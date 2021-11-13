@@ -1,0 +1,1 @@
+{"version":3,"file":"ConversionError.js","sourceRoot":"","sources":["../../src/errors/ConversionError.ts"],"names":[],"mappings":";;;AAAA,MAAa,eAAgB,SAAQ,KAAK;IAGxC;;;;OAIG;IACH,YAAmB,OAAO,GAAG,kBAAkB;QAC7C,KAAK,CAAC,OAAO,CAAC,CAAC;QARjB;;;;mBAAgC,iBAAiB;WAAC;IASlD,CAAC;CACF;AAXD,0CAWC"}
