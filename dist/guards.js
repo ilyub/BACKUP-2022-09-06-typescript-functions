@@ -1,5 +1,5 @@
 "use strict";
-/* typerock/eslint-plugin disable @typerock/disallow-by-regexp[guards] */
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[guards] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.unknown = exports.undefined = exports.true = exports.trueGuard = exports.stringU = exports.stringsU = exports.strings = exports.string = exports.objectU = exports.objectOf = exports.objectsU = exports.objects = exports.object = exports.numberU = exports.numbersU = exports.numbers = exports.number = exports.numStrsU = exports.numStrs = exports.numStr = exports.null = exports.instances = exports.instance = exports.indexedObjectOf = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObject = exports.false = exports.falseGuard = exports.enumerationU = exports.enumeration = exports.empty = exports.callableU = exports.callable = exports.booleanU = exports.booleansU = exports.booleans = exports.boolean = exports.arrayOf = exports.arraysU = exports.arrays = exports.array = exports.orFactory = exports.or = exports.notFactory = exports.not = exports.andFactory = exports.and = exports.factory = void 0;
 const tslib_1 = require("tslib");

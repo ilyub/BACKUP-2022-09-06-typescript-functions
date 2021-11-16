@@ -1,20 +1,6 @@
 import * as a from "./array";
 import * as regexp from "./regexp";
 /**
- * Compares strings.
- *
- * @param str1 - String 1.
- * @param str2 - String 2.
- * @returns Comparison result.
- */
-export function compare(str1, str2) {
-    if (str1 > str2)
-        return 1;
-    if (str1 < str2)
-        return -1;
-    return 0;
-}
-/**
  * Detects EOL sequence.
  *
  * @param str - String.

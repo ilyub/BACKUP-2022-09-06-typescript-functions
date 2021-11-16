@@ -1,4 +1,4 @@
-/* typerock/eslint-plugin disable @typerock/disallow-by-regexp[array] */
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[array] */
 import * as _ from "lodash-es";
 import * as assert from "./assertions";
 import * as is from "./guards";

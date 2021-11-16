@@ -8,7 +8,7 @@
 
 | Name | Type |
 | :------ | :------ |
-| `T` | extends `object``object` |
+| `T` | extends `object` = `object` |
 
 ## Table of contents
 

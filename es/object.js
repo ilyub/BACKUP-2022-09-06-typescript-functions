@@ -1,4 +1,4 @@
-/* typerock/eslint-plugin disable @typerock/disallow-by-regexp[object] */
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[object] */
 import * as a from "./array";
 import * as is from "./guards";
 import * as json from "./json";

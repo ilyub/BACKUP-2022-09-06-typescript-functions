@@ -1,4 +1,4 @@
-/* typerock/eslint-plugin disable @typerock/disallow-identifier[json] */
+/* skylib/eslint-plugin disable @skylib/disallow-identifier[json] */
 import * as is from "./guards";
 /**
  * Decodes JSON string.

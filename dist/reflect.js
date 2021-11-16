@@ -1,5 +1,5 @@
 "use strict";
-/* typerock/eslint-plugin disable @typerock/disallow-identifier[reflect] */
+/* skylib/eslint-plugin disable @skylib/disallow-identifier[reflect] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.set = exports.getOwnMetadataKey = exports.getOwnMetadata = exports.getMetadataKey = exports.getMetadata = exports.get = exports.defineMetadataKey = exports.defineMetadata = void 0;
 // eslint-disable-next-line import/no-unassigned-import

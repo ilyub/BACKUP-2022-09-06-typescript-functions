@@ -14,7 +14,6 @@
 
 ### Functions
 
-- [compare](string.md#compare)
 - [detectEol](string.md#detecteol)
 - [empty](string.md#empty)
 - [lcFirst](string.md#lcfirst)
@@ -37,27 +36,6 @@
 Ƭ **Eol**: ``"\r\n"`` \| ``"\n"``
 
 ## Functions
-
-### compare
-
-▸ **compare**(`str1`, `str2`): ``-1`` \| ``0`` \| ``1``
-
-Compares strings.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `str1` | `string` | String 1. |
-| `str2` | `string` | String 2. |
-
-#### Returns
-
-``-1`` \| ``0`` \| ``1``
-
-Comparison result.
-
-___
 
 ### detectEol
 

@@ -1,24 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unpadMultiline = exports.ucFirst = exports.trimTrailingEmptyLines = exports.trimStart = exports.trimLeadingEmptyLines = exports.trimEnd = exports.trailingSpaces = exports.replaceAll = exports.path = exports.lines = exports.lcFirst = exports.leadingSpaces = exports.empty = exports.detectEol = exports.compare = void 0;
+exports.unpadMultiline = exports.ucFirst = exports.trimTrailingEmptyLines = exports.trimStart = exports.trimLeadingEmptyLines = exports.trimEnd = exports.trailingSpaces = exports.replaceAll = exports.path = exports.lines = exports.lcFirst = exports.leadingSpaces = exports.empty = exports.detectEol = void 0;
 const tslib_1 = require("tslib");
 const a = (0, tslib_1.__importStar)(require("./array"));
 const regexp = (0, tslib_1.__importStar)(require("./regexp"));
-/**
- * Compares strings.
- *
- * @param str1 - String 1.
- * @param str2 - String 2.
- * @returns Comparison result.
- */
-function compare(str1, str2) {
-    if (str1 > str2)
-        return 1;
-    if (str1 < str2)
-        return -1;
-    return 0;
-}
-exports.compare = compare;
 /**
  * Detects EOL sequence.
  *

@@ -1,5 +1,5 @@
 "use strict";
-/* typerock/eslint-plugin disable @typerock/disallow-identifier[json] */
+/* skylib/eslint-plugin disable @skylib/disallow-identifier[json] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.encode = exports.decode = void 0;
 const tslib_1 = require("tslib");

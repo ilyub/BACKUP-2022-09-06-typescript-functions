@@ -1,4 +1,4 @@
-/* typerock/eslint-plugin disable @typerock/disallow-identifier[timer] */
+/* skylib/eslint-plugin disable @skylib/disallow-identifier[timer] */
 import * as is from "./guards";
 /**
  * Adds interval.

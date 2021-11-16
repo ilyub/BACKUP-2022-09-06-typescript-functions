@@ -1,4 +1,4 @@
-/* typerock/eslint-plugin disable @typerock/disallow-identifier[reflect] */
+/* skylib/eslint-plugin disable @skylib/disallow-identifier[reflect] */
 // eslint-disable-next-line import/no-unassigned-import
 import "reflect-metadata";
 /**

@@ -23,11 +23,7 @@ Typescript functions / [Exports](modules.md)
   - [reflect](https://ilyub.github.io/typescript-functions/modules/reflect.html) - Typed versions of Reflect functions.
   - [regexp](https://ilyub.github.io/typescript-functions/modules/regexp.html) - Regular expression manipulation functions.
   - [string](https://ilyub.github.io/typescript-functions/modules/string.html) - String manipulation functions.
-  - testUtils
-    - [testUtils](https://ilyub.github.io/typescript-functions/modules/testutils.html) - Test utils.
-    - [testUtils/RootWrapper](https://ilyub.github.io/typescript-functions/modules/testutils_rootwrapper.html) - RootWrapper class.
-    - [testUtils/Wrapper](https://ilyub.github.io/typescript-functions/modules/testutils_wrapper.html) - Wrapper class.
-    - [testUtils/Wrappers](https://ilyub.github.io/typescript-functions/modules/testutils_wrappers.html) - Wrappers class.
+  - [testUtils](https://ilyub.github.io/typescript-functions/modules/testutils.html) - Test utils.
   - types
     - [types/core](https://ilyub.github.io/typescript-functions/modules/types_core.html) - Core types.
     - [types/locales](https://ilyub.github.io/typescript-functions/modules/types_locales.html) - Locale types.

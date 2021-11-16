@@ -1,4 +1,4 @@
-/* typerock/eslint-plugin disable @typerock/disallow-by-regexp[types.core] */
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[types.core] */
 /**
  * Creates validation object.
  *

@@ -1,4 +1,4 @@
-/* typerock/eslint-plugin disable @typerock/disallow-by-regexp[guards] */
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[guards] */
 import * as o from "./object";
 /**
  * Creates single-arg guard.

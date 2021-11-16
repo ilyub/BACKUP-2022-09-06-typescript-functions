@@ -1,5 +1,5 @@
 "use strict";
-/* typerock/eslint-plugin disable @typerock/disallow-by-regexp[types.core] */
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[types.core] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createValidationObject = void 0;
 /**

@@ -1,13 +1,5 @@
 export declare type Eol = "\r\n" | "\n";
 /**
- * Compares strings.
- *
- * @param str1 - String 1.
- * @param str2 - String 2.
- * @returns Comparison result.
- */
-export declare function compare(str1: string, str2: string): -1 | 0 | 1;
-/**
  * Detects EOL sequence.
  *
  * @param str - String.

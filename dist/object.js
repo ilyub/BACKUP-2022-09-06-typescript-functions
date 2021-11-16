@@ -1,5 +1,5 @@
 "use strict";
-/* typerock/eslint-plugin disable @typerock/disallow-by-regexp[object] */
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[object] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.values = exports.unfreezeDeep = exports.unfreeze = exports.undefinedToOptional = exports.sort = exports.size = exports.omit = exports.merge = exports.map = exports.keys = exports.hasOwnProp = exports.getPrototypeOf = exports.fromEntries = exports.freezeDeep = exports.freeze = exports.filter = exports.extend = exports.entries = exports.defineProperty = exports.compare = exports.clone = exports.assign = void 0;
 const tslib_1 = require("tslib");
