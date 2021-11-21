@@ -24,7 +24,7 @@ export function createFacade(name, extension) {
         }
     };
     const proxyTarget = o.extend(callback, facadeOwnMethods, extension);
-    const proxy = new Proxy(proxyTarget, wrapProxyHandler({
+    const proxy = new Proxy(proxyTarget, wrapProxyHandler("createFacade", {
         apply(target, thisArg, args) {
             return target.call(thisArg, ...args);
         },
@@ -33,6 +33,13 @@ export function createFacade(name, extension) {
                 return reflect.get(target, key);
             if (is.not.empty(implementation))
                 return reflect.get(implementation, key);
+            throw new Error(`Missing facade implementation: ${name}`);
+        },
+        getOwnPropertyDescriptor(target, key) {
+            if (o.hasOwnProp(key, target))
+                return Object.getOwnPropertyDescriptor(target, key);
+            if (is.not.empty(implementation))
+                return Object.getOwnPropertyDescriptor(implementation, key);
             throw new Error(`Missing facade implementation: ${name}`);
         },
         set(target, key, value) {
@@ -57,7 +64,7 @@ export function createFacade(name, extension) {
  */
 export function onDemand(generator) {
     let obj = undefined;
-    return new Proxy({}, wrapProxyHandler({
+    return new Proxy({}, wrapProxyHandler("onDemand", {
         get(_target, key) {
             obj = obj !== null && obj !== void 0 ? obj : generator();
             return reflect.get(obj, key);
@@ -90,48 +97,49 @@ export async function wait(timeout) {
 /**
  * Adds missing methods to proxy handler.
  *
+ * @param id - ID.
  * @param handler - Handler.
  * @returns New handler with missing methods added.
  */
-export function wrapProxyHandler(handler) {
+export function wrapProxyHandler(id, handler) {
     return Object.assign({ apply() {
-            throw new Error("Proxy method not implemented: apply");
+            throw new Error(`Proxy method not implemented: ${id}.apply`);
         },
         construct() {
-            throw new Error("Proxy method not implemented: construct");
+            throw new Error(`Proxy method not implemented: ${id}.construct`);
         },
         defineProperty() {
-            throw new Error("Proxy method not implemented: defineProperty");
+            throw new Error(`Proxy method not implemented: ${id}.defineProperty`);
         },
         deleteProperty() {
-            throw new Error("Proxy method not implemented: deleteProperty");
+            throw new Error(`Proxy method not implemented: ${id}.deleteProperty`);
         },
         get() {
-            throw new Error("Proxy method not implemented: get");
+            throw new Error(`Proxy method not implemented: ${id}.get`);
         },
         getOwnPropertyDescriptor() {
-            throw new Error("Proxy method not implemented: getOwnPropertyDescriptor");
+            throw new Error(`Proxy method not implemented: ${id}.getOwnPropertyDescriptor`);
         },
         getPrototypeOf() {
-            throw new Error("Proxy method not implemented: getPrototypeOf");
+            throw new Error(`Proxy method not implemented: ${id}.getPrototypeOf`);
         },
         has() {
-            throw new Error("Proxy method not implemented: has");
+            throw new Error(`Proxy method not implemented: ${id}.has`);
         },
         isExtensible() {
-            throw new Error("Proxy method not implemented: isExtensible");
+            throw new Error(`Proxy method not implemented: ${id}.isExtensible`);
         },
         ownKeys() {
-            throw new Error("Proxy method not implemented: ownKeys");
+            throw new Error(`Proxy method not implemented: ${id}.ownKeys`);
         },
         preventExtensions() {
-            throw new Error("Proxy method not implemented: preventExtensions");
+            throw new Error(`Proxy method not implemented: ${id}.preventExtensions`);
         },
         set() {
-            throw new Error("Proxy method not implemented: set");
+            throw new Error(`Proxy method not implemented: ${id}.set`);
         },
         setPrototypeOf() {
-            throw new Error("Proxy method not implemented: setPrototypeOf");
+            throw new Error(`Proxy method not implemented: ${id}.setPrototypeOf`);
         } }, handler);
 }
 //# sourceMappingURL=helpers.js.map

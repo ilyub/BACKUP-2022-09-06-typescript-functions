@@ -108,7 +108,7 @@ ___
 
 ### wrapProxyHandler
 
-▸ **wrapProxyHandler**<`T`\>(`handler`): `ProxyHandler`<`T`\>
+▸ **wrapProxyHandler**<`T`\>(`id`, `handler`): `ProxyHandler`<`T`\>
 
 Adds missing methods to proxy handler.
 
@@ -122,6 +122,7 @@ Adds missing methods to proxy handler.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
+| `id` | `string` | ID. |
 | `handler` | `Readonly`<`ProxyHandler`<`T`\>\> | Handler. |
 
 #### Returns

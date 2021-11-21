@@ -31,8 +31,9 @@ export declare function wait(timeout: number): Promise<void>;
 /**
  * Adds missing methods to proxy handler.
  *
+ * @param id - ID.
  * @param handler - Handler.
  * @returns New handler with missing methods added.
  */
-export declare function wrapProxyHandler<T extends object>(handler: Readonly<ProxyHandler<T>>): ProxyHandler<T>;
+export declare function wrapProxyHandler<T extends object>(id: string, handler: Readonly<ProxyHandler<T>>): ProxyHandler<T>;
 //# sourceMappingURL=helpers.d.ts.map
