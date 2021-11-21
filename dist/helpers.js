@@ -46,6 +46,11 @@ function createFacade(name, extension) {
                 return Object.getOwnPropertyDescriptor(implementation, key);
             throw new Error(`Missing facade implementation: ${name}`);
         },
+        isExtensible() {
+            if (is.not.empty(implementation))
+                return Object.isExtensible(implementation);
+            throw new Error(`Missing facade implementation: ${name}`);
+        },
         set(target, key, value) {
             if (o.hasOwnProp(key, target)) {
                 reflect.set(target, key, value);
