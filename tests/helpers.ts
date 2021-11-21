@@ -96,6 +96,9 @@ it("createFacade: Object", () => {
     expect(() => {
       Object.getOwnPropertyDescriptor(facade, "value");
     }).toThrow(error);
+    expect(() => {
+      Object.isExtensible(facade);
+    }).toThrow(error);
   }
 
   {
@@ -122,6 +125,7 @@ it("createFacade: Object", () => {
       expect(Object.getOwnPropertyDescriptor(facade, "value")).toStrictEqual(
         expected
       );
+      expect(Object.isExtensible(facade)).toBeTrue();
     }
 
     {
@@ -138,6 +142,7 @@ it("createFacade: Object", () => {
       expect(Object.getOwnPropertyDescriptor(facade, "value")).toStrictEqual(
         expected
       );
+      expect(Object.isExtensible(facade)).toBeTrue();
     }
   }
 });
