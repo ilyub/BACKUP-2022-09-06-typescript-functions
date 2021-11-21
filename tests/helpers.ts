@@ -11,6 +11,21 @@ class TestClass {
 
 testUtils.installFakeTimer();
 
+it("createFacade", () => {
+  const facade = createFacade("sample-facade", {});
+
+  const expected = {
+    configurable: true,
+    enumerable: true,
+    value: facade.setImplementation,
+    writable: true
+  };
+
+  expect(
+    Object.getOwnPropertyDescriptor(facade, "setImplementation")
+  ).toStrictEqual(expected);
+});
+
 it("createFacade: Extension", () => {
   interface Extension {
     pow: (x: number) => number;
@@ -78,6 +93,9 @@ it("createFacade: Object", () => {
     expect(() => {
       facade.value = 1;
     }).toThrow(error);
+    expect(() => {
+      Object.getOwnPropertyDescriptor(facade, "value");
+    }).toThrow(error);
   }
 
   {
@@ -92,14 +110,34 @@ it("createFacade: Object", () => {
     });
 
     {
+      const expected = {
+        configurable: true,
+        enumerable: true,
+        value: 1,
+        writable: true
+      };
+
       expect(facade.value).toStrictEqual(1);
       expect(facade.get()).toStrictEqual(1);
+      expect(Object.getOwnPropertyDescriptor(facade, "value")).toStrictEqual(
+        expected
+      );
     }
 
     {
+      const expected = {
+        configurable: true,
+        enumerable: true,
+        value: 2,
+        writable: true
+      };
+
       facade.set(2);
       expect(facade.value).toStrictEqual(2);
       expect(facade.get()).toStrictEqual(2);
+      expect(Object.getOwnPropertyDescriptor(facade, "value")).toStrictEqual(
+        expected
+      );
     }
   }
 });
@@ -154,7 +192,7 @@ it("wait", async () => {
 });
 
 it("wrapProxyHandler", () => {
-  const handler = wrapProxyHandler({});
+  const handler = wrapProxyHandler("testId", {});
 
   const proxyClass = new Proxy<typeof TestClass>(TestClass, handler);
 
@@ -205,5 +243,7 @@ it("wrapProxyHandler", () => {
   };
 
   for (const [name, subtest] of Object.entries(subtests))
-    expect(subtest).toThrow(new Error(`Proxy method not implemented: ${name}`));
+    expect(subtest).toThrow(
+      new Error(`Proxy method not implemented: testId.${name}`)
+    );
 });
