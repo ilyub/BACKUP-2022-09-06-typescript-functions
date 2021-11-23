@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.toBeSameAs = exports.textToEqual = exports.setRandomSystemTime = exports.run = exports.jestSetup = exports.jestReset = exports.installFakeTimer = exports.htmlToEqual = exports.getClock = exports.executionTimeToEqual = exports.executionTimeToBeWithin = void 0;
+exports.toExist = exports.toBeSameAs = exports.textToEqual = exports.setRandomSystemTime = exports.run = exports.jestSetup = exports.jestReset = exports.installFakeTimer = exports.htmlToEqual = exports.getClock = exports.executionTimeToEqual = exports.executionTimeToBeWithin = void 0;
 const tslib_1 = require("tslib");
 // eslint-disable-next-line import/no-unassigned-import
 require("jest-extended");
@@ -72,7 +72,7 @@ function getClock() {
 }
 exports.getClock = getClock;
 /**
- * Checks that HTMLElement contains expected HTML code.
+ * Checks that object contains expected HTML code.
  *
  * @param got - Got value.
  * @param expected - Expected HTML code.
@@ -83,8 +83,8 @@ function htmlToEqual(got, expected) {
         .run(() => {
         if (got instanceof HTMLElement)
             return got.innerHTML;
-        const isHtmlMethod = is.callable;
-        assert.object.of(got, { html: isHtmlMethod }, {}, "Missing html method");
+        const isHtml = is.callable;
+        assert.object.of(got, { html: isHtml }, {}, 'Missing "html" method');
         return got.html();
     })
         .trim()
@@ -141,7 +141,8 @@ function jestSetup() {
             executionTimeToEqual,
             htmlToEqual,
             textToEqual,
-            toBeSameAs
+            toBeSameAs,
+            toExist
         };
         expect.extend(matchers);
         expect.extend(expectExtend);
@@ -189,7 +190,7 @@ function setRandomSystemTime() {
 }
 exports.setRandomSystemTime = setRandomSystemTime;
 /**
- * Checks that HTMLElement contains expected text.
+ * Checks that object contains expected text.
  *
  * @param got - Got value.
  * @param expected - Expected text.
@@ -202,8 +203,8 @@ function textToEqual(got, expected) {
             assert.not.empty(got.textContent);
             return got.textContent;
         }
-        const isTextMethod = is.callable;
-        assert.object.of(got, { text: isTextMethod }, {}, "Missing text method");
+        const isText = is.callable;
+        assert.object.of(got, { text: isText }, {}, 'Missing "text" method');
         return got.text();
     })
         .trim()
@@ -238,6 +239,29 @@ function toBeSameAs(got, expected) {
         };
 }
 exports.toBeSameAs = toBeSameAs;
+/**
+ * Checks that object exists.
+ *
+ * @param got - Got value.
+ * @returns Result object.
+ */
+function toExist(got) {
+    const exists = fn.run(() => {
+        const isExists = is.callable;
+        assert.object.of(got, { exists: isExists }, {}, 'Missing "exists" method');
+        return got.exists();
+    });
+    return exists
+        ? {
+            message: () => "Expected object not to exist",
+            pass: true
+        }
+        : {
+            message: () => "Expected object to exist",
+            pass: false
+        };
+}
+exports.toExist = toExist;
 /*
 |*******************************************************************************
 |* Private

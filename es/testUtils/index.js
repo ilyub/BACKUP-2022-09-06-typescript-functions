@@ -65,7 +65,7 @@ export function getClock() {
     return clock;
 }
 /**
- * Checks that HTMLElement contains expected HTML code.
+ * Checks that object contains expected HTML code.
  *
  * @param got - Got value.
  * @param expected - Expected HTML code.
@@ -76,8 +76,8 @@ export function htmlToEqual(got, expected) {
         .run(() => {
         if (got instanceof HTMLElement)
             return got.innerHTML;
-        const isHtmlMethod = is.callable;
-        assert.object.of(got, { html: isHtmlMethod }, {}, "Missing html method");
+        const isHtml = is.callable;
+        assert.object.of(got, { html: isHtml }, {}, 'Missing "html" method');
         return got.html();
     })
         .trim()
@@ -131,7 +131,8 @@ export function jestSetup() {
             executionTimeToEqual,
             htmlToEqual,
             textToEqual,
-            toBeSameAs
+            toBeSameAs,
+            toExist
         };
         expect.extend(matchers);
         expect.extend(expectExtend);
@@ -176,7 +177,7 @@ export function setRandomSystemTime() {
     clock.setSystemTime(d);
 }
 /**
- * Checks that HTMLElement contains expected text.
+ * Checks that object contains expected text.
  *
  * @param got - Got value.
  * @param expected - Expected text.
@@ -189,8 +190,8 @@ export function textToEqual(got, expected) {
             assert.not.empty(got.textContent);
             return got.textContent;
         }
-        const isTextMethod = is.callable;
-        assert.object.of(got, { text: isTextMethod }, {}, "Missing text method");
+        const isText = is.callable;
+        assert.object.of(got, { text: isText }, {}, 'Missing "text" method');
         return got.text();
     })
         .trim()
@@ -220,6 +221,28 @@ export function toBeSameAs(got, expected) {
         }
         : {
             message: () => "Expected the same object",
+            pass: false
+        };
+}
+/**
+ * Checks that object exists.
+ *
+ * @param got - Got value.
+ * @returns Result object.
+ */
+export function toExist(got) {
+    const exists = fn.run(() => {
+        const isExists = is.callable;
+        assert.object.of(got, { exists: isExists }, {}, 'Missing "exists" method');
+        return got.exists();
+    });
+    return exists
+        ? {
+            message: () => "Expected object not to exist",
+            pass: true
+        }
+        : {
+            message: () => "Expected object to exist",
             pass: false
         };
 }

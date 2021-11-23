@@ -31,6 +31,7 @@
 - [setRandomSystemTime](testUtils.md#setrandomsystemtime)
 - [textToEqual](testUtils.md#texttoequal)
 - [toBeSameAs](testUtils.md#tobesameas)
+- [toExist](testUtils.md#toexist)
 
 ## Type aliases
 
@@ -122,7 +123,7 @@ ___
 
 ▸ **htmlToEqual**(`got`, `expected`): [`ExpectReturnType`](../interfaces/testUtils.ExpectReturnType.md)
 
-Checks that HTMLElement contains expected HTML code.
+Checks that object contains expected HTML code.
 
 #### Parameters
 
@@ -224,7 +225,7 @@ ___
 
 ▸ **textToEqual**(`got`, `expected`): [`ExpectReturnType`](../interfaces/testUtils.ExpectReturnType.md)
 
-Checks that HTMLElement contains expected text.
+Checks that object contains expected text.
 
 #### Parameters
 
@@ -253,6 +254,26 @@ Checks that two objects are identical.
 | :------ | :------ | :------ |
 | `got` | `unknown` | Got value. |
 | `expected` | `object` | Expected object. |
+
+#### Returns
+
+[`ExpectReturnType`](../interfaces/testUtils.ExpectReturnType.md)
+
+Result object.
+
+___
+
+### toExist
+
+▸ **toExist**(`got`): [`ExpectReturnType`](../interfaces/testUtils.ExpectReturnType.md)
+
+Checks that object exists.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `got` | `unknown` | Got value. |
 
 #### Returns
 

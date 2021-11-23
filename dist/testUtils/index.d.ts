@@ -20,14 +20,14 @@ declare global {
              */
             readonly executionTimeToEqual: (time: number) => Promise<R>;
             /**
-             * Checks that HTMLElement contains expected HTML code.
+             * Checks that object contains expected HTML code.
              *
              * @param expected - Expected HTML code.
              * @returns Result object.
              */
             readonly htmlToEqual: (expected: string) => R;
             /**
-             * Checks that HTMLElement contains expected text.
+             * Checks that object contains expected text.
              *
              * @param expected - Expected text.
              * @returns Result object.
@@ -40,6 +40,12 @@ declare global {
              * @returns Result object.
              */
             readonly toBeSameAs: (expected: object) => R;
+            /**
+             * Checks that object exists.
+             *
+             * @returns Result object.
+             */
+            readonly toExist: () => R;
         }
     }
 }
@@ -80,7 +86,7 @@ export declare function executionTimeToEqual(got: unknown, time: number): Promis
  */
 export declare function getClock(): DeepReadonly<fakeTimers.Clock>;
 /**
- * Checks that HTMLElement contains expected HTML code.
+ * Checks that object contains expected HTML code.
  *
  * @param got - Got value.
  * @param expected - Expected HTML code.
@@ -120,7 +126,7 @@ export declare function run<T>(promiseAsync: PromiseAsync<T>): Promise<T>;
  */
 export declare function setRandomSystemTime(): void;
 /**
- * Checks that HTMLElement contains expected text.
+ * Checks that object contains expected text.
  *
  * @param got - Got value.
  * @param expected - Expected text.
@@ -135,4 +141,11 @@ export declare function textToEqual(got: unknown, expected: string): ExpectRetur
  * @returns Result object.
  */
 export declare function toBeSameAs(got: unknown, expected: object): ExpectReturnType;
+/**
+ * Checks that object exists.
+ *
+ * @param got - Got value.
+ * @returns Result object.
+ */
+export declare function toExist(got: unknown): ExpectReturnType;
 //# sourceMappingURL=index.d.ts.map
