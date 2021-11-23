@@ -12,4 +12,4 @@
 
 ### LocaleName
 
-Ƭ **LocaleName**: ``"de-DE"`` \| ``"en-GB"`` \| ``"en-US"`` \| ``"es-ES"`` \| ``"fr-FR"`` \| ``"ru-RU"``
+Ƭ **LocaleName**: keyof `configurable.LocaleName` extends `never` ? keyof `configurable.DefaultLocaleName` : keyof `configurable.LocaleName`
