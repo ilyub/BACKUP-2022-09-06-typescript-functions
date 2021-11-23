@@ -12,4 +12,4 @@
 
 ### LocaleName
 
-Ƭ **LocaleName**: keyof `configurable.LocaleName` extends `never` ? keyof `configurable.DefaultLocaleName` : keyof `configurable.LocaleName`
+Ƭ **LocaleName**: keyof `configurable.LocaleName`
