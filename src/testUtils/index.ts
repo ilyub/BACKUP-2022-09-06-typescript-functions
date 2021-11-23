@@ -36,14 +36,14 @@ declare global {
        */
       readonly executionTimeToEqual: (time: number) => Promise<R>;
       /**
-       * Checks that HTMLElement contains expected HTML code.
+       * Checks that object contains expected HTML code.
        *
        * @param expected - Expected HTML code.
        * @returns Result object.
        */
       readonly htmlToEqual: (expected: string) => R;
       /**
-       * Checks that HTMLElement contains expected text.
+       * Checks that object contains expected text.
        *
        * @param expected - Expected text.
        * @returns Result object.
@@ -56,6 +56,12 @@ declare global {
        * @returns Result object.
        */
       readonly toBeSameAs: (expected: object) => R;
+      /**
+       * Checks that object exists.
+       *
+       * @returns Result object.
+       */
+      readonly toExist: () => R;
     }
   }
 }
@@ -159,7 +165,7 @@ export function getClock(): DeepReadonly<fakeTimers.Clock> {
 }
 
 /**
- * Checks that HTMLElement contains expected HTML code.
+ * Checks that object contains expected HTML code.
  *
  * @param got - Got value.
  * @param expected - Expected HTML code.
@@ -170,9 +176,9 @@ export function htmlToEqual(got: unknown, expected: string): ExpectReturnType {
     .run(() => {
       if (got instanceof HTMLElement) return got.innerHTML;
 
-      const isHtmlMethod: is.Guard<() => string> = is.callable;
+      const isHtml: is.Guard<() => string> = is.callable;
 
-      assert.object.of(got, { html: isHtmlMethod }, {}, "Missing html method");
+      assert.object.of(got, { html: isHtml }, {}, 'Missing "html" method');
 
       return got.html();
     })
@@ -234,6 +240,7 @@ export function jestSetup(): void {
       readonly htmlToEqual: ExpectFromMatcher<"htmlToEqual">;
       readonly textToEqual: ExpectFromMatcher<"textToEqual">;
       readonly toBeSameAs: ExpectFromMatcher<"toBeSameAs">;
+      readonly toExist: ExpectFromMatcher<"toExist">;
     }
 
     const expectExtend: ExpectExtendMap = {
@@ -241,7 +248,8 @@ export function jestSetup(): void {
       executionTimeToEqual,
       htmlToEqual,
       textToEqual,
-      toBeSameAs
+      toBeSameAs,
+      toExist
     };
 
     expect.extend(matchers as jest.ExpectExtendMap);
@@ -297,7 +305,7 @@ export function setRandomSystemTime(): void {
 }
 
 /**
- * Checks that HTMLElement contains expected text.
+ * Checks that object contains expected text.
  *
  * @param got - Got value.
  * @param expected - Expected text.
@@ -312,9 +320,9 @@ export function textToEqual(got: unknown, expected: string): ExpectReturnType {
         return got.textContent;
       }
 
-      const isTextMethod: is.Guard<() => string> = is.callable;
+      const isText: is.Guard<() => string> = is.callable;
 
-      assert.object.of(got, { text: isTextMethod }, {}, "Missing text method");
+      assert.object.of(got, { text: isText }, {}, 'Missing "text" method');
 
       return got.text();
     })
@@ -348,6 +356,32 @@ export function toBeSameAs(got: unknown, expected: object): ExpectReturnType {
       }
     : {
         message: (): string => "Expected the same object",
+        pass: false
+      };
+}
+
+/**
+ * Checks that object exists.
+ *
+ * @param got - Got value.
+ * @returns Result object.
+ */
+export function toExist(got: unknown): ExpectReturnType {
+  const exists = fn.run(() => {
+    const isExists: is.Guard<() => boolean> = is.callable;
+
+    assert.object.of(got, { exists: isExists }, {}, 'Missing "exists" method');
+
+    return got.exists();
+  });
+
+  return exists
+    ? {
+        message: (): string => "Expected object not to exist",
+        pass: true
+      }
+    : {
+        message: (): string => "Expected object to exist",
         pass: false
       };
 }

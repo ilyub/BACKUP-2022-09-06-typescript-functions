@@ -78,8 +78,8 @@ it("htmlToEqual", () => {
     );
   }
 
-  expect(() => testUtils.htmlToEqual(1, "")).toThrow(
-    new Error("Missing html method")
+  expect(() => testUtils.htmlToEqual({}, "")).toThrow(
+    new Error('Missing "html" method')
   );
 });
 
@@ -135,8 +135,8 @@ it("textToEqual", () => {
     );
   }
 
-  expect(() => testUtils.textToEqual(1, "")).toThrow(
-    new Error("Missing text method")
+  expect(() => testUtils.textToEqual({}, "")).toThrow(
+    new Error('Missing "text" method')
   );
 });
 
@@ -158,4 +158,41 @@ it("toBeSameAs", () => {
     expect(result.pass).toBeFalse();
     expect(result.message()).toStrictEqual("Expected the same object");
   }
+
+  {
+    const obj1 = { x: 1 };
+
+    const obj2 = { x: 1 };
+
+    expect(obj1).not.toBeSameAs(obj2);
+    expect(obj1).toStrictEqual(obj2);
+  }
+});
+
+it("toExist", () => {
+  {
+    const result = testUtils.toExist({
+      exists() {
+        return true;
+      }
+    });
+
+    expect(result.pass).toBeTrue();
+    expect(result.message()).toStrictEqual("Expected object not to exist");
+  }
+
+  {
+    const result = testUtils.toExist({
+      exists() {
+        return false;
+      }
+    });
+
+    expect(result.pass).toBeFalse();
+    expect(result.message()).toStrictEqual("Expected object to exist");
+  }
+
+  expect(() => testUtils.toExist({})).toThrow(
+    new Error('Missing "exists" method')
+  );
 });
