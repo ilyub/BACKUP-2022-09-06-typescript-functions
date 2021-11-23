@@ -5,6 +5,4 @@ declare global {
   }
 }
 
-export type LocaleName = keyof configurable.LocaleName extends never
-  ? "en-US"
-  : keyof configurable.LocaleName;
+export type LocaleName = keyof configurable.LocaleName;
