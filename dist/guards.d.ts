@@ -90,6 +90,7 @@ export declare namespace not {
     export var empty: ExclusiveGuard<types.empty>;
     var _a: ExclusiveGuard<null>;
     export var numStr: ExclusiveGuard<types.NumStr>;
+    export var numStrU: ExclusiveGuard<types.NumStrU>;
     export var number: ExclusiveGuard<number>;
     export var numberU: ExclusiveGuard<types.numberU>;
     export var object: ExclusiveGuard<object>;
@@ -299,6 +300,13 @@ export { nullGuard as null };
 export declare function numStr(value: unknown): value is types.NumStr;
 export declare const numStrs: Guard<readonly types.NumStr[]>;
 export declare const numStrsU: Guard<readonly types.NumStr[] | undefined>;
+/**
+ * Checks that value type is NumStrU.
+ *
+ * @param value - Value.
+ * @returns _True_ if value type is NumStrU, _false_ otherwise.
+ */
+export declare function numStrU(value: unknown): value is types.NumStrU;
 /**
  * Checks that value is a number.
  *

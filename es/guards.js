@@ -220,6 +220,23 @@ not.numStr = notFactory(numStr);
 export const numStrs = factory(arrayOf, numStr);
 export const numStrsU = orFactory(numStrs, undefinedGuard);
 /**
+ * Checks that value type is NumStrU.
+ *
+ * @param value - Value.
+ * @returns _True_ if value type is NumStrU, _false_ otherwise.
+ */
+export function numStrU(value) {
+    switch (typeof value) {
+        case "number":
+        case "string":
+        case "undefined":
+            return true;
+        default:
+            return false;
+    }
+}
+not.numStrU = notFactory(numStrU);
+/**
  * Checks that value is a number.
  *
  * @param value - Value.

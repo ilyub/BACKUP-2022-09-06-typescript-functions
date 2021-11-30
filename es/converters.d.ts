@@ -207,6 +207,13 @@ export declare function instancesOrFail<T>(value: unknown, ctor: types.Construct
  */
 export declare function numStr(value: unknown): types.NumStr;
 /**
+ * Converts value to NumStrU.
+ *
+ * @param value - Value.
+ * @returns Converted value.
+ */
+export declare function numStrU(value: unknown): types.NumStrU;
+/**
  * Converts value to a number.
  *
  * @param value - Value.

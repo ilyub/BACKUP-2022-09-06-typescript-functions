@@ -21,6 +21,8 @@
 - [IterableOrFn](types_core.md#iterableorfn)
 - [KeysOfType](types_core.md#keysoftype)
 - [NumStr](types_core.md#numstr)
+- [NumStrE](types_core.md#numstre)
+- [NumStrU](types_core.md#numstru)
 - [Optional](types_core.md#optional)
 - [PartialRecord](types_core.md#partialrecord)
 - [PromiseAsync](types_core.md#promiseasync)
@@ -276,6 +278,18 @@ ___
 ### NumStr
 
 Ƭ **NumStr**: `number` \| `string`
+
+___
+
+### NumStrE
+
+Ƭ **NumStrE**: [`NumStr`](types_core.md#numstr) \| [`empty`](types_core.md#empty)
+
+___
+
+### NumStrU
+
+Ƭ **NumStrU**: [`NumStr`](types_core.md#numstr) \| `undefined`
 
 ___
 

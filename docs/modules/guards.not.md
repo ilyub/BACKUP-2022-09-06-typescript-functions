@@ -16,6 +16,7 @@
 - [factory](guards.not.md#factory)
 - [null](guards.not.md#null)
 - [numStr](guards.not.md#numstr)
+- [numStrU](guards.not.md#numstru)
 - [number](guards.not.md#number)
 - [numberU](guards.not.md#numberu)
 - [object](guards.not.md#object)
@@ -94,6 +95,12 @@ ___
 ### numStr
 
 • **numStr**: [`ExclusiveGuard`](guards.md#exclusiveguard)<[`NumStr`](types_core.md#numstr)\>
+
+___
+
+### numStrU
+
+• **numStrU**: [`ExclusiveGuard`](guards.md#exclusiveguard)<[`NumStrU`](types_core.md#numstru)\>
 
 ___
 

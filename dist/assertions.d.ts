@@ -130,6 +130,13 @@ export { nullAssertion as null };
  */
 export declare function numStr(value: unknown, error?: ErrorArg): asserts value is types.NumStr;
 /**
+ * Asserts that value type is NumStrU.
+ *
+ * @param value - Value.
+ * @param error - Error to be thrown.
+ */
+export declare function numStrU(value: unknown, error?: ErrorArg): asserts value is types.NumStrU;
+/**
  * Asserts that value is a number.
  *
  * @param value - Value.

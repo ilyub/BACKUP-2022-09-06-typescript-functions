@@ -33,6 +33,7 @@
 - [not](assertions.md#not)
 - [null](assertions.md#null)
 - [numStr](assertions.md#numstr)
+- [numStrU](assertions.md#numstru)
 - [number](assertions.md#number)
 - [numberU](assertions.md#numberu)
 - [object](assertions.md#object)
@@ -400,6 +401,25 @@ Asserts that value type is NumStr.
 #### Returns
 
 asserts value is NumStr
+
+___
+
+### numStrU
+
+▸ **numStrU**(`value`, `error?`): asserts value is NumStrU
+
+Asserts that value type is NumStrU.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error to be thrown. |
+
+#### Returns
+
+asserts value is NumStrU
 
 ___
 

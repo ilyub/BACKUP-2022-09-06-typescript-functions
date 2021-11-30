@@ -54,6 +54,7 @@
 - [notFactory](guards.md#notfactory)
 - [null](guards.md#null)
 - [numStr](guards.md#numstr)
+- [numStrU](guards.md#numstru)
 - [numStrs](guards.md#numstrs)
 - [numStrsU](guards.md#numstrsu)
 - [number](guards.md#number)
@@ -903,6 +904,26 @@ Checks that value type is NumStr.
 value is NumStr
 
 _True_ if value type is NumStr, _false_ otherwise.
+
+___
+
+### numStrU
+
+▸ **numStrU**(`value`): value is NumStrU
+
+Checks that value type is NumStrU.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+
+#### Returns
+
+value is NumStrU
+
+_True_ if value type is NumStrU, _false_ otherwise.
 
 ___
 

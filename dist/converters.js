@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unknown = exports.stringU = exports.stringOrFail = exports.string = exports.object = exports.numberU = exports.numberOrFail = exports.number = exports.numStr = exports.instancesOrFail = exports.instancesFiltered = exports.instances = exports.instanceU = exports.instanceOrFail = exports.instance = exports.indexedObjectOf = exports.indexedObject = exports.enumerationU = exports.enumeration = exports.notEmpty = exports.callableU = exports.callableOrFail = exports.callable = exports.byGuard = exports.boolean = exports.arrayOfUndef = exports.arrayOfOrFail = exports.arrayOfFiltered = exports.arrayOf = exports.array = exports.not = exports.factory = exports.orFail = void 0;
+exports.unknown = exports.stringU = exports.stringOrFail = exports.string = exports.object = exports.numberU = exports.numberOrFail = exports.number = exports.numStrU = exports.numStr = exports.instancesOrFail = exports.instancesFiltered = exports.instances = exports.instanceU = exports.instanceOrFail = exports.instance = exports.indexedObjectOf = exports.indexedObject = exports.enumerationU = exports.enumeration = exports.notEmpty = exports.callableU = exports.callableOrFail = exports.callable = exports.byGuard = exports.boolean = exports.arrayOfUndef = exports.arrayOfOrFail = exports.arrayOfFiltered = exports.arrayOf = exports.array = exports.not = exports.factory = exports.orFail = void 0;
 const tslib_1 = require("tslib");
 const ConversionError_1 = require("./errors/ConversionError");
 const is = (0, tslib_1.__importStar)(require("./guards"));
@@ -286,6 +286,16 @@ function numStr(value) {
     return is.number(value) ? value : string(value);
 }
 exports.numStr = numStr;
+/**
+ * Converts value to NumStrU.
+ *
+ * @param value - Value.
+ * @returns Converted value.
+ */
+function numStrU(value) {
+    return is.number(value) ? value : stringU(value);
+}
+exports.numStrU = numStrU;
 /**
  * Converts value to a number.
  *

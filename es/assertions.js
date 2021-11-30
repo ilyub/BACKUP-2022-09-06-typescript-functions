@@ -192,6 +192,15 @@ export function numStr(value, error) {
     byGuard(value, is.numStr, error);
 }
 /**
+ * Asserts that value type is NumStrU.
+ *
+ * @param value - Value.
+ * @param error - Error to be thrown.
+ */
+export function numStrU(value, error) {
+    byGuard(value, is.numStrU, error);
+}
+/**
  * Asserts that value is a number.
  *
  * @param value - Value.

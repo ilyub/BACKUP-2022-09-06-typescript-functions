@@ -259,6 +259,15 @@ export function numStr(value) {
     return is.number(value) ? value : string(value);
 }
 /**
+ * Converts value to NumStrU.
+ *
+ * @param value - Value.
+ * @returns Converted value.
+ */
+export function numStrU(value) {
+    return is.number(value) ? value : stringU(value);
+}
+/**
  * Converts value to a number.
  *
  * @param value - Value.

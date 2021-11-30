@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.undefined = exports.toBeTrue = exports.toBeFalse = exports.stringU = exports.string = exports.objectU = exports.object = exports.numberU = exports.number = exports.numStr = exports.null = exports.instances = exports.instance = exports.indexedObject = exports.enumerationU = exports.enumeration = exports.empty = exports.callableU = exports.callable = exports.byGuard = exports.booleanU = exports.boolean = exports.array = exports.not = exports.toErrorArg = void 0;
+exports.undefined = exports.toBeTrue = exports.toBeFalse = exports.stringU = exports.string = exports.objectU = exports.object = exports.numberU = exports.number = exports.numStrU = exports.numStr = exports.null = exports.instances = exports.instance = exports.indexedObject = exports.enumerationU = exports.enumeration = exports.empty = exports.callableU = exports.callable = exports.byGuard = exports.booleanU = exports.boolean = exports.array = exports.not = exports.toErrorArg = void 0;
 const tslib_1 = require("tslib");
 const AssertionError_1 = require("./errors/AssertionError");
 const is = (0, tslib_1.__importStar)(require("./guards"));
@@ -210,6 +210,16 @@ function numStr(value, error) {
     byGuard(value, is.numStr, error);
 }
 exports.numStr = numStr;
+/**
+ * Asserts that value type is NumStrU.
+ *
+ * @param value - Value.
+ * @param error - Error to be thrown.
+ */
+function numStrU(value, error) {
+    byGuard(value, is.numStrU, error);
+}
+exports.numStrU = numStrU;
 /**
  * Asserts that value is a number.
  *

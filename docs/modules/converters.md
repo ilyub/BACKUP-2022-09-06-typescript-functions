@@ -52,6 +52,7 @@
 - [not](converters.md#not)
 - [notEmpty](converters.md#notempty)
 - [numStr](converters.md#numstr)
+- [numStrU](converters.md#numstru)
 - [number](converters.md#number)
 - [numberOrFail](converters.md#numberorfail)
 - [numberU](converters.md#numberu)
@@ -697,6 +698,26 @@ Converts value to NumStr.
 #### Returns
 
 [`NumStr`](types_core.md#numstr)
+
+Converted value.
+
+___
+
+### numStrU
+
+▸ **numStrU**(`value`): [`NumStrU`](types_core.md#numstru)
+
+Converts value to NumStrU.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+
+#### Returns
+
+[`NumStrU`](types_core.md#numstru)
 
 Converted value.
 

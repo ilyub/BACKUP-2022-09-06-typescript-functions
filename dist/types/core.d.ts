@@ -15,6 +15,8 @@ export declare type IterableOrFn<T> = Iterable<T> | (() => Iterable<T>);
 export declare type Interval = ReturnType<typeof setInterval>;
 export declare type KeysOfType<T, V> = KeysOfType1<T, V>;
 export declare type NumStr = number | string;
+export declare type NumStrE = NumStr | empty;
+export declare type NumStrU = NumStr | undefined;
 export declare type Optional<T> = {
     [K in keyof T]?: T[K];
 };
