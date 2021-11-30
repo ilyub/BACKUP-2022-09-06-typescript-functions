@@ -167,6 +167,13 @@ it("numStr", () => {
   expect(is.numStr(undefined)).toBeFalse();
 });
 
+it("numStrU", () => {
+  expect(is.numStrU(1)).toBeTrue();
+  expect(is.numStrU("a")).toBeTrue();
+  expect(is.numStrU(true)).toBeFalse();
+  expect(is.numStrU(undefined)).toBeTrue();
+});
+
 it("number", () => {
   expect(is.number(1)).toBeTrue();
   expect(is.number("a")).toBeFalse();

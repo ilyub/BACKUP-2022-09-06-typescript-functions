@@ -42,6 +42,10 @@ export type KeysOfType<T, V> = KeysOfType1<T, V>;
 
 export type NumStr = number | string;
 
+export type NumStrE = NumStr | empty;
+
+export type NumStrU = NumStr | undefined;
+
 // eslint-disable-next-line @skylib/prefer-readonly
 export type Optional<T> = { [K in keyof T]?: T[K] };
 

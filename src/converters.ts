@@ -346,6 +346,16 @@ export function numStr(value: unknown): types.NumStr {
 }
 
 /**
+ * Converts value to NumStrU.
+ *
+ * @param value - Value.
+ * @returns Converted value.
+ */
+export function numStrU(value: unknown): types.NumStrU {
+  return is.number(value) ? value : stringU(value);
+}
+
+/**
  * Converts value to a number.
  *
  * @param value - Value.

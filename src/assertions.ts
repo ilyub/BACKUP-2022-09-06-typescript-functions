@@ -279,6 +279,19 @@ export function numStr(
 }
 
 /**
+ * Asserts that value type is NumStrU.
+ *
+ * @param value - Value.
+ * @param error - Error to be thrown.
+ */
+export function numStrU(
+  value: unknown,
+  error?: ErrorArg
+): asserts value is types.NumStrU {
+  byGuard(value, is.numStrU, error);
+}
+
+/**
  * Asserts that value is a number.
  *
  * @param value - Value.

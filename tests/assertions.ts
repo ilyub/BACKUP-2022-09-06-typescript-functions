@@ -272,6 +272,13 @@ it("numStr", () => {
   testAssertion("fail", assert.numStr, is.numStr, undefined);
 });
 
+it("numStrU", () => {
+  testAssertion("pass", assert.numStrU, is.numStrU, 1);
+  testAssertion("pass", assert.numStrU, is.numStrU, "a");
+  testAssertion("fail", assert.numStrU, is.numStrU, true);
+  testAssertion("pass", assert.numStrU, is.numStrU, undefined);
+});
+
 it("number", () => {
   testAssertion("pass", assert.number, is.number, 1);
   testAssertion("fail", assert.number, is.number, "a");

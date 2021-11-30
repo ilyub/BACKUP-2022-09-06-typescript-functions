@@ -254,6 +254,22 @@ it("numStr", () => {
   expect(cast.numStr(undefined)).toStrictEqual("");
 });
 
+it("numStrU", () => {
+  expect(cast.numStrU(123)).toStrictEqual(123);
+  expect(cast.numStrU(-12.3)).toStrictEqual(-12.3);
+  expect(cast.numStrU(true)).toStrictEqual("true");
+  expect(cast.numStrU(false)).toStrictEqual("false");
+  expect(cast.numStrU(" 12 ")).toStrictEqual(" 12 ");
+  expect(cast.numStrU(" -12.34 ")).toStrictEqual(" -12.34 ");
+  expect(cast.numStrU(" 12s ")).toStrictEqual(" 12s ");
+  expect(cast.numStrU("\n")).toStrictEqual("\n");
+  expect(cast.numStrU("\r\n")).toStrictEqual("\r\n");
+  expect(cast.numStrU([])).toBeUndefined();
+  expect(cast.numStrU(null)).toBeUndefined();
+  expect(cast.numStrU(undefined)).toBeUndefined();
+  expect(cast.numStrU(undefined)).toBeUndefined();
+});
+
 it("number", () => {
   expect(cast.number(123)).toStrictEqual(123);
   expect(cast.number(-12.3)).toStrictEqual(-12.3);
