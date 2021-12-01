@@ -1,6 +1,7 @@
 import * as is from "./guards";
 import * as o from "./object";
 import * as reflect from "./reflect";
+import * as s from "./string";
 import * as timer from "./timer";
 /**
  * Creates facade.
@@ -88,6 +89,44 @@ export function onDemand(generator) {
             return true;
         }
     }));
+}
+/**
+ * Creates safe access interface for an object.
+ *
+ * @param obj - Object.
+ * @param writableKeys - Writable keys.
+ * @param readonlyKeys - Readonly keys.
+ * @returns Safe access interface.
+ */
+export function safeAccess(obj, writableKeys, readonlyKeys = []) {
+    const result = {};
+    for (const key of writableKeys)
+        defineWriteAccess(key);
+    for (const key of writableKeys)
+        defineReadAccess(key);
+    for (const key of readonlyKeys)
+        defineReadAccess(key);
+    return result;
+    function defineReadAccess(key) {
+        Object.defineProperty(result, key, {
+            get() {
+                return reflect.get(obj, key);
+            },
+            set() {
+                throw new Error("Write access denied");
+            }
+        });
+    }
+    function defineWriteAccess(key) {
+        Object.defineProperty(result, `set${s.ucFirst(key)}`, {
+            get() {
+                return setter;
+            }
+        });
+        function setter(value) {
+            reflect.set(obj, key, value);
+        }
+    }
 }
 /**
  * Delays program execution.

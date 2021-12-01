@@ -7,6 +7,13 @@ export interface FacadeOwnMethods<F> {
      */
     readonly setImplementation: (implementation: F) => void;
 }
+export declare type SafeAccess<T extends object, W extends keyof T & string, R extends keyof T> = {
+    readonly [K in W as `set${Capitalize<K>}`]: (value: T[K]) => void;
+} & {
+    readonly [K in W]: T[K];
+} & {
+    readonly [K in R]: T[K];
+};
 /**
  * Creates facade.
  *
@@ -22,6 +29,15 @@ export declare function createFacade<F extends object, E = unknown>(name: string
  * @returns Resource.
  */
 export declare function onDemand<T extends object>(generator: () => T): T;
+/**
+ * Creates safe access interface for an object.
+ *
+ * @param obj - Object.
+ * @param writableKeys - Writable keys.
+ * @param readonlyKeys - Readonly keys.
+ * @returns Safe access interface.
+ */
+export declare function safeAccess<T extends object, W extends keyof T & string, R extends keyof T>(obj: T, writableKeys: readonly W[], readonlyKeys?: readonly R[]): SafeAccess<T, W, R>;
 /**
  * Delays program execution.
  *

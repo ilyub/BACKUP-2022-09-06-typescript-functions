@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.wrapProxyHandler = exports.wait = exports.onDemand = exports.createFacade = void 0;
+exports.wrapProxyHandler = exports.wait = exports.safeAccess = exports.onDemand = exports.createFacade = void 0;
 const tslib_1 = require("tslib");
 const is = (0, tslib_1.__importStar)(require("./guards"));
 const o = (0, tslib_1.__importStar)(require("./object"));
 const reflect = (0, tslib_1.__importStar)(require("./reflect"));
+const s = (0, tslib_1.__importStar)(require("./string"));
 const timer = (0, tslib_1.__importStar)(require("./timer"));
 /**
  * Creates facade.
@@ -95,6 +96,45 @@ function onDemand(generator) {
     }));
 }
 exports.onDemand = onDemand;
+/**
+ * Creates safe access interface for an object.
+ *
+ * @param obj - Object.
+ * @param writableKeys - Writable keys.
+ * @param readonlyKeys - Readonly keys.
+ * @returns Safe access interface.
+ */
+function safeAccess(obj, writableKeys, readonlyKeys = []) {
+    const result = {};
+    for (const key of writableKeys)
+        defineWriteAccess(key);
+    for (const key of writableKeys)
+        defineReadAccess(key);
+    for (const key of readonlyKeys)
+        defineReadAccess(key);
+    return result;
+    function defineReadAccess(key) {
+        Object.defineProperty(result, key, {
+            get() {
+                return reflect.get(obj, key);
+            },
+            set() {
+                throw new Error("Write access denied");
+            }
+        });
+    }
+    function defineWriteAccess(key) {
+        Object.defineProperty(result, `set${s.ucFirst(key)}`, {
+            get() {
+                return setter;
+            }
+        });
+        function setter(value) {
+            reflect.set(obj, key, value);
+        }
+    }
+}
+exports.safeAccess = safeAccess;
 /**
  * Delays program execution.
  *

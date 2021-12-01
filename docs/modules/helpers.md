@@ -11,11 +11,13 @@
 ### Type aliases
 
 - [Facade](helpers.md#facade)
+- [SafeAccess](helpers.md#safeaccess)
 
 ### Functions
 
 - [createFacade](helpers.md#createfacade)
 - [onDemand](helpers.md#ondemand)
+- [safeAccess](helpers.md#safeaccess)
 - [wait](helpers.md#wait)
 - [wrapProxyHandler](helpers.md#wrapproxyhandler)
 
@@ -31,6 +33,20 @@
 | :------ | :------ |
 | `F` | `F` |
 | `E` | `unknown` |
+
+___
+
+### SafeAccess
+
+Ƭ **SafeAccess**<`T`, `W`, `R`\>: { readonly [K in W as \`set${Capitalize<K\>}\`]: Function } & { readonly [K in W]: T[K] } & { readonly [K in R]: T[K] }
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+| `W` | extends keyof `T` & `string` |
+| `R` | extends keyof `T` |
 
 ## Functions
 
@@ -85,6 +101,36 @@ Delays resource generation until demanded.
 `T`
 
 Resource.
+
+___
+
+### safeAccess
+
+▸ **safeAccess**<`T`, `W`, `R`\>(`obj`, `writableKeys`, `readonlyKeys?`): [`SafeAccess`](helpers.md#safeaccess)<`T`, `W`, `R`\>
+
+Creates safe access interface for an object.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+| `W` | extends `string` |
+| `R` | extends `string` \| `number` \| `symbol` |
+
+#### Parameters
+
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `obj` | `T` | `undefined` | Object. |
+| `writableKeys` | readonly `W`[] | `undefined` | Writable keys. |
+| `readonlyKeys` | readonly `R`[] | `[]` | Readonly keys. |
+
+#### Returns
+
+[`SafeAccess`](helpers.md#safeaccess)<`T`, `W`, `R`\>
+
+Safe access interface.
 
 ___
 
