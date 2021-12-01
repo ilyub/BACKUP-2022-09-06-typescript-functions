@@ -1,5 +1,12 @@
-import { createFacade, onDemand, wait, wrapProxyHandler } from "@/helpers";
+import {
+  createFacade,
+  onDemand,
+  safeAccess,
+  wait,
+  wrapProxyHandler
+} from "@/helpers";
 import * as o from "@/object";
+import * as reflect from "@/reflect";
 import * as testUtils from "@/testUtils";
 import type { numberU } from "@/types/core";
 
@@ -186,6 +193,51 @@ it("onDemand: set", () => {
   obj.y = 3;
   expect(obj.x).toStrictEqual(2);
   expect(obj.y).toStrictEqual(3);
+});
+
+it("safeAccess", () => {
+  const obj = {
+    a: "a",
+    b: 10,
+    c: 20,
+    d: 30
+  };
+
+  const safe = safeAccess(obj, ["a", "b"], ["c"]);
+
+  const error = new Error("Write access denied");
+
+  safeAccess(obj, []);
+
+  {
+    expect(() => {
+      reflect.set(safe, "a", "b");
+    }).toThrow(error);
+
+    expect(() => {
+      reflect.set(safe, "b", 11);
+    }).toThrow(error);
+
+    expect(() => {
+      reflect.set(safe, "c", 21);
+    }).toThrow(error);
+  }
+
+  {
+    expect(reflect.get(safe, "a")).toStrictEqual("a");
+    expect(reflect.get(safe, "b")).toStrictEqual(10);
+    expect(reflect.get(safe, "c")).toStrictEqual(20);
+    expect(reflect.get(safe, "d")).toBeUndefined();
+  }
+
+  {
+    safe.setA("b");
+    safe.setB(11);
+    expect(reflect.get(safe, "a")).toStrictEqual("b");
+    expect(reflect.get(safe, "b")).toStrictEqual(11);
+    expect(reflect.get(safe, "c")).toStrictEqual(20);
+    expect(reflect.get(safe, "d")).toBeUndefined();
+  }
 });
 
 it("wait", async () => {
