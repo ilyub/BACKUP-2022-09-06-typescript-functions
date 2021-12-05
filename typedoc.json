@@ -6,7 +6,6 @@
     "DeepWritable1",
     "KeysOfType1",
     "LocaleName",
-    "SafeOmit1",
     "UndefinedToOptional1"
   ],
   "name": "Typescript functions",

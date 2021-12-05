@@ -65,7 +65,9 @@ export type ReadonlyPartialRecord<K extends PropertyKey, T> = Readonly<
 export type ReadonlyRecord<K extends PropertyKey, T> = Readonly<Record<K, T>>;
 
 // eslint-disable-next-line @skylib/prefer-readonly
-export type SafeOmit<T extends object, K extends keyof T> = SafeOmit1<T, K>;
+export type SafeOmit<T extends object, K extends keyof T> = Omit<T, K> & {
+  [L in K]?: never;
+};
 
 export type Sync<T> = () => T;
 
@@ -169,20 +171,6 @@ type DeepWritable6<T> = T extends object
 type KeysOfType1<T, V> = KeysOfType2<T, V>[keyof T];
 
 type KeysOfType2<T, V> = { readonly [K in keyof T]: Equal<T[K], V, K, never> };
-
-// eslint-disable-next-line @skylib/prefer-readonly
-type SafeOmit1<T extends object, K extends keyof T> = SafeOmit2<T, K> &
-  SafeOmit3<T, K>;
-
-// eslint-disable-next-line @skylib/prefer-readonly
-type SafeOmit2<T extends object, K extends keyof T> = {
-  [L in Exclude<keyof T, K>]: T[L];
-};
-
-// eslint-disable-next-line @skylib/prefer-readonly
-type SafeOmit3<T extends object, K extends keyof T> = {
-  [L in K]?: never;
-};
 
 // eslint-disable-next-line @skylib/prefer-readonly
 type UndefinedToOptional1<T extends object> = UndefinedToOptional2<T> &
