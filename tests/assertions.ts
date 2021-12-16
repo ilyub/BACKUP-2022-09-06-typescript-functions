@@ -358,12 +358,14 @@ it("objectU", () => {
 
 it("string", () => {
   testAssertion("pass", assert.string, is.string, "a");
+  testAssertion("pass", assert.string, is.string, "");
   testAssertion("fail", assert.string, is.string, 1);
   testAssertion("fail", assert.string, is.string, undefined);
 });
 
 it("stringU", () => {
   testAssertion("pass", assert.stringU, is.stringU, "a");
+  testAssertion("fail", assert.stringU, is.stringU, "");
   testAssertion("fail", assert.stringU, is.stringU, 1);
   testAssertion("pass", assert.stringU, is.stringU, undefined);
 });

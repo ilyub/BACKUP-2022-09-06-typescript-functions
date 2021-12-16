@@ -226,12 +226,14 @@ it("objectU", () => {
 
 it("string", () => {
   expect(is.string("a")).toBeTrue();
+  expect(is.string("")).toBeTrue();
   expect(is.string(1)).toBeFalse();
   expect(is.string(undefined)).toBeFalse();
 });
 
 it("stringU", () => {
   expect(is.stringU("a")).toBeTrue();
+  expect(is.stringU("")).toBeFalse();
   expect(is.stringU(1)).toBeFalse();
   expect(is.stringU(undefined)).toBeTrue();
 });

@@ -610,7 +610,7 @@ export const stringsU = orFactory(strings, undefinedGuard);
  * @returns _True_ if value type is stringU, _false_ otherwise.
  */
 export function stringU(value: unknown): value is types.stringU {
-  return typeof value === "string" || value === undefined;
+  return (typeof value === "string" && value !== "") || value === undefined;
 }
 
 not.stringU = notFactory(stringU);
