@@ -3,6 +3,14 @@
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
 import type { If } from "ts-toolbelt/out/Any/If";
 
+export type AddPrefix<T extends string, P extends string> = `${P}${T}`;
+
+export type ArrayElement<T extends readonly unknown[]> = T extends Array<
+  infer R
+>
+  ? R
+  : unknown;
+
 export type Async<T> = () => Promise<T>;
 
 export type CallSignature<T extends Callable> = (
@@ -56,6 +64,9 @@ export type PromiseAsync<T> = Promise<T> | Async<T>;
 
 export type PromiseAsyncSync<T> = Promise<T> | Async<T> | Sync<T>;
 
+export type ReadonlyArrayElement<T extends readonly unknown[]> =
+  T extends ReadonlyArray<infer R> ? R : unknown;
+
 export type ReadonlyIndexedObject<T = unknown> = Readonly<IndexedObject<T>>;
 
 export type ReadonlyPartialRecord<K extends PropertyKey, T> = Readonly<
@@ -63,6 +74,11 @@ export type ReadonlyPartialRecord<K extends PropertyKey, T> = Readonly<
 >;
 
 export type ReadonlyRecord<K extends PropertyKey, T> = Readonly<Record<K, T>>;
+
+export type RemovePrefix<
+  T extends string,
+  P extends string
+> = T extends `${P}${infer R}` ? R : never;
 
 // eslint-disable-next-line @skylib/prefer-readonly
 export type SafeOmit<T extends object, K extends keyof T> = Omit<T, K> & {

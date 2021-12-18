@@ -9,13 +9,29 @@
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
 
 import type {
+  AddPrefix,
+  ArrayElement,
   DeepPartial,
   DeepReadonly,
   DeepWritable,
   numberU,
+  ReadonlyArrayElement,
+  RemovePrefix,
   UndefinedToOptional
 } from "@/types/core";
 import { createValidationObject } from "@/types/core";
+
+it("AddPrefix", () => {
+  const x: Equals<AddPrefix<"a" | "b", "@">, "@a" | "@b"> = 1;
+
+  expect(x).toStrictEqual(1);
+});
+
+it("ArrayElement", () => {
+  const x: Equals<ArrayElement<number[]>, number> = 1;
+
+  expect(x).toStrictEqual(1);
+});
 
 it("DeepPartial", () => {
   {
@@ -230,6 +246,18 @@ it("DeepWritable", () => {
 
     expect(value).toStrictEqual(1);
   }
+});
+
+it("ReadonlyArrayElement", () => {
+  const x: Equals<ReadonlyArrayElement<number[]>, number> = 1;
+
+  expect(x).toStrictEqual(1);
+});
+
+it("RemovePrefix", () => {
+  const x: Equals<RemovePrefix<"@a" | "@b", "@">, "a" | "b"> = 1;
+
+  expect(x).toStrictEqual(1);
 });
 
 it("UndefinedToOptional", () => {
