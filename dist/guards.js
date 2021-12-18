@@ -347,7 +347,7 @@ exports.stringsU = orFactory(exports.strings, undefinedGuard);
  * @returns _True_ if value type is stringU, _false_ otherwise.
  */
 function stringU(value) {
-    return typeof value === "string" || value === undefined;
+    return (typeof value === "string" && value !== "") || value === undefined;
 }
 exports.stringU = stringU;
 not.stringU = notFactory(stringU);

@@ -20,32 +20,12 @@ declare global {
              */
             readonly executionTimeToEqual: (time: number) => Promise<R>;
             /**
-             * Checks that object contains expected HTML code.
-             *
-             * @param expected - Expected HTML code.
-             * @returns Result object.
-             */
-            readonly htmlToEqual: (expected: string) => R;
-            /**
-             * Checks that object contains expected text.
-             *
-             * @param expected - Expected text.
-             * @returns Result object.
-             */
-            readonly textToEqual: (expected: string) => R;
-            /**
              * Checks that two objects are identical.
              *
              * @param expected - Expected object.
              * @returns Result object.
              */
             readonly toBeSameAs: (expected: object) => R;
-            /**
-             * Checks that object exists.
-             *
-             * @returns Result object.
-             */
-            readonly toExist: () => R;
         }
     }
 }
@@ -86,14 +66,6 @@ export declare function executionTimeToEqual(got: unknown, time: number): Promis
  */
 export declare function getClock(): DeepReadonly<fakeTimers.Clock>;
 /**
- * Checks that object contains expected HTML code.
- *
- * @param got - Got value.
- * @param expected - Expected HTML code.
- * @returns Result object.
- */
-export declare function htmlToEqual(got: unknown, expected: string): ExpectReturnType;
-/**
  * Installs fake timer.
  *
  * @param options - Options.
@@ -126,14 +98,6 @@ export declare function run<T>(promiseAsync: PromiseAsync<T>): Promise<T>;
  */
 export declare function setRandomSystemTime(): void;
 /**
- * Checks that object contains expected text.
- *
- * @param got - Got value.
- * @param expected - Expected text.
- * @returns Result object.
- */
-export declare function textToEqual(got: unknown, expected: string): ExpectReturnType;
-/**
  * Checks that two objects are identical.
  *
  * @param got - Got value.
@@ -141,11 +105,4 @@ export declare function textToEqual(got: unknown, expected: string): ExpectRetur
  * @returns Result object.
  */
 export declare function toBeSameAs(got: unknown, expected: object): ExpectReturnType;
-/**
- * Checks that object exists.
- *
- * @param got - Got value.
- * @returns Result object.
- */
-export declare function toExist(got: unknown): ExpectReturnType;
 //# sourceMappingURL=index.d.ts.map

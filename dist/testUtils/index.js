@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.toExist = exports.toBeSameAs = exports.textToEqual = exports.setRandomSystemTime = exports.run = exports.jestSetup = exports.jestReset = exports.installFakeTimer = exports.htmlToEqual = exports.getClock = exports.executionTimeToEqual = exports.executionTimeToBeWithin = void 0;
+exports.toBeSameAs = exports.setRandomSystemTime = exports.run = exports.jestSetup = exports.jestReset = exports.installFakeTimer = exports.getClock = exports.executionTimeToEqual = exports.executionTimeToBeWithin = void 0;
 const tslib_1 = require("tslib");
 // eslint-disable-next-line import/no-unassigned-import
 require("jest-extended");
@@ -13,7 +13,6 @@ const fakeTimers = (0, tslib_1.__importStar)(require("@sinonjs/fake-timers"));
 const a = (0, tslib_1.__importStar)(require("../array"));
 const assert = (0, tslib_1.__importStar)(require("../assertions"));
 const fn = (0, tslib_1.__importStar)(require("../function"));
-const is = (0, tslib_1.__importStar)(require("../guards"));
 /**
  * Checks that async function executes within expected time.
  *
@@ -72,35 +71,6 @@ function getClock() {
 }
 exports.getClock = getClock;
 /**
- * Checks that object contains expected HTML code.
- *
- * @param got - Got value.
- * @param expected - Expected HTML code.
- * @returns Result object.
- */
-function htmlToEqual(got, expected) {
-    const html = fn
-        .run(() => {
-        if (got instanceof HTMLElement)
-            return got.innerHTML;
-        const isHtml = is.callable;
-        assert.object.of(got, { html: isHtml }, {}, 'Missing "html" method');
-        return got.html();
-    })
-        .trim()
-        .replace(/\s+/gu, " ");
-    return html === expected
-        ? {
-            message: () => `Expected HTML code not to be "${expected}"`,
-            pass: true
-        }
-        : {
-            message: () => `Expected HTML code to be "${expected}", got "${html}"`,
-            pass: false
-        };
-}
-exports.htmlToEqual = htmlToEqual;
-/**
  * Installs fake timer.
  *
  * @param options - Options.
@@ -139,10 +109,7 @@ function jestSetup() {
         const expectExtend = {
             executionTimeToBeWithin,
             executionTimeToEqual,
-            htmlToEqual,
-            textToEqual,
-            toBeSameAs,
-            toExist
+            toBeSameAs
         };
         expect.extend(matchers);
         expect.extend(expectExtend);
@@ -190,37 +157,6 @@ function setRandomSystemTime() {
 }
 exports.setRandomSystemTime = setRandomSystemTime;
 /**
- * Checks that object contains expected text.
- *
- * @param got - Got value.
- * @param expected - Expected text.
- * @returns Result object.
- */
-function textToEqual(got, expected) {
-    const text = fn
-        .run(() => {
-        if (got instanceof HTMLElement) {
-            assert.not.empty(got.textContent);
-            return got.textContent;
-        }
-        const isText = is.callable;
-        assert.object.of(got, { text: isText }, {}, 'Missing "text" method');
-        return got.text();
-    })
-        .trim()
-        .replace(/\s+/gu, " ");
-    return text === expected
-        ? {
-            message: () => `Expected text not to be "${expected}"`,
-            pass: true
-        }
-        : {
-            message: () => `Expected text to be "${expected}", got "${text}"`,
-            pass: false
-        };
-}
-exports.textToEqual = textToEqual;
-/**
  * Checks that two objects are identical.
  *
  * @param got - Got value.
@@ -239,29 +175,6 @@ function toBeSameAs(got, expected) {
         };
 }
 exports.toBeSameAs = toBeSameAs;
-/**
- * Checks that object exists.
- *
- * @param got - Got value.
- * @returns Result object.
- */
-function toExist(got) {
-    const exists = fn.run(() => {
-        const isExists = is.callable;
-        assert.object.of(got, { exists: isExists }, {}, 'Missing "exists" method');
-        return got.exists();
-    });
-    return exists
-        ? {
-            message: () => "Expected object not to exist",
-            pass: true
-        }
-        : {
-            message: () => "Expected object to exist",
-            pass: false
-        };
-}
-exports.toExist = toExist;
 /*
 |*******************************************************************************
 |* Private

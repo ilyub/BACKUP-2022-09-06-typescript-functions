@@ -6,6 +6,8 @@
 
 ### Type aliases
 
+- [AddPrefix](types_core.md#addprefix)
+- [ArrayElement](types_core.md#arrayelement)
 - [Async](types_core.md#async)
 - [CallSignature](types_core.md#callsignature)
 - [Callable](types_core.md#callable)
@@ -27,9 +29,11 @@
 - [PartialRecord](types_core.md#partialrecord)
 - [PromiseAsync](types_core.md#promiseasync)
 - [PromiseAsyncSync](types_core.md#promiseasyncsync)
+- [ReadonlyArrayElement](types_core.md#readonlyarrayelement)
 - [ReadonlyIndexedObject](types_core.md#readonlyindexedobject)
 - [ReadonlyPartialRecord](types_core.md#readonlypartialrecord)
 - [ReadonlyRecord](types_core.md#readonlyrecord)
+- [RemovePrefix](types_core.md#removeprefix)
 - [SafeOmit](types_core.md#safeomit)
 - [Sync](types_core.md#sync)
 - [Timeout](types_core.md#timeout)
@@ -51,6 +55,31 @@
 - [createValidationObject](types_core.md#createvalidationobject)
 
 ## Type aliases
+
+### AddPrefix
+
+Ƭ **AddPrefix**<`T`, `P`\>: \`${P}${T}\`
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `string` |
+| `P` | extends `string` |
+
+___
+
+### ArrayElement
+
+Ƭ **ArrayElement**<`T`\>: `T` extends infer R[] ? `R` : `unknown`
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends readonly `unknown`[] |
+
+___
 
 ### Async
 
@@ -342,6 +371,18 @@ ___
 
 ___
 
+### ReadonlyArrayElement
+
+Ƭ **ReadonlyArrayElement**<`T`\>: `T` extends `ReadonlyArray`<infer R\> ? `R` : `unknown`
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends readonly `unknown`[] |
+
+___
+
 ### ReadonlyIndexedObject
 
 Ƭ **ReadonlyIndexedObject**<`T`\>: `Readonly`<[`IndexedObject`](types_core.md#indexedobject)<`T`\>\>
@@ -380,9 +421,22 @@ ___
 
 ___
 
+### RemovePrefix
+
+Ƭ **RemovePrefix**<`T`, `P`\>: `T` extends \`${P}${infer R}\` ? `R` : `never`
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `string` |
+| `P` | extends `string` |
+
+___
+
 ### SafeOmit
 
-Ƭ **SafeOmit**<`T`, `K`\>: `SafeOmit1`<`T`, `K`\>
+Ƭ **SafeOmit**<`T`, `K`\>: `Omit`<`T`, `K`\> & { [L in K]?: never }
 
 #### Type parameters
 

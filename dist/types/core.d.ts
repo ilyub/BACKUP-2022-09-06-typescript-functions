@@ -1,5 +1,7 @@
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
 import type { If } from "ts-toolbelt/out/Any/If";
+export declare type AddPrefix<T extends string, P extends string> = `${P}${T}`;
+export declare type ArrayElement<T extends readonly unknown[]> = T extends Array<infer R> ? R : unknown;
 export declare type Async<T> = () => Promise<T>;
 export declare type CallSignature<T extends Callable> = (this: ThisParameterType<T>, ...args: Parameters<T>) => ReturnType<T>;
 export declare type Callable<T = any> = (...args: any[]) => T;
@@ -23,10 +25,14 @@ export declare type Optional<T> = {
 export declare type PartialRecord<K extends PropertyKey, T> = Partial<Record<K, T>>;
 export declare type PromiseAsync<T> = Promise<T> | Async<T>;
 export declare type PromiseAsyncSync<T> = Promise<T> | Async<T> | Sync<T>;
+export declare type ReadonlyArrayElement<T extends readonly unknown[]> = T extends ReadonlyArray<infer R> ? R : unknown;
 export declare type ReadonlyIndexedObject<T = unknown> = Readonly<IndexedObject<T>>;
 export declare type ReadonlyPartialRecord<K extends PropertyKey, T> = Readonly<PartialRecord<K, T>>;
 export declare type ReadonlyRecord<K extends PropertyKey, T> = Readonly<Record<K, T>>;
-export declare type SafeOmit<T extends object, K extends keyof T> = SafeOmit1<T, K>;
+export declare type RemovePrefix<T extends string, P extends string> = T extends `${P}${infer R}` ? R : never;
+export declare type SafeOmit<T extends object, K extends keyof T> = Omit<T, K> & {
+    [L in K]?: never;
+};
 export declare type Sync<T> = () => T;
 export declare type Timeout = ReturnType<typeof setTimeout>;
 export declare type UndefinedToOptional<T extends object> = UndefinedToOptional1<T>;
@@ -76,13 +82,6 @@ declare type DeepWritable6<T> = T extends object ? {
 declare type KeysOfType1<T, V> = KeysOfType2<T, V>[keyof T];
 declare type KeysOfType2<T, V> = {
     readonly [K in keyof T]: Equal<T[K], V, K, never>;
-};
-declare type SafeOmit1<T extends object, K extends keyof T> = SafeOmit2<T, K> & SafeOmit3<T, K>;
-declare type SafeOmit2<T extends object, K extends keyof T> = {
-    [L in Exclude<keyof T, K>]: T[L];
-};
-declare type SafeOmit3<T extends object, K extends keyof T> = {
-    [L in K]?: never;
 };
 declare type UndefinedToOptional1<T extends object> = UndefinedToOptional2<T> & UndefinedToOptional3<T>;
 declare type UndefinedToOptional2<T extends object> = {

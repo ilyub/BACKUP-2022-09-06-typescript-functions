@@ -23,15 +23,12 @@
 - [executionTimeToBeWithin](testUtils.md#executiontimetobewithin)
 - [executionTimeToEqual](testUtils.md#executiontimetoequal)
 - [getClock](testUtils.md#getclock)
-- [htmlToEqual](testUtils.md#htmltoequal)
 - [installFakeTimer](testUtils.md#installfaketimer)
 - [jestReset](testUtils.md#jestreset)
 - [jestSetup](testUtils.md#jestsetup)
 - [run](testUtils.md#run)
 - [setRandomSystemTime](testUtils.md#setrandomsystemtime)
-- [textToEqual](testUtils.md#texttoequal)
 - [toBeSameAs](testUtils.md#tobesameas)
-- [toExist](testUtils.md#toexist)
 
 ## Type aliases
 
@@ -119,27 +116,6 @@ Fake timer.
 
 ___
 
-### htmlToEqual
-
-▸ **htmlToEqual**(`got`, `expected`): [`ExpectReturnType`](../interfaces/testUtils.ExpectReturnType.md)
-
-Checks that object contains expected HTML code.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `got` | `unknown` | Got value. |
-| `expected` | `string` | Expected HTML code. |
-
-#### Returns
-
-[`ExpectReturnType`](../interfaces/testUtils.ExpectReturnType.md)
-
-Result object.
-
-___
-
 ### installFakeTimer
 
 ▸ **installFakeTimer**(`options?`): `void`
@@ -221,27 +197,6 @@ Sets random system time.
 
 ___
 
-### textToEqual
-
-▸ **textToEqual**(`got`, `expected`): [`ExpectReturnType`](../interfaces/testUtils.ExpectReturnType.md)
-
-Checks that object contains expected text.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `got` | `unknown` | Got value. |
-| `expected` | `string` | Expected text. |
-
-#### Returns
-
-[`ExpectReturnType`](../interfaces/testUtils.ExpectReturnType.md)
-
-Result object.
-
-___
-
 ### toBeSameAs
 
 ▸ **toBeSameAs**(`got`, `expected`): [`ExpectReturnType`](../interfaces/testUtils.ExpectReturnType.md)
@@ -254,26 +209,6 @@ Checks that two objects are identical.
 | :------ | :------ | :------ |
 | `got` | `unknown` | Got value. |
 | `expected` | `object` | Expected object. |
-
-#### Returns
-
-[`ExpectReturnType`](../interfaces/testUtils.ExpectReturnType.md)
-
-Result object.
-
-___
-
-### toExist
-
-▸ **toExist**(`got`): [`ExpectReturnType`](../interfaces/testUtils.ExpectReturnType.md)
-
-Checks that object exists.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `got` | `unknown` | Got value. |
 
 #### Returns
 
