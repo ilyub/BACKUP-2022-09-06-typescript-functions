@@ -3,6 +3,7 @@ import * as o from "./object";
 import * as reflect from "./reflect";
 import * as s from "./string";
 import * as timer from "./timer";
+import type { AddPrefix } from "./types/core";
 
 export type Facade<F, E = unknown> = F & FacadeOwnMethods<F> & E;
 
@@ -20,7 +21,7 @@ export type SafeAccess<
   W extends keyof T & string,
   R extends keyof T
 > = {
-  readonly [K in W as `set${Capitalize<K>}`]: (value: T[K]) => void;
+  readonly [K in W as AddPrefix<Capitalize<K>, "set">]: (value: T[K]) => void;
 } & {
   readonly [K in W]: T[K];
 } & {
