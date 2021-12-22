@@ -35,13 +35,13 @@ it("drop", () => {
 
 it("findBy", () => {
   const arr = [
-    { id: 1, value: "a" },
-    { id: 2, value: "b" },
-    { id: 3, value: "c" },
-    { id: 2, value: "d" }
+    { data: "a", id: 1 },
+    { data: "b", id: 2 },
+    { data: "c", id: 3 },
+    { data: "d", id: 2 }
   ];
 
-  const expected = { id: 2, value: "b" };
+  const expected = { data: "b", id: 2 };
 
   expect(a.findBy(arr, { id: 2 }, "id")).toStrictEqual(expected);
   expect(a.findBy(arr, { id: 4 }, "id")).toBeUndefined();
@@ -89,10 +89,10 @@ it("get", () => {
 
 it("includesBy", () => {
   const arr = [
-    { id: 1, value: "a" },
-    { id: 2, value: "b" },
-    { id: 3, value: "c" },
-    { id: 2, value: "d" }
+    { data: "a", id: 1 },
+    { data: "b", id: 2 },
+    { data: "c", id: 3 },
+    { data: "d", id: 2 }
   ];
 
   expect(a.includesBy(arr, { id: 2 }, "id")).toBeTrue();
@@ -117,6 +117,38 @@ it("push", () => {
   expect(arr).toStrictEqual([1, 2, 3]);
 });
 
+it.each([
+  {
+    arr: [
+      { data: "a", id: 1 },
+      { data: "b", id: 2 }
+    ],
+    expected: [
+      { data: "a", id: 1 },
+      { data: "b", id: 2 },
+      { data: "e", id: 3 }
+    ],
+    value: { data: "e", id: 3 }
+  },
+  {
+    arr: [
+      { data: "a", id: 1 },
+      { data: "b", id: 2 },
+      { data: "c", id: 3 },
+      { data: "d", id: 2 }
+    ],
+    expected: [
+      { data: "a", id: 1 },
+      { data: "e", id: 2 },
+      { data: "c", id: 3 },
+      { data: "e", id: 2 }
+    ],
+    value: { data: "e", id: 2 }
+  }
+])("pushOrReplaceBy", ({ arr, expected, value }) => {
+  expect(a.pushOrReplaceBy(arr, value, "id")).toStrictEqual(expected);
+});
+
 it("random", () => {
   expect(a.random([1, 2, 3])).toBeOneOf([1, 2, 3]);
   expect(() => a.random([])).toThrow(new AssertionError("Invalid index"));
@@ -124,15 +156,15 @@ it("random", () => {
 
 it("removeBy", () => {
   const arr = [
-    { id: 1, value: "a" },
-    { id: 2, value: "b" },
-    { id: 3, value: "c" },
-    { id: 2, value: "d" }
+    { data: "a", id: 1 },
+    { data: "b", id: 2 },
+    { data: "c", id: 3 },
+    { data: "d", id: 2 }
   ];
 
   const expected = [
-    { id: 1, value: "a" },
-    { id: 3, value: "c" }
+    { data: "a", id: 1 },
+    { data: "c", id: 3 }
   ];
 
   expect(a.removeBy(arr, { id: 2 }, "id")).toStrictEqual(expected);
@@ -147,6 +179,37 @@ it("replace", () => {
   expect(a.replace(["a", "b", "c"], 1, "d")).toStrictEqual(["a", "d", "c"]);
 });
 
+it.each([
+  {
+    arr: [
+      { data: "a", id: 1 },
+      { data: "b", id: 2 }
+    ],
+    expected: [
+      { data: "a", id: 1 },
+      { data: "b", id: 2 }
+    ],
+    value: { data: "e", id: 3 }
+  },
+  {
+    arr: [
+      { data: "a", id: 1 },
+      { data: "b", id: 2 },
+      { data: "c", id: 3 },
+      { data: "d", id: 2 }
+    ],
+    expected: [
+      { data: "a", id: 1 },
+      { data: "e", id: 2 },
+      { data: "c", id: 3 },
+      { data: "e", id: 2 }
+    ],
+    value: { data: "e", id: 2 }
+  }
+])("replaceBy", ({ arr, expected, value }) => {
+  expect(a.replaceBy(arr, value, "id")).toStrictEqual(expected);
+});
+
 it("reverse", () => {
   expect(a.reverse([1, 2, 3])).toStrictEqual([3, 2, 1]);
 });
@@ -154,6 +217,36 @@ it("reverse", () => {
 it("sort", () => {
   expect(a.sort([1, 3, 2])).toStrictEqual([1, 2, 3]);
   expect(a.sort([1, 3, 2], (x, y) => y - x)).toStrictEqual([3, 2, 1]);
+});
+
+it.each([
+  {
+    arr: [
+      { data: "a", id: 1 },
+      { data: "b", id: 2 }
+    ],
+    expected: [
+      { data: "a", id: 1 },
+      { data: "b", id: 2 },
+      { data: "e", id: 3 }
+    ],
+    value: { data: "e", id: 3 }
+  },
+  {
+    arr: [
+      { data: "a", id: 1 },
+      { data: "b", id: 2 },
+      { data: "c", id: 3 },
+      { data: "d", id: 2 }
+    ],
+    expected: [
+      { data: "a", id: 1 },
+      { data: "c", id: 3 }
+    ],
+    value: { data: "e", id: 2 }
+  }
+])("toggleBy", ({ arr, expected, value }) => {
+  expect(a.toggleBy(arr, value, "id")).toStrictEqual(expected);
 });
 
 it("truncate", () => {
@@ -165,16 +258,16 @@ it("truncate", () => {
 
 it("uniqueBy", () => {
   const arr = [
-    { id: 1, value: "a" },
-    { id: 2, value: "b" },
-    { id: 3, value: "c" },
-    { id: 2, value: "d" }
+    { data: "a", id: 1 },
+    { data: "b", id: 2 },
+    { data: "c", id: 3 },
+    { data: "d", id: 2 }
   ];
 
   const expected = [
-    { id: 1, value: "a" },
-    { id: 2, value: "b" },
-    { id: 3, value: "c" }
+    { data: "a", id: 1 },
+    { data: "b", id: 2 },
+    { data: "c", id: 3 }
   ];
 
   expect(a.uniqueBy(arr, "id")).toStrictEqual(expected);
