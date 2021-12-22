@@ -38,7 +38,7 @@ ___
 
 ### SafeAccess
 
-Ƭ **SafeAccess**<`T`, `W`, `R`\>: { readonly [K in W as \`set${Capitalize<K\>}\`]: Function } & { readonly [K in W]: T[K] } & { readonly [K in R]: T[K] }
+Ƭ **SafeAccess**<`T`, `W`, `R`\>: { readonly [K in W as AddPrefix<Capitalize<K\>, "set"\>]: Function } & { readonly [K in W]: T[K] } & { readonly [K in R]: T[K] }
 
 #### Type parameters
 

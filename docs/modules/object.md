@@ -37,9 +37,9 @@
 - [map](object.md#map)
 - [merge](object.md#merge)
 - [omit](object.md#omit)
+- [removeUndefinedKeys](object.md#removeundefinedkeys)
 - [size](object.md#size)
 - [sort](object.md#sort)
-- [undefinedToOptional](object.md#undefinedtooptional)
 - [unfreeze](object.md#unfreeze)
 - [unfreezeDeep](object.md#unfreezedeep)
 - [values](object.md#values)
@@ -560,6 +560,54 @@ New object with given keys omitted.
 
 ___
 
+### removeUndefinedKeys
+
+▸ **removeUndefinedKeys**<`T`\>(`obj`): `T`
+
+Removes undefined keys.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | [`OptionalToUndefined`](types_core.md#optionaltoundefined)<`T`\> | Object. |
+
+#### Returns
+
+`T`
+
+New object with undefined keys removed.
+
+▸ **removeUndefinedKeys**<`T`\>(`obj`): [`UndefinedToOptional`](types_core.md#undefinedtooptional)<`T`\>
+
+Removes undefined keys.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | `T` | Object. |
+
+#### Returns
+
+[`UndefinedToOptional`](types_core.md#undefinedtooptional)<`T`\>
+
+New object with undefined keys removed.
+
+___
+
 ### size
 
 ▸ **size**(`obj`): `number`
@@ -602,32 +650,6 @@ Sorts object.
 #### Returns
 
 `T`
-
-New object.
-
-___
-
-### undefinedToOptional
-
-▸ **undefinedToOptional**<`T`\>(`obj`): [`UndefinedToOptional`](types_core.md#undefinedtooptional)<`T`\>
-
-Converts undefined properties to optional.
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `obj` | `T` | Object. |
-
-#### Returns
-
-[`UndefinedToOptional`](types_core.md#undefinedtooptional)<`T`\>
 
 New object.
 

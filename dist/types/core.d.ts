@@ -1,5 +1,9 @@
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
 import type { If } from "ts-toolbelt/out/Any/If";
+import type { FilterKeys } from "ts-toolbelt/out/Object/FilterKeys";
+import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
+import type { ReadonlyKeys } from "ts-toolbelt/out/Object/ReadonlyKeys";
+import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 export declare type AddPrefix<T extends string, P extends string> = `${P}${T}`;
 export declare type ArrayElement<T extends readonly unknown[]> = T extends Array<infer R> ? R : unknown;
 export declare type Async<T> = () => Promise<T>;
@@ -10,6 +14,7 @@ export declare type ConstructSignature<T extends Constructor> = new (...args: Co
 export declare type DeepPartial<T> = DeepPartial1<T>;
 export declare type DeepReadonly<T> = DeepReadonly1<T>;
 export declare type DeepWritable<T> = DeepWritable1<T>;
+export declare type DefinedKeys<T extends object> = FilterKeys<T, undefined, "<-extends">;
 export declare type Equal<A, B, C, D> = If<Equals<A, B>, C, D>;
 export declare type Entry<T> = readonly [keyof T, T[keyof T]];
 export declare type IndexedObject<T = unknown> = Record<PropertyKey, T>;
@@ -21,6 +26,15 @@ export declare type NumStrE = NumStr | empty;
 export declare type NumStrU = NumStr | undefined;
 export declare type Optional<T> = {
     [K in keyof T]?: T[K];
+};
+export declare type OptionalToUndefined<T extends object> = {
+    readonly [K in OptionalKeys<T> & ReadonlyKeys<T>]: T[K] | undefined;
+} & {
+    [K in Exclude<OptionalKeys<T>, ReadonlyKeys<T>>]: T[K] | undefined;
+} & {
+    readonly [K in RequiredKeys<T> & ReadonlyKeys<T>]: T[K];
+} & {
+    [K in Exclude<RequiredKeys<T>, ReadonlyKeys<T>>]: T[K];
 };
 export declare type PartialRecord<K extends PropertyKey, T> = Partial<Record<K, T>>;
 export declare type PromiseAsync<T> = Promise<T> | Async<T>;
@@ -35,7 +49,16 @@ export declare type SafeOmit<T extends object, K extends keyof T> = Omit<T, K> &
 };
 export declare type Sync<T> = () => T;
 export declare type Timeout = ReturnType<typeof setTimeout>;
-export declare type UndefinedToOptional<T extends object> = UndefinedToOptional1<T>;
+export declare type UndefinedKeys<T extends object> = Exclude<keyof T, DefinedKeys<T>>;
+export declare type UndefinedToOptional<T extends object> = {
+    readonly [K in DefinedKeys<T> & ReadonlyKeys<T>]: T[K];
+} & {
+    [K in Exclude<DefinedKeys<T>, ReadonlyKeys<T>>]: T[K];
+} & {
+    readonly [K in UndefinedKeys<T> & ReadonlyKeys<T>]?: Exclude<T[K], undefined>;
+} & {
+    [K in Exclude<UndefinedKeys<T>, ReadonlyKeys<T>>]?: Exclude<T[K], undefined>;
+};
 export declare type ValidationObject<T extends PropertyKey> = ReadonlySet<T>;
 export declare type Writable<T> = {
     -readonly [K in keyof T]: T[K];
@@ -83,18 +106,5 @@ declare type KeysOfType1<T, V> = KeysOfType2<T, V>[keyof T];
 declare type KeysOfType2<T, V> = {
     readonly [K in keyof T]: Equal<T[K], V, K, never>;
 };
-declare type UndefinedToOptional1<T extends object> = UndefinedToOptional2<T> & UndefinedToOptional3<T>;
-declare type UndefinedToOptional2<T extends object> = {
-    [K in UndefinedToOptional4<T>]: T[K];
-};
-declare type UndefinedToOptional3<T extends object> = {
-    [K in UndefinedToOptional5<T>]?: Exclude<T[K], undefined>;
-};
-declare type UndefinedToOptional4<T extends object> = {
-    [K in keyof T]: undefined extends T[K] ? never : K;
-}[keyof T];
-declare type UndefinedToOptional5<T extends object> = {
-    [K in keyof T]: undefined extends T[K] ? K : never;
-}[keyof T];
 export {};
 //# sourceMappingURL=core.d.ts.map

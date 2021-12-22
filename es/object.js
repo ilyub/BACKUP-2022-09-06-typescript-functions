@@ -176,6 +176,15 @@ export function omit(obj, ...exclude) {
     return filter(obj, (_value, key) => !keysSet.has(key));
 }
 /**
+ * Removes undefined keys.
+ *
+ * @param obj - Object.
+ * @returns New object with undefined keys removed.
+ */
+export function removeUndefinedKeys(obj) {
+    return filter(obj, is.not.empty);
+}
+/**
  * Returns the number of enumerable properties.
  *
  * @param obj - Object.
@@ -193,15 +202,6 @@ export function size(obj) {
  */
 export function sort(obj, compareFn) {
     return fromEntries(a.sort(getEntries(obj), compareFn));
-}
-/**
- * Converts undefined properties to optional.
- *
- * @param obj - Object.
- * @returns New object.
- */
-export function undefinedToOptional(obj) {
-    return filter(obj, is.not.empty);
 }
 /**
  * Marks object as writable.

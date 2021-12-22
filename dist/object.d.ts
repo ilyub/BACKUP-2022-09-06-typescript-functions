@@ -1,4 +1,4 @@
-import type { DeepReadonly, DeepWritable, Entry, objectU, PartialRecord, ReadonlyIndexedObject, ReadonlyRecord, SafeOmit, UndefinedToOptional, Writable } from "./types/core";
+import type { DeepReadonly, DeepWritable, Entry, objectU, OptionalToUndefined, PartialRecord, ReadonlyIndexedObject, ReadonlyRecord, SafeOmit, UndefinedToOptional, Writable } from "./types/core";
 export interface Descriptor<T extends object = object> {
     readonly configurable?: boolean;
     readonly enumerable?: boolean;
@@ -169,6 +169,8 @@ export declare function merge(...objects: ReadonlyIndexedObject[]): ReadonlyInde
  * @returns New object with given keys omitted.
  */
 export declare function omit<T extends object, K extends keyof T>(obj: T, ...exclude: K[]): SafeOmit<T, K>;
+export declare function removeUndefinedKeys<T extends object>(obj: OptionalToUndefined<T>): T;
+export declare function removeUndefinedKeys<T extends object>(obj: T): UndefinedToOptional<T>;
 /**
  * Returns the number of enumerable properties.
  *
@@ -184,13 +186,6 @@ export declare function size(obj: object): number;
  * @returns New object.
  */
 export declare function sort<T extends object>(obj: T, compareFn?: (x: Entry<T>, y: Entry<T>) => number): T;
-/**
- * Converts undefined properties to optional.
- *
- * @param obj - Object.
- * @returns New object.
- */
-export declare function undefinedToOptional<T extends object>(obj: T): UndefinedToOptional<T>;
 /**
  * Marks object as writable.
  *

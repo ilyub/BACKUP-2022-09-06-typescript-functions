@@ -1,7 +1,7 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[object] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.values = exports.unfreezeDeep = exports.unfreeze = exports.undefinedToOptional = exports.sort = exports.size = exports.omit = exports.merge = exports.map = exports.keys = exports.hasOwnProp = exports.getPrototypeOf = exports.fromEntries = exports.freezeDeep = exports.freeze = exports.filter = exports.extend = exports.entries = exports.defineProperty = exports.compare = exports.clone = exports.assign = void 0;
+exports.values = exports.unfreezeDeep = exports.unfreeze = exports.sort = exports.size = exports.removeUndefinedKeys = exports.omit = exports.merge = exports.map = exports.keys = exports.hasOwnProp = exports.getPrototypeOf = exports.fromEntries = exports.freezeDeep = exports.freeze = exports.filter = exports.extend = exports.entries = exports.defineProperty = exports.compare = exports.clone = exports.assign = void 0;
 const tslib_1 = require("tslib");
 const a = (0, tslib_1.__importStar)(require("./array"));
 const is = (0, tslib_1.__importStar)(require("./guards"));
@@ -195,6 +195,16 @@ function omit(obj, ...exclude) {
 }
 exports.omit = omit;
 /**
+ * Removes undefined keys.
+ *
+ * @param obj - Object.
+ * @returns New object with undefined keys removed.
+ */
+function removeUndefinedKeys(obj) {
+    return filter(obj, is.not.empty);
+}
+exports.removeUndefinedKeys = removeUndefinedKeys;
+/**
  * Returns the number of enumerable properties.
  *
  * @param obj - Object.
@@ -215,16 +225,6 @@ function sort(obj, compareFn) {
     return fromEntries(a.sort(getEntries(obj), compareFn));
 }
 exports.sort = sort;
-/**
- * Converts undefined properties to optional.
- *
- * @param obj - Object.
- * @returns New object.
- */
-function undefinedToOptional(obj) {
-    return filter(obj, is.not.empty);
-}
-exports.undefinedToOptional = undefinedToOptional;
 /**
  * Marks object as writable.
  *

@@ -16,6 +16,7 @@
 - [DeepPartial](types_core.md#deeppartial)
 - [DeepReadonly](types_core.md#deepreadonly)
 - [DeepWritable](types_core.md#deepwritable)
+- [DefinedKeys](types_core.md#definedkeys)
 - [Entry](types_core.md#entry)
 - [Equal](types_core.md#equal)
 - [IndexedObject](types_core.md#indexedobject)
@@ -26,6 +27,7 @@
 - [NumStrE](types_core.md#numstre)
 - [NumStrU](types_core.md#numstru)
 - [Optional](types_core.md#optional)
+- [OptionalToUndefined](types_core.md#optionaltoundefined)
 - [PartialRecord](types_core.md#partialrecord)
 - [PromiseAsync](types_core.md#promiseasync)
 - [PromiseAsyncSync](types_core.md#promiseasyncsync)
@@ -37,6 +39,7 @@
 - [SafeOmit](types_core.md#safeomit)
 - [Sync](types_core.md#sync)
 - [Timeout](types_core.md#timeout)
+- [UndefinedKeys](types_core.md#undefinedkeys)
 - [UndefinedToOptional](types_core.md#undefinedtooptional)
 - [ValidationObject](types_core.md#validationobject)
 - [Writable](types_core.md#writable)
@@ -234,6 +237,18 @@ ___
 
 ___
 
+### DefinedKeys
+
+Ƭ **DefinedKeys**<`T`\>: `FilterKeys`<`T`, `undefined`, ``"<-extends"``\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+___
+
 ### Entry
 
 Ƭ **Entry**<`T`\>: readonly [keyof `T`, `T`[keyof `T`]]
@@ -331,6 +346,18 @@ ___
 | Name |
 | :------ |
 | `T` |
+
+___
+
+### OptionalToUndefined
+
+Ƭ **OptionalToUndefined**<`T`\>: { readonly [K in OptionalKeys<T\> & ReadonlyKeys<T\>]: T[K] \| undefined } & { [K in Exclude<OptionalKeys<T\>, ReadonlyKeys<T\>\>]: T[K] \| undefined } & { readonly [K in RequiredKeys<T\> & ReadonlyKeys<T\>]: T[K] } & { [K in Exclude<RequiredKeys<T\>, ReadonlyKeys<T\>\>]: T[K] }
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
 
 ___
 
@@ -473,9 +500,21 @@ ___
 
 ___
 
+### UndefinedKeys
+
+Ƭ **UndefinedKeys**<`T`\>: `Exclude`<keyof `T`, [`DefinedKeys`](types_core.md#definedkeys)<`T`\>\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+___
+
 ### UndefinedToOptional
 
-Ƭ **UndefinedToOptional**<`T`\>: `UndefinedToOptional1`<`T`\>
+Ƭ **UndefinedToOptional**<`T`\>: { readonly [K in DefinedKeys<T\> & ReadonlyKeys<T\>]: T[K] } & { [K in Exclude<DefinedKeys<T\>, ReadonlyKeys<T\>\>]: T[K] } & { readonly [K in UndefinedKeys<T\> & ReadonlyKeys<T\>]?: Exclude<T[K], undefined\> } & { [K in Exclude<UndefinedKeys<T\>, ReadonlyKeys<T\>\>]?: Exclude<T[K], undefined\> }
 
 #### Type parameters
 

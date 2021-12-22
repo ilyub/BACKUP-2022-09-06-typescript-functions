@@ -1,3 +1,4 @@
+import type { AddPrefix } from "./types/core";
 export declare type Facade<F, E = unknown> = F & FacadeOwnMethods<F> & E;
 export interface FacadeOwnMethods<F> {
     /**
@@ -8,7 +9,7 @@ export interface FacadeOwnMethods<F> {
     readonly setImplementation: (implementation: F) => void;
 }
 export declare type SafeAccess<T extends object, W extends keyof T & string, R extends keyof T> = {
-    readonly [K in W as `set${Capitalize<K>}`]: (value: T[K]) => void;
+    readonly [K in W as AddPrefix<Capitalize<K>, "set">]: (value: T[K]) => void;
 } & {
     readonly [K in W]: T[K];
 } & {
