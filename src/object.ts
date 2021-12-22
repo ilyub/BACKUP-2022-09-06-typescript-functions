@@ -9,6 +9,7 @@ import type {
   Entry,
   IndexedObject,
   objectU,
+  OptionalToUndefined,
   PartialRecord,
   ReadonlyIndexedObject,
   ReadonlyRecord,
@@ -308,6 +309,25 @@ export function omit<T extends object, K extends keyof T>(
   return filter(obj, (_value, key) => !keysSet.has(key)) as SafeOmit<T, K>;
 }
 
+export function removeUndefinedKeys<T extends object>(
+  // eslint-disable-next-line @skylib/prefer-readonly
+  obj: OptionalToUndefined<T>
+): T;
+
+export function removeUndefinedKeys<T extends object>(
+  obj: T
+): UndefinedToOptional<T>;
+
+/**
+ * Removes undefined keys.
+ *
+ * @param obj - Object.
+ * @returns New object with undefined keys removed.
+ */
+export function removeUndefinedKeys(obj: object): object {
+  return filter(obj, is.not.empty);
+}
+
 /**
  * Returns the number of enumerable properties.
  *
@@ -330,18 +350,6 @@ export function sort<T extends object>(
   compareFn?: (x: Entry<T>, y: Entry<T>) => number
 ): T {
   return fromEntries(a.sort(getEntries(obj), compareFn)) as T;
-}
-
-/**
- * Converts undefined properties to optional.
- *
- * @param obj - Object.
- * @returns New object.
- */
-export function undefinedToOptional<T extends object>(
-  obj: T
-): UndefinedToOptional<T> {
-  return filter(obj, is.not.empty) as UndefinedToOptional<T>;
 }
 
 /**

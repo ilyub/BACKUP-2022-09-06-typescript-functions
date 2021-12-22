@@ -5,8 +5,7 @@
     "DeepReadonly1",
     "DeepWritable1",
     "KeysOfType1",
-    "LocaleName",
-    "UndefinedToOptional1"
+    "LocaleName"
   ],
   "name": "Typescript functions",
   "out": "docs"

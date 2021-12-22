@@ -179,6 +179,14 @@ it("omit", () => {
   expect(o.omit({ a: 1, b: 2, c: 3 }, "b")).toStrictEqual({ a: 1, c: 3 });
 });
 
+it("removeUndefinedKeys", () => {
+  const obj = { a: 1, b: undefined };
+
+  const expected = { a: 1 };
+
+  expect(o.removeUndefinedKeys(obj)).toStrictEqual(expected);
+});
+
 it("size", () => {
   const symbol = Symbol("SampleSymbol");
 
@@ -211,14 +219,6 @@ it("sort", () => {
 
     expect(o.sort(obj, (x, y) => y[1] - x[1])).toStrictEqual(expected);
   }
-});
-
-it("undefinedToOptional", () => {
-  const obj = { a: 1, b: undefined };
-
-  const expected = { a: 1 };
-
-  expect(o.undefinedToOptional(obj)).toStrictEqual(expected);
 });
 
 it("unfreeze", () => {
