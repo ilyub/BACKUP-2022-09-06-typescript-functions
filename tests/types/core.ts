@@ -14,9 +14,12 @@ import type {
   DeepPartial,
   DeepReadonly,
   DeepWritable,
+  DefinedKeys,
   numberU,
+  OptionalToUndefined,
   ReadonlyArrayElement,
   RemovePrefix,
+  UndefinedKeys,
   UndefinedToOptional
 } from "@/types/core";
 import { createValidationObject } from "@/types/core";
@@ -248,6 +251,48 @@ it("DeepWritable", () => {
   }
 });
 
+it("DefinedKeys", () => {
+  interface From {
+    readonly xr: number;
+    xw: number;
+    readonly yr?: number;
+    yw?: number;
+  }
+
+  type To = DefinedKeys<From>;
+
+  type Expected = "xr" | "xw";
+
+  const value: Equals<To, Expected> = 1;
+
+  expect(value).toStrictEqual(1);
+});
+
+it("OptionalToUndefined", () => {
+  interface From {
+    readonly xr: number;
+    xw: number;
+    readonly yr?: number;
+    yw?: number;
+  }
+
+  type To = OptionalToUndefined<From>;
+
+  type Expected = {
+    readonly xr: number;
+  } & {
+    xw: number;
+  } & {
+    readonly yr: numberU;
+  } & {
+    yw: numberU;
+  };
+
+  const value: Equals<To, Expected> = 1;
+
+  expect(value).toStrictEqual(1);
+});
+
 it("ReadonlyArrayElement", () => {
   const x: Equals<ReadonlyArrayElement<number[]>, number> = 1;
 
@@ -260,15 +305,42 @@ it("RemovePrefix", () => {
   expect(x).toStrictEqual(1);
 });
 
+it("UndefinedKeys", () => {
+  interface From {
+    readonly xr: number;
+    xw: number;
+    readonly yr: numberU;
+    yw: numberU;
+  }
+
+  type To = UndefinedKeys<From>;
+
+  type Expected = "yr" | "yw";
+
+  const value: Equals<To, Expected> = 1;
+
+  expect(value).toStrictEqual(1);
+});
+
 it("UndefinedToOptional", () => {
   interface From {
-    x: number;
-    y: numberU;
+    readonly xr: number;
+    xw: number;
+    readonly yr: numberU;
+    yw: numberU;
   }
 
   type To = UndefinedToOptional<From>;
 
-  type Expected = { x: number } & { y?: number };
+  type Expected = {
+    readonly xr: number;
+  } & {
+    xw: number;
+  } & {
+    readonly yr?: number;
+  } & {
+    yw?: number;
+  };
 
   const value: Equals<To, Expected> = 1;
 

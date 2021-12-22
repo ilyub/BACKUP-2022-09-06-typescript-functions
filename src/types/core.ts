@@ -2,6 +2,10 @@
 
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
 import type { If } from "ts-toolbelt/out/Any/If";
+import type { FilterKeys } from "ts-toolbelt/out/Object/FilterKeys";
+import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
+import type { ReadonlyKeys } from "ts-toolbelt/out/Object/ReadonlyKeys";
+import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 
 export type AddPrefix<T extends string, P extends string> = `${P}${T}`;
 
@@ -34,6 +38,12 @@ export type DeepReadonly<T> = DeepReadonly1<T>;
 
 export type DeepWritable<T> = DeepWritable1<T>;
 
+export type DefinedKeys<T extends object> = FilterKeys<
+  T,
+  undefined,
+  "<-extends"
+>;
+
 export type Equal<A, B, C, D> = If<Equals<A, B>, C, D>;
 
 export type Entry<T> = readonly [keyof T, T[keyof T]];
@@ -56,6 +66,17 @@ export type NumStrU = NumStr | undefined;
 
 // eslint-disable-next-line @skylib/prefer-readonly
 export type Optional<T> = { [K in keyof T]?: T[K] };
+
+// eslint-disable-next-line @skylib/prefer-readonly
+export type OptionalToUndefined<T extends object> = {
+  readonly [K in OptionalKeys<T> & ReadonlyKeys<T>]: T[K] | undefined;
+} & {
+  [K in Exclude<OptionalKeys<T>, ReadonlyKeys<T>>]: T[K] | undefined;
+} & {
+  readonly [K in RequiredKeys<T> & ReadonlyKeys<T>]: T[K];
+} & {
+  [K in Exclude<RequiredKeys<T>, ReadonlyKeys<T>>]: T[K];
+};
 
 // eslint-disable-next-line @skylib/prefer-readonly
 export type PartialRecord<K extends PropertyKey, T> = Partial<Record<K, T>>;
@@ -90,8 +111,18 @@ export type Sync<T> = () => T;
 // eslint-disable-next-line @skylib/disallow-identifier
 export type Timeout = ReturnType<typeof setTimeout>;
 
+export type UndefinedKeys<T extends object> = Exclude<keyof T, DefinedKeys<T>>;
+
 // eslint-disable-next-line @skylib/prefer-readonly
-export type UndefinedToOptional<T extends object> = UndefinedToOptional1<T>;
+export type UndefinedToOptional<T extends object> = {
+  readonly [K in DefinedKeys<T> & ReadonlyKeys<T>]: T[K];
+} & {
+  [K in Exclude<DefinedKeys<T>, ReadonlyKeys<T>>]: T[K];
+} & {
+  readonly [K in UndefinedKeys<T> & ReadonlyKeys<T>]?: Exclude<T[K], undefined>;
+} & {
+  [K in Exclude<UndefinedKeys<T>, ReadonlyKeys<T>>]?: Exclude<T[K], undefined>;
+};
 
 export type ValidationObject<T extends PropertyKey> = ReadonlySet<T>;
 
@@ -187,25 +218,3 @@ type DeepWritable6<T> = T extends object
 type KeysOfType1<T, V> = KeysOfType2<T, V>[keyof T];
 
 type KeysOfType2<T, V> = { readonly [K in keyof T]: Equal<T[K], V, K, never> };
-
-// eslint-disable-next-line @skylib/prefer-readonly
-type UndefinedToOptional1<T extends object> = UndefinedToOptional2<T> &
-  UndefinedToOptional3<T>;
-
-// eslint-disable-next-line @skylib/prefer-readonly
-type UndefinedToOptional2<T extends object> = {
-  [K in UndefinedToOptional4<T>]: T[K];
-};
-
-// eslint-disable-next-line @skylib/prefer-readonly
-type UndefinedToOptional3<T extends object> = {
-  [K in UndefinedToOptional5<T>]?: Exclude<T[K], undefined>;
-};
-
-type UndefinedToOptional4<T extends object> = {
-  [K in keyof T]: undefined extends T[K] ? never : K;
-}[keyof T];
-
-type UndefinedToOptional5<T extends object> = {
-  [K in keyof T]: undefined extends T[K] ? K : never;
-}[keyof T];
