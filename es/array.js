@@ -123,6 +123,19 @@ export function push(arr, value) {
     return [...arr, value];
 }
 /**
+ * Pushes value or replaces elements matching value if found.
+ *
+ * @param arr - Array.
+ * @param value - Value.
+ * @param keyOrReduce - Comparison key or reduce function.
+ * @returns New array.
+ */
+export function pushOrReplaceBy(arr, value, keyOrReduce) {
+    return includesBy(arr, value, keyOrReduce)
+        ? replaceBy(arr, value, keyOrReduce)
+        : push(arr, value);
+}
+/**
  * Picks random element from an array.
  *
  * @param arr - Array.
@@ -156,6 +169,18 @@ export function replace(arr, index, value) {
     return [...arr.slice(0, index), value, ...arr.slice(index + 1)];
 }
 /**
+ * Replaces elements matching value.
+ *
+ * @param arr - Array.
+ * @param value - New value.
+ * @param keyOrReduce - Comparison key or reduce function.
+ * @returns New array with matching elements replaced.
+ */
+export function replaceBy(arr, value, keyOrReduce) {
+    const reduce = toReduce(keyOrReduce);
+    return arr.map(element => reduce(element) === reduce(value) ? value : element);
+}
+/**
  * Reverses array.
  *
  * @param arr - Array.
@@ -173,6 +198,19 @@ export function reverse(arr) {
  */
 export function sort(arr, compareFn) {
     return clone(arr).sort(compareFn);
+}
+/**
+ * Adds/removes value to/from an array.
+ *
+ * @param arr - Array.
+ * @param value - Value.
+ * @param keyOrReduce - Comparison key or reduce function.
+ * @returns New array.
+ */
+export function toggleBy(arr, value, keyOrReduce) {
+    return includesBy(arr, value, keyOrReduce)
+        ? removeBy(arr, value, keyOrReduce)
+        : push(arr, value);
 }
 /**
  * Truncates array.

@@ -118,6 +118,15 @@ export declare function last<T>(arr: readonly T[]): T;
  */
 export declare function push<T>(arr: readonly T[], value: T): T[];
 /**
+ * Pushes value or replaces elements matching value if found.
+ *
+ * @param arr - Array.
+ * @param value - Value.
+ * @param keyOrReduce - Comparison key or reduce function.
+ * @returns New array.
+ */
+export declare function pushOrReplaceBy<T extends object>(arr: readonly T[], value: T, keyOrReduce: PropertyKey | ReduceForComparison<object>): T[];
+/**
  * Picks random element from an array.
  *
  * @param arr - Array.
@@ -143,6 +152,15 @@ export declare function removeBy<T extends object>(arr: readonly T[], value: obj
  */
 export declare function replace<T>(arr: readonly T[], index: number, value: T): T[];
 /**
+ * Replaces elements matching value.
+ *
+ * @param arr - Array.
+ * @param value - New value.
+ * @param keyOrReduce - Comparison key or reduce function.
+ * @returns New array with matching elements replaced.
+ */
+export declare function replaceBy<T extends object>(arr: readonly T[], value: T, keyOrReduce: PropertyKey | ReduceForComparison<object>): T[];
+/**
  * Reverses array.
  *
  * @param arr - Array.
@@ -157,6 +175,15 @@ export declare function reverse<T>(arr: readonly T[]): T[];
  * @returns New sorted array.
  */
 export declare function sort<T>(arr: readonly T[], compareFn?: (x: T, y: T) => number): T[];
+/**
+ * Adds/removes value to/from an array.
+ *
+ * @param arr - Array.
+ * @param value - Value.
+ * @param keyOrReduce - Comparison key or reduce function.
+ * @returns New array.
+ */
+export declare function toggleBy<T extends object>(arr: readonly T[], value: T, keyOrReduce: PropertyKey | ReduceForComparison<object>): T[];
 /**
  * Truncates array.
  *

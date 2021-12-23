@@ -1,7 +1,7 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[array] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unshift = exports.uniqueBy = exports.truncate = exports.sort = exports.reverse = exports.replace = exports.removeBy = exports.random = exports.push = exports.last = exports.includesBy = exports.get = exports.fromRange = exports.fromIterable = exports.first = exports.findBy = exports.drop = exports.clone = exports.chain = void 0;
+exports.unshift = exports.uniqueBy = exports.truncate = exports.toggleBy = exports.sort = exports.reverse = exports.replaceBy = exports.replace = exports.removeBy = exports.random = exports.pushOrReplaceBy = exports.push = exports.last = exports.includesBy = exports.get = exports.fromRange = exports.fromIterable = exports.first = exports.findBy = exports.drop = exports.clone = exports.chain = void 0;
 const tslib_1 = require("tslib");
 const _ = (0, tslib_1.__importStar)(require("lodash"));
 const assert = (0, tslib_1.__importStar)(require("./assertions"));
@@ -138,6 +138,20 @@ function push(arr, value) {
 }
 exports.push = push;
 /**
+ * Pushes value or replaces elements matching value if found.
+ *
+ * @param arr - Array.
+ * @param value - Value.
+ * @param keyOrReduce - Comparison key or reduce function.
+ * @returns New array.
+ */
+function pushOrReplaceBy(arr, value, keyOrReduce) {
+    return includesBy(arr, value, keyOrReduce)
+        ? replaceBy(arr, value, keyOrReduce)
+        : push(arr, value);
+}
+exports.pushOrReplaceBy = pushOrReplaceBy;
+/**
  * Picks random element from an array.
  *
  * @param arr - Array.
@@ -174,6 +188,19 @@ function replace(arr, index, value) {
 }
 exports.replace = replace;
 /**
+ * Replaces elements matching value.
+ *
+ * @param arr - Array.
+ * @param value - New value.
+ * @param keyOrReduce - Comparison key or reduce function.
+ * @returns New array with matching elements replaced.
+ */
+function replaceBy(arr, value, keyOrReduce) {
+    const reduce = toReduce(keyOrReduce);
+    return arr.map(element => reduce(element) === reduce(value) ? value : element);
+}
+exports.replaceBy = replaceBy;
+/**
  * Reverses array.
  *
  * @param arr - Array.
@@ -194,6 +221,20 @@ function sort(arr, compareFn) {
     return clone(arr).sort(compareFn);
 }
 exports.sort = sort;
+/**
+ * Adds/removes value to/from an array.
+ *
+ * @param arr - Array.
+ * @param value - Value.
+ * @param keyOrReduce - Comparison key or reduce function.
+ * @returns New array.
+ */
+function toggleBy(arr, value, keyOrReduce) {
+    return includesBy(arr, value, keyOrReduce)
+        ? removeBy(arr, value, keyOrReduce)
+        : push(arr, value);
+}
+exports.toggleBy = toggleBy;
 /**
  * Truncates array.
  *

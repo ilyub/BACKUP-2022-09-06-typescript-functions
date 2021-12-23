@@ -21,11 +21,14 @@
 - [includesBy](array.md#includesby)
 - [last](array.md#last)
 - [push](array.md#push)
+- [pushOrReplaceBy](array.md#pushorreplaceby)
 - [random](array.md#random)
 - [removeBy](array.md#removeby)
 - [replace](array.md#replace)
+- [replaceBy](array.md#replaceby)
 - [reverse](array.md#reverse)
 - [sort](array.md#sort)
+- [toggleBy](array.md#toggleby)
 - [truncate](array.md#truncate)
 - [uniqueBy](array.md#uniqueby)
 - [unshift](array.md#unshift)
@@ -447,6 +450,34 @@ New array with one element added.
 
 ___
 
+### pushOrReplaceBy
+
+▸ **pushOrReplaceBy**<`T`\>(`arr`, `value`, `keyOrReduce`): `T`[]
+
+Pushes value or replaces elements matching value if found.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `arr` | readonly `T`[] | Array. |
+| `value` | `T` | Value. |
+| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](array.md#reduceforcomparison)<`object`\> | Comparison key or reduce function. |
+
+#### Returns
+
+`T`[]
+
+New array.
+
+___
+
 ### random
 
 ▸ **random**<`T`\>(`arr`): `T`
@@ -529,6 +560,34 @@ New array with one element replaced.
 
 ___
 
+### replaceBy
+
+▸ **replaceBy**<`T`\>(`arr`, `value`, `keyOrReduce`): `T`[]
+
+Replaces elements matching value.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `arr` | readonly `T`[] | Array. |
+| `value` | `T` | New value. |
+| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](array.md#reduceforcomparison)<`object`\> | Comparison key or reduce function. |
+
+#### Returns
+
+`T`[]
+
+New array with matching elements replaced.
+
+___
+
 ### reverse
 
 ▸ **reverse**<`T`\>(`arr`): `T`[]
@@ -579,6 +638,34 @@ Sorts array.
 `T`[]
 
 New sorted array.
+
+___
+
+### toggleBy
+
+▸ **toggleBy**<`T`\>(`arr`, `value`, `keyOrReduce`): `T`[]
+
+Adds/removes value to/from an array.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `arr` | readonly `T`[] | Array. |
+| `value` | `T` | Value. |
+| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](array.md#reduceforcomparison)<`object`\> | Comparison key or reduce function. |
+
+#### Returns
+
+`T`[]
+
+New array.
 
 ___
 
