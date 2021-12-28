@@ -1,0 +1,39 @@
+/**
+ * Removes key.
+ *
+ * @param map - Map.
+ * @param key - Key.
+ * @returns Map with key removed.
+ */
+export function mapDelete<K, V>(
+  map: ReadonlyMap<K, V>,
+  key: K
+): ReadonlyMap<K, V> {
+  const result = new Map(map);
+
+  result.delete(key);
+
+  return result;
+}
+
+export { mapDelete as delete };
+
+/**
+ * Sets key to value.
+ *
+ * @param map - Map.
+ * @param key - Key.
+ * @param value - Value.
+ * @returns Map with key set to value.
+ */
+export function set<K, V>(
+  map: ReadonlyMap<K, V>,
+  key: K,
+  value: V
+): ReadonlyMap<K, V> {
+  const result = new Map(map);
+
+  result.set(key, value);
+
+  return result;
+}
