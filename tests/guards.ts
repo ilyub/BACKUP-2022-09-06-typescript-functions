@@ -154,6 +154,13 @@ it("instances", () => {
   expect(guard({})).toBeFalse();
 });
 
+it("map", () => {
+  expect(is.map(new Map([["a", 1]]), is.string, is.number)).toBeTrue();
+  expect(is.map(new Map([[1, 1]]), is.string, is.number)).toBeFalse();
+  expect(is.map(new Map([["a", "a"]]), is.string, is.number)).toBeFalse();
+  expect(is.map({}, is.string, is.number)).toBeFalse();
+});
+
 it("null", () => {
   expect(is.null(1)).toBeFalse();
   expect(is.null(null)).toBeTrue();
@@ -222,6 +229,12 @@ it("objectU", () => {
   expect(is.objectU(1)).toBeFalse();
   expect(is.objectU(null)).toBeFalse();
   expect(is.objectU(undefined)).toBeTrue();
+});
+
+it("set", () => {
+  expect(is.set(new Set(["a"]), is.string)).toBeTrue();
+  expect(is.set(new Set([1]), is.string)).toBeFalse();
+  expect(is.set({}, is.string)).toBeFalse();
 });
 
 it("string", () => {

@@ -1,5 +1,6 @@
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[guards] */
 
+import * as a from "./array";
 import * as o from "./object";
 // eslint-disable-next-line @skylib/consistent-import
 import type * as types from "./types/core";
@@ -402,6 +403,8 @@ export function indexedObject(
   return typeof value === "object" && value !== null;
 }
 
+export const indexedObjectU = orFactory(indexedObject, undefinedGuard);
+
 export const indexedObjects = factory(arrayOf, indexedObject);
 
 export const indexedObjectsU = orFactory(indexedObjects, undefinedGuard);
@@ -448,6 +451,25 @@ export function instances<T>(
   ctor: types.Constructor<T>
 ): value is readonly T[] {
   return Array.isArray(value) && value.every(x => x instanceof ctor);
+}
+
+/**
+ * Checks that value type is Map<K, V>.
+ *
+ * @param value - Value.
+ * @param keyGuard - Key guard.
+ * @param valueGuard - Value guard.
+ * @returns _True_ if value type is Map<K, V>, _false_ otherwise.
+ */
+export function map<K, V>(
+  value: unknown,
+  keyGuard: Guard<K>,
+  valueGuard: Guard<V>
+): value is ReadonlyMap<K, V> {
+  return (
+    value instanceof Map &&
+    a.fromIterable(value).every(([k, v]) => keyGuard(k) && valueGuard(v))
+  );
 }
 
 /**
@@ -585,6 +607,20 @@ object.of = objectOf;
  */
 export function objectU(value: unknown): value is types.objectU {
   return object(value) || value === undefined;
+}
+
+/**
+ * Checks that value type is Set<T>.
+ *
+ * @param value - Value.
+ * @param guard - Guard.
+ * @returns _True_ if value type is Set<T>, _false_ otherwise.
+ */
+export function set<T>(
+  value: unknown,
+  guard: Guard<T>
+): value is ReadonlySet<T> {
+  return value instanceof Set && a.fromIterable(value).every(x => guard(x));
 }
 
 /**
