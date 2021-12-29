@@ -353,7 +353,7 @@ export declare const objectsU: Guard<readonly object[] | undefined>;
  * @param optionalGuards - Guards for optional properties.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-export declare function objectOf<A, B>(value: unknown, requiredGuards: Guards<A>, optionalGuards: Guards<B>): value is Required<A> & types.Optional<B>;
+export declare function objectOf<A, B>(value: unknown, requiredGuards: Guards<A>, optionalGuards: Guards<B>): value is Required<A> & Partial<B>;
 /**
  * Checks that value type is objectU.
  *

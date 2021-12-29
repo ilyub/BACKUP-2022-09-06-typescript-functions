@@ -158,7 +158,7 @@ export declare function numberU(value: unknown, error?: ErrorArg): asserts value
  */
 export declare function object(value: unknown, error?: ErrorArg): asserts value is object;
 export declare namespace object {
-    var of: <A, B>(value: unknown, requiredGuards: is.Guards<A>, optionalGuards: is.Guards<B>, error?: ErrorArg | undefined) => asserts value is Required<A> & types.Optional<B>;
+    var of: <A, B>(value: unknown, requiredGuards: is.Guards<A>, optionalGuards: is.Guards<B>, error?: ErrorArg | undefined) => asserts value is Required<A> & Partial<B>;
 }
 /**
  * Asserts that value type is objectU.

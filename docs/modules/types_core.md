@@ -26,8 +26,8 @@
 - [NumStr](types_core.md#numstr)
 - [NumStrE](types_core.md#numstre)
 - [NumStrU](types_core.md#numstru)
-- [Optional](types_core.md#optional)
 - [OptionalToUndefined](types_core.md#optionaltoundefined)
+- [Partial2](types_core.md#partial2)
 - [PartialRecord](types_core.md#partialrecord)
 - [PromiseAsync](types_core.md#promiseasync)
 - [PromiseAsyncSync](types_core.md#promiseasyncsync)
@@ -36,6 +36,7 @@
 - [ReadonlyPartialRecord](types_core.md#readonlypartialrecord)
 - [ReadonlyRecord](types_core.md#readonlyrecord)
 - [RemovePrefix](types_core.md#removeprefix)
+- [Required2](types_core.md#required2)
 - [SafeOmit](types_core.md#safeomit)
 - [Sync](types_core.md#sync)
 - [Timeout](types_core.md#timeout)
@@ -337,21 +338,21 @@ ___
 
 ___
 
-### Optional
+### OptionalToUndefined
 
-Ƭ **Optional**<`T`\>: { [K in keyof T]?: T[K] }
+Ƭ **OptionalToUndefined**<`T`\>: `Join4`<{ readonly [K in OptionalKeys<T\> & ReadonlyKeys<T\>]: T[K] \| undefined }, { [K in Exclude<OptionalKeys<T\>, ReadonlyKeys<T\>\>]: T[K] \| undefined }, { readonly [K in RequiredKeys<T\> & ReadonlyKeys<T\>]: T[K] }, { [K in Exclude<RequiredKeys<T\>, ReadonlyKeys<T\>\>]: T[K] }\>
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `T` |
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
 
 ___
 
-### OptionalToUndefined
+### Partial2
 
-Ƭ **OptionalToUndefined**<`T`\>: { readonly [K in OptionalKeys<T\> & ReadonlyKeys<T\>]: T[K] \| undefined } & { [K in Exclude<OptionalKeys<T\>, ReadonlyKeys<T\>\>]: T[K] \| undefined } & { readonly [K in RequiredKeys<T\> & ReadonlyKeys<T\>]: T[K] } & { [K in Exclude<RequiredKeys<T\>, ReadonlyKeys<T\>\>]: T[K] }
+Ƭ **Partial2**<`T`\>: `Join2`<{ readonly [K in ReadonlyKeys<T\>]?: T[K] }, { [K in WritableKeys<T\>]?: T[K] }\>
 
 #### Type parameters
 
@@ -461,6 +462,18 @@ ___
 
 ___
 
+### Required2
+
+Ƭ **Required2**<`T`\>: `Join2`<{ readonly [K in ReadonlyKeys<T\>]-?: T[K] }, { [K in WritableKeys<T\>]-?: T[K] }\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+___
+
 ### SafeOmit
 
 Ƭ **SafeOmit**<`T`, `K`\>: `Omit`<`T`, `K`\> & { [L in K]?: never }
@@ -514,7 +527,7 @@ ___
 
 ### UndefinedToOptional
 
-Ƭ **UndefinedToOptional**<`T`\>: { readonly [K in DefinedKeys<T\> & ReadonlyKeys<T\>]: T[K] } & { [K in Exclude<DefinedKeys<T\>, ReadonlyKeys<T\>\>]: T[K] } & { readonly [K in UndefinedKeys<T\> & ReadonlyKeys<T\>]?: Exclude<T[K], undefined\> } & { [K in Exclude<UndefinedKeys<T\>, ReadonlyKeys<T\>\>]?: Exclude<T[K], undefined\> }
+Ƭ **UndefinedToOptional**<`T`\>: `Join4`<{ readonly [K in DefinedKeys<T\> & ReadonlyKeys<T\>]: T[K] }, { [K in Exclude<DefinedKeys<T\>, ReadonlyKeys<T\>\>]: T[K] }, { readonly [K in UndefinedKeys<T\> & ReadonlyKeys<T\>]?: Exclude<T[K], undefined\> }, { [K in Exclude<UndefinedKeys<T\>, ReadonlyKeys<T\>\>]?: Exclude<T[K], undefined\> }\>
 
 #### Type parameters
 

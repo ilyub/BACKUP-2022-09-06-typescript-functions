@@ -14,7 +14,7 @@
 
 ### of
 
-▸ **of**<`A`, `B`\>(`value`, `requiredGuards`, `optionalGuards`, `error?`): asserts value is Required<A\> & Optional<B\>
+▸ **of**<`A`, `B`\>(`value`, `requiredGuards`, `optionalGuards`, `error?`): asserts value is Required<A\> & Partial<B\>
 
 Asserts that value type is T.
 
@@ -36,4 +36,4 @@ Asserts that value type is T.
 
 #### Returns
 
-asserts value is Required<A\> & Optional<B\>
+asserts value is Required<A\> & Partial<B\>
