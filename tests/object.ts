@@ -21,18 +21,6 @@ it("clone", () => {
   expect(obj2).not.toBeSameAs(obj1);
 });
 
-it("compare", () => {
-  const obj1 = { a: 1 };
-
-  const obj2 = { a: 1 };
-
-  const obj3 = { a: 2 };
-
-  expect(o.compare(obj1, obj2)).toBeTrue();
-  expect(o.compare(obj1, obj3)).toBeFalse();
-  expect(o.compare(obj2, obj3)).toBeFalse();
-});
-
 it("defineProperty", () => {
   const obj = { a: 1 };
 
