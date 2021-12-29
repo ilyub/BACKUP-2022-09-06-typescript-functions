@@ -4,6 +4,8 @@
     "DeepPartial1",
     "DeepReadonly1",
     "DeepWritable1",
+    "Join2",
+    "Join4",
     "KeysOfType1",
     "LocaleName"
   ],

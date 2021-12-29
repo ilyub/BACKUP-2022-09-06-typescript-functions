@@ -585,7 +585,7 @@ export function objectOf<A, B>(
   value: unknown,
   requiredGuards: Guards<A>,
   optionalGuards: Guards<B>
-): value is Required<A> & types.Optional<B> {
+): value is Required<A> & Partial<B> {
   return (
     indexedObject(value) &&
     o.entries(requiredGuards).every(([name, guard]) => guard(value[name])) &&

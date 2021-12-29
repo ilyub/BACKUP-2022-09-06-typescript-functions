@@ -298,7 +298,6 @@ export function omit<T extends object, K extends keyof T>(
 }
 
 export function removeUndefinedKeys<T extends object>(
-  // eslint-disable-next-line @skylib/prefer-readonly
   obj: OptionalToUndefined<T>
 ): T;
 

@@ -343,7 +343,7 @@ object.of = <A, B>(
   requiredGuards: is.Guards<A>,
   optionalGuards: is.Guards<B>,
   error?: ErrorArg
-): asserts value is Required<A> & types.Optional<B> => {
+): asserts value is Required<A> & Partial<B> => {
   byGuard(
     value,
     is.factory(is.object.of, requiredGuards, optionalGuards),
