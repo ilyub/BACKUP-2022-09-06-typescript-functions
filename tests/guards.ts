@@ -244,6 +244,20 @@ it("true", () => {
   expect(is.true(undefined)).toBeFalse();
 });
 
+it("tuple", () => {
+  expect(is.tuple([true, 1], is.boolean, is.number)).toBeTrue();
+  expect(is.tuple([undefined, 1], is.boolean, is.number)).toBeFalse();
+  expect(is.tuple({}, is.boolean, is.number)).toBeFalse();
+});
+
+it("tuple.factory", () => {
+  const guard = is.tuple.factory(is.boolean, is.number, is.string);
+
+  expect(guard([true, 1, "a"])).toBeTrue();
+  expect(guard([undefined, 1, "a"])).toBeFalse();
+  expect(guard({})).toBeFalse();
+});
+
 it("undefined", () => {
   expect(is.undefined(1)).toBeFalse();
   expect(is.undefined(null)).toBeFalse();
