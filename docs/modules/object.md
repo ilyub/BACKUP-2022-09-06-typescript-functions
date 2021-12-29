@@ -23,7 +23,6 @@
 
 - [assign](object.md#assign)
 - [clone](object.md#clone)
-- [compare](object.md#compare)
 - [defineProperty](object.md#defineproperty)
 - [entries](object.md#entries)
 - [extend](object.md#extend)
@@ -152,27 +151,6 @@ Creates object copy.
 [`Writable`](types_core.md#writable)<`T`\>
 
 Object copy.
-
-___
-
-### compare
-
-▸ **compare**(`obj1`, `obj2`): `boolean`
-
-Compares two objects.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `obj1` | [`objectU`](types_core.md#objectu) | Object 1. |
-| `obj2` | [`objectU`](types_core.md#objectu) | Object 2. |
-
-#### Returns
-
-`boolean`
-
-_True_ if objects are equal, _false_ otherwise.
 
 ___
 

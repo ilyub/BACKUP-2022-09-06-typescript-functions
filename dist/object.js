@@ -1,11 +1,10 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[object] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.values = exports.unfreezeDeep = exports.unfreeze = exports.sort = exports.size = exports.removeUndefinedKeys = exports.omit = exports.merge = exports.map = exports.keys = exports.hasOwnProp = exports.getPrototypeOf = exports.fromEntries = exports.freezeDeep = exports.freeze = exports.filter = exports.extend = exports.entries = exports.defineProperty = exports.compare = exports.clone = exports.assign = void 0;
+exports.values = exports.unfreezeDeep = exports.unfreeze = exports.sort = exports.size = exports.removeUndefinedKeys = exports.omit = exports.merge = exports.map = exports.keys = exports.hasOwnProp = exports.getPrototypeOf = exports.fromEntries = exports.freezeDeep = exports.freeze = exports.filter = exports.extend = exports.entries = exports.defineProperty = exports.clone = exports.assign = void 0;
 const tslib_1 = require("tslib");
 const a = (0, tslib_1.__importStar)(require("./array"));
 const is = (0, tslib_1.__importStar)(require("./guards"));
-const json = (0, tslib_1.__importStar)(require("./json"));
 /**
  * Typed version of Object.assign.
  *
@@ -27,17 +26,6 @@ function clone(obj) {
     return Object.assign({}, obj);
 }
 exports.clone = clone;
-/**
- * Compares two objects.
- *
- * @param obj1 - Object 1.
- * @param obj2 - Object 2.
- * @returns _True_ if objects are equal, _false_ otherwise.
- */
-function compare(obj1, obj2) {
-    return json.encode(obj1) === json.encode(obj2);
-}
-exports.compare = compare;
 /**
  * Typed version of Object.defineProperty.
  *

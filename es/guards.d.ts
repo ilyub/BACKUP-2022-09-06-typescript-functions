@@ -257,6 +257,7 @@ export declare function indexedObject(value: unknown): value is types.ReadonlyIn
 export declare namespace indexedObject {
     var of: typeof indexedObjectOf;
 }
+export declare const indexedObjectU: Guard<Readonly<types.IndexedObject<unknown>> | undefined>;
 export declare const indexedObjects: Guard<readonly Readonly<types.IndexedObject<unknown>>[]>;
 export declare const indexedObjectsU: Guard<readonly Readonly<types.IndexedObject<unknown>>[] | undefined>;
 /**
@@ -283,6 +284,15 @@ export declare function instance<T>(value: unknown, ctor: types.Constructor<T>):
  * @returns _True_ if value type is T[], _false_ otherwise.
  */
 export declare function instances<T>(value: unknown, ctor: types.Constructor<T>): value is readonly T[];
+/**
+ * Checks that value type is Map<K, V>.
+ *
+ * @param value - Value.
+ * @param keyGuard - Key guard.
+ * @param valueGuard - Value guard.
+ * @returns _True_ if value type is Map<K, V>, _false_ otherwise.
+ */
+export declare function map<K, V>(value: unknown, keyGuard: Guard<K>, valueGuard: Guard<V>): value is ReadonlyMap<K, V>;
 /**
  * Checks that value is _null_.
  *
@@ -352,6 +362,14 @@ export declare function objectOf<A, B>(value: unknown, requiredGuards: Guards<A>
  */
 export declare function objectU(value: unknown): value is types.objectU;
 /**
+ * Checks that value type is Set<T>.
+ *
+ * @param value - Value.
+ * @param guard - Guard.
+ * @returns _True_ if value type is Set<T>, _false_ otherwise.
+ */
+export declare function set<T>(value: unknown, guard: Guard<T>): value is ReadonlySet<T>;
+/**
  * Checks that value is a string.
  *
  * @param value - Value.
@@ -375,6 +393,81 @@ export declare function stringU(value: unknown): value is types.stringU;
  */
 export declare function trueGuard(value: unknown): value is true;
 export { trueGuard as true };
+/**
+ * Checks that value type is [A].
+ *
+ * @param value - Value.
+ * @param guard - Guard .
+ * @returns _True_ if value type is [A], _false_ otherwise.
+ */
+export declare function tuple<A>(value: unknown, guard: Guard<A>): value is readonly [A];
+/**
+ * Checks that value type is [A, B].
+ *
+ * @param value - Value.
+ * @param guard1 - Guard 1.
+ * @param guard2 - Guard 2.
+ * @returns _True_ if value type is [A, B], _false_ otherwise.
+ */
+export declare function tuple<A, B>(value: unknown, guard1: Guard<A>, guard2: Guard<B>): value is readonly [A, B];
+/**
+ * Checks that value type is [A, B, C].
+ *
+ * @param value - Value.
+ * @param guard1 - Guard 1.
+ * @param guard2 - Guard 2.
+ * @param guard3 - Guard 3.
+ * @returns _True_ if value type is [A, B, C], _false_ otherwise.
+ */
+export declare function tuple<A, B, C>(value: unknown, guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>): value is readonly [A, B, C];
+/**
+ * Checks that value type is [A, B, C, D].
+ *
+ * @param value - Value.
+ * @param guard1 - Guard 1.
+ * @param guard2 - Guard 2.
+ * @param guard3 - Guard 3.
+ * @param guard4 - Guard 4.
+ * @returns _True_ if value type is [A, B, C, D], _false_ otherwise.
+ */
+export declare function tuple<A, B, C, D>(value: unknown, guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>, guard4: Guard<D>): value is readonly [A, B, C, D];
+export declare namespace tuple {
+    var factory: typeof tupleFactory;
+}
+/**
+ * Creates guard for type [A].
+ *
+ * @param guard - Guard.
+ * @returns Guard for type [A].
+ */
+export declare function tupleFactory<A>(guard: Guard<A>): Guard<readonly [A]>;
+/**
+ * Creates guard for type [A, B].
+ *
+ * @param guard1 - Guard 1.
+ * @param guard2 - Guard 2.
+ * @returns Guard for type [A, B].
+ */
+export declare function tupleFactory<A, B>(guard1: Guard<A>, guard2: Guard<B>): Guard<readonly [A, B]>;
+/**
+ * Creates guard for type [A, B, C].
+ *
+ * @param guard1 - Guard 1.
+ * @param guard2 - Guard 2.
+ * @param guard3 - Guard 3.
+ * @returns Guard for type [A, B, C].
+ */
+export declare function tupleFactory<A, B, C>(guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>): Guard<readonly [A, B, C]>;
+/**
+ * Creates guard for type [A, B, C, D].
+ *
+ * @param guard1 - Guard 1.
+ * @param guard2 - Guard 2.
+ * @param guard3 - Guard 3.
+ * @param guard4 - Guard 4.
+ * @returns Guard for type [A, B, C, D].
+ */
+export declare function tupleFactory<A, B, C, D>(guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>, guard4: Guard<D>): Guard<readonly [A, B, C, D]>;
 /**
  * Checks that value is _undefined_.
  *

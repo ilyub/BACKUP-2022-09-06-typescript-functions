@@ -17,6 +17,7 @@
 - [not](guards.not.md)
 - [object](guards.object.md)
 - [or](guards.or.md)
+- [tuple](guards.tuple.md)
 
 ### Type aliases
 
@@ -46,10 +47,12 @@
 - [falseGuard](guards.md#falseguard)
 - [indexedObject](guards.md#indexedobject)
 - [indexedObjectOf](guards.md#indexedobjectof)
+- [indexedObjectU](guards.md#indexedobjectu)
 - [indexedObjects](guards.md#indexedobjects)
 - [indexedObjectsU](guards.md#indexedobjectsu)
 - [instance](guards.md#instance)
 - [instances](guards.md#instances)
+- [map](guards.md#map)
 - [not](guards.md#not)
 - [notFactory](guards.md#notfactory)
 - [null](guards.md#null)
@@ -68,11 +71,14 @@
 - [objectsU](guards.md#objectsu)
 - [or](guards.md#or)
 - [orFactory](guards.md#orfactory)
+- [set](guards.md#set)
 - [string](guards.md#string)
 - [stringU](guards.md#stringu)
 - [strings](guards.md#strings)
 - [stringsU](guards.md#stringsu)
 - [trueGuard](guards.md#trueguard)
+- [tuple](guards.md#tuple)
+- [tupleFactory](guards.md#tuplefactory)
 - [undefined](guards.md#undefined)
 - [unknown](guards.md#unknown)
 
@@ -727,6 +733,22 @@ _True_ if value type is IndexedObject\<T\>, _false_ otherwise.
 
 ___
 
+### indexedObjectU
+
+▸ `Const` **indexedObjectU**(`value`): value is undefined \| Readonly<IndexedObject<unknown\>\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
+
+#### Returns
+
+value is undefined \| Readonly<IndexedObject<unknown\>\>
+
+___
+
 ### indexedObjects
 
 ▸ `Const` **indexedObjects**(`value`): value is readonly Readonly<IndexedObject<unknown\>\>[]
@@ -810,6 +832,35 @@ Checks that value type is T[].
 value is readonly T[]
 
 _True_ if value type is T[], _false_ otherwise.
+
+___
+
+### map
+
+▸ **map**<`K`, `V`\>(`value`, `keyGuard`, `valueGuard`): value is ReadonlyMap<K, V\>
+
+Checks that value type is Map<K, V>.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `K` |
+| `V` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+| `keyGuard` | [`Guard`](guards.md#guard)<`K`\> | Key guard. |
+| `valueGuard` | [`Guard`](guards.md#guard)<`V`\> | Value guard. |
+
+#### Returns
+
+value is ReadonlyMap<K, V\>
+
+_True_ if value type is Map<K, V>, _false_ otherwise.
 
 ___
 
@@ -1299,6 +1350,33 @@ Guard for type A | B | C | D.
 
 ___
 
+### set
+
+▸ **set**<`T`\>(`value`, `guard`): value is ReadonlySet<T\>
+
+Checks that value type is Set<T>.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+| `guard` | [`Guard`](guards.md#guard)<`T`\> | Guard. |
+
+#### Returns
+
+value is ReadonlySet<T\>
+
+_True_ if value type is Set<T>, _false_ otherwise.
+
+___
+
 ### string
 
 ▸ **string**(`value`): value is string
@@ -1388,6 +1466,218 @@ Checks that value is _true_.
 value is true
 
 _True_ if value is _true_, _false_ otherwise.
+
+___
+
+### tuple
+
+▸ **tuple**<`A`\>(`value`, `guard`): value is readonly [A]
+
+Checks that value type is [A].
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `A` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+| `guard` | [`Guard`](guards.md#guard)<`A`\> | Guard . |
+
+#### Returns
+
+value is readonly [A]
+
+_True_ if value type is [A], _false_ otherwise.
+
+▸ **tuple**<`A`, `B`\>(`value`, `guard1`, `guard2`): value is readonly [A, B]
+
+Checks that value type is [A, B].
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `A` |
+| `B` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
+
+#### Returns
+
+value is readonly [A, B]
+
+_True_ if value type is [A, B], _false_ otherwise.
+
+▸ **tuple**<`A`, `B`, `C`\>(`value`, `guard1`, `guard2`, `guard3`): value is readonly [A, B, C]
+
+Checks that value type is [A, B, C].
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `A` |
+| `B` |
+| `C` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
+| `guard3` | [`Guard`](guards.md#guard)<`C`\> | Guard 3. |
+
+#### Returns
+
+value is readonly [A, B, C]
+
+_True_ if value type is [A, B, C], _false_ otherwise.
+
+▸ **tuple**<`A`, `B`, `C`, `D`\>(`value`, `guard1`, `guard2`, `guard3`, `guard4`): value is readonly [A, B, C, D]
+
+Checks that value type is [A, B, C, D].
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `A` |
+| `B` |
+| `C` |
+| `D` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
+| `guard3` | [`Guard`](guards.md#guard)<`C`\> | Guard 3. |
+| `guard4` | [`Guard`](guards.md#guard)<`D`\> | Guard 4. |
+
+#### Returns
+
+value is readonly [A, B, C, D]
+
+_True_ if value type is [A, B, C, D], _false_ otherwise.
+
+___
+
+### tupleFactory
+
+▸ **tupleFactory**<`A`\>(`guard`): [`Guard`](guards.md#guard)<readonly [`A`]\>
+
+Creates guard for type [A].
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `A` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `guard` | [`Guard`](guards.md#guard)<`A`\> | Guard. |
+
+#### Returns
+
+[`Guard`](guards.md#guard)<readonly [`A`]\>
+
+Guard for type [A].
+
+▸ **tupleFactory**<`A`, `B`\>(`guard1`, `guard2`): [`Guard`](guards.md#guard)<readonly [`A`, `B`]\>
+
+Creates guard for type [A, B].
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `A` |
+| `B` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
+
+#### Returns
+
+[`Guard`](guards.md#guard)<readonly [`A`, `B`]\>
+
+Guard for type [A, B].
+
+▸ **tupleFactory**<`A`, `B`, `C`\>(`guard1`, `guard2`, `guard3`): [`Guard`](guards.md#guard)<readonly [`A`, `B`, `C`]\>
+
+Creates guard for type [A, B, C].
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `A` |
+| `B` |
+| `C` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
+| `guard3` | [`Guard`](guards.md#guard)<`C`\> | Guard 3. |
+
+#### Returns
+
+[`Guard`](guards.md#guard)<readonly [`A`, `B`, `C`]\>
+
+Guard for type [A, B, C].
+
+▸ **tupleFactory**<`A`, `B`, `C`, `D`\>(`guard1`, `guard2`, `guard3`, `guard4`): [`Guard`](guards.md#guard)<readonly [`A`, `B`, `C`, `D`]\>
+
+Creates guard for type [A, B, C, D].
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `A` |
+| `B` |
+| `C` |
+| `D` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
+| `guard3` | [`Guard`](guards.md#guard)<`C`\> | Guard 3. |
+| `guard4` | [`Guard`](guards.md#guard)<`D`\> | Guard 4. |
+
+#### Returns
+
+[`Guard`](guards.md#guard)<readonly [`A`, `B`, `C`, `D`]\>
+
+Guard for type [A, B, C, D].
 
 ___
 

@@ -1,4 +1,5 @@
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[guards] */
+import * as a from "./array";
 import * as o from "./object";
 /**
  * Creates single-arg guard.
@@ -157,6 +158,7 @@ export { falseGuard as false };
 export function indexedObject(value) {
     return typeof value === "object" && value !== null;
 }
+export const indexedObjectU = orFactory(indexedObject, undefinedGuard);
 export const indexedObjects = factory(arrayOf, indexedObject);
 export const indexedObjectsU = orFactory(indexedObjects, undefinedGuard);
 /**
@@ -189,6 +191,18 @@ export function instance(value, ctor) {
  */
 export function instances(value, ctor) {
     return Array.isArray(value) && value.every(x => x instanceof ctor);
+}
+/**
+ * Checks that value type is Map<K, V>.
+ *
+ * @param value - Value.
+ * @param keyGuard - Key guard.
+ * @param valueGuard - Value guard.
+ * @returns _True_ if value type is Map<K, V>, _false_ otherwise.
+ */
+export function map(value, keyGuard, valueGuard) {
+    return (value instanceof Map &&
+        a.fromIterable(value).every(([k, v]) => keyGuard(k) && valueGuard(v)));
 }
 /**
  * Checks that value is _null_.
@@ -296,6 +310,16 @@ export function objectU(value) {
     return object(value) || value === undefined;
 }
 /**
+ * Checks that value type is Set<T>.
+ *
+ * @param value - Value.
+ * @param guard - Guard.
+ * @returns _True_ if value type is Set<T>, _false_ otherwise.
+ */
+export function set(value, guard) {
+    return value instanceof Set && a.fromIterable(value).every(x => guard(x));
+}
+/**
  * Checks that value is a string.
  *
  * @param value - Value.
@@ -327,6 +351,13 @@ export function trueGuard(value) {
     return value === true;
 }
 export { trueGuard as true };
+export function tuple(value, ...guards) {
+    return array(value) && guards.every((guard, index) => guard(value[index]));
+}
+export function tupleFactory(...guards) {
+    return (value) => array(value) && guards.every((guard, index) => guard(value[index]));
+}
+tuple.factory = tupleFactory;
 /**
  * Checks that value is _undefined_.
  *

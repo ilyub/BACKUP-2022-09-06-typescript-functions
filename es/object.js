@@ -1,7 +1,6 @@
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[object] */
 import * as a from "./array";
 import * as is from "./guards";
-import * as json from "./json";
 /**
  * Typed version of Object.assign.
  *
@@ -20,16 +19,6 @@ export function assign(mutableTarget, ...sources) {
  */
 export function clone(obj) {
     return Object.assign({}, obj);
-}
-/**
- * Compares two objects.
- *
- * @param obj1 - Object 1.
- * @param obj2 - Object 2.
- * @returns _True_ if objects are equal, _false_ otherwise.
- */
-export function compare(obj1, obj2) {
-    return json.encode(obj1) === json.encode(obj2);
 }
 /**
  * Typed version of Object.defineProperty.

@@ -1,8 +1,10 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[guards] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unknown = exports.undefined = exports.true = exports.trueGuard = exports.stringU = exports.stringsU = exports.strings = exports.string = exports.objectU = exports.objectOf = exports.objectsU = exports.objects = exports.object = exports.numberU = exports.numbersU = exports.numbers = exports.number = exports.numStrU = exports.numStrsU = exports.numStrs = exports.numStr = exports.null = exports.instances = exports.instance = exports.indexedObjectOf = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObject = exports.false = exports.falseGuard = exports.enumerationU = exports.enumeration = exports.empty = exports.callableU = exports.callable = exports.booleanU = exports.booleansU = exports.booleans = exports.boolean = exports.arrayOf = exports.arraysU = exports.arrays = exports.array = exports.orFactory = exports.or = exports.notFactory = exports.not = exports.andFactory = exports.and = exports.factory = void 0;
+exports.trueGuard = exports.stringU = exports.stringsU = exports.strings = exports.string = exports.set = exports.objectU = exports.objectOf = exports.objectsU = exports.objects = exports.object = exports.numberU = exports.numbersU = exports.numbers = exports.number = exports.numStrU = exports.numStrsU = exports.numStrs = exports.numStr = exports.null = exports.map = exports.instances = exports.instance = exports.indexedObjectOf = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObjectU = exports.indexedObject = exports.false = exports.falseGuard = exports.enumerationU = exports.enumeration = exports.empty = exports.callableU = exports.callable = exports.booleanU = exports.booleansU = exports.booleans = exports.boolean = exports.arrayOf = exports.arraysU = exports.arrays = exports.array = exports.orFactory = exports.or = exports.notFactory = exports.not = exports.andFactory = exports.and = exports.factory = void 0;
+exports.unknown = exports.undefined = exports.tupleFactory = exports.tuple = exports.true = void 0;
 const tslib_1 = require("tslib");
+const a = (0, tslib_1.__importStar)(require("./array"));
 const o = (0, tslib_1.__importStar)(require("./object"));
 /**
  * Creates single-arg guard.
@@ -179,6 +181,7 @@ function indexedObject(value) {
     return typeof value === "object" && value !== null;
 }
 exports.indexedObject = indexedObject;
+exports.indexedObjectU = orFactory(indexedObject, undefinedGuard);
 exports.indexedObjects = factory(arrayOf, indexedObject);
 exports.indexedObjectsU = orFactory(exports.indexedObjects, undefinedGuard);
 /**
@@ -215,6 +218,19 @@ function instances(value, ctor) {
     return Array.isArray(value) && value.every(x => x instanceof ctor);
 }
 exports.instances = instances;
+/**
+ * Checks that value type is Map<K, V>.
+ *
+ * @param value - Value.
+ * @param keyGuard - Key guard.
+ * @param valueGuard - Value guard.
+ * @returns _True_ if value type is Map<K, V>, _false_ otherwise.
+ */
+function map(value, keyGuard, valueGuard) {
+    return (value instanceof Map &&
+        a.fromIterable(value).every(([k, v]) => keyGuard(k) && valueGuard(v)));
+}
+exports.map = map;
 /**
  * Checks that value is _null_.
  *
@@ -328,6 +344,17 @@ function objectU(value) {
 }
 exports.objectU = objectU;
 /**
+ * Checks that value type is Set<T>.
+ *
+ * @param value - Value.
+ * @param guard - Guard.
+ * @returns _True_ if value type is Set<T>, _false_ otherwise.
+ */
+function set(value, guard) {
+    return value instanceof Set && a.fromIterable(value).every(x => guard(x));
+}
+exports.set = set;
+/**
  * Checks that value is a string.
  *
  * @param value - Value.
@@ -362,6 +389,15 @@ function trueGuard(value) {
 }
 exports.trueGuard = trueGuard;
 exports.true = trueGuard;
+function tuple(value, ...guards) {
+    return array(value) && guards.every((guard, index) => guard(value[index]));
+}
+exports.tuple = tuple;
+function tupleFactory(...guards) {
+    return (value) => array(value) && guards.every((guard, index) => guard(value[index]));
+}
+exports.tupleFactory = tupleFactory;
+tuple.factory = tupleFactory;
 /**
  * Checks that value is _undefined_.
  *

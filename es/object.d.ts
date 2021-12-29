@@ -38,14 +38,6 @@ export declare function assign<T extends object, K extends keyof T>(mutableTarge
  */
 export declare function clone<T extends object>(obj: T): Writable<T>;
 /**
- * Compares two objects.
- *
- * @param obj1 - Object 1.
- * @param obj2 - Object 2.
- * @returns _True_ if objects are equal, _false_ otherwise.
- */
-export declare function compare(obj1: objectU, obj2: objectU): boolean;
-/**
  * Typed version of Object.defineProperty.
  *
  * @param obj - Object.
