@@ -1,7 +1,33 @@
 import * as is from "./guards";
-import type { PromiseAsync, PromiseAsyncSync, Sync } from "./types/core";
+import type { Async, PromiseAsync, PromiseAsyncSync, Sync } from "./types/core";
 
 export type PipeCallback<V = unknown, R = unknown> = (value: V) => R;
+
+/**
+ * Prevents parallel running.
+ *
+ * @param async - Async function.
+ * @returns Wrapped async function.
+ */
+export function doNotRunParallel<T extends unknown[] = never[]>(
+  async: Async<void, T>
+): Async<void, T> {
+  let running = 0;
+
+  return async (...args: T): Promise<void> => {
+    if (running) {
+      // Already running
+    } else {
+      running++;
+
+      try {
+        await async(...args);
+      } finally {
+        running--;
+      }
+    }
+  };
+}
 
 /**
  * Applies callbacks to the value.

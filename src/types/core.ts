@@ -16,7 +16,9 @@ export type ArrayElement<T extends readonly unknown[]> = T extends Array<
   ? R
   : unknown;
 
-export type Async<T> = () => Promise<T>;
+export type Async<R, A extends unknown[] = never[]> = (
+  ...args: A
+) => Promise<R>;
 
 export type CallSignature<T extends Callable> = (
   this: ThisParameterType<T>,
