@@ -87,21 +87,28 @@ ___
 
 ### Async
 
-Ƭ **Async**<`T`\>: () => `Promise`<`T`\>
+Ƭ **Async**<`R`, `A`\>: (...`args`: `A`) => `Promise`<`R`\>
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `T` |
+| Name | Type |
+| :------ | :------ |
+| `R` | `R` |
+| `A` | extends `unknown`[] = `never`[] |
 
 #### Type declaration
 
-▸ (): `Promise`<`T`\>
+▸ (...`args`): `Promise`<`R`\>
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `...args` | `A` |
 
 ##### Returns
 
-`Promise`<`T`\>
+`Promise`<`R`\>
 
 ___
 

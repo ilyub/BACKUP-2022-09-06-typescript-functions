@@ -10,6 +10,7 @@
 
 ### Functions
 
+- [doNotRunParallel](function.md#donotrunparallel)
 - [pipe](function.md#pipe)
 - [run](function.md#run)
 
@@ -41,6 +42,32 @@
 `R`
 
 ## Functions
+
+### doNotRunParallel
+
+▸ **doNotRunParallel**<`T`\>(`async`): [`Async`](types_core.md#async)<`void`, `T`\>
+
+Prevents parallel running.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `unknown`[] = `never`[] |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `async` | [`Async`](types_core.md#async)<`void`, `T`\> | Async function. |
+
+#### Returns
+
+[`Async`](types_core.md#async)<`void`, `T`\>
+
+Wrapped async function.
+
+___
 
 ### pipe
 

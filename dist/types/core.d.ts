@@ -7,7 +7,7 @@ import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 import type { WritableKeys } from "ts-toolbelt/out/Object/WritableKeys";
 export declare type AddPrefix<T extends string, P extends string> = `${P}${T}`;
 export declare type ArrayElement<T extends readonly unknown[]> = T extends Array<infer R> ? R : unknown;
-export declare type Async<T> = () => Promise<T>;
+export declare type Async<R, A extends unknown[] = never[]> = (...args: A) => Promise<R>;
 export declare type CallSignature<T extends Callable> = (this: ThisParameterType<T>, ...args: Parameters<T>) => ReturnType<T>;
 export declare type Callable<T = any> = (...args: any[]) => T;
 export declare type Constructor<T = any> = new (...args: any[]) => T;
