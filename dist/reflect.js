@@ -1,9 +1,35 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/disallow-identifier[reflect] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.set = exports.getOwnMetadataKey = exports.getOwnMetadata = exports.getMetadataKey = exports.getMetadata = exports.get = exports.defineMetadataKey = exports.defineMetadata = void 0;
+exports.setPrototypeOf = exports.set = exports.preventExtensions = exports.ownKeys = exports.isExtensible = exports.has = exports.getPrototypeOf = exports.getOwnPropertyDescriptor = exports.getOwnMetadataKey = exports.getOwnMetadata = exports.getMetadataKey = exports.getMetadata = exports.get = exports.deleteProperty = exports.defineProperty = exports.defineMetadataKey = exports.defineMetadata = exports.construct = exports.apply = void 0;
 // eslint-disable-next-line import/no-unassigned-import
 require("reflect-metadata");
+/**
+ * Typed version of Reflect.construct.
+ *
+ * @param target - Target function.
+ * @param thisArg - This argument.
+ * @param args - Arguments.
+ * @returns Function execution result.
+ */
+function apply(target, thisArg, args) {
+    return Reflect.apply(target, thisArg, args);
+}
+exports.apply = apply;
+/**
+ * Typed version of Reflect.construct.
+ *
+ * @param target - Target function.
+ * @param args - Arguments.
+ * @param newTarget - New target function.
+ * @returns Constructed object.
+ */
+function construct(target, args, newTarget) {
+    return newTarget
+        ? Reflect.construct(target, args, newTarget)
+        : Reflect.construct(target, args);
+}
+exports.construct = construct;
 /**
  * Typed version of Reflect.defineMetadata.
  *
@@ -27,6 +53,8 @@ function defineMetadataKey(metadataKey, metadataValue, target, key) {
     Reflect.defineMetadata(metadataKey, metadataValue, target, key);
 }
 exports.defineMetadataKey = defineMetadataKey;
+exports.defineProperty = Reflect.defineProperty;
+exports.deleteProperty = Reflect.deleteProperty;
 /**
  * Typed version of Reflect.get.
  *
@@ -84,15 +112,23 @@ function getOwnMetadataKey(metadataKey, target, key) {
     return Reflect.getOwnMetadata(metadataKey, target, key);
 }
 exports.getOwnMetadataKey = getOwnMetadataKey;
+exports.getOwnPropertyDescriptor = Reflect.getOwnPropertyDescriptor;
+exports.getPrototypeOf = Reflect.getPrototypeOf;
+exports.has = Reflect.has;
+exports.isExtensible = Reflect.isExtensible;
+exports.ownKeys = Reflect.ownKeys;
+exports.preventExtensions = Reflect.preventExtensions;
 /**
  * Typed version of Reflect.set.
  *
  * @param target - Target object.
  * @param key - Property name.
  * @param value - Property value.
+ * @returns Result.
  */
 function set(target, key, value) {
-    Reflect.set(target, key, value);
+    return Reflect.set(target, key, value);
 }
 exports.set = set;
+exports.setPrototypeOf = Reflect.setPrototypeOf;
 //# sourceMappingURL=reflect.js.map

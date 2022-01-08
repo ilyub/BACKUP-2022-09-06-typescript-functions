@@ -10,14 +10,25 @@
 
 ### Functions
 
+- [apply](reflect.md#apply)
+- [construct](reflect.md#construct)
 - [defineMetadata](reflect.md#definemetadata)
 - [defineMetadataKey](reflect.md#definemetadatakey)
+- [defineProperty](reflect.md#defineproperty)
+- [deleteProperty](reflect.md#deleteproperty)
 - [get](reflect.md#get)
 - [getMetadata](reflect.md#getmetadata)
 - [getMetadataKey](reflect.md#getmetadatakey)
 - [getOwnMetadata](reflect.md#getownmetadata)
 - [getOwnMetadataKey](reflect.md#getownmetadatakey)
+- [getOwnPropertyDescriptor](reflect.md#getownpropertydescriptor)
+- [getPrototypeOf](reflect.md#getprototypeof)
+- [has](reflect.md#has)
+- [isExtensible](reflect.md#isextensible)
+- [ownKeys](reflect.md#ownkeys)
+- [preventExtensions](reflect.md#preventextensions)
 - [set](reflect.md#set)
+- [setPrototypeOf](reflect.md#setprototypeof)
 
 ## Type aliases
 
@@ -26,6 +37,50 @@
 Ƭ **MetadataKey**: `string` \| `symbol`
 
 ## Functions
+
+### apply
+
+▸ **apply**(`target`, `thisArg`, `args`): `unknown`
+
+Typed version of Reflect.construct.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `Function` | Target function. |
+| `thisArg` | `unknown` | This argument. |
+| `args` | `ArrayLike`<`unknown`\> | Arguments. |
+
+#### Returns
+
+`unknown`
+
+Function execution result.
+
+___
+
+### construct
+
+▸ **construct**(`target`, `args`, `newTarget?`): `unknown`
+
+Typed version of Reflect.construct.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `Function` | Target function. |
+| `args` | `ArrayLike`<`unknown`\> | Arguments. |
+| `newTarget?` | `Function` | New target function. |
+
+#### Returns
+
+`unknown`
+
+Constructed object.
+
+___
 
 ### defineMetadata
 
@@ -65,6 +120,41 @@ Typed version of Reflect.defineMetadata.
 #### Returns
 
 `void`
+
+___
+
+### defineProperty
+
+▸ `Const` **defineProperty**(`target`, `propertyKey`, `attributes`): `boolean`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `target` | `object` |
+| `propertyKey` | `PropertyKey` |
+| `attributes` | `PropertyDescriptor` |
+
+#### Returns
+
+`boolean`
+
+___
+
+### deleteProperty
+
+▸ `Const` **deleteProperty**(`target`, `propertyKey`): `boolean`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `target` | `object` |
+| `propertyKey` | `PropertyKey` |
+
+#### Returns
+
+`boolean`
 
 ___
 
@@ -175,9 +265,107 @@ Metadata value.
 
 ___
 
+### getOwnPropertyDescriptor
+
+▸ `Const` **getOwnPropertyDescriptor**(`target`, `propertyKey`): `PropertyDescriptor` \| `undefined`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `target` | `object` |
+| `propertyKey` | `PropertyKey` |
+
+#### Returns
+
+`PropertyDescriptor` \| `undefined`
+
+___
+
+### getPrototypeOf
+
+▸ `Const` **getPrototypeOf**(`target`): `object` \| ``null``
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `target` | `object` |
+
+#### Returns
+
+`object` \| ``null``
+
+___
+
+### has
+
+▸ `Const` **has**(`target`, `propertyKey`): `boolean`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `target` | `object` |
+| `propertyKey` | `PropertyKey` |
+
+#### Returns
+
+`boolean`
+
+___
+
+### isExtensible
+
+▸ `Const` **isExtensible**(`target`): `boolean`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `target` | `object` |
+
+#### Returns
+
+`boolean`
+
+___
+
+### ownKeys
+
+▸ `Const` **ownKeys**(`target`): (`string` \| `symbol`)[]
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `target` | `object` |
+
+#### Returns
+
+(`string` \| `symbol`)[]
+
+___
+
+### preventExtensions
+
+▸ `Const` **preventExtensions**(`target`): `boolean`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `target` | `object` |
+
+#### Returns
+
+`boolean`
+
+___
+
 ### set
 
-▸ **set**(`target`, `key`, `value`): `void`
+▸ **set**(`target`, `key`, `value`): `boolean`
 
 Typed version of Reflect.set.
 
@@ -191,4 +379,23 @@ Typed version of Reflect.set.
 
 #### Returns
 
-`void`
+`boolean`
+
+Result.
+
+___
+
+### setPrototypeOf
+
+▸ `Const` **setPrototypeOf**(`target`, `proto`): `boolean`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `target` | `object` |
+| `proto` | ``null`` \| `object` |
+
+#### Returns
+
+`boolean`
