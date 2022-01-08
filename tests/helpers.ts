@@ -5,10 +5,8 @@ import {
   wait,
   wrapProxyHandler
 } from "@/helpers";
-import * as o from "@/object";
 import * as reflect from "@/reflect";
 import * as testUtils from "@/testUtils";
-import type { numberU } from "@/types/core";
 
 class TestClass {
   public x?: number = 1;
@@ -248,59 +246,69 @@ it("wait", async () => {
   });
 });
 
-it("wrapProxyHandler", () => {
-  const handler = wrapProxyHandler("testId", {});
+it.each<"doDefault" | "throw">(["doDefault", "throw"])(
+  "wrapProxyHandler",
+  action => {
+    const handler = wrapProxyHandler("testId", action, {});
 
-  const proxyClass = new Proxy<typeof TestClass>(TestClass, handler);
+    const proxyClass = new Proxy<typeof TestClass>(TestClass, handler);
 
-  const proxyFunction = new Proxy<() => void>(() => {}, handler);
+    const proxyFunction = new Proxy<() => void>(() => {}, handler);
 
-  const proxyObject = new Proxy<TestClass>(new TestClass(), handler);
+    const proxyObject = new Proxy<TestClass>(new TestClass(), handler);
 
-  const subtests = {
-    apply(): void {
-      proxyFunction();
-    },
-    construct(): TestClass {
-      return new proxyClass();
-    },
-    defineProperty(): void {
-      Object.defineProperty(proxyObject, "x", {});
-    },
-    deleteProperty(): void {
-      delete proxyObject.x;
-    },
-    get(): numberU {
-      return proxyObject.x;
-    },
-    getOwnPropertyDescriptor(): void {
-      Object.getOwnPropertyDescriptor(proxyObject, "x");
-    },
-    getPrototypeOf(): void {
-      o.getPrototypeOf(proxyObject);
-    },
-    has(): boolean {
-      return "x" in proxyObject;
-    },
-    isExtensible(): void {
-      Object.isExtensible(proxyObject);
-    },
-    ownKeys(): void {
-      Object.keys(proxyObject);
-    },
-    preventExtensions(): void {
-      Object.preventExtensions(proxyObject);
-    },
-    set(): void {
-      proxyObject.x = 1;
-    },
-    setPrototypeOf(): void {
-      Object.setPrototypeOf(proxyObject, {});
-    }
-  };
+    const proxyObjectFrozen = new Proxy<TestClass>(new TestClass(), handler);
 
-  for (const [name, subtest] of Object.entries(subtests))
-    expect(subtest).toThrow(
-      new Error(`Proxy method not implemented: testId.${name}`)
-    );
-});
+    const subtests = {
+      apply(): void {
+        reflect.apply(proxyFunction, undefined, []);
+      },
+      construct(): void {
+        reflect.construct(proxyClass, []);
+      },
+      defineProperty(): void {
+        reflect.defineProperty(proxyObject, "x", {});
+      },
+      deleteProperty(): void {
+        reflect.deleteProperty(proxyObject, "x");
+      },
+      get(): void {
+        reflect.get(proxyObject, "x");
+      },
+      getOwnPropertyDescriptor(): void {
+        reflect.getOwnPropertyDescriptor(proxyObject, "x");
+      },
+      getPrototypeOf(): void {
+        reflect.getPrototypeOf(proxyObject);
+      },
+      has(): void {
+        reflect.has(proxyObject, "x");
+      },
+      isExtensible(): void {
+        reflect.isExtensible(proxyObject);
+      },
+      ownKeys(): void {
+        reflect.ownKeys(proxyObject);
+      },
+      preventExtensions(): void {
+        reflect.preventExtensions(proxyObjectFrozen);
+      },
+      set(): void {
+        reflect.set(proxyObject, "x", 1);
+      },
+      setPrototypeOf(): void {
+        reflect.setPrototypeOf(proxyObject, null);
+      }
+    };
+
+    for (const [name, subtest] of Object.entries(subtests))
+      switch (action) {
+        case "doDefault":
+          expect(subtest).not.toThrow();
+          break;
+
+        case "throw":
+          expect(subtest).toThrow(new Error(`Not implemented: testId.${name}`));
+      }
+  }
+);

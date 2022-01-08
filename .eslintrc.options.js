@@ -1,3 +1,3 @@
 module.exports = {
-  readonlyIgnoreTypes: ["Element", "Timeout"]
+  readonlyIgnoreTypes: ["Element", "PropertyDescriptor", "Timeout"]
 };
