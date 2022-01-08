@@ -6,6 +6,19 @@ const mk2 = Symbol("SampleMetadataKey2");
 
 const pk1 = Symbol("SamplePropertyKey1");
 
+it("apply", () => {
+  expect(reflect.apply(() => true, undefined, [])).toBeTrue();
+});
+
+it("construct", () => {
+  class C {
+    public value = 1;
+  }
+
+  expect(reflect.construct(C, [])).toStrictEqual(new C());
+  expect(reflect.construct(C, [], C)).toStrictEqual(new C());
+});
+
 it("defineMetadata", () => {
   const obj = {};
 

@@ -6,6 +6,40 @@ import "reflect-metadata";
 export type MetadataKey = string | symbol;
 
 /**
+ * Typed version of Reflect.construct.
+ *
+ * @param target - Target function.
+ * @param thisArg - This argument.
+ * @param args - Arguments.
+ * @returns Function execution result.
+ */
+export function apply(
+  target: Function,
+  thisArg: unknown,
+  args: ArrayLike<unknown>
+): unknown {
+  return Reflect.apply(target, thisArg, args);
+}
+
+/**
+ * Typed version of Reflect.construct.
+ *
+ * @param target - Target function.
+ * @param args - Arguments.
+ * @param newTarget - New target function.
+ * @returns Constructed object.
+ */
+export function construct(
+  target: Function,
+  args: ArrayLike<unknown>,
+  newTarget?: Function
+): unknown {
+  return newTarget
+    ? Reflect.construct(target, args, newTarget)
+    : Reflect.construct(target, args);
+}
+
+/**
  * Typed version of Reflect.defineMetadata.
  *
  * @param metadataKey - Metadata key.
@@ -36,6 +70,10 @@ export function defineMetadataKey(
 ): void {
   Reflect.defineMetadata(metadataKey, metadataValue, target, key);
 }
+
+export const defineProperty = Reflect.defineProperty;
+
+export const deleteProperty = Reflect.deleteProperty;
 
 /**
  * Typed version of Reflect.get.
@@ -105,13 +143,28 @@ export function getOwnMetadataKey(
   return Reflect.getOwnMetadata(metadataKey, target, key);
 }
 
+export const getOwnPropertyDescriptor = Reflect.getOwnPropertyDescriptor;
+
+export const getPrototypeOf = Reflect.getPrototypeOf;
+
+export const has = Reflect.has;
+
+export const isExtensible = Reflect.isExtensible;
+
+export const ownKeys = Reflect.ownKeys;
+
+export const preventExtensions = Reflect.preventExtensions;
+
 /**
  * Typed version of Reflect.set.
  *
  * @param target - Target object.
  * @param key - Property name.
  * @param value - Property value.
+ * @returns Result.
  */
-export function set(target: object, key: PropertyKey, value: unknown): void {
-  Reflect.set(target, key, value);
+export function set(target: object, key: PropertyKey, value: unknown): boolean {
+  return Reflect.set(target, key, value);
 }
+
+export const setPrototypeOf = Reflect.setPrototypeOf;
