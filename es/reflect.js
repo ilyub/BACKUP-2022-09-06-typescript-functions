@@ -103,19 +103,51 @@ export function getOwnMetadataKey(metadataKey, target, key) {
 export const getOwnPropertyDescriptor = Reflect.getOwnPropertyDescriptor;
 export const getPrototypeOf = Reflect.getPrototypeOf;
 export const has = Reflect.has;
+/**
+ * Typed version of Reflect.hasMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @returns _True_ if key exists, _false_ otherwise.
+ */
+export function hasMetadata(metadataKey, target) {
+    return Reflect.hasMetadata(metadataKey, target);
+}
+/**
+ * Typed version of Reflect.hasMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @param key - Property name.
+ * @returns _True_ if key exists, _false_ otherwise.
+ */
+export function hasMetadataKey(metadataKey, target, key) {
+    return Reflect.hasMetadata(metadataKey, target, key);
+}
+/**
+ * Typed version of Reflect.hasMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @returns _True_ if key exists, _false_ otherwise.
+ */
+export function hasOwnMetadata(metadataKey, target) {
+    return Reflect.hasOwnMetadata(metadataKey, target);
+}
+/**
+ * Typed version of Reflect.hasMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @param key - Property name.
+ * @returns _True_ if key exists, _false_ otherwise.
+ */
+export function hasOwnMetadataKey(metadataKey, target, key) {
+    return Reflect.hasOwnMetadata(metadataKey, target, key);
+}
 export const isExtensible = Reflect.isExtensible;
 export const ownKeys = Reflect.ownKeys;
 export const preventExtensions = Reflect.preventExtensions;
-/**
- * Typed version of Reflect.set.
- *
- * @param target - Target object.
- * @param key - Property name.
- * @param value - Property value.
- * @returns Result.
- */
-export function set(target, key, value) {
-    return Reflect.set(target, key, value);
-}
+export const set = Reflect.set;
 export const setPrototypeOf = Reflect.setPrototypeOf;
 //# sourceMappingURL=reflect.js.map

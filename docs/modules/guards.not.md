@@ -22,6 +22,7 @@
 - [object](guards.not.md#object)
 - [string](guards.not.md#string)
 - [stringU](guards.not.md#stringu)
+- [symbol](guards.not.md#symbol)
 - [undefined](guards.not.md#undefined)
 
 ## Variables
@@ -131,6 +132,12 @@ ___
 ### stringU
 
 • **stringU**: [`ExclusiveGuard`](guards.md#exclusiveguard)<[`stringU`](types_core.md#stringu)\>
+
+___
+
+### symbol
+
+• **symbol**: [`ExclusiveGuard`](guards.md#exclusiveguard)<`symbol`\>
 
 ___
 

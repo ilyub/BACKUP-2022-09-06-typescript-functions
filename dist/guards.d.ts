@@ -96,6 +96,7 @@ export declare namespace not {
     export var object: ExclusiveGuard<object>;
     export var string: ExclusiveGuard<string>;
     export var stringU: ExclusiveGuard<types.stringU>;
+    export var symbol: ExclusiveGuard<symbol>;
     export var undefined: ExclusiveGuard<undefined>;
     export { _a as null };
 }
@@ -385,6 +386,15 @@ export declare const stringsU: Guard<readonly string[] | undefined>;
  * @returns _True_ if value type is stringU, _false_ otherwise.
  */
 export declare function stringU(value: unknown): value is types.stringU;
+/**
+ * Checks that value is a symbol.
+ *
+ * @param value - Value.
+ * @returns _True_ if value is a symbol, _false_ otherwise.
+ */
+export declare function symbol(value: unknown): value is symbol;
+export declare const symbols: Guard<readonly symbol[]>;
+export declare const symbolsU: Guard<readonly symbol[] | undefined>;
 /**
  * Checks that value is _true_.
  *

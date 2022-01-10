@@ -82,17 +82,43 @@ export declare function getOwnMetadataKey(metadataKey: MetadataKey, target: obje
 export declare const getOwnPropertyDescriptor: typeof Reflect.getOwnPropertyDescriptor;
 export declare const getPrototypeOf: typeof Reflect.getPrototypeOf;
 export declare const has: typeof Reflect.has;
+/**
+ * Typed version of Reflect.hasMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @returns _True_ if key exists, _false_ otherwise.
+ */
+export declare function hasMetadata(metadataKey: MetadataKey, target: object): boolean;
+/**
+ * Typed version of Reflect.hasMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @param key - Property name.
+ * @returns _True_ if key exists, _false_ otherwise.
+ */
+export declare function hasMetadataKey(metadataKey: MetadataKey, target: object, key: MetadataKey): boolean;
+/**
+ * Typed version of Reflect.hasMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @returns _True_ if key exists, _false_ otherwise.
+ */
+export declare function hasOwnMetadata(metadataKey: MetadataKey, target: object): boolean;
+/**
+ * Typed version of Reflect.hasMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @param key - Property name.
+ * @returns _True_ if key exists, _false_ otherwise.
+ */
+export declare function hasOwnMetadataKey(metadataKey: MetadataKey, target: object, key: MetadataKey): boolean;
 export declare const isExtensible: typeof Reflect.isExtensible;
 export declare const ownKeys: typeof Reflect.ownKeys;
 export declare const preventExtensions: typeof Reflect.preventExtensions;
-/**
- * Typed version of Reflect.set.
- *
- * @param target - Target object.
- * @param key - Property name.
- * @param value - Property value.
- * @returns Result.
- */
-export declare function set(target: object, key: PropertyKey, value: unknown): boolean;
+export declare const set: typeof Reflect.set;
 export declare const setPrototypeOf: typeof Reflect.setPrototypeOf;
 //# sourceMappingURL=reflect.d.ts.map

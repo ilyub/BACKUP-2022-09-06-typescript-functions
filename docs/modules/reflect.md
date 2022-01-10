@@ -24,6 +24,10 @@
 - [getOwnPropertyDescriptor](reflect.md#getownpropertydescriptor)
 - [getPrototypeOf](reflect.md#getprototypeof)
 - [has](reflect.md#has)
+- [hasMetadata](reflect.md#hasmetadata)
+- [hasMetadataKey](reflect.md#hasmetadatakey)
+- [hasOwnMetadata](reflect.md#hasownmetadata)
+- [hasOwnMetadataKey](reflect.md#hasownmetadatakey)
 - [isExtensible](reflect.md#isextensible)
 - [ownKeys](reflect.md#ownkeys)
 - [preventExtensions](reflect.md#preventextensions)
@@ -315,6 +319,92 @@ ___
 
 ___
 
+### hasMetadata
+
+▸ **hasMetadata**(`metadataKey`, `target`): `boolean`
+
+Typed version of Reflect.hasMetadata.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `metadataKey` | [`MetadataKey`](reflect.md#metadatakey) | Metadata key. |
+| `target` | `object` | Target object. |
+
+#### Returns
+
+`boolean`
+
+_True_ if key exists, _false_ otherwise.
+
+___
+
+### hasMetadataKey
+
+▸ **hasMetadataKey**(`metadataKey`, `target`, `key`): `boolean`
+
+Typed version of Reflect.hasMetadata.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `metadataKey` | [`MetadataKey`](reflect.md#metadatakey) | Metadata key. |
+| `target` | `object` | Target object. |
+| `key` | [`MetadataKey`](reflect.md#metadatakey) | Property name. |
+
+#### Returns
+
+`boolean`
+
+_True_ if key exists, _false_ otherwise.
+
+___
+
+### hasOwnMetadata
+
+▸ **hasOwnMetadata**(`metadataKey`, `target`): `boolean`
+
+Typed version of Reflect.hasMetadata.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `metadataKey` | [`MetadataKey`](reflect.md#metadatakey) | Metadata key. |
+| `target` | `object` | Target object. |
+
+#### Returns
+
+`boolean`
+
+_True_ if key exists, _false_ otherwise.
+
+___
+
+### hasOwnMetadataKey
+
+▸ **hasOwnMetadataKey**(`metadataKey`, `target`, `key`): `boolean`
+
+Typed version of Reflect.hasMetadata.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `metadataKey` | [`MetadataKey`](reflect.md#metadatakey) | Metadata key. |
+| `target` | `object` | Target object. |
+| `key` | [`MetadataKey`](reflect.md#metadatakey) | Property name. |
+
+#### Returns
+
+`boolean`
+
+_True_ if key exists, _false_ otherwise.
+
+___
+
 ### isExtensible
 
 ▸ `Const` **isExtensible**(`target`): `boolean`
@@ -365,23 +455,20 @@ ___
 
 ### set
 
-▸ **set**(`target`, `key`, `value`): `boolean`
-
-Typed version of Reflect.set.
+▸ `Const` **set**(`target`, `propertyKey`, `value`, `receiver?`): `boolean`
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `target` | `object` | Target object. |
-| `key` | `PropertyKey` | Property name. |
-| `value` | `unknown` | Property value. |
+| Name | Type |
+| :------ | :------ |
+| `target` | `object` |
+| `propertyKey` | `PropertyKey` |
+| `value` | `any` |
+| `receiver?` | `any` |
 
 #### Returns
 
 `boolean`
-
-Result.
 
 ___
 

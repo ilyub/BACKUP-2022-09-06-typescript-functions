@@ -76,6 +76,9 @@
 - [stringU](guards.md#stringu)
 - [strings](guards.md#strings)
 - [stringsU](guards.md#stringsu)
+- [symbol](guards.md#symbol)
+- [symbols](guards.md#symbols)
+- [symbolsU](guards.md#symbolsu)
 - [trueGuard](guards.md#trueguard)
 - [tuple](guards.md#tuple)
 - [tupleFactory](guards.md#tuplefactory)
@@ -1446,6 +1449,58 @@ ___
 #### Returns
 
 value is undefined \| readonly string[]
+
+___
+
+### symbol
+
+▸ **symbol**(`value`): value is symbol
+
+Checks that value is a symbol.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+
+#### Returns
+
+value is symbol
+
+_True_ if value is a symbol, _false_ otherwise.
+
+___
+
+### symbols
+
+▸ `Const` **symbols**(`value`): value is readonly symbol[]
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
+
+#### Returns
+
+value is readonly symbol[]
+
+___
+
+### symbolsU
+
+▸ `Const` **symbolsU**(`value`): value is undefined \| readonly symbol[]
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
+
+#### Returns
+
+value is undefined \| readonly symbol[]
 
 ___
 

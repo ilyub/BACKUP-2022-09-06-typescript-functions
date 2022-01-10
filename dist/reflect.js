@@ -1,7 +1,7 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/disallow-identifier[reflect] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setPrototypeOf = exports.set = exports.preventExtensions = exports.ownKeys = exports.isExtensible = exports.has = exports.getPrototypeOf = exports.getOwnPropertyDescriptor = exports.getOwnMetadataKey = exports.getOwnMetadata = exports.getMetadataKey = exports.getMetadata = exports.get = exports.deleteProperty = exports.defineProperty = exports.defineMetadataKey = exports.defineMetadata = exports.construct = exports.apply = void 0;
+exports.setPrototypeOf = exports.set = exports.preventExtensions = exports.ownKeys = exports.isExtensible = exports.hasOwnMetadataKey = exports.hasOwnMetadata = exports.hasMetadataKey = exports.hasMetadata = exports.has = exports.getPrototypeOf = exports.getOwnPropertyDescriptor = exports.getOwnMetadataKey = exports.getOwnMetadata = exports.getMetadataKey = exports.getMetadata = exports.get = exports.deleteProperty = exports.defineProperty = exports.defineMetadataKey = exports.defineMetadata = exports.construct = exports.apply = void 0;
 // eslint-disable-next-line import/no-unassigned-import
 require("reflect-metadata");
 /**
@@ -115,20 +115,55 @@ exports.getOwnMetadataKey = getOwnMetadataKey;
 exports.getOwnPropertyDescriptor = Reflect.getOwnPropertyDescriptor;
 exports.getPrototypeOf = Reflect.getPrototypeOf;
 exports.has = Reflect.has;
+/**
+ * Typed version of Reflect.hasMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @returns _True_ if key exists, _false_ otherwise.
+ */
+function hasMetadata(metadataKey, target) {
+    return Reflect.hasMetadata(metadataKey, target);
+}
+exports.hasMetadata = hasMetadata;
+/**
+ * Typed version of Reflect.hasMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @param key - Property name.
+ * @returns _True_ if key exists, _false_ otherwise.
+ */
+function hasMetadataKey(metadataKey, target, key) {
+    return Reflect.hasMetadata(metadataKey, target, key);
+}
+exports.hasMetadataKey = hasMetadataKey;
+/**
+ * Typed version of Reflect.hasMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @returns _True_ if key exists, _false_ otherwise.
+ */
+function hasOwnMetadata(metadataKey, target) {
+    return Reflect.hasOwnMetadata(metadataKey, target);
+}
+exports.hasOwnMetadata = hasOwnMetadata;
+/**
+ * Typed version of Reflect.hasMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @param key - Property name.
+ * @returns _True_ if key exists, _false_ otherwise.
+ */
+function hasOwnMetadataKey(metadataKey, target, key) {
+    return Reflect.hasOwnMetadata(metadataKey, target, key);
+}
+exports.hasOwnMetadataKey = hasOwnMetadataKey;
 exports.isExtensible = Reflect.isExtensible;
 exports.ownKeys = Reflect.ownKeys;
 exports.preventExtensions = Reflect.preventExtensions;
-/**
- * Typed version of Reflect.set.
- *
- * @param target - Target object.
- * @param key - Property name.
- * @param value - Property value.
- * @returns Result.
- */
-function set(target, key, value) {
-    return Reflect.set(target, key, value);
-}
-exports.set = set;
+exports.set = Reflect.set;
 exports.setPrototypeOf = Reflect.setPrototypeOf;
 //# sourceMappingURL=reflect.js.map
