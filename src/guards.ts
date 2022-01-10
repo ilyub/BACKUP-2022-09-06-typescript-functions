@@ -652,6 +652,22 @@ export function stringU(value: unknown): value is types.stringU {
 not.stringU = notFactory(stringU);
 
 /**
+ * Checks that value is a symbol.
+ *
+ * @param value - Value.
+ * @returns _True_ if value is a symbol, _false_ otherwise.
+ */
+export function symbol(value: unknown): value is symbol {
+  return typeof value === "symbol";
+}
+
+not.symbol = notFactory(symbol);
+
+export const symbols = factory(arrayOf, symbol);
+
+export const symbolsU = orFactory(symbols, undefinedGuard);
+
+/**
  * Checks that value is _true_.
  *
  * @param value - Value.

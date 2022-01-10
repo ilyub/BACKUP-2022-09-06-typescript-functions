@@ -251,6 +251,11 @@ it("stringU", () => {
   expect(is.stringU(undefined)).toBeTrue();
 });
 
+it("symbol", () => {
+  expect(is.symbol(Symbol("TestSymbol"))).toBeTrue();
+  expect(is.symbol(1)).toBeFalse();
+});
+
 it("true", () => {
   expect(is.true(true)).toBeTrue();
   expect(is.true(false)).toBeFalse();
