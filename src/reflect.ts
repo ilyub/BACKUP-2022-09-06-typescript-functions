@@ -149,22 +149,69 @@ export const getPrototypeOf = Reflect.getPrototypeOf;
 
 export const has = Reflect.has;
 
+/**
+ * Typed version of Reflect.hasMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @returns _True_ if key exists, _false_ otherwise.
+ */
+export function hasMetadata(metadataKey: MetadataKey, target: object): boolean {
+  return Reflect.hasMetadata(metadataKey, target);
+}
+
+/**
+ * Typed version of Reflect.hasMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @param key - Property name.
+ * @returns _True_ if key exists, _false_ otherwise.
+ */
+export function hasMetadataKey(
+  metadataKey: MetadataKey,
+  target: object,
+  key: MetadataKey
+): boolean {
+  return Reflect.hasMetadata(metadataKey, target, key);
+}
+
+/**
+ * Typed version of Reflect.hasMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @returns _True_ if key exists, _false_ otherwise.
+ */
+export function hasOwnMetadata(
+  metadataKey: MetadataKey,
+  target: object
+): boolean {
+  return Reflect.hasOwnMetadata(metadataKey, target);
+}
+
+/**
+ * Typed version of Reflect.hasMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @param key - Property name.
+ * @returns _True_ if key exists, _false_ otherwise.
+ */
+export function hasOwnMetadataKey(
+  metadataKey: MetadataKey,
+  target: object,
+  key: MetadataKey
+): boolean {
+  return Reflect.hasOwnMetadata(metadataKey, target, key);
+}
+
 export const isExtensible = Reflect.isExtensible;
 
 export const ownKeys = Reflect.ownKeys;
 
 export const preventExtensions = Reflect.preventExtensions;
 
-/**
- * Typed version of Reflect.set.
- *
- * @param target - Target object.
- * @param key - Property name.
- * @param value - Property value.
- * @returns Result.
- */
-export function set(target: object, key: PropertyKey, value: unknown): boolean {
-  return Reflect.set(target, key, value);
-}
+export const set = Reflect.set;
 
 export const setPrototypeOf = Reflect.setPrototypeOf;
