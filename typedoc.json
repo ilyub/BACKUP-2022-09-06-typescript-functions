@@ -10,5 +10,6 @@
     "LocaleName"
   ],
   "name": "Typescript functions",
-  "out": "docs"
+  "out": "docs",
+  "tsconfig": "tsconfig-typedoc.json"
 }
