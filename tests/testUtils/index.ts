@@ -9,7 +9,7 @@ async function testResolve(): Promise<void> {
   await Promise.resolve();
 }
 
-testUtils.installFakeTimer({ shouldAdvanceTime: false });
+testUtils.installFakeTimer();
 
 it("executionTimeToBeWithin", async () => {
   {
