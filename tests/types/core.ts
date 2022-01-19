@@ -16,11 +16,12 @@ import type {
   DeepWritable,
   DefinedKeys,
   numberU,
-  OptionalToUndefined,
   ReadonlyArrayElement,
   RemovePrefix,
   UndefinedKeys,
-  UndefinedToOptional
+  WithOptionalKeys,
+  WithUndeclaredKeys,
+  WithUndefinedKeys
 } from "@/types/core";
 import { createValidationObject } from "@/types/core";
 
@@ -268,31 +269,6 @@ it("DefinedKeys", () => {
   expect(value).toStrictEqual(1);
 });
 
-it("OptionalToUndefined", () => {
-  interface From {
-    readonly xr: number;
-    xw: number;
-    readonly yr?: number;
-    yw?: number;
-  }
-
-  type To = OptionalToUndefined<From>;
-
-  type Expected = {
-    readonly xr: number;
-  } & {
-    xw: number;
-  } & {
-    readonly yr: numberU;
-  } & {
-    yw: numberU;
-  };
-
-  const value: Equals<To, Expected> = 1;
-
-  expect(value).toStrictEqual(1);
-});
-
 it("ReadonlyArrayElement", () => {
   const x: Equals<ReadonlyArrayElement<number[]>, number> = 1;
 
@@ -322,24 +298,98 @@ it("UndefinedKeys", () => {
   expect(value).toStrictEqual(1);
 });
 
-it("UndefinedToOptional", () => {
+it("WithOptionalKeys", () => {
   interface From {
-    readonly xr: number;
-    xw: number;
-    readonly yr: numberU;
-    yw: numberU;
+    readonly r: number;
+    readonly ro?: number;
+    readonly rou?: numberU;
+    readonly ru: numberU;
+    w: number;
+    wo?: number;
+    wou?: numberU;
+    wu: numberU;
   }
 
-  type To = UndefinedToOptional<From>;
+  type To = WithOptionalKeys<From>;
 
   type Expected = {
-    readonly xr: number;
+    readonly r: number;
   } & {
-    xw: number;
+    readonly ro?: number;
+    readonly rou?: number;
+    readonly ru?: number;
   } & {
-    readonly yr?: number;
+    w: number;
   } & {
-    yw?: number;
+    wo?: number;
+    wou?: number;
+    wu?: number;
+  };
+
+  const value: Equals<To, Expected> = 1;
+
+  expect(value).toStrictEqual(1);
+});
+
+it("WithUndeclaredKeys", () => {
+  interface From {
+    readonly r: number;
+    readonly ro?: number;
+    readonly rou?: numberU;
+    readonly ru: numberU;
+    w: number;
+    wo?: number;
+    wou?: numberU;
+    wu: numberU;
+  }
+
+  type To = WithUndeclaredKeys<From>;
+
+  type Expected = {
+    readonly r: number;
+  } & {
+    readonly ro?: numberU;
+    readonly rou?: numberU;
+    readonly ru?: numberU;
+  } & {
+    w: number;
+  } & {
+    wo?: numberU;
+    wou?: numberU;
+    wu?: numberU;
+  };
+
+  const value: Equals<To, Expected> = 1;
+
+  expect(value).toStrictEqual(1);
+});
+
+it("WithUndefinedKeys", () => {
+  interface From {
+    readonly r: number;
+    readonly ro?: number;
+    readonly rou?: numberU;
+    readonly ru: numberU;
+    w: number;
+    wo?: number;
+    wou?: numberU;
+    wu: numberU;
+  }
+
+  type To = WithUndefinedKeys<From>;
+
+  type Expected = {
+    readonly r: number;
+  } & {
+    readonly ro: numberU;
+    readonly rou: numberU;
+    readonly ru: numberU;
+  } & {
+    w: number;
+  } & {
+    wo: numberU;
+    wou: numberU;
+    wu: numberU;
   };
 
   const value: Equals<To, Expected> = 1;

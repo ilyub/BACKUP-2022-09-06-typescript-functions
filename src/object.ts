@@ -8,12 +8,12 @@ import type {
   Entry,
   IndexedObject,
   objectU,
-  OptionalToUndefined,
   PartialRecord,
   ReadonlyIndexedObject,
   ReadonlyRecord,
-  SafeOmit,
-  UndefinedToOptional,
+  StrictOmit,
+  WithOptionalKeys,
+  WithUndeclaredKeys,
   Writable
 } from "./types/core";
 
@@ -291,19 +291,11 @@ export function merge(
 export function omit<T extends object, K extends keyof T>(
   obj: T,
   ...exclude: K[]
-): SafeOmit<T, K> {
+): StrictOmit<T, K> {
   const keysSet = new Set<keyof T>(exclude);
 
-  return filter(obj, (_value, key) => !keysSet.has(key)) as SafeOmit<T, K>;
+  return filter(obj, (_value, key) => !keysSet.has(key)) as StrictOmit<T, K>;
 }
-
-export function removeUndefinedKeys<T extends object>(
-  obj: OptionalToUndefined<T>
-): T;
-
-export function removeUndefinedKeys<T extends object>(
-  obj: T
-): UndefinedToOptional<T>;
 
 /**
  * Removes undefined keys.
@@ -311,6 +303,20 @@ export function removeUndefinedKeys<T extends object>(
  * @param obj - Object.
  * @returns New object with undefined keys removed.
  */
+export function removeUndefinedKeys<T extends object>(
+  obj: T
+): WithOptionalKeys<T>;
+
+/**
+ * Removes undefined keys.
+ *
+ * @param obj - Object.
+ * @returns New object with undefined keys removed.
+ */
+export function removeUndefinedKeys<T extends object>(
+  obj: WithUndeclaredKeys<T>
+): T;
+
 export function removeUndefinedKeys(obj: object): object {
   return filter(obj, is.not.empty);
 }

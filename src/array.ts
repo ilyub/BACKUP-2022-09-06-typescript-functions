@@ -6,7 +6,7 @@ import * as assert from "./assertions";
 import * as is from "./guards";
 import * as o from "./object";
 import * as reflect from "./reflect";
-import type { IterableOrFn } from "./types/core";
+import type { IterableLike } from "./types/core";
 
 export type ReduceForComparison<T extends object> = (obj: T) => unknown;
 
@@ -121,7 +121,7 @@ export function first<T>(arr: readonly T[]): T {
  * @param iterable - Iterable.
  * @returns Array.
  */
-export function fromIterable<T>(iterable: IterableOrFn<T>): T[] {
+export function fromIterable<T>(iterable: IterableLike<T>): T[] {
   return is.callable(iterable) ? [...iterable()] : [...iterable];
 }
 
