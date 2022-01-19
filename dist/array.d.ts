@@ -1,4 +1,4 @@
-import type { IterableOrFn } from "./types/core";
+import type { IterableLike } from "./types/core";
 export declare type ReduceForComparison<T extends object> = (obj: T) => unknown;
 /**
  * Creates an array of pairs [x1, x2], [x2, x3]...
@@ -73,7 +73,7 @@ export declare function first<T>(arr: readonly T[]): T;
  * @param iterable - Iterable.
  * @returns Array.
  */
-export declare function fromIterable<T>(iterable: IterableOrFn<T>): T[];
+export declare function fromIterable<T>(iterable: IterableLike<T>): T[];
 /**
  * Creates array from range.
  *

@@ -306,7 +306,7 @@ Creates array from iterable.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `iterable` | [`IterableOrFn`](types_core.md#iterableorfn)<`T`\> | Iterable. |
+| `iterable` | [`IterableLike`](types_core.md#iterablelike)<`T`\> | Iterable. |
 
 #### Returns
 

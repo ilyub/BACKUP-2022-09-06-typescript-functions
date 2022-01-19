@@ -13,37 +13,45 @@
 - [Callable](types_core.md#callable)
 - [ConstructSignature](types_core.md#constructsignature)
 - [Constructor](types_core.md#constructor)
+- [DeclaredKeys](types_core.md#declaredkeys)
 - [DeepPartial](types_core.md#deeppartial)
 - [DeepReadonly](types_core.md#deepreadonly)
 - [DeepWritable](types_core.md#deepwritable)
+- [Defined](types_core.md#defined)
 - [DefinedKeys](types_core.md#definedkeys)
 - [Entry](types_core.md#entry)
 - [Equal](types_core.md#equal)
 - [IndexedObject](types_core.md#indexedobject)
 - [Interval](types_core.md#interval)
-- [IterableOrFn](types_core.md#iterableorfn)
+- [IterableLike](types_core.md#iterablelike)
 - [KeysOfType](types_core.md#keysoftype)
 - [NumStr](types_core.md#numstr)
 - [NumStrE](types_core.md#numstre)
 - [NumStrU](types_core.md#numstru)
-- [OptionalToUndefined](types_core.md#optionaltoundefined)
-- [Partial2](types_core.md#partial2)
 - [PartialRecord](types_core.md#partialrecord)
 - [PromiseAsync](types_core.md#promiseasync)
 - [PromiseAsyncSync](types_core.md#promiseasyncsync)
 - [ReadonlyArrayElement](types_core.md#readonlyarrayelement)
+- [ReadonlyDeclaredKeys](types_core.md#readonlydeclaredkeys)
 - [ReadonlyIndexedObject](types_core.md#readonlyindexedobject)
 - [ReadonlyPartialRecord](types_core.md#readonlypartialrecord)
 - [ReadonlyRecord](types_core.md#readonlyrecord)
+- [ReadonlyUndeclaredKeys](types_core.md#readonlyundeclaredkeys)
 - [RemovePrefix](types_core.md#removeprefix)
-- [Required2](types_core.md#required2)
-- [SafeOmit](types_core.md#safeomit)
+- [StrictOmit](types_core.md#strictomit)
+- [StrictPartial](types_core.md#strictpartial)
+- [StrictRequired](types_core.md#strictrequired)
 - [Sync](types_core.md#sync)
 - [Timeout](types_core.md#timeout)
+- [UndeclaredKeys](types_core.md#undeclaredkeys)
 - [UndefinedKeys](types_core.md#undefinedkeys)
-- [UndefinedToOptional](types_core.md#undefinedtooptional)
 - [ValidationObject](types_core.md#validationobject)
+- [WithOptionalKeys](types_core.md#withoptionalkeys)
+- [WithUndeclaredKeys](types_core.md#withundeclaredkeys)
+- [WithUndefinedKeys](types_core.md#withundefinedkeys)
 - [Writable](types_core.md#writable)
+- [WritableDeclaredKeys](types_core.md#writabledeclaredkeys)
+- [WritableUndeclaredKeys](types_core.md#writableundeclaredkeys)
 - [booleanE](types_core.md#booleane)
 - [booleanU](types_core.md#booleanu)
 - [empty](types_core.md#empty)
@@ -79,9 +87,9 @@ ___
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends readonly `unknown`[] |
+| Name |
+| :------ |
+| `T` |
 
 ___
 
@@ -209,6 +217,18 @@ ___
 
 ___
 
+### DeclaredKeys
+
+Ƭ **DeclaredKeys**<`T`\>: `PropertyKey` & [`DefinedKeys`](types_core.md#definedkeys)<`T`\> & `RequiredKeys`<`T`\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+___
+
 ### DeepPartial
 
 Ƭ **DeepPartial**<`T`\>: `DeepPartial1`<`T`\>
@@ -236,6 +256,18 @@ ___
 ### DeepWritable
 
 Ƭ **DeepWritable**<`T`\>: `DeepWritable1`<`T`\>
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+___
+
+### Defined
+
+Ƭ **Defined**<`T`\>: `Exclude`<`T`, `undefined`\>
 
 #### Type parameters
 
@@ -302,9 +334,9 @@ ___
 
 ___
 
-### IterableOrFn
+### IterableLike
 
-Ƭ **IterableOrFn**<`T`\>: `Iterable`<`T`\> \| () => `Iterable`<`T`\>
+Ƭ **IterableLike**<`T`\>: `Iterable`<`T`\> \| () => `Iterable`<`T`\>
 
 #### Type parameters
 
@@ -342,30 +374,6 @@ ___
 ### NumStrU
 
 Ƭ **NumStrU**: [`NumStr`](types_core.md#numstr) \| `undefined`
-
-___
-
-### OptionalToUndefined
-
-Ƭ **OptionalToUndefined**<`T`\>: `Join4`<{ readonly [K in OptionalKeys<T\> & ReadonlyKeys<T\>]: T[K] \| undefined }, { [K in Exclude<OptionalKeys<T\>, ReadonlyKeys<T\>\>]: T[K] \| undefined }, { readonly [K in RequiredKeys<T\> & ReadonlyKeys<T\>]: T[K] }, { [K in Exclude<RequiredKeys<T\>, ReadonlyKeys<T\>\>]: T[K] }\>
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
-
-___
-
-### Partial2
-
-Ƭ **Partial2**<`T`\>: `Join2`<{ readonly [K in ReadonlyKeys<T\>]?: T[K] }, { [K in WritableKeys<T\>]?: T[K] }\>
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
 
 ___
 
@@ -412,9 +420,21 @@ ___
 
 #### Type parameters
 
+| Name |
+| :------ |
+| `T` |
+
+___
+
+### ReadonlyDeclaredKeys
+
+Ƭ **ReadonlyDeclaredKeys**<`T`\>: `PropertyKey` & `ReadonlyKeys`<`T`\> & [`DeclaredKeys`](types_core.md#declaredkeys)<`T`\>
+
+#### Type parameters
+
 | Name | Type |
 | :------ | :------ |
-| `T` | extends readonly `unknown`[] |
+| `T` | extends `object` |
 
 ___
 
@@ -456,6 +476,18 @@ ___
 
 ___
 
+### ReadonlyUndeclaredKeys
+
+Ƭ **ReadonlyUndeclaredKeys**<`T`\>: `PropertyKey` & `ReadonlyKeys`<`T`\> & [`UndeclaredKeys`](types_core.md#undeclaredkeys)<`T`\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+___
+
 ### RemovePrefix
 
 Ƭ **RemovePrefix**<`T`, `P`\>: `T` extends \`${P}${infer R}\` ? `R` : `never`
@@ -469,21 +501,9 @@ ___
 
 ___
 
-### Required2
+### StrictOmit
 
-Ƭ **Required2**<`T`\>: `Join2`<{ readonly [K in ReadonlyKeys<T\>]-?: T[K] }, { [K in WritableKeys<T\>]-?: T[K] }\>
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
-
-___
-
-### SafeOmit
-
-Ƭ **SafeOmit**<`T`, `K`\>: `Omit`<`T`, `K`\> & { [L in K]?: never }
+Ƭ **StrictOmit**<`T`, `K`\>: `Omit`<`T`, `K`\> & { [L in K]?: never }
 
 #### Type parameters
 
@@ -494,35 +514,9 @@ ___
 
 ___
 
-### Sync
+### StrictPartial
 
-Ƭ **Sync**<`T`\>: () => `T`
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-
-#### Type declaration
-
-▸ (): `T`
-
-##### Returns
-
-`T`
-
-___
-
-### Timeout
-
-Ƭ **Timeout**: `ReturnType`<typeof `setTimeout`\>
-
-___
-
-### UndefinedKeys
-
-Ƭ **UndefinedKeys**<`T`\>: `Exclude`<keyof `T`, [`DefinedKeys`](types_core.md#definedkeys)<`T`\>\>
+Ƭ **StrictPartial**<`T`\>: `Join2`<{ [K in WritableKeys<T\>]?: T[K] }, { readonly [K in ReadonlyKeys<T\>]?: T[K] }\>
 
 #### Type parameters
 
@@ -532,9 +526,66 @@ ___
 
 ___
 
-### UndefinedToOptional
+### StrictRequired
 
-Ƭ **UndefinedToOptional**<`T`\>: `Join4`<{ readonly [K in DefinedKeys<T\> & ReadonlyKeys<T\>]: T[K] }, { [K in Exclude<DefinedKeys<T\>, ReadonlyKeys<T\>\>]: T[K] }, { readonly [K in UndefinedKeys<T\> & ReadonlyKeys<T\>]?: Exclude<T[K], undefined\> }, { [K in Exclude<UndefinedKeys<T\>, ReadonlyKeys<T\>\>]?: Exclude<T[K], undefined\> }\>
+Ƭ **StrictRequired**<`T`\>: `Join2`<{ [K in WritableKeys<T\>]-?: T[K] }, { readonly [K in ReadonlyKeys<T\>]-?: T[K] }\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+___
+
+### Sync
+
+Ƭ **Sync**<`R`, `A`\>: (...`args`: `A`) => `R`
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `R` | `R` |
+| `A` | extends `unknown`[] = `never`[] |
+
+#### Type declaration
+
+▸ (...`args`): `R`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `...args` | `A` |
+
+##### Returns
+
+`R`
+
+___
+
+### Timeout
+
+Ƭ **Timeout**: `ReturnType`<typeof `setTimeout`\>
+
+___
+
+### UndeclaredKeys
+
+Ƭ **UndeclaredKeys**<`T`\>: `Exclude`<keyof `T`, [`DeclaredKeys`](types_core.md#declaredkeys)<`T`\>\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+___
+
+### UndefinedKeys
+
+Ƭ **UndefinedKeys**<`T`\>: `Exclude`<keyof `T`, [`DefinedKeys`](types_core.md#definedkeys)<`T`\>\>
 
 #### Type parameters
 
@@ -556,6 +607,42 @@ ___
 
 ___
 
+### WithOptionalKeys
+
+Ƭ **WithOptionalKeys**<`T`\>: `Join4`<{ [K in WritableDeclaredKeys<T\>]: T[K] }, { [K in WritableUndeclaredKeys<T\>]?: Defined<T[K]\> }, { readonly [K in ReadonlyDeclaredKeys<T\>]: T[K] }, { readonly [K in ReadonlyUndeclaredKeys<T\>]?: Defined<T[K]\> }\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+___
+
+### WithUndeclaredKeys
+
+Ƭ **WithUndeclaredKeys**<`T`\>: `Join4`<{ [K in WritableDeclaredKeys<T\>]: T[K] }, { [K in WritableUndeclaredKeys<T\>]?: T[K] }, { readonly [K in ReadonlyDeclaredKeys<T\>]: T[K] }, { readonly [K in ReadonlyUndeclaredKeys<T\>]?: T[K] }\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+___
+
+### WithUndefinedKeys
+
+Ƭ **WithUndefinedKeys**<`T`\>: `Join4`<{ [K in WritableDeclaredKeys<T\>]: T[K] }, { [K in WritableUndeclaredKeys<T\>]: T[K] \| undefined }, { readonly [K in ReadonlyDeclaredKeys<T\>]: T[K] }, { readonly [K in ReadonlyUndeclaredKeys<T\>]: T[K] \| undefined }\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+___
+
 ### Writable
 
 Ƭ **Writable**<`T`\>: { -readonly [K in keyof T]: T[K] }
@@ -565,6 +652,30 @@ ___
 | Name |
 | :------ |
 | `T` |
+
+___
+
+### WritableDeclaredKeys
+
+Ƭ **WritableDeclaredKeys**<`T`\>: `PropertyKey` & `WritableKeys`<`T`\> & [`DeclaredKeys`](types_core.md#declaredkeys)<`T`\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+___
+
+### WritableUndeclaredKeys
+
+Ƭ **WritableUndeclaredKeys**<`T`\>: `PropertyKey` & `WritableKeys`<`T`\> & [`UndeclaredKeys`](types_core.md#undeclaredkeys)<`T`\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
 
 ___
 

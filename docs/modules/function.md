@@ -143,7 +143,7 @@ Executes callback.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `callback` | [`Sync`](types_core.md#sync)<`T`\> | Callback. |
+| `callback` | [`Sync`](types_core.md#sync)<`T`, `never`[]\> | Callback. |
 
 #### Returns
 

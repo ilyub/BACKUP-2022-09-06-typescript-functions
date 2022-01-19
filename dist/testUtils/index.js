@@ -13,6 +13,7 @@ const fakeTimers = (0, tslib_1.__importStar)(require("@sinonjs/fake-timers"));
 const a = (0, tslib_1.__importStar)(require("../array"));
 const assert = (0, tslib_1.__importStar)(require("../assertions"));
 const fn = (0, tslib_1.__importStar)(require("../function"));
+const o = (0, tslib_1.__importStar)(require("../object"));
 /**
  * Checks that async function executes within expected time.
  *
@@ -76,15 +77,14 @@ exports.getClock = getClock;
  * @param options - Options.
  */
 function installFakeTimer(options = {}) {
-    var _a;
     assert.empty(clock);
-    clock = fakeTimers.install({
+    clock = fakeTimers.install(o.extend({
         advanceTimeDelta: 10,
         loopLimit: 1000,
         now: Date.now(),
-        shouldAdvanceTime: (_a = options.shouldAdvanceTime) !== null && _a !== void 0 ? _a : false,
+        shouldAdvanceTime: false,
         toFake: []
-    });
+    }, options));
 }
 exports.installFakeTimer = installFakeTimer;
 /**

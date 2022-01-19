@@ -9,6 +9,7 @@ import * as fakeTimers from "@sinonjs/fake-timers";
 import * as a from "../array";
 import * as assert from "../assertions";
 import * as fn from "../function";
+import * as o from "../object";
 /**
  * Checks that async function executes within expected time.
  *
@@ -69,15 +70,14 @@ export function getClock() {
  * @param options - Options.
  */
 export function installFakeTimer(options = {}) {
-    var _a;
     assert.empty(clock);
-    clock = fakeTimers.install({
+    clock = fakeTimers.install(o.extend({
         advanceTimeDelta: 10,
         loopLimit: 1000,
         now: Date.now(),
-        shouldAdvanceTime: (_a = options.shouldAdvanceTime) !== null && _a !== void 0 ? _a : false,
+        shouldAdvanceTime: false,
         toFake: []
-    });
+    }, options));
 }
 /**
  * Jest reset.

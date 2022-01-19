@@ -512,7 +512,7 @@ ___
 
 ### omit
 
-▸ **omit**<`T`, `K`\>(`obj`, ...`exclude`): [`SafeOmit`](types_core.md#safeomit)<`T`, `K`\>
+▸ **omit**<`T`, `K`\>(`obj`, ...`exclude`): [`StrictOmit`](types_core.md#strictomit)<`T`, `K`\>
 
 Omits keys from object.
 
@@ -532,7 +532,7 @@ Omits keys from object.
 
 #### Returns
 
-[`SafeOmit`](types_core.md#safeomit)<`T`, `K`\>
+[`StrictOmit`](types_core.md#strictomit)<`T`, `K`\>
 
 New object with given keys omitted.
 
@@ -540,29 +540,7 @@ ___
 
 ### removeUndefinedKeys
 
-▸ **removeUndefinedKeys**<`T`\>(`obj`): `T`
-
-Removes undefined keys.
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `obj` | [`OptionalToUndefined`](types_core.md#optionaltoundefined)<`T`\> | Object. |
-
-#### Returns
-
-`T`
-
-New object with undefined keys removed.
-
-▸ **removeUndefinedKeys**<`T`\>(`obj`): [`UndefinedToOptional`](types_core.md#undefinedtooptional)<`T`\>
+▸ **removeUndefinedKeys**<`T`\>(`obj`): [`WithOptionalKeys`](types_core.md#withoptionalkeys)<`T`\>
 
 Removes undefined keys.
 
@@ -580,7 +558,29 @@ Removes undefined keys.
 
 #### Returns
 
-[`UndefinedToOptional`](types_core.md#undefinedtooptional)<`T`\>
+[`WithOptionalKeys`](types_core.md#withoptionalkeys)<`T`\>
+
+New object with undefined keys removed.
+
+▸ **removeUndefinedKeys**<`T`\>(`obj`): `T`
+
+Removes undefined keys.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | [`WithUndeclaredKeys`](types_core.md#withundeclaredkeys)<`T`\> | Object. |
+
+#### Returns
+
+`T`
 
 New object with undefined keys removed.
 

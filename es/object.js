@@ -164,12 +164,6 @@ export function omit(obj, ...exclude) {
     const keysSet = new Set(exclude);
     return filter(obj, (_value, key) => !keysSet.has(key));
 }
-/**
- * Removes undefined keys.
- *
- * @param obj - Object.
- * @returns New object with undefined keys removed.
- */
 export function removeUndefinedKeys(obj) {
     return filter(obj, is.not.empty);
 }
