@@ -10,6 +10,7 @@ import * as fakeTimers from "@sinonjs/fake-timers";
 import * as a from "../array";
 import * as assert from "../assertions";
 import * as fn from "../function";
+import * as o from "../object";
 import type { Async, DeepReadonly, PromiseAsync } from "../types/core";
 
 declare global {
@@ -151,13 +152,18 @@ export function getClock(): DeepReadonly<fakeTimers.Clock> {
 export function installFakeTimer(options: FakeTimerOptions = {}): void {
   assert.empty(clock);
 
-  clock = fakeTimers.install({
-    advanceTimeDelta: 10,
-    loopLimit: 1000,
-    now: Date.now(),
-    shouldAdvanceTime: options.shouldAdvanceTime ?? false,
-    toFake: []
-  });
+  clock = fakeTimers.install(
+    o.extend(
+      {
+        advanceTimeDelta: 10,
+        loopLimit: 1000,
+        now: Date.now(),
+        shouldAdvanceTime: false,
+        toFake: []
+      },
+      options
+    )
+  );
 }
 
 /**
