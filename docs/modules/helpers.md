@@ -12,6 +12,7 @@
 
 - [Facade](helpers.md#facade)
 - [SafeAccess](helpers.md#safeaccess)
+- [SafeAccessGuards](helpers.md#safeaccessguards)
 
 ### Functions
 
@@ -38,15 +39,28 @@ ___
 
 ### SafeAccess
 
-Ƭ **SafeAccess**<`T`, `W`, `R`\>: { readonly [K in W as AddPrefix<Capitalize<K\>, "set"\>]: Function } & { readonly [K in W]: T[K] } & { readonly [K in R]: T[K] }
+Ƭ **SafeAccess**<`T`, `W`, `R`\>: [`Join2`](types_core.md#join2)<{ [K in W]: T[K] }, { readonly [K in R]: T[K] }\>
 
 #### Type parameters
 
 | Name | Type |
 | :------ | :------ |
 | `T` | extends `object` |
-| `W` | extends keyof `T` & `string` |
+| `W` | extends keyof `T` |
 | `R` | extends keyof `T` |
+
+___
+
+### SafeAccessGuards
+
+Ƭ **SafeAccessGuards**<`T`, `W`\>: { readonly [K in W]: Guard<T[K]\> }
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | `T` |
+| `W` | extends keyof `T` |
 
 ## Functions
 
@@ -106,7 +120,7 @@ ___
 
 ### safeAccess
 
-▸ **safeAccess**<`T`, `W`, `R`\>(`obj`, `writableKeys`, `readonlyKeys?`): [`SafeAccess`](helpers.md#safeaccess)<`T`, `W`, `R`\>
+▸ **safeAccess**<`T`, `W`, `R`\>(`obj`, `guards`, `readonlyKeys?`): [`SafeAccess`](helpers.md#safeaccess)<`T`, `W`, `R`\>
 
 Creates safe access interface for an object.
 
@@ -115,7 +129,7 @@ Creates safe access interface for an object.
 | Name | Type |
 | :------ | :------ |
 | `T` | extends `object` |
-| `W` | extends `string` |
+| `W` | extends `string` \| `number` \| `symbol` |
 | `R` | extends `string` \| `number` \| `symbol` |
 
 #### Parameters
@@ -123,7 +137,7 @@ Creates safe access interface for an object.
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
 | `obj` | `T` | `undefined` | Object. |
-| `writableKeys` | readonly `W`[] | `undefined` | Writable keys. |
+| `guards` | [`SafeAccessGuards`](helpers.md#safeaccessguards)<`T`, `W`\> | `undefined` | Guards. |
 | `readonlyKeys` | readonly `R`[] | `[]` | Readonly keys. |
 
 #### Returns

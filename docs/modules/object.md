@@ -576,7 +576,7 @@ Removes undefined keys.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `obj` | [`WithUndeclaredKeys`](types_core.md#withundeclaredkeys)<`T`\> | Object. |
+| `obj` | [`Join4`](types_core.md#join4)<{ [K in string \| number \| symbol]: T[K] }, { [K in string \| number \| symbol]?: T[K] }, { readonly [K in string \| number \| symbol]: T[K] }, { readonly [K in string \| number \| symbol]?: T[K] }\> | Object. |
 
 #### Returns
 

@@ -22,6 +22,9 @@ export declare type Equal<A, B, C, D> = If<Equals<A, B>, C, D>;
 export declare type IndexedObject<T = unknown> = Record<PropertyKey, T>;
 export declare type Interval = ReturnType<typeof setInterval>;
 export declare type IterableLike<T> = Iterable<T> | (() => Iterable<T>);
+export declare type Join2<A extends object, B extends object> = keyof A extends never ? B : keyof B extends never ? A : A & B;
+export declare type Join3<A extends object, B extends object, C extends object> = keyof A extends never ? Join2<B, C> : A & Join2<B, C>;
+export declare type Join4<A extends object, B extends object, C extends object, D extends object> = keyof A extends never ? Join3<B, C, D> : A & Join3<B, C, D>;
 export declare type KeysOfType<T, V> = KeysOfType1<T, V>;
 export declare type NumStr = number | string;
 export declare type NumStrE = NumStr | empty;
@@ -125,9 +128,6 @@ declare type DeepWritable5<T> = T extends Constructor ? new (...args: Constructo
 declare type DeepWritable6<T> = T extends object ? {
     -readonly [K in keyof T]: DeepWritable1<T[K]>;
 } : unknown;
-declare type EmptyToUnknown<T extends object> = keyof T extends never ? unknown : T;
-declare type Join2<A extends object, B extends object> = EmptyToUnknown<A> & EmptyToUnknown<B>;
-declare type Join4<A extends object, B extends object, C extends object, D extends object> = EmptyToUnknown<A> & EmptyToUnknown<B> & EmptyToUnknown<C> & EmptyToUnknown<D>;
 declare type KeysOfType1<T, V> = KeysOfType2<T, V>[keyof T];
 declare type KeysOfType2<T, V> = {
     readonly [K in keyof T]: Equal<T[K], V, K, never>;

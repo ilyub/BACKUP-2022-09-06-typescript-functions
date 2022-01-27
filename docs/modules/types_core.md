@@ -24,6 +24,9 @@
 - [IndexedObject](types_core.md#indexedobject)
 - [Interval](types_core.md#interval)
 - [IterableLike](types_core.md#iterablelike)
+- [Join2](types_core.md#join2)
+- [Join3](types_core.md#join3)
+- [Join4](types_core.md#join4)
 - [KeysOfType](types_core.md#keysoftype)
 - [NumStr](types_core.md#numstr)
 - [NumStrE](types_core.md#numstre)
@@ -346,6 +349,48 @@ ___
 
 ___
 
+### Join2
+
+Ƭ **Join2**<`A`, `B`\>: keyof `A` extends `never` ? `B` : keyof `B` extends `never` ? `A` : `A` & `B`
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `A` | extends `object` |
+| `B` | extends `object` |
+
+___
+
+### Join3
+
+Ƭ **Join3**<`A`, `B`, `C`\>: keyof `A` extends `never` ? [`Join2`](types_core.md#join2)<`B`, `C`\> : `A` & [`Join2`](types_core.md#join2)<`B`, `C`\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `A` | extends `object` |
+| `B` | extends `object` |
+| `C` | extends `object` |
+
+___
+
+### Join4
+
+Ƭ **Join4**<`A`, `B`, `C`, `D`\>: keyof `A` extends `never` ? [`Join3`](types_core.md#join3)<`B`, `C`, `D`\> : `A` & [`Join3`](types_core.md#join3)<`B`, `C`, `D`\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `A` | extends `object` |
+| `B` | extends `object` |
+| `C` | extends `object` |
+| `D` | extends `object` |
+
+___
+
 ### KeysOfType
 
 Ƭ **KeysOfType**<`T`, `V`\>: `KeysOfType1`<`T`, `V`\>
@@ -516,7 +561,7 @@ ___
 
 ### StrictPartial
 
-Ƭ **StrictPartial**<`T`\>: `Join2`<{ [K in WritableKeys<T\>]?: T[K] }, { readonly [K in ReadonlyKeys<T\>]?: T[K] }\>
+Ƭ **StrictPartial**<`T`\>: [`Join2`](types_core.md#join2)<{ [K in WritableKeys<T\>]?: T[K] }, { readonly [K in ReadonlyKeys<T\>]?: T[K] }\>
 
 #### Type parameters
 
@@ -528,7 +573,7 @@ ___
 
 ### StrictRequired
 
-Ƭ **StrictRequired**<`T`\>: `Join2`<{ [K in WritableKeys<T\>]-?: T[K] }, { readonly [K in ReadonlyKeys<T\>]-?: T[K] }\>
+Ƭ **StrictRequired**<`T`\>: [`Join2`](types_core.md#join2)<{ [K in WritableKeys<T\>]-?: T[K] }, { readonly [K in ReadonlyKeys<T\>]-?: T[K] }\>
 
 #### Type parameters
 
@@ -609,7 +654,7 @@ ___
 
 ### WithOptionalKeys
 
-Ƭ **WithOptionalKeys**<`T`\>: `Join4`<{ [K in WritableDeclaredKeys<T\>]: T[K] }, { [K in WritableUndeclaredKeys<T\>]?: Defined<T[K]\> }, { readonly [K in ReadonlyDeclaredKeys<T\>]: T[K] }, { readonly [K in ReadonlyUndeclaredKeys<T\>]?: Defined<T[K]\> }\>
+Ƭ **WithOptionalKeys**<`T`\>: [`Join4`](types_core.md#join4)<{ [K in WritableDeclaredKeys<T\>]: T[K] }, { [K in WritableUndeclaredKeys<T\>]?: Defined<T[K]\> }, { readonly [K in ReadonlyDeclaredKeys<T\>]: T[K] }, { readonly [K in ReadonlyUndeclaredKeys<T\>]?: Defined<T[K]\> }\>
 
 #### Type parameters
 
@@ -621,7 +666,7 @@ ___
 
 ### WithUndeclaredKeys
 
-Ƭ **WithUndeclaredKeys**<`T`\>: `Join4`<{ [K in WritableDeclaredKeys<T\>]: T[K] }, { [K in WritableUndeclaredKeys<T\>]?: T[K] }, { readonly [K in ReadonlyDeclaredKeys<T\>]: T[K] }, { readonly [K in ReadonlyUndeclaredKeys<T\>]?: T[K] }\>
+Ƭ **WithUndeclaredKeys**<`T`\>: [`Join4`](types_core.md#join4)<{ [K in WritableDeclaredKeys<T\>]: T[K] }, { [K in WritableUndeclaredKeys<T\>]?: T[K] }, { readonly [K in ReadonlyDeclaredKeys<T\>]: T[K] }, { readonly [K in ReadonlyUndeclaredKeys<T\>]?: T[K] }\>
 
 #### Type parameters
 
@@ -633,7 +678,7 @@ ___
 
 ### WithUndefinedKeys
 
-Ƭ **WithUndefinedKeys**<`T`\>: `Join4`<{ [K in WritableDeclaredKeys<T\>]: T[K] }, { [K in WritableUndeclaredKeys<T\>]: T[K] \| undefined }, { readonly [K in ReadonlyDeclaredKeys<T\>]: T[K] }, { readonly [K in ReadonlyUndeclaredKeys<T\>]: T[K] \| undefined }\>
+Ƭ **WithUndefinedKeys**<`T`\>: [`Join4`](types_core.md#join4)<{ [K in WritableDeclaredKeys<T\>]: T[K] }, { [K in WritableUndeclaredKeys<T\>]: T[K] \| undefined }, { readonly [K in ReadonlyDeclaredKeys<T\>]: T[K] }, { readonly [K in ReadonlyUndeclaredKeys<T\>]: T[K] \| undefined }\>
 
 #### Type parameters
 
