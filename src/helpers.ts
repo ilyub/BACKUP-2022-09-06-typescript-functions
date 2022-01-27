@@ -1,10 +1,10 @@
 import * as assert from "./assertions";
+import * as cast from "./converters";
 import * as is from "./guards";
 import * as o from "./object";
 import * as reflect from "./reflect";
-import * as s from "./string";
 import * as timer from "./timer";
-import type { AddPrefix } from "./types/core";
+import type { Join2 } from "./types/core";
 
 export type Facade<F, E = unknown> = F & FacadeOwnMethods<F> & E;
 
@@ -19,14 +19,12 @@ export interface FacadeOwnMethods<F> {
 
 export type SafeAccess<
   T extends object,
-  W extends keyof T & string,
+  W extends keyof T,
   R extends keyof T
-> = {
-  readonly [K in W as AddPrefix<Capitalize<K>, "set">]: (value: T[K]) => void;
-} & {
-  readonly [K in W]: T[K];
-} & {
-  readonly [K in R]: T[K];
+> = Join2<{ [K in W]: T[K] }, { readonly [K in R]: T[K] }>;
+
+export declare type SafeAccessGuards<T, W extends keyof T> = {
+  readonly [K in W]: is.Guard<T[K]>;
 };
 
 /**
@@ -151,51 +149,44 @@ export function onDemand<T extends object>(generator: () => T): T {
  * Creates safe access interface for an object.
  *
  * @param obj - Object.
- * @param writableKeys - Writable keys.
+ * @param guards - Guards.
  * @param readonlyKeys - Readonly keys.
  * @returns Safe access interface.
  */
 export function safeAccess<
   T extends object,
-  W extends keyof T & string,
+  W extends keyof T,
   R extends keyof T
 >(
   obj: T,
-  writableKeys: readonly W[],
+  guards: SafeAccessGuards<T, W>,
   readonlyKeys: readonly R[] = []
 ): SafeAccess<T, W, R> {
-  const result = {};
+  const guardsMap: Map<PropertyKey, is.Guard> = new Map(Object.entries(guards));
 
-  for (const key of writableKeys) defineWriteAccess(key);
+  const writableKeys = Object.keys(guards);
 
-  for (const key of writableKeys) defineReadAccess(key);
+  const keysSet: Set<PropertyKey> = new Set([...readonlyKeys, ...writableKeys]);
 
-  for (const key of readonlyKeys) defineReadAccess(key);
+  return new Proxy(
+    obj,
+    wrapProxyHandler("createFacade", "throw", {
+      get(target, key) {
+        if (keysSet.has(key)) return reflect.get(target, key);
 
-  return result as SafeAccess<T, W, R>;
-
-  function defineReadAccess(key: PropertyKey): void {
-    Object.defineProperty(result, key, {
-      get() {
-        return reflect.get(obj, key);
+        throw new Error(`Read access denied: ${cast.string(key)}`);
       },
-      set() {
-        throw new Error("Write access denied");
-      }
-    });
-  }
+      set(target, key, value) {
+        const guard = guardsMap.get(key);
 
-  function defineWriteAccess(key: string): void {
-    Object.defineProperty(result, `set${s.ucFirst(key)}`, {
-      get() {
-        return setter;
-      }
-    });
+        if (guard)
+          if (guard(value)) return reflect.set(target, key, value);
+          else throw new Error(`Type check failed: ${cast.string(key)}`);
 
-    function setter(value: unknown): void {
-      reflect.set(obj, key, value);
-    }
-  }
+        throw new Error(`Write access denied: ${cast.string(key)}`);
+      }
+    })
+  );
 }
 
 /**

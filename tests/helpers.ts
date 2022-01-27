@@ -1,3 +1,4 @@
+import * as is from "@/guards";
 import {
   createFacade,
   onDemand,
@@ -201,40 +202,46 @@ it("safeAccess", () => {
     d: 30
   };
 
-  const safe = safeAccess(obj, ["a", "b"], ["c"]);
+  safeAccess(obj, {});
 
-  const error = new Error("Write access denied");
-
-  safeAccess(obj, []);
+  const safe = safeAccess(obj, { a: is.string, b: is.number }, ["c"]);
 
   {
     expect(() => {
-      reflect.set(safe, "a", "b");
-    }).toThrow(error);
+      reflect.set(safe, "a", safe.b);
+    }).toThrow(new Error("Type check failed: a"));
 
     expect(() => {
-      reflect.set(safe, "b", 11);
-    }).toThrow(error);
+      reflect.set(safe, "b", safe.a);
+    }).toThrow(new Error("Type check failed: b"));
 
     expect(() => {
-      reflect.set(safe, "c", 21);
-    }).toThrow(error);
+      reflect.set(safe, "c", safe.c);
+    }).toThrow(new Error("Write access denied: c"));
+
+    expect(() => {
+      reflect.set(safe, "d", safe.c);
+    }).toThrow(new Error("Write access denied: d"));
   }
 
   {
     expect(reflect.get(safe, "a")).toStrictEqual("a");
     expect(reflect.get(safe, "b")).toStrictEqual(10);
     expect(reflect.get(safe, "c")).toStrictEqual(20);
-    expect(reflect.get(safe, "d")).toBeUndefined();
+    expect(() => reflect.get(safe, "d")).toThrow(
+      new Error("Read access denied: d")
+    );
   }
 
   {
-    safe.setA("b");
-    safe.setB(11);
+    safe.a = "b";
+    safe.b = 11;
     expect(reflect.get(safe, "a")).toStrictEqual("b");
     expect(reflect.get(safe, "b")).toStrictEqual(11);
     expect(reflect.get(safe, "c")).toStrictEqual(20);
-    expect(reflect.get(safe, "d")).toBeUndefined();
+    expect(() => reflect.get(safe, "d")).toThrow(
+      new Error("Read access denied: d")
+    );
   }
 });
 

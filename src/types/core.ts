@@ -60,6 +60,25 @@ export type Interval = ReturnType<typeof setInterval>;
 
 export type IterableLike<T> = Iterable<T> | (() => Iterable<T>);
 
+export type Join2<A extends object, B extends object> = keyof A extends never
+  ? B
+  : keyof B extends never
+  ? A
+  : A & B;
+
+export type Join3<
+  A extends object,
+  B extends object,
+  C extends object
+> = keyof A extends never ? Join2<B, C> : A & Join2<B, C>;
+
+export type Join4<
+  A extends object,
+  B extends object,
+  C extends object,
+  D extends object
+> = keyof A extends never ? Join3<B, C, D> : A & Join3<B, C, D>;
+
 export type KeysOfType<T, V> = KeysOfType1<T, V>;
 
 export type NumStr = number | string;
@@ -246,21 +265,6 @@ type DeepWritable5<T> = T extends Constructor
 type DeepWritable6<T> = T extends object
   ? { -readonly [K in keyof T]: DeepWritable1<T[K]> }
   : unknown;
-
-type EmptyToUnknown<T extends object> = keyof T extends never ? unknown : T;
-
-type Join2<A extends object, B extends object> = EmptyToUnknown<A> &
-  EmptyToUnknown<B>;
-
-type Join4<
-  A extends object,
-  B extends object,
-  C extends object,
-  D extends object
-> = EmptyToUnknown<A> &
-  EmptyToUnknown<B> &
-  EmptyToUnknown<C> &
-  EmptyToUnknown<D>;
 
 type KeysOfType1<T, V> = KeysOfType2<T, V>[keyof T];
 
