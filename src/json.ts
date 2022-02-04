@@ -104,10 +104,12 @@ function reviver(_key: unknown, value: unknown): unknown {
     switch (value.dataType) {
       case "map-5702-3c89-3feb-75d4":
         assert.byGuard(value.value, isMapValue);
+
         return new Map(value.value);
 
       case "set-41ef-10c9-ae1f-15e8":
         assert.byGuard(value.value, isSetValue);
+
         return new Set(value.value);
     }
 

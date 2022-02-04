@@ -74,15 +74,12 @@ function testAssertion(
 
     case "fail":
       expect(guard(...args)).toBeFalse();
-
       expect(() => {
         assertion(...args);
       }).toThrow(new AssertionError());
-
       expect(() => {
         assertion(...args, testMessage);
       }).toThrow(testAssertionError);
-
       expect(() => {
         assertion(...args, () => testError);
       }).toThrow(testError);

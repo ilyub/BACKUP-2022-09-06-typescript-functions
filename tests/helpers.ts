@@ -312,6 +312,7 @@ it.each<"doDefault" | "throw">(["doDefault", "throw"])(
       switch (action) {
         case "doDefault":
           expect(subtest).not.toThrow();
+
           break;
 
         case "throw":
