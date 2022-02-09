@@ -87,6 +87,8 @@ export type NumStrE = NumStr | empty;
 
 export type NumStrU = NumStr | undefined;
 
+export type NumStrs = readonly NumStr[];
+
 // eslint-disable-next-line @skylib/prefer-readonly
 export type PartialRecord<K extends PropertyKey, T> = Partial<Record<K, T>>;
 
@@ -184,19 +186,29 @@ export type booleanE = boolean | empty;
 
 export type booleanU = boolean | undefined;
 
+export type booleans = readonly boolean[];
+
 export type empty = null | undefined;
 
 export type numberE = number | empty;
 
 export type numberU = number | undefined;
 
+export type numbers = readonly number[];
+
 export type objectE = object | empty;
 
 export type objectU = object | undefined;
 
+export type objects = readonly objects[];
+
 export type stringE = string | empty;
 
 export type stringU = string | undefined;
+
+export type strings = readonly strings[];
+
+export type unknowns = readonly unknowns[];
 
 /**
  * Creates validation object.
