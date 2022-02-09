@@ -32,6 +32,7 @@
 - [andFactory](guards.md#andfactory)
 - [array](guards.md#array)
 - [arrayOf](guards.md#arrayof)
+- [arrayU](guards.md#arrayu)
 - [arrays](guards.md#arrays)
 - [arraysU](guards.md#arraysu)
 - [boolean](guards.md#boolean)
@@ -84,6 +85,7 @@
 - [tupleFactory](guards.md#tuplefactory)
 - [undefined](guards.md#undefined)
 - [unknown](guards.md#unknown)
+- [unknowns](guards.md#unknowns)
 
 ## References
 
@@ -408,6 +410,22 @@ Checks that value type is T[].
 value is readonly T[]
 
 _True_ if value type is T[], _false_ otherwise.
+
+___
+
+### arrayU
+
+▸ `Const` **arrayU**(`value`): value is undefined \| readonly unknown[]
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
+
+#### Returns
+
+value is undefined \| readonly unknown[]
 
 ___
 
@@ -1773,3 +1791,19 @@ Checks that value is _unknown_.
 \_value is unknown
 
 _True_ if value is _unknown_, _false_ otherwise.
+
+___
+
+### unknowns
+
+▸ `Const` **unknowns**(`value`): value is readonly unknown[]
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
+
+#### Returns
+
+value is readonly unknown[]

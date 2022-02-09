@@ -29,6 +29,7 @@ export declare type KeysOfType<T, V> = KeysOfType1<T, V>;
 export declare type NumStr = number | string;
 export declare type NumStrE = NumStr | empty;
 export declare type NumStrU = NumStr | undefined;
+export declare type NumStrs = readonly NumStr[];
 export declare type PartialRecord<K extends PropertyKey, T> = Partial<Record<K, T>>;
 export declare type PromiseAsync<T> = Promise<T> | Async<T>;
 export declare type PromiseAsyncSync<T> = Promise<T> | Async<T> | Sync<T>;
@@ -91,13 +92,18 @@ export declare type WritableDeclaredKeys<T extends object> = PropertyKey & Writa
 export declare type WritableUndeclaredKeys<T extends object> = PropertyKey & WritableKeys<T> & UndeclaredKeys<T>;
 export declare type booleanE = boolean | empty;
 export declare type booleanU = boolean | undefined;
+export declare type booleans = readonly boolean[];
 export declare type empty = null | undefined;
 export declare type numberE = number | empty;
 export declare type numberU = number | undefined;
+export declare type numbers = readonly number[];
 export declare type objectE = object | empty;
 export declare type objectU = object | undefined;
+export declare type objects = readonly objects[];
 export declare type stringE = string | empty;
 export declare type stringU = string | undefined;
+export declare type strings = readonly strings[];
+export declare type unknowns = readonly unknowns[];
 /**
  * Creates validation object.
  *

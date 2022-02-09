@@ -31,6 +31,7 @@
 - [NumStr](types_core.md#numstr)
 - [NumStrE](types_core.md#numstre)
 - [NumStrU](types_core.md#numstru)
+- [NumStrs](types_core.md#numstrs)
 - [PartialRecord](types_core.md#partialrecord)
 - [PromiseAsync](types_core.md#promiseasync)
 - [PromiseAsyncSync](types_core.md#promiseasyncsync)
@@ -57,13 +58,18 @@
 - [WritableUndeclaredKeys](types_core.md#writableundeclaredkeys)
 - [booleanE](types_core.md#booleane)
 - [booleanU](types_core.md#booleanu)
+- [booleans](types_core.md#booleans)
 - [empty](types_core.md#empty)
 - [numberE](types_core.md#numbere)
 - [numberU](types_core.md#numberu)
+- [numbers](types_core.md#numbers)
 - [objectE](types_core.md#objecte)
 - [objectU](types_core.md#objectu)
+- [objects](types_core.md#objects)
 - [stringE](types_core.md#stringe)
 - [stringU](types_core.md#stringu)
+- [strings](types_core.md#strings)
+- [unknowns](types_core.md#unknowns)
 
 ### Functions
 
@@ -422,6 +428,12 @@ ___
 
 ___
 
+### NumStrs
+
+Ƭ **NumStrs**: readonly [`NumStr`](types_core.md#numstr)[]
+
+___
+
 ### PartialRecord
 
 Ƭ **PartialRecord**<`K`, `T`\>: `Partial`<`Record`<`K`, `T`\>\>
@@ -736,6 +748,12 @@ ___
 
 ___
 
+### booleans
+
+Ƭ **booleans**: readonly `boolean`[]
+
+___
+
 ### empty
 
 Ƭ **empty**: ``null`` \| `undefined`
@@ -754,6 +772,12 @@ ___
 
 ___
 
+### numbers
+
+Ƭ **numbers**: readonly `number`[]
+
+___
+
 ### objectE
 
 Ƭ **objectE**: `object` \| [`empty`](types_core.md#empty)
@@ -766,6 +790,12 @@ ___
 
 ___
 
+### objects
+
+Ƭ **objects**: readonly [`objects`](types_core.md#objects)[]
+
+___
+
 ### stringE
 
 Ƭ **stringE**: `string` \| [`empty`](types_core.md#empty)
@@ -775,6 +805,18 @@ ___
 ### stringU
 
 Ƭ **stringU**: `string` \| `undefined`
+
+___
+
+### strings
+
+Ƭ **strings**: readonly [`strings`](types_core.md#strings)[]
+
+___
+
+### unknowns
+
+Ƭ **unknowns**: readonly [`unknowns`](types_core.md#unknowns)[]
 
 ## Functions
 

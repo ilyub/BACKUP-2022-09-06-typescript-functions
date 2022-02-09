@@ -54,6 +54,7 @@ or.factory = orFactory;
 export function array(value) {
     return Array.isArray(value);
 }
+export const arrayU = orFactory(array, undefinedGuard);
 export const arrays = factory(arrayOf, array);
 export const arraysU = orFactory(arrays, undefinedGuard);
 /**
@@ -390,4 +391,5 @@ not.undefined = notFactory(undefinedGuard);
 export function unknown(_value) {
     return true;
 }
+export const unknowns = factory(arrayOf, unknown);
 //# sourceMappingURL=guards.js.map

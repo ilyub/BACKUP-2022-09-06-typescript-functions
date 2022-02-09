@@ -177,6 +177,7 @@ export declare function array(value: unknown): value is readonly unknown[];
 export declare namespace array {
     var of: typeof arrayOf;
 }
+export declare const arrayU: Guard<readonly unknown[] | undefined>;
 export declare const arrays: Guard<readonly (readonly unknown[])[]>;
 export declare const arraysU: Guard<readonly (readonly unknown[])[] | undefined>;
 /**
@@ -493,4 +494,5 @@ export { undefinedGuard as undefined };
  * @returns _True_ if value is _unknown_, _false_ otherwise.
  */
 export declare function unknown(_value: unknown): _value is unknown;
+export declare const unknowns: Guard<readonly unknown[]>;
 //# sourceMappingURL=guards.d.ts.map

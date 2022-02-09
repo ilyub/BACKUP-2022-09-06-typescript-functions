@@ -1,8 +1,8 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[guards] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.symbol = exports.stringU = exports.stringsU = exports.strings = exports.string = exports.set = exports.objectU = exports.objectOf = exports.objectsU = exports.objects = exports.object = exports.numberU = exports.numbersU = exports.numbers = exports.number = exports.numStrU = exports.numStrsU = exports.numStrs = exports.numStr = exports.null = exports.map = exports.instances = exports.instance = exports.indexedObjectOf = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObjectU = exports.indexedObject = exports.false = exports.falseGuard = exports.enumerationU = exports.enumeration = exports.empty = exports.callableU = exports.callable = exports.booleanU = exports.booleansU = exports.booleans = exports.boolean = exports.arrayOf = exports.arraysU = exports.arrays = exports.array = exports.orFactory = exports.or = exports.notFactory = exports.not = exports.andFactory = exports.and = exports.factory = void 0;
-exports.unknown = exports.undefined = exports.tupleFactory = exports.tuple = exports.true = exports.trueGuard = exports.symbolsU = exports.symbols = void 0;
+exports.stringU = exports.stringsU = exports.strings = exports.string = exports.set = exports.objectU = exports.objectOf = exports.objectsU = exports.objects = exports.object = exports.numberU = exports.numbersU = exports.numbers = exports.number = exports.numStrU = exports.numStrsU = exports.numStrs = exports.numStr = exports.null = exports.map = exports.instances = exports.instance = exports.indexedObjectOf = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObjectU = exports.indexedObject = exports.false = exports.falseGuard = exports.enumerationU = exports.enumeration = exports.empty = exports.callableU = exports.callable = exports.booleanU = exports.booleansU = exports.booleans = exports.boolean = exports.arrayOf = exports.arraysU = exports.arrays = exports.arrayU = exports.array = exports.orFactory = exports.or = exports.notFactory = exports.not = exports.andFactory = exports.and = exports.factory = void 0;
+exports.unknowns = exports.unknown = exports.undefined = exports.tupleFactory = exports.tuple = exports.true = exports.trueGuard = exports.symbolsU = exports.symbols = exports.symbol = void 0;
 const tslib_1 = require("tslib");
 const a = (0, tslib_1.__importStar)(require("./array"));
 const o = (0, tslib_1.__importStar)(require("./object"));
@@ -67,6 +67,7 @@ function array(value) {
     return Array.isArray(value);
 }
 exports.array = array;
+exports.arrayU = orFactory(array, undefinedGuard);
 exports.arrays = factory(arrayOf, array);
 exports.arraysU = orFactory(exports.arrays, undefinedGuard);
 /**
@@ -432,4 +433,5 @@ function unknown(_value) {
     return true;
 }
 exports.unknown = unknown;
+exports.unknowns = factory(arrayOf, unknown);
 //# sourceMappingURL=guards.js.map
