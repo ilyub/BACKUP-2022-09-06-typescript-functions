@@ -200,15 +200,15 @@ export type objectE = object | empty;
 
 export type objectU = object | undefined;
 
-export type objects = readonly objects[];
+export type objects = readonly object[];
 
 export type stringE = string | empty;
 
 export type stringU = string | undefined;
 
-export type strings = readonly strings[];
+export type strings = readonly string[];
 
-export type unknowns = readonly unknowns[];
+export type unknowns = readonly unknown[];
 
 /**
  * Creates validation object.
