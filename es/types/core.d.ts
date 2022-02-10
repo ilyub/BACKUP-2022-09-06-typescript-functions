@@ -99,11 +99,11 @@ export declare type numberU = number | undefined;
 export declare type numbers = readonly number[];
 export declare type objectE = object | empty;
 export declare type objectU = object | undefined;
-export declare type objects = readonly objects[];
+export declare type objects = readonly object[];
 export declare type stringE = string | empty;
 export declare type stringU = string | undefined;
-export declare type strings = readonly strings[];
-export declare type unknowns = readonly unknowns[];
+export declare type strings = readonly string[];
+export declare type unknowns = readonly unknown[];
 /**
  * Creates validation object.
  *

@@ -792,7 +792,7 @@ ___
 
 ### objects
 
-Ƭ **objects**: readonly [`objects`](types_core.md#objects)[]
+Ƭ **objects**: readonly `object`[]
 
 ___
 
@@ -810,13 +810,13 @@ ___
 
 ### strings
 
-Ƭ **strings**: readonly [`strings`](types_core.md#strings)[]
+Ƭ **strings**: readonly `string`[]
 
 ___
 
 ### unknowns
 
-Ƭ **unknowns**: readonly [`unknowns`](types_core.md#unknowns)[]
+Ƭ **unknowns**: readonly `unknown`[]
 
 ## Functions
 
