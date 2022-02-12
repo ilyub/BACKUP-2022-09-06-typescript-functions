@@ -364,7 +364,9 @@ export function enumeration<T extends PropertyKey>(
   value: unknown,
   vo: types.ValidationObject<T>
 ): value is T {
-  return vo.has(value as T);
+  const untypedVo: ReadonlySet<unknown> = vo;
+
+  return untypedVo.has(value);
 }
 
 /**
@@ -378,7 +380,9 @@ export function enumerationU<T extends PropertyKey>(
   value: unknown,
   vo: types.ValidationObject<T>
 ): value is T | undefined {
-  return vo.has(value as T) || value === undefined;
+  const untypedVo: ReadonlySet<unknown> = vo;
+
+  return untypedVo.has(value) || value === undefined;
 }
 
 /**

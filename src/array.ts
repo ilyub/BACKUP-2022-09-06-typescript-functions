@@ -152,6 +152,7 @@ export function fromRange(from: number, to: number, step = 1): number[] {
 export function get<T>(arr: readonly T[], index: number): T {
   assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
 
+  // eslint-disable-next-line no-type-assertion/no-type-assertion
   return arr[index] as T;
 }
 

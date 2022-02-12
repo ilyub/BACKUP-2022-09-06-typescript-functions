@@ -198,7 +198,9 @@ export function jestSetup(): void {
       toBeSameAs
     };
 
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     expect.extend(matchers as jest.ExpectExtendMap);
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     expect.extend(expectExtend as jest.ExpectExtendMap & ExpectExtendMap);
   }
 

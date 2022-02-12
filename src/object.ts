@@ -55,6 +55,7 @@ export function assign<T extends object, K extends keyof T>(
   mutableTarget: T,
   ...sources: Array<{ readonly [L in K]: T[L] }>
 ): T {
+  // eslint-disable-next-line no-type-assertion/no-type-assertion
   return Object.assign(mutableTarget, ...sources) as T;
 }
 
@@ -92,6 +93,7 @@ export function defineProperty<T extends object>(
 function getEntries<T extends object>(
   obj: T
 ): ReadonlyArray<readonly [keyof T, T[keyof T]]> {
+  // eslint-disable-next-line no-type-assertion/no-type-assertion
   return Object.entries(obj) as Array<[keyof T, T[keyof T]]>;
 }
 
@@ -176,6 +178,7 @@ export function freeze<T extends object>(obj: T): Readonly<T> {
  * @returns Object marked as deep readonly.
  */
 export function freezeDeep<T extends object>(obj: T): DeepReadonly<T> {
+  // eslint-disable-next-line no-type-assertion/no-type-assertion
   return obj as DeepReadonly<T>;
 }
 
@@ -190,6 +193,7 @@ freeze.deep = freezeDeep;
 export function fromEntries<K extends PropertyKey, V>(
   entries: Iterable<readonly [K, V]>
 ): PartialRecord<K, V> {
+  // eslint-disable-next-line no-type-assertion/no-type-assertion
   const result = {} as Record<K, V>;
 
   for (const entry of entries) result[entry[0]] = entry[1];
@@ -197,6 +201,7 @@ export function fromEntries<K extends PropertyKey, V>(
   return result;
 }
 
+// eslint-disable-next-line no-type-assertion/no-type-assertion
 fromEntries.exhaustive = fromEntries as <K extends PropertyKey, V>(
   entries: Iterable<readonly [K, V]>
 ) => Record<K, V>;
@@ -231,6 +236,7 @@ export function hasOwnProp(key: PropertyKey, obj: object): boolean {
  * @returns Object keys.
  */
 export function keys<T extends object>(obj: T): ReadonlyArray<keyof T> {
+  // eslint-disable-next-line no-type-assertion/no-type-assertion
   return Object.keys(obj) as Array<keyof T>;
 }
 
@@ -294,6 +300,7 @@ export function omit<T extends object, K extends keyof T>(
 ): StrictOmit<T, K> {
   const keysSet = new Set<keyof T>(exclude);
 
+  // eslint-disable-next-line no-type-assertion/no-type-assertion
   return filter(obj, (_value, key) => !keysSet.has(key)) as StrictOmit<T, K>;
 }
 
@@ -342,6 +349,7 @@ export function sort<T extends object>(
   obj: T,
   compareFn?: (x: Entry<T>, y: Entry<T>) => number
 ): T {
+  // eslint-disable-next-line no-type-assertion/no-type-assertion
   return fromEntries(a.sort(getEntries(obj), compareFn)) as T;
 }
 
@@ -362,6 +370,7 @@ export function unfreeze<T extends object>(obj: T): Writable<T> {
  * @returns Object marked as deep writable.
  */
 export function unfreezeDeep<T extends object>(obj: T): DeepWritable<T> {
+  // eslint-disable-next-line no-type-assertion/no-type-assertion
   return obj as DeepReadonly<T>;
 }
 
@@ -374,5 +383,6 @@ unfreeze.deep = unfreezeDeep;
  * @returns Object values.
  */
 export function values<T extends object>(obj: T): ReadonlyArray<T[keyof T]> {
+  // eslint-disable-next-line no-type-assertion/no-type-assertion
   return Object.values(obj) as Array<T[keyof T]>;
 }

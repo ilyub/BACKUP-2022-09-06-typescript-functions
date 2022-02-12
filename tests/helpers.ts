@@ -71,6 +71,7 @@ it("createFacade: Function", () => {
   {
     const error = new Error("Facade is not callable: sample-facade");
 
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     facade.setImplementation(1 as unknown as Facade);
     expect(() => facade(1)).toThrow(error);
   }

@@ -105,6 +105,7 @@ export function createFacade<F extends object, E = unknown>(
     })
   );
 
+  // eslint-disable-next-line no-type-assertion/no-type-assertion
   return proxy as Facade<F, E>;
 }
 
@@ -118,7 +119,8 @@ export function onDemand<T extends object>(generator: () => T): T {
   let obj: T | undefined = undefined;
 
   return new Proxy(
-    {} as T,
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
+    {} as never,
     wrapProxyHandler("onDemand", "throw", {
       get(_target, key) {
         obj = obj ?? generator();
