@@ -78,6 +78,10 @@ test("fromRange", () => {
   expect(a.fromRange(5, 8, 2)).toStrictEqual([5, 7]);
 });
 
+test("fromString", () => {
+  expect(a.fromString("abc")).toStrictEqual(["a", "b", "c"]);
+});
+
 test("get", () => {
   const error = new AssertionError("Invalid index");
 

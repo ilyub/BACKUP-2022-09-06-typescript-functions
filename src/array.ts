@@ -150,6 +150,16 @@ export function fromRange(from: number, to: number, step = 1): number[] {
 }
 
 /**
+ * Creates array from string.
+ *
+ * @param str - String.
+ * @returns Array.
+ */
+export function fromString(str: string): string[] {
+  return [...str];
+}
+
+/**
  * Gets element by index.
  *
  * @param arr - Array.
