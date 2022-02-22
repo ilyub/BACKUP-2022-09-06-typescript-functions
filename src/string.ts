@@ -24,6 +24,20 @@ export function empty(str: string): boolean {
 }
 
 /**
+ * Filters string.
+ *
+ * @param str - String.
+ * @param predicate - Filter function.
+ * @returns Filtered string.
+ */
+export function filter(
+  str: string,
+  predicate: (char: string, index: number) => unknown
+): string {
+  return a.fromString(str).filter(predicate).join("");
+}
+
+/**
  * Gets leading spaces.
  *
  * @param str - String.

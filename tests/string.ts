@@ -74,6 +74,10 @@ test("replaceAll", () => {
   expect(s.replaceAll("a1b1c", "1", "2")).toBe("a2b2c");
 });
 
+test("filter", () => {
+  expect(s.filter("a1b1c", char => char !== "1")).toBe("abc");
+});
+
 test("trailingSpaces", () => {
   expect(s.trailingSpaces("abc \n\r\t ")).toBe(" \n\r\t ");
 });
