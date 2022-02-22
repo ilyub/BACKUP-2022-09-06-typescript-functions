@@ -2,6 +2,10 @@ import * as a from "@/array";
 import { AssertionError } from "@/errors/AssertionError";
 import * as regexp from "@/regexp";
 
+test("addFlags", () => {
+  expect(regexp.addFlags(/.*/u, "gu").flags).toBe("gu");
+});
+
 test("escapeString", () => {
   expect(regexp.escapeString("$()*+.?[\\]^{|}-")).toBe(
     "\\$\\(\\)\\*\\+\\.\\?\\[\\\\\\]\\^\\{\\|\\}\\x2d"
