@@ -4,7 +4,9 @@ import * as timer from "@/timer";
 
 testUtils.installFakeTimer();
 
-it("addInterval, removeInterval", async () => {
+test("addInterval, removeInterval", async () => {
+  expect.hasAssertions();
+
   await testUtils.run(async () => {
     const callback1 = jest.fn();
 
@@ -16,21 +18,21 @@ it("addInterval, removeInterval", async () => {
 
     {
       await wait(100);
-      expect(callback1).not.toBeCalled();
-      expect(callback2).not.toBeCalled();
+      expect(callback1).not.toHaveBeenCalled();
+      expect(callback2).not.toHaveBeenCalled();
     }
 
     {
       await wait(200);
-      expect(callback1).toBeCalledTimes(1);
-      expect(callback2).toBeCalledTimes(1);
+      expect(callback1).toHaveBeenCalledTimes(1);
+      expect(callback2).toHaveBeenCalledTimes(1);
     }
 
     {
       timer.removeInterval(handler1);
       await wait(200);
-      expect(callback1).toBeCalledTimes(1);
-      expect(callback2).toBeCalledTimes(2);
+      expect(callback1).toHaveBeenCalledTimes(1);
+      expect(callback2).toHaveBeenCalledTimes(2);
     }
 
     timer.removeInterval(handler2);
@@ -38,7 +40,9 @@ it("addInterval, removeInterval", async () => {
   });
 });
 
-it("addTimeout, removeTimeout", async () => {
+test("addTimeout, removeTimeout", async () => {
+  expect.hasAssertions();
+
   await testUtils.run(async () => {
     const callback1 = jest.fn();
 
@@ -50,21 +54,21 @@ it("addTimeout, removeTimeout", async () => {
 
     {
       await wait(100);
-      expect(callback1).not.toBeCalled();
-      expect(callback2).not.toBeCalled();
+      expect(callback1).not.toHaveBeenCalled();
+      expect(callback2).not.toHaveBeenCalled();
     }
 
     {
       timer.removeTimeout(handlers1);
       await wait(200);
-      expect(callback1).not.toBeCalled();
-      expect(callback2).toBeCalledTimes(1);
+      expect(callback1).not.toHaveBeenCalled();
+      expect(callback2).toHaveBeenCalledTimes(1);
     }
 
     {
       await wait(200);
-      expect(callback1).not.toBeCalled();
-      expect(callback2).toBeCalledTimes(1);
+      expect(callback1).not.toHaveBeenCalled();
+      expect(callback2).toHaveBeenCalledTimes(1);
     }
 
     timer.removeTimeout(undefined);

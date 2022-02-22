@@ -4,12 +4,12 @@ const error1 = new AssertionError();
 
 const error2 = new AssertionError("Custom message");
 
-it("message", () => {
-  expect(error1.message).toStrictEqual("Assertion failed");
-  expect(error2.message).toStrictEqual("Custom message");
+test("message", () => {
+  expect(error1.message).toBe("Assertion failed");
+  expect(error2.message).toBe("Custom message");
 });
 
-it("name", () => {
-  expect(error1.name).toStrictEqual("AssertionError");
-  expect(error2.name).toStrictEqual("AssertionError");
+test("name", () => {
+  expect(error1.name).toBe("AssertionError");
+  expect(error2.name).toBe("AssertionError");
 });

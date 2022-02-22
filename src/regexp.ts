@@ -20,9 +20,8 @@ export function escapeString(str: string): string {
  * @returns Matches.
  */
 export function matchAll(str: string, re: RegExp): RegExpExecArray[] {
-  if (re.flags.includes("g")) {
-    // Already has global flag
-  } else re = new RegExp(re, `${re.flags}g`);
+  // eslint-disable-next-line security/detect-non-literal-regexp
+  re = re.flags.includes("g") ? re : new RegExp(re, `${re.flags}g`);
 
   return a.fromIterable(function* (): Generator<RegExpExecArray> {
     let match = re.exec(str);

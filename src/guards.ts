@@ -5,18 +5,40 @@ import * as o from "./object";
 // eslint-disable-next-line @skylib/consistent-import
 import type * as types from "./types/core";
 
-export type ExclusiveGuard<T> = <V>(value: V) => value is Exclude<V, T>;
+export interface ExclusiveGuard<T> {
+  /**
+   * Checks that value type is not T.
+   *
+   * @param value - Value.
+   * @returns _True_ if value type is not T, _false_ otherwise.
+   */
+  <V>(value: V): value is Exclude<V, T>;
+}
 
-export type Guard<T = unknown> = (value: unknown) => value is T;
+export interface Guard<T = unknown> {
+  /**
+   * Checks that value type is T.
+   *
+   * @param value - Value.
+   * @returns _True_ if value type is T, _false_ otherwise.
+   */
+  (value: unknown): value is T;
+}
 
 export type Guards<T> = {
   readonly [K in keyof T]: Guard<T[K]>;
 };
 
-export type MultiArgGuard<T, A extends unknown[]> = (
-  value: unknown,
-  ...args: A
-) => value is T;
+export interface MultiArgGuard<T, A extends unknown[]> {
+  /**
+   * Checks that value type is T.
+   *
+   * @param value - Value.
+   * @param args - Arguments.
+   * @returns _True_ if value type is T, _false_ otherwise.
+   */
+  (value: unknown, ...args: A): value is T;
+}
 
 /**
  * Creates single-arg guard.
@@ -591,7 +613,7 @@ export function objectOf<A, B>(
   value: unknown,
   requiredGuards: Guards<A>,
   optionalGuards: Guards<B>
-): value is Required<A> & Partial<B> {
+): value is Partial<B> & Required<A> {
   return (
     indexedObject(value) &&
     o.entries(requiredGuards).every(([name, guard]) => guard(value[name])) &&

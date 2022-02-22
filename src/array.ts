@@ -8,7 +8,15 @@ import * as o from "./object";
 import * as reflect from "./reflect";
 import type { IterableLike } from "./types/core";
 
-export type ReduceForComparison<T extends object> = (obj: T) => unknown;
+export interface ReduceForComparison<T extends object> {
+  /**
+   * Reduces object for comparison.
+   *
+   * @param obj - Object.
+   * @returns Reduced value.
+   */
+  (obj: T): unknown;
+}
 
 /**
  * Creates an array of pairs [x1, x2], [x2, x3]...
@@ -283,7 +291,11 @@ export function replaceBy<T extends object>(
  * @returns New reversed array.
  */
 export function reverse<T>(arr: readonly T[]): T[] {
-  return clone(arr).reverse();
+  const result = clone(arr);
+
+  result.reverse();
+
+  return result;
 }
 
 /**
@@ -297,7 +309,11 @@ export function sort<T>(
   arr: readonly T[],
   compareFn?: (x: T, y: T) => number
 ): T[] {
-  return clone(arr).sort(compareFn);
+  const result = clone(arr);
+
+  result.sort(compareFn);
+
+  return result;
 }
 
 /**

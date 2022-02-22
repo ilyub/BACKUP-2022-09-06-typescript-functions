@@ -1,7 +1,15 @@
 import * as is from "./guards";
 import type { Async, PromiseAsync, PromiseAsyncSync, Sync } from "./types/core";
 
-export type PipeCallback<V = unknown, R = unknown> = (value: V) => R;
+export interface PipeCallback<V = unknown, R = unknown> {
+  /**
+   * Pipe callback.
+   *
+   * @param value - Value.
+   * @returns Result.
+   */
+  (value: V): R;
+}
 
 /**
  * Prevents parallel running.

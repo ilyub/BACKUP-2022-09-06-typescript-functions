@@ -1,21 +1,22 @@
 import * as arrayMap from "@/arrayMap";
 
-export type Get<K extends PropertyKey, T> = (
-  key: K,
-  map: ReadonlyMap<K, readonly T[]>
-) => readonly T[];
+interface Get<K extends PropertyKey, T> {
+  (key: K, map: ReadonlyMap<K, readonly T[]>): readonly T[];
+}
 
-export type Get2<K extends PropertyKey, L extends PropertyKey, T> = (
-  key1: K,
-  key2: L,
-  map: ReadonlyMap<K, ReadonlyMap<L, readonly T[]>>
-) => readonly T[];
+interface Get2<K extends PropertyKey, L extends PropertyKey, T> {
+  (
+    key1: K,
+    key2: L,
+    map: ReadonlyMap<K, ReadonlyMap<L, readonly T[]>>
+  ): readonly T[];
+}
 
 const get: Get<string, number> = arrayMap.get;
 
 const get2: Get2<string, string, number> = arrayMap.get2;
 
-it("push", () => {
+test("push", () => {
   const got = new Map<string, number[]>();
 
   arrayMap.push("a", 1, got);
@@ -33,7 +34,7 @@ it("push", () => {
   expect(get("c", got)).toStrictEqual([]);
 });
 
-it("push2", () => {
+test("push2", () => {
   const got = new Map<string, Map<string, number[]>>();
 
   arrayMap.push2("a", "x", 1, got);
@@ -60,7 +61,7 @@ it("push2", () => {
   expect(get2("c", "z", got)).toStrictEqual([]);
 });
 
-it("unshift", () => {
+test("unshift", () => {
   const got = new Map<string, number[]>();
 
   arrayMap.unshift("a", 1, got);
@@ -78,7 +79,7 @@ it("unshift", () => {
   expect(get("c", got)).toStrictEqual([]);
 });
 
-it("unshift2", () => {
+test("unshift2", () => {
   const got = new Map<string, Map<string, number[]>>();
 
   arrayMap.unshift2("a", "x", 1, got);

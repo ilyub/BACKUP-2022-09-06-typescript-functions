@@ -37,13 +37,6 @@ export interface Descriptor<T extends object = object> {
   readonly writable?: boolean;
 }
 
-export type FilterCallback<T extends object> = (
-  value: T[keyof T],
-  key: keyof T
-) => boolean;
-
-export type MapCallback<V, R> = (value: V, key: string) => R;
-
 /**
  * Typed version of Object.assign.
  *
@@ -106,7 +99,7 @@ export { getEntries as entries };
  * @param source - Source.
  * @returns Target.
  */
-export function extend<T extends object, A>(target: T, source: A): T & A;
+export function extend<T extends object, A>(target: T, source: A): A & T;
 
 /**
  * Typed version of Object.assign.
@@ -120,7 +113,7 @@ export function extend<T extends object, A, B>(
   target: T,
   source1: A,
   source2: B
-): T & A & B;
+): A & B & T;
 
 /**
  * Typed version of Object.assign.
@@ -136,7 +129,7 @@ export function extend<T extends object, A, B, C>(
   source1: A,
   source2: B,
   source3: C
-): T & A & B & C;
+): A & B & C & T;
 
 export function extend(target: object, ...sources: unknown[]): unknown {
   return Object.assign(target, ...sources);
@@ -151,7 +144,7 @@ export function extend(target: object, ...sources: unknown[]): unknown {
  */
 export function filter<T extends object>(
   obj: T,
-  callback: FilterCallback<T>
+  callback: (value: T[keyof T], key: keyof T) => boolean
 ): Partial<T> {
   const result: Partial<T> = {};
 
@@ -249,7 +242,7 @@ export function keys<T extends object>(obj: T): ReadonlyArray<keyof T> {
  */
 export function map<V, R>(
   obj: ReadonlyRecord<string, V>,
-  callback: MapCallback<V, R>
+  callback: (value: V, key: string) => R
 ): ReadonlyRecord<string, R> {
   return fromEntries.exhaustive(
     Object.entries(obj).map(([key, value]): [string, R] => [

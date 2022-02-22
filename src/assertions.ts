@@ -3,7 +3,14 @@ import * as is from "./guards";
 // eslint-disable-next-line @skylib/consistent-import
 import type * as types from "./types/core";
 
-export type Assertion<T> = (value: unknown) => asserts value is T;
+export interface Assertion<T> {
+  /**
+   * Asserts that value type is T.
+   *
+   * @param value - Value.
+   */
+  (value: unknown): asserts value is T;
+}
 
 export type ErrorArg = string | (() => unknown);
 
@@ -343,7 +350,7 @@ object.of = <A, B>(
   requiredGuards: is.Guards<A>,
   optionalGuards: is.Guards<B>,
   error?: ErrorArg
-): asserts value is Required<A> & Partial<B> => {
+): asserts value is Partial<B> & Required<A> => {
   byGuard(
     value,
     is.factory(is.object.of, requiredGuards, optionalGuards),

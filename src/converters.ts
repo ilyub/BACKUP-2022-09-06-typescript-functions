@@ -4,12 +4,26 @@ import * as o from "./object";
 // eslint-disable-next-line @skylib/consistent-import
 import type * as types from "./types/core";
 
-export type Converter<T> = (value: unknown) => T;
+export interface Converter<T> {
+  /**
+   * Converts value to type T.
+   *
+   * @param value - Value.
+   * @returns Converted value.
+   */
+  (value: unknown): T;
+}
 
-export type MultiArgConverter<T, A extends unknown[]> = (
-  value: unknown,
-  ...args: A
-) => T;
+export interface MultiArgConverter<T, A extends unknown[]> {
+  /**
+   * Converts value to type T.
+   *
+   * @param value - Value.
+   * @param args - Arguments.
+   * @returns Converted value.
+   */
+  (value: unknown, ...args: A): T;
+}
 
 export type OrFail = typeof orFail;
 
@@ -133,7 +147,7 @@ export function boolean(value: unknown): boolean {
 export function byGuard<T>(
   value: unknown,
   guard: is.Guard<T>,
-  defVal: T | OrFail
+  defVal: OrFail | T
 ): T {
   if (guard(value)) return value;
 
@@ -202,7 +216,7 @@ not.empty = notEmpty;
 export function enumeration<T extends PropertyKey>(
   value: unknown,
   vo: types.ValidationObject<T>,
-  defVal: T | OrFail
+  defVal: OrFail | T
 ): T {
   if (is.enumeration(value, vo)) return value;
 

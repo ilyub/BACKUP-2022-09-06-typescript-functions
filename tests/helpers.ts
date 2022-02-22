@@ -17,7 +17,7 @@ class TestClass {
 
 testUtils.installFakeTimer();
 
-it("createFacade", () => {
+test("createFacade", () => {
   const facade = createFacade("sample-facade", {});
 
   const expected = {
@@ -32,7 +32,7 @@ it("createFacade", () => {
   ).toStrictEqual(expected);
 });
 
-it("createFacade: Extension", () => {
+test("createFacade: Extension", () => {
   interface Extension {
     pow: (x: number) => number;
   }
@@ -44,21 +44,23 @@ it("createFacade: Extension", () => {
   const facade = createFacade<object, Extension>("sample-facade", extension);
 
   {
-    expect(facade.pow(1)).toStrictEqual(1);
-    expect(facade.pow(2)).toStrictEqual(4);
-    expect(facade.pow(3)).toStrictEqual(9);
+    expect(facade.pow(1)).toBe(1);
+    expect(facade.pow(2)).toBe(4);
+    expect(facade.pow(3)).toBe(9);
   }
 
   {
     facade.pow = (x): number => x * x * x;
-    expect(facade.pow(1)).toStrictEqual(1);
-    expect(facade.pow(2)).toStrictEqual(8);
-    expect(facade.pow(3)).toStrictEqual(27);
+    expect(facade.pow(1)).toBe(1);
+    expect(facade.pow(2)).toBe(8);
+    expect(facade.pow(3)).toBe(27);
   }
 });
 
-it("createFacade: Function", () => {
-  type Facade = (x: number) => number;
+test("createFacade: Function", () => {
+  interface Facade {
+    (x: number): number;
+  }
 
   const facade = createFacade<Facade>("sample-facade", {});
 
@@ -78,13 +80,13 @@ it("createFacade: Function", () => {
 
   {
     facade.setImplementation(x => x * x);
-    expect(facade(1)).toStrictEqual(1);
-    expect(facade(2)).toStrictEqual(4);
-    expect(facade(3)).toStrictEqual(9);
+    expect(facade(1)).toBe(1);
+    expect(facade(2)).toBe(4);
+    expect(facade(3)).toBe(9);
   }
 });
 
-it("createFacade: Object", () => {
+test("createFacade: Object", () => {
   interface Facade {
     get: () => number;
     set: (x: number) => void;
@@ -127,8 +129,8 @@ it("createFacade: Object", () => {
         writable: true
       };
 
-      expect(facade.value).toStrictEqual(1);
-      expect(facade.get()).toStrictEqual(1);
+      expect(facade.value).toBe(1);
+      expect(facade.get()).toBe(1);
       expect(Object.getOwnPropertyDescriptor(facade, "value")).toStrictEqual(
         expected
       );
@@ -144,8 +146,8 @@ it("createFacade: Object", () => {
       };
 
       facade.set(2);
-      expect(facade.value).toStrictEqual(2);
-      expect(facade.get()).toStrictEqual(2);
+      expect(facade.value).toBe(2);
+      expect(facade.get()).toBe(2);
       expect(Object.getOwnPropertyDescriptor(facade, "value")).toStrictEqual(
         expected
       );
@@ -154,14 +156,14 @@ it("createFacade: Object", () => {
   }
 });
 
-it("onDemand: get", () => {
+test("onDemand: get", () => {
   const obj = onDemand(() => new TestClass());
 
-  expect(obj.x).toStrictEqual(1);
-  expect(obj.y).toStrictEqual(2);
+  expect(obj.x).toBe(1);
+  expect(obj.y).toBe(2);
 });
 
-it("onDemand: getOwnPropertyDescriptor", () => {
+test("onDemand: getOwnPropertyDescriptor", () => {
   const obj = onDemand(() => new TestClass());
 
   expect(Object.getOwnPropertyDescriptor(obj, "x")).toStrictEqual({
@@ -179,23 +181,23 @@ it("onDemand: getOwnPropertyDescriptor", () => {
   });
 });
 
-it("onDemand: ownKeys", () => {
+test("onDemand: ownKeys", () => {
   const obj = onDemand(() => new TestClass());
 
   expect(Object.keys(obj)).toStrictEqual(["x", "y"]);
   expect(Object.keys(obj)).toStrictEqual(["x", "y"]);
 });
 
-it("onDemand: set", () => {
+test("onDemand: set", () => {
   const obj = onDemand(() => new TestClass());
 
   obj.x = 2;
   obj.y = 3;
-  expect(obj.x).toStrictEqual(2);
-  expect(obj.y).toStrictEqual(3);
+  expect(obj.x).toBe(2);
+  expect(obj.y).toBe(3);
 });
 
-it("safeAccess", () => {
+test("safeAccess", () => {
   const obj = {
     a: "a",
     b: 10,
@@ -226,9 +228,9 @@ it("safeAccess", () => {
   }
 
   {
-    expect(reflect.get(safe, "a")).toStrictEqual("a");
-    expect(reflect.get(safe, "b")).toStrictEqual(10);
-    expect(reflect.get(safe, "c")).toStrictEqual(20);
+    expect(reflect.get(safe, "a")).toBe("a");
+    expect(reflect.get(safe, "b")).toBe(10);
+    expect(reflect.get(safe, "c")).toBe(20);
     expect(() => reflect.get(safe, "d")).toThrow(
       new Error("Read access denied: d")
     );
@@ -237,16 +239,18 @@ it("safeAccess", () => {
   {
     safe.a = "b";
     safe.b = 11;
-    expect(reflect.get(safe, "a")).toStrictEqual("b");
-    expect(reflect.get(safe, "b")).toStrictEqual(11);
-    expect(reflect.get(safe, "c")).toStrictEqual(20);
+    expect(reflect.get(safe, "a")).toBe("b");
+    expect(reflect.get(safe, "b")).toBe(11);
+    expect(reflect.get(safe, "c")).toBe(20);
     expect(() => reflect.get(safe, "d")).toThrow(
       new Error("Read access denied: d")
     );
   }
 });
 
-it("wait", async () => {
+test("wait", async () => {
+  expect.assertions(1);
+
   await testUtils.run(async () => {
     await expect(async () => {
       await wait(1000);
@@ -254,9 +258,11 @@ it("wait", async () => {
   });
 });
 
-it.each<"doDefault" | "throw">(["doDefault", "throw"])(
+test.each<"doDefault" | "throw">(["doDefault", "throw"])(
   "wrapProxyHandler",
   action => {
+    expect.hasAssertions();
+
     const handler = wrapProxyHandler("testId", action, {});
 
     const proxyClass = new Proxy<typeof TestClass>(TestClass, handler);
@@ -309,15 +315,19 @@ it.each<"doDefault" | "throw">(["doDefault", "throw"])(
       }
     };
 
-    for (const [name, subtest] of Object.entries(subtests))
+    for (const [name, subtest] of Object.entries(subtests)) {
+      // eslint-disable-next-line jest/no-conditional-in-test
       switch (action) {
         case "doDefault":
+          // eslint-disable-next-line jest/no-conditional-expect
           expect(subtest).not.toThrow();
 
           break;
 
         case "throw":
+          // eslint-disable-next-line jest/no-conditional-expect
           expect(subtest).toThrow(new Error(`Not implemented: testId.${name}`));
       }
+    }
   }
 );

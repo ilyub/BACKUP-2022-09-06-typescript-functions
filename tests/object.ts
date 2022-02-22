@@ -1,6 +1,6 @@
 import * as o from "@/object";
 
-it("assign", () => {
+test("assign", () => {
   const obj = { a: 1, b: 2 };
 
   const source = { b: 3 };
@@ -11,7 +11,7 @@ it("assign", () => {
   expect(obj).toStrictEqual(expected);
 });
 
-it("clone", () => {
+test("clone", () => {
   const obj1 = { a: 1 };
 
   const obj2 = o.clone(obj1);
@@ -21,7 +21,7 @@ it("clone", () => {
   expect(obj2).not.toBeSameAs(obj1);
 });
 
-it("defineProperty", () => {
+test("defineProperty", () => {
   const obj = { a: 1 };
 
   const descriptor: o.Descriptor = {
@@ -30,12 +30,12 @@ it("defineProperty", () => {
     get: () => 2
   };
 
-  expect(obj.a).toStrictEqual(1);
+  expect(obj.a).toBe(1);
   o.defineProperty(obj, "a", descriptor);
-  expect(obj.a).toStrictEqual(2);
+  expect(obj.a).toBe(2);
 });
 
-it("entries", () => {
+test("entries", () => {
   const obj = { a: 1, b: 2, c: 3 };
 
   const expected = [
@@ -48,7 +48,7 @@ it("entries", () => {
   expect(o.entries(obj)).toStrictEqual(expected);
 });
 
-it("extend", () => {
+test("extend", () => {
   const obj = { a: 1 };
 
   const source = { b: 2 };
@@ -59,7 +59,7 @@ it("extend", () => {
   expect(obj).toStrictEqual(expected);
 });
 
-it("filter", () => {
+test("filter", () => {
   const obj = { a: 1, b: 2, c: 3 };
 
   const expected = { a: 1, c: 3 };
@@ -71,7 +71,7 @@ it("filter", () => {
   }
 });
 
-it("freeze", () => {
+test("freeze", () => {
   const obj1 = {};
 
   const obj2 = o.freeze(obj1);
@@ -79,7 +79,7 @@ it("freeze", () => {
   expect(obj1).toBeSameAs(obj2);
 });
 
-it("freeze.deep", () => {
+test("freeze.deep", () => {
   const obj1 = {};
 
   const obj2 = o.freeze.deep(obj1);
@@ -87,12 +87,12 @@ it("freeze.deep", () => {
   expect(obj1).toBeSameAs(obj2);
 });
 
-it("fromEntries", () => {
+test("fromEntries", () => {
   expect(o.fromEntries([["a", 1]])).toStrictEqual({ a: 1 });
   expect(o.fromEntries.exhaustive([["a", 1]])).toStrictEqual({ a: 1 });
 });
 
-it("getPrototypeOf", () => {
+test("getPrototypeOf", () => {
   class TestClass {
     public value = 1;
   }
@@ -103,7 +103,7 @@ it("getPrototypeOf", () => {
   expect(o.getPrototypeOf(obj)).toBeSameAs(TestClass.prototype);
 });
 
-it("hasOwnProp", () => {
+test("hasOwnProp", () => {
   {
     expect(o.hasOwnProp("a", { a: 1 })).toBeTrue();
     expect(o.hasOwnProp("a", { a: undefined })).toBeTrue();
@@ -127,7 +127,7 @@ it("hasOwnProp", () => {
   }
 });
 
-it("keys", () => {
+test("keys", () => {
   const obj = { a: 1, b: 2, c: 3 };
 
   const expected = ["a", "b", "c"];
@@ -135,7 +135,7 @@ it("keys", () => {
   expect(o.keys(obj)).toStrictEqual(expected);
 });
 
-it("map", () => {
+test("map", () => {
   const obj = { a: "1", b: "12", c: "123" };
 
   const expected = { a: 1, b: 2, c: 3 };
@@ -147,7 +147,7 @@ it("map", () => {
   }
 });
 
-it("merge", () => {
+test("merge", () => {
   expect(
     o.merge(
       { a: 1, b: [1], c: "a" },
@@ -163,11 +163,11 @@ it("merge", () => {
   });
 });
 
-it("omit", () => {
+test("omit", () => {
   expect(o.omit({ a: 1, b: 2, c: 3 }, "b")).toStrictEqual({ a: 1, c: 3 });
 });
 
-it("removeUndefinedKeys", () => {
+test("removeUndefinedKeys", () => {
   const obj = { a: 1, b: undefined };
 
   const expected = { a: 1 };
@@ -175,15 +175,15 @@ it("removeUndefinedKeys", () => {
   expect(o.removeUndefinedKeys(obj)).toStrictEqual(expected);
 });
 
-it("size", () => {
+test("size", () => {
   const symbol = Symbol("SampleSymbol");
 
   const obj = { a: 1, b: 2, c: 3, [symbol]: 4 };
 
-  expect(o.size(obj)).toStrictEqual(3);
+  expect(o.size(obj)).toBe(3);
 });
 
-it("sort", () => {
+test("sort", () => {
   {
     const obj = o.fromEntries.exhaustive([
       ["a", 1],
@@ -209,7 +209,7 @@ it("sort", () => {
   }
 });
 
-it("unfreeze", () => {
+test("unfreeze", () => {
   const obj1 = {};
 
   const obj2 = o.unfreeze(obj1);
@@ -217,7 +217,7 @@ it("unfreeze", () => {
   expect(obj1).toBeSameAs(obj2);
 });
 
-it("unfreeze.deep", () => {
+test("unfreeze.deep", () => {
   const obj1 = {};
 
   const obj2 = o.unfreeze.deep(obj1);
@@ -225,7 +225,7 @@ it("unfreeze.deep", () => {
   expect(obj1).toBeSameAs(obj2);
 });
 
-it("values", () => {
+test("values", () => {
   const obj = { a: 1, b: 2, c: 3 };
 
   const expected = [1, 2, 3];

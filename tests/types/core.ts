@@ -25,19 +25,19 @@ import type {
 } from "@/types/core";
 import { createValidationObject } from "@/types/core";
 
-it("AddPrefix", () => {
+test("addPrefix", () => {
   const x: Equals<AddPrefix<"a" | "b", "@">, "@a" | "@b"> = 1;
 
-  expect(x).toStrictEqual(1);
+  expect(x).toBe(1);
 });
 
-it("ArrayElement", () => {
+test("arrayElement", () => {
   const x: Equals<ArrayElement<number[]>, number> = 1;
 
-  expect(x).toStrictEqual(1);
+  expect(x).toBe(1);
 });
 
-it("DeepPartial", () => {
+test("deepPartial", () => {
   {
     const x1: Equals<DeepPartial<any>, any> = 1;
 
@@ -55,14 +55,14 @@ it("DeepPartial", () => {
 
     const x8: Equals<DeepPartial<new () => object>, new () => object> = 1;
 
-    expect(x1).toStrictEqual(1);
-    expect(x2).toStrictEqual(1);
-    expect(x3).toStrictEqual(1);
-    expect(x4).toStrictEqual(1);
-    expect(x5).toStrictEqual(1);
-    expect(x6).toStrictEqual(1);
-    expect(x7).toStrictEqual(1);
-    expect(x8).toStrictEqual(1);
+    expect(x1).toBe(1);
+    expect(x2).toBe(1);
+    expect(x3).toBe(1);
+    expect(x4).toBe(1);
+    expect(x5).toBe(1);
+    expect(x6).toBe(1);
+    expect(x7).toBe(1);
+    expect(x8).toBe(1);
   }
 
   {
@@ -82,11 +82,11 @@ it("DeepPartial", () => {
 
     const value: Equals<To, Expected> = 1;
 
-    expect(value).toStrictEqual(1);
+    expect(value).toBe(1);
   }
 });
 
-it("DeepReadonly", () => {
+test("deepReadonly", () => {
   {
     const x1: Equals<DeepReadonly<any>, any> = 1;
 
@@ -104,14 +104,14 @@ it("DeepReadonly", () => {
 
     const x8: Equals<DeepReadonly<new () => object>, new () => object> = 1;
 
-    expect(x1).toStrictEqual(1);
-    expect(x2).toStrictEqual(1);
-    expect(x3).toStrictEqual(1);
-    expect(x4).toStrictEqual(1);
-    expect(x5).toStrictEqual(1);
-    expect(x6).toStrictEqual(1);
-    expect(x7).toStrictEqual(1);
-    expect(x8).toStrictEqual(1);
+    expect(x1).toBe(1);
+    expect(x2).toBe(1);
+    expect(x3).toBe(1);
+    expect(x4).toBe(1);
+    expect(x5).toBe(1);
+    expect(x6).toBe(1);
+    expect(x7).toBe(1);
+    expect(x8).toBe(1);
   }
 
   {
@@ -123,7 +123,7 @@ it("DeepReadonly", () => {
 
     const value: Equals<To, Expected> = 1;
 
-    expect(value).toStrictEqual(1);
+    expect(value).toBe(1);
   }
 
   {
@@ -136,15 +136,15 @@ it("DeepReadonly", () => {
 
     type To = DeepReadonly<From>;
 
-    type Expected = (new (x: string) => object) &
-      ((x: number) => boolean) & {
+    type Expected = ((x: number) => boolean) &
+      (new (x: string) => object) & {
         readonly x: number;
         readonly y: string;
       };
 
     const value: Equals<To, Expected> = 1;
 
-    expect(value).toStrictEqual(1);
+    expect(value).toBe(1);
   }
 
   {
@@ -157,19 +157,19 @@ it("DeepReadonly", () => {
 
     type To = DeepReadonly<From>;
 
-    type Expected = (new (x: string) => object) &
-      ((this: object, x: number) => boolean) & {
+    type Expected = ((this: object, x: number) => boolean) &
+      (new (x: string) => object) & {
         readonly x: number;
         readonly y: string;
       };
 
     const value: Equals<To, Expected> = 1;
 
-    expect(value).toStrictEqual(1);
+    expect(value).toBe(1);
   }
 });
 
-it("DeepWritable", () => {
+test("deepWritable", () => {
   {
     const x1: Equals<DeepWritable<any>, any> = 1;
 
@@ -187,14 +187,14 @@ it("DeepWritable", () => {
 
     const x8: Equals<DeepWritable<new () => object>, new () => object> = 1;
 
-    expect(x1).toStrictEqual(1);
-    expect(x2).toStrictEqual(1);
-    expect(x3).toStrictEqual(1);
-    expect(x4).toStrictEqual(1);
-    expect(x5).toStrictEqual(1);
-    expect(x6).toStrictEqual(1);
-    expect(x7).toStrictEqual(1);
-    expect(x8).toStrictEqual(1);
+    expect(x1).toBe(1);
+    expect(x2).toBe(1);
+    expect(x3).toBe(1);
+    expect(x4).toBe(1);
+    expect(x5).toBe(1);
+    expect(x6).toBe(1);
+    expect(x7).toBe(1);
+    expect(x8).toBe(1);
   }
 
   {
@@ -206,7 +206,7 @@ it("DeepWritable", () => {
 
     const value: Equals<To, Expected> = 1;
 
-    expect(value).toStrictEqual(1);
+    expect(value).toBe(1);
   }
 
   {
@@ -219,15 +219,15 @@ it("DeepWritable", () => {
 
     type To = DeepWritable<From>;
 
-    type Expected = (new (x: string) => object) &
-      ((x: number) => boolean) & {
+    type Expected = ((x: number) => boolean) &
+      (new (x: string) => object) & {
         x: number;
         y: string;
       };
 
     const value: Equals<To, Expected> = 1;
 
-    expect(value).toStrictEqual(1);
+    expect(value).toBe(1);
   }
 
   {
@@ -240,19 +240,19 @@ it("DeepWritable", () => {
 
     type To = DeepWritable<From>;
 
-    type Expected = (new (x: string) => object) &
-      ((this: object, x: number) => boolean) & {
+    type Expected = ((this: object, x: number) => boolean) &
+      (new (x: string) => object) & {
         x: number;
         y: string;
       };
 
     const value: Equals<To, Expected> = 1;
 
-    expect(value).toStrictEqual(1);
+    expect(value).toBe(1);
   }
 });
 
-it("DefinedKeys", () => {
+test("definedKeys", () => {
   interface From {
     readonly xr: number;
     xw: number;
@@ -266,22 +266,22 @@ it("DefinedKeys", () => {
 
   const value: Equals<To, Expected> = 1;
 
-  expect(value).toStrictEqual(1);
+  expect(value).toBe(1);
 });
 
-it("ReadonlyArrayElement", () => {
+test("readonlyArrayElement", () => {
   const x: Equals<ReadonlyArrayElement<number[]>, number> = 1;
 
-  expect(x).toStrictEqual(1);
+  expect(x).toBe(1);
 });
 
-it("RemovePrefix", () => {
+test("removePrefix", () => {
   const x: Equals<RemovePrefix<"@a" | "@b", "@">, "a" | "b"> = 1;
 
-  expect(x).toStrictEqual(1);
+  expect(x).toBe(1);
 });
 
-it("UndefinedKeys", () => {
+test("undefinedKeys", () => {
   interface From {
     readonly xr: number;
     xw: number;
@@ -295,10 +295,10 @@ it("UndefinedKeys", () => {
 
   const value: Equals<To, Expected> = 1;
 
-  expect(value).toStrictEqual(1);
+  expect(value).toBe(1);
 });
 
-it("WithOptionalKeys", () => {
+test("withOptionalKeys", () => {
   interface From {
     readonly r: number;
     readonly ro?: number;
@@ -328,10 +328,10 @@ it("WithOptionalKeys", () => {
 
   const value: Equals<To, Expected> = 1;
 
-  expect(value).toStrictEqual(1);
+  expect(value).toBe(1);
 });
 
-it("WithUndeclaredKeys", () => {
+test("withUndeclaredKeys", () => {
   interface From {
     readonly r: number;
     readonly ro?: number;
@@ -361,10 +361,10 @@ it("WithUndeclaredKeys", () => {
 
   const value: Equals<To, Expected> = 1;
 
-  expect(value).toStrictEqual(1);
+  expect(value).toBe(1);
 });
 
-it("WithUndefinedKeys", () => {
+test("withUndefinedKeys", () => {
   interface From {
     readonly r: number;
     readonly ro?: number;
@@ -394,11 +394,11 @@ it("WithUndefinedKeys", () => {
 
   const value: Equals<To, Expected> = 1;
 
-  expect(value).toStrictEqual(1);
+  expect(value).toBe(1);
 });
 
-it("createValidationObject", () => {
-  type Enum = 1 | "a";
+test("createValidationObject", () => {
+  type Enum = "a" | 1;
 
   const error = new Error("Invalid source");
 

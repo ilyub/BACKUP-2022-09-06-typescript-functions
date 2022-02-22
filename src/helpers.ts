@@ -6,7 +6,7 @@ import * as reflect from "./reflect";
 import * as timer from "./timer";
 import type { Join2 } from "./types/core";
 
-export type Facade<F, E = unknown> = F & FacadeOwnMethods<F> & E;
+export type Facade<F, E = unknown> = E & F & FacadeOwnMethods<F>;
 
 export interface FacadeOwnMethods<F> {
   /**
@@ -38,7 +38,7 @@ export function createFacade<F extends object, E = unknown>(
   name: string,
   extension: E
 ): Facade<F, E> {
-  let implementation: F | undefined = undefined;
+  let implementation: F | undefined;
 
   function callback(this: unknown, ...args: unknown[]): unknown {
     if (is.callable(implementation)) return implementation.call(this, ...args);
@@ -116,7 +116,7 @@ export function createFacade<F extends object, E = unknown>(
  * @returns Resource.
  */
 export function onDemand<T extends object>(generator: () => T): T {
-  let obj: T | undefined = undefined;
+  let obj: T | undefined;
 
   return new Proxy(
     // eslint-disable-next-line no-type-assertion/no-type-assertion

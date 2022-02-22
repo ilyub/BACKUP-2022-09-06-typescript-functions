@@ -11,12 +11,12 @@ async function testResolve(): Promise<void> {
 
 testUtils.installFakeTimer();
 
-it("executionTimeToBeWithin", async () => {
+test("executionTimeToBeWithin", async () => {
   {
     const result = await testUtils.executionTimeToBeWithin(testResolve, 0, 1);
 
     expect(result.pass).toBeTrue();
-    expect(result.message()).toStrictEqual(
+    expect(result.message()).toBe(
       "Expected callback execution time (0 ms) not to be within [0, 1] ms"
     );
   }
@@ -25,18 +25,18 @@ it("executionTimeToBeWithin", async () => {
     const result = await testUtils.executionTimeToBeWithin(testResolve, 1, 2);
 
     expect(result.pass).toBeFalse();
-    expect(result.message()).toStrictEqual(
+    expect(result.message()).toBe(
       "Expected callback execution time (0 ms) to be within [1, 2] ms"
     );
   }
 });
 
-it("executionTimeToEqual", async () => {
+test("executionTimeToEqual", async () => {
   {
     const result = await testUtils.executionTimeToEqual(testResolve, 0);
 
     expect(result.pass).toBeTrue();
-    expect(result.message()).toStrictEqual(
+    expect(result.message()).toBe(
       "Expected callback execution time not to be 0 ms"
     );
   }
@@ -45,30 +45,32 @@ it("executionTimeToEqual", async () => {
     const result = await testUtils.executionTimeToEqual(testResolve, 1);
 
     expect(result.pass).toBeFalse();
-    expect(result.message()).toStrictEqual(
+    expect(result.message()).toBe(
       "Expected callback execution time (0 ms) to be 1 ms"
     );
   }
 });
 
-it("getClock", () => {
+test("getClock", () => {
   expect(testUtils.getClock()).toBeObject();
 });
 
-it("jestReset", () => {
+test("jestReset", () => {
   const callback = jest.fn();
 
   callback();
-  expect(callback).toBeCalledTimes(1);
+  expect(callback).toHaveBeenCalledTimes(1);
   testUtils.jestReset();
-  expect(callback).not.toBeCalled();
+  expect(callback).not.toHaveBeenCalled();
 });
 
-it("jestReset.dom", () => {
+test("jestReset.dom", () => {
   {
+    // eslint-disable-next-line github/no-inner-html
     document.body.innerHTML = "<div></div>";
     testUtils.jestReset.dom();
-    expect(document.body.innerHTML).toStrictEqual("");
+    // eslint-disable-next-line github/no-inner-html
+    expect(document.body.innerHTML).toBe("");
   }
 
   {
@@ -76,15 +78,15 @@ it("jestReset.dom", () => {
   }
 });
 
-it("run", async () => {
+test("run", async () => {
   await expect(testUtils.run(testResolve)).resolves.toBeUndefined();
 });
 
-it("setRandomSystemTime", () => {
-  testUtils.setRandomSystemTime();
+test("setRandomSystemTime", () => {
+  expect(testUtils.setRandomSystemTime).not.toThrow();
 });
 
-it("toBeSameAs", () => {
+test("toBeSameAs", () => {
   {
     const arr1 = [1];
 
@@ -93,14 +95,14 @@ it("toBeSameAs", () => {
     const result = testUtils.toBeSameAs(arr1, arr2);
 
     expect(result.pass).toBeTrue();
-    expect(result.message()).toStrictEqual("Expected not the same object");
+    expect(result.message()).toBe("Expected not the same object");
   }
 
   {
     const result = testUtils.toBeSameAs([], []);
 
     expect(result.pass).toBeFalse();
-    expect(result.message()).toStrictEqual("Expected the same object");
+    expect(result.message()).toBe("Expected the same object");
   }
 
   {

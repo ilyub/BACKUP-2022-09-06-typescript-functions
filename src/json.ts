@@ -53,7 +53,7 @@ const isCustomData = is.factory(
   {
     dataType: isDataType,
     value: is.unknown
-  },
+  } as const,
   {}
 );
 

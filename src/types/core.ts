@@ -11,17 +11,38 @@ export type AddPrefix<T extends string, P extends string> = `${P}${T}`;
 
 export type ArrayElement<T> = T extends Array<infer R> ? R : unknown;
 
-export type Async<R, A extends unknown[] = never[]> = (
-  ...args: A
-) => Promise<R>;
+export interface Async<R, A extends unknowns = nevers> {
+  /**
+   * Async function.
+   *
+   * @param args - Arguments.
+   * @returns Promise.
+   */
+  (...args: A): Promise<R>;
+}
 
-export type CallSignature<T extends Callable> = (
-  this: ThisParameterType<T>,
-  ...args: Parameters<T>
-) => ReturnType<T>;
+export interface CallSignature<T extends Callable> {
+  /**
+   * Async function.
+   *
+   * @param this - This argument.
+   * @param args - Arguments.
+   * @returns Result.
+   */
+  (this: ThisParameterType<T>, ...args: Parameters<T>): ReturnType<T>;
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type Callable<T = any> = (...args: any[]) => T;
+export interface Callable<T = any> {
+  /**
+   * Function.
+   *
+   * @param args - Arguments.
+   * @returns Result.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (...args: any[]): T;
+}
 
 export type ConstructSignature<T extends Constructor> = new (
   ...args: ConstructorParameters<T>
@@ -30,8 +51,8 @@ export type ConstructSignature<T extends Constructor> = new (
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Constructor<T = any> = new (...args: any[]) => T;
 
-export type DeclaredKeys<T extends object> = PropertyKey &
-  DefinedKeys<T> &
+export type DeclaredKeys<T extends object> = DefinedKeys<T> &
+  PropertyKey &
   RequiredKeys<T>;
 
 export type DeepPartial<T> = DeepPartial1<T>;
@@ -83,26 +104,25 @@ export type KeysOfType<T, V> = KeysOfType1<T, V>;
 
 export type NumStr = number | string;
 
-export type NumStrE = NumStr | empty;
+export type NumStrE = empty | NumStr;
 
 export type NumStrU = NumStr | undefined;
 
 export type NumStrs = readonly NumStr[];
 
-// eslint-disable-next-line @skylib/prefer-readonly
 export type PartialRecord<K extends PropertyKey, T> = Partial<Record<K, T>>;
 
-export type PromiseAsync<T> = Promise<T> | Async<T>;
+export type PromiseAsync<T> = Async<T> | Promise<T>;
 
-export type PromiseAsyncSync<T> = Promise<T> | Async<T> | Sync<T>;
+export type PromiseAsyncSync<T> = Async<T> | Promise<T> | Sync<T>;
 
 export type ReadonlyArrayElement<T> = T extends ReadonlyArray<infer R>
   ? R
   : unknown;
 
-export type ReadonlyDeclaredKeys<T extends object> = PropertyKey &
-  ReadonlyKeys<T> &
-  DeclaredKeys<T>;
+export type ReadonlyDeclaredKeys<T extends object> = DeclaredKeys<T> &
+  PropertyKey &
+  ReadonlyKeys<T>;
 
 export type ReadonlyIndexedObject<T = unknown> = Readonly<IndexedObject<T>>;
 
@@ -121,7 +141,6 @@ export type RemovePrefix<
   P extends string
 > = T extends `${P}${infer R}` ? R : never;
 
-// eslint-disable-next-line @skylib/prefer-readonly
 export type StrictOmit<T extends object, K extends keyof T> = Omit<T, K> & {
   [L in K]?: never;
 };
@@ -136,7 +155,15 @@ export type StrictRequired<T extends object> = Join2<
   { readonly [K in ReadonlyKeys<T>]-?: T[K] }
 >;
 
-export type Sync<R, A extends unknown[] = never[]> = (...args: A) => R;
+export interface Sync<R, A extends unknowns = nevers> {
+  /**
+   * Function.
+   *
+   * @param args - Arguments.
+   * @returns Result.
+   */
+  (...args: A): R;
+}
 
 // eslint-disable-next-line @skylib/disallow-identifier
 export type Timeout = ReturnType<typeof setTimeout>;
@@ -174,15 +201,15 @@ export type WithUndefinedKeys<T extends object> = Join4<
 // eslint-disable-next-line @skylib/prefer-readonly
 export type Writable<T> = { -readonly [K in keyof T]: T[K] };
 
-export type WritableDeclaredKeys<T extends object> = PropertyKey &
-  WritableKeys<T> &
-  DeclaredKeys<T>;
+export type WritableDeclaredKeys<T extends object> = DeclaredKeys<T> &
+  PropertyKey &
+  WritableKeys<T>;
 
 export type WritableUndeclaredKeys<T extends object> = PropertyKey &
-  WritableKeys<T> &
-  UndeclaredKeys<T>;
+  UndeclaredKeys<T> &
+  WritableKeys<T>;
 
-export type booleanE = boolean | empty;
+export type booleanE = empty | boolean;
 
 export type booleanU = boolean | undefined;
 
@@ -190,19 +217,21 @@ export type booleans = readonly boolean[];
 
 export type empty = null | undefined;
 
-export type numberE = number | empty;
+export type nevers = readonly never[];
+
+export type numberE = empty | number;
 
 export type numberU = number | undefined;
 
 export type numbers = readonly number[];
 
-export type objectE = object | empty;
+export type objectE = empty | object;
 
 export type objectU = object | undefined;
 
 export type objects = readonly object[];
 
-export type stringE = string | empty;
+export type stringE = empty | string;
 
 export type stringU = string | undefined;
 
@@ -239,7 +268,6 @@ type DeepPartial3<T> = T extends Constructor ? T : DeepPartial4<T>;
 
 type DeepPartial4<T> = T extends unknown[] ? T : DeepPartial5<T>;
 
-// eslint-disable-next-line @skylib/prefer-readonly
 type DeepPartial5<T> = { [K in keyof T]?: DeepPartial1<T[K]> };
 
 type DeepReadonly1<T> = T extends object ? DeepReadonly2<T> : T;

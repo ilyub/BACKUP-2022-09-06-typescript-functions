@@ -4,7 +4,9 @@ import * as testUtils from "@/testUtils";
 
 testUtils.installFakeTimer();
 
-it("doNotRunParallel", async () => {
+test("doNotRunParallel", async () => {
+  expect.hasAssertions();
+
   await testUtils.run(async () => {
     const callback = jest.fn();
 
@@ -47,20 +49,20 @@ it("doNotRunParallel", async () => {
     ];
 
     await Promise.all(promises);
-    expect(callback).toBeCalledTimes(5);
-    expect(callback).nthCalledWith(1, "value1");
-    expect(callback).nthCalledWith(2, "value2");
-    expect(callback).nthCalledWith(3, "value3");
-    expect(callback).nthCalledWith(4, "value4");
-    expect(callback).nthCalledWith(5, "value5");
+    expect(callback).toHaveBeenCalledTimes(5);
+    expect(callback).toHaveBeenNthCalledWith(1, "value1");
+    expect(callback).toHaveBeenNthCalledWith(2, "value2");
+    expect(callback).toHaveBeenNthCalledWith(3, "value3");
+    expect(callback).toHaveBeenNthCalledWith(4, "value4");
+    expect(callback).toHaveBeenNthCalledWith(5, "value5");
   });
 });
 
-it("pipe", () => {
-  expect(fn.pipe(10_000, Math.log10, Math.sqrt)).toStrictEqual(2);
+test("pipe", () => {
+  expect(fn.pipe(10_000, Math.log10, Math.sqrt)).toBe(2);
 });
 
-it("run", async () => {
+test("run", async () => {
   expect(fn.run(() => true)).toBeTrue();
   await expect(fn.run(Promise.resolve())).resolves.toBeUndefined();
   await expect(fn.run(resolve)).resolves.toBeUndefined();

@@ -12,7 +12,7 @@ class TestClass {
   }
 }
 
-type TestEnum = 1 | "a";
+type TestEnum = "a" | 1;
 
 const TestEnumVO = createValidationObject<TestEnum>({ 1: 1, a: "a" });
 
@@ -26,7 +26,7 @@ function testFunction(): number {
   return 1;
 }
 
-it("array", () => {
+test("array", () => {
   const arr = [1];
 
   expect(cast.array([1])).toStrictEqual([1]);
@@ -34,7 +34,7 @@ it("array", () => {
   expect(cast.array(arr)).toBeSameAs(arr);
 });
 
-it("array.of", () => {
+test("array.of", () => {
   const converter = cast.factory(cast.array.of, cast.number);
 
   const arr = [1];
@@ -47,7 +47,7 @@ it("array.of", () => {
   expect(converter(arr)).not.toBeSameAs(arr);
 });
 
-it("array.of.filtered", () => {
+test("array.of.filtered", () => {
   const converter = cast.factory(cast.array.of.filtered, is.number);
 
   const arr = [1];
@@ -60,7 +60,7 @@ it("array.of.filtered", () => {
   expect(converter(arr)).not.toBeSameAs(arr);
 });
 
-it("array.of.orFail", () => {
+test("array.of.orFail", () => {
   const converter = cast.factory(cast.array.of.orFail, is.number);
 
   const arr = [1];
@@ -73,7 +73,7 @@ it("array.of.orFail", () => {
   expect(converter(arr)).toBeSameAs(arr);
 });
 
-it("array.of.undef", () => {
+test("array.of.undef", () => {
   const converter = cast.factory(cast.array.of.undef, cast.numberU);
 
   const arr = [1];
@@ -86,7 +86,7 @@ it("array.of.undef", () => {
   expect(converter(arr)).not.toBeSameAs(arr);
 });
 
-it("boolean", () => {
+test("boolean", () => {
   expect(cast.boolean(true)).toBeTrue();
   expect(cast.boolean(false)).toBeFalse();
   expect(cast.boolean({})).toBeTrue();
@@ -99,50 +99,50 @@ it("boolean", () => {
   expect(cast.boolean(undefined)).toBeFalse();
 });
 
-it("byGuard", () => {
+test("byGuard", () => {
   const converter1 = cast.factory(cast.byGuard, is.number, 2);
 
   const converter2 = cast.factory(cast.byGuard, is.number, cast.orFail);
 
-  expect(converter1(1)).toStrictEqual(1);
-  expect(converter1("a")).toStrictEqual(2);
+  expect(converter1(1)).toBe(1);
+  expect(converter1("a")).toBe(2);
   expect(() => converter2("a")).toThrow(testError);
 });
 
-it("callable", () => {
+test("callable", () => {
   expect(() => cast.callable()).toThrow(new Error("Not implemented"));
 });
 
-it("callable.orFail", () => {
+test("callable.orFail", () => {
   expect(cast.callable.orFail(testFunction)).toStrictEqual(testFunction);
   expect(() => cast.callable.orFail(1)).toThrow(testError);
 });
 
-it("callableU", () => {
+test("callableU", () => {
   expect(cast.callableU(testFunction)).toStrictEqual(testFunction);
   expect(cast.callableU(1)).toBeUndefined();
 });
 
-it("enumeration", () => {
+test("enumeration", () => {
   const converter1 = cast.factory(cast.enumeration, TestEnumVO, 1);
 
   const converter2 = cast.factory(cast.enumeration, TestEnumVO, cast.orFail);
 
-  expect(converter1(1)).toStrictEqual(1);
-  expect(converter1("a")).toStrictEqual("a");
-  expect(converter1("b")).toStrictEqual(1);
+  expect(converter1(1)).toBe(1);
+  expect(converter1("a")).toBe("a");
+  expect(converter1("b")).toBe(1);
   expect(() => converter2("b")).toThrow(testError);
 });
 
-it("enumerationU", () => {
+test("enumerationU", () => {
   const converter = cast.factory(cast.enumerationU, TestEnumVO);
 
-  expect(converter(1)).toStrictEqual(1);
-  expect(converter("a")).toStrictEqual("a");
+  expect(converter(1)).toBe(1);
+  expect(converter("a")).toBe("a");
   expect(converter("b")).toBeUndefined();
 });
 
-it("indexedObject", () => {
+test("indexedObject", () => {
   const obj = { a: 1 };
 
   expect(cast.indexedObject({ a: 1 })).toStrictEqual({ a: 1 });
@@ -152,7 +152,7 @@ it("indexedObject", () => {
   expect(cast.indexedObject(obj)).toBeSameAs(obj);
 });
 
-it("indexedObject.of", () => {
+test("indexedObject.of", () => {
   const converter = cast.factory(cast.indexedObject.of, cast.string);
 
   const obj = { a: 1 };
@@ -164,11 +164,11 @@ it("indexedObject.of", () => {
   expect(converter(obj)).not.toBeSameAs(obj);
 });
 
-it("instance", () => {
+test("instance", () => {
   expect(() => cast.instance()).toThrow(new Error("Not implemented"));
 });
 
-it("instance.orFail", () => {
+test("instance.orFail", () => {
   const converter = cast.factory(cast.instance.orFail, TestClass);
 
   expect(converter(testClass1)).toStrictEqual(testClass1);
@@ -177,7 +177,7 @@ it("instance.orFail", () => {
   expect(() => converter(undefined)).toThrow(testError);
 });
 
-it("instanceU", () => {
+test("instanceU", () => {
   const converter = cast.factory(cast.instanceU, TestClass);
 
   expect(converter(testClass1)).toStrictEqual(testClass1);
@@ -186,11 +186,11 @@ it("instanceU", () => {
   expect(converter(undefined)).toBeUndefined();
 });
 
-it("instances", () => {
+test("instances", () => {
   expect(() => cast.instances()).toThrow(new Error("Not implemented"));
 });
 
-it("instances.filtered", () => {
+test("instances.filtered", () => {
   const converter = cast.factory(cast.instances.filtered, TestClass);
 
   const arr1 = [testClass1, testClass2];
@@ -207,7 +207,7 @@ it("instances.filtered", () => {
   expect(converter(arr1)).not.toBeSameAs(arr1);
 });
 
-it("instances.orFail", () => {
+test("instances.orFail", () => {
   const converter = cast.factory(cast.instances.orFail, TestClass);
 
   const arr1 = [testClass1, testClass2];
@@ -224,74 +224,74 @@ it("instances.orFail", () => {
   expect(converter(arr1)).toBeSameAs(arr1);
 });
 
-it("not", () => {
+test("not", () => {
   expect(() => cast.not()).toThrow(new Error("Not implemented"));
 });
 
-it("not.empty", () => {
-  expect(subtest("a")).toStrictEqual("a");
-  expect(subtest(null)).toStrictEqual("b");
-  expect(subtest(undefined)).toStrictEqual("b");
+test("not.empty", () => {
+  expect(subtest("a")).toBe("a");
+  expect(subtest(null)).toBe("b");
+  expect(subtest(undefined)).toBe("b");
 
   function subtest(value: stringE): string {
     return cast.not.empty(value, "b");
   }
 });
 
-it("numStr", () => {
-  expect(cast.numStr(123)).toStrictEqual(123);
+test("numStr", () => {
+  expect(cast.numStr(123)).toBe(123);
   expect(cast.numStr(-12.3)).toStrictEqual(-12.3);
-  expect(cast.numStr(true)).toStrictEqual("true");
-  expect(cast.numStr(false)).toStrictEqual("false");
-  expect(cast.numStr(" 12 ")).toStrictEqual(" 12 ");
-  expect(cast.numStr(" -12.34 ")).toStrictEqual(" -12.34 ");
-  expect(cast.numStr(" 12s ")).toStrictEqual(" 12s ");
-  expect(cast.numStr("\n")).toStrictEqual("\n");
-  expect(cast.numStr("\r\n")).toStrictEqual("\r\n");
-  expect(cast.numStr([])).toStrictEqual("");
-  expect(cast.numStr(null)).toStrictEqual("");
-  expect(cast.numStr(undefined)).toStrictEqual("");
-  expect(cast.numStr(undefined)).toStrictEqual("");
+  expect(cast.numStr(true)).toBe("true");
+  expect(cast.numStr(false)).toBe("false");
+  expect(cast.numStr(" 12 ")).toBe(" 12 ");
+  expect(cast.numStr(" -12.34 ")).toBe(" -12.34 ");
+  expect(cast.numStr(" 12s ")).toBe(" 12s ");
+  expect(cast.numStr("\n")).toBe("\n");
+  expect(cast.numStr("\r\n")).toBe("\r\n");
+  expect(cast.numStr([])).toBe("");
+  expect(cast.numStr(null)).toBe("");
+  expect(cast.numStr(undefined)).toBe("");
+  expect(cast.numStr(undefined)).toBe("");
 });
 
-it("numStrU", () => {
-  expect(cast.numStrU(123)).toStrictEqual(123);
+test("numStrU", () => {
+  expect(cast.numStrU(123)).toBe(123);
   expect(cast.numStrU(-12.3)).toStrictEqual(-12.3);
-  expect(cast.numStrU(true)).toStrictEqual("true");
-  expect(cast.numStrU(false)).toStrictEqual("false");
-  expect(cast.numStrU(" 12 ")).toStrictEqual(" 12 ");
-  expect(cast.numStrU(" -12.34 ")).toStrictEqual(" -12.34 ");
-  expect(cast.numStrU(" 12s ")).toStrictEqual(" 12s ");
-  expect(cast.numStrU("\n")).toStrictEqual("\n");
-  expect(cast.numStrU("\r\n")).toStrictEqual("\r\n");
+  expect(cast.numStrU(true)).toBe("true");
+  expect(cast.numStrU(false)).toBe("false");
+  expect(cast.numStrU(" 12 ")).toBe(" 12 ");
+  expect(cast.numStrU(" -12.34 ")).toBe(" -12.34 ");
+  expect(cast.numStrU(" 12s ")).toBe(" 12s ");
+  expect(cast.numStrU("\n")).toBe("\n");
+  expect(cast.numStrU("\r\n")).toBe("\r\n");
   expect(cast.numStrU([])).toBeUndefined();
   expect(cast.numStrU(null)).toBeUndefined();
   expect(cast.numStrU(undefined)).toBeUndefined();
   expect(cast.numStrU(undefined)).toBeUndefined();
 });
 
-it("number", () => {
-  expect(cast.number(123)).toStrictEqual(123);
+test("number", () => {
+  expect(cast.number(123)).toBe(123);
   expect(cast.number(-12.3)).toStrictEqual(-12.3);
-  expect(cast.number(true)).toStrictEqual(1);
-  expect(cast.number(false)).toStrictEqual(0);
-  expect(cast.number(" 12 ")).toStrictEqual(12);
+  expect(cast.number(true)).toBe(1);
+  expect(cast.number(false)).toBe(0);
+  expect(cast.number(" 12 ")).toBe(12);
   expect(cast.number(" -12.34 ")).toStrictEqual(-12.34);
-  expect(cast.number(" 12s ")).toStrictEqual(0);
-  expect(cast.number("\n")).toStrictEqual(0);
-  expect(cast.number("\r\n")).toStrictEqual(0);
-  expect(cast.number([])).toStrictEqual(0);
-  expect(cast.number(null)).toStrictEqual(0);
-  expect(cast.number(undefined)).toStrictEqual(0);
-  expect(cast.number(undefined, 1)).toStrictEqual(1);
+  expect(cast.number(" 12s ")).toBe(0);
+  expect(cast.number("\n")).toBe(0);
+  expect(cast.number("\r\n")).toBe(0);
+  expect(cast.number([])).toBe(0);
+  expect(cast.number(null)).toBe(0);
+  expect(cast.number(undefined)).toBe(0);
+  expect(cast.number(undefined, 1)).toBe(1);
 });
 
-it("number.orFail", () => {
-  expect(cast.number.orFail(123)).toStrictEqual(123);
+test("number.orFail", () => {
+  expect(cast.number.orFail(123)).toBe(123);
   expect(cast.number.orFail(-12.3)).toStrictEqual(-12.3);
-  expect(cast.number.orFail(true)).toStrictEqual(1);
-  expect(cast.number.orFail(false)).toStrictEqual(0);
-  expect(cast.number.orFail(" 12 ")).toStrictEqual(12);
+  expect(cast.number.orFail(true)).toBe(1);
+  expect(cast.number.orFail(false)).toBe(0);
+  expect(cast.number.orFail(" 12 ")).toBe(12);
   expect(cast.number.orFail(" -12.34 ")).toStrictEqual(-12.34);
   expect(() => cast.number.orFail(" 12s ")).toThrow(testError);
   expect(() => cast.number.orFail("\n")).toThrow(testError);
@@ -301,12 +301,12 @@ it("number.orFail", () => {
   expect(() => cast.number.orFail(undefined)).toThrow(testError);
 });
 
-it("numberU", () => {
-  expect(cast.numberU(123)).toStrictEqual(123);
+test("numberU", () => {
+  expect(cast.numberU(123)).toBe(123);
   expect(cast.numberU(-12.3)).toStrictEqual(-12.3);
-  expect(cast.numberU(true)).toStrictEqual(1);
-  expect(cast.numberU(false)).toStrictEqual(0);
-  expect(cast.numberU(" 12 ")).toStrictEqual(12);
+  expect(cast.numberU(true)).toBe(1);
+  expect(cast.numberU(false)).toBe(0);
+  expect(cast.numberU(" 12 ")).toBe(12);
   expect(cast.numberU(" -12.34 ")).toStrictEqual(-12.34);
   expect(cast.numberU(" 12s ")).toBeUndefined();
   expect(cast.numberU("\n")).toBeUndefined();
@@ -316,44 +316,44 @@ it("numberU", () => {
   expect(cast.numberU(undefined)).toBeUndefined();
 });
 
-it("object", () => {
+test("object", () => {
   expect(cast.object({ a: 1 })).toStrictEqual({ a: 1 });
   expect(cast.object(1)).toStrictEqual({});
 });
 
-it("string", () => {
-  expect(cast.string(123)).toStrictEqual("123");
-  expect(cast.string(-12.3)).toStrictEqual("-12.3");
-  expect(cast.string(true)).toStrictEqual("true");
-  expect(cast.string(false)).toStrictEqual("false");
-  expect(cast.string("")).toStrictEqual("");
-  expect(cast.string([])).toStrictEqual("");
-  expect(cast.string(null)).toStrictEqual("");
-  expect(cast.string(undefined)).toStrictEqual("");
+test("string", () => {
+  expect(cast.string(123)).toBe("123");
+  expect(cast.string(-12.3)).toBe("-12.3");
+  expect(cast.string(true)).toBe("true");
+  expect(cast.string(false)).toBe("false");
+  expect(cast.string("")).toBe("");
+  expect(cast.string([])).toBe("");
+  expect(cast.string(null)).toBe("");
+  expect(cast.string(undefined)).toBe("");
 });
 
-it("string.orFail", () => {
-  expect(cast.string.orFail(123)).toStrictEqual("123");
-  expect(cast.string.orFail(-12.3)).toStrictEqual("-12.3");
-  expect(cast.string.orFail(true)).toStrictEqual("true");
-  expect(cast.string.orFail(false)).toStrictEqual("false");
+test("string.orFail", () => {
+  expect(cast.string.orFail(123)).toBe("123");
+  expect(cast.string.orFail(-12.3)).toBe("-12.3");
+  expect(cast.string.orFail(true)).toBe("true");
+  expect(cast.string.orFail(false)).toBe("false");
   expect(() => cast.string.orFail("")).toThrow(testError);
   expect(() => cast.string.orFail([])).toThrow(testError);
   expect(() => cast.string.orFail(null)).toThrow(testError);
   expect(() => cast.string.orFail(undefined)).toThrow(testError);
 });
 
-it("stringU", () => {
-  expect(cast.stringU(123)).toStrictEqual("123");
-  expect(cast.stringU(-12.3)).toStrictEqual("-12.3");
-  expect(cast.stringU(true)).toStrictEqual("true");
-  expect(cast.stringU(false)).toStrictEqual("false");
+test("stringU", () => {
+  expect(cast.stringU(123)).toBe("123");
+  expect(cast.stringU(-12.3)).toBe("-12.3");
+  expect(cast.stringU(true)).toBe("true");
+  expect(cast.stringU(false)).toBe("false");
   expect(cast.stringU("")).toBeUndefined();
   expect(cast.stringU([])).toBeUndefined();
   expect(cast.stringU(null)).toBeUndefined();
   expect(cast.stringU(undefined)).toBeUndefined();
 });
 
-it("unknown", () => {
-  expect(cast.unknown(123)).toStrictEqual(123);
+test("unknown", () => {
+  expect(cast.unknown(123)).toBe(123);
 });

@@ -15,7 +15,6 @@ import type { Async, DeepReadonly, PromiseAsync } from "../types/core";
 
 declare global {
   namespace jest {
-    // eslint-disable-next-line @skylib/prefer-readonly
     interface Matchers<R> {
       /**
        * Checks that async function executes within expected time.
@@ -46,12 +45,20 @@ declare global {
   }
 }
 
-export type ExpectFromMatcher<K extends keyof jest.Matchers<unknown>> = (
-  got: unknown,
-  ...args: Parameters<jest.Matchers<unknown>[K]>
-) => ReturnType<jest.Matchers<unknown>[K]> extends Promise<unknown>
-  ? Promise<ExpectReturnType>
-  : ExpectReturnType;
+export interface ExpectFromMatcher<K extends keyof jest.Matchers<unknown>> {
+  /**
+   * Converts matcher function to expect function.
+   *
+   * @param got - Got value.
+   * @param args - Args.
+   * @returns Result.
+   */
+  (got: unknown, ...args: Parameters<jest.Matchers<unknown>[K]>): ReturnType<
+    jest.Matchers<unknown>[K]
+  > extends Promise<unknown>
+    ? Promise<ExpectReturnType>
+    : ExpectReturnType;
+}
 
 export interface ExpectReturnType {
   /**
@@ -177,7 +184,13 @@ export function jestReset(): void {
  * Jest reset.
  */
 jestReset.dom = (): void => {
-  document.body.innerHTML = "";
+  while (document.body.children.length) {
+    const child = document.body.children.item(0);
+
+    assert.not.empty(child);
+    child.remove();
+  }
+
   $.expr.pseudos["visible"] = jqueryVisiblie;
 };
 
@@ -201,7 +214,7 @@ export function jestSetup(): void {
     // eslint-disable-next-line no-type-assertion/no-type-assertion
     expect.extend(matchers as jest.ExpectExtendMap);
     // eslint-disable-next-line no-type-assertion/no-type-assertion
-    expect.extend(expectExtend as jest.ExpectExtendMap & ExpectExtendMap);
+    expect.extend(expectExtend as ExpectExtendMap & jest.ExpectExtendMap);
   }
 
   jestReset();
@@ -277,7 +290,7 @@ export function toBeSameAs(got: unknown, expected: object): ExpectReturnType {
 |*******************************************************************************
 |*/
 
-let clock: DeepReadonly<fakeTimers.Clock> | undefined = undefined;
+let clock: DeepReadonly<fakeTimers.Clock> | undefined;
 
 /**
  * JQuery visible selector.

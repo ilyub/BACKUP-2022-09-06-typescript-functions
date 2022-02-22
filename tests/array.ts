@@ -6,7 +6,7 @@ function reduce(obj: object): unknown {
   return reflect.get(obj, "id");
 }
 
-it("chain", () => {
+test("chain", () => {
   expect(a.chain([1, 2, 3, 4, 5])).toStrictEqual([
     [1, 2],
     [2, 3],
@@ -15,7 +15,7 @@ it("chain", () => {
   ]);
 });
 
-it("clone", () => {
+test("clone", () => {
   const arr1 = [1, 2, 3];
 
   const arr2 = a.clone(arr1);
@@ -25,7 +25,7 @@ it("clone", () => {
   expect(arr2).not.toBeSameAs(arr1);
 });
 
-it("drop", () => {
+test("drop", () => {
   const error = new AssertionError("Invalid index");
 
   expect(() => a.drop([1, 2, 3], -1)).toThrow(error);
@@ -33,7 +33,7 @@ it("drop", () => {
   expect(a.drop([1, 2, 3], 1)).toStrictEqual([1, 3]);
 });
 
-it("findBy", () => {
+test("findBy", () => {
   const arr = [
     { data: "a", id: 1 },
     { data: "b", id: 2 },
@@ -49,16 +49,16 @@ it("findBy", () => {
   expect(a.findBy(arr, { id: 4 }, reduce)).toBeUndefined();
 });
 
-it("first", () => {
+test("first", () => {
   const error = new AssertionError("Invalid index");
 
-  expect(a.first([1, 2, 3])).toStrictEqual(1);
+  expect(a.first([1, 2, 3])).toBe(1);
   expect(a.first([null, 2, 3])).toBeNull();
   expect(a.first([undefined, 2, 3])).toBeUndefined();
   expect(() => a.first([])).toThrow(error);
 });
 
-it("fromIterable", () => {
+test("fromIterable", () => {
   const arr1 = [1, 2, 3];
 
   const arr2 = a.fromIterable(arr1);
@@ -72,22 +72,22 @@ it("fromIterable", () => {
   expect(arr3).not.toBeSameAs(arr1);
 });
 
-it("fromRange", () => {
+test("fromRange", () => {
   expect(a.fromRange(5, 7)).toStrictEqual([5, 6, 7]);
   expect(a.fromRange(5, 7, 2)).toStrictEqual([5, 7]);
   expect(a.fromRange(5, 8, 2)).toStrictEqual([5, 7]);
 });
 
-it("get", () => {
+test("get", () => {
   const error = new AssertionError("Invalid index");
 
-  expect(a.get([1, 2, 3], 1)).toStrictEqual(2);
+  expect(a.get([1, 2, 3], 1)).toBe(2);
   expect(a.get([1, null, 3], 1)).toBeNull();
   expect(a.get([1, undefined, 3], 1)).toBeUndefined();
   expect(() => a.get([], 0)).toThrow(error);
 });
 
-it("includesBy", () => {
+test("includesBy", () => {
   const arr = [
     { data: "a", id: 1 },
     { data: "b", id: 2 },
@@ -101,23 +101,23 @@ it("includesBy", () => {
   expect(a.includesBy(arr, { id: 4 }, reduce)).toBeFalse();
 });
 
-it("last", () => {
+test("last", () => {
   const error = new AssertionError("Invalid index");
 
-  expect(a.last([1, 2, 3])).toStrictEqual(3);
+  expect(a.last([1, 2, 3])).toBe(3);
   expect(a.last([1, 2, null])).toBeNull();
   expect(a.last([1, 2, undefined])).toBeUndefined();
   expect(() => a.last([])).toThrow(error);
 });
 
-it("push", () => {
+test("push", () => {
   const arr = [1, 2, 3];
 
   expect(a.push([1, 2, 3], 4)).toStrictEqual([1, 2, 3, 4]);
   expect(arr).toStrictEqual([1, 2, 3]);
 });
 
-it.each([
+test.each([
   {
     arr: [
       { data: "a", id: 1 },
@@ -149,12 +149,12 @@ it.each([
   expect(a.pushOrReplaceBy(arr, value, "id")).toStrictEqual(expected);
 });
 
-it("random", () => {
+test("random", () => {
   expect(a.random([1, 2, 3])).toBeOneOf([1, 2, 3]);
   expect(() => a.random([])).toThrow(new AssertionError("Invalid index"));
 });
 
-it("removeBy", () => {
+test("removeBy", () => {
   const arr = [
     { data: "a", id: 1 },
     { data: "b", id: 2 },
@@ -171,7 +171,7 @@ it("removeBy", () => {
   expect(a.removeBy(arr, { id: 2 }, reduce)).toStrictEqual(expected);
 });
 
-it("replace", () => {
+test("replace", () => {
   const error = new AssertionError("Invalid index");
 
   expect(() => a.replace(["a", "b", "c"], -1, "d")).toThrow(error);
@@ -179,7 +179,7 @@ it("replace", () => {
   expect(a.replace(["a", "b", "c"], 1, "d")).toStrictEqual(["a", "d", "c"]);
 });
 
-it.each([
+test.each([
   {
     arr: [
       { data: "a", id: 1 },
@@ -210,16 +210,16 @@ it.each([
   expect(a.replaceBy(arr, value, "id")).toStrictEqual(expected);
 });
 
-it("reverse", () => {
+test("reverse", () => {
   expect(a.reverse([1, 2, 3])).toStrictEqual([3, 2, 1]);
 });
 
-it("sort", () => {
+test("sort", () => {
   expect(a.sort([1, 3, 2])).toStrictEqual([1, 2, 3]);
   expect(a.sort([1, 3, 2], (x, y) => y - x)).toStrictEqual([3, 2, 1]);
 });
 
-it.each([
+test.each([
   {
     arr: [
       { data: "a", id: 1 },
@@ -249,14 +249,14 @@ it.each([
   expect(a.toggleBy(arr, value, "id")).toStrictEqual(expected);
 });
 
-it("truncate", () => {
+test("truncate", () => {
   const arr = [1, 2, 3];
 
   a.truncate(arr);
   expect(arr).toStrictEqual([]);
 });
 
-it("uniqueBy", () => {
+test("uniqueBy", () => {
   const arr = [
     { data: "a", id: 1 },
     { data: "b", id: 2 },
@@ -274,7 +274,7 @@ it("uniqueBy", () => {
   expect(a.uniqueBy(arr, reduce)).toStrictEqual(expected);
 });
 
-it("unshift", () => {
+test("unshift", () => {
   const arr = [1, 2, 3];
 
   expect(a.unshift([1, 2, 3], 4)).toStrictEqual([4, 1, 2, 3]);

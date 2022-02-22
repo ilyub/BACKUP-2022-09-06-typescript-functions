@@ -1,7 +1,7 @@
 import * as a from "./array";
 import * as regexp from "./regexp";
 
-export type Eol = "\r\n" | "\n";
+export type Eol = "\n" | "\r\n";
 
 /**
  * Detects EOL sequence.
@@ -129,6 +129,7 @@ export function replaceAll(
   search: string,
   replace: string
 ): string {
+  // eslint-disable-next-line security/detect-non-literal-regexp
   return str.replace(new RegExp(regexp.escapeString(search), "gu"), replace);
 }
 
@@ -149,7 +150,7 @@ export function trailingSpaces(str: string): string {
  * @returns Trimmed string.
  */
 export function trimEnd(str: string): string {
-  return str.replace(/(?<!\s)\s+$/u, "");
+  return str.replace(/(^|\S)\s+$/u, "$1");
 }
 
 /**

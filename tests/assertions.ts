@@ -1,25 +1,39 @@
+/* eslint-disable jest/expect-expect */
+
 import * as assert from "@/assertions";
 import { AssertionError } from "@/errors/AssertionError";
 import * as is from "@/guards";
 import { createValidationObject } from "@/types/core";
 
-type Assertion1<X> = (x: X, error?: assert.ErrorArg) => void;
+interface Assertion1<X> {
+  (x: X, error?: assert.ErrorArg): void;
+}
 
-type Assertion2<X, Y> = (x: X, y: Y, error?: assert.ErrorArg) => void;
+interface Assertion2<X, Y> {
+  (x: X, y: Y, error?: assert.ErrorArg): void;
+}
 
-type Assertion3<X, Y, Z> = (x: X, y: Y, z: Z, error?: assert.ErrorArg) => void;
+interface Assertion3<X, Y, Z> {
+  (x: X, y: Y, z: Z, error?: assert.ErrorArg): void;
+}
 
-type Guard1<X> = (x: X) => boolean;
+interface Guard1<X> {
+  (x: X): boolean;
+}
 
-type Guard2<X, Y> = (x: X, y: Y) => boolean;
+interface Guard2<X, Y> {
+  (x: X, y: Y): boolean;
+}
 
-type Guard3<X, Y, Z> = (x: X, y: Y, z: Z) => boolean;
+interface Guard3<X, Y, Z> {
+  (x: X, y: Y, z: Z): boolean;
+}
 
 class TestClass {
   public value = 1;
 }
 
-type TestEnum = 1 | "a";
+type TestEnum = "a" | 1;
 
 const TestEnumVO = createValidationObject<TestEnum>({ 1: 1, a: "a" });
 
@@ -34,14 +48,14 @@ const testMessage = "Sample error";
 const testObject = { num: 1, str: "a" };
 
 function testAssertion<X>(
-  expected: "pass" | "fail",
+  expected: "fail" | "pass",
   assertion: Assertion1<X>,
   guard: Guard1<X>,
   x: X
 ): void;
 
 function testAssertion<X, Y>(
-  expected: "pass" | "fail",
+  expected: "fail" | "pass",
   assertion: Assertion2<X, Y>,
   guard: Guard2<X, Y>,
   x: X,
@@ -49,7 +63,7 @@ function testAssertion<X, Y>(
 ): void;
 
 function testAssertion<X, Y, Z>(
-  expected: "pass" | "fail",
+  expected: "fail" | "pass",
   assertion: Assertion3<X, Y, Z>,
   guard: Guard3<X, Y, Z>,
   x: X,
@@ -58,7 +72,7 @@ function testAssertion<X, Y, Z>(
 ): void;
 
 function testAssertion(
-  expected: "pass" | "fail",
+  expected: "fail" | "pass",
   assertion: Function,
   guard: Function,
   ...args: unknown[]
@@ -86,7 +100,7 @@ function testAssertion(
   }
 }
 
-it("toErrorArg", () => {
+test("toErrorArg", () => {
   {
     const errorArg = assert.toErrorArg(testError);
 
@@ -101,37 +115,37 @@ it("toErrorArg", () => {
   }
 });
 
-it("not", () => {
+test("not", () => {
   expect(() => assert.not()).toThrow(new Error("Not implemented"));
 });
 
-it("array", () => {
+test("array", () => {
   testAssertion("pass", assert.array, is.array, [1]);
   testAssertion("pass", assert.array, is.array, ["a"]);
   testAssertion("fail", assert.array, is.array, 1);
 });
 
-it("array.of", () => {
+test("array.of", () => {
   testAssertion("pass", assert.array.of, is.array.of, [1], is.number);
   testAssertion("fail", assert.array.of, is.array.of, ["a"], is.number);
   testAssertion("fail", assert.array.of, is.array.of, 1, is.number);
 });
 
-it("boolean", () => {
+test("boolean", () => {
   testAssertion("pass", assert.boolean, is.boolean, true);
   testAssertion("pass", assert.boolean, is.boolean, false);
   testAssertion("fail", assert.boolean, is.boolean, 1);
   testAssertion("fail", assert.boolean, is.boolean, undefined);
 });
 
-it("booleanU", () => {
+test("booleanU", () => {
   testAssertion("pass", assert.booleanU, is.booleanU, true);
   testAssertion("pass", assert.booleanU, is.booleanU, false);
   testAssertion("fail", assert.booleanU, is.booleanU, 1);
   testAssertion("pass", assert.booleanU, is.booleanU, undefined);
 });
 
-it("byGuard", () => {
+test("byGuard", () => {
   testAssertion("pass", assert.byGuard, guard2, true, is.boolean);
   testAssertion("pass", assert.byGuard, guard2, false, is.boolean);
   testAssertion("fail", assert.byGuard, guard2, 1, is.boolean);
@@ -142,31 +156,31 @@ it("byGuard", () => {
   }
 });
 
-it("callable", () => {
+test("callable", () => {
   testAssertion("pass", assert.callable, is.callable, () => true);
   testAssertion("fail", assert.callable, is.callable, 1);
   testAssertion("fail", assert.callable, is.callable, undefined);
 });
 
-it("callableU", () => {
+test("callableU", () => {
   testAssertion("pass", assert.callableU, is.callableU, () => true);
   testAssertion("fail", assert.callableU, is.callableU, 1);
   testAssertion("pass", assert.callableU, is.callableU, undefined);
 });
 
-it("empty", () => {
+test("empty", () => {
   testAssertion("pass", assert.empty, is.empty, null);
   testAssertion("pass", assert.empty, is.empty, undefined);
   testAssertion("fail", assert.empty, is.empty, 1);
 });
 
-it("not.empty", () => {
+test("not.empty", () => {
   testAssertion("fail", assert.not.empty, is.not.empty, null);
   testAssertion("fail", assert.not.empty, is.not.empty, undefined);
   testAssertion("pass", assert.not.empty, is.not.empty, 1);
 });
 
-it("enumeration", () => {
+test("enumeration", () => {
   testAssertion("pass", assert.enumeration, is.enumeration, 1, TestEnumVO);
 
   testAssertion("pass", assert.enumeration, is.enumeration, "a", TestEnumVO);
@@ -182,7 +196,7 @@ it("enumeration", () => {
   );
 });
 
-it("enumerationU", () => {
+test("enumerationU", () => {
   testAssertion("pass", assert.enumerationU, is.enumerationU, 1, TestEnumVO);
 
   testAssertion("pass", assert.enumerationU, is.enumerationU, "a", TestEnumVO);
@@ -198,14 +212,14 @@ it("enumerationU", () => {
   );
 });
 
-it("indexedObject", () => {
+test("indexedObject", () => {
   testAssertion("pass", assert.indexedObject, is.indexedObject, { a: 1 });
   testAssertion("pass", assert.indexedObject, is.indexedObject, { a: "a" });
   testAssertion("fail", assert.indexedObject, is.indexedObject, 1);
   testAssertion("fail", assert.indexedObject, is.indexedObject, null);
 });
 
-it("indexedObject.of", () => {
+test("indexedObject.of", () => {
   testAssertion(
     "pass",
     assert.indexedObject.of,
@@ -239,58 +253,58 @@ it("indexedObject.of", () => {
   );
 });
 
-it("instance", () => {
+test("instance", () => {
   testAssertion("pass", assert.instance, is.instance, testClass, TestClass);
   testAssertion("fail", assert.instance, is.instance, {}, TestClass);
 });
 
-it("instances", () => {
+test("instances", () => {
   testAssertion("pass", assert.instances, is.instances, [testClass], TestClass);
   testAssertion("fail", assert.instances, is.instances, [{}], TestClass);
   testAssertion("fail", assert.instances, is.instances, 1, TestClass);
 });
 
-it("null", () => {
+test("null", () => {
   testAssertion("pass", assert.null, is.null, null);
   testAssertion("fail", assert.null, is.null, undefined);
   testAssertion("fail", assert.null, is.null, 1);
 });
 
-it("not.null", () => {
+test("not.null", () => {
   testAssertion("fail", assert.not.null, is.not.null, null);
   testAssertion("pass", assert.not.null, is.not.null, undefined);
   testAssertion("pass", assert.not.null, is.not.null, 1);
 });
 
-it("numStr", () => {
+test("numStr", () => {
   testAssertion("pass", assert.numStr, is.numStr, 1);
   testAssertion("pass", assert.numStr, is.numStr, "a");
   testAssertion("fail", assert.numStr, is.numStr, true);
   testAssertion("fail", assert.numStr, is.numStr, undefined);
 });
 
-it("numStrU", () => {
+test("numStrU", () => {
   testAssertion("pass", assert.numStrU, is.numStrU, 1);
   testAssertion("pass", assert.numStrU, is.numStrU, "a");
   testAssertion("fail", assert.numStrU, is.numStrU, true);
   testAssertion("pass", assert.numStrU, is.numStrU, undefined);
 });
 
-it("number", () => {
+test("number", () => {
   testAssertion("pass", assert.number, is.number, 1);
   testAssertion("fail", assert.number, is.number, "a");
   testAssertion("fail", assert.number, is.number, true);
   testAssertion("fail", assert.number, is.number, undefined);
 });
 
-it("numberU", () => {
+test("numberU", () => {
   testAssertion("pass", assert.numberU, is.numberU, 1);
   testAssertion("fail", assert.numberU, is.numberU, "a");
   testAssertion("fail", assert.numberU, is.numberU, true);
   testAssertion("pass", assert.numberU, is.numberU, undefined);
 });
 
-it("object", () => {
+test("object", () => {
   testAssertion("pass", assert.object, is.object, testObject);
   testAssertion("pass", assert.object, is.object, {});
   testAssertion("fail", assert.object, is.object, 1);
@@ -298,7 +312,7 @@ it("object", () => {
   testAssertion("fail", assert.object, is.object, undefined);
 });
 
-it("object.of", () => {
+test("object.of", () => {
   testAssertion(
     "pass",
     assert.object.of,
@@ -345,7 +359,7 @@ it("object.of", () => {
   );
 });
 
-it("objectU", () => {
+test("objectU", () => {
   testAssertion("pass", assert.objectU, is.objectU, testObject);
   testAssertion("pass", assert.objectU, is.objectU, {});
   testAssertion("fail", assert.objectU, is.objectU, 1);
@@ -353,21 +367,21 @@ it("objectU", () => {
   testAssertion("pass", assert.objectU, is.objectU, undefined);
 });
 
-it("string", () => {
+test("string", () => {
   testAssertion("pass", assert.string, is.string, "a");
   testAssertion("pass", assert.string, is.string, "");
   testAssertion("fail", assert.string, is.string, 1);
   testAssertion("fail", assert.string, is.string, undefined);
 });
 
-it("stringU", () => {
+test("stringU", () => {
   testAssertion("pass", assert.stringU, is.stringU, "a");
   testAssertion("fail", assert.stringU, is.stringU, "");
   testAssertion("fail", assert.stringU, is.stringU, 1);
   testAssertion("pass", assert.stringU, is.stringU, undefined);
 });
 
-it("toBeFalse", () => {
+test("toBeFalse", () => {
   expect(() => {
     assert.toBeFalse(false);
   }).not.toThrow();
@@ -385,7 +399,7 @@ it("toBeFalse", () => {
   }).toThrow(testError);
 });
 
-it("toBeTrue", () => {
+test("toBeTrue", () => {
   expect(() => {
     assert.toBeTrue(true);
   }).not.toThrow();
@@ -403,13 +417,13 @@ it("toBeTrue", () => {
   }).toThrow(testError);
 });
 
-it("undefined", () => {
+test("undefined", () => {
   testAssertion("pass", assert.undefined, is.undefined, undefined);
   testAssertion("fail", assert.undefined, is.undefined, null);
   testAssertion("fail", assert.undefined, is.undefined, 1);
 });
 
-it("not.undefined", () => {
+test("not.undefined", () => {
   testAssertion("fail", assert.not.undefined, is.not.undefined, undefined);
   testAssertion("pass", assert.not.undefined, is.not.undefined, null);
   testAssertion("pass", assert.not.undefined, is.not.undefined, 1);

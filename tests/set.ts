@@ -1,6 +1,6 @@
 import * as set from "@/set";
 
-it("delete", () => {
+test("delete", () => {
   const source: ReadonlySet<number> = new Set([1, 2]);
 
   const expected: ReadonlySet<number> = new Set([1]);
@@ -8,7 +8,7 @@ it("delete", () => {
   expect(set.delete(source, 2)).toStrictEqual(expected);
 });
 
-it("set", () => {
+test("set", () => {
   const source: ReadonlySet<number> = new Set([1]);
 
   const expected: ReadonlySet<number> = new Set([1, 2]);

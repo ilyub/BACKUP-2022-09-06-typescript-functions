@@ -8,11 +8,11 @@ const mk3 = Symbol("SampleMetadataKey3");
 
 const pk1 = Symbol("SamplePropertyKey1");
 
-it("apply", () => {
+test("apply", () => {
   expect(reflect.apply(() => true, undefined, [])).toBeTrue();
 });
 
-it("construct", () => {
+test("construct", () => {
   class C {
     public value = 1;
   }
@@ -21,46 +21,46 @@ it("construct", () => {
   expect(reflect.construct(C, [], C)).toStrictEqual(new C());
 });
 
-it("defineMetadata", () => {
+test("defineMetadata", () => {
   const obj = {};
 
   {
     reflect.defineMetadata("mk1", 1, obj);
-    expect(reflect.getOwnMetadata("mk1", obj)).toStrictEqual(1);
+    expect(reflect.getOwnMetadata("mk1", obj)).toBe(1);
     expect(reflect.getOwnMetadata("mk2", obj)).toBeUndefined();
   }
 
   {
     reflect.defineMetadata(mk1, 1, obj);
-    expect(reflect.getOwnMetadata(mk1, obj)).toStrictEqual(1);
+    expect(reflect.getOwnMetadata(mk1, obj)).toBe(1);
     expect(reflect.getOwnMetadata(mk2, obj)).toBeUndefined();
   }
 });
 
-it("defineMetadataKey", () => {
+test("defineMetadataKey", () => {
   const obj = {};
 
   {
     reflect.defineMetadataKey("mk1", 1, obj, pk1);
-    expect(reflect.getOwnMetadataKey("mk1", obj, pk1)).toStrictEqual(1);
+    expect(reflect.getOwnMetadataKey("mk1", obj, pk1)).toBe(1);
     expect(reflect.getOwnMetadataKey("mk2", obj, pk1)).toBeUndefined();
   }
 
   {
     reflect.defineMetadataKey(mk1, 1, obj, "pk1");
-    expect(reflect.getOwnMetadataKey(mk1, obj, "pk1")).toStrictEqual(1);
+    expect(reflect.getOwnMetadataKey(mk1, obj, "pk1")).toBe(1);
     expect(reflect.getOwnMetadataKey(mk2, obj, "pk1")).toBeUndefined();
   }
 });
 
-it("get", () => {
+test("get", () => {
   const obj = { pk1: 1, [pk1]: 2 };
 
-  expect(reflect.get(obj, "pk1")).toStrictEqual(1);
-  expect(reflect.get(obj, pk1)).toStrictEqual(2);
+  expect(reflect.get(obj, "pk1")).toBe(1);
+  expect(reflect.get(obj, pk1)).toBe(2);
 });
 
-it("getMetadata", () => {
+test("getMetadata", () => {
   class TestClass {
     public value = 1;
   }
@@ -70,19 +70,19 @@ it("getMetadata", () => {
   {
     reflect.defineMetadata("mk1", 1, TestClass.prototype);
     reflect.defineMetadata("mk2", 2, obj);
-    expect(reflect.getMetadata("mk1", obj)).toStrictEqual(1);
-    expect(reflect.getMetadata("mk2", obj)).toStrictEqual(2);
+    expect(reflect.getMetadata("mk1", obj)).toBe(1);
+    expect(reflect.getMetadata("mk2", obj)).toBe(2);
   }
 
   {
     reflect.defineMetadata(mk1, 1, TestClass.prototype);
     reflect.defineMetadata(mk2, 2, obj);
-    expect(reflect.getMetadata(mk1, obj)).toStrictEqual(1);
-    expect(reflect.getMetadata(mk2, obj)).toStrictEqual(2);
+    expect(reflect.getMetadata(mk1, obj)).toBe(1);
+    expect(reflect.getMetadata(mk2, obj)).toBe(2);
   }
 });
 
-it("getMetadataKey", () => {
+test("getMetadataKey", () => {
   class TestClass {
     public value = 1;
   }
@@ -92,19 +92,19 @@ it("getMetadataKey", () => {
   {
     reflect.defineMetadataKey("mk1", 1, TestClass.prototype, pk1);
     reflect.defineMetadataKey("mk2", 2, obj, pk1);
-    expect(reflect.getMetadataKey("mk1", obj, pk1)).toStrictEqual(1);
-    expect(reflect.getMetadataKey("mk2", obj, pk1)).toStrictEqual(2);
+    expect(reflect.getMetadataKey("mk1", obj, pk1)).toBe(1);
+    expect(reflect.getMetadataKey("mk2", obj, pk1)).toBe(2);
   }
 
   {
     reflect.defineMetadataKey(mk1, 1, TestClass.prototype, "pk1");
     reflect.defineMetadataKey(mk2, 2, obj, "pk1");
-    expect(reflect.getMetadataKey(mk1, obj, "pk1")).toStrictEqual(1);
-    expect(reflect.getMetadataKey(mk2, obj, "pk1")).toStrictEqual(2);
+    expect(reflect.getMetadataKey(mk1, obj, "pk1")).toBe(1);
+    expect(reflect.getMetadataKey(mk2, obj, "pk1")).toBe(2);
   }
 });
 
-it("getOwnMetadata", () => {
+test("getOwnMetadata", () => {
   class TestClass {
     public value = 1;
   }
@@ -115,18 +115,18 @@ it("getOwnMetadata", () => {
     reflect.defineMetadata("mk1", 1, TestClass.prototype);
     reflect.defineMetadata("mk2", 2, obj);
     expect(reflect.getOwnMetadata("mk1", obj)).toBeUndefined();
-    expect(reflect.getOwnMetadata("mk2", obj)).toStrictEqual(2);
+    expect(reflect.getOwnMetadata("mk2", obj)).toBe(2);
   }
 
   {
     reflect.defineMetadata(mk1, 1, TestClass.prototype);
     reflect.defineMetadata(mk2, 2, obj);
     expect(reflect.getOwnMetadata(mk1, obj)).toBeUndefined();
-    expect(reflect.getOwnMetadata(mk2, obj)).toStrictEqual(2);
+    expect(reflect.getOwnMetadata(mk2, obj)).toBe(2);
   }
 });
 
-it("getOwnMetadataKey", () => {
+test("getOwnMetadataKey", () => {
   class TestClass {
     public value = 1;
   }
@@ -137,18 +137,18 @@ it("getOwnMetadataKey", () => {
     reflect.defineMetadataKey("mk1", 1, TestClass.prototype, pk1);
     reflect.defineMetadataKey("mk2", 2, obj, pk1);
     expect(reflect.getOwnMetadataKey("mk1", obj, pk1)).toBeUndefined();
-    expect(reflect.getOwnMetadataKey("mk2", obj, pk1)).toStrictEqual(2);
+    expect(reflect.getOwnMetadataKey("mk2", obj, pk1)).toBe(2);
   }
 
   {
     reflect.defineMetadataKey(mk1, 1, TestClass.prototype, "pk1");
     reflect.defineMetadataKey(mk2, 2, obj, "pk1");
     expect(reflect.getOwnMetadataKey(mk1, obj, "pk1")).toBeUndefined();
-    expect(reflect.getOwnMetadataKey(mk2, obj, "pk1")).toStrictEqual(2);
+    expect(reflect.getOwnMetadataKey(mk2, obj, "pk1")).toBe(2);
   }
 });
 
-it("hasMetadata", () => {
+test("hasMetadata", () => {
   class TestClass {
     public value = 1;
   }
@@ -172,7 +172,7 @@ it("hasMetadata", () => {
   }
 });
 
-it("hasMetadataKey", () => {
+test("hasMetadataKey", () => {
   class TestClass {
     public value = 1;
   }
@@ -196,7 +196,7 @@ it("hasMetadataKey", () => {
   }
 });
 
-it("hasOwnMetadata", () => {
+test("hasOwnMetadata", () => {
   class TestClass {
     public value = 1;
   }
@@ -220,7 +220,7 @@ it("hasOwnMetadata", () => {
   }
 });
 
-it("hasOwnMetadataKey", () => {
+test("hasOwnMetadataKey", () => {
   class TestClass {
     public value = 1;
   }
