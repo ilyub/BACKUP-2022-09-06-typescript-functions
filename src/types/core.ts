@@ -7,6 +7,8 @@ import type { ReadonlyKeys } from "ts-toolbelt/out/Object/ReadonlyKeys";
 import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 import type { WritableKeys } from "ts-toolbelt/out/Object/WritableKeys";
 
+export type { CamelCase, KebabCase } from "type-fest";
+
 export type AddPrefix<T extends string, P extends string> = `${P}${T}`;
 
 export type ArrayElement<T> = T extends Array<infer R> ? R : unknown;
@@ -115,6 +117,8 @@ export type PartialRecord<K extends PropertyKey, T> = Partial<Record<K, T>>;
 export type PromiseAsync<T> = Async<T> | Promise<T>;
 
 export type PromiseAsyncSync<T> = Async<T> | Promise<T> | Sync<T>;
+
+export type PropertyKeys = readonly PropertyKey[];
 
 export type ReadonlyArrayElement<T> = T extends ReadonlyArray<infer R>
   ? R
