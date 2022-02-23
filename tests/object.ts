@@ -1,3 +1,4 @@
+import * as is from "@/guards";
 import * as o from "@/object";
 
 test("assign", () => {
@@ -46,6 +47,11 @@ test("entries", () => {
 
   expect(o.entries(obj)).toStrictEqual(expected);
   expect(o.entries(obj)).toStrictEqual(expected);
+});
+
+test("every", () => {
+  expect(o.every({ a: 1, b: 2 }, is.number)).toBeTrue();
+  expect(o.every({ a: 1, b: "a" }, is.number)).toBeFalse();
 });
 
 test("extend", () => {
@@ -181,6 +187,11 @@ test("size", () => {
   const obj = { a: 1, b: 2, c: 3, [symbol]: 4 };
 
   expect(o.size(obj)).toBe(3);
+});
+
+test("some", () => {
+  expect(o.some({ a: 1, b: "a" }, is.string)).toBeTrue();
+  expect(o.some({ a: 1, b: 2 }, is.string)).toBeFalse();
 });
 
 test("sort", () => {

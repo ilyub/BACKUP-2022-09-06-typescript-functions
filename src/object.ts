@@ -12,6 +12,7 @@ import type {
   ReadonlyIndexedObject,
   ReadonlyRecord,
   StrictOmit,
+  unknowns,
   WithOptionalKeys,
   WithUndeclaredKeys,
   Writable
@@ -44,12 +45,25 @@ export interface Descriptor<T extends object = object> {
  * @param sources - Sources.
  * @returns Target.
  */
+export function assign<T extends object>(
+  mutableTarget: T,
+  ...sources: Array<Partial<T>>
+): T;
+
+/**
+ * Typed version of Object.assign.
+ *
+ * @param mutableTarget - Target object.
+ * @param sources - Sources.
+ * @returns Target.
+ */
 export function assign<T extends object, K extends keyof T>(
   mutableTarget: T,
   ...sources: Array<{ readonly [L in K]: T[L] }>
-): T {
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
-  return Object.assign(mutableTarget, ...sources) as T;
+): T;
+
+export function assign(mutableTarget: object, ...sources: unknowns): unknown {
+  return Object.assign(mutableTarget, ...sources);
 }
 
 /**
@@ -91,6 +105,37 @@ function getEntries<T extends object>(
 }
 
 export { getEntries as entries };
+
+/**
+ * Checks that every object property satisfies condition.
+ *
+ * @param obj - Object.
+ * @param callback - Callback.
+ * @returns _True_ if every object property satisfies condition, _false_ otherwise.
+ */
+export function every<K extends PropertyKey, S, D extends S>(
+  obj: ReadonlyRecord<K, S>,
+  callback: (value: S, key: K) => value is D
+): obj is ReadonlyRecord<K, D>;
+
+/**
+ * Checks that every object property satisfies condition.
+ *
+ * @param obj - Object.
+ * @param callback - Callback.
+ * @returns _True_ if every object property satisfies condition, _false_ otherwise.
+ */
+export function every<K extends PropertyKey, V>(
+  obj: ReadonlyRecord<K, V>,
+  callback: (value: V, key: K) => boolean
+): boolean;
+
+export function every<K extends PropertyKey, V>(
+  obj: ReadonlyRecord<K, V>,
+  callback: (value: V, key: K) => boolean
+): boolean {
+  return getEntries(obj).every(([key, value]) => callback(value, key));
+}
 
 /**
  * Typed version of Object.assign.
@@ -329,6 +374,37 @@ export function removeUndefinedKeys(obj: object): object {
  */
 export function size(obj: object): number {
   return Object.keys(obj).length;
+}
+
+/**
+ * Checks that some object property satisfies condition.
+ *
+ * @param obj - Object.
+ * @param callback - Callback.
+ * @returns _True_ if some object property satisfies condition, _false_ otherwise.
+ */
+export function some<K extends PropertyKey, S, D extends S>(
+  obj: ReadonlyRecord<K, S>,
+  callback: (value: S, key: K) => value is D
+): obj is ReadonlyRecord<K, D>;
+
+/**
+ * Checks that some object property satisfies condition.
+ *
+ * @param obj - Object.
+ * @param callback - Callback.
+ * @returns _True_ if some object property satisfies condition, _false_ otherwise.
+ */
+export function some<K extends PropertyKey, V>(
+  obj: ReadonlyRecord<K, V>,
+  callback: (value: V, key: K) => boolean
+): boolean;
+
+export function some<K extends PropertyKey, V>(
+  obj: ReadonlyRecord<K, V>,
+  callback: (value: V, key: K) => boolean
+): boolean {
+  return getEntries(obj).some(([key, value]) => callback(value, key));
 }
 
 /**
