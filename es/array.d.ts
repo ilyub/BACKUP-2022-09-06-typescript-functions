@@ -1,5 +1,13 @@
 import type { IterableLike } from "./types/core";
-export declare type ReduceForComparison<T extends object> = (obj: T) => unknown;
+export interface ReduceForComparison<T extends object> {
+    /**
+     * Reduces object for comparison.
+     *
+     * @param obj - Object.
+     * @returns Reduced value.
+     */
+    (obj: T): unknown;
+}
 /**
  * Creates an array of pairs [x1, x2], [x2, x3]...
  *
@@ -83,6 +91,13 @@ export declare function fromIterable<T>(iterable: IterableLike<T>): T[];
  * @returns Array of numbers.
  */
 export declare function fromRange(from: number, to: number, step?: number): number[];
+/**
+ * Creates array from string.
+ *
+ * @param str - String.
+ * @returns Array.
+ */
+export declare function fromString(str: string): string[];
 /**
  * Gets element by index.
  *

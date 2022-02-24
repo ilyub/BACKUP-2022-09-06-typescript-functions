@@ -4,9 +4,13 @@
 
 ## Table of contents
 
-### Type aliases
+### Interfaces
 
-- [PipeCallback](function.md#pipecallback)
+- [PipeCallback](../interfaces/function.PipeCallback.md)
+
+### Variables
+
+- [noop](function.md#noop)
 
 ### Functions
 
@@ -14,38 +18,17 @@
 - [pipe](function.md#pipe)
 - [run](function.md#run)
 
-## Type aliases
+## Variables
 
-### PipeCallback
+### noop
 
-Ƭ **PipeCallback**<`V`, `R`\>: (`value`: `V`) => `R`
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `V` | `unknown` |
-| `R` | `unknown` |
-
-#### Type declaration
-
-▸ (`value`): `R`
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `value` | `V` |
-
-##### Returns
-
-`R`
+• `Const` **noop**: `Function`
 
 ## Functions
 
 ### doNotRunParallel
 
-▸ **doNotRunParallel**<`T`\>(`async`): [`Async`](types_core.md#async)<`void`, `T`\>
+▸ **doNotRunParallel**<`T`\>(`async`): [`Async`](../interfaces/types_core.Async.md)<`void`, `T`\>
 
 Prevents parallel running.
 
@@ -59,11 +42,11 @@ Prevents parallel running.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `async` | [`Async`](types_core.md#async)<`void`, `T`\> | Async function. |
+| `async` | [`Async`](../interfaces/types_core.Async.md)<`void`, `T`\> | Async function. |
 
 #### Returns
 
-[`Async`](types_core.md#async)<`void`, `T`\>
+[`Async`](../interfaces/types_core.Async.md)<`void`, `T`\>
 
 Wrapped async function.
 
@@ -88,8 +71,8 @@ Applies callbacks to the value.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `A` | Value. |
-| `callback1` | [`PipeCallback`](function.md#pipecallback)<`A`, `B`\> | Callback 1. |
-| `callback2` | [`PipeCallback`](function.md#pipecallback)<`B`, `C`\> | Callback 2. |
+| `callback1` | [`PipeCallback`](../interfaces/function.PipeCallback.md)<`A`, `B`\> | Callback 1. |
+| `callback2` | [`PipeCallback`](../interfaces/function.PipeCallback.md)<`B`, `C`\> | Callback 2. |
 
 #### Returns
 
@@ -115,9 +98,9 @@ Applies callbacks to the value.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `A` | Value. |
-| `callback1` | [`PipeCallback`](function.md#pipecallback)<`A`, `B`\> | Callback 1. |
-| `callback2` | [`PipeCallback`](function.md#pipecallback)<`B`, `C`\> | Callback 2. |
-| `callback3` | [`PipeCallback`](function.md#pipecallback)<`C`, `D`\> | Callback 3. |
+| `callback1` | [`PipeCallback`](../interfaces/function.PipeCallback.md)<`A`, `B`\> | Callback 1. |
+| `callback2` | [`PipeCallback`](../interfaces/function.PipeCallback.md)<`B`, `C`\> | Callback 2. |
+| `callback3` | [`PipeCallback`](../interfaces/function.PipeCallback.md)<`C`, `D`\> | Callback 3. |
 
 #### Returns
 
@@ -143,7 +126,7 @@ Executes callback.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `callback` | [`Sync`](types_core.md#sync)<`T`, `never`[]\> | Callback. |
+| `callback` | [`Sync`](../interfaces/types_core.Sync.md)<`T`, [`nevers`](types_core.md#nevers)\> | Callback. |
 
 #### Returns
 

@@ -29,7 +29,7 @@ Asserts that value type is T[].
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard` | [`Guard`](guards.md#guard)<`T`\> | Guard for type T. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
 | `error?` | [`ErrorArg`](assertions.md#errorarg) | Error to be thrown. |
 
 #### Returns

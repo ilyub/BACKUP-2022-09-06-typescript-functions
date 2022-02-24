@@ -1,10 +1,35 @@
 import type * as types from "./types/core";
-export declare type ExclusiveGuard<T> = <V>(value: V) => value is Exclude<V, T>;
-export declare type Guard<T = unknown> = (value: unknown) => value is T;
+export interface ExclusiveGuard<T> {
+    /**
+     * Checks that value type is not T.
+     *
+     * @param value - Value.
+     * @returns _True_ if value type is not T, _false_ otherwise.
+     */
+    <V>(value: V): value is Exclude<V, T>;
+}
+export interface Guard<T = unknown> {
+    /**
+     * Checks that value type is T.
+     *
+     * @param value - Value.
+     * @returns _True_ if value type is T, _false_ otherwise.
+     */
+    (value: unknown): value is T;
+}
 export declare type Guards<T> = {
     readonly [K in keyof T]: Guard<T[K]>;
 };
-export declare type MultiArgGuard<T, A extends unknown[]> = (value: unknown, ...args: A) => value is T;
+export interface MultiArgGuard<T, A extends unknown[]> {
+    /**
+     * Checks that value type is T.
+     *
+     * @param value - Value.
+     * @param args - Arguments.
+     * @returns _True_ if value type is T, _false_ otherwise.
+     */
+    (value: unknown, ...args: A): value is T;
+}
 /**
  * Creates single-arg guard.
  *
@@ -355,7 +380,7 @@ export declare const objectsU: Guard<readonly object[] | undefined>;
  * @param optionalGuards - Guards for optional properties.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-export declare function objectOf<A, B>(value: unknown, requiredGuards: Guards<A>, optionalGuards: Guards<B>): value is Required<A> & Partial<B>;
+export declare function objectOf<A, B>(value: unknown, requiredGuards: Guards<A>, optionalGuards: Guards<B>): value is Partial<B> & Required<A>;
 /**
  * Checks that value type is objectU.
  *

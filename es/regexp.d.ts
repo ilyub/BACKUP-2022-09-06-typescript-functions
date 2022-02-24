@@ -1,5 +1,13 @@
 import type { stringU } from "./types/core";
 /**
+ * Adds flag to regular expression.
+ *
+ * @param re - Regular expression.
+ * @param flags - Flags.
+ * @returns New regular expression.
+ */
+export declare function addFlags(re: RegExp, flags: string): RegExp;
+/**
  * Escapes regular expression special characters.
  *
  * @param str - String.

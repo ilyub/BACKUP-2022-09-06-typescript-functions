@@ -14,17 +14,13 @@
 
 - [Descriptor](../interfaces/object.Descriptor.md)
 
-### Type aliases
-
-- [FilterCallback](object.md#filtercallback)
-- [MapCallback](object.md#mapcallback)
-
 ### Functions
 
 - [assign](object.md#assign)
 - [clone](object.md#clone)
 - [defineProperty](object.md#defineproperty)
 - [entries](object.md#entries)
+- [every](object.md#every)
 - [extend](object.md#extend)
 - [filter](object.md#filter)
 - [freeze](object.md#freeze)
@@ -38,16 +34,19 @@
 - [omit](object.md#omit)
 - [removeUndefinedKeys](object.md#removeundefinedkeys)
 - [size](object.md#size)
+- [some](object.md#some)
 - [sort](object.md#sort)
 - [unfreeze](object.md#unfreeze)
 - [unfreezeDeep](object.md#unfreezedeep)
 - [values](object.md#values)
 
-## Type aliases
+## Functions
 
-### FilterCallback
+### assign
 
-Ƭ **FilterCallback**<`T`\>: (`value`: `T`[keyof `T`], `key`: keyof `T`) => `boolean`
+▸ **assign**<`T`\>(`mutableTarget`, ...`sources`): `T`
+
+Typed version of Object.assign.
 
 #### Type parameters
 
@@ -55,52 +54,18 @@
 | :------ | :------ |
 | `T` | extends `object` |
 
-#### Type declaration
+#### Parameters
 
-▸ (`value`, `key`): `boolean`
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `mutableTarget` | `T` | Target object. |
+| `...sources` | `Partial`<`T`\>[] | Sources. |
 
-##### Parameters
+#### Returns
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `T`[keyof `T`] |
-| `key` | keyof `T` |
+`T`
 
-##### Returns
-
-`boolean`
-
-___
-
-### MapCallback
-
-Ƭ **MapCallback**<`V`, `R`\>: (`value`: `V`, `key`: `string`) => `R`
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `V` |
-| `R` |
-
-#### Type declaration
-
-▸ (`value`, `key`): `R`
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `value` | `V` |
-| `key` | `string` |
-
-##### Returns
-
-`R`
-
-## Functions
-
-### assign
+Target.
 
 ▸ **assign**<`T`, `K`\>(`mutableTarget`, ...`sources`): `T`
 
@@ -206,9 +171,62 @@ Object entries.
 
 ___
 
+### every
+
+▸ **every**<`K`, `S`, `D`\>(`obj`, `callback`): obj is Readonly<Record<K, D\>\>
+
+Checks that every object property satisfies condition.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `S` | `S` |
+| `D` | `D` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | `Readonly`<`Record`<`K`, `S`\>\> | Object. |
+| `callback` | (`value`: `S`, `key`: `K`) => value is D | Callback. |
+
+#### Returns
+
+obj is Readonly<Record<K, D\>\>
+
+_True_ if every object property satisfies condition, _false_ otherwise.
+
+▸ **every**<`K`, `V`\>(`obj`, `callback`): `boolean`
+
+Checks that every object property satisfies condition.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `V` | `V` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | `Readonly`<`Record`<`K`, `V`\>\> | Object. |
+| `callback` | (`value`: `V`, `key`: `K`) => `boolean` | Callback. |
+
+#### Returns
+
+`boolean`
+
+_True_ if every object property satisfies condition, _false_ otherwise.
+
+___
+
 ### extend
 
-▸ **extend**<`T`, `A`\>(`target`, `source`): `T` & `A`
+▸ **extend**<`T`, `A`\>(`target`, `source`): `A` & `T`
 
 Typed version of Object.assign.
 
@@ -228,11 +246,11 @@ Typed version of Object.assign.
 
 #### Returns
 
-`T` & `A`
+`A` & `T`
 
 Target.
 
-▸ **extend**<`T`, `A`, `B`\>(`target`, `source1`, `source2`): `T` & `A` & `B`
+▸ **extend**<`T`, `A`, `B`\>(`target`, `source1`, `source2`): `A` & `B` & `T`
 
 Typed version of Object.assign.
 
@@ -254,11 +272,11 @@ Typed version of Object.assign.
 
 #### Returns
 
-`T` & `A` & `B`
+`A` & `B` & `T`
 
 Target.
 
-▸ **extend**<`T`, `A`, `B`, `C`\>(`target`, `source1`, `source2`, `source3`): `T` & `A` & `B` & `C`
+▸ **extend**<`T`, `A`, `B`, `C`\>(`target`, `source1`, `source2`, `source3`): `A` & `B` & `C` & `T`
 
 Typed version of Object.assign.
 
@@ -282,7 +300,7 @@ Typed version of Object.assign.
 
 #### Returns
 
-`T` & `A` & `B` & `C`
+`A` & `B` & `C` & `T`
 
 Target.
 
@@ -305,7 +323,7 @@ Filters object by callback.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `obj` | `T` | Object. |
-| `callback` | [`FilterCallback`](object.md#filtercallback)<`T`\> | Callback. |
+| `callback` | (`value`: `T`[keyof `T`], `key`: keyof `T`) => `boolean` | Callback. |
 
 #### Returns
 
@@ -479,7 +497,7 @@ Applies callback to each property.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `obj` | `Readonly`<`Record`<`string`, `V`\>\> | Object. |
-| `callback` | [`MapCallback`](object.md#mapcallback)<`V`, `R`\> | Callback. |
+| `callback` | (`value`: `V`, `key`: `string`) => `R` | Callback. |
 
 #### Returns
 
@@ -603,6 +621,59 @@ Returns the number of enumerable properties.
 `number`
 
 The number of enumerable properties.
+
+___
+
+### some
+
+▸ **some**<`K`, `S`, `D`\>(`obj`, `callback`): obj is Readonly<Record<K, D\>\>
+
+Checks that some object property satisfies condition.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `S` | `S` |
+| `D` | `D` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | `Readonly`<`Record`<`K`, `S`\>\> | Object. |
+| `callback` | (`value`: `S`, `key`: `K`) => value is D | Callback. |
+
+#### Returns
+
+obj is Readonly<Record<K, D\>\>
+
+_True_ if some object property satisfies condition, _false_ otherwise.
+
+▸ **some**<`K`, `V`\>(`obj`, `callback`): `boolean`
+
+Checks that some object property satisfies condition.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `V` | `V` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | `Readonly`<`Record`<`K`, `V`\>\> | Object. |
+| `callback` | (`value`: `V`, `key`: `K`) => `boolean` | Callback. |
+
+#### Returns
+
+`boolean`
+
+_True_ if some object property satisfies condition, _false_ otherwise.
 
 ___
 

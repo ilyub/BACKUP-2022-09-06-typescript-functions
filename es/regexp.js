@@ -1,5 +1,18 @@
 import * as a from "./array";
 import * as assert from "./assertions";
+import * as s from "./string";
+/**
+ * Adds flag to regular expression.
+ *
+ * @param re - Regular expression.
+ * @param flags - Flags.
+ * @returns New regular expression.
+ */
+export function addFlags(re, flags) {
+    flags = s.filter(flags, flag => !re.flags.includes(flag));
+    // eslint-disable-next-line security/detect-non-literal-regexp
+    return flags ? new RegExp(re, re.flags + flags) : re;
+}
 /**
  * Escapes regular expression special characters.
  *
@@ -17,11 +30,7 @@ export function escapeString(str) {
  * @returns Matches.
  */
 export function matchAll(str, re) {
-    if (re.flags.includes("g")) {
-        // Already has global flag
-    }
-    else
-        re = new RegExp(re, `${re.flags}g`);
+    re = addFlags(re, "g");
     return a.fromIterable(function* () {
         let match = re.exec(str);
         while (match) {

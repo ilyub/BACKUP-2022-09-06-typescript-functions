@@ -4,9 +4,9 @@
 
 ## Table of contents
 
-### Type aliases
+### Interfaces
 
-- [ReduceForComparison](array.md#reduceforcomparison)
+- [ReduceForComparison](../interfaces/array.ReduceForComparison.md)
 
 ### Functions
 
@@ -17,6 +17,7 @@
 - [first](array.md#first)
 - [fromIterable](array.md#fromiterable)
 - [fromRange](array.md#fromrange)
+- [fromString](array.md#fromstring)
 - [get](array.md#get)
 - [includesBy](array.md#includesby)
 - [last](array.md#last)
@@ -32,32 +33,6 @@
 - [truncate](array.md#truncate)
 - [uniqueBy](array.md#uniqueby)
 - [unshift](array.md#unshift)
-
-## Type aliases
-
-### ReduceForComparison
-
-Ƭ **ReduceForComparison**<`T`\>: (`obj`: `T`) => `unknown`
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
-
-#### Type declaration
-
-▸ (`obj`): `unknown`
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `obj` | `T` |
-
-##### Returns
-
-`unknown`
 
 ## Functions
 
@@ -252,7 +227,7 @@ Finds element matching value.
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
 | `value` | `object` | Value for comparison. |
-| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](array.md#reduceforcomparison)<`object`\> | Comparison key or reduce function. |
+| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](../interfaces/array.ReduceForComparison.md)<`object`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -338,6 +313,26 @@ Array of numbers.
 
 ___
 
+### fromString
+
+▸ **fromString**(`str`): `string`[]
+
+Creates array from string.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `str` | `string` | String. |
+
+#### Returns
+
+`string`[]
+
+Array.
+
+___
+
 ### get
 
 ▸ **get**<`T`\>(`arr`, `index`): `T`
@@ -385,7 +380,7 @@ Checks that array contains element matching value.
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
 | `value` | `object` | Value for comparison. |
-| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](array.md#reduceforcomparison)<`object`\> | Comparison key or reduce function. |
+| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](../interfaces/array.ReduceForComparison.md)<`object`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -468,7 +463,7 @@ Pushes value or replaces elements matching value if found.
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
 | `value` | `T` | Value. |
-| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](array.md#reduceforcomparison)<`object`\> | Comparison key or reduce function. |
+| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](../interfaces/array.ReduceForComparison.md)<`object`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -522,7 +517,7 @@ Removes elements matching value.
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
 | `value` | `object` | Value for comparison. |
-| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](array.md#reduceforcomparison)<`object`\> | Comparison key or reduce function. |
+| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](../interfaces/array.ReduceForComparison.md)<`object`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -578,7 +573,7 @@ Replaces elements matching value.
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
 | `value` | `T` | New value. |
-| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](array.md#reduceforcomparison)<`object`\> | Comparison key or reduce function. |
+| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](../interfaces/array.ReduceForComparison.md)<`object`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -659,7 +654,7 @@ Adds/removes value to/from an array.
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
 | `value` | `T` | Value. |
-| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](array.md#reduceforcomparison)<`object`\> | Comparison key or reduce function. |
+| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](../interfaces/array.ReduceForComparison.md)<`object`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -704,7 +699,7 @@ Creates an array of unique elements.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
-| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](array.md#reduceforcomparison)<`T`\> | Comparison key or reduce function. |
+| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](../interfaces/array.ReduceForComparison.md)<`T`\> | Comparison key or reduce function. |
 
 #### Returns
 

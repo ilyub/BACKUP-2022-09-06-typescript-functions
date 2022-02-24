@@ -22,6 +22,7 @@ export function doNotRunParallel(async) {
         }
     };
 }
+export const noop = () => { };
 export function pipe(value, ...callbacks) {
     for (const callback of callbacks)
         value = callback(value);

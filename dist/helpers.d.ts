@@ -1,15 +1,15 @@
 import * as is from "./guards";
 import type { Join2 } from "./types/core";
-export declare type Facade<F, E = unknown> = F & FacadeOwnMethods<F> & E;
-export interface FacadeOwnMethods<F> {
+export declare type Facade<I, E = unknown> = E & FacadeOwnMethods<I> & I;
+export interface FacadeOwnMethods<I> {
     /**
      * Sets implementation.
      *
      * @param implementation - Implementation.
      */
-    readonly setImplementation: (implementation: F) => void;
+    readonly setImplementation: (implementation: I) => void;
 }
-export declare type SafeAccess<T extends object, W extends keyof T, R extends keyof T> = Join2<{
+export declare type SafeAccess<T extends object, W extends string & keyof T, R extends string & keyof T> = Join2<{
     [K in W]: T[K];
 }, {
     readonly [K in R]: T[K];
@@ -24,7 +24,7 @@ export declare type SafeAccessGuards<T, W extends keyof T> = {
  * @param extension - Facade extension.
  * @returns Facade.
  */
-export declare function createFacade<F extends object, E = unknown>(name: string, extension: E): Facade<F, E>;
+export declare function createFacade<I extends object, E = unknown>(name: string, extension: E): Facade<I, E>;
 /**
  * Delays resource generation until demanded.
  *
@@ -40,7 +40,7 @@ export declare function onDemand<T extends object>(generator: () => T): T;
  * @param readonlyKeys - Readonly keys.
  * @returns Safe access interface.
  */
-export declare function safeAccess<T extends object, W extends keyof T, R extends keyof T>(obj: T, guards: SafeAccessGuards<T, W>, readonlyKeys?: readonly R[]): SafeAccess<T, W, R>;
+export declare function safeAccess<T extends object, W extends string & keyof T, R extends string & keyof T>(obj: T, guards: SafeAccessGuards<T, W>, readonlyKeys?: readonly R[]): SafeAccess<T, W, R>;
 /**
  * Delays program execution.
  *

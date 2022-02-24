@@ -11,9 +11,12 @@
 - [not](assertions.not.md)
 - [object](assertions.object.md)
 
+### Interfaces
+
+- [Assertion](../interfaces/assertions.Assertion.md)
+
 ### Type aliases
 
-- [Assertion](assertions.md#assertion)
 - [ErrorArg](assertions.md#errorarg)
 
 ### Functions
@@ -46,32 +49,6 @@
 - [undefined](assertions.md#undefined)
 
 ## Type aliases
-
-### Assertion
-
-Ƭ **Assertion**<`T`\>: (`value`: `unknown`) => asserts value is T
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-
-#### Type declaration
-
-▸ (`value`): asserts value is T
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
-
-##### Returns
-
-asserts value is T
-
-___
 
 ### ErrorArg
 
@@ -153,7 +130,7 @@ Asserts that value type is T.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard` | [`Guard`](guards.md#guard)<`T`\> | Guard for type T. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
 | `error?` | [`ErrorArg`](assertions.md#errorarg) | Error to be thrown. |
 
 #### Returns

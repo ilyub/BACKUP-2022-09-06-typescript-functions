@@ -14,7 +14,7 @@
 
 ### of
 
-• **of**: <T\>(`value`: `unknown`, `guard`: [`Guard`](guards.md#guard)<`T`\>) => value is Readonly<IndexedObject<T\>\>
+• **of**: <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => value is Readonly<IndexedObject<T\>\>
 
 #### Type declaration
 
@@ -33,7 +33,7 @@ Checks that value type is IndexedObject\<T\>.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard` | [`Guard`](guards.md#guard)<`T`\> | Guard for type T. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
 
 ##### Returns
 

@@ -1,7 +1,7 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[array] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unshift = exports.uniqueBy = exports.truncate = exports.toggleBy = exports.sort = exports.reverse = exports.replaceBy = exports.replace = exports.removeBy = exports.random = exports.pushOrReplaceBy = exports.push = exports.last = exports.includesBy = exports.get = exports.fromRange = exports.fromIterable = exports.first = exports.findBy = exports.drop = exports.clone = exports.chain = void 0;
+exports.unshift = exports.uniqueBy = exports.truncate = exports.toggleBy = exports.sort = exports.reverse = exports.replaceBy = exports.replace = exports.removeBy = exports.random = exports.pushOrReplaceBy = exports.push = exports.last = exports.includesBy = exports.get = exports.fromString = exports.fromRange = exports.fromIterable = exports.first = exports.findBy = exports.drop = exports.clone = exports.chain = void 0;
 const tslib_1 = require("tslib");
 const _ = (0, tslib_1.__importStar)(require("lodash"));
 const assert = (0, tslib_1.__importStar)(require("./assertions"));
@@ -90,6 +90,16 @@ function fromRange(from, to, step = 1) {
 }
 exports.fromRange = fromRange;
 /**
+ * Creates array from string.
+ *
+ * @param str - String.
+ * @returns Array.
+ */
+function fromString(str) {
+    return [...str];
+}
+exports.fromString = fromString;
+/**
  * Gets element by index.
  *
  * @param arr - Array.
@@ -99,6 +109,7 @@ exports.fromRange = fromRange;
  */
 function get(arr, index) {
     assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return arr[index];
 }
 exports.get = get;
@@ -207,7 +218,9 @@ exports.replaceBy = replaceBy;
  * @returns New reversed array.
  */
 function reverse(arr) {
-    return clone(arr).reverse();
+    const result = clone(arr);
+    result.reverse();
+    return result;
 }
 exports.reverse = reverse;
 /**
@@ -218,7 +231,9 @@ exports.reverse = reverse;
  * @returns New sorted array.
  */
 function sort(arr, compareFn) {
-    return clone(arr).sort(compareFn);
+    const result = clone(arr);
+    result.sort(compareFn);
+    return result;
 }
 exports.sort = sort;
 /**

@@ -98,7 +98,11 @@ exports.jestReset = jestReset;
  * Jest reset.
  */
 jestReset.dom = () => {
-    document.body.innerHTML = "";
+    while (document.body.children.length) {
+        const child = document.body.children.item(0);
+        assert.not.empty(child);
+        child.remove();
+    }
     jquery_1.default.expr.pseudos["visible"] = jqueryVisiblie;
 };
 /**
@@ -111,7 +115,9 @@ function jestSetup() {
             executionTimeToEqual,
             toBeSameAs
         };
+        // eslint-disable-next-line no-type-assertion/no-type-assertion
         expect.extend(matchers);
+        // eslint-disable-next-line no-type-assertion/no-type-assertion
         expect.extend(expectExtend);
     }
     jestReset();
@@ -180,7 +186,7 @@ exports.toBeSameAs = toBeSameAs;
 |* Private
 |*******************************************************************************
 |*/
-let clock = undefined;
+let clock;
 /**
  * JQuery visible selector.
  *

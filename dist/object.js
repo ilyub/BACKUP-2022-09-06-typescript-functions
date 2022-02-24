@@ -1,17 +1,10 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[object] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.values = exports.unfreezeDeep = exports.unfreeze = exports.sort = exports.size = exports.removeUndefinedKeys = exports.omit = exports.merge = exports.map = exports.keys = exports.hasOwnProp = exports.getPrototypeOf = exports.fromEntries = exports.freezeDeep = exports.freeze = exports.filter = exports.extend = exports.entries = exports.defineProperty = exports.clone = exports.assign = void 0;
+exports.values = exports.unfreezeDeep = exports.unfreeze = exports.sort = exports.some = exports.size = exports.removeUndefinedKeys = exports.omit = exports.merge = exports.map = exports.keys = exports.hasOwnProp = exports.getPrototypeOf = exports.fromEntries = exports.freezeDeep = exports.freeze = exports.filter = exports.extend = exports.every = exports.entries = exports.defineProperty = exports.clone = exports.assign = void 0;
 const tslib_1 = require("tslib");
 const a = (0, tslib_1.__importStar)(require("./array"));
 const is = (0, tslib_1.__importStar)(require("./guards"));
-/**
- * Typed version of Object.assign.
- *
- * @param mutableTarget - Target object.
- * @param sources - Sources.
- * @returns Target.
- */
 function assign(mutableTarget, ...sources) {
     return Object.assign(mutableTarget, ...sources);
 }
@@ -44,9 +37,14 @@ exports.defineProperty = defineProperty;
  * @returns Object entries.
  */
 function getEntries(obj) {
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return Object.entries(obj);
 }
 exports.entries = getEntries;
+function every(obj, callback) {
+    return getEntries(obj).every(([key, value]) => callback(value, key));
+}
+exports.every = every;
 function extend(target, ...sources) {
     return Object.assign(target, ...sources);
 }
@@ -83,6 +81,7 @@ exports.freeze = freeze;
  * @returns Object marked as deep readonly.
  */
 function freezeDeep(obj) {
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return obj;
 }
 exports.freezeDeep = freezeDeep;
@@ -94,12 +93,14 @@ freeze.deep = freezeDeep;
  * @returns Object.
  */
 function fromEntries(entries) {
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     const result = {};
     for (const entry of entries)
         result[entry[0]] = entry[1];
     return result;
 }
 exports.fromEntries = fromEntries;
+// eslint-disable-next-line no-type-assertion/no-type-assertion
 fromEntries.exhaustive = fromEntries;
 /**
  * Typed version of Object.getPrototypeOf.
@@ -130,6 +131,7 @@ exports.hasOwnProp = hasOwnProp;
  * @returns Object keys.
  */
 function keys(obj) {
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return Object.keys(obj);
 }
 exports.keys = keys;
@@ -179,6 +181,7 @@ exports.merge = merge;
  */
 function omit(obj, ...exclude) {
     const keysSet = new Set(exclude);
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return filter(obj, (_value, key) => !keysSet.has(key));
 }
 exports.omit = omit;
@@ -196,6 +199,10 @@ function size(obj) {
     return Object.keys(obj).length;
 }
 exports.size = size;
+function some(obj, callback) {
+    return getEntries(obj).some(([key, value]) => callback(value, key));
+}
+exports.some = some;
 /**
  * Sorts object.
  *
@@ -204,6 +211,7 @@ exports.size = size;
  * @returns New object.
  */
 function sort(obj, compareFn) {
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return fromEntries(a.sort(getEntries(obj), compareFn));
 }
 exports.sort = sort;
@@ -224,6 +232,7 @@ exports.unfreeze = unfreeze;
  * @returns Object marked as deep writable.
  */
 function unfreezeDeep(obj) {
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return obj;
 }
 exports.unfreezeDeep = unfreezeDeep;
@@ -235,6 +244,7 @@ unfreeze.deep = unfreezeDeep;
  * @returns Object values.
  */
 function values(obj) {
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return Object.values(obj);
 }
 exports.values = values;

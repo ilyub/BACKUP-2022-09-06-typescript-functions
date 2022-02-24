@@ -1,7 +1,24 @@
 import * as is from "./guards";
 import type * as types from "./types/core";
-export declare type Converter<T> = (value: unknown) => T;
-export declare type MultiArgConverter<T, A extends unknown[]> = (value: unknown, ...args: A) => T;
+export interface Converter<T> {
+    /**
+     * Converts value to type T.
+     *
+     * @param value - Value.
+     * @returns Converted value.
+     */
+    (value: unknown): T;
+}
+export interface MultiArgConverter<T, A extends unknown[]> {
+    /**
+     * Converts value to type T.
+     *
+     * @param value - Value.
+     * @param args - Arguments.
+     * @returns Converted value.
+     */
+    (value: unknown, ...args: A): T;
+}
 export declare type OrFail = typeof orFail;
 export declare const orFail: unique symbol;
 /**
@@ -83,7 +100,7 @@ export declare function boolean(value: unknown): boolean;
  * @returns Value if it is of type T, defVal otherwise.
  * @throws ConversionError if defVal is equal to orFail.
  */
-export declare function byGuard<T>(value: unknown, guard: is.Guard<T>, defVal: T | OrFail): T;
+export declare function byGuard<T>(value: unknown, guard: is.Guard<T>, defVal: OrFail | T): T;
 /**
  * Not implemented.
  */
@@ -123,7 +140,7 @@ export declare function notEmpty<T>(value: T, defVal: Exclude<T, types.empty>): 
  * @returns Value if it is of type T, defVal otherwise.
  * @throws ConversionError if defVal is equal to orFail.
  */
-export declare function enumeration<T extends PropertyKey>(value: unknown, vo: types.ValidationObject<T>, defVal: T | OrFail): T;
+export declare function enumeration<T extends PropertyKey>(value: unknown, vo: types.ValidationObject<T>, defVal: OrFail | T): T;
 /**
  * Converts value to type T | undefined.
  *

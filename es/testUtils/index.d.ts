@@ -29,7 +29,16 @@ declare global {
         }
     }
 }
-export declare type ExpectFromMatcher<K extends keyof jest.Matchers<unknown>> = (got: unknown, ...args: Parameters<jest.Matchers<unknown>[K]>) => ReturnType<jest.Matchers<unknown>[K]> extends Promise<unknown> ? Promise<ExpectReturnType> : ExpectReturnType;
+export interface ExpectFromMatcher<K extends keyof jest.Matchers<unknown>> {
+    /**
+     * Converts matcher function to expect function.
+     *
+     * @param got - Got value.
+     * @param args - Args.
+     * @returns Result.
+     */
+    (got: unknown, ...args: Parameters<jest.Matchers<unknown>[K]>): ReturnType<jest.Matchers<unknown>[K]> extends Promise<unknown> ? Promise<ExpectReturnType> : ExpectReturnType;
+}
 export interface ExpectReturnType {
     /**
      * Generates failure message.

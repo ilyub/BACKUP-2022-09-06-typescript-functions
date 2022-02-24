@@ -1,6 +1,6 @@
 [Typescript functions](../index.md) / [Exports](../modules.md) / [helpers](../modules/helpers.md) / FacadeOwnMethods
 
-# Interface: FacadeOwnMethods<F\>
+# Interface: FacadeOwnMethods<I\>
 
 [helpers](../modules/helpers.md).FacadeOwnMethods
 
@@ -8,7 +8,7 @@
 
 | Name |
 | :------ |
-| `F` |
+| `I` |
 
 ## Table of contents
 
@@ -28,7 +28,7 @@ Sets implementation.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `implementation` | `F` | Implementation. |
+| `implementation` | `I` | Implementation. |
 
 #### Returns
 

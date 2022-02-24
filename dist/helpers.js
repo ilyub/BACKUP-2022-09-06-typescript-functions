@@ -4,6 +4,7 @@ exports.wrapProxyHandler = exports.wait = exports.safeAccess = exports.onDemand 
 const tslib_1 = require("tslib");
 const assert = (0, tslib_1.__importStar)(require("./assertions"));
 const cast = (0, tslib_1.__importStar)(require("./converters"));
+const fn = (0, tslib_1.__importStar)(require("./function"));
 const is = (0, tslib_1.__importStar)(require("./guards"));
 const o = (0, tslib_1.__importStar)(require("./object"));
 const reflect = (0, tslib_1.__importStar)(require("./reflect"));
@@ -16,56 +17,48 @@ const timer = (0, tslib_1.__importStar)(require("./timer"));
  * @returns Facade.
  */
 function createFacade(name, extension) {
-    let implementation = undefined;
-    function callback(...args) {
-        if (is.callable(implementation))
-            return implementation.call(this, ...args);
-        throw new Error(implementation
-            ? `Facade is not callable: ${name}`
-            : `Missing facade implementation: ${name}`);
-    }
+    let _implementation;
     const facadeOwnMethods = {
         setImplementation(value) {
-            implementation = value;
+            _implementation = value;
         }
     };
-    const proxyTarget = o.extend(callback, facadeOwnMethods, extension);
-    const proxy = new Proxy(proxyTarget, wrapProxyHandler("createFacade", "throw", {
-        apply(target, thisArg, args) {
-            return target.call(thisArg, ...args);
+    const defaultFacade = Object.assign(Object.assign({}, extension), facadeOwnMethods);
+    const proxy = new Proxy(fn.noop, wrapProxyHandler("createFacade", "throw", {
+        apply(_target, thisArg, args) {
+            return reflect.apply(implementation(), thisArg, args);
         },
-        get(target, key) {
-            if (o.hasOwnProp(key, target))
-                return reflect.get(target, key);
-            if (is.not.empty(implementation))
-                return reflect.get(implementation, key);
-            throw new Error(`Missing facade implementation: ${name}`);
+        get(_target, key) {
+            return reflect.get(facade(key), key);
         },
-        getOwnPropertyDescriptor(target, key) {
-            if (o.hasOwnProp(key, target))
-                return Object.getOwnPropertyDescriptor(target, key);
-            if (is.not.empty(implementation))
-                return Object.getOwnPropertyDescriptor(implementation, key);
-            throw new Error(`Missing facade implementation: ${name}`);
+        getOwnPropertyDescriptor(_target, key) {
+            return Object.getOwnPropertyDescriptor(facade(key), key);
+        },
+        has(_target, key) {
+            return reflect.has(facade(key), key);
         },
         isExtensible() {
-            if (is.not.empty(implementation))
-                return Object.isExtensible(implementation);
-            throw new Error(`Missing facade implementation: ${name}`);
+            return Object.isExtensible(facade());
         },
-        set(target, key, value) {
-            if (o.hasOwnProp(key, target)) {
-                reflect.set(target, key, value);
-                return true;
-            }
-            if (is.not.empty(implementation)) {
-                reflect.set(implementation, key, value);
-                return true;
-            }
-            throw new Error(`Missing facade implementation: ${name}`);
+        ownKeys() {
+            return reflect.ownKeys(facade());
+        },
+        set(_target, key, value) {
+            return reflect.set(facade(key), key, value);
         }
     }));
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return proxy;
+    function facade(key) {
+        if (is.not.empty(key) && key in defaultFacade)
+            return defaultFacade;
+        assert.not.empty(_implementation, `Missing facade implementation: ${name}`);
+        return _implementation;
+    }
+    function implementation() {
+        assert.callable(_implementation, `Facade is not callable: ${name}`);
+        return _implementation;
+    }
 }
 exports.createFacade = createFacade;
 /**
@@ -75,26 +68,34 @@ exports.createFacade = createFacade;
  * @returns Resource.
  */
 function onDemand(generator) {
-    let obj = undefined;
-    return new Proxy({}, wrapProxyHandler("onDemand", "throw", {
+    let _obj;
+    const proxy = new Proxy({}, wrapProxyHandler("onDemand", "throw", {
         get(_target, key) {
-            obj = obj !== null && obj !== void 0 ? obj : generator();
-            return reflect.get(obj, key);
+            return reflect.get(obj(), key);
         },
         getOwnPropertyDescriptor(_target, key) {
-            obj = obj !== null && obj !== void 0 ? obj : generator();
-            return Object.getOwnPropertyDescriptor(obj, key);
+            return Object.getOwnPropertyDescriptor(obj(), key);
+        },
+        has(_target, key) {
+            return reflect.has(obj(), key);
+        },
+        isExtensible() {
+            return reflect.isExtensible(obj());
         },
         ownKeys() {
-            obj = obj !== null && obj !== void 0 ? obj : generator();
-            return Object.keys(obj);
+            return Object.keys(obj());
         },
         set(_target, key, value) {
-            obj = obj !== null && obj !== void 0 ? obj : generator();
-            reflect.set(obj, key, value);
+            reflect.set(obj(), key, value);
             return true;
         }
     }));
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
+    return proxy;
+    function obj() {
+        _obj = _obj !== null && _obj !== void 0 ? _obj : generator();
+        return _obj;
+    }
 }
 exports.onDemand = onDemand;
 /**
@@ -107,13 +108,28 @@ exports.onDemand = onDemand;
  */
 function safeAccess(obj, guards, readonlyKeys = []) {
     const guardsMap = new Map(Object.entries(guards));
-    const writableKeys = Object.keys(guards);
-    const keysSet = new Set([...readonlyKeys, ...writableKeys]);
-    return new Proxy(obj, wrapProxyHandler("createFacade", "throw", {
+    const writableKeys = o.keys(guards);
+    const keys = [...readonlyKeys, ...writableKeys];
+    const keysSet = new Set(keys);
+    return new Proxy(obj, wrapProxyHandler("safeAccess", "throw", {
         get(target, key) {
             if (keysSet.has(key))
                 return reflect.get(target, key);
             throw new Error(`Read access denied: ${cast.string(key)}`);
+        },
+        getOwnPropertyDescriptor(target, key) {
+            if (keysSet.has(key))
+                return reflect.getOwnPropertyDescriptor(target, key);
+            throw new Error(`Read access denied: ${cast.string(key)}`);
+        },
+        has(_target, key) {
+            return keysSet.has(key);
+        },
+        isExtensible(target) {
+            return reflect.isExtensible(target);
+        },
+        ownKeys() {
+            return keys;
         },
         set(target, key, value) {
             const guard = guardsMap.get(key);

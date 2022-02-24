@@ -14,11 +14,11 @@
 
 ### factory
 
-• **factory**: <A, B\>(`guard1`: [`Guard`](guards.md#guard)<`A`\>, `guard2`: [`Guard`](guards.md#guard)<`B`\>) => [`Guard`](guards.md#guard)<`A` & `B`\><A, B, C\>(`guard1`: [`Guard`](guards.md#guard)<`A`\>, `guard2`: [`Guard`](guards.md#guard)<`B`\>, `guard3`: [`Guard`](guards.md#guard)<`C`\>) => [`Guard`](guards.md#guard)<`A` & `B` & `C`\><A, B, C, D\>(`guard1`: [`Guard`](guards.md#guard)<`A`\>, `guard2`: [`Guard`](guards.md#guard)<`B`\>, `guard3`: [`Guard`](guards.md#guard)<`C`\>, `guard4`: [`Guard`](guards.md#guard)<`D`\>) => [`Guard`](guards.md#guard)<`A` & `B` & `C` & `D`\>
+• **factory**: <A, B\>(`guard1`: [`Guard`](../interfaces/guards.Guard.md)<`A`\>, `guard2`: [`Guard`](../interfaces/guards.Guard.md)<`B`\>) => [`Guard`](../interfaces/guards.Guard.md)<`A` & `B`\><A, B, C\>(`guard1`: [`Guard`](../interfaces/guards.Guard.md)<`A`\>, `guard2`: [`Guard`](../interfaces/guards.Guard.md)<`B`\>, `guard3`: [`Guard`](../interfaces/guards.Guard.md)<`C`\>) => [`Guard`](../interfaces/guards.Guard.md)<`A` & `B` & `C`\><A, B, C, D\>(`guard1`: [`Guard`](../interfaces/guards.Guard.md)<`A`\>, `guard2`: [`Guard`](../interfaces/guards.Guard.md)<`B`\>, `guard3`: [`Guard`](../interfaces/guards.Guard.md)<`C`\>, `guard4`: [`Guard`](../interfaces/guards.Guard.md)<`D`\>) => [`Guard`](../interfaces/guards.Guard.md)<`A` & `B` & `C` & `D`\>
 
 #### Type declaration
 
-▸ <`A`, `B`\>(`guard1`, `guard2`): [`Guard`](guards.md#guard)<`A` & `B`\>
+▸ <`A`, `B`\>(`guard1`, `guard2`): [`Guard`](../interfaces/guards.Guard.md)<`A` & `B`\>
 
 Creates guard for type A & B.
 
@@ -33,16 +33,16 @@ Creates guard for type A & B.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
 
 ##### Returns
 
-[`Guard`](guards.md#guard)<`A` & `B`\>
+[`Guard`](../interfaces/guards.Guard.md)<`A` & `B`\>
 
 Guard for type A & B.
 
-▸ <`A`, `B`, `C`\>(`guard1`, `guard2`, `guard3`): [`Guard`](guards.md#guard)<`A` & `B` & `C`\>
+▸ <`A`, `B`, `C`\>(`guard1`, `guard2`, `guard3`): [`Guard`](../interfaces/guards.Guard.md)<`A` & `B` & `C`\>
 
 Creates guard for type A & B & C.
 
@@ -58,17 +58,17 @@ Creates guard for type A & B & C.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
-| `guard3` | [`Guard`](guards.md#guard)<`C`\> | Guard 3. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
+| `guard3` | [`Guard`](../interfaces/guards.Guard.md)<`C`\> | Guard 3. |
 
 ##### Returns
 
-[`Guard`](guards.md#guard)<`A` & `B` & `C`\>
+[`Guard`](../interfaces/guards.Guard.md)<`A` & `B` & `C`\>
 
 Guard for type A & B & C.
 
-▸ <`A`, `B`, `C`, `D`\>(`guard1`, `guard2`, `guard3`, `guard4`): [`Guard`](guards.md#guard)<`A` & `B` & `C` & `D`\>
+▸ <`A`, `B`, `C`, `D`\>(`guard1`, `guard2`, `guard3`, `guard4`): [`Guard`](../interfaces/guards.Guard.md)<`A` & `B` & `C` & `D`\>
 
 Creates guard for type A & B & C & D.
 
@@ -85,13 +85,13 @@ Creates guard for type A & B & C & D.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
-| `guard3` | [`Guard`](guards.md#guard)<`C`\> | Guard 3. |
-| `guard4` | [`Guard`](guards.md#guard)<`D`\> | Guard 4. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
+| `guard3` | [`Guard`](../interfaces/guards.Guard.md)<`C`\> | Guard 3. |
+| `guard4` | [`Guard`](../interfaces/guards.Guard.md)<`D`\> | Guard 4. |
 
 ##### Returns
 
-[`Guard`](guards.md#guard)<`A` & `B` & `C` & `D`\>
+[`Guard`](../interfaces/guards.Guard.md)<`A` & `B` & `C` & `D`\>
 
 Guard for type A & B & C & D.

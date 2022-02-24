@@ -16,6 +16,7 @@
 
 - [detectEol](string.md#detecteol)
 - [empty](string.md#empty)
+- [filter](string.md#filter)
 - [lcFirst](string.md#lcfirst)
 - [leadingSpaces](string.md#leadingspaces)
 - [lines](string.md#lines)
@@ -33,7 +34,7 @@
 
 ### Eol
 
-Ƭ **Eol**: ``"\r\n"`` \| ``"\n"``
+Ƭ **Eol**: ``"\n"`` \| ``"\r\n"``
 
 ## Functions
 
@@ -74,6 +75,27 @@ Checks that string consists of spaces.
 `boolean`
 
 _True_ if string consists of spaces, _false_ otherwise.
+
+___
+
+### filter
+
+▸ **filter**(`str`, `predicate`): `string`
+
+Filters string.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `str` | `string` | String. |
+| `predicate` | (`char`: `string`, `index`: `number`) => `unknown` | Filter function. |
+
+#### Returns
+
+`string`
+
+Filtered string.
 
 ___
 

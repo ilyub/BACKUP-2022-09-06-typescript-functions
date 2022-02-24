@@ -129,7 +129,7 @@ ___
 
 ### defineProperty
 
-▸ `Const` **defineProperty**(`target`, `propertyKey`, `attributes`): `boolean`
+▸ **defineProperty**(`target`, `propertyKey`, `attributes`): `boolean`
 
 #### Parameters
 
@@ -147,7 +147,7 @@ ___
 
 ### deleteProperty
 
-▸ `Const` **deleteProperty**(`target`, `propertyKey`): `boolean`
+▸ **deleteProperty**(`target`, `propertyKey`): `boolean`
 
 #### Parameters
 
@@ -271,7 +271,7 @@ ___
 
 ### getOwnPropertyDescriptor
 
-▸ `Const` **getOwnPropertyDescriptor**(`target`, `propertyKey`): `PropertyDescriptor` \| `undefined`
+▸ **getOwnPropertyDescriptor**(`target`, `propertyKey`): `PropertyDescriptor` \| `undefined`
 
 #### Parameters
 
@@ -288,7 +288,7 @@ ___
 
 ### getPrototypeOf
 
-▸ `Const` **getPrototypeOf**(`target`): `object` \| ``null``
+▸ **getPrototypeOf**(`target`): `object` \| ``null``
 
 #### Parameters
 
@@ -304,7 +304,7 @@ ___
 
 ### has
 
-▸ `Const` **has**(`target`, `propertyKey`): `boolean`
+▸ **has**(`target`, `propertyKey`): `boolean`
 
 #### Parameters
 
@@ -407,7 +407,7 @@ ___
 
 ### isExtensible
 
-▸ `Const` **isExtensible**(`target`): `boolean`
+▸ **isExtensible**(`target`): `boolean`
 
 #### Parameters
 
@@ -423,7 +423,7 @@ ___
 
 ### ownKeys
 
-▸ `Const` **ownKeys**(`target`): (`string` \| `symbol`)[]
+▸ **ownKeys**(`target`): (`string` \| `symbol`)[]
 
 #### Parameters
 
@@ -439,7 +439,7 @@ ___
 
 ### preventExtensions
 
-▸ `Const` **preventExtensions**(`target`): `boolean`
+▸ **preventExtensions**(`target`): `boolean`
 
 #### Parameters
 
@@ -455,7 +455,7 @@ ___
 
 ### set
 
-▸ `Const` **set**(`target`, `propertyKey`, `value`, `receiver?`): `boolean`
+▸ **set**(`target`, `propertyKey`, `value`, `receiver?`): `boolean`
 
 #### Parameters
 
@@ -474,7 +474,7 @@ ___
 
 ### setPrototypeOf
 
-▸ `Const` **setPrototypeOf**(`target`, `proto`): `boolean`
+▸ **setPrototypeOf**(`target`, `proto`): `boolean`
 
 #### Parameters
 

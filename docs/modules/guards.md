@@ -19,12 +19,15 @@
 - [or](guards.or.md)
 - [tuple](guards.tuple.md)
 
+### Interfaces
+
+- [ExclusiveGuard](../interfaces/guards.ExclusiveGuard.md)
+- [Guard](../interfaces/guards.Guard.md)
+- [MultiArgGuard](../interfaces/guards.MultiArgGuard.md)
+
 ### Type aliases
 
-- [ExclusiveGuard](guards.md#exclusiveguard)
-- [Guard](guards.md#guard)
 - [Guards](guards.md#guards)
-- [MultiArgGuard](guards.md#multiargguard)
 
 ### Functions
 
@@ -101,64 +104,6 @@ Renames and re-exports [trueGuard](guards.md#trueguard)
 
 ## Type aliases
 
-### ExclusiveGuard
-
-Ƭ **ExclusiveGuard**<`T`\>: <V\>(`value`: `V`) => value is Exclude<V, T\>
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-
-#### Type declaration
-
-▸ <`V`\>(`value`): value is Exclude<V, T\>
-
-##### Type parameters
-
-| Name |
-| :------ |
-| `V` |
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `value` | `V` |
-
-##### Returns
-
-value is Exclude<V, T\>
-
-___
-
-### Guard
-
-Ƭ **Guard**<`T`\>: (`value`: `unknown`) => value is T
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | `unknown` |
-
-#### Type declaration
-
-▸ (`value`): value is T
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
-
-##### Returns
-
-value is T
-
-___
-
 ### Guards
 
 Ƭ **Guards**<`T`\>: { readonly [K in keyof T]: Guard<T[K]\> }
@@ -168,34 +113,6 @@ ___
 | Name |
 | :------ |
 | `T` |
-
-___
-
-### MultiArgGuard
-
-Ƭ **MultiArgGuard**<`T`, `A`\>: (`value`: `unknown`, ...`args`: `A`) => value is T
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | `T` |
-| `A` | extends `unknown`[] |
-
-#### Type declaration
-
-▸ (`value`, ...`args`): value is T
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
-| `...args` | `A` |
-
-##### Returns
-
-value is T
 
 ## Functions
 
@@ -217,8 +134,8 @@ Checks that value type is A & B.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
 
 #### Returns
 
@@ -243,9 +160,9 @@ Checks that value type is A & B & C.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
-| `guard3` | [`Guard`](guards.md#guard)<`C`\> | Guard 3. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
+| `guard3` | [`Guard`](../interfaces/guards.Guard.md)<`C`\> | Guard 3. |
 
 #### Returns
 
@@ -271,10 +188,10 @@ Checks that value type is A & B & C & D.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
-| `guard3` | [`Guard`](guards.md#guard)<`C`\> | Guard 3. |
-| `guard4` | [`Guard`](guards.md#guard)<`D`\> | Guard 4. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
+| `guard3` | [`Guard`](../interfaces/guards.Guard.md)<`C`\> | Guard 3. |
+| `guard4` | [`Guard`](../interfaces/guards.Guard.md)<`D`\> | Guard 4. |
 
 #### Returns
 
@@ -286,7 +203,7 @@ ___
 
 ### andFactory
 
-▸ **andFactory**<`A`, `B`\>(`guard1`, `guard2`): [`Guard`](guards.md#guard)<`A` & `B`\>
+▸ **andFactory**<`A`, `B`\>(`guard1`, `guard2`): [`Guard`](../interfaces/guards.Guard.md)<`A` & `B`\>
 
 Creates guard for type A & B.
 
@@ -301,16 +218,16 @@ Creates guard for type A & B.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
 
 #### Returns
 
-[`Guard`](guards.md#guard)<`A` & `B`\>
+[`Guard`](../interfaces/guards.Guard.md)<`A` & `B`\>
 
 Guard for type A & B.
 
-▸ **andFactory**<`A`, `B`, `C`\>(`guard1`, `guard2`, `guard3`): [`Guard`](guards.md#guard)<`A` & `B` & `C`\>
+▸ **andFactory**<`A`, `B`, `C`\>(`guard1`, `guard2`, `guard3`): [`Guard`](../interfaces/guards.Guard.md)<`A` & `B` & `C`\>
 
 Creates guard for type A & B & C.
 
@@ -326,17 +243,17 @@ Creates guard for type A & B & C.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
-| `guard3` | [`Guard`](guards.md#guard)<`C`\> | Guard 3. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
+| `guard3` | [`Guard`](../interfaces/guards.Guard.md)<`C`\> | Guard 3. |
 
 #### Returns
 
-[`Guard`](guards.md#guard)<`A` & `B` & `C`\>
+[`Guard`](../interfaces/guards.Guard.md)<`A` & `B` & `C`\>
 
 Guard for type A & B & C.
 
-▸ **andFactory**<`A`, `B`, `C`, `D`\>(`guard1`, `guard2`, `guard3`, `guard4`): [`Guard`](guards.md#guard)<`A` & `B` & `C` & `D`\>
+▸ **andFactory**<`A`, `B`, `C`, `D`\>(`guard1`, `guard2`, `guard3`, `guard4`): [`Guard`](../interfaces/guards.Guard.md)<`A` & `B` & `C` & `D`\>
 
 Creates guard for type A & B & C & D.
 
@@ -353,14 +270,14 @@ Creates guard for type A & B & C & D.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
-| `guard3` | [`Guard`](guards.md#guard)<`C`\> | Guard 3. |
-| `guard4` | [`Guard`](guards.md#guard)<`D`\> | Guard 4. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
+| `guard3` | [`Guard`](../interfaces/guards.Guard.md)<`C`\> | Guard 3. |
+| `guard4` | [`Guard`](../interfaces/guards.Guard.md)<`D`\> | Guard 4. |
 
 #### Returns
 
-[`Guard`](guards.md#guard)<`A` & `B` & `C` & `D`\>
+[`Guard`](../interfaces/guards.Guard.md)<`A` & `B` & `C` & `D`\>
 
 Guard for type A & B & C & D.
 
@@ -403,7 +320,7 @@ Checks that value type is T[].
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard` | [`Guard`](guards.md#guard)<`T`\> | Guard for type T. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
 
 #### Returns
 
@@ -415,7 +332,7 @@ ___
 
 ### arrayU
 
-▸ `Const` **arrayU**(`value`): value is undefined \| readonly unknown[]
+▸ **arrayU**(`value`): value is undefined \| readonly unknown[]
 
 #### Parameters
 
@@ -431,7 +348,7 @@ ___
 
 ### arrays
 
-▸ `Const` **arrays**(`value`): value is readonly (readonly unknown[])[]
+▸ **arrays**(`value`): value is readonly (readonly unknown[])[]
 
 #### Parameters
 
@@ -447,7 +364,7 @@ ___
 
 ### arraysU
 
-▸ `Const` **arraysU**(`value`): value is undefined \| readonly (readonly unknown[])[]
+▸ **arraysU**(`value`): value is undefined \| readonly (readonly unknown[])[]
 
 #### Parameters
 
@@ -503,7 +420,7 @@ ___
 
 ### booleans
 
-▸ `Const` **booleans**(`value`): value is readonly boolean[]
+▸ **booleans**(`value`): value is readonly boolean[]
 
 #### Parameters
 
@@ -519,7 +436,7 @@ ___
 
 ### booleansU
 
-▸ `Const` **booleansU**(`value`): value is undefined \| readonly boolean[]
+▸ **booleansU**(`value`): value is undefined \| readonly boolean[]
 
 #### Parameters
 
@@ -661,7 +578,7 @@ ___
 
 ### factory
 
-▸ **factory**<`T`, `A`\>(`guard`, ...`args`): [`Guard`](guards.md#guard)<`T`\>
+▸ **factory**<`T`, `A`\>(`guard`, ...`args`): [`Guard`](../interfaces/guards.Guard.md)<`T`\>
 
 Creates single-arg guard.
 
@@ -676,12 +593,12 @@ Creates single-arg guard.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard` | [`MultiArgGuard`](guards.md#multiargguard)<`T`, `A`\> | Multi-arg guard. |
+| `guard` | [`MultiArgGuard`](../interfaces/guards.MultiArgGuard.md)<`T`, `A`\> | Multi-arg guard. |
 | `...args` | `A` | Rest arguments. |
 
 #### Returns
 
-[`Guard`](guards.md#guard)<`T`\>
+[`Guard`](../interfaces/guards.Guard.md)<`T`\>
 
 Single-arg guard.
 
@@ -744,7 +661,7 @@ Checks that value type is IndexedObject\<T\>.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard` | [`Guard`](guards.md#guard)<`T`\> | Guard for type T. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
 
 #### Returns
 
@@ -756,7 +673,7 @@ ___
 
 ### indexedObjectU
 
-▸ `Const` **indexedObjectU**(`value`): value is undefined \| Readonly<IndexedObject<unknown\>\>
+▸ **indexedObjectU**(`value`): value is undefined \| Readonly<IndexedObject<unknown\>\>
 
 #### Parameters
 
@@ -772,7 +689,7 @@ ___
 
 ### indexedObjects
 
-▸ `Const` **indexedObjects**(`value`): value is readonly Readonly<IndexedObject<unknown\>\>[]
+▸ **indexedObjects**(`value`): value is readonly Readonly<IndexedObject<unknown\>\>[]
 
 #### Parameters
 
@@ -788,7 +705,7 @@ ___
 
 ### indexedObjectsU
 
-▸ `Const` **indexedObjectsU**(`value`): value is undefined \| readonly Readonly<IndexedObject<unknown\>\>[]
+▸ **indexedObjectsU**(`value`): value is undefined \| readonly Readonly<IndexedObject<unknown\>\>[]
 
 #### Parameters
 
@@ -874,8 +791,8 @@ Checks that value type is Map<K, V>.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `keyGuard` | [`Guard`](guards.md#guard)<`K`\> | Key guard. |
-| `valueGuard` | [`Guard`](guards.md#guard)<`V`\> | Value guard. |
+| `keyGuard` | [`Guard`](../interfaces/guards.Guard.md)<`K`\> | Key guard. |
+| `valueGuard` | [`Guard`](../interfaces/guards.Guard.md)<`V`\> | Value guard. |
 
 #### Returns
 
@@ -903,7 +820,7 @@ Checks that value type is not T.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `V` | Value. |
-| `guard` | [`Guard`](guards.md#guard)<`T`\> | Guard for type T. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
 
 #### Returns
 
@@ -915,7 +832,7 @@ ___
 
 ### notFactory
 
-▸ **notFactory**<`T`\>(`guard`): [`ExclusiveGuard`](guards.md#exclusiveguard)<`T`\>
+▸ **notFactory**<`T`\>(`guard`): [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`T`\>
 
 Creates guard for not T type.
 
@@ -929,11 +846,11 @@ Creates guard for not T type.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard` | [`Guard`](guards.md#guard)<`T`\> | Guard for type T. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
 
 #### Returns
 
-[`ExclusiveGuard`](guards.md#exclusiveguard)<`T`\>
+[`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`T`\>
 
 Guard for not T type.
 
@@ -1001,7 +918,7 @@ ___
 
 ### numStrs
 
-▸ `Const` **numStrs**(`value`): value is readonly NumStr[]
+▸ **numStrs**(`value`): value is readonly NumStr[]
 
 #### Parameters
 
@@ -1017,7 +934,7 @@ ___
 
 ### numStrsU
 
-▸ `Const` **numStrsU**(`value`): value is undefined \| readonly NumStr[]
+▸ **numStrsU**(`value`): value is undefined \| readonly NumStr[]
 
 #### Parameters
 
@@ -1073,7 +990,7 @@ ___
 
 ### numbers
 
-▸ `Const` **numbers**(`value`): value is readonly number[]
+▸ **numbers**(`value`): value is readonly number[]
 
 #### Parameters
 
@@ -1089,7 +1006,7 @@ ___
 
 ### numbersU
 
-▸ `Const` **numbersU**(`value`): value is undefined \| readonly number[]
+▸ **numbersU**(`value`): value is undefined \| readonly number[]
 
 #### Parameters
 
@@ -1125,7 +1042,7 @@ ___
 
 ### objectOf
 
-▸ **objectOf**<`A`, `B`\>(`value`, `requiredGuards`, `optionalGuards`): value is Required<A\> & Partial<B\>
+▸ **objectOf**<`A`, `B`\>(`value`, `requiredGuards`, `optionalGuards`): value is Partial<B\> & Required<A\>
 
 Checks that value type is T.
 
@@ -1146,7 +1063,7 @@ Checks that value type is T.
 
 #### Returns
 
-value is Required<A\> & Partial<B\>
+value is Partial<B\> & Required<A\>
 
 _True_ if value type is T, _false_ otherwise.
 
@@ -1174,7 +1091,7 @@ ___
 
 ### objects
 
-▸ `Const` **objects**(`value`): value is readonly object[]
+▸ **objects**(`value`): value is readonly object[]
 
 #### Parameters
 
@@ -1190,7 +1107,7 @@ ___
 
 ### objectsU
 
-▸ `Const` **objectsU**(`value`): value is undefined \| readonly object[]
+▸ **objectsU**(`value`): value is undefined \| readonly object[]
 
 #### Parameters
 
@@ -1222,8 +1139,8 @@ Checks that value type is A | B.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
 
 #### Returns
 
@@ -1248,9 +1165,9 @@ Checks that value type is A | B | C.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
-| `guard3` | [`Guard`](guards.md#guard)<`C`\> | Guard 3. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
+| `guard3` | [`Guard`](../interfaces/guards.Guard.md)<`C`\> | Guard 3. |
 
 #### Returns
 
@@ -1276,10 +1193,10 @@ Checks that value type is A | B | C | D.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
-| `guard3` | [`Guard`](guards.md#guard)<`C`\> | Guard 3. |
-| `guard4` | [`Guard`](guards.md#guard)<`D`\> | Guard 4. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
+| `guard3` | [`Guard`](../interfaces/guards.Guard.md)<`C`\> | Guard 3. |
+| `guard4` | [`Guard`](../interfaces/guards.Guard.md)<`D`\> | Guard 4. |
 
 #### Returns
 
@@ -1291,7 +1208,7 @@ ___
 
 ### orFactory
 
-▸ **orFactory**<`A`, `B`\>(`guard1`, `guard2`): [`Guard`](guards.md#guard)<`A` \| `B`\>
+▸ **orFactory**<`A`, `B`\>(`guard1`, `guard2`): [`Guard`](../interfaces/guards.Guard.md)<`A` \| `B`\>
 
 Creates guard for type A | B.
 
@@ -1306,16 +1223,16 @@ Creates guard for type A | B.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
 
 #### Returns
 
-[`Guard`](guards.md#guard)<`A` \| `B`\>
+[`Guard`](../interfaces/guards.Guard.md)<`A` \| `B`\>
 
 Guard for type A | B.
 
-▸ **orFactory**<`A`, `B`, `C`\>(`guard1`, `guard2`, `guard3`): [`Guard`](guards.md#guard)<`A` \| `B` \| `C`\>
+▸ **orFactory**<`A`, `B`, `C`\>(`guard1`, `guard2`, `guard3`): [`Guard`](../interfaces/guards.Guard.md)<`A` \| `B` \| `C`\>
 
 Creates guard for type A | B | C.
 
@@ -1331,17 +1248,17 @@ Creates guard for type A | B | C.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
-| `guard3` | [`Guard`](guards.md#guard)<`C`\> | Guard 3. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
+| `guard3` | [`Guard`](../interfaces/guards.Guard.md)<`C`\> | Guard 3. |
 
 #### Returns
 
-[`Guard`](guards.md#guard)<`A` \| `B` \| `C`\>
+[`Guard`](../interfaces/guards.Guard.md)<`A` \| `B` \| `C`\>
 
 Guard for type A | B | C.
 
-▸ **orFactory**<`A`, `B`, `C`, `D`\>(`guard1`, `guard2`, `guard3`, `guard4`): [`Guard`](guards.md#guard)<`A` \| `B` \| `C` \| `D`\>
+▸ **orFactory**<`A`, `B`, `C`, `D`\>(`guard1`, `guard2`, `guard3`, `guard4`): [`Guard`](../interfaces/guards.Guard.md)<`A` \| `B` \| `C` \| `D`\>
 
 Creates guard for type A | B | C | D.
 
@@ -1358,14 +1275,14 @@ Creates guard for type A | B | C | D.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
-| `guard3` | [`Guard`](guards.md#guard)<`C`\> | Guard 3. |
-| `guard4` | [`Guard`](guards.md#guard)<`D`\> | Guard 4. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
+| `guard3` | [`Guard`](../interfaces/guards.Guard.md)<`C`\> | Guard 3. |
+| `guard4` | [`Guard`](../interfaces/guards.Guard.md)<`D`\> | Guard 4. |
 
 #### Returns
 
-[`Guard`](guards.md#guard)<`A` \| `B` \| `C` \| `D`\>
+[`Guard`](../interfaces/guards.Guard.md)<`A` \| `B` \| `C` \| `D`\>
 
 Guard for type A | B | C | D.
 
@@ -1388,7 +1305,7 @@ Checks that value type is Set<T>.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard` | [`Guard`](guards.md#guard)<`T`\> | Guard. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard. |
 
 #### Returns
 
@@ -1440,7 +1357,7 @@ ___
 
 ### strings
 
-▸ `Const` **strings**(`value`): value is readonly string[]
+▸ **strings**(`value`): value is readonly string[]
 
 #### Parameters
 
@@ -1456,7 +1373,7 @@ ___
 
 ### stringsU
 
-▸ `Const` **stringsU**(`value`): value is undefined \| readonly string[]
+▸ **stringsU**(`value`): value is undefined \| readonly string[]
 
 #### Parameters
 
@@ -1492,7 +1409,7 @@ ___
 
 ### symbols
 
-▸ `Const` **symbols**(`value`): value is readonly symbol[]
+▸ **symbols**(`value`): value is readonly symbol[]
 
 #### Parameters
 
@@ -1508,7 +1425,7 @@ ___
 
 ### symbolsU
 
-▸ `Const` **symbolsU**(`value`): value is undefined \| readonly symbol[]
+▸ **symbolsU**(`value`): value is undefined \| readonly symbol[]
 
 #### Parameters
 
@@ -1559,7 +1476,7 @@ Checks that value type is [A].
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard` | [`Guard`](guards.md#guard)<`A`\> | Guard . |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard . |
 
 #### Returns
 
@@ -1583,8 +1500,8 @@ Checks that value type is [A, B].
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
 
 #### Returns
 
@@ -1609,9 +1526,9 @@ Checks that value type is [A, B, C].
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
-| `guard3` | [`Guard`](guards.md#guard)<`C`\> | Guard 3. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
+| `guard3` | [`Guard`](../interfaces/guards.Guard.md)<`C`\> | Guard 3. |
 
 #### Returns
 
@@ -1637,10 +1554,10 @@ Checks that value type is [A, B, C, D].
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
-| `guard3` | [`Guard`](guards.md#guard)<`C`\> | Guard 3. |
-| `guard4` | [`Guard`](guards.md#guard)<`D`\> | Guard 4. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
+| `guard3` | [`Guard`](../interfaces/guards.Guard.md)<`C`\> | Guard 3. |
+| `guard4` | [`Guard`](../interfaces/guards.Guard.md)<`D`\> | Guard 4. |
 
 #### Returns
 
@@ -1652,7 +1569,7 @@ ___
 
 ### tupleFactory
 
-▸ **tupleFactory**<`A`\>(`guard`): [`Guard`](guards.md#guard)<readonly [`A`]\>
+▸ **tupleFactory**<`A`\>(`guard`): [`Guard`](../interfaces/guards.Guard.md)<readonly [`A`]\>
 
 Creates guard for type [A].
 
@@ -1666,15 +1583,15 @@ Creates guard for type [A].
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard` | [`Guard`](guards.md#guard)<`A`\> | Guard. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard. |
 
 #### Returns
 
-[`Guard`](guards.md#guard)<readonly [`A`]\>
+[`Guard`](../interfaces/guards.Guard.md)<readonly [`A`]\>
 
 Guard for type [A].
 
-▸ **tupleFactory**<`A`, `B`\>(`guard1`, `guard2`): [`Guard`](guards.md#guard)<readonly [`A`, `B`]\>
+▸ **tupleFactory**<`A`, `B`\>(`guard1`, `guard2`): [`Guard`](../interfaces/guards.Guard.md)<readonly [`A`, `B`]\>
 
 Creates guard for type [A, B].
 
@@ -1689,16 +1606,16 @@ Creates guard for type [A, B].
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
 
 #### Returns
 
-[`Guard`](guards.md#guard)<readonly [`A`, `B`]\>
+[`Guard`](../interfaces/guards.Guard.md)<readonly [`A`, `B`]\>
 
 Guard for type [A, B].
 
-▸ **tupleFactory**<`A`, `B`, `C`\>(`guard1`, `guard2`, `guard3`): [`Guard`](guards.md#guard)<readonly [`A`, `B`, `C`]\>
+▸ **tupleFactory**<`A`, `B`, `C`\>(`guard1`, `guard2`, `guard3`): [`Guard`](../interfaces/guards.Guard.md)<readonly [`A`, `B`, `C`]\>
 
 Creates guard for type [A, B, C].
 
@@ -1714,17 +1631,17 @@ Creates guard for type [A, B, C].
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
-| `guard3` | [`Guard`](guards.md#guard)<`C`\> | Guard 3. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
+| `guard3` | [`Guard`](../interfaces/guards.Guard.md)<`C`\> | Guard 3. |
 
 #### Returns
 
-[`Guard`](guards.md#guard)<readonly [`A`, `B`, `C`]\>
+[`Guard`](../interfaces/guards.Guard.md)<readonly [`A`, `B`, `C`]\>
 
 Guard for type [A, B, C].
 
-▸ **tupleFactory**<`A`, `B`, `C`, `D`\>(`guard1`, `guard2`, `guard3`, `guard4`): [`Guard`](guards.md#guard)<readonly [`A`, `B`, `C`, `D`]\>
+▸ **tupleFactory**<`A`, `B`, `C`, `D`\>(`guard1`, `guard2`, `guard3`, `guard4`): [`Guard`](../interfaces/guards.Guard.md)<readonly [`A`, `B`, `C`, `D`]\>
 
 Creates guard for type [A, B, C, D].
 
@@ -1741,14 +1658,14 @@ Creates guard for type [A, B, C, D].
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard1` | [`Guard`](guards.md#guard)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](guards.md#guard)<`B`\> | Guard 2. |
-| `guard3` | [`Guard`](guards.md#guard)<`C`\> | Guard 3. |
-| `guard4` | [`Guard`](guards.md#guard)<`D`\> | Guard 4. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
+| `guard3` | [`Guard`](../interfaces/guards.Guard.md)<`C`\> | Guard 3. |
+| `guard4` | [`Guard`](../interfaces/guards.Guard.md)<`D`\> | Guard 4. |
 
 #### Returns
 
-[`Guard`](guards.md#guard)<readonly [`A`, `B`, `C`, `D`]\>
+[`Guard`](../interfaces/guards.Guard.md)<readonly [`A`, `B`, `C`, `D`]\>
 
 Guard for type [A, B, C, D].
 
@@ -1796,7 +1713,7 @@ ___
 
 ### unknowns
 
-▸ `Const` **unknowns**(`value`): value is readonly unknown[]
+▸ **unknowns**(`value`): value is readonly unknown[]
 
 #### Parameters
 

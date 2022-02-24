@@ -14,11 +14,11 @@
 
 ### of
 
-• **of**: <A, B\>(`value`: `unknown`, `requiredGuards`: [`Guards`](guards.md#guards)<`A`\>, `optionalGuards`: [`Guards`](guards.md#guards)<`B`\>) => value is Required<A\> & Partial<B\>
+• **of**: <A, B\>(`value`: `unknown`, `requiredGuards`: [`Guards`](guards.md#guards)<`A`\>, `optionalGuards`: [`Guards`](guards.md#guards)<`B`\>) => value is Partial<B\> & Required<A\>
 
 #### Type declaration
 
-▸ <`A`, `B`\>(`value`, `requiredGuards`, `optionalGuards`): value is Required<A\> & Partial<B\>
+▸ <`A`, `B`\>(`value`, `requiredGuards`, `optionalGuards`): value is Partial<B\> & Required<A\>
 
 Checks that value type is T.
 
@@ -39,6 +39,6 @@ Checks that value type is T.
 
 ##### Returns
 
-value is Required<A\> & Partial<B\>
+value is Partial<B\> & Required<A\>
 
 _True_ if value type is T, _false_ otherwise.

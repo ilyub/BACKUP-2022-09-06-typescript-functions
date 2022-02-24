@@ -16,7 +16,7 @@
 
 ### filtered
 
-• **filtered**: <T\>(`value`: `unknown`, `guard`: [`Guard`](guards.md#guard)<`T`\>) => `T`[]
+• **filtered**: <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => `T`[]
 
 #### Type declaration
 
@@ -35,7 +35,7 @@ Converts value to type T[].
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard` | [`Guard`](guards.md#guard)<`T`\> | Guard for type T. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
 
 ##### Returns
 
@@ -47,7 +47,7 @@ ___
 
 ### orFail
 
-• **orFail**: <T\>(`value`: `unknown`, `guard`: [`Guard`](guards.md#guard)<`T`\>) => readonly `T`[]
+• **orFail**: <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => readonly `T`[]
 
 #### Type declaration
 
@@ -68,7 +68,7 @@ Converts value to type T[].
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard` | [`Guard`](guards.md#guard)<`T`\> | Guard for type T. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
 
 ##### Returns
 
@@ -80,7 +80,7 @@ ___
 
 ### undef
 
-• **undef**: <T\>(`value`: `unknown`, `converter`: [`Converter`](converters.md#converter)<`undefined` \| `T`\>) => `T`[]
+• **undef**: <T\>(`value`: `unknown`, `converter`: [`Converter`](../interfaces/converters.Converter.md)<`undefined` \| `T`\>) => `T`[]
 
 #### Type declaration
 
@@ -99,7 +99,7 @@ Converts value to type T[].
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `converter` | [`Converter`](converters.md#converter)<`undefined` \| `T`\> | Converter for type T \| undefined. |
+| `converter` | [`Converter`](../interfaces/converters.Converter.md)<`undefined` \| `T`\> | Converter for type T \| undefined. |
 
 ##### Returns
 

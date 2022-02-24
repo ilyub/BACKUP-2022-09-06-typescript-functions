@@ -1,13 +1,6 @@
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[object] */
 import * as a from "./array";
 import * as is from "./guards";
-/**
- * Typed version of Object.assign.
- *
- * @param mutableTarget - Target object.
- * @param sources - Sources.
- * @returns Target.
- */
 export function assign(mutableTarget, ...sources) {
     return Object.assign(mutableTarget, ...sources);
 }
@@ -37,9 +30,13 @@ export function defineProperty(obj, key, descriptor) {
  * @returns Object entries.
  */
 function getEntries(obj) {
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return Object.entries(obj);
 }
 export { getEntries as entries };
+export function every(obj, callback) {
+    return getEntries(obj).every(([key, value]) => callback(value, key));
+}
 export function extend(target, ...sources) {
     return Object.assign(target, ...sources);
 }
@@ -73,6 +70,7 @@ export function freeze(obj) {
  * @returns Object marked as deep readonly.
  */
 export function freezeDeep(obj) {
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return obj;
 }
 freeze.deep = freezeDeep;
@@ -83,11 +81,13 @@ freeze.deep = freezeDeep;
  * @returns Object.
  */
 export function fromEntries(entries) {
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     const result = {};
     for (const entry of entries)
         result[entry[0]] = entry[1];
     return result;
 }
+// eslint-disable-next-line no-type-assertion/no-type-assertion
 fromEntries.exhaustive = fromEntries;
 /**
  * Typed version of Object.getPrototypeOf.
@@ -116,6 +116,7 @@ export function hasOwnProp(key, obj) {
  * @returns Object keys.
  */
 export function keys(obj) {
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return Object.keys(obj);
 }
 /**
@@ -162,6 +163,7 @@ export function merge(...objects) {
  */
 export function omit(obj, ...exclude) {
     const keysSet = new Set(exclude);
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return filter(obj, (_value, key) => !keysSet.has(key));
 }
 export function removeUndefinedKeys(obj) {
@@ -176,6 +178,9 @@ export function removeUndefinedKeys(obj) {
 export function size(obj) {
     return Object.keys(obj).length;
 }
+export function some(obj, callback) {
+    return getEntries(obj).some(([key, value]) => callback(value, key));
+}
 /**
  * Sorts object.
  *
@@ -184,6 +189,7 @@ export function size(obj) {
  * @returns New object.
  */
 export function sort(obj, compareFn) {
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return fromEntries(a.sort(getEntries(obj), compareFn));
 }
 /**
@@ -202,6 +208,7 @@ export function unfreeze(obj) {
  * @returns Object marked as deep writable.
  */
 export function unfreezeDeep(obj) {
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return obj;
 }
 unfreeze.deep = unfreezeDeep;
@@ -212,6 +219,7 @@ unfreeze.deep = unfreezeDeep;
  * @returns Object values.
  */
 export function values(obj) {
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return Object.values(obj);
 }
 //# sourceMappingURL=object.js.map

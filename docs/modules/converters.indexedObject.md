@@ -14,7 +14,7 @@
 
 ### of
 
-• **of**: <T\>(`value`: `unknown`, `converter`: [`Converter`](converters.md#converter)<`T`\>) => [`ReadonlyIndexedObject`](types_core.md#readonlyindexedobject)<`T`\>
+• **of**: <T\>(`value`: `unknown`, `converter`: [`Converter`](../interfaces/converters.Converter.md)<`T`\>) => [`ReadonlyIndexedObject`](types_core.md#readonlyindexedobject)<`T`\>
 
 #### Type declaration
 
@@ -33,7 +33,7 @@ Converts value to IndexedObject\<T\>.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `converter` | [`Converter`](converters.md#converter)<`T`\> | Converter for type T. |
+| `converter` | [`Converter`](../interfaces/converters.Converter.md)<`T`\> | Converter for type T. |
 
 ##### Returns
 

@@ -29,41 +29,41 @@
 
 ### boolean
 
-• **boolean**: [`ExclusiveGuard`](guards.md#exclusiveguard)<`boolean`\>
+• **boolean**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`boolean`\>
 
 ___
 
 ### booleanU
 
-• **booleanU**: [`ExclusiveGuard`](guards.md#exclusiveguard)<[`booleanU`](types_core.md#booleanu)\>
+• **booleanU**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<[`booleanU`](types_core.md#booleanu)\>
 
 ___
 
 ### callable
 
-• **callable**: [`ExclusiveGuard`](guards.md#exclusiveguard)<`Function`\>
+• **callable**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`Function`\>
 
 ___
 
 ### callableU
 
-• **callableU**: [`ExclusiveGuard`](guards.md#exclusiveguard)<`undefined` \| `Function`\>
+• **callableU**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`undefined` \| `Function`\>
 
 ___
 
 ### empty
 
-• **empty**: [`ExclusiveGuard`](guards.md#exclusiveguard)<[`empty`](types_core.md#empty)\>
+• **empty**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<[`empty`](types_core.md#empty)\>
 
 ___
 
 ### factory
 
-• **factory**: <T\>(`guard`: [`Guard`](guards.md#guard)<`T`\>) => [`ExclusiveGuard`](guards.md#exclusiveguard)<`T`\>
+• **factory**: <T\>(`guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`T`\>
 
 #### Type declaration
 
-▸ <`T`\>(`guard`): [`ExclusiveGuard`](guards.md#exclusiveguard)<`T`\>
+▸ <`T`\>(`guard`): [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`T`\>
 
 Creates guard for not T type.
 
@@ -77,11 +77,11 @@ Creates guard for not T type.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard` | [`Guard`](guards.md#guard)<`T`\> | Guard for type T. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
 
 ##### Returns
 
-[`ExclusiveGuard`](guards.md#exclusiveguard)<`T`\>
+[`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`T`\>
 
 Guard for not T type.
 
@@ -89,58 +89,58 @@ ___
 
 ### null
 
-• **null**: [`ExclusiveGuard`](guards.md#exclusiveguard)<``null``\>
+• **null**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<``null``\>
 
 ___
 
 ### numStr
 
-• **numStr**: [`ExclusiveGuard`](guards.md#exclusiveguard)<[`NumStr`](types_core.md#numstr)\>
+• **numStr**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<[`NumStr`](types_core.md#numstr)\>
 
 ___
 
 ### numStrU
 
-• **numStrU**: [`ExclusiveGuard`](guards.md#exclusiveguard)<[`NumStrU`](types_core.md#numstru)\>
+• **numStrU**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<[`NumStrU`](types_core.md#numstru)\>
 
 ___
 
 ### number
 
-• **number**: [`ExclusiveGuard`](guards.md#exclusiveguard)<`number`\>
+• **number**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`number`\>
 
 ___
 
 ### numberU
 
-• **numberU**: [`ExclusiveGuard`](guards.md#exclusiveguard)<[`numberU`](types_core.md#numberu)\>
+• **numberU**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<[`numberU`](types_core.md#numberu)\>
 
 ___
 
 ### object
 
-• **object**: [`ExclusiveGuard`](guards.md#exclusiveguard)<`object`\>
+• **object**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`object`\>
 
 ___
 
 ### string
 
-• **string**: [`ExclusiveGuard`](guards.md#exclusiveguard)<`string`\>
+• **string**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`string`\>
 
 ___
 
 ### stringU
 
-• **stringU**: [`ExclusiveGuard`](guards.md#exclusiveguard)<[`stringU`](types_core.md#stringu)\>
+• **stringU**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<[`stringU`](types_core.md#stringu)\>
 
 ___
 
 ### symbol
 
-• **symbol**: [`ExclusiveGuard`](guards.md#exclusiveguard)<`symbol`\>
+• **symbol**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`symbol`\>
 
 ___
 
 ### undefined
 
-• **undefined**: [`ExclusiveGuard`](guards.md#exclusiveguard)<`undefined`\>
+• **undefined**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`undefined`\>

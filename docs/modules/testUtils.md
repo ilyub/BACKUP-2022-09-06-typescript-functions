@@ -11,12 +11,9 @@
 
 ### Interfaces
 
+- [ExpectFromMatcher](../interfaces/testUtils.ExpectFromMatcher.md)
 - [ExpectReturnType](../interfaces/testUtils.ExpectReturnType.md)
 - [FakeTimerOptions](../interfaces/testUtils.FakeTimerOptions.md)
-
-### Type aliases
-
-- [ExpectFromMatcher](testUtils.md#expectfrommatcher)
 
 ### Functions
 
@@ -29,33 +26,6 @@
 - [run](testUtils.md#run)
 - [setRandomSystemTime](testUtils.md#setrandomsystemtime)
 - [toBeSameAs](testUtils.md#tobesameas)
-
-## Type aliases
-
-### ExpectFromMatcher
-
-Ƭ **ExpectFromMatcher**<`K`\>: (`got`: `unknown`, ...`args`: `Parameters`<`jest.Matchers`<`unknown`\>[`K`]\>) => `ReturnType`<`jest.Matchers`<`unknown`\>[`K`]\> extends `Promise`<`unknown`\> ? `Promise`<[`ExpectReturnType`](../interfaces/testUtils.ExpectReturnType.md)\> : [`ExpectReturnType`](../interfaces/testUtils.ExpectReturnType.md)
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `K` | extends keyof `jest.Matchers`<`unknown`\> |
-
-#### Type declaration
-
-▸ (`got`, ...`args`): `ReturnType`<`jest.Matchers`<`unknown`\>[`K`]\> extends `Promise`<`unknown`\> ? `Promise`<[`ExpectReturnType`](../interfaces/testUtils.ExpectReturnType.md)\> : [`ExpectReturnType`](../interfaces/testUtils.ExpectReturnType.md)
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `got` | `unknown` |
-| `...args` | `Parameters`<`jest.Matchers`<`unknown`\>[`K`]\> |
-
-##### Returns
-
-`ReturnType`<`jest.Matchers`<`unknown`\>[`K`]\> extends `Promise`<`unknown`\> ? `Promise`<[`ExpectReturnType`](../interfaces/testUtils.ExpectReturnType.md)\> : [`ExpectReturnType`](../interfaces/testUtils.ExpectReturnType.md)
 
 ## Functions
 

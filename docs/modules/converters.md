@@ -16,10 +16,13 @@
 - [number](converters.number.md)
 - [string](converters.string.md)
 
+### Interfaces
+
+- [Converter](../interfaces/converters.Converter.md)
+- [MultiArgConverter](../interfaces/converters.MultiArgConverter.md)
+
 ### Type aliases
 
-- [Converter](converters.md#converter)
-- [MultiArgConverter](converters.md#multiargconverter)
 - [OrFail](converters.md#orfail)
 
 ### Variables
@@ -64,60 +67,6 @@
 
 ## Type aliases
 
-### Converter
-
-Ƭ **Converter**<`T`\>: (`value`: `unknown`) => `T`
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-
-#### Type declaration
-
-▸ (`value`): `T`
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
-
-##### Returns
-
-`T`
-
-___
-
-### MultiArgConverter
-
-Ƭ **MultiArgConverter**<`T`, `A`\>: (`value`: `unknown`, ...`args`: `A`) => `T`
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | `T` |
-| `A` | extends `unknown`[] |
-
-#### Type declaration
-
-▸ (`value`, ...`args`): `T`
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
-| `...args` | `A` |
-
-##### Returns
-
-`T`
-
-___
-
 ### OrFail
 
 Ƭ **OrFail**: typeof [`orFail`](converters.md#orfail)
@@ -126,7 +75,7 @@ ___
 
 ### orFail
 
-• **orFail**: typeof [`orFail`](converters.md#orfail)
+• `Const` **orFail**: typeof [`orFail`](converters.md#orfail)
 
 ## Functions
 
@@ -167,7 +116,7 @@ Converts value to type T[].
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `converter` | [`Converter`](converters.md#converter)<`T`\> | Converter for type T. |
+| `converter` | [`Converter`](../interfaces/converters.Converter.md)<`T`\> | Converter for type T. |
 
 #### Returns
 
@@ -194,7 +143,7 @@ Converts value to type T[].
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard` | [`Guard`](guards.md#guard)<`T`\> | Guard for type T. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
 
 #### Returns
 
@@ -223,7 +172,7 @@ Converts value to type T[].
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard` | [`Guard`](guards.md#guard)<`T`\> | Guard for type T. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
 
 #### Returns
 
@@ -250,7 +199,7 @@ Converts value to type T[].
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `converter` | [`Converter`](converters.md#converter)<`undefined` \| `T`\> | Converter for type T \| undefined. |
+| `converter` | [`Converter`](../interfaces/converters.Converter.md)<`undefined` \| `T`\> | Converter for type T \| undefined. |
 
 #### Returns
 
@@ -299,7 +248,7 @@ Converts value to type T.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard` | [`Guard`](guards.md#guard)<`T`\> | Guard for type T. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
 | `defVal` | `T` \| typeof [`orFail`](converters.md#orfail) | Default value. |
 
 #### Returns
@@ -435,7 +384,7 @@ ___
 
 ### factory
 
-▸ **factory**<`T`, `A`\>(`converter`, ...`args`): [`Converter`](converters.md#converter)<`T`\>
+▸ **factory**<`T`, `A`\>(`converter`, ...`args`): [`Converter`](../interfaces/converters.Converter.md)<`T`\>
 
 Creates single-arg converter.
 
@@ -450,12 +399,12 @@ Creates single-arg converter.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `converter` | [`MultiArgConverter`](converters.md#multiargconverter)<`T`, `A`\> | Multi-arg converter. |
+| `converter` | [`MultiArgConverter`](../interfaces/converters.MultiArgConverter.md)<`T`, `A`\> | Multi-arg converter. |
 | `...args` | `A` | Rest arguments. |
 
 #### Returns
 
-[`Converter`](converters.md#converter)<`T`\>
+[`Converter`](../interfaces/converters.Converter.md)<`T`\>
 
 Single-arg converter.
 
@@ -498,7 +447,7 @@ Converts value to IndexedObject\<T\>.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `converter` | [`Converter`](converters.md#converter)<`T`\> | Converter for type T. |
+| `converter` | [`Converter`](../interfaces/converters.Converter.md)<`T`\> | Converter for type T. |
 
 #### Returns
 

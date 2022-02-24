@@ -26,13 +26,13 @@
 
 ### Facade
 
-Ƭ **Facade**<`F`, `E`\>: `F` & [`FacadeOwnMethods`](../interfaces/helpers.FacadeOwnMethods.md)<`F`\> & `E`
+Ƭ **Facade**<`I`, `E`\>: `E` & [`FacadeOwnMethods`](../interfaces/helpers.FacadeOwnMethods.md)<`I`\> & `I`
 
 #### Type parameters
 
 | Name | Type |
 | :------ | :------ |
-| `F` | `F` |
+| `I` | `I` |
 | `E` | `unknown` |
 
 ___
@@ -46,8 +46,8 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `T` | extends `object` |
-| `W` | extends keyof `T` |
-| `R` | extends keyof `T` |
+| `W` | extends `string` & keyof `T` |
+| `R` | extends `string` & keyof `T` |
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 ### createFacade
 
-▸ **createFacade**<`F`, `E`\>(`name`, `extension`): [`Facade`](helpers.md#facade)<`F`, `E`\>
+▸ **createFacade**<`I`, `E`\>(`name`, `extension`): [`Facade`](helpers.md#facade)<`I`, `E`\>
 
 Creates facade.
 
@@ -74,7 +74,7 @@ Creates facade.
 
 | Name | Type |
 | :------ | :------ |
-| `F` | extends `object` |
+| `I` | extends `object` |
 | `E` | `unknown` |
 
 #### Parameters
@@ -86,7 +86,7 @@ Creates facade.
 
 #### Returns
 
-[`Facade`](helpers.md#facade)<`F`, `E`\>
+[`Facade`](helpers.md#facade)<`I`, `E`\>
 
 Facade.
 
@@ -129,8 +129,8 @@ Creates safe access interface for an object.
 | Name | Type |
 | :------ | :------ |
 | `T` | extends `object` |
-| `W` | extends `string` \| `number` \| `symbol` |
-| `R` | extends `string` \| `number` \| `symbol` |
+| `W` | extends `string` |
+| `R` | extends `string` |
 
 #### Parameters
 

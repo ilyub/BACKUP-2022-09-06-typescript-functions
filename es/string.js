@@ -19,6 +19,16 @@ export function empty(str) {
     return /^\s*$/u.test(str);
 }
 /**
+ * Filters string.
+ *
+ * @param str - String.
+ * @param predicate - Filter function.
+ * @returns Filtered string.
+ */
+export function filter(str, predicate) {
+    return a.fromString(str).filter(predicate).join("");
+}
+/**
  * Gets leading spaces.
  *
  * @param str - String.
@@ -103,6 +113,7 @@ pathUtils.removeTrailingSlash = (path) => path.replace(/[/\\]$/u, "");
  * @returns New string with replacements done.
  */
 export function replaceAll(str, search, replace) {
+    // eslint-disable-next-line security/detect-non-literal-regexp
     return str.replace(new RegExp(regexp.escapeString(search), "gu"), replace);
 }
 /**
@@ -121,7 +132,7 @@ export function trailingSpaces(str) {
  * @returns Trimmed string.
  */
 export function trimEnd(str) {
-    return str.replace(/(?<!\s)\s+$/u, "");
+    return str.replace(/(^|\S)\s+$/u, "$1");
 }
 /**
  * Trims leading empty lines.

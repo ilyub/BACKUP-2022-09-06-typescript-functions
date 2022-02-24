@@ -147,7 +147,8 @@ not.empty = notFactory(empty);
  * @returns _True_ if value type is T, _false_ otherwise.
  */
 function enumeration(value, vo) {
-    return vo.has(value);
+    const untypedVo = vo;
+    return untypedVo.has(value);
 }
 exports.enumeration = enumeration;
 /**
@@ -158,7 +159,8 @@ exports.enumeration = enumeration;
  * @returns _True_ if value type is T | undefined, _false_ otherwise.
  */
 function enumerationU(value, vo) {
-    return vo.has(value) || value === undefined;
+    const untypedVo = vo;
+    return untypedVo.has(value) || value === undefined;
 }
 exports.enumerationU = enumerationU;
 /**

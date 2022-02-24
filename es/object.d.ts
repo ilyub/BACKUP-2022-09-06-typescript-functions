@@ -18,8 +18,14 @@ export interface Descriptor<T extends object = object> {
     readonly set?: (this: T, value: unknown) => void;
     readonly writable?: boolean;
 }
-export declare type FilterCallback<T extends object> = (value: T[keyof T], key: keyof T) => boolean;
-export declare type MapCallback<V, R> = (value: V, key: string) => R;
+/**
+ * Typed version of Object.assign.
+ *
+ * @param mutableTarget - Target object.
+ * @param sources - Sources.
+ * @returns Target.
+ */
+export declare function assign<T extends object>(mutableTarget: T, ...sources: Array<Partial<T>>): T;
 /**
  * Typed version of Object.assign.
  *
@@ -54,13 +60,29 @@ export declare function defineProperty<T extends object>(obj: T, key: PropertyKe
 declare function getEntries<T extends object>(obj: T): ReadonlyArray<readonly [keyof T, T[keyof T]]>;
 export { getEntries as entries };
 /**
+ * Checks that every object property satisfies condition.
+ *
+ * @param obj - Object.
+ * @param callback - Callback.
+ * @returns _True_ if every object property satisfies condition, _false_ otherwise.
+ */
+export declare function every<K extends PropertyKey, S, D extends S>(obj: ReadonlyRecord<K, S>, callback: (value: S, key: K) => value is D): obj is ReadonlyRecord<K, D>;
+/**
+ * Checks that every object property satisfies condition.
+ *
+ * @param obj - Object.
+ * @param callback - Callback.
+ * @returns _True_ if every object property satisfies condition, _false_ otherwise.
+ */
+export declare function every<K extends PropertyKey, V>(obj: ReadonlyRecord<K, V>, callback: (value: V, key: K) => boolean): boolean;
+/**
  * Typed version of Object.assign.
  *
  * @param target - Target object.
  * @param source - Source.
  * @returns Target.
  */
-export declare function extend<T extends object, A>(target: T, source: A): T & A;
+export declare function extend<T extends object, A>(target: T, source: A): A & T;
 /**
  * Typed version of Object.assign.
  *
@@ -69,7 +91,7 @@ export declare function extend<T extends object, A>(target: T, source: A): T & A
  * @param source2 - Source 2.
  * @returns Target.
  */
-export declare function extend<T extends object, A, B>(target: T, source1: A, source2: B): T & A & B;
+export declare function extend<T extends object, A, B>(target: T, source1: A, source2: B): A & B & T;
 /**
  * Typed version of Object.assign.
  *
@@ -79,7 +101,7 @@ export declare function extend<T extends object, A, B>(target: T, source1: A, so
  * @param source3 - Source 3.
  * @returns Target.
  */
-export declare function extend<T extends object, A, B, C>(target: T, source1: A, source2: B, source3: C): T & A & B & C;
+export declare function extend<T extends object, A, B, C>(target: T, source1: A, source2: B, source3: C): A & B & C & T;
 /**
  * Filters object by callback.
  *
@@ -87,7 +109,7 @@ export declare function extend<T extends object, A, B, C>(target: T, source1: A,
  * @param callback - Callback.
  * @returns New filtered object.
  */
-export declare function filter<T extends object>(obj: T, callback: FilterCallback<T>): Partial<T>;
+export declare function filter<T extends object>(obj: T, callback: (value: T[keyof T], key: keyof T) => boolean): Partial<T>;
 /**
  * Marks object as readonly.
  *
@@ -144,7 +166,7 @@ export declare function keys<T extends object>(obj: T): ReadonlyArray<keyof T>;
  * @param callback - Callback.
  * @returns New object.
  */
-export declare function map<V, R>(obj: ReadonlyRecord<string, V>, callback: MapCallback<V, R>): ReadonlyRecord<string, R>;
+export declare function map<V, R>(obj: ReadonlyRecord<string, V>, callback: (value: V, key: string) => R): ReadonlyRecord<string, R>;
 /**
  * Merges several objects.
  * If more than one object has the same key, respective values are combined into array.
@@ -182,6 +204,22 @@ export declare function removeUndefinedKeys<T extends object>(obj: WithUndeclare
  * @returns The number of enumerable properties.
  */
 export declare function size(obj: object): number;
+/**
+ * Checks that some object property satisfies condition.
+ *
+ * @param obj - Object.
+ * @param callback - Callback.
+ * @returns _True_ if some object property satisfies condition, _false_ otherwise.
+ */
+export declare function some<K extends PropertyKey, S, D extends S>(obj: ReadonlyRecord<K, S>, callback: (value: S, key: K) => value is D): obj is ReadonlyRecord<K, D>;
+/**
+ * Checks that some object property satisfies condition.
+ *
+ * @param obj - Object.
+ * @param callback - Callback.
+ * @returns _True_ if some object property satisfies condition, _false_ otherwise.
+ */
+export declare function some<K extends PropertyKey, V>(obj: ReadonlyRecord<K, V>, callback: (value: V, key: K) => boolean): boolean;
 /**
  * Sorts object.
  *

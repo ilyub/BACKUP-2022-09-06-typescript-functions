@@ -10,11 +10,33 @@
 
 ### Functions
 
+- [addFlags](regexp.md#addflags)
 - [escapeString](regexp.md#escapestring)
 - [matchAll](regexp.md#matchall)
 - [slice](regexp.md#slice)
 
 ## Functions
+
+### addFlags
+
+▸ **addFlags**(`re`, `flags`): `RegExp`
+
+Adds flag to regular expression.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `re` | `RegExp` | Regular expression. |
+| `flags` | `string` | Flags. |
+
+#### Returns
+
+`RegExp`
+
+New regular expression.
+
+___
 
 ### escapeString
 

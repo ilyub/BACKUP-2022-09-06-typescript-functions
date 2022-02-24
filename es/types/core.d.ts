@@ -4,14 +4,40 @@ import type { FilterKeys } from "ts-toolbelt/out/Object/FilterKeys";
 import type { ReadonlyKeys } from "ts-toolbelt/out/Object/ReadonlyKeys";
 import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 import type { WritableKeys } from "ts-toolbelt/out/Object/WritableKeys";
+export type { CamelCase, KebabCase } from "type-fest";
 export declare type AddPrefix<T extends string, P extends string> = `${P}${T}`;
 export declare type ArrayElement<T> = T extends Array<infer R> ? R : unknown;
-export declare type Async<R, A extends unknown[] = never[]> = (...args: A) => Promise<R>;
-export declare type CallSignature<T extends Callable> = (this: ThisParameterType<T>, ...args: Parameters<T>) => ReturnType<T>;
-export declare type Callable<T = any> = (...args: any[]) => T;
+export interface Async<R, A extends unknowns = nevers> {
+    /**
+     * Async function.
+     *
+     * @param args - Arguments.
+     * @returns Promise.
+     */
+    (...args: A): Promise<R>;
+}
+export interface CallSignature<T extends Callable> {
+    /**
+     * Async function.
+     *
+     * @param this - This argument.
+     * @param args - Arguments.
+     * @returns Result.
+     */
+    (this: ThisParameterType<T>, ...args: Parameters<T>): ReturnType<T>;
+}
+export interface Callable<T = any> {
+    /**
+     * Function.
+     *
+     * @param args - Arguments.
+     * @returns Result.
+     */
+    (...args: any[]): T;
+}
 export declare type ConstructSignature<T extends Constructor> = new (...args: ConstructorParameters<T>) => InstanceType<T>;
 export declare type Constructor<T = any> = new (...args: any[]) => T;
-export declare type DeclaredKeys<T extends object> = PropertyKey & DefinedKeys<T> & RequiredKeys<T>;
+export declare type DeclaredKeys<T extends object> = DefinedKeys<T> & PropertyKey & RequiredKeys<T>;
 export declare type DeepPartial<T> = DeepPartial1<T>;
 export declare type DeepReadonly<T> = DeepReadonly1<T>;
 export declare type DeepWritable<T> = DeepWritable1<T>;
@@ -27,14 +53,15 @@ export declare type Join3<A extends object, B extends object, C extends object> 
 export declare type Join4<A extends object, B extends object, C extends object, D extends object> = keyof A extends never ? Join3<B, C, D> : A & Join3<B, C, D>;
 export declare type KeysOfType<T, V> = KeysOfType1<T, V>;
 export declare type NumStr = number | string;
-export declare type NumStrE = NumStr | empty;
+export declare type NumStrE = empty | NumStr;
 export declare type NumStrU = NumStr | undefined;
 export declare type NumStrs = readonly NumStr[];
 export declare type PartialRecord<K extends PropertyKey, T> = Partial<Record<K, T>>;
-export declare type PromiseAsync<T> = Promise<T> | Async<T>;
-export declare type PromiseAsyncSync<T> = Promise<T> | Async<T> | Sync<T>;
+export declare type PromiseAsync<T> = Async<T> | Promise<T>;
+export declare type PromiseAsyncSync<T> = Async<T> | Promise<T> | Sync<T>;
+export declare type PropertyKeys = readonly PropertyKey[];
 export declare type ReadonlyArrayElement<T> = T extends ReadonlyArray<infer R> ? R : unknown;
-export declare type ReadonlyDeclaredKeys<T extends object> = PropertyKey & ReadonlyKeys<T> & DeclaredKeys<T>;
+export declare type ReadonlyDeclaredKeys<T extends object> = DeclaredKeys<T> & PropertyKey & ReadonlyKeys<T>;
 export declare type ReadonlyIndexedObject<T = unknown> = Readonly<IndexedObject<T>>;
 export declare type ReadonlyPartialRecord<K extends PropertyKey, T> = Readonly<PartialRecord<K, T>>;
 export declare type ReadonlyRecord<K extends PropertyKey, T> = Readonly<Record<K, T>>;
@@ -53,7 +80,15 @@ export declare type StrictRequired<T extends object> = Join2<{
 }, {
     readonly [K in ReadonlyKeys<T>]-?: T[K];
 }>;
-export declare type Sync<R, A extends unknown[] = never[]> = (...args: A) => R;
+export interface Sync<R, A extends unknowns = nevers> {
+    /**
+     * Function.
+     *
+     * @param args - Arguments.
+     * @returns Result.
+     */
+    (...args: A): R;
+}
 export declare type Timeout = ReturnType<typeof setTimeout>;
 export declare type UndeclaredKeys<T extends object> = Exclude<keyof T, DeclaredKeys<T>>;
 export declare type UndefinedKeys<T extends object> = Exclude<keyof T, DefinedKeys<T>>;
@@ -88,19 +123,20 @@ export declare type WithUndefinedKeys<T extends object> = Join4<{
 export declare type Writable<T> = {
     -readonly [K in keyof T]: T[K];
 };
-export declare type WritableDeclaredKeys<T extends object> = PropertyKey & WritableKeys<T> & DeclaredKeys<T>;
-export declare type WritableUndeclaredKeys<T extends object> = PropertyKey & WritableKeys<T> & UndeclaredKeys<T>;
-export declare type booleanE = boolean | empty;
+export declare type WritableDeclaredKeys<T extends object> = DeclaredKeys<T> & PropertyKey & WritableKeys<T>;
+export declare type WritableUndeclaredKeys<T extends object> = PropertyKey & UndeclaredKeys<T> & WritableKeys<T>;
+export declare type booleanE = empty | boolean;
 export declare type booleanU = boolean | undefined;
 export declare type booleans = readonly boolean[];
 export declare type empty = null | undefined;
-export declare type numberE = number | empty;
+export declare type nevers = readonly never[];
+export declare type numberE = empty | number;
 export declare type numberU = number | undefined;
 export declare type numbers = readonly number[];
-export declare type objectE = object | empty;
+export declare type objectE = empty | object;
 export declare type objectU = object | undefined;
 export declare type objects = readonly object[];
-export declare type stringE = string | empty;
+export declare type stringE = empty | string;
 export declare type stringU = string | undefined;
 export declare type strings = readonly string[];
 export declare type unknowns = readonly unknown[];
@@ -138,5 +174,4 @@ declare type KeysOfType1<T, V> = KeysOfType2<T, V>[keyof T];
 declare type KeysOfType2<T, V> = {
     readonly [K in keyof T]: Equal<T[K], V, K, never>;
 };
-export {};
 //# sourceMappingURL=core.d.ts.map

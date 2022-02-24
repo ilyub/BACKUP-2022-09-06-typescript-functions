@@ -1,4 +1,4 @@
-export declare type Eol = "\r\n" | "\n";
+export declare type Eol = "\n" | "\r\n";
 /**
  * Detects EOL sequence.
  *
@@ -13,6 +13,14 @@ export declare function detectEol(str: string): Eol;
  * @returns _True_ if string consists of spaces, _false_ otherwise.
  */
 export declare function empty(str: string): boolean;
+/**
+ * Filters string.
+ *
+ * @param str - String.
+ * @param predicate - Filter function.
+ * @returns Filtered string.
+ */
+export declare function filter(str: string, predicate: (char: string, index: number) => unknown): string;
 /**
  * Gets leading spaces.
  *

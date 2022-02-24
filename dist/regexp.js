@@ -1,9 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.slice = exports.matchAll = exports.escapeString = void 0;
+exports.slice = exports.matchAll = exports.escapeString = exports.addFlags = void 0;
 const tslib_1 = require("tslib");
 const a = (0, tslib_1.__importStar)(require("./array"));
 const assert = (0, tslib_1.__importStar)(require("./assertions"));
+const s = (0, tslib_1.__importStar)(require("./string"));
+/**
+ * Adds flag to regular expression.
+ *
+ * @param re - Regular expression.
+ * @param flags - Flags.
+ * @returns New regular expression.
+ */
+function addFlags(re, flags) {
+    flags = s.filter(flags, flag => !re.flags.includes(flag));
+    // eslint-disable-next-line security/detect-non-literal-regexp
+    return flags ? new RegExp(re, re.flags + flags) : re;
+}
+exports.addFlags = addFlags;
 /**
  * Escapes regular expression special characters.
  *
@@ -22,11 +36,7 @@ exports.escapeString = escapeString;
  * @returns Matches.
  */
 function matchAll(str, re) {
-    if (re.flags.includes("g")) {
-        // Already has global flag
-    }
-    else
-        re = new RegExp(re, `${re.flags}g`);
+    re = addFlags(re, "g");
     return a.fromIterable(function* () {
         let match = re.exec(str);
         while (match) {

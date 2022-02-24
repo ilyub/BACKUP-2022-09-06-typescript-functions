@@ -1,5 +1,13 @@
 import type { Async, PromiseAsync, Sync } from "./types/core";
-export declare type PipeCallback<V = unknown, R = unknown> = (value: V) => R;
+export interface PipeCallback<V = unknown, R = unknown> {
+    /**
+     * Pipe callback.
+     *
+     * @param value - Value.
+     * @returns Result.
+     */
+    (value: V): R;
+}
 /**
  * Prevents parallel running.
  *
@@ -7,6 +15,7 @@ export declare type PipeCallback<V = unknown, R = unknown> = (value: V) => R;
  * @returns Wrapped async function.
  */
 export declare function doNotRunParallel<T extends unknown[] = never[]>(async: Async<void, T>): Async<void, T>;
+export declare const noop: Function;
 /**
  * Applies callbacks to the value.
  *

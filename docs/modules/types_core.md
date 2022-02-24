@@ -4,13 +4,17 @@
 
 ## Table of contents
 
+### Interfaces
+
+- [Async](../interfaces/types_core.Async.md)
+- [CallSignature](../interfaces/types_core.CallSignature.md)
+- [Callable](../interfaces/types_core.Callable.md)
+- [Sync](../interfaces/types_core.Sync.md)
+
 ### Type aliases
 
 - [AddPrefix](types_core.md#addprefix)
 - [ArrayElement](types_core.md#arrayelement)
-- [Async](types_core.md#async)
-- [CallSignature](types_core.md#callsignature)
-- [Callable](types_core.md#callable)
 - [ConstructSignature](types_core.md#constructsignature)
 - [Constructor](types_core.md#constructor)
 - [DeclaredKeys](types_core.md#declaredkeys)
@@ -35,6 +39,7 @@
 - [PartialRecord](types_core.md#partialrecord)
 - [PromiseAsync](types_core.md#promiseasync)
 - [PromiseAsyncSync](types_core.md#promiseasyncsync)
+- [PropertyKeys](types_core.md#propertykeys)
 - [ReadonlyArrayElement](types_core.md#readonlyarrayelement)
 - [ReadonlyDeclaredKeys](types_core.md#readonlydeclaredkeys)
 - [ReadonlyIndexedObject](types_core.md#readonlyindexedobject)
@@ -45,7 +50,6 @@
 - [StrictOmit](types_core.md#strictomit)
 - [StrictPartial](types_core.md#strictpartial)
 - [StrictRequired](types_core.md#strictrequired)
-- [Sync](types_core.md#sync)
 - [Timeout](types_core.md#timeout)
 - [UndeclaredKeys](types_core.md#undeclaredkeys)
 - [UndefinedKeys](types_core.md#undefinedkeys)
@@ -60,6 +64,7 @@
 - [booleanU](types_core.md#booleanu)
 - [booleans](types_core.md#booleans)
 - [empty](types_core.md#empty)
+- [nevers](types_core.md#nevers)
 - [numberE](types_core.md#numbere)
 - [numberU](types_core.md#numberu)
 - [numbers](types_core.md#numbers)
@@ -99,86 +104,6 @@ ___
 | Name |
 | :------ |
 | `T` |
-
-___
-
-### Async
-
-Ƭ **Async**<`R`, `A`\>: (...`args`: `A`) => `Promise`<`R`\>
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `R` | `R` |
-| `A` | extends `unknown`[] = `never`[] |
-
-#### Type declaration
-
-▸ (...`args`): `Promise`<`R`\>
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `...args` | `A` |
-
-##### Returns
-
-`Promise`<`R`\>
-
-___
-
-### CallSignature
-
-Ƭ **CallSignature**<`T`\>: (`this`: `ThisParameterType`<`T`\>, ...`args`: `Parameters`<`T`\>) => `ReturnType`<`T`\>
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends [`Callable`](types_core.md#callable) |
-
-#### Type declaration
-
-▸ (`this`, ...`args`): `ReturnType`<`T`\>
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `this` | `ThisParameterType`<`T`\> |
-| `...args` | `Parameters`<`T`\> |
-
-##### Returns
-
-`ReturnType`<`T`\>
-
-___
-
-### Callable
-
-Ƭ **Callable**<`T`\>: (...`args`: `any`[]) => `T`
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | `any` |
-
-#### Type declaration
-
-▸ (...`args`): `T`
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `...args` | `any`[] |
-
-##### Returns
-
-`T`
 
 ___
 
@@ -228,7 +153,7 @@ ___
 
 ### DeclaredKeys
 
-Ƭ **DeclaredKeys**<`T`\>: `PropertyKey` & [`DefinedKeys`](types_core.md#definedkeys)<`T`\> & `RequiredKeys`<`T`\>
+Ƭ **DeclaredKeys**<`T`\>: [`DefinedKeys`](types_core.md#definedkeys)<`T`\> & `PropertyKey` & `RequiredKeys`<`T`\>
 
 #### Type parameters
 
@@ -418,7 +343,7 @@ ___
 
 ### NumStrE
 
-Ƭ **NumStrE**: [`NumStr`](types_core.md#numstr) \| [`empty`](types_core.md#empty)
+Ƭ **NumStrE**: [`empty`](types_core.md#empty) \| [`NumStr`](types_core.md#numstr)
 
 ___
 
@@ -449,7 +374,7 @@ ___
 
 ### PromiseAsync
 
-Ƭ **PromiseAsync**<`T`\>: `Promise`<`T`\> \| [`Async`](types_core.md#async)<`T`\>
+Ƭ **PromiseAsync**<`T`\>: [`Async`](../interfaces/types_core.Async.md)<`T`\> \| `Promise`<`T`\>
 
 #### Type parameters
 
@@ -461,13 +386,19 @@ ___
 
 ### PromiseAsyncSync
 
-Ƭ **PromiseAsyncSync**<`T`\>: `Promise`<`T`\> \| [`Async`](types_core.md#async)<`T`\> \| [`Sync`](types_core.md#sync)<`T`\>
+Ƭ **PromiseAsyncSync**<`T`\>: [`Async`](../interfaces/types_core.Async.md)<`T`\> \| `Promise`<`T`\> \| [`Sync`](../interfaces/types_core.Sync.md)<`T`\>
 
 #### Type parameters
 
 | Name |
 | :------ |
 | `T` |
+
+___
+
+### PropertyKeys
+
+Ƭ **PropertyKeys**: readonly `PropertyKey`[]
 
 ___
 
@@ -485,7 +416,7 @@ ___
 
 ### ReadonlyDeclaredKeys
 
-Ƭ **ReadonlyDeclaredKeys**<`T`\>: `PropertyKey` & `ReadonlyKeys`<`T`\> & [`DeclaredKeys`](types_core.md#declaredkeys)<`T`\>
+Ƭ **ReadonlyDeclaredKeys**<`T`\>: [`DeclaredKeys`](types_core.md#declaredkeys)<`T`\> & `PropertyKey` & `ReadonlyKeys`<`T`\>
 
 #### Type parameters
 
@@ -595,33 +526,6 @@ ___
 
 ___
 
-### Sync
-
-Ƭ **Sync**<`R`, `A`\>: (...`args`: `A`) => `R`
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `R` | `R` |
-| `A` | extends `unknown`[] = `never`[] |
-
-#### Type declaration
-
-▸ (...`args`): `R`
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `...args` | `A` |
-
-##### Returns
-
-`R`
-
-___
-
 ### Timeout
 
 Ƭ **Timeout**: `ReturnType`<typeof `setTimeout`\>
@@ -714,7 +618,7 @@ ___
 
 ### WritableDeclaredKeys
 
-Ƭ **WritableDeclaredKeys**<`T`\>: `PropertyKey` & `WritableKeys`<`T`\> & [`DeclaredKeys`](types_core.md#declaredkeys)<`T`\>
+Ƭ **WritableDeclaredKeys**<`T`\>: [`DeclaredKeys`](types_core.md#declaredkeys)<`T`\> & `PropertyKey` & `WritableKeys`<`T`\>
 
 #### Type parameters
 
@@ -726,7 +630,7 @@ ___
 
 ### WritableUndeclaredKeys
 
-Ƭ **WritableUndeclaredKeys**<`T`\>: `PropertyKey` & `WritableKeys`<`T`\> & [`UndeclaredKeys`](types_core.md#undeclaredkeys)<`T`\>
+Ƭ **WritableUndeclaredKeys**<`T`\>: `PropertyKey` & [`UndeclaredKeys`](types_core.md#undeclaredkeys)<`T`\> & `WritableKeys`<`T`\>
 
 #### Type parameters
 
@@ -738,7 +642,7 @@ ___
 
 ### booleanE
 
-Ƭ **booleanE**: `boolean` \| [`empty`](types_core.md#empty)
+Ƭ **booleanE**: [`empty`](types_core.md#empty) \| `boolean`
 
 ___
 
@@ -760,9 +664,15 @@ ___
 
 ___
 
+### nevers
+
+Ƭ **nevers**: readonly `never`[]
+
+___
+
 ### numberE
 
-Ƭ **numberE**: `number` \| [`empty`](types_core.md#empty)
+Ƭ **numberE**: [`empty`](types_core.md#empty) \| `number`
 
 ___
 
@@ -780,7 +690,7 @@ ___
 
 ### objectE
 
-Ƭ **objectE**: `object` \| [`empty`](types_core.md#empty)
+Ƭ **objectE**: [`empty`](types_core.md#empty) \| `object`
 
 ___
 
@@ -798,7 +708,7 @@ ___
 
 ### stringE
 
-Ƭ **stringE**: `string` \| [`empty`](types_core.md#empty)
+Ƭ **stringE**: [`empty`](types_core.md#empty) \| `string`
 
 ___
 

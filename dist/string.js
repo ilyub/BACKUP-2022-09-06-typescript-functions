@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unpadMultiline = exports.ucFirst = exports.trimTrailingEmptyLines = exports.trimStart = exports.trimLeadingEmptyLines = exports.trimEnd = exports.trailingSpaces = exports.replaceAll = exports.path = exports.lines = exports.lcFirst = exports.leadingSpaces = exports.empty = exports.detectEol = void 0;
+exports.unpadMultiline = exports.ucFirst = exports.trimTrailingEmptyLines = exports.trimStart = exports.trimLeadingEmptyLines = exports.trimEnd = exports.trailingSpaces = exports.replaceAll = exports.path = exports.lines = exports.lcFirst = exports.leadingSpaces = exports.filter = exports.empty = exports.detectEol = void 0;
 const tslib_1 = require("tslib");
 const a = (0, tslib_1.__importStar)(require("./array"));
 const regexp = (0, tslib_1.__importStar)(require("./regexp"));
@@ -24,6 +24,17 @@ function empty(str) {
     return /^\s*$/u.test(str);
 }
 exports.empty = empty;
+/**
+ * Filters string.
+ *
+ * @param str - String.
+ * @param predicate - Filter function.
+ * @returns Filtered string.
+ */
+function filter(str, predicate) {
+    return a.fromString(str).filter(predicate).join("");
+}
+exports.filter = filter;
 /**
  * Gets leading spaces.
  *
@@ -112,6 +123,7 @@ pathUtils.removeTrailingSlash = (path) => path.replace(/[/\\]$/u, "");
  * @returns New string with replacements done.
  */
 function replaceAll(str, search, replace) {
+    // eslint-disable-next-line security/detect-non-literal-regexp
     return str.replace(new RegExp(regexp.escapeString(search), "gu"), replace);
 }
 exports.replaceAll = replaceAll;
@@ -132,7 +144,7 @@ exports.trailingSpaces = trailingSpaces;
  * @returns Trimmed string.
  */
 function trimEnd(str) {
-    return str.replace(/(?<!\s)\s+$/u, "");
+    return str.replace(/(^|\S)\s+$/u, "$1");
 }
 exports.trimEnd = trimEnd;
 /**

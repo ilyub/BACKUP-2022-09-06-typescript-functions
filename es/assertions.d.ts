@@ -1,6 +1,13 @@
 import * as is from "./guards";
 import type * as types from "./types/core";
-export declare type Assertion<T> = (value: unknown) => asserts value is T;
+export interface Assertion<T> {
+    /**
+     * Asserts that value type is T.
+     *
+     * @param value - Value.
+     */
+    (value: unknown): asserts value is T;
+}
 export declare type ErrorArg = string | (() => unknown);
 /**
  * Converts error or error message to error argument usable with assertion.
@@ -158,7 +165,7 @@ export declare function numberU(value: unknown, error?: ErrorArg): asserts value
  */
 export declare function object(value: unknown, error?: ErrorArg): asserts value is object;
 export declare namespace object {
-    var of: <A, B>(value: unknown, requiredGuards: is.Guards<A>, optionalGuards: is.Guards<B>, error?: ErrorArg | undefined) => asserts value is Required<A> & Partial<B>;
+    var of: <A, B>(value: unknown, requiredGuards: is.Guards<A>, optionalGuards: is.Guards<B>, error?: ErrorArg | undefined) => asserts value is Partial<B> & Required<A>;
 }
 /**
  * Asserts that value type is objectU.

@@ -79,6 +79,15 @@ export function fromRange(from, to, step = 1) {
     return result;
 }
 /**
+ * Creates array from string.
+ *
+ * @param str - String.
+ * @returns Array.
+ */
+export function fromString(str) {
+    return [...str];
+}
+/**
  * Gets element by index.
  *
  * @param arr - Array.
@@ -88,6 +97,7 @@ export function fromRange(from, to, step = 1) {
  */
 export function get(arr, index) {
     assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return arr[index];
 }
 /**
@@ -187,7 +197,9 @@ export function replaceBy(arr, value, keyOrReduce) {
  * @returns New reversed array.
  */
 export function reverse(arr) {
-    return clone(arr).reverse();
+    const result = clone(arr);
+    result.reverse();
+    return result;
 }
 /**
  * Sorts array.
@@ -197,7 +209,9 @@ export function reverse(arr) {
  * @returns New sorted array.
  */
 export function sort(arr, compareFn) {
-    return clone(arr).sort(compareFn);
+    const result = clone(arr);
+    result.sort(compareFn);
+    return result;
 }
 /**
  * Adds/removes value to/from an array.
