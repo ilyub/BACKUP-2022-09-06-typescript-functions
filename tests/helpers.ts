@@ -9,19 +9,7 @@ import {
 import * as reflect from "@/reflect";
 import * as testUtils from "@/testUtils";
 
-class TestClass {
-  public x?: number = 1;
-
-  public y?: number = 2;
-}
-
 testUtils.installFakeTimer();
-
-test("createFacade", () => {
-  const facade = createFacade("sample-facade", {});
-
-  expect(facade.setImplementation).toBeDefined();
-});
 
 test("createFacade: Extension", () => {
   interface Extension {
@@ -55,173 +43,134 @@ test("createFacade: Function", () => {
 
   const facade = createFacade<Facade>("sample-facade", {});
 
-  {
-    facade.setImplementation(x => x * x);
-    expect(facade(1)).toBe(1);
-    expect(facade(2)).toBe(4);
-    expect(facade(3)).toBe(9);
-  }
+  facade.setImplementation(x => x * x);
+  expect(facade(1)).toBe(1);
+  expect(facade(2)).toBe(4);
+  expect(facade(3)).toBe(9);
 });
 
 test("createFacade: Object", () => {
   interface Facade {
-    get: () => number;
-    set: (x: number) => void;
     value: number;
   }
 
   const facade = createFacade<Facade>("sample-facade", {});
 
-  {
-    const error = new Error("Missing facade implementation: sample-facade");
-
-    expect(() => facade.value).toThrow(error);
-    expect(() => {
-      facade.value = 1;
-    }).toThrow(error);
-    expect(() => {
-      Object.getOwnPropertyDescriptor(facade, "value");
-    }).toThrow(error);
-    expect(() => {
-      Object.isExtensible(facade);
-    }).toThrow(error);
+  class Implementation {
+    public value = 1;
   }
 
-  {
-    facade.setImplementation({
-      get() {
-        return this.value;
-      },
-      set(value: number) {
-        this.value = value;
-      },
-      value: 1
-    });
+  facade.setImplementation(new Implementation());
 
-    {
-      const expected = {
-        configurable: true,
-        enumerable: true,
-        value: 1,
-        writable: true
-      };
-
-      expect(facade.value).toBe(1);
-      expect(facade.get()).toBe(1);
-      expect(Object.getOwnPropertyDescriptor(facade, "value")).toStrictEqual(
-        expected
-      );
-      expect(Object.isExtensible(facade)).toBeTrue();
-    }
-
-    {
-      const expected = {
-        configurable: true,
-        enumerable: true,
-        value: 2,
-        writable: true
-      };
-
-      facade.set(2);
-      expect(facade.value).toBe(2);
-      expect(facade.get()).toBe(2);
-      expect(Object.getOwnPropertyDescriptor(facade, "value")).toStrictEqual(
-        expected
-      );
-      expect(Object.isExtensible(facade)).toBeTrue();
-    }
-  }
-});
-
-test("onDemand: get", () => {
-  const obj = onDemand(() => new TestClass());
-
-  expect(obj.x).toBe(1);
-  expect(obj.y).toBe(2);
-});
-
-test("onDemand: getOwnPropertyDescriptor", () => {
-  const obj = onDemand(() => new TestClass());
-
-  expect(Object.getOwnPropertyDescriptor(obj, "x")).toStrictEqual({
+  const descriptor = {
     configurable: true,
     enumerable: true,
     value: 1,
     writable: true
-  });
+  };
 
-  expect(Object.getOwnPropertyDescriptor(obj, "y")).toStrictEqual({
+  expect(reflect.get(facade, "value")).toBe(1);
+  expect(reflect.getOwnPropertyDescriptor(facade, "value")).toStrictEqual(
+    descriptor
+  );
+  expect(reflect.has(facade, "value")).toBeTrue();
+  expect(reflect.isExtensible(facade)).toBeTrue();
+  expect(reflect.ownKeys(facade)).toStrictEqual(["value"]);
+  expect(reflect.set(facade, "value", 2)).toBeTrue();
+});
+
+test("onDemand: Object", () => {
+  class TestClass {
+    public value = 1;
+  }
+
+  const obj = onDemand(() => new TestClass());
+
+  const descriptor = {
     configurable: true,
     enumerable: true,
-    value: 2,
+    value: 1,
     writable: true
-  });
-});
+  };
 
-test("onDemand: ownKeys", () => {
-  const obj = onDemand(() => new TestClass());
-
-  expect(Object.keys(obj)).toStrictEqual(["x", "y"]);
-  expect(Object.keys(obj)).toStrictEqual(["x", "y"]);
-});
-
-test("onDemand: set", () => {
-  const obj = onDemand(() => new TestClass());
-
-  obj.x = 2;
-  obj.y = 3;
-  expect(obj.x).toBe(2);
-  expect(obj.y).toBe(3);
+  expect(reflect.get(obj, "value")).toBe(1);
+  expect(reflect.getOwnPropertyDescriptor(obj, "value")).toStrictEqual(
+    descriptor
+  );
+  expect(reflect.has(obj, "value")).toBeTrue();
+  expect(reflect.isExtensible(obj)).toBeTrue();
+  expect(reflect.ownKeys(obj)).toStrictEqual(["value"]);
+  expect(reflect.set(obj, "value", 2)).toBeTrue();
 });
 
 test("safeAccess", () => {
-  const obj = {
-    a: "a",
-    b: 10,
-    c: 20,
-    d: 30
-  };
+  safeAccess({}, {});
 
-  safeAccess(obj, {});
-
-  const safe = safeAccess(obj, { a: is.string, b: is.number }, ["c"]);
+  const obj = safeAccess(
+    {
+      a: 1,
+      b: 2,
+      c: 3
+    },
+    { a: is.number },
+    ["b"]
+  );
 
   {
-    expect(() => {
-      reflect.set(safe, "a", safe.b);
-    }).toThrow(new Error("Type check failed: a"));
+    const error = new Error("Read access denied: c");
 
-    expect(() => {
-      reflect.set(safe, "b", safe.a);
-    }).toThrow(new Error("Type check failed: b"));
-
-    expect(() => {
-      reflect.set(safe, "c", safe.c);
-    }).toThrow(new Error("Write access denied: c"));
-
-    expect(() => {
-      reflect.set(safe, "d", safe.c);
-    }).toThrow(new Error("Write access denied: d"));
+    expect(reflect.get(obj, "a")).toBe(1);
+    expect(reflect.get(obj, "b")).toBe(2);
+    expect(() => reflect.get(obj, "c")).toThrow(error);
   }
 
   {
-    expect(reflect.get(safe, "a")).toBe("a");
-    expect(reflect.get(safe, "b")).toBe(10);
-    expect(reflect.get(safe, "c")).toBe(20);
-    expect(() => reflect.get(safe, "d")).toThrow(
-      new Error("Read access denied: d")
-    );
+    const expected1 = {
+      configurable: true,
+      enumerable: true,
+      value: 1,
+      writable: true
+    };
+
+    const expected2 = {
+      configurable: true,
+      enumerable: true,
+      value: 2,
+      writable: true
+    };
+
+    const error = new Error("Read access denied: c");
+
+    expect(reflect.getOwnPropertyDescriptor(obj, "a")).toStrictEqual(expected1);
+    expect(reflect.getOwnPropertyDescriptor(obj, "b")).toStrictEqual(expected2);
+    expect(() => reflect.getOwnPropertyDescriptor(obj, "c")).toThrow(error);
   }
 
   {
-    safe.a = "b";
-    safe.b = 11;
-    expect(reflect.get(safe, "a")).toBe("b");
-    expect(reflect.get(safe, "b")).toBe(11);
-    expect(reflect.get(safe, "c")).toBe(20);
-    expect(() => reflect.get(safe, "d")).toThrow(
-      new Error("Read access denied: d")
-    );
+    expect(reflect.has(obj, "a")).toBeTrue();
+    expect(reflect.has(obj, "b")).toBeTrue();
+    expect(reflect.has(obj, "c")).toBeFalse();
+  }
+
+  {
+    expect(reflect.isExtensible(obj)).toBeTrue();
+  }
+
+  {
+    expect(reflect.ownKeys(obj)).toStrictEqual(["b", "a"]);
+  }
+
+  {
+    const error1 = new Error("Type check failed: a");
+
+    const error2 = new Error("Write access denied: b");
+
+    const error3 = new Error("Write access denied: c");
+
+    expect(reflect.set(obj, "a", 2)).toBeTrue();
+    expect(() => reflect.set(obj, "a", "b")).toThrow(error1);
+    expect(() => reflect.set(obj, "b", 3)).toThrow(error2);
+    expect(() => reflect.set(obj, "c", 4)).toThrow(error3);
   }
 });
 
@@ -239,6 +188,12 @@ test.each<"doDefault" | "throw">(["doDefault", "throw"])(
   "wrapProxyHandler",
   action => {
     expect.hasAssertions();
+
+    class TestClass {
+      public x?: number = 1;
+
+      public y?: number = 2;
+    }
 
     const handler = wrapProxyHandler("testId", action, {});
 

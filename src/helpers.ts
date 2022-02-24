@@ -1,5 +1,6 @@
 import * as assert from "./assertions";
 import * as cast from "./converters";
+import * as fn from "./function";
 import * as is from "./guards";
 import * as o from "./object";
 import * as reflect from "./reflect";
@@ -49,32 +50,16 @@ export function createFacade<I extends object, E = unknown>(
   const defaultFacade = { ...extension, ...facadeOwnMethods };
 
   const proxy = new Proxy(
-    () => {},
+    fn.noop,
     wrapProxyHandler("createFacade", "throw", {
       apply(_target, thisArg, args: unknowns) {
         return reflect.apply(implementation(), thisArg, args);
-      },
-      construct(_target, args, newTarget) {
-        const result = reflect.construct(implementation(), args, newTarget);
-
-        assert.object(result);
-
-        return result;
-      },
-      defineProperty(_target, key, attrs) {
-        return reflect.defineProperty(facade(key), key, attrs);
-      },
-      deleteProperty(_target, key) {
-        return reflect.deleteProperty(facade(key), key);
       },
       get(_target, key) {
         return reflect.get(facade(key), key);
       },
       getOwnPropertyDescriptor(_target, key) {
         return Object.getOwnPropertyDescriptor(facade(key), key);
-      },
-      getPrototypeOf() {
-        return reflect.getPrototypeOf(facade());
       },
       has(_target, key) {
         return reflect.has(facade(key), key);
@@ -85,20 +70,14 @@ export function createFacade<I extends object, E = unknown>(
       ownKeys() {
         return reflect.ownKeys(facade());
       },
-      preventExtensions() {
-        return reflect.preventExtensions(facade());
-      },
       set(_target, key, value) {
         return reflect.set(facade(key), key, value);
-      },
-      setPrototypeOf(_target, proto) {
-        return reflect.setPrototypeOf(facade(), proto);
       }
     })
   );
 
   // eslint-disable-next-line no-type-assertion/no-type-assertion
-  return proxy as Facade<I, E>;
+  return proxy as unknown as Facade<I, E>;
 
   function facade(key?: PropertyKey): object {
     if (is.not.empty(key) && key in defaultFacade) return defaultFacade;
@@ -127,30 +106,11 @@ export function onDemand<T extends object>(generator: () => T): T {
   const proxy = new Proxy(
     {},
     wrapProxyHandler("onDemand", "throw", {
-      apply(_target, thisArg, args) {
-        return reflect.apply(fn(), thisArg, args);
-      },
-      construct(_target, args, newTarget) {
-        const result = reflect.construct(fn(), args, newTarget);
-
-        assert.object(result);
-
-        return result;
-      },
-      defineProperty(_target, key, attrs) {
-        return reflect.defineProperty(obj(), key, attrs);
-      },
-      deleteProperty(_target, key) {
-        return reflect.deleteProperty(obj(), key);
-      },
       get(_target, key) {
         return reflect.get(obj(), key);
       },
       getOwnPropertyDescriptor(_target, key) {
         return Object.getOwnPropertyDescriptor(obj(), key);
-      },
-      getPrototypeOf() {
-        return reflect.getPrototypeOf(obj());
       },
       has(_target, key) {
         return reflect.has(obj(), key);
@@ -161,29 +121,16 @@ export function onDemand<T extends object>(generator: () => T): T {
       ownKeys() {
         return Object.keys(obj());
       },
-      preventExtensions() {
-        return reflect.preventExtensions(obj());
-      },
       set(_target, key, value) {
         reflect.set(obj(), key, value);
 
         return true;
-      },
-      setPrototypeOf(_target, proto) {
-        return reflect.setPrototypeOf(obj(), proto);
       }
     })
   );
 
   // eslint-disable-next-line no-type-assertion/no-type-assertion
   return proxy as T;
-
-  function fn(): Function {
-    _obj = _obj ?? generator();
-    assert.callable(_obj);
-
-    return _obj;
-  }
 
   function obj(): object {
     _obj = _obj ?? generator();
@@ -233,6 +180,9 @@ export function safeAccess<
       },
       has(_target, key): boolean {
         return keysSet.has(key);
+      },
+      isExtensible(target) {
+        return reflect.isExtensible(target);
       },
       ownKeys() {
         return keys;
