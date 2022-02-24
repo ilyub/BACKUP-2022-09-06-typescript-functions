@@ -4,23 +4,23 @@ import * as is from "./guards";
 import * as o from "./object";
 import * as reflect from "./reflect";
 import * as timer from "./timer";
-import type { Join2 } from "./types/core";
+import type { Join2, unknowns } from "./types/core";
 
-export type Facade<F, E = unknown> = E & F & FacadeOwnMethods<F>;
+export type Facade<I, E = unknown> = E & FacadeOwnMethods<I> & I;
 
-export interface FacadeOwnMethods<F> {
+export interface FacadeOwnMethods<I> {
   /**
    * Sets implementation.
    *
    * @param implementation - Implementation.
    */
-  readonly setImplementation: (implementation: F) => void;
+  readonly setImplementation: (implementation: I) => void;
 }
 
 export type SafeAccess<
   T extends object,
-  W extends keyof T,
-  R extends keyof T
+  W extends string & keyof T,
+  R extends string & keyof T
 > = Join2<{ [K in W]: T[K] }, { readonly [K in R]: T[K] }>;
 
 export declare type SafeAccessGuards<T, W extends keyof T> = {
@@ -34,79 +34,85 @@ export declare type SafeAccessGuards<T, W extends keyof T> = {
  * @param extension - Facade extension.
  * @returns Facade.
  */
-export function createFacade<F extends object, E = unknown>(
+export function createFacade<I extends object, E = unknown>(
   name: string,
   extension: E
-): Facade<F, E> {
-  let implementation: F | undefined;
+): Facade<I, E> {
+  let _implementation: I | undefined;
 
-  function callback(this: unknown, ...args: unknown[]): unknown {
-    if (is.callable(implementation)) return implementation.call(this, ...args);
-
-    throw new Error(
-      implementation
-        ? `Facade is not callable: ${name}`
-        : `Missing facade implementation: ${name}`
-    );
-  }
-
-  const facadeOwnMethods: FacadeOwnMethods<F> = {
-    setImplementation(value: F) {
-      implementation = value;
+  const facadeOwnMethods: FacadeOwnMethods<I> = {
+    setImplementation(value: I) {
+      _implementation = value;
     }
   };
 
-  const proxyTarget = o.extend(callback, facadeOwnMethods, extension);
+  const defaultFacade = { ...extension, ...facadeOwnMethods };
 
   const proxy = new Proxy(
-    proxyTarget,
+    () => {},
     wrapProxyHandler("createFacade", "throw", {
-      apply(target, thisArg, args: readonly unknown[]) {
-        return target.call(thisArg, ...args);
+      apply(_target, thisArg, args: unknowns) {
+        return reflect.apply(implementation(), thisArg, args);
       },
-      get(target, key) {
-        if (o.hasOwnProp(key, target)) return reflect.get(target, key);
+      construct(_target, args, newTarget) {
+        const result = reflect.construct(implementation(), args, newTarget);
 
-        if (is.not.empty(implementation))
-          return reflect.get(implementation, key);
+        assert.object(result);
 
-        throw new Error(`Missing facade implementation: ${name}`);
+        return result;
       },
-      getOwnPropertyDescriptor(target, key) {
-        if (o.hasOwnProp(key, target))
-          return Object.getOwnPropertyDescriptor(target, key);
-
-        if (is.not.empty(implementation))
-          return Object.getOwnPropertyDescriptor(implementation, key);
-
-        throw new Error(`Missing facade implementation: ${name}`);
+      defineProperty(_target, key, attrs) {
+        return reflect.defineProperty(facade(key), key, attrs);
+      },
+      deleteProperty(_target, key) {
+        return reflect.deleteProperty(facade(key), key);
+      },
+      get(_target, key) {
+        return reflect.get(facade(key), key);
+      },
+      getOwnPropertyDescriptor(_target, key) {
+        return Object.getOwnPropertyDescriptor(facade(key), key);
+      },
+      getPrototypeOf() {
+        return reflect.getPrototypeOf(facade());
+      },
+      has(_target, key) {
+        return reflect.has(facade(key), key);
       },
       isExtensible() {
-        if (is.not.empty(implementation))
-          return Object.isExtensible(implementation);
-
-        throw new Error(`Missing facade implementation: ${name}`);
+        return Object.isExtensible(facade());
       },
-      set(target, key, value) {
-        if (o.hasOwnProp(key, target)) {
-          reflect.set(target, key, value);
-
-          return true;
-        }
-
-        if (is.not.empty(implementation)) {
-          reflect.set(implementation, key, value);
-
-          return true;
-        }
-
-        throw new Error(`Missing facade implementation: ${name}`);
+      ownKeys() {
+        return reflect.ownKeys(facade());
+      },
+      preventExtensions() {
+        return reflect.preventExtensions(facade());
+      },
+      set(_target, key, value) {
+        return reflect.set(facade(key), key, value);
+      },
+      setPrototypeOf(_target, proto) {
+        return reflect.setPrototypeOf(facade(), proto);
       }
     })
   );
 
   // eslint-disable-next-line no-type-assertion/no-type-assertion
-  return proxy as Facade<F, E>;
+  return proxy as Facade<I, E>;
+
+  function facade(key?: PropertyKey): object {
+    if (is.not.empty(key) && key in defaultFacade) return defaultFacade;
+
+    assert.not.empty(_implementation, `Missing facade implementation: ${name}`);
+
+    return _implementation;
+  }
+
+  function implementation(): Function {
+    assert.callable(_implementation, `Facade is not callable: ${name}`);
+
+    return _implementation;
+  }
 }
 
 /**
@@ -116,35 +122,74 @@ export function createFacade<F extends object, E = unknown>(
  * @returns Resource.
  */
 export function onDemand<T extends object>(generator: () => T): T {
-  let obj: T | undefined;
+  let _obj: T | undefined;
 
-  return new Proxy(
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
-    {} as never,
+  const proxy = new Proxy(
+    {},
     wrapProxyHandler("onDemand", "throw", {
-      get(_target, key) {
-        obj = obj ?? generator();
+      apply(_target, thisArg, args) {
+        return reflect.apply(fn(), thisArg, args);
+      },
+      construct(_target, args, newTarget) {
+        const result = reflect.construct(fn(), args, newTarget);
 
-        return reflect.get(obj, key);
+        assert.object(result);
+
+        return result;
+      },
+      defineProperty(_target, key, attrs) {
+        return reflect.defineProperty(obj(), key, attrs);
+      },
+      deleteProperty(_target, key) {
+        return reflect.deleteProperty(obj(), key);
+      },
+      get(_target, key) {
+        return reflect.get(obj(), key);
       },
       getOwnPropertyDescriptor(_target, key) {
-        obj = obj ?? generator();
-
-        return Object.getOwnPropertyDescriptor(obj, key);
+        return Object.getOwnPropertyDescriptor(obj(), key);
+      },
+      getPrototypeOf() {
+        return reflect.getPrototypeOf(obj());
+      },
+      has(_target, key) {
+        return reflect.has(obj(), key);
+      },
+      isExtensible() {
+        return reflect.isExtensible(obj());
       },
       ownKeys() {
-        obj = obj ?? generator();
-
-        return Object.keys(obj);
+        return Object.keys(obj());
+      },
+      preventExtensions() {
+        return reflect.preventExtensions(obj());
       },
       set(_target, key, value) {
-        obj = obj ?? generator();
-        reflect.set(obj, key, value);
+        reflect.set(obj(), key, value);
 
         return true;
+      },
+      setPrototypeOf(_target, proto) {
+        return reflect.setPrototypeOf(obj(), proto);
       }
     })
   );
+
+  // eslint-disable-next-line no-type-assertion/no-type-assertion
+  return proxy as T;
+
+  function fn(): Function {
+    _obj = _obj ?? generator();
+    assert.callable(_obj);
+
+    return _obj;
+  }
+
+  function obj(): object {
+    _obj = _obj ?? generator();
+
+    return _obj;
+  }
 }
 
 /**
@@ -157,8 +202,8 @@ export function onDemand<T extends object>(generator: () => T): T {
  */
 export function safeAccess<
   T extends object,
-  W extends keyof T,
-  R extends keyof T
+  W extends string & keyof T,
+  R extends string & keyof T
 >(
   obj: T,
   guards: SafeAccessGuards<T, W>,
@@ -166,17 +211,31 @@ export function safeAccess<
 ): SafeAccess<T, W, R> {
   const guardsMap: Map<PropertyKey, is.Guard> = new Map(Object.entries(guards));
 
-  const writableKeys = Object.keys(guards);
+  const writableKeys = o.keys(guards);
 
-  const keysSet: Set<PropertyKey> = new Set([...readonlyKeys, ...writableKeys]);
+  const keys = [...readonlyKeys, ...writableKeys];
+
+  const keysSet = new Set<PropertyKey>(keys);
 
   return new Proxy(
     obj,
-    wrapProxyHandler("createFacade", "throw", {
+    wrapProxyHandler("safeAccess", "throw", {
       get(target, key) {
         if (keysSet.has(key)) return reflect.get(target, key);
 
         throw new Error(`Read access denied: ${cast.string(key)}`);
+      },
+      getOwnPropertyDescriptor(target, key) {
+        if (keysSet.has(key))
+          return reflect.getOwnPropertyDescriptor(target, key);
+
+        throw new Error(`Read access denied: ${cast.string(key)}`);
+      },
+      has(_target, key): boolean {
+        return keysSet.has(key);
+      },
+      ownKeys() {
+        return keys;
       },
       set(target, key, value) {
         const guard = guardsMap.get(key);
@@ -218,12 +277,12 @@ export function wrapProxyHandler<T extends object>(
   switch (action) {
     case "doDefault":
       return {
-        apply(target, thisArg, args: readonly unknown[]): unknown {
+        apply(target, thisArg, args): unknown {
           assert.callable(target);
 
           return reflect.apply(target, thisArg, args);
         },
-        construct(target, args: readonly unknown[], newTarget): object {
+        construct(target, args, newTarget): object {
           assert.callable(target);
 
           const result = reflect.construct(target, args, newTarget);

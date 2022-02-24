@@ -20,16 +20,7 @@ testUtils.installFakeTimer();
 test("createFacade", () => {
   const facade = createFacade("sample-facade", {});
 
-  const expected = {
-    configurable: true,
-    enumerable: true,
-    value: facade.setImplementation,
-    writable: true
-  };
-
-  expect(
-    Object.getOwnPropertyDescriptor(facade, "setImplementation")
-  ).toStrictEqual(expected);
+  expect(facade.setImplementation).toBeDefined();
 });
 
 test("createFacade: Extension", () => {
@@ -63,20 +54,6 @@ test("createFacade: Function", () => {
   }
 
   const facade = createFacade<Facade>("sample-facade", {});
-
-  {
-    const error = new Error("Missing facade implementation: sample-facade");
-
-    expect(() => facade(1)).toThrow(error);
-  }
-
-  {
-    const error = new Error("Facade is not callable: sample-facade");
-
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
-    facade.setImplementation(1 as unknown as Facade);
-    expect(() => facade(1)).toThrow(error);
-  }
 
   {
     facade.setImplementation(x => x * x);
@@ -315,19 +292,19 @@ test.each<"doDefault" | "throw">(["doDefault", "throw"])(
       }
     };
 
-    for (const [name, subtest] of Object.entries(subtests)) {
-      // eslint-disable-next-line jest/no-conditional-in-test
+    /* eslint-disable jest/no-conditional-expect, jest/no-conditional-in-test */
+
+    for (const [name, subtest] of Object.entries(subtests))
       switch (action) {
         case "doDefault":
-          // eslint-disable-next-line jest/no-conditional-expect
           expect(subtest).not.toThrow();
 
           break;
 
         case "throw":
-          // eslint-disable-next-line jest/no-conditional-expect
           expect(subtest).toThrow(new Error(`Not implemented: testId.${name}`));
       }
-    }
+
+    /* eslint-enable jest/no-conditional-expect, jest/no-conditional-in-test */
   }
 );
