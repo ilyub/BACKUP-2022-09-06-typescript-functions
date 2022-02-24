@@ -37,6 +37,8 @@ export function doNotRunParallel<T extends unknown[] = never[]>(
   };
 }
 
+export const noop: Function = () => {};
+
 /**
  * Applies callbacks to the value.
  *

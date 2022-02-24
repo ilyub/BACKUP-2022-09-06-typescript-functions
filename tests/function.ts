@@ -58,6 +58,10 @@ test("doNotRunParallel", async () => {
   });
 });
 
+test("noop", () => {
+  expect(fn.noop()).toBeUndefined();
+});
+
 test("pipe", () => {
   expect(fn.pipe(10_000, Math.log10, Math.sqrt)).toBe(2);
 });
