@@ -1,3 +1,4 @@
+import * as fn from "@/function";
 import * as is from "@/guards";
 import {
   createFacade,
@@ -199,7 +200,7 @@ test.each<"doDefault" | "throw">(["doDefault", "throw"])(
 
     const proxyClass = new Proxy<typeof TestClass>(TestClass, handler);
 
-    const proxyFunction = new Proxy<() => void>(() => {}, handler);
+    const proxyFunction = new Proxy<() => void>(fn.noop, handler);
 
     const proxyObject = new Proxy<TestClass>(new TestClass(), handler);
 

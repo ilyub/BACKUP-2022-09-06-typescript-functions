@@ -1,6 +1,3 @@
-/**
- * @jest-environment @skylib/config/src/jest-env-jsdom
- */
 import $ from "jquery";
 
 import * as testUtils from "@/testUtils";
