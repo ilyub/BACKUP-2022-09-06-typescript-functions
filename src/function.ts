@@ -1,5 +1,11 @@
 import * as is from "./guards";
-import type { Async, PromiseAsync, PromiseAsyncSync, Sync } from "./types/core";
+import type {
+  Async,
+  Callable,
+  PromiseAsync,
+  PromiseAsyncSync,
+  Sync
+} from "./types/core";
 
 export interface PipeCallback<V = unknown, R = unknown> {
   /**
@@ -37,7 +43,8 @@ export function doNotRunParallel<T extends unknown[] = never[]>(
   };
 }
 
-export const noop: Function = () => {};
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+export const noop: Callable = () => {};
 
 /**
  * Applies callbacks to the value.
