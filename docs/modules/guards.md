@@ -777,7 +777,7 @@ ___
 
 ▸ **map**<`K`, `V`\>(`value`, `keyGuard`, `valueGuard`): value is ReadonlyMap<K, V\>
 
-Checks that value type is Map<K, V>.
+Checks that value type is Map\<K, V\>.
 
 #### Type parameters
 
@@ -798,7 +798,7 @@ Checks that value type is Map<K, V>.
 
 value is ReadonlyMap<K, V\>
 
-_True_ if value type is Map<K, V>, _false_ otherwise.
+_True_ if value type is Map\<K, V\>, _false_ otherwise.
 
 ___
 

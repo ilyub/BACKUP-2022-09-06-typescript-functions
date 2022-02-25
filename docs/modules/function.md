@@ -8,21 +8,12 @@
 
 - [PipeCallback](../interfaces/function.PipeCallback.md)
 
-### Variables
-
-- [noop](function.md#noop)
-
 ### Functions
 
 - [doNotRunParallel](function.md#donotrunparallel)
+- [noop](function.md#noop)
 - [pipe](function.md#pipe)
 - [run](function.md#run)
-
-## Variables
-
-### noop
-
-• `Const` **noop**: `Function`
 
 ## Functions
 
@@ -49,6 +40,22 @@ Prevents parallel running.
 [`Async`](../interfaces/types_core.Async.md)<`void`, `T`\>
 
 Wrapped async function.
+
+___
+
+### noop
+
+▸ **noop**(...`args`): `any`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `...args` | `any`[] |
+
+#### Returns
+
+`any`
 
 ___
 

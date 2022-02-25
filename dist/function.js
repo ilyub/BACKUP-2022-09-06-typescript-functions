@@ -27,6 +27,7 @@ function doNotRunParallel(async) {
     };
 }
 exports.doNotRunParallel = doNotRunParallel;
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => { };
 exports.noop = noop;
 function pipe(value, ...callbacks) {

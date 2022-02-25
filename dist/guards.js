@@ -222,12 +222,12 @@ function instances(value, ctor) {
 }
 exports.instances = instances;
 /**
- * Checks that value type is Map<K, V>.
+ * Checks that value type is Map\<K, V\>.
  *
  * @param value - Value.
  * @param keyGuard - Key guard.
  * @param valueGuard - Value guard.
- * @returns _True_ if value type is Map<K, V>, _false_ otherwise.
+ * @returns _True_ if value type is Map\<K, V\>, _false_ otherwise.
  */
 function map(value, keyGuard, valueGuard) {
     return (value instanceof Map &&

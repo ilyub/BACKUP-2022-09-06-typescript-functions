@@ -196,12 +196,12 @@ export function instances(value, ctor) {
     return Array.isArray(value) && value.every(x => x instanceof ctor);
 }
 /**
- * Checks that value type is Map<K, V>.
+ * Checks that value type is Map\<K, V\>.
  *
  * @param value - Value.
  * @param keyGuard - Key guard.
  * @param valueGuard - Value guard.
- * @returns _True_ if value type is Map<K, V>, _false_ otherwise.
+ * @returns _True_ if value type is Map\<K, V\>, _false_ otherwise.
  */
 export function map(value, keyGuard, valueGuard) {
     return (value instanceof Map &&

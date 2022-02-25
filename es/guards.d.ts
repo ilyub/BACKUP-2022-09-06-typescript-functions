@@ -312,12 +312,12 @@ export declare function instance<T>(value: unknown, ctor: types.Constructor<T>):
  */
 export declare function instances<T>(value: unknown, ctor: types.Constructor<T>): value is readonly T[];
 /**
- * Checks that value type is Map<K, V>.
+ * Checks that value type is Map\<K, V\>.
  *
  * @param value - Value.
  * @param keyGuard - Key guard.
  * @param valueGuard - Value guard.
- * @returns _True_ if value type is Map<K, V>, _false_ otherwise.
+ * @returns _True_ if value type is Map\<K, V\>, _false_ otherwise.
  */
 export declare function map<K, V>(value: unknown, keyGuard: Guard<K>, valueGuard: Guard<V>): value is ReadonlyMap<K, V>;
 /**

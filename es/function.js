@@ -22,6 +22,7 @@ export function doNotRunParallel(async) {
         }
     };
 }
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 export const noop = () => { };
 export function pipe(value, ...callbacks) {
     for (const callback of callbacks)
