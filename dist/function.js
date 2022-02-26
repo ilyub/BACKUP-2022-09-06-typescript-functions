@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.run = exports.pipe = exports.noop = exports.doNotRunParallel = void 0;
+exports.run = exports.pipe = exports.noop = exports.identity = exports.doNotRunParallel = void 0;
 const tslib_1 = require("tslib");
 const is = (0, tslib_1.__importStar)(require("./guards"));
 /**
@@ -27,6 +27,16 @@ function doNotRunParallel(async) {
     };
 }
 exports.doNotRunParallel = doNotRunParallel;
+/**
+ * Identity function.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+function identity(value) {
+    return value;
+}
+exports.identity = identity;
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => { };
 exports.noop = noop;

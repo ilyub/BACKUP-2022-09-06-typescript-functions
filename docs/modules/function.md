@@ -11,6 +11,7 @@
 ### Functions
 
 - [doNotRunParallel](function.md#donotrunparallel)
+- [identity](function.md#identity)
 - [noop](function.md#noop)
 - [pipe](function.md#pipe)
 - [run](function.md#run)
@@ -40,6 +41,32 @@ Prevents parallel running.
 [`Async`](../interfaces/types_core.Async.md)<`void`, `T`\>
 
 Wrapped async function.
+
+___
+
+### identity
+
+▸ **identity**<`T`\>(`value`): `T`
+
+Identity function.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `T` | Value. |
+
+#### Returns
+
+`T`
+
+Value.
 
 ___
 

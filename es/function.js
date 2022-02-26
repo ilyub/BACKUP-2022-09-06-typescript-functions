@@ -22,6 +22,15 @@ export function doNotRunParallel(async) {
         }
     };
 }
+/**
+ * Identity function.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+export function identity(value) {
+    return value;
+}
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export const noop = () => { };
 export function pipe(value, ...callbacks) {

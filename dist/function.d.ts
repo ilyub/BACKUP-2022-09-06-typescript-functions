@@ -15,6 +15,13 @@ export interface PipeCallback<V = unknown, R = unknown> {
  * @returns Wrapped async function.
  */
 export declare function doNotRunParallel<T extends unknown[] = never[]>(async: Async<void, T>): Async<void, T>;
+/**
+ * Identity function.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+export declare function identity<T>(value: T): T;
 export declare const noop: Callable;
 /**
  * Applies callbacks to the value.
