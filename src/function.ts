@@ -43,6 +43,16 @@ export function doNotRunParallel<T extends unknown[] = never[]>(
   };
 }
 
+/**
+ * Identity function.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+export function identity<T>(value: T): T {
+  return value;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export const noop: Callable = () => {};
 

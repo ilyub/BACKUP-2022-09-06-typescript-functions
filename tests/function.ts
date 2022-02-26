@@ -58,6 +58,12 @@ test("doNotRunParallel", async () => {
   });
 });
 
+test("identity", () => {
+  expect(fn.identity(1)).toBe(1);
+  expect(fn.identity(2)).toBe(2);
+  expect(fn.identity(3)).toBe(3);
+});
+
 test("noop", () => {
   expect(fn.noop()).toBeUndefined();
 });
