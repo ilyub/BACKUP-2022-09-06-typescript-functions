@@ -13,7 +13,7 @@ export type AddPrefix<T extends string, P extends string> = `${P}${T}`;
 
 export type ArrayElement<T> = T extends Array<infer R> ? R : unknown;
 
-export interface Async<R, A extends unknowns = nevers> {
+export interface Async<R, A extends unknowns = emptyArray> {
   /**
    * Async function.
    *
@@ -215,7 +215,7 @@ export type StrictRequired<T extends object> = Join2<
   { readonly [K in ReadonlyKeys<T>]-?: T[K] }
 >;
 
-export interface Sync<R, A extends unknowns = nevers> {
+export interface Sync<R, A extends unknowns = emptyArray> {
   /**
    * Function.
    *
@@ -277,7 +277,9 @@ export type booleans = readonly boolean[];
 
 export type empty = null | undefined;
 
-export type nevers = readonly never[];
+export type emptyArray = readonly never[];
+
+export type falseU = false | undefined;
 
 export type numberE = empty | number;
 
@@ -296,6 +298,8 @@ export type stringE = empty | string;
 export type stringU = string | undefined;
 
 export type strings = readonly string[];
+
+export type trueU = true | undefined;
 
 export type unknowns = readonly unknown[];
 
