@@ -18,6 +18,7 @@ import type {
   numberU,
   ReadonlyArrayElement,
   RemovePrefix,
+  strings,
   UndefinedKeys,
   WithOptionalKeys,
   WithUndeclaredKeys,
@@ -119,7 +120,7 @@ test("deepReadonly", () => {
 
     type To = DeepReadonly<From>;
 
-    type Expected = readonly [number, { readonly x: readonly string[] }];
+    type Expected = readonly [number, { readonly x: strings }];
 
     const value: Equals<To, Expected> = 1;
 
@@ -198,7 +199,7 @@ test("deepWritable", () => {
   }
 
   {
-    type From = readonly [number, { readonly x: readonly string[] }];
+    type From = readonly [number, { readonly x: strings }];
 
     type To = DeepWritable<From>;
 

@@ -56,7 +56,7 @@ export function not(): never {
  * @param value - Value.
  * @returns Value if it is an array, empty array otherwise.
  */
-export function array(value: unknown): readonly unknown[] {
+export function array(value: unknown): types.unknowns {
   return is.array(value) ? value : [];
 }
 

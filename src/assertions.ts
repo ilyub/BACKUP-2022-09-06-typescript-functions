@@ -42,7 +42,7 @@ export function not(): never {
 export function array(
   value: unknown,
   error?: ErrorArg
-): asserts value is readonly unknown[] {
+): asserts value is types.unknowns {
   byGuard(value, is.array, error);
 }
 

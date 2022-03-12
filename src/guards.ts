@@ -283,7 +283,7 @@ or.factory = orFactory;
  * @param value - Value.
  * @returns _True_ if value is an array, _false_ otherwise.
  */
-export function array(value: unknown): value is readonly unknown[] {
+export function array(value: unknown): value is types.unknowns {
   return Array.isArray(value);
 }
 
