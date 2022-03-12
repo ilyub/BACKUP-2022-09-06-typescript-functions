@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.unpadMultiline = exports.ucFirst = exports.trimTrailingEmptyLines = exports.trimStart = exports.trimLeadingEmptyLines = exports.trimEnd = exports.trailingSpaces = exports.replaceAll = exports.path = exports.lines = exports.lcFirst = exports.leadingSpaces = exports.filter = exports.empty = exports.detectEol = void 0;
 const tslib_1 = require("tslib");
-const a = (0, tslib_1.__importStar)(require("./array"));
-const regexp = (0, tslib_1.__importStar)(require("./regexp"));
+const a = tslib_1.__importStar(require("./array"));
+const regexp = tslib_1.__importStar(require("./regexp"));
 /**
  * Detects EOL sequence.
  *

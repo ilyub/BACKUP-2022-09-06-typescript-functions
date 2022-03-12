@@ -198,13 +198,13 @@ export declare function orFactory<A, B, C, D>(guard1: Guard<A>, guard2: Guard<B>
  * @param value - Value.
  * @returns _True_ if value is an array, _false_ otherwise.
  */
-export declare function array(value: unknown): value is readonly unknown[];
+export declare function array(value: unknown): value is types.unknowns;
 export declare namespace array {
     var of: typeof arrayOf;
 }
-export declare const arrayU: Guard<readonly unknown[] | undefined>;
-export declare const arrays: Guard<readonly (readonly unknown[])[]>;
-export declare const arraysU: Guard<readonly (readonly unknown[])[] | undefined>;
+export declare const arrayU: Guard<types.unknowns | undefined>;
+export declare const arrays: Guard<readonly types.unknowns[]>;
+export declare const arraysU: Guard<readonly types.unknowns[] | undefined>;
 /**
  * Checks that value type is T[].
  *

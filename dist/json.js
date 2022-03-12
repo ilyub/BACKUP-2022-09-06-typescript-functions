@@ -3,9 +3,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.encode = exports.decode = void 0;
 const tslib_1 = require("tslib");
-const a = (0, tslib_1.__importStar)(require("./array"));
-const assert = (0, tslib_1.__importStar)(require("./assertions"));
-const is = (0, tslib_1.__importStar)(require("./guards"));
+const a = tslib_1.__importStar(require("./array"));
+const assert = tslib_1.__importStar(require("./assertions"));
+const is = tslib_1.__importStar(require("./guards"));
 const core_1 = require("./types/core");
 /**
  * Decodes JSON string.

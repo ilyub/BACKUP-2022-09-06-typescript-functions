@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.slice = exports.matchAll = exports.escapeString = exports.addFlags = void 0;
 const tslib_1 = require("tslib");
-const a = (0, tslib_1.__importStar)(require("./array"));
-const assert = (0, tslib_1.__importStar)(require("./assertions"));
-const s = (0, tslib_1.__importStar)(require("./string"));
+const a = tslib_1.__importStar(require("./array"));
+const assert = tslib_1.__importStar(require("./assertions"));
+const s = tslib_1.__importStar(require("./string"));
 /**
  * Adds flag to regular expression.
  *

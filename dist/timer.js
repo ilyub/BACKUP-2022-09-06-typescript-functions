@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.removeTimeout = exports.addTimeout = exports.removeInterval = exports.addInterval = void 0;
 const tslib_1 = require("tslib");
-const is = (0, tslib_1.__importStar)(require("./guards"));
+const is = tslib_1.__importStar(require("./guards"));
 /**
  * Adds interval.
  *

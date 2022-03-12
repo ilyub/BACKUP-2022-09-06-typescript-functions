@@ -58,7 +58,7 @@
 
 ### array
 
-▸ **array**(`value`, `error?`): asserts value is readonly unknown[]
+▸ **array**(`value`, `error?`): asserts value is unknowns
 
 Asserts that value is an array.
 
@@ -71,7 +71,7 @@ Asserts that value is an array.
 
 #### Returns
 
-asserts value is readonly unknown[]
+asserts value is unknowns
 
 ___
 

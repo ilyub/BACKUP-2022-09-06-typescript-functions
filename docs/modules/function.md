@@ -160,7 +160,7 @@ Executes callback.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `callback` | [`Sync`](../interfaces/types_core.Sync.md)<`T`, [`nevers`](types_core.md#nevers)\> | Callback. |
+| `callback` | [`Sync`](../interfaces/types_core.Sync.md)<`T`, [`emptyArray`](types_core.md#emptyarray)\> | Callback. |
 
 #### Returns
 

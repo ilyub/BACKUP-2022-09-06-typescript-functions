@@ -45,9 +45,15 @@ ___
 
 ### get
 
-▸ `Optional` `Readonly` **get**(): `unknown`
+▸ `Optional` `Readonly` **get**(`this`): `unknown`
 
 Getter for component's property.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `this` | `T` | Object. |
 
 #### Returns
 
@@ -59,7 +65,7 @@ ___
 
 ### set
 
-▸ `Optional` `Readonly` **set**(`value`): `void`
+▸ `Optional` `Readonly` **set**(`this`, `value`): `void`
 
 Setter for component's property.
 
@@ -67,6 +73,7 @@ Setter for component's property.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
+| `this` | `T` | Object. |
 | `value` | `unknown` | New value. |
 
 #### Returns

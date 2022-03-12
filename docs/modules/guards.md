@@ -285,7 +285,7 @@ ___
 
 ### array
 
-▸ **array**(`value`): value is readonly unknown[]
+▸ **array**(`value`): value is unknowns
 
 Checks that value is an array.
 
@@ -297,7 +297,7 @@ Checks that value is an array.
 
 #### Returns
 
-value is readonly unknown[]
+value is unknowns
 
 _True_ if value is an array, _false_ otherwise.
 
@@ -332,7 +332,7 @@ ___
 
 ### arrayU
 
-▸ **arrayU**(`value`): value is undefined \| readonly unknown[]
+▸ **arrayU**(`value`): value is undefined \| unknowns
 
 #### Parameters
 
@@ -342,13 +342,13 @@ ___
 
 #### Returns
 
-value is undefined \| readonly unknown[]
+value is undefined \| unknowns
 
 ___
 
 ### arrays
 
-▸ **arrays**(`value`): value is readonly (readonly unknown[])[]
+▸ **arrays**(`value`): value is readonly unknowns[]
 
 #### Parameters
 
@@ -358,13 +358,13 @@ ___
 
 #### Returns
 
-value is readonly (readonly unknown[])[]
+value is readonly unknowns[]
 
 ___
 
 ### arraysU
 
-▸ **arraysU**(`value`): value is undefined \| readonly (readonly unknown[])[]
+▸ **arraysU**(`value`): value is undefined \| readonly unknowns[]
 
 #### Parameters
 
@@ -374,7 +374,7 @@ ___
 
 #### Returns
 
-value is undefined \| readonly (readonly unknown[])[]
+value is undefined \| readonly unknowns[]
 
 ___
 

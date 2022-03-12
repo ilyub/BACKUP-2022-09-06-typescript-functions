@@ -32,7 +32,7 @@ export declare namespace not {
  * @param value - Value.
  * @param error - Error to be thrown.
  */
-export declare function array(value: unknown, error?: ErrorArg): asserts value is readonly unknown[];
+export declare function array(value: unknown, error?: ErrorArg): asserts value is types.unknowns;
 export declare namespace array {
     var of: <T>(value: unknown, guard: is.Guard<T>, error?: ErrorArg | undefined) => asserts value is readonly T[];
 }

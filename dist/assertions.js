@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.undefined = exports.toBeTrue = exports.toBeFalse = exports.stringU = exports.string = exports.objectU = exports.object = exports.numberU = exports.number = exports.numStrU = exports.numStr = exports.null = exports.instances = exports.instance = exports.indexedObject = exports.enumerationU = exports.enumeration = exports.empty = exports.callableU = exports.callable = exports.byGuard = exports.booleanU = exports.boolean = exports.array = exports.not = exports.toErrorArg = void 0;
 const tslib_1 = require("tslib");
 const AssertionError_1 = require("./errors/AssertionError");
-const is = (0, tslib_1.__importStar)(require("./guards"));
+const is = tslib_1.__importStar(require("./guards"));
 /**
  * Converts error or error message to error argument usable with assertion.
  *

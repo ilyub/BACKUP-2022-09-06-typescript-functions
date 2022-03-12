@@ -81,7 +81,7 @@
 
 ### array
 
-▸ **array**(`value`): readonly `unknown`[]
+▸ **array**(`value`): [`unknowns`](types_core.md#unknowns)
 
 Converts value to an array.
 
@@ -93,7 +93,7 @@ Converts value to an array.
 
 #### Returns
 
-readonly `unknown`[]
+[`unknowns`](types_core.md#unknowns)
 
 Value if it is an array, empty array otherwise.
 

@@ -3,8 +3,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.values = exports.unfreezeDeep = exports.unfreeze = exports.sort = exports.some = exports.size = exports.removeUndefinedKeys = exports.omit = exports.merge = exports.map = exports.keys = exports.hasOwnProp = exports.getPrototypeOf = exports.fromEntries = exports.freezeDeep = exports.freeze = exports.filter = exports.extend = exports.every = exports.entries = exports.defineProperty = exports.clone = exports.assign = void 0;
 const tslib_1 = require("tslib");
-const a = (0, tslib_1.__importStar)(require("./array"));
-const is = (0, tslib_1.__importStar)(require("./guards"));
+const a = tslib_1.__importStar(require("./array"));
+const is = tslib_1.__importStar(require("./guards"));
 function assign(mutableTarget, ...sources) {
     return Object.assign(mutableTarget, ...sources);
 }

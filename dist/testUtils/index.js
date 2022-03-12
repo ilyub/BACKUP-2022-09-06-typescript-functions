@@ -6,14 +6,14 @@ const tslib_1 = require("tslib");
 require("jest-extended");
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
 // @ts-ignore
-const matchers = (0, tslib_1.__importStar)(require("jest-extended/all"));
-const jquery_1 = (0, tslib_1.__importDefault)(require("jquery"));
-const _ = (0, tslib_1.__importStar)(require("lodash"));
-const fakeTimers = (0, tslib_1.__importStar)(require("@sinonjs/fake-timers"));
-const a = (0, tslib_1.__importStar)(require("../array"));
-const assert = (0, tslib_1.__importStar)(require("../assertions"));
-const fn = (0, tslib_1.__importStar)(require("../function"));
-const o = (0, tslib_1.__importStar)(require("../object"));
+const matchers = tslib_1.__importStar(require("jest-extended/all"));
+const jquery_1 = tslib_1.__importDefault(require("jquery"));
+const _ = tslib_1.__importStar(require("lodash"));
+const fakeTimers = tslib_1.__importStar(require("@sinonjs/fake-timers"));
+const a = tslib_1.__importStar(require("../array"));
+const assert = tslib_1.__importStar(require("../assertions"));
+const fn = tslib_1.__importStar(require("../function"));
+const o = tslib_1.__importStar(require("../object"));
 /**
  * Checks that async function executes within expected time.
  *

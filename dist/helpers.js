@@ -2,13 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.wrapProxyHandler = exports.wait = exports.safeAccess = exports.onDemand = exports.createFacade = void 0;
 const tslib_1 = require("tslib");
-const assert = (0, tslib_1.__importStar)(require("./assertions"));
-const cast = (0, tslib_1.__importStar)(require("./converters"));
-const fn = (0, tslib_1.__importStar)(require("./function"));
-const is = (0, tslib_1.__importStar)(require("./guards"));
-const o = (0, tslib_1.__importStar)(require("./object"));
-const reflect = (0, tslib_1.__importStar)(require("./reflect"));
-const timer = (0, tslib_1.__importStar)(require("./timer"));
+const assert = tslib_1.__importStar(require("./assertions"));
+const cast = tslib_1.__importStar(require("./converters"));
+const fn = tslib_1.__importStar(require("./function"));
+const is = tslib_1.__importStar(require("./guards"));
+const o = tslib_1.__importStar(require("./object"));
+const reflect = tslib_1.__importStar(require("./reflect"));
+const timer = tslib_1.__importStar(require("./timer"));
 /**
  * Creates facade.
  *

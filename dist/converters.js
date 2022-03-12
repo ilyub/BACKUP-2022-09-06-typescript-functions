@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.unknown = exports.stringU = exports.stringOrFail = exports.string = exports.object = exports.numberU = exports.numberOrFail = exports.number = exports.numStrU = exports.numStr = exports.instancesOrFail = exports.instancesFiltered = exports.instances = exports.instanceU = exports.instanceOrFail = exports.instance = exports.indexedObjectOf = exports.indexedObject = exports.enumerationU = exports.enumeration = exports.notEmpty = exports.callableU = exports.callableOrFail = exports.callable = exports.byGuard = exports.boolean = exports.arrayOfUndef = exports.arrayOfOrFail = exports.arrayOfFiltered = exports.arrayOf = exports.array = exports.not = exports.factory = exports.orFail = void 0;
 const tslib_1 = require("tslib");
 const ConversionError_1 = require("./errors/ConversionError");
-const is = (0, tslib_1.__importStar)(require("./guards"));
-const o = (0, tslib_1.__importStar)(require("./object"));
+const is = tslib_1.__importStar(require("./guards"));
+const o = tslib_1.__importStar(require("./object"));
 exports.orFail = Symbol("OrFail");
 /**
  * Creates single-arg converter.

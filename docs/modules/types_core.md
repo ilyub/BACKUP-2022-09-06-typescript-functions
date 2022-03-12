@@ -15,6 +15,7 @@
 
 - [AddPrefix](types_core.md#addprefix)
 - [ArrayElement](types_core.md#arrayelement)
+- [Capital](types_core.md#capital)
 - [ConstructSignature](types_core.md#constructsignature)
 - [Constructor](types_core.md#constructor)
 - [DeclaredKeys](types_core.md#declaredkeys)
@@ -32,6 +33,7 @@
 - [Join3](types_core.md#join3)
 - [Join4](types_core.md#join4)
 - [KeysOfType](types_core.md#keysoftype)
+- [NonCapital](types_core.md#noncapital)
 - [NumStr](types_core.md#numstr)
 - [NumStrE](types_core.md#numstre)
 - [NumStrU](types_core.md#numstru)
@@ -64,7 +66,8 @@
 - [booleanU](types_core.md#booleanu)
 - [booleans](types_core.md#booleans)
 - [empty](types_core.md#empty)
-- [nevers](types_core.md#nevers)
+- [emptyArray](types_core.md#emptyarray)
+- [falseU](types_core.md#falseu)
 - [numberE](types_core.md#numbere)
 - [numberU](types_core.md#numberu)
 - [numbers](types_core.md#numbers)
@@ -74,6 +77,7 @@
 - [stringE](types_core.md#stringe)
 - [stringU](types_core.md#stringu)
 - [strings](types_core.md#strings)
+- [trueU](types_core.md#trueu)
 - [unknowns](types_core.md#unknowns)
 
 ### Functions
@@ -104,6 +108,12 @@ ___
 | Name |
 | :------ |
 | `T` |
+
+___
+
+### Capital
+
+Ƭ **Capital**: ``"A"`` \| ``"B"`` \| ``"C"`` \| ``"D"`` \| ``"E"`` \| ``"F"`` \| ``"G"`` \| ``"H"`` \| ``"I"`` \| ``"J"`` \| ``"K"`` \| ``"L"`` \| ``"M"`` \| ``"N"`` \| ``"O"`` \| ``"P"`` \| ``"Q"`` \| ``"R"`` \| ``"S"`` \| ``"T"`` \| ``"U"`` \| ``"V"`` \| ``"W"`` \| ``"X"`` \| ``"Y"`` \| ``"Z"``
 
 ___
 
@@ -332,6 +342,12 @@ ___
 | :------ |
 | `T` |
 | `V` |
+
+___
+
+### NonCapital
+
+Ƭ **NonCapital**: ``"a"`` \| ``"b"`` \| ``"c"`` \| ``"d"`` \| ``"e"`` \| ``"f"`` \| ``"g"`` \| ``"h"`` \| ``"i"`` \| ``"j"`` \| ``"k"`` \| ``"l"`` \| ``"m"`` \| ``"n"`` \| ``"o"`` \| ``"p"`` \| ``"q"`` \| ``"r"`` \| ``"s"`` \| ``"t"`` \| ``"u"`` \| ``"v"`` \| ``"w"`` \| ``"x"`` \| ``"y"`` \| ``"z"``
 
 ___
 
@@ -664,9 +680,15 @@ ___
 
 ___
 
-### nevers
+### emptyArray
 
-Ƭ **nevers**: readonly `never`[]
+Ƭ **emptyArray**: readonly `never`[]
+
+___
+
+### falseU
+
+Ƭ **falseU**: ``false`` \| `undefined`
 
 ___
 
@@ -721,6 +743,12 @@ ___
 ### strings
 
 Ƭ **strings**: readonly `string`[]
+
+___
+
+### trueU
+
+Ƭ **trueU**: ``true`` \| `undefined`
 
 ___
 

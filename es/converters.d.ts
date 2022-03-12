@@ -42,7 +42,7 @@ export declare namespace not {
  * @param value - Value.
  * @returns Value if it is an array, empty array otherwise.
  */
-export declare function array(value: unknown): readonly unknown[];
+export declare function array(value: unknown): types.unknowns;
 export declare namespace array {
     var of: typeof arrayOf;
 }

@@ -14,7 +14,7 @@
 
 ### CallSignature
 
-▸ **CallSignature**(...`args`): `ReturnType`<`T`\>
+▸ **CallSignature**(`this`, ...`args`): `ReturnType`<`T`\>
 
 Async function.
 
@@ -22,6 +22,7 @@ Async function.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
+| `this` | `ThisParameterType`<`T`\> | This argument. |
 | `...args` | `Parameters`<`T`\> | Arguments. |
 
 #### Returns
