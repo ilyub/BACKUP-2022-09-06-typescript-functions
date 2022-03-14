@@ -9,6 +9,9 @@ import type { WritableKeys } from "ts-toolbelt/out/Object/WritableKeys";
 
 export type { CamelCase, KebabCase } from "type-fest";
 
+// eslint-disable-next-line @skylib/no-unnecessary-readonly
+export type ReadonlyParameters<T extends Callable> = Readonly<Parameters<T>>;
+
 export type AddPrefix<T extends string, P extends string> = `${P}${T}`;
 
 export type ArrayElement<T> = T extends Array<infer R> ? R : unknown;
@@ -46,7 +49,7 @@ export interface Callable<T = any> {
   (...args: any[]): T;
 }
 
-export type Capital =
+export type UppercaseLetter =
   | "A"
   | "B"
   | "C"
@@ -132,7 +135,7 @@ export type Join4<
 
 export type KeysOfType<T, V> = KeysOfType1<T, V>;
 
-export type NonCapital =
+export type LowercaseLetter =
   | "a"
   | "b"
   | "c"
