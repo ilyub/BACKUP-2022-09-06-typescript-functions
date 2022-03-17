@@ -4,6 +4,7 @@ import {
   createFacade,
   onDemand,
   safeAccess,
+  typedef,
   wait,
   wrapProxyHandler
 } from "@/helpers";
@@ -173,6 +174,10 @@ test("safeAccess", () => {
     expect(() => reflect.set(obj, "b", 3)).toThrow(error2);
     expect(() => reflect.set(obj, "c", 4)).toThrow(error3);
   }
+});
+
+test("typedef", () => {
+  expect(typedef(1)).toBe(1);
 });
 
 test("wait", async () => {

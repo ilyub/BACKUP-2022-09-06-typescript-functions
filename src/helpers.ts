@@ -140,6 +140,16 @@ export function onDemand<T extends object>(generator: () => T): T {
 }
 
 /**
+ * Defines source type.
+ *
+ * @param source - Source.
+ * @returns Source.
+ */
+export function typedef<T>(source: T): T {
+  return source;
+}
+
+/**
  * Creates safe access interface for an object.
  *
  * @param obj - Object.
