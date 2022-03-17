@@ -16,7 +16,8 @@ export function decode(source: stringE): unknown {
   try {
     if (is.not.empty(source)) return JSON.parse(source, reviver);
   } catch {
-    //
+    // eslint-disable-next-line unicorn/no-null
+    return null;
   }
 
   // eslint-disable-next-line unicorn/no-null
@@ -31,6 +32,28 @@ export function decode(source: stringE): unknown {
  */
 export function encode(source: unknown): string {
   return JSON.stringify(source, replacer);
+}
+
+/**
+ * Compares two values as JSON strings.
+ *
+ * @param x - Value.
+ * @param y - Value.
+ * @returns _True_ if two values are not equal, _false_ otherwise.
+ */
+export function eq(x: unknown, y: unknown): boolean {
+  return encode(x) === encode(y);
+}
+
+/**
+ * Compares two values as JSON strings.
+ *
+ * @param x - Value.
+ * @param y - Value.
+ * @returns _True_ if two values are not equal, _false_ otherwise.
+ */
+export function neq(x: unknown, y: unknown): boolean {
+  return encode(x) !== encode(y);
 }
 
 /*

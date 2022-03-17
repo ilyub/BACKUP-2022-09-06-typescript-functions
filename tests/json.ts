@@ -39,3 +39,13 @@ test("encode", () => {
     '{"dataType":"set-41ef-10c9-ae1f-15e8","value":["a",1]}'
   );
 });
+
+test("eq", () => {
+  expect(json.eq({ value: 1 }, { value: 1 })).toBeTrue();
+  expect(json.eq({ value: 1 }, { value: 2 })).toBeFalse();
+});
+
+test("neq", () => {
+  expect(json.neq({ value: 1 }, { value: 2 })).toBeTrue();
+  expect(json.neq({ value: 1 }, { value: 1 })).toBeFalse();
+});
