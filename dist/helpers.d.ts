@@ -33,6 +33,13 @@ export declare function createFacade<I extends object, E = unknown>(name: string
  */
 export declare function onDemand<T extends object>(generator: () => T): T;
 /**
+ * Defines source type.
+ *
+ * @param source - Source.
+ * @returns Source.
+ */
+export declare function typedef<T>(source: T): T;
+/**
  * Creates safe access interface for an object.
  *
  * @param obj - Object.

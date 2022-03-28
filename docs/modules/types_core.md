@@ -15,7 +15,6 @@
 
 - [AddPrefix](types_core.md#addprefix)
 - [ArrayElement](types_core.md#arrayelement)
-- [Capital](types_core.md#capital)
 - [ConstructSignature](types_core.md#constructsignature)
 - [Constructor](types_core.md#constructor)
 - [DeclaredKeys](types_core.md#declaredkeys)
@@ -33,7 +32,7 @@
 - [Join3](types_core.md#join3)
 - [Join4](types_core.md#join4)
 - [KeysOfType](types_core.md#keysoftype)
-- [NonCapital](types_core.md#noncapital)
+- [LowercaseLetter](types_core.md#lowercaseletter)
 - [NumStr](types_core.md#numstr)
 - [NumStrE](types_core.md#numstre)
 - [NumStrU](types_core.md#numstru)
@@ -45,6 +44,7 @@
 - [ReadonlyArrayElement](types_core.md#readonlyarrayelement)
 - [ReadonlyDeclaredKeys](types_core.md#readonlydeclaredkeys)
 - [ReadonlyIndexedObject](types_core.md#readonlyindexedobject)
+- [ReadonlyParameters](types_core.md#readonlyparameters)
 - [ReadonlyPartialRecord](types_core.md#readonlypartialrecord)
 - [ReadonlyRecord](types_core.md#readonlyrecord)
 - [ReadonlyUndeclaredKeys](types_core.md#readonlyundeclaredkeys)
@@ -55,6 +55,7 @@
 - [Timeout](types_core.md#timeout)
 - [UndeclaredKeys](types_core.md#undeclaredkeys)
 - [UndefinedKeys](types_core.md#undefinedkeys)
+- [UppercaseLetter](types_core.md#uppercaseletter)
 - [ValidationObject](types_core.md#validationobject)
 - [WithOptionalKeys](types_core.md#withoptionalkeys)
 - [WithUndeclaredKeys](types_core.md#withundeclaredkeys)
@@ -108,12 +109,6 @@ ___
 | Name |
 | :------ |
 | `T` |
-
-___
-
-### Capital
-
-Ƭ **Capital**: ``"A"`` \| ``"B"`` \| ``"C"`` \| ``"D"`` \| ``"E"`` \| ``"F"`` \| ``"G"`` \| ``"H"`` \| ``"I"`` \| ``"J"`` \| ``"K"`` \| ``"L"`` \| ``"M"`` \| ``"N"`` \| ``"O"`` \| ``"P"`` \| ``"Q"`` \| ``"R"`` \| ``"S"`` \| ``"T"`` \| ``"U"`` \| ``"V"`` \| ``"W"`` \| ``"X"`` \| ``"Y"`` \| ``"Z"``
 
 ___
 
@@ -345,9 +340,9 @@ ___
 
 ___
 
-### NonCapital
+### LowercaseLetter
 
-Ƭ **NonCapital**: ``"a"`` \| ``"b"`` \| ``"c"`` \| ``"d"`` \| ``"e"`` \| ``"f"`` \| ``"g"`` \| ``"h"`` \| ``"i"`` \| ``"j"`` \| ``"k"`` \| ``"l"`` \| ``"m"`` \| ``"n"`` \| ``"o"`` \| ``"p"`` \| ``"q"`` \| ``"r"`` \| ``"s"`` \| ``"t"`` \| ``"u"`` \| ``"v"`` \| ``"w"`` \| ``"x"`` \| ``"y"`` \| ``"z"``
+Ƭ **LowercaseLetter**: ``"a"`` \| ``"b"`` \| ``"c"`` \| ``"d"`` \| ``"e"`` \| ``"f"`` \| ``"g"`` \| ``"h"`` \| ``"i"`` \| ``"j"`` \| ``"k"`` \| ``"l"`` \| ``"m"`` \| ``"n"`` \| ``"o"`` \| ``"p"`` \| ``"q"`` \| ``"r"`` \| ``"s"`` \| ``"t"`` \| ``"u"`` \| ``"v"`` \| ``"w"`` \| ``"x"`` \| ``"y"`` \| ``"z"``
 
 ___
 
@@ -451,6 +446,18 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `T` | `unknown` |
+
+___
+
+### ReadonlyParameters
+
+Ƭ **ReadonlyParameters**<`T`\>: `Readonly`<`Parameters`<`T`\>\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends [`Callable`](../interfaces/types_core.Callable.md) |
 
 ___
 
@@ -569,6 +576,12 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `T` | extends `object` |
+
+___
+
+### UppercaseLetter
+
+Ƭ **UppercaseLetter**: ``"A"`` \| ``"B"`` \| ``"C"`` \| ``"D"`` \| ``"E"`` \| ``"F"`` \| ``"G"`` \| ``"H"`` \| ``"I"`` \| ``"J"`` \| ``"K"`` \| ``"L"`` \| ``"M"`` \| ``"N"`` \| ``"O"`` \| ``"P"`` \| ``"Q"`` \| ``"R"`` \| ``"S"`` \| ``"T"`` \| ``"U"`` \| ``"V"`` \| ``"W"`` \| ``"X"`` \| ``"Y"`` \| ``"Z"``
 
 ___
 

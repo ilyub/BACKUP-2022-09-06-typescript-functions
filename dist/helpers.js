@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.wrapProxyHandler = exports.wait = exports.safeAccess = exports.onDemand = exports.createFacade = void 0;
+exports.wrapProxyHandler = exports.wait = exports.safeAccess = exports.typedef = exports.onDemand = exports.createFacade = void 0;
 const tslib_1 = require("tslib");
 const assert = tslib_1.__importStar(require("./assertions"));
 const cast = tslib_1.__importStar(require("./converters"));
@@ -98,6 +98,16 @@ function onDemand(generator) {
     }
 }
 exports.onDemand = onDemand;
+/**
+ * Defines source type.
+ *
+ * @param source - Source.
+ * @returns Source.
+ */
+function typedef(source) {
+    return source;
+}
+exports.typedef = typedef;
 /**
  * Creates safe access interface for an object.
  *

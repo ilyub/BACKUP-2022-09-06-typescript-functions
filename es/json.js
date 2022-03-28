@@ -15,7 +15,8 @@ export function decode(source) {
             return JSON.parse(source, reviver);
     }
     catch (_a) {
-        //
+        // eslint-disable-next-line unicorn/no-null
+        return null;
     }
     // eslint-disable-next-line unicorn/no-null
     return null;
@@ -28,6 +29,26 @@ export function decode(source) {
  */
 export function encode(source) {
     return JSON.stringify(source, replacer);
+}
+/**
+ * Compares two values as JSON strings.
+ *
+ * @param x - Value.
+ * @param y - Value.
+ * @returns _True_ if two values are not equal, _false_ otherwise.
+ */
+export function eq(x, y) {
+    return encode(x) === encode(y);
+}
+/**
+ * Compares two values as JSON strings.
+ *
+ * @param x - Value.
+ * @param y - Value.
+ * @returns _True_ if two values are not equal, _false_ otherwise.
+ */
+export function neq(x, y) {
+    return encode(x) !== encode(y);
 }
 const DataTypeVO = createValidationObject({
     "map-5702-3c89-3feb-75d4": "map-5702-3c89-3feb-75d4",

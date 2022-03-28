@@ -8,6 +8,8 @@
 
 - [decode](json.md#decode)
 - [encode](json.md#encode)
+- [eq](json.md#eq)
+- [neq](json.md#neq)
 
 ## Functions
 
@@ -48,3 +50,45 @@ Encodes to JSON string.
 `string`
 
 JSON string.
+
+___
+
+### eq
+
+▸ **eq**(`x`, `y`): `boolean`
+
+Compares two values as JSON strings.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `x` | `unknown` | Value. |
+| `y` | `unknown` | Value. |
+
+#### Returns
+
+`boolean`
+
+_True_ if two values are not equal, _false_ otherwise.
+
+___
+
+### neq
+
+▸ **neq**(`x`, `y`): `boolean`
+
+Compares two values as JSON strings.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `x` | `unknown` | Value. |
+| `y` | `unknown` | Value. |
+
+#### Returns
+
+`boolean`
+
+_True_ if two values are not equal, _false_ otherwise.

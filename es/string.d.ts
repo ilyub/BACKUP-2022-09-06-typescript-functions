@@ -43,6 +43,13 @@ export declare function lcFirst(str: string): string;
  */
 export declare function lines(str: string): string[];
 /**
+ * Checks that string is multiline.
+ *
+ * @param str - String.
+ * @returns _True_ if string is multiline, _false_ otherwise.
+ */
+export declare function multiline(str: string): boolean;
+/**
  * Not implemented.
  */
 declare function pathUtils(): never;
@@ -64,6 +71,13 @@ export { pathUtils as path };
  * @returns New string with replacements done.
  */
 export declare function replaceAll(str: string, search: string, replace: string): string;
+/**
+ * Checks that string is single-line.
+ *
+ * @param str - String.
+ * @returns _True_ if string is single-line, _false_ otherwise.
+ */
+export declare function singleLine(str: string): boolean;
 /**
  * Gets trailing spaces.
  *

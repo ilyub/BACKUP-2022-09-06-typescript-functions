@@ -19,6 +19,7 @@
 - [createFacade](helpers.md#createfacade)
 - [onDemand](helpers.md#ondemand)
 - [safeAccess](helpers.md#safeaccess)
+- [typedef](helpers.md#typedef)
 - [wait](helpers.md#wait)
 - [wrapProxyHandler](helpers.md#wrapproxyhandler)
 
@@ -145,6 +146,32 @@ Creates safe access interface for an object.
 [`SafeAccess`](helpers.md#safeaccess)<`T`, `W`, `R`\>
 
 Safe access interface.
+
+___
+
+### typedef
+
+▸ **typedef**<`T`\>(`source`): `T`
+
+Defines source type.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `source` | `T` | Source. |
+
+#### Returns
+
+`T`
+
+Source.
 
 ___
 

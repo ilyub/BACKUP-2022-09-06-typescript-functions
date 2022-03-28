@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unpadMultiline = exports.ucFirst = exports.trimTrailingEmptyLines = exports.trimStart = exports.trimLeadingEmptyLines = exports.trimEnd = exports.trailingSpaces = exports.replaceAll = exports.path = exports.lines = exports.lcFirst = exports.leadingSpaces = exports.filter = exports.empty = exports.detectEol = void 0;
+exports.unpadMultiline = exports.ucFirst = exports.trimTrailingEmptyLines = exports.trimStart = exports.trimLeadingEmptyLines = exports.trimEnd = exports.trailingSpaces = exports.singleLine = exports.replaceAll = exports.path = exports.multiline = exports.lines = exports.lcFirst = exports.leadingSpaces = exports.filter = exports.empty = exports.detectEol = void 0;
 const tslib_1 = require("tslib");
 const a = tslib_1.__importStar(require("./array"));
 const regexp = tslib_1.__importStar(require("./regexp"));
@@ -66,6 +66,16 @@ function lines(str) {
 }
 exports.lines = lines;
 /**
+ * Checks that string is multiline.
+ *
+ * @param str - String.
+ * @returns _True_ if string is multiline, _false_ otherwise.
+ */
+function multiline(str) {
+    return str.includes("\n");
+}
+exports.multiline = multiline;
+/**
  * Not implemented.
  */
 function pathUtils() {
@@ -127,6 +137,16 @@ function replaceAll(str, search, replace) {
     return str.replace(new RegExp(regexp.escapeString(search), "gu"), replace);
 }
 exports.replaceAll = replaceAll;
+/**
+ * Checks that string is single-line.
+ *
+ * @param str - String.
+ * @returns _True_ if string is single-line, _false_ otherwise.
+ */
+function singleLine(str) {
+    return !str.includes("\n");
+}
+exports.singleLine = singleLine;
 /**
  * Gets trailing spaces.
  *

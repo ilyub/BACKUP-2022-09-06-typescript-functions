@@ -20,8 +20,10 @@
 - [lcFirst](string.md#lcfirst)
 - [leadingSpaces](string.md#leadingspaces)
 - [lines](string.md#lines)
+- [multiline](string.md#multiline)
 - [path](string.md#path)
 - [replaceAll](string.md#replaceall)
+- [singleLine](string.md#singleline)
 - [trailingSpaces](string.md#trailingspaces)
 - [trimEnd](string.md#trimend)
 - [trimLeadingEmptyLines](string.md#trimleadingemptylines)
@@ -159,6 +161,26 @@ Array of strings.
 
 ___
 
+### multiline
+
+▸ **multiline**(`str`): `boolean`
+
+Checks that string is multiline.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `str` | `string` | String. |
+
+#### Returns
+
+`boolean`
+
+_True_ if string is multiline, _false_ otherwise.
+
+___
+
 ### path
 
 ▸ **path**(): `never`
@@ -190,6 +212,26 @@ Replaces all occurences of search term.
 `string`
 
 New string with replacements done.
+
+___
+
+### singleLine
+
+▸ **singleLine**(`str`): `boolean`
+
+Checks that string is single-line.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `str` | `string` | String. |
+
+#### Returns
+
+`boolean`
+
+_True_ if string is single-line, _false_ otherwise.
 
 ___
 

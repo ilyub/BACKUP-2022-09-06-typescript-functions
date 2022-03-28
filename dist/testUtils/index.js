@@ -171,14 +171,8 @@ exports.setRandomSystemTime = setRandomSystemTime;
  */
 function toBeSameAs(got, expected) {
     return got === expected
-        ? {
-            message: () => "Expected not the same object",
-            pass: true
-        }
-        : {
-            message: () => "Expected the same object",
-            pass: false
-        };
+        ? { message: () => "Expected not the same object", pass: true }
+        : { message: () => "Expected the same object", pass: false };
 }
 exports.toBeSameAs = toBeSameAs;
 /*

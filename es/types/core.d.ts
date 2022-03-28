@@ -5,6 +5,7 @@ import type { ReadonlyKeys } from "ts-toolbelt/out/Object/ReadonlyKeys";
 import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 import type { WritableKeys } from "ts-toolbelt/out/Object/WritableKeys";
 export type { CamelCase, KebabCase } from "type-fest";
+export declare type ReadonlyParameters<T extends Callable> = Readonly<Parameters<T>>;
 export declare type AddPrefix<T extends string, P extends string> = `${P}${T}`;
 export declare type ArrayElement<T> = T extends Array<infer R> ? R : unknown;
 export interface Async<R, A extends unknowns = emptyArray> {
@@ -35,7 +36,7 @@ export interface Callable<T = any> {
      */
     (...args: any[]): T;
 }
-export declare type Capital = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z";
+export declare type UppercaseLetter = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z";
 export declare type ConstructSignature<T extends Constructor> = new (...args: ConstructorParameters<T>) => InstanceType<T>;
 export declare type Constructor<T = any> = new (...args: any[]) => T;
 export declare type DeclaredKeys<T extends object> = DefinedKeys<T> & PropertyKey & RequiredKeys<T>;
@@ -53,7 +54,7 @@ export declare type Join2<A extends object, B extends object> = keyof A extends 
 export declare type Join3<A extends object, B extends object, C extends object> = keyof A extends never ? Join2<B, C> : A & Join2<B, C>;
 export declare type Join4<A extends object, B extends object, C extends object, D extends object> = keyof A extends never ? Join3<B, C, D> : A & Join3<B, C, D>;
 export declare type KeysOfType<T, V> = KeysOfType1<T, V>;
-export declare type NonCapital = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z";
+export declare type LowercaseLetter = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z";
 export declare type NumStr = number | string;
 export declare type NumStrE = empty | NumStr;
 export declare type NumStrU = NumStr | undefined;

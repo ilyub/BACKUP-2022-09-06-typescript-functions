@@ -9,6 +9,7 @@
 - [array](modules/array.md)
 - [arrayMap](modules/arrayMap.md)
 - [assertions](modules/assertions.md)
+- [configs/eslintrc.options](modules/configs_eslintrc_options.md)
 - [converters](modules/converters.md)
 - [errors/AssertionError](modules/errors_AssertionError.md)
 - [errors/ConversionError](modules/errors_ConversionError.md)

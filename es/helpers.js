@@ -93,6 +93,15 @@ export function onDemand(generator) {
     }
 }
 /**
+ * Defines source type.
+ *
+ * @param source - Source.
+ * @returns Source.
+ */
+export function typedef(source) {
+    return source;
+}
+/**
  * Creates safe access interface for an object.
  *
  * @param obj - Object.

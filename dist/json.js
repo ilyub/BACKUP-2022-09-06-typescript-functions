@@ -1,7 +1,7 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/disallow-identifier[json] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.encode = exports.decode = void 0;
+exports.neq = exports.eq = exports.encode = exports.decode = void 0;
 const tslib_1 = require("tslib");
 const a = tslib_1.__importStar(require("./array"));
 const assert = tslib_1.__importStar(require("./assertions"));
@@ -19,7 +19,8 @@ function decode(source) {
             return JSON.parse(source, reviver);
     }
     catch (_a) {
-        //
+        // eslint-disable-next-line unicorn/no-null
+        return null;
     }
     // eslint-disable-next-line unicorn/no-null
     return null;
@@ -35,6 +36,28 @@ function encode(source) {
     return JSON.stringify(source, replacer);
 }
 exports.encode = encode;
+/**
+ * Compares two values as JSON strings.
+ *
+ * @param x - Value.
+ * @param y - Value.
+ * @returns _True_ if two values are not equal, _false_ otherwise.
+ */
+function eq(x, y) {
+    return encode(x) === encode(y);
+}
+exports.eq = eq;
+/**
+ * Compares two values as JSON strings.
+ *
+ * @param x - Value.
+ * @param y - Value.
+ * @returns _True_ if two values are not equal, _false_ otherwise.
+ */
+function neq(x, y) {
+    return encode(x) !== encode(y);
+}
+exports.neq = neq;
 const DataTypeVO = (0, core_1.createValidationObject)({
     "map-5702-3c89-3feb-75d4": "map-5702-3c89-3feb-75d4",
     "set-41ef-10c9-ae1f-15e8": "set-41ef-10c9-ae1f-15e8"

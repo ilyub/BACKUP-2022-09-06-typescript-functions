@@ -56,6 +56,15 @@ export function lines(str) {
     return str.split(/\r\n|\n/u);
 }
 /**
+ * Checks that string is multiline.
+ *
+ * @param str - String.
+ * @returns _True_ if string is multiline, _false_ otherwise.
+ */
+export function multiline(str) {
+    return str.includes("\n");
+}
+/**
  * Not implemented.
  */
 function pathUtils() {
@@ -115,6 +124,15 @@ pathUtils.removeTrailingSlash = (path) => path.replace(/[/\\]$/u, "");
 export function replaceAll(str, search, replace) {
     // eslint-disable-next-line security/detect-non-literal-regexp
     return str.replace(new RegExp(regexp.escapeString(search), "gu"), replace);
+}
+/**
+ * Checks that string is single-line.
+ *
+ * @param str - String.
+ * @returns _True_ if string is single-line, _false_ otherwise.
+ */
+export function singleLine(str) {
+    return !str.includes("\n");
 }
 /**
  * Gets trailing spaces.
