@@ -11,6 +11,10 @@ test("empty", () => {
   expect(s.empty(" \n\r\t - \n\r\t ")).toBeFalse();
 });
 
+test("filter", () => {
+  expect(s.filter("a1b1c", char => char !== "1")).toBe("abc");
+});
+
 test("leadingSpaces", () => {
   expect(s.leadingSpaces(" \n\r\t abc")).toBe(" \n\r\t ");
 });
@@ -22,6 +26,11 @@ test("lcFirst", () => {
 
 test("lines", () => {
   expect(s.lines("a\nb\r\nc")).toStrictEqual(["a", "b", "c"]);
+});
+
+test("multiline", () => {
+  expect(s.multiline("a\nb")).toBeTrue();
+  expect(s.multiline("ab")).toBeFalse();
 });
 
 test("path", () => {
@@ -74,8 +83,9 @@ test("replaceAll", () => {
   expect(s.replaceAll("a1b1c", "1", "2")).toBe("a2b2c");
 });
 
-test("filter", () => {
-  expect(s.filter("a1b1c", char => char !== "1")).toBe("abc");
+test("singleLine", () => {
+  expect(s.singleLine("ab")).toBeTrue();
+  expect(s.singleLine("a\nb")).toBeFalse();
 });
 
 test("trailingSpaces", () => {

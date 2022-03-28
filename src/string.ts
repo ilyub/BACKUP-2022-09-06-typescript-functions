@@ -68,6 +68,16 @@ export function lines(str: string): string[] {
 }
 
 /**
+ * Checks that string is multiline.
+ *
+ * @param str - String.
+ * @returns _True_ if string is multiline, _false_ otherwise.
+ */
+export function multiline(str: string): boolean {
+  return str.includes("\n");
+}
+
+/**
  * Not implemented.
  */
 function pathUtils(): never {
@@ -145,6 +155,16 @@ export function replaceAll(
 ): string {
   // eslint-disable-next-line security/detect-non-literal-regexp
   return str.replace(new RegExp(regexp.escapeString(search), "gu"), replace);
+}
+
+/**
+ * Checks that string is single-line.
+ *
+ * @param str - String.
+ * @returns _True_ if string is single-line, _false_ otherwise.
+ */
+export function singleLine(str: string): boolean {
+  return !str.includes("\n");
 }
 
 /**
