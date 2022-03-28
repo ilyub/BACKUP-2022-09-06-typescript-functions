@@ -18,9 +18,7 @@ test("createFacade: Extension", () => {
     pow: (x: number) => number;
   }
 
-  const extension: Extension = {
-    pow: x => x * x
-  };
+  const extension: Extension = { pow: x => x * x };
 
   const facade = createFacade<object, Extension>("sample-facade", extension);
 

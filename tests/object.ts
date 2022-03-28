@@ -37,7 +37,11 @@ test("defineProperty", () => {
 });
 
 test("entries", () => {
-  const obj = { a: 1, b: 2, c: 3 };
+  const obj = {
+    a: 1,
+    b: 2,
+    c: 3
+  };
 
   const expected = [
     ["a", 1],
@@ -66,7 +70,11 @@ test("extend", () => {
 });
 
 test("filter", () => {
-  const obj = { a: 1, b: 2, c: 3 };
+  const obj = {
+    a: 1,
+    b: 2,
+    c: 3
+  };
 
   const expected = { a: 1, c: 3 };
 
@@ -134,7 +142,11 @@ test("hasOwnProp", () => {
 });
 
 test("keys", () => {
-  const obj = { a: 1, b: 2, c: 3 };
+  const obj = {
+    a: 1,
+    b: 2,
+    c: 3
+  };
 
   const expected = ["a", "b", "c"];
 
@@ -142,9 +154,17 @@ test("keys", () => {
 });
 
 test("map", () => {
-  const obj = { a: "1", b: "12", c: "123" };
+  const obj = {
+    a: "1",
+    b: "12",
+    c: "123"
+  };
 
-  const expected = { a: 1, b: 2, c: 3 };
+  const expected = {
+    a: 1,
+    b: 2,
+    c: 3
+  };
 
   expect(o.map(obj, callback)).toStrictEqual(expected);
 
@@ -156,9 +176,21 @@ test("map", () => {
 test("merge", () => {
   expect(
     o.merge(
-      { a: 1, b: [1], c: "a" },
-      { b: 2, c: [2], d: "b" },
-      { c: 3, d: [3], e: "c" }
+      {
+        a: 1,
+        b: [1],
+        c: "a"
+      },
+      {
+        b: 2,
+        c: [2],
+        d: "b"
+      },
+      {
+        c: 3,
+        d: [3],
+        e: "c"
+      }
     )
   ).toStrictEqual({
     a: 1,
@@ -170,7 +202,16 @@ test("merge", () => {
 });
 
 test("omit", () => {
-  expect(o.omit({ a: 1, b: 2, c: 3 }, "b")).toStrictEqual({ a: 1, c: 3 });
+  expect(
+    o.omit(
+      {
+        a: 1,
+        b: 2,
+        c: 3
+      },
+      "b"
+    )
+  ).toStrictEqual({ a: 1, c: 3 });
 });
 
 test("removeUndefinedKeys", () => {
@@ -184,7 +225,12 @@ test("removeUndefinedKeys", () => {
 test("size", () => {
   const symbol = Symbol("SampleSymbol");
 
-  const obj = { a: 1, b: 2, c: 3, [symbol]: 4 };
+  const obj = {
+    a: 1,
+    b: 2,
+    c: 3,
+    [symbol]: 4
+  };
 
   expect(o.size(obj)).toBe(3);
 });
@@ -202,7 +248,11 @@ test("sort", () => {
       ["b", 2]
     ]);
 
-    const expected = { a: 1, b: 2, c: 3 };
+    const expected = {
+      a: 1,
+      b: 2,
+      c: 3
+    };
 
     expect(o.sort(obj)).toStrictEqual(expected);
   }
@@ -214,7 +264,11 @@ test("sort", () => {
       ["b", 2]
     ]);
 
-    const expected = { a: 3, b: 2, c: 1 };
+    const expected = {
+      a: 3,
+      b: 2,
+      c: 1
+    };
 
     expect(o.sort(obj, (x, y) => y[1] - x[1])).toStrictEqual(expected);
   }
@@ -237,7 +291,11 @@ test("unfreeze.deep", () => {
 });
 
 test("values", () => {
-  const obj = { a: 1, b: 2, c: 3 };
+  const obj = {
+    a: 1,
+    b: 2,
+    c: 3
+  };
 
   const expected = [1, 2, 3];
 

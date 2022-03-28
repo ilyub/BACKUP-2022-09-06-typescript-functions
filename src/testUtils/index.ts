@@ -274,14 +274,8 @@ export function setRandomSystemTime(): void {
  */
 export function toBeSameAs(got: unknown, expected: object): ExpectReturnType {
   return got === expected
-    ? {
-        message: (): string => "Expected not the same object",
-        pass: true
-      }
-    : {
-        message: (): string => "Expected the same object",
-        pass: false
-      };
+    ? { message: (): string => "Expected not the same object", pass: true }
+    : { message: (): string => "Expected the same object", pass: false };
 }
 
 /*
