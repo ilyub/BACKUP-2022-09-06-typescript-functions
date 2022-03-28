@@ -5,6 +5,7 @@ module.exports = [
   "array",
   "arrayMap",
   "assertions",
+  "configs",
   "converters",
   "dev",
   "errors",
