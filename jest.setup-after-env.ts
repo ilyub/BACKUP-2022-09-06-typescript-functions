@@ -1,9 +1,6 @@
 import * as testUtils from "./src/testUtils";
 
 testUtils.jestSetup();
+testUtils.jestSetup.dom();
 beforeEach(testUtils.jestReset);
-
-if (JEST_ENV === "jsdom") {
-  testUtils.jestSetup.dom();
-  beforeEach(testUtils.jestReset.dom);
-}
+beforeEach(testUtils.jestReset.dom);

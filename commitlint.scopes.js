@@ -7,12 +7,14 @@ module.exports = [
   "assertions",
   "configs",
   "converters",
+  "core",
   "dev",
   "errors",
   "function",
   "guards",
   "helpers",
   "json",
+  "locales",
   "map",
   "number",
   "object",
@@ -21,12 +23,6 @@ module.exports = [
   "set",
   "string",
   "testUtils",
-  "testUtils.index",
-  "testUtils.RootWrapper",
-  "testUtils.Wrapper",
-  "testUtils.Wrappers",
   "timer",
-  "types",
-  "types.core",
-  "types.locales"
+  "types"
 ];
