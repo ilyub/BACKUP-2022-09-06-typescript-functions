@@ -108,7 +108,6 @@ export type Equal<A, B, C, D> = If<Equals<A, B>, C, D>;
 
 export type IndexedObject<T = unknown> = Record<PropertyKey, T>;
 
-// eslint-disable-next-line @skylib/disallow-identifier
 export type Interval = ReturnType<typeof setInterval>;
 
 export type IterableLike<T> = Iterable<T> | (() => Iterable<T>);
@@ -227,7 +226,6 @@ export interface Sync<R, A extends unknowns = emptyArray> {
   (...args: A): R;
 }
 
-// eslint-disable-next-line @skylib/disallow-identifier
 export type Timeout = ReturnType<typeof setTimeout>;
 
 export type UndeclaredKeys<T extends object> = Exclude<
