@@ -250,14 +250,12 @@ export function instances<T>(
  * @param value - Value.
  * @param error - Error to be thrown.
  */
-function nullAssertion(
+export function toBeNull(
   value: unknown,
   error?: ErrorArg
 ): asserts value is null {
   byGuard(value, is.null, error);
 }
-
-export { nullAssertion as null };
 
 /**
  * Asserts that value is not _null_.
@@ -433,14 +431,12 @@ export function toBeTrue(
  * @param value - Value.
  * @param error - Error to be thrown.
  */
-function undefinedAssertion(
+export function toBeUndefined(
   value: unknown,
   error?: ErrorArg
 ): asserts value is undefined {
   byGuard(value, is.undefined, error);
 }
-
-export { undefinedAssertion as undefined };
 
 /**
  * Asserts that value is not _undefined_.

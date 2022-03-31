@@ -264,10 +264,10 @@ test("instances", () => {
   testAssertion("fail", assert.instances, is.instances, 1, TestClass);
 });
 
-test("null", () => {
-  testAssertion("pass", assert.null, is.null, null);
-  testAssertion("fail", assert.null, is.null, undefined);
-  testAssertion("fail", assert.null, is.null, 1);
+test("toBeNull", () => {
+  testAssertion("pass", assert.toBeNull, is.null, null);
+  testAssertion("fail", assert.toBeNull, is.null, undefined);
+  testAssertion("fail", assert.toBeNull, is.null, 1);
 });
 
 test("not.null", () => {
@@ -418,9 +418,9 @@ test("toBeTrue", () => {
 });
 
 test("undefined", () => {
-  testAssertion("pass", assert.undefined, is.undefined, undefined);
-  testAssertion("fail", assert.undefined, is.undefined, null);
-  testAssertion("fail", assert.undefined, is.undefined, 1);
+  testAssertion("pass", assert.toBeUndefined, is.undefined, undefined);
+  testAssertion("fail", assert.toBeUndefined, is.undefined, null);
+  testAssertion("fail", assert.toBeUndefined, is.undefined, 1);
 });
 
 test("not.undefined", () => {
