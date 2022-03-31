@@ -6,23 +6,26 @@ import * as assert from "./assertions";
 import * as is from "./guards";
 import * as o from "./object";
 import * as reflect from "./reflect";
-import type { IterableLike } from "./types/core";
 
-export interface ReduceForComparison<T extends object> {
+export type KeyOrReduce<T extends object, V extends object = T> =
+  | PropertyKey
+  | Reduce<T, V>;
+
+export interface Reduce<T extends object, V extends object = T> {
   /**
    * Reduces object for comparison.
    *
    * @param obj - Object.
    * @returns Reduced value.
    */
-  (obj: T): unknown;
+  (obj: T | V): unknown;
 }
 
 /**
- * Creates an array of pairs [x1, x2], [x2, x3]...
+ * Creates array of pairs ("[x, y, z]" => "[[x, y], [y, z]]").
  *
  * @param arr - Array.
- * @returns An array of pairs.
+ * @returns Array of pairs.
  */
 export function chain<T>(arr: readonly T[]): Array<[T, T]> {
   const result: Array<[T, T]> = [];
@@ -38,42 +41,42 @@ export function chain<T>(arr: readonly T[]): Array<[T, T]> {
 }
 
 /**
- * Creates array copy.
+ * Clones array.
  *
  * @param arr - Array.
- * @returns Array copy.
+ * @returns New array.
  */
 export function clone<A>(arr: readonly [A]): [A];
 
 /**
- * Creates array copy.
+ * Clones array.
  *
  * @param arr - Array.
- * @returns Array copy.
+ * @returns New array.
  */
 export function clone<A, B>(arr: readonly [A, B]): [A, B];
 
 /**
- * Creates array copy.
+ * Clones array.
  *
  * @param arr - Array.
- * @returns Array copy.
+ * @returns New array.
  */
 export function clone<A, B, C>(arr: readonly [A, B, C]): [A, B, C];
 
 /**
- * Creates array copy.
+ * Clones array.
  *
  * @param arr - Array.
- * @returns Array copy.
+ * @returns New array.
  */
 export function clone<A, B, C, D>(arr: readonly [A, B, C, D]): [A, B, C, D];
 
 /**
- * Creates array copy.
+ * Clones array.
  *
  * @param arr - Array.
- * @returns Array copy.
+ * @returns New array.
  */
 export function clone<T>(arr: readonly T[]): T[];
 
@@ -89,7 +92,7 @@ export function clone<T>(arr: readonly T[]): T[] {
  * @returns New array with one element removed.
  */
 export function drop<T>(arr: readonly T[], index: number): T[] {
-  assert.toBeTrue(index >= 0 && index < arr.length, "Invalid index");
+  assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
 
   return [...arr.slice(0, index), ...arr.slice(index + 1)];
 }
@@ -98,22 +101,24 @@ export function drop<T>(arr: readonly T[], index: number): T[] {
  * Finds element matching value.
  *
  * @param arr - Array.
- * @param value - Value for comparison.
+ * @param value - Value.
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns The first element matching value if available, _undefined_ otherwise.
  */
-export function findBy<T extends object>(
+export function findBy<T extends object, V extends object>(
   arr: readonly T[],
-  value: object,
-  keyOrReduce: PropertyKey | ReduceForComparison<object>
+  value: V,
+  keyOrReduce: KeyOrReduce<T | V>
 ): T | undefined {
   const reduce = toReduce(keyOrReduce);
 
-  return arr.find(element => reduce(element) === reduce(value));
+  const reduced = reduce(value);
+
+  return arr.find(element => reduce(element) === reduced);
 }
 
 /**
- * Gets the first element.
+ * Returns the first element from an array.
  *
  * @param arr - Array.
  * @returns The first element if available.
@@ -129,14 +134,14 @@ export function first<T>(arr: readonly T[]): T {
  * @param iterable - Iterable.
  * @returns Array.
  */
-export function fromIterable<T>(iterable: IterableLike<T>): T[] {
-  return is.callable(iterable) ? [...iterable()] : [...iterable];
+export function fromIterable<T>(iterable: Iterable<T>): T[] {
+  return [...iterable];
 }
 
 /**
- * Creates array from range.
+ * Creates array of numbers.
  *
- * @param from - Starting number.
+ * @param from - Lower limit (inclusive).
  * @param to - Upper limit (inclusive).
  * @param step - Step.
  * @returns Array of numbers.
@@ -160,11 +165,11 @@ export function fromString(str: string): string[] {
 }
 
 /**
- * Gets element by index.
+ * Returns element by index.
  *
  * @param arr - Array.
  * @param index - Index.
- * @returns Array element if available.
+ * @returns Element if available.
  * @throws Error otherwise.
  */
 export function get<T>(arr: readonly T[], index: number): T {
@@ -178,22 +183,24 @@ export function get<T>(arr: readonly T[], index: number): T {
  * Checks that array contains element matching value.
  *
  * @param arr - Array.
- * @param value - Value for comparison.
+ * @param value - Value.
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns _True_ if array contains element matching value, _false_ otherwise.
  */
-export function includesBy<T extends object>(
+export function includesBy<T extends object, V extends object>(
   arr: readonly T[],
-  value: object,
-  keyOrReduce: PropertyKey | ReduceForComparison<object>
+  value: V,
+  keyOrReduce: KeyOrReduce<T, V>
 ): boolean {
   const reduce = toReduce(keyOrReduce);
 
-  return arr.some(element => reduce(element) === reduce(value));
+  const reduced = reduce(value);
+
+  return arr.some(element => reduce(element) === reduced);
 }
 
 /**
- * Gets the last element.
+ * Returns the last element from an array.
  *
  * @param arr - Array.
  * @returns The last element if available.
@@ -204,7 +211,7 @@ export function last<T>(arr: readonly T[]): T {
 }
 
 /**
- * Adds element to the end of array.
+ * Adds element to the end of an array.
  *
  * @param arr - Array.
  * @param value - Value.
@@ -215,7 +222,7 @@ export function push<T>(arr: readonly T[], value: T): T[] {
 }
 
 /**
- * Pushes value or replaces elements matching value if found.
+ * Replaces elements matching value if found, pushes value otherwise.
  *
  * @param arr - Array.
  * @param value - Value.
@@ -225,7 +232,7 @@ export function push<T>(arr: readonly T[], value: T): T[] {
 export function pushOrReplaceBy<T extends object>(
   arr: readonly T[],
   value: T,
-  keyOrReduce: PropertyKey | ReduceForComparison<object>
+  keyOrReduce: KeyOrReduce<T>
 ): T[] {
   return includesBy(arr, value, keyOrReduce)
     ? replaceBy(arr, value, keyOrReduce)
@@ -246,18 +253,20 @@ export function random<T>(arr: readonly T[]): T {
  * Removes elements matching value.
  *
  * @param arr - Array.
- * @param value - Value for comparison.
+ * @param value - Value.
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns New array with matching elements removed.
  */
-export function removeBy<T extends object>(
+export function removeBy<T extends object, V extends object>(
   arr: readonly T[],
-  value: object,
-  keyOrReduce: PropertyKey | ReduceForComparison<object>
+  value: V,
+  keyOrReduce: KeyOrReduce<T, V>
 ): T[] {
   const reduce = toReduce(keyOrReduce);
 
-  return arr.filter(element => reduce(element) !== reduce(value));
+  const reduced = reduce(value);
+
+  return arr.filter(element => reduce(element) !== reduced);
 }
 
 /**
@@ -265,11 +274,11 @@ export function removeBy<T extends object>(
  *
  * @param arr - Array.
  * @param index - Index to be replaced.
- * @param value - New value.
+ * @param value - Value.
  * @returns New array with one element replaced.
  */
 export function replace<T>(arr: readonly T[], index: number, value: T): T[] {
-  assert.toBeTrue(index >= 0 && index < arr.length, "Invalid index");
+  assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
 
   return [...arr.slice(0, index), value, ...arr.slice(index + 1)];
 }
@@ -278,27 +287,27 @@ export function replace<T>(arr: readonly T[], index: number, value: T): T[] {
  * Replaces elements matching value.
  *
  * @param arr - Array.
- * @param value - New value.
+ * @param value - Value.
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns New array with matching elements replaced.
  */
 export function replaceBy<T extends object>(
   arr: readonly T[],
   value: T,
-  keyOrReduce: PropertyKey | ReduceForComparison<object>
+  keyOrReduce: KeyOrReduce<T>
 ): T[] {
   const reduce = toReduce(keyOrReduce);
 
-  return arr.map(element =>
-    reduce(element) === reduce(value) ? value : element
-  );
+  const reduced = reduce(value);
+
+  return arr.map(element => (reduce(element) === reduced ? value : element));
 }
 
 /**
  * Reverses array.
  *
  * @param arr - Array.
- * @returns New reversed array.
+ * @returns New array.
  */
 export function reverse<T>(arr: readonly T[]): T[] {
   const result = clone(arr);
@@ -313,7 +322,7 @@ export function reverse<T>(arr: readonly T[]): T[] {
  *
  * @param arr - Array.
  * @param compareFn - Comparison function.
- * @returns New sorted array.
+ * @returns New array.
  */
 export function sort<T>(
   arr: readonly T[],
@@ -337,7 +346,7 @@ export function sort<T>(
 export function toggleBy<T extends object>(
   arr: readonly T[],
   value: T,
-  keyOrReduce: PropertyKey | ReduceForComparison<object>
+  keyOrReduce: KeyOrReduce<T>
 ): T[] {
   return includesBy(arr, value, keyOrReduce)
     ? removeBy(arr, value, keyOrReduce)
@@ -354,15 +363,15 @@ export function truncate(mutableArray: unknown[]): void {
 }
 
 /**
- * Creates an array of unique elements.
+ * Creates unique array.
  *
  * @param arr - Array.
  * @param keyOrReduce - Comparison key or reduce function.
- * @returns An array of unique elements.
+ * @returns Unique array.
  */
 export function uniqueBy<T extends object>(
   arr: readonly T[],
-  keyOrReduce: PropertyKey | ReduceForComparison<T>
+  keyOrReduce: KeyOrReduce<T>
 ): T[] {
   const reduce = toReduce(keyOrReduce);
 
@@ -380,7 +389,7 @@ export function uniqueBy<T extends object>(
 }
 
 /**
- * Adds element to the beginning of the array.
+ * Adds element to the beginning of an array.
  *
  * @param arr - Array.
  * @param value - Value.
@@ -388,6 +397,24 @@ export function uniqueBy<T extends object>(
  */
 export function unshift<T>(arr: readonly T[], value: T): T[] {
   return [value, ...arr];
+}
+
+/**
+ * Replaces elements matching value if found, unshifts value otherwise.
+ *
+ * @param arr - Array.
+ * @param value - Value.
+ * @param keyOrReduce - Comparison key or reduce function.
+ * @returns New array.
+ */
+export function unshiftOrReplaceBy<T extends object>(
+  arr: readonly T[],
+  value: T,
+  keyOrReduce: KeyOrReduce<T>
+): T[] {
+  return includesBy(arr, value, keyOrReduce)
+    ? replaceBy(arr, value, keyOrReduce)
+    : unshift(arr, value);
 }
 
 /*
@@ -402,9 +429,9 @@ export function unshift<T>(arr: readonly T[], value: T): T[] {
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns Reduce function.
  */
-function toReduce<T extends object>(
-  keyOrReduce: PropertyKey | ReduceForComparison<T>
-): ReduceForComparison<T> {
+function toReduce<T extends object, V extends object = T>(
+  keyOrReduce: KeyOrReduce<T, V>
+): Reduce<T, V> {
   return is.callable(keyOrReduce)
     ? keyOrReduce
     : (obj): unknown => reflect.get(obj, keyOrReduce);

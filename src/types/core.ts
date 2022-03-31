@@ -110,8 +110,6 @@ export type IndexedObject<T = unknown> = Record<PropertyKey, T>;
 
 export type Interval = ReturnType<typeof setInterval>;
 
-export type IterableLike<T> = Iterable<T> | (() => Iterable<T>);
-
 export type Join2<A extends object, B extends object> = keyof A extends never
   ? B
   : keyof B extends never

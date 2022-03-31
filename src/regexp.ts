@@ -1,5 +1,6 @@
 import * as a from "./array";
 import * as assert from "./assertions";
+import * as fn from "./function";
 import * as s from "./string";
 import type { stringU } from "./types/core";
 
@@ -37,14 +38,16 @@ export function escapeString(str: string): string {
 export function matchAll(str: string, re: RegExp): RegExpExecArray[] {
   re = addFlags(re, "g");
 
-  return a.fromIterable(function* (): Generator<RegExpExecArray> {
-    let match = re.exec(str);
+  return a.fromIterable(
+    fn.run(function* (): Generator<RegExpExecArray> {
+      let match = re.exec(str);
 
-    while (match) {
-      yield match;
-      match = re.exec(str);
-    }
-  });
+      while (match) {
+        yield match;
+        match = re.exec(str);
+      }
+    })
+  );
 }
 
 /**
