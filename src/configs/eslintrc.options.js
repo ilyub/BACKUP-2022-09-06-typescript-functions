@@ -48,6 +48,7 @@ module.exports = importPrefix => {
         type: "wildcard"
       },
       {
+        altLocalNames: ["mapFn"],
         autoImportSource: `${importPrefix}map`,
         sourcePattern: "@skylib/functions/*/map",
         type: "wildcard"
@@ -75,6 +76,7 @@ module.exports = importPrefix => {
         type: "wildcard"
       },
       {
+        altLocalNames: ["setFn"],
         autoImportSource: `${importPrefix}set`,
         sourcePattern: "@skylib/functions/*/set",
         type: "wildcard"

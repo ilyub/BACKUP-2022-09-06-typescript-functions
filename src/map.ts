@@ -1,4 +1,15 @@
 /**
+ * Checks if map has value.
+ *
+ * @param map - Map.
+ * @param key - Key.
+ * @returns _True_ if map has value, _false_ otherwise.
+ */
+export function has(map: ReadonlyMap<unknown, unknown>, key: unknown): boolean {
+  return map.has(key);
+}
+
+/**
  * Removes key.
  *
  * @param map - Map.
