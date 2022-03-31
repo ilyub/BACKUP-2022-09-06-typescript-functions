@@ -62,6 +62,11 @@ export function neq(x: unknown, y: unknown): boolean {
 |*******************************************************************************
 |*/
 
+interface CustomData {
+  readonly dataType: DataType;
+  readonly value: unknown;
+}
+
 type DataType = "map-5702-3c89-3feb-75d4" | "set-41ef-10c9-ae1f-15e8";
 
 const DataTypeVO = createValidationObject<DataType>({
@@ -71,12 +76,8 @@ const DataTypeVO = createValidationObject<DataType>({
 
 const isDataType = is.factory(is.enumeration, DataTypeVO);
 
-const isCustomData = is.factory(
-  is.object.of,
-  {
-    dataType: isDataType,
-    value: is.unknown
-  } as const,
+const isCustomData = is.object.of.factory<CustomData>(
+  { dataType: isDataType, value: is.unknown },
   {}
 );
 
