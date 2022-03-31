@@ -1,19 +1,14 @@
+import * as fn from "@/function";
 import * as is from "@/guards";
 import { createValidationObject } from "@/types/core";
 
-class TestClass {
-  public value = 1;
-}
+test("factory", () => {
+  const guard = is.factory(is.array.of, is.number);
 
-type TestEnum = "a" | 1;
-
-const TestEnumVO = createValidationObject<TestEnum>({ 1: 1, a: "a" });
-
-const testClass = new TestClass();
-
-function testFunction(): boolean {
-  return true;
-}
+  expect(guard([1])).toBeTrue();
+  expect(guard(["a"])).toBeFalse();
+  expect(guard(1)).toBeFalse();
+});
 
 test("and", () => {
   expect(is.and(undefined, is.booleanU, is.numberU)).toBeTrue();
@@ -62,11 +57,9 @@ test("array", () => {
 });
 
 test("array.of", () => {
-  const guard = is.factory(is.array.of, is.number);
-
-  expect(guard([1])).toBeTrue();
-  expect(guard(["a"])).toBeFalse();
-  expect(guard(1)).toBeFalse();
+  expect(is.array.of([1], is.number)).toBeTrue();
+  expect(is.array.of(["a"], is.number)).toBeFalse();
+  expect(is.array.of(1, is.number)).toBeFalse();
 });
 
 test("boolean", () => {
@@ -76,23 +69,24 @@ test("boolean", () => {
   expect(is.boolean(undefined)).toBeFalse();
 });
 
-test("booleanU", () => {
-  expect(is.booleanU(1)).toBeFalse();
-  expect(is.booleanU(true)).toBeTrue();
-  expect(is.booleanU(false)).toBeTrue();
-  expect(is.booleanU(undefined)).toBeTrue();
-});
-
 test("callable", () => {
+  class TestClass {
+    public value = 1;
+  }
+
   expect(is.callable(TestClass)).toBeTrue();
-  expect(is.callable(testFunction)).toBeTrue();
+  expect(is.callable(fn.noop)).toBeTrue();
   expect(is.callable(1)).toBeFalse();
   expect(is.callable(undefined)).toBeFalse();
 });
 
 test("callableU", () => {
+  class TestClass {
+    public value = 1;
+  }
+
   expect(is.callableU(TestClass)).toBeTrue();
-  expect(is.callableU(testFunction)).toBeTrue();
+  expect(is.callableU(fn.noop)).toBeTrue();
   expect(is.callableU(1)).toBeFalse();
   expect(is.callableU(undefined)).toBeTrue();
 });
@@ -104,6 +98,10 @@ test("empty", () => {
 });
 
 test("enumeration", () => {
+  type TestEnum = "a" | 1;
+
+  const TestEnumVO = createValidationObject<TestEnum>({ 1: 1, a: "a" });
+
   expect(is.enumeration(1, TestEnumVO)).toBeTrue();
   expect(is.enumeration("a", TestEnumVO)).toBeTrue();
   expect(is.enumeration("b", TestEnumVO)).toBeFalse();
@@ -111,6 +109,10 @@ test("enumeration", () => {
 });
 
 test("enumerationU", () => {
+  type TestEnum = "a" | 1;
+
+  const TestEnumVO = createValidationObject<TestEnum>({ 1: 1, a: "a" });
+
   expect(is.enumerationU(1, TestEnumVO)).toBeTrue();
   expect(is.enumerationU("a", TestEnumVO)).toBeTrue();
   expect(is.enumerationU("b", TestEnumVO)).toBeFalse();
@@ -131,27 +133,40 @@ test("indexedObject", () => {
 });
 
 test("indexedObject.of", () => {
-  const guard = is.factory(is.indexedObject.of, is.number);
-
-  expect(guard({ a: 1 })).toBeTrue();
-  expect(guard({ a: "a" })).toBeFalse();
-  expect(guard(1)).toBeFalse();
-  expect(guard(null)).toBeFalse();
+  expect(is.indexedObject.of({ a: 1 }, is.number)).toBeTrue();
+  expect(is.indexedObject.of({ a: "a" }, is.number)).toBeFalse();
+  expect(is.indexedObject.of(1, is.number)).toBeFalse();
+  expect(is.indexedObject.of(null, is.number)).toBeFalse();
 });
 
 test("instance", () => {
-  const guard = is.factory(is.instance, TestClass);
+  class TestClass {
+    public value = 1;
+  }
 
-  expect(guard(testClass)).toBeTrue();
-  expect(guard({})).toBeFalse();
+  expect(is.instance(new TestClass(), TestClass)).toBeTrue();
+  expect(is.instance({}, TestClass)).toBeFalse();
+  expect(is.instance(undefined, TestClass)).toBeFalse();
+});
+
+test("instanceU", () => {
+  class TestClass {
+    public value = 1;
+  }
+
+  expect(is.instanceU(new TestClass(), TestClass)).toBeTrue();
+  expect(is.instanceU({}, TestClass)).toBeFalse();
+  expect(is.instanceU(undefined, TestClass)).toBeTrue();
 });
 
 test("instances", () => {
-  const guard = is.factory(is.instances, TestClass);
+  class TestClass {
+    public value = 1;
+  }
 
-  expect(guard([testClass])).toBeTrue();
-  expect(guard([{}])).toBeFalse();
-  expect(guard({})).toBeFalse();
+  expect(is.instances([new TestClass()], TestClass)).toBeTrue();
+  expect(is.instances([{}], TestClass)).toBeFalse();
+  expect(is.instances([undefined], TestClass)).toBeFalse();
 });
 
 test("map", () => {
@@ -159,6 +174,15 @@ test("map", () => {
   expect(is.map(new Map([[1, 1]]), is.string, is.number)).toBeFalse();
   expect(is.map(new Map([["a", "a"]]), is.string, is.number)).toBeFalse();
   expect(is.map({}, is.string, is.number)).toBeFalse();
+  expect(is.map(undefined, is.string, is.number)).toBeFalse();
+});
+
+test("mapU", () => {
+  expect(is.mapU(new Map([["a", 1]]), is.string, is.number)).toBeTrue();
+  expect(is.mapU(new Map([[1, 1]]), is.string, is.number)).toBeFalse();
+  expect(is.mapU(new Map([["a", "a"]]), is.string, is.number)).toBeFalse();
+  expect(is.mapU({}, is.string, is.number)).toBeFalse();
+  expect(is.mapU(undefined, is.string, is.number)).toBeTrue();
 });
 
 test("null", () => {
@@ -174,25 +198,11 @@ test("numStr", () => {
   expect(is.numStr(undefined)).toBeFalse();
 });
 
-test("numStrU", () => {
-  expect(is.numStrU(1)).toBeTrue();
-  expect(is.numStrU("a")).toBeTrue();
-  expect(is.numStrU(true)).toBeFalse();
-  expect(is.numStrU(undefined)).toBeTrue();
-});
-
 test("number", () => {
   expect(is.number(1)).toBeTrue();
   expect(is.number("a")).toBeFalse();
   expect(is.number(true)).toBeFalse();
   expect(is.number(undefined)).toBeFalse();
-});
-
-test("numberU", () => {
-  expect(is.numberU(1)).toBeTrue();
-  expect(is.numberU("a")).toBeFalse();
-  expect(is.numberU(true)).toBeFalse();
-  expect(is.numberU(undefined)).toBeTrue();
 });
 
 test("object", () => {
@@ -203,38 +213,47 @@ test("object", () => {
 });
 
 test("object.of", () => {
-  interface TestInterface {
-    num: number;
-    str?: string;
-  }
-
-  const guard: is.Guard<TestInterface> = is.factory(
+  const guard = is.factory(
     is.object.of,
     { num: is.number },
     { str: is.string }
   );
 
   expect(guard({ num: 1, str: "a" })).toBeTrue();
-  expect(guard({ num: 1 })).toBeTrue();
-  expect(guard({ str: "a" })).toBeFalse();
   expect(guard({ num: true, str: "a" })).toBeFalse();
   expect(guard({ num: 1, str: true })).toBeFalse();
+  expect(guard({ num: 1 })).toBeTrue();
+  expect(guard({ str: "a" })).toBeFalse();
   expect(guard(1)).toBeFalse();
   expect(guard(null)).toBeFalse();
   expect(guard(undefined)).toBeFalse();
 });
 
-test("objectU", () => {
-  expect(is.objectU({})).toBeTrue();
-  expect(is.objectU(1)).toBeFalse();
-  expect(is.objectU(null)).toBeFalse();
-  expect(is.objectU(undefined)).toBeTrue();
+test("object.of.factory", () => {
+  const guard = is.object.of.factory({ num: is.number }, { str: is.string });
+
+  expect(guard({ num: 1, str: "a" })).toBeTrue();
+  expect(guard({ num: true, str: "a" })).toBeFalse();
+  expect(guard({ num: 1, str: true })).toBeFalse();
+  expect(guard({ num: 1 })).toBeTrue();
+  expect(guard({ str: "a" })).toBeFalse();
+  expect(guard(1)).toBeFalse();
+  expect(guard(null)).toBeFalse();
+  expect(guard(undefined)).toBeFalse();
 });
 
 test("set", () => {
   expect(is.set(new Set(["a"]), is.string)).toBeTrue();
   expect(is.set(new Set([1]), is.string)).toBeFalse();
   expect(is.set({}, is.string)).toBeFalse();
+  expect(is.set(undefined, is.string)).toBeFalse();
+});
+
+test("setU", () => {
+  expect(is.setU(new Set(["a"]), is.string)).toBeTrue();
+  expect(is.setU(new Set([1]), is.string)).toBeFalse();
+  expect(is.setU({}, is.string)).toBeFalse();
+  expect(is.setU(undefined, is.string)).toBeTrue();
 });
 
 test("string", () => {
@@ -242,13 +261,6 @@ test("string", () => {
   expect(is.string("")).toBeTrue();
   expect(is.string(1)).toBeFalse();
   expect(is.string(undefined)).toBeFalse();
-});
-
-test("stringU", () => {
-  expect(is.stringU("a")).toBeTrue();
-  expect(is.stringU("")).toBeFalse();
-  expect(is.stringU(1)).toBeFalse();
-  expect(is.stringU(undefined)).toBeTrue();
 });
 
 test("symbol", () => {

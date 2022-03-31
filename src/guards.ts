@@ -1,11 +1,13 @@
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[guards] */
+import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
+import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 
 import * as a from "./array";
 import * as o from "./object";
+import * as setFn from "./set";
 // eslint-disable-next-line @skylib/consistent-import
 import type * as types from "./types/core";
 
-export interface ExclusiveGuard<T> {
+export interface ExclusionGuard<T> {
   /**
    * Checks that value type is not T.
    *
@@ -25,8 +27,8 @@ export interface Guard<T = unknown> {
   (value: unknown): value is T;
 }
 
-export type Guards<T> = {
-  readonly [K in keyof T]: Guard<T[K]>;
+export type Guards<T, K extends keyof T = keyof T> = {
+  readonly [L in K]-?: Guard<T[L]>;
 };
 
 export interface MultiArgGuard<T, A extends unknown[]> {
@@ -102,7 +104,7 @@ export function and<A, B, C, D>(
   guard4: Guard<D>
 ): value is A & B & C & D;
 
-export function and(value: unknown, ...guards: Guard[]): boolean {
+export function and(value: unknown, ...guards: Guard[]): value is unknown {
   return guards.every(guard => guard(value));
 }
 
@@ -166,12 +168,12 @@ export function not<T, V>(value: V, guard: Guard<T>): value is Exclude<V, T> {
 }
 
 /**
- * Creates guard for not T type.
+ * Creates guard for type not T.
  *
  * @param guard - Guard for type T.
- * @returns Guard for not T type.
+ * @returns Guard for type not T.
  */
-export function notFactory<T>(guard: Guard<T>): ExclusiveGuard<T> {
+export function notFactory<T>(guard: Guard<T>): ExclusionGuard<T> {
   return <V>(value: V): value is Exclude<V, T> => !guard(value);
 }
 
@@ -287,6 +289,8 @@ export function array(value: unknown): value is types.unknowns {
   return Array.isArray(value);
 }
 
+not.array = notFactory(array);
+
 export const arrayU = orFactory(array, undefinedGuard);
 
 export const arrays = factory(arrayOf, array);
@@ -304,7 +308,7 @@ export function arrayOf<T>(
   value: unknown,
   guard: Guard<T>
 ): value is readonly T[] {
-  return Array.isArray(value) && value.every(guard);
+  return array(value) && value.every(guard);
 }
 
 array.of = arrayOf;
@@ -321,21 +325,11 @@ export function boolean(value: unknown): value is boolean {
 
 not.boolean = notFactory(boolean);
 
+export const booleanU = orFactory(boolean, undefinedGuard);
+
 export const booleans = factory(arrayOf, boolean);
 
 export const booleansU = orFactory(booleans, undefinedGuard);
-
-/**
- * Checks that value type is booleanU.
- *
- * @param value - Value.
- * @returns _True_ if value type is booleanU, _false_ otherwise.
- */
-export function booleanU(value: unknown): value is types.booleanU {
-  return typeof value === "boolean" || value === undefined;
-}
-
-not.booleanU = notFactory(booleanU);
 
 /**
  * Checks that value type is T.
@@ -346,8 +340,6 @@ not.booleanU = notFactory(booleanU);
 export function callable<T extends Function>(value: unknown): value is T {
   return typeof value === "function";
 }
-
-not.callable = notFactory(callable);
 
 /**
  * Checks that value type is T | undefined.
@@ -360,8 +352,6 @@ export function callableU<T extends Function>(
 ): value is T | undefined {
   return typeof value === "function" || value === undefined;
 }
-
-not.callableU = notFactory(callableU);
 
 /**
  * Checks that value type is empty.
@@ -386,9 +376,7 @@ export function enumeration<T extends PropertyKey>(
   value: unknown,
   vo: types.ValidationObject<T>
 ): value is T {
-  const untypedVo: ReadonlySet<unknown> = vo;
-
-  return untypedVo.has(value);
+  return setFn.has(vo, value);
 }
 
 /**
@@ -402,9 +390,7 @@ export function enumerationU<T extends PropertyKey>(
   value: unknown,
   vo: types.ValidationObject<T>
 ): value is T | undefined {
-  const untypedVo: ReadonlySet<unknown> = vo;
-
-  return untypedVo.has(value) || value === undefined;
+  return setFn.has(vo, value) || value === undefined;
 }
 
 /**
@@ -419,6 +405,8 @@ export function falseGuard(value: unknown): value is false {
 
 export { falseGuard as false };
 
+not.false = notFactory(falseGuard);
+
 /**
  * Checks that value type is IndexedObject.
  *
@@ -430,6 +418,8 @@ export function indexedObject(
 ): value is types.ReadonlyIndexedObject {
   return typeof value === "object" && value !== null;
 }
+
+not.indexedObject = notFactory(indexedObject);
 
 export const indexedObjectU = orFactory(indexedObject, undefinedGuard);
 
@@ -468,6 +458,20 @@ export function instance<T>(
 }
 
 /**
+ * Checks that value type is T | undefined.
+ *
+ * @param value - Value.
+ * @param ctor - Constructor.
+ * @returns _True_ if value type is T | undefined, _false_ otherwise.
+ */
+export function instanceU<T>(
+  value: unknown,
+  ctor: types.Constructor<T>
+): value is T | undefined {
+  return value instanceof ctor || value === undefined;
+}
+
+/**
  * Checks that value type is T[].
  *
  * @param value - Value.
@@ -478,7 +482,7 @@ export function instances<T>(
   value: unknown,
   ctor: types.Constructor<T>
 ): value is readonly T[] {
-  return Array.isArray(value) && value.every(x => x instanceof ctor);
+  return array(value) && value.every(v => v instanceof ctor);
 }
 
 /**
@@ -498,6 +502,22 @@ export function map<K, V>(
     value instanceof Map &&
     a.fromIterable(value).every(([k, v]) => keyGuard(k) && valueGuard(v))
   );
+}
+
+/**
+ * Checks that value type is Map\<K, V\>.
+ *
+ * @param value - Value.
+ * @param keyGuard - Key guard.
+ * @param valueGuard - Value guard.
+ * @returns _True_ if value type is Map\<K, V\>, _false_ otherwise.
+ */
+export function mapU<K, V>(
+  value: unknown,
+  keyGuard: Guard<K>,
+  valueGuard: Guard<V>
+): value is ReadonlyMap<K, V> | undefined {
+  return map(value, keyGuard, valueGuard) || value === undefined;
 }
 
 /**
@@ -533,29 +553,11 @@ export function numStr(value: unknown): value is types.NumStr {
 
 not.numStr = notFactory(numStr);
 
+export const numStrU = orFactory(numStr, undefinedGuard);
+
 export const numStrs = factory(arrayOf, numStr);
 
 export const numStrsU = orFactory(numStrs, undefinedGuard);
-
-/**
- * Checks that value type is NumStrU.
- *
- * @param value - Value.
- * @returns _True_ if value type is NumStrU, _false_ otherwise.
- */
-export function numStrU(value: unknown): value is types.NumStrU {
-  switch (typeof value) {
-    case "number":
-    case "string":
-    case "undefined":
-      return true;
-
-    default:
-      return false;
-  }
-}
-
-not.numStrU = notFactory(numStrU);
 
 /**
  * Checks that value is a number.
@@ -569,21 +571,11 @@ export function number(value: unknown): value is number {
 
 not.number = notFactory(number);
 
+export const numberU = orFactory(number, undefinedGuard);
+
 export const numbers = factory(arrayOf, number);
 
 export const numbersU = orFactory(numbers, undefinedGuard);
-
-/**
- * Checks that value type is numberU.
- *
- * @param value - Value.
- * @returns _True_ if value type is numberU, _false_ otherwise.
- */
-export function numberU(value: unknown): value is types.numberU {
-  return typeof value === "number" || value === undefined;
-}
-
-not.numberU = notFactory(numberU);
 
 /**
  * Checks that value is an object.
@@ -597,6 +589,8 @@ export function object(value: unknown): value is object {
 
 not.object = notFactory(object);
 
+export const objectU = orFactory(object, undefinedGuard);
+
 export const objects = factory(arrayOf, object);
 
 export const objectsU = orFactory(objects, undefinedGuard);
@@ -605,50 +599,66 @@ export const objectsU = orFactory(objects, undefinedGuard);
  * Checks that value type is T.
  *
  * @param value - Value.
- * @param requiredGuards - Guards for required properties.
- * @param optionalGuards - Guards for optional properties.
+ * @param required - Guards for required properties.
+ * @param optional - Guards for optional properties.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-export function objectOf<A, B>(
+export function objectOf<T extends object>(
   value: unknown,
-  requiredGuards: Guards<A>,
-  optionalGuards: Guards<B>
-): value is Partial<B> & Required<A> {
+  required: Guards<T, RequiredKeys<T>>,
+  optional: Guards<T, OptionalKeys<T>>
+): value is T {
   return (
     indexedObject(value) &&
-    o.entries(requiredGuards).every(([name, guard]) => guard(value[name])) &&
-    o
-      .entries(optionalGuards)
-      .every(([name, guard]) =>
-        o.hasOwnProp(name, value) ? guard(value[name]) : true
-      )
+    o.every(required, (guard, key) => checkRequiredProp(value, key, guard)) &&
+    o.every(optional, (guard, key) => checkOptionalProp(value, key, guard))
   );
 }
 
 object.of = objectOf;
 
 /**
- * Checks that value type is objectU.
+ * Creates guard for type T.
  *
- * @param value - Value.
- * @returns _True_ if value type is objectU, _false_ otherwise.
+ * @param required - Guards for required properties.
+ * @param optional - Guards for optional properties.
+ * @returns Guard for type T.
  */
-export function objectU(value: unknown): value is types.objectU {
-  return object(value) || value === undefined;
+export function objectOfFactory<T extends object>(
+  required: Guards<T, RequiredKeys<T>>,
+  optional: Guards<T, OptionalKeys<T>>
+): Guard<T> {
+  return (value: unknown): value is T => objectOf(value, required, optional);
 }
 
+objectOf.factory = objectOfFactory;
+
 /**
- * Checks that value type is Set<T>.
+ * Checks that value type is Set\<T\>.
  *
  * @param value - Value.
  * @param guard - Guard.
- * @returns _True_ if value type is Set<T>, _false_ otherwise.
+ * @returns _True_ if value type is Set\<T\>, _false_ otherwise.
  */
 export function set<T>(
   value: unknown,
   guard: Guard<T>
 ): value is ReadonlySet<T> {
-  return value instanceof Set && a.fromIterable(value).every(x => guard(x));
+  return value instanceof Set && a.fromIterable(value).every(v => guard(v));
+}
+
+/**
+ * Checks that value type is Set\<T\>.
+ *
+ * @param value - Value.
+ * @param guard - Guard.
+ * @returns _True_ if value type is Set\<T\>, _false_ otherwise.
+ */
+export function setU<T>(
+  value: unknown,
+  guard: Guard<T>
+): value is ReadonlySet<T> | undefined {
+  return set(value, guard) || value === undefined;
 }
 
 /**
@@ -663,21 +673,11 @@ export function string(value: unknown): value is string {
 
 not.string = notFactory(string);
 
+export const stringU = orFactory(string, undefinedGuard);
+
 export const strings = factory(arrayOf, string);
 
 export const stringsU = orFactory(strings, undefinedGuard);
-
-/**
- * Checks that value type is stringU.
- *
- * @param value - Value.
- * @returns _True_ if value type is stringU, _false_ otherwise.
- */
-export function stringU(value: unknown): value is types.stringU {
-  return (typeof value === "string" && value !== "") || value === undefined;
-}
-
-not.stringU = notFactory(stringU);
 
 /**
  * Checks that value is a symbol.
@@ -690,6 +690,8 @@ export function symbol(value: unknown): value is symbol {
 }
 
 not.symbol = notFactory(symbol);
+
+export const symbolU = orFactory(symbol, undefinedGuard);
 
 export const symbols = factory(arrayOf, symbol);
 
@@ -706,6 +708,8 @@ export function trueGuard(value: unknown): value is true {
 }
 
 export { trueGuard as true };
+
+not.true = notFactory(trueGuard);
 
 /**
  * Checks that value type is [A].
@@ -853,3 +857,43 @@ export function unknown(_value: unknown): _value is unknown {
 }
 
 export const unknowns = factory(arrayOf, unknown);
+
+export const unknownsU = orFactory(unknowns, undefinedGuard);
+
+/*
+|*******************************************************************************
+|* Private
+|*******************************************************************************
+|*/
+
+/**
+ * Checks optional prop.
+ *
+ * @param obj - Object.
+ * @param key - Key.
+ * @param guard - Guard.
+ * @returns Check result.
+ */
+function checkOptionalProp(
+  obj: types.ReadonlyIndexedObject,
+  key: PropertyKey,
+  guard: Guard
+): boolean {
+  return o.hasOwnProp(key, obj) ? guard(obj[key]) : true;
+}
+
+/**
+ * Checks required prop.
+ *
+ * @param obj - Object.
+ * @param key - Key.
+ * @param guard - Guard.
+ * @returns Check result.
+ */
+function checkRequiredProp(
+  obj: types.ReadonlyIndexedObject,
+  key: PropertyKey,
+  guard: Guard
+): boolean {
+  return o.hasOwnProp(key, obj) ? guard(obj[key]) : false;
+}

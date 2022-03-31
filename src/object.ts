@@ -125,9 +125,9 @@ export function every<K extends PropertyKey, S, D extends S>(
  * @param callback - Callback.
  * @returns _True_ if every object property satisfies condition, _false_ otherwise.
  */
-export function every<K extends PropertyKey, V>(
-  obj: ReadonlyRecord<K, V>,
-  callback: (value: V, key: K) => boolean
+export function every<T>(
+  obj: T,
+  callback: (value: T[keyof T], key: keyof T) => boolean
 ): boolean;
 
 export function every<K extends PropertyKey, V>(
