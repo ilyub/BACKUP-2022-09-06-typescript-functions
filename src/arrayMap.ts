@@ -1,29 +1,45 @@
+export type ArrayMap<K extends PropertyKey, T> = ReadonlyMap<K, readonly T[]>;
+
+export type ArrayMap2<
+  K extends PropertyKey,
+  L extends PropertyKey,
+  T
+> = ReadonlyMap<K, ReadonlyMap<L, readonly T[]>>;
+
+export type WritableArrayMap<K extends PropertyKey, T> = Map<K, T[]>;
+
+export type WritableArrayMap2<
+  K extends PropertyKey,
+  L extends PropertyKey,
+  T
+> = Map<K, Map<L, T[]>>;
+
 /**
- * Gets values from array map.
+ * Returns array from array map.
  *
  * @param key - Key.
  * @param map - Array map.
- * @returns Values.
+ * @returns Array.
  */
 export function get<K extends PropertyKey, T>(
   key: K,
-  map: ReadonlyMap<K, readonly T[]>
+  map: ArrayMap<K, T>
 ): readonly T[] {
   return map.get(key) ?? [];
 }
 
 /**
- * Gets values from array map.
+ * Returns array from array map.
  *
  * @param key1 - Key 1.
  * @param key2 - Key 2.
  * @param map - Array map.
- * @returns Values.
+ * @returns Array.
  */
 export function get2<K extends PropertyKey, L extends PropertyKey, T>(
   key1: K,
   key2: L,
-  map: ReadonlyMap<K, ReadonlyMap<L, readonly T[]>>
+  map: ArrayMap2<K, L, T>
 ): readonly T[] {
   return map.get(key1)?.get(key2) ?? [];
 }
@@ -38,7 +54,7 @@ export function get2<K extends PropertyKey, L extends PropertyKey, T>(
 export function push<K extends PropertyKey, T>(
   key: K,
   value: T,
-  mutableMap: Map<K, T[]>
+  mutableMap: WritableArrayMap<K, T>
 ): void {
   const arr = mutableMap.get(key);
 
@@ -58,7 +74,7 @@ export function push2<K extends PropertyKey, L extends PropertyKey, T>(
   key1: K,
   key2: L,
   value: T,
-  mutableMap: Map<K, Map<L, T[]>>
+  mutableMap: WritableArrayMap2<K, L, T>
 ): void {
   const map = mutableMap.get(key1);
 
@@ -67,7 +83,7 @@ export function push2<K extends PropertyKey, L extends PropertyKey, T>(
 }
 
 /**
- * Unshift value to array map.
+ * Unshifts value to array map.
  *
  * @param key - Key.
  * @param value - Value.
@@ -76,7 +92,7 @@ export function push2<K extends PropertyKey, L extends PropertyKey, T>(
 export function unshift<K extends PropertyKey, T>(
   key: K,
   value: T,
-  mutableMap: Map<K, T[]>
+  mutableMap: WritableArrayMap<K, T>
 ): void {
   const arr = mutableMap.get(key);
 
@@ -85,7 +101,7 @@ export function unshift<K extends PropertyKey, T>(
 }
 
 /**
- * Pushes value to array map.
+ * Unshifts value to array map.
  *
  * @param key1 - Key 1.
  * @param key2 - Key 2.
@@ -96,7 +112,7 @@ export function unshift2<K extends PropertyKey, L extends PropertyKey, T>(
   key1: K,
   key2: L,
   value: T,
-  mutableMap: Map<K, Map<L, T[]>>
+  mutableMap: WritableArrayMap2<K, L, T>
 ): void {
   const map = mutableMap.get(key1);
 

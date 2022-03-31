@@ -1,46 +1,49 @@
 import * as arrayMap from "@/arrayMap";
 
-interface Get<K extends PropertyKey, T> {
-  (key: K, map: ReadonlyMap<K, readonly T[]>): readonly T[];
-}
+test("get", () => {
+  const map = new Map([
+    ["a", [1, 2]],
+    ["b", [3]]
+  ]);
 
-interface Get2<K extends PropertyKey, L extends PropertyKey, T> {
-  (
-    key1: K,
-    key2: L,
-    map: ReadonlyMap<K, ReadonlyMap<L, readonly T[]>>
-  ): readonly T[];
-}
+  expect(arrayMap.get("a", map)).toStrictEqual([1, 2]);
+  expect(arrayMap.get("b", map)).toStrictEqual([3]);
+  expect(arrayMap.get("c", map)).toStrictEqual([]);
+});
 
-const get: Get<string, number> = arrayMap.get;
+test("get2", () => {
+  const map = new Map([
+    ["a", new Map([["x", [1, 2]]])],
+    ["b", new Map([["y", [3]]])]
+  ]);
 
-const get2: Get2<string, string, number> = arrayMap.get2;
+  expect(arrayMap.get2("a", "x", map)).toStrictEqual([1, 2]);
+  expect(arrayMap.get2("b", "y", map)).toStrictEqual([3]);
+  expect(arrayMap.get2("c", "z", map)).toStrictEqual([]);
+});
 
 test("push", () => {
-  const got = new Map<string, number[]>();
+  const map = new Map<string, number[]>();
 
-  arrayMap.push("a", 1, got);
-  arrayMap.push("a", 2, got);
-  arrayMap.push("b", 3, got);
+  arrayMap.push("a", 1, map);
+  arrayMap.push("a", 2, map);
+  arrayMap.push("b", 3, map);
 
   const expected = new Map([
     ["a", [1, 2]],
     ["b", [3]]
   ]);
 
-  expect(got).toStrictEqual(expected);
-  expect(get("a", got)).toStrictEqual([1, 2]);
-  expect(get("b", got)).toStrictEqual([3]);
-  expect(get("c", got)).toStrictEqual([]);
+  expect(map).toStrictEqual(expected);
 });
 
 test("push2", () => {
-  const got = new Map<string, Map<string, number[]>>();
+  const map = new Map<string, Map<string, number[]>>();
 
-  arrayMap.push2("a", "x", 1, got);
-  arrayMap.push2("a", "x", 2, got);
-  arrayMap.push2("a", "y", 3, got);
-  arrayMap.push2("b", "z", 4, got);
+  arrayMap.push2("a", "x", 1, map);
+  arrayMap.push2("a", "x", 2, map);
+  arrayMap.push2("a", "y", 3, map);
+  arrayMap.push2("b", "z", 4, map);
 
   const expected = new Map([
     [
@@ -53,39 +56,31 @@ test("push2", () => {
     ["b", new Map([["z", [4]]])]
   ]);
 
-  expect(got).toStrictEqual(expected);
-  expect(get2("a", "x", got)).toStrictEqual([1, 2]);
-  expect(get2("a", "y", got)).toStrictEqual([3]);
-  expect(get2("a", "z", got)).toStrictEqual([]);
-  expect(get2("b", "z", got)).toStrictEqual([4]);
-  expect(get2("c", "z", got)).toStrictEqual([]);
+  expect(map).toStrictEqual(expected);
 });
 
 test("unshift", () => {
-  const got = new Map<string, number[]>();
+  const map = new Map<string, number[]>();
 
-  arrayMap.unshift("a", 1, got);
-  arrayMap.unshift("a", 2, got);
-  arrayMap.unshift("b", 3, got);
+  arrayMap.unshift("a", 1, map);
+  arrayMap.unshift("a", 2, map);
+  arrayMap.unshift("b", 3, map);
 
   const expected = new Map([
     ["a", [2, 1]],
     ["b", [3]]
   ]);
 
-  expect(got).toStrictEqual(expected);
-  expect(get("a", got)).toStrictEqual([2, 1]);
-  expect(get("b", got)).toStrictEqual([3]);
-  expect(get("c", got)).toStrictEqual([]);
+  expect(map).toStrictEqual(expected);
 });
 
 test("unshift2", () => {
-  const got = new Map<string, Map<string, number[]>>();
+  const map = new Map<string, Map<string, number[]>>();
 
-  arrayMap.unshift2("a", "x", 1, got);
-  arrayMap.unshift2("a", "x", 2, got);
-  arrayMap.unshift2("a", "y", 3, got);
-  arrayMap.unshift2("b", "z", 4, got);
+  arrayMap.unshift2("a", "x", 1, map);
+  arrayMap.unshift2("a", "x", 2, map);
+  arrayMap.unshift2("a", "y", 3, map);
+  arrayMap.unshift2("b", "z", 4, map);
 
   const expected = new Map([
     [
@@ -98,10 +93,5 @@ test("unshift2", () => {
     ["b", new Map([["z", [4]]])]
   ]);
 
-  expect(got).toStrictEqual(expected);
-  expect(get2("a", "x", got)).toStrictEqual([2, 1]);
-  expect(get2("a", "y", got)).toStrictEqual([3]);
-  expect(get2("a", "z", got)).toStrictEqual([]);
-  expect(get2("b", "z", got)).toStrictEqual([4]);
-  expect(get2("c", "z", got)).toStrictEqual([]);
+  expect(map).toStrictEqual(expected);
 });
