@@ -8,91 +8,91 @@ module.exports = importPrefix => {
   return {
     consistentImport: [
       {
-        autoImportSource: `${importPrefix}/array`,
+        autoImportSource: `${importPrefix}array`,
         localName: "a",
         sourcePattern: "@skylib/functions/*/array",
         type: "wildcard"
       },
       {
-        autoImportSource: `${importPrefix}/arrayMap`,
+        autoImportSource: `${importPrefix}arrayMap`,
         sourcePattern: "@skylib/functions/*/arrayMap",
         type: "wildcard"
       },
       {
-        autoImportSource: `${importPrefix}/assertions`,
+        autoImportSource: `${importPrefix}assertions`,
         localName: "assert",
         sourcePattern: "@skylib/functions/*/assertions",
         type: "wildcard"
       },
       {
-        autoImportSource: `${importPrefix}/converters`,
+        autoImportSource: `${importPrefix}converters`,
         localName: "cast",
         sourcePattern: "@skylib/functions/*/converters",
         type: "wildcard"
       },
       {
-        autoImportSource: `${importPrefix}/function`,
+        autoImportSource: `${importPrefix}function`,
         localName: "fn",
         sourcePattern: "@skylib/functions/*/function",
         type: "wildcard"
       },
       {
-        autoImportSource: `${importPrefix}/guards`,
+        autoImportSource: `${importPrefix}guards`,
         localName: "is",
         sourcePattern: "@skylib/functions/*/guards",
         type: "wildcard"
       },
       {
-        autoImportSource: `${importPrefix}/json`,
+        autoImportSource: `${importPrefix}json`,
         sourcePattern: "@skylib/functions/*/json",
         type: "wildcard"
       },
       {
-        autoImportSource: `${importPrefix}/map`,
+        autoImportSource: `${importPrefix}map`,
         sourcePattern: "@skylib/functions/*/map",
         type: "wildcard"
       },
       {
-        autoImportSource: `${importPrefix}/number`,
+        autoImportSource: `${importPrefix}number`,
         localName: "num",
         sourcePattern: "@skylib/functions/*/number",
         type: "wildcard"
       },
       {
-        autoImportSource: `${importPrefix}/object`,
+        autoImportSource: `${importPrefix}object`,
         localName: "o",
         sourcePattern: "@skylib/functions/*/object",
         type: "wildcard"
       },
       {
-        autoImportSource: `${importPrefix}/reflect`,
+        autoImportSource: `${importPrefix}reflect`,
         sourcePattern: "@skylib/functions/*/reflect",
         type: "wildcard"
       },
       {
-        autoImportSource: `${importPrefix}/regexp`,
+        autoImportSource: `${importPrefix}regexp`,
         sourcePattern: "@skylib/functions/*/regexp",
         type: "wildcard"
       },
       {
-        autoImportSource: `${importPrefix}/set`,
+        autoImportSource: `${importPrefix}set`,
         sourcePattern: "@skylib/functions/*/set",
         type: "wildcard"
       },
       {
-        autoImportSource: `${importPrefix}/string`,
+        autoImportSource: `${importPrefix}string`,
         localName: "s",
         sourcePattern: "@skylib/functions/*/string",
         type: "wildcard"
       },
       {
         altLocalNames: ["functionsTestUtils"],
-        autoImportSource: `${importPrefix}/testUtils`,
+        autoImportSource: `${importPrefix}testUtils`,
         sourcePattern: "@skylib/functions/*/testUtils",
         type: "wildcard"
       },
       {
-        autoImportSource: `${importPrefix}/timer`,
+        autoImportSource: `${importPrefix}timer`,
         sourcePattern: "@skylib/functions/*/timer",
         type: "wildcard"
       }
