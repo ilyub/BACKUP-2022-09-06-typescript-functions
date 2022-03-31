@@ -1,6 +1,5 @@
 import * as is from "./guards";
 import type {
-  Async,
   Callable,
   PromiseAsync,
   PromiseAsyncSync,
@@ -15,32 +14,6 @@ export interface PipeCallback<V = unknown, R = unknown> {
    * @returns Result.
    */
   (value: V): R;
-}
-
-/**
- * Prevents parallel running.
- *
- * @param async - Async function.
- * @returns Wrapped async function.
- */
-export function doNotRunParallel<T extends unknown[] = never[]>(
-  async: Async<void, T>
-): Async<void, T> {
-  let running = 0;
-
-  return async (...args: T): Promise<void> => {
-    if (running) {
-      // Already running
-    } else {
-      running++;
-
-      try {
-        await async(...args);
-      } finally {
-        running--;
-      }
-    }
-  };
 }
 
 /**
@@ -62,7 +35,7 @@ export const noop: Callable = () => {};
  * @param value - Value.
  * @param callback1 - Callback 1.
  * @param callback2 - Callback 2.
- * @returns The value returned by callbacks sequence.
+ * @returns The value returned by callback sequence.
  */
 export function pipe<A, B, C>(
   value: A,
@@ -77,7 +50,7 @@ export function pipe<A, B, C>(
  * @param callback1 - Callback 1.
  * @param callback2 - Callback 2.
  * @param callback3 - Callback 3.
- * @returns The value returned by callbacks sequence.
+ * @returns The value returned by callback sequence.
  */
 export function pipe<A, B, C, D>(
   value: A,
