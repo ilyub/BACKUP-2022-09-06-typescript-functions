@@ -80,17 +80,6 @@ test("callable", () => {
   expect(is.callable(undefined)).toBeFalse();
 });
 
-test("callableU", () => {
-  class TestClass {
-    public value = 1;
-  }
-
-  expect(is.callableU(TestClass)).toBeTrue();
-  expect(is.callableU(fn.noop)).toBeTrue();
-  expect(is.callableU(1)).toBeFalse();
-  expect(is.callableU(undefined)).toBeTrue();
-});
-
 test("empty", () => {
   expect(is.empty(1)).toBeFalse();
   expect(is.empty(null)).toBeTrue();
@@ -106,17 +95,6 @@ test("enumeration", () => {
   expect(is.enumeration("a", TestEnumVO)).toBeTrue();
   expect(is.enumeration("b", TestEnumVO)).toBeFalse();
   expect(is.enumeration(undefined, TestEnumVO)).toBeFalse();
-});
-
-test("enumerationU", () => {
-  type TestEnum = "a" | 1;
-
-  const TestEnumVO = createValidationObject<TestEnum>({ 1: 1, a: "a" });
-
-  expect(is.enumerationU(1, TestEnumVO)).toBeTrue();
-  expect(is.enumerationU("a", TestEnumVO)).toBeTrue();
-  expect(is.enumerationU("b", TestEnumVO)).toBeFalse();
-  expect(is.enumerationU(undefined, TestEnumVO)).toBeTrue();
 });
 
 test("false", () => {
@@ -149,16 +127,6 @@ test("instance", () => {
   expect(is.instance(undefined, TestClass)).toBeFalse();
 });
 
-test("instanceU", () => {
-  class TestClass {
-    public value = 1;
-  }
-
-  expect(is.instanceU(new TestClass(), TestClass)).toBeTrue();
-  expect(is.instanceU({}, TestClass)).toBeFalse();
-  expect(is.instanceU(undefined, TestClass)).toBeTrue();
-});
-
 test("instances", () => {
   class TestClass {
     public value = 1;
@@ -175,14 +143,6 @@ test("map", () => {
   expect(is.map(new Map([["a", "a"]]), is.string, is.number)).toBeFalse();
   expect(is.map({}, is.string, is.number)).toBeFalse();
   expect(is.map(undefined, is.string, is.number)).toBeFalse();
-});
-
-test("mapU", () => {
-  expect(is.mapU(new Map([["a", 1]]), is.string, is.number)).toBeTrue();
-  expect(is.mapU(new Map([[1, 1]]), is.string, is.number)).toBeFalse();
-  expect(is.mapU(new Map([["a", "a"]]), is.string, is.number)).toBeFalse();
-  expect(is.mapU({}, is.string, is.number)).toBeFalse();
-  expect(is.mapU(undefined, is.string, is.number)).toBeTrue();
 });
 
 test("null", () => {
@@ -247,13 +207,6 @@ test("set", () => {
   expect(is.set(new Set([1]), is.string)).toBeFalse();
   expect(is.set({}, is.string)).toBeFalse();
   expect(is.set(undefined, is.string)).toBeFalse();
-});
-
-test("setU", () => {
-  expect(is.setU(new Set(["a"]), is.string)).toBeTrue();
-  expect(is.setU(new Set([1]), is.string)).toBeFalse();
-  expect(is.setU({}, is.string)).toBeFalse();
-  expect(is.setU(undefined, is.string)).toBeTrue();
 });
 
 test("string", () => {

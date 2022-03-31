@@ -342,18 +342,6 @@ export function callable<T extends Function>(value: unknown): value is T {
 }
 
 /**
- * Checks that value type is T | undefined.
- *
- * @param value - Value.
- * @returns _True_ if value type is T | undefined, _false_ otherwise.
- */
-export function callableU<T extends Function>(
-  value: unknown
-): value is T | undefined {
-  return typeof value === "function" || value === undefined;
-}
-
-/**
  * Checks that value type is empty.
  *
  * @param value - Value.
@@ -377,20 +365,6 @@ export function enumeration<T extends PropertyKey>(
   vo: types.ValidationObject<T>
 ): value is T {
   return setFn.has(vo, value);
-}
-
-/**
- * Checks that value type is T | undefined.
- *
- * @param value - Value.
- * @param vo - Validation object.
- * @returns _True_ if value type is T | undefined, _false_ otherwise.
- */
-export function enumerationU<T extends PropertyKey>(
-  value: unknown,
-  vo: types.ValidationObject<T>
-): value is T | undefined {
-  return setFn.has(vo, value) || value === undefined;
 }
 
 /**
@@ -458,20 +432,6 @@ export function instance<T>(
 }
 
 /**
- * Checks that value type is T | undefined.
- *
- * @param value - Value.
- * @param ctor - Constructor.
- * @returns _True_ if value type is T | undefined, _false_ otherwise.
- */
-export function instanceU<T>(
-  value: unknown,
-  ctor: types.Constructor<T>
-): value is T | undefined {
-  return value instanceof ctor || value === undefined;
-}
-
-/**
  * Checks that value type is T[].
  *
  * @param value - Value.
@@ -502,22 +462,6 @@ export function map<K, V>(
     value instanceof Map &&
     a.fromIterable(value).every(([k, v]) => keyGuard(k) && valueGuard(v))
   );
-}
-
-/**
- * Checks that value type is Map\<K, V\>.
- *
- * @param value - Value.
- * @param keyGuard - Key guard.
- * @param valueGuard - Value guard.
- * @returns _True_ if value type is Map\<K, V\>, _false_ otherwise.
- */
-export function mapU<K, V>(
-  value: unknown,
-  keyGuard: Guard<K>,
-  valueGuard: Guard<V>
-): value is ReadonlyMap<K, V> | undefined {
-  return map(value, keyGuard, valueGuard) || value === undefined;
 }
 
 /**
@@ -645,20 +589,6 @@ export function set<T>(
   guard: Guard<T>
 ): value is ReadonlySet<T> {
   return value instanceof Set && a.fromIterable(value).every(v => guard(v));
-}
-
-/**
- * Checks that value type is Set\<T\>.
- *
- * @param value - Value.
- * @param guard - Guard.
- * @returns _True_ if value type is Set\<T\>, _false_ otherwise.
- */
-export function setU<T>(
-  value: unknown,
-  guard: Guard<T>
-): value is ReadonlySet<T> | undefined {
-  return set(value, guard) || value === undefined;
 }
 
 /**
