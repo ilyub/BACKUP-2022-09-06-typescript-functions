@@ -138,11 +138,19 @@ test("instances", () => {
 });
 
 test("map", () => {
-  expect(is.map(new Map([["a", 1]]), is.string, is.number)).toBeTrue();
-  expect(is.map(new Map([[1, 1]]), is.string, is.number)).toBeFalse();
-  expect(is.map(new Map([["a", "a"]]), is.string, is.number)).toBeFalse();
-  expect(is.map({}, is.string, is.number)).toBeFalse();
-  expect(is.map(undefined, is.string, is.number)).toBeFalse();
+  expect(is.map(new Map([["a", 1]]))).toBeTrue();
+  expect(is.map(new Map([[1, 1]]))).toBeFalse();
+  expect(is.map(new Map([["a", "a"]]))).toBeFalse();
+  expect(is.map({})).toBeFalse();
+  expect(is.map(undefined)).toBeFalse();
+});
+
+test("map.of", () => {
+  expect(is.map.of(new Map([["a", 1]]), is.string, is.number)).toBeTrue();
+  expect(is.map.of(new Map([[1, 1]]), is.string, is.number)).toBeTrue();
+  expect(is.map.of(new Map([["a", "a"]]), is.string, is.number)).toBeTrue();
+  expect(is.map.of({}, is.string, is.number)).toBeFalse();
+  expect(is.map.of(undefined, is.string, is.number)).toBeFalse();
 });
 
 test("null", () => {
@@ -203,10 +211,17 @@ test("object.of.factory", () => {
 });
 
 test("set", () => {
-  expect(is.set(new Set(["a"]), is.string)).toBeTrue();
-  expect(is.set(new Set([1]), is.string)).toBeFalse();
-  expect(is.set({}, is.string)).toBeFalse();
-  expect(is.set(undefined, is.string)).toBeFalse();
+  expect(is.set(new Set(["a"]))).toBeTrue();
+  expect(is.set(new Set([1]))).toBeTrue();
+  expect(is.set({})).toBeFalse();
+  expect(is.set(undefined)).toBeFalse();
+});
+
+test("set.of", () => {
+  expect(is.set.of(new Set(["a"]), is.string)).toBeTrue();
+  expect(is.set.of(new Set([1]), is.string)).toBeFalse();
+  expect(is.set.of({}, is.string)).toBeFalse();
+  expect(is.set.of(undefined, is.string)).toBeFalse();
 });
 
 test("string", () => {

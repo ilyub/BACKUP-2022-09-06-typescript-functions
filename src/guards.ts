@@ -446,6 +446,24 @@ export function instances<T>(
 }
 
 /**
+ * Checks that value type is Map.
+ *
+ * @param value - Value.
+ * @returns _True_ if value type is Map, _false_ otherwise.
+ */
+export function map(value: unknown): value is ReadonlyMap<unknown, unknown> {
+  return value instanceof Map;
+}
+
+not.map = notFactory(map);
+
+export const mapU = orFactory(map, undefinedGuard);
+
+export const maps = factory(arrayOf, map);
+
+export const mapsU = orFactory(maps, undefinedGuard);
+
+/**
  * Checks that value type is Map\<K, V\>.
  *
  * @param value - Value.
@@ -453,7 +471,7 @@ export function instances<T>(
  * @param valueGuard - Value guard.
  * @returns _True_ if value type is Map\<K, V\>, _false_ otherwise.
  */
-export function map<K, V>(
+export function mapOf<K, V>(
   value: unknown,
   keyGuard: Guard<K>,
   valueGuard: Guard<V>
@@ -463,6 +481,8 @@ export function map<K, V>(
     a.fromIterable(value).every(([k, v]) => keyGuard(k) && valueGuard(v))
   );
 }
+
+map.of = mapOf;
 
 /**
  * Checks that value is _null_.
@@ -578,18 +598,38 @@ export function objectOfFactory<T extends object>(
 objectOf.factory = objectOfFactory;
 
 /**
+ * Checks that value type is Set.
+ *
+ * @param value - Value.
+ * @returns _True_ if value type is Set, _false_ otherwise.
+ */
+export function set(value: unknown): value is ReadonlySet<unknown> {
+  return value instanceof Set;
+}
+
+not.set = notFactory(set);
+
+export const setU = orFactory(set, undefinedGuard);
+
+export const sets = factory(arrayOf, set);
+
+export const setsU = orFactory(sets, undefinedGuard);
+
+/**
  * Checks that value type is Set\<T\>.
  *
  * @param value - Value.
  * @param guard - Guard.
  * @returns _True_ if value type is Set\<T\>, _false_ otherwise.
  */
-export function set<T>(
+export function setOf<T>(
   value: unknown,
   guard: Guard<T>
 ): value is ReadonlySet<T> {
   return value instanceof Set && a.fromIterable(value).every(v => guard(v));
 }
+
+set.of = setOf;
 
 /**
  * Checks that value is a string.
