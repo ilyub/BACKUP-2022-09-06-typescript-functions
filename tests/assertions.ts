@@ -1,118 +1,31 @@
-/* eslint-disable jest/expect-expect */
-
 import * as assert from "@/assertions";
 import { AssertionError } from "@/errors/AssertionError";
+import { InternalError } from "@/errors/InternalError";
+import * as fn from "@/function";
 import * as is from "@/guards";
+import type { Callable, unknowns } from "@/types/core";
 import { createValidationObject } from "@/types/core";
 
-interface Assertion1<X> {
-  (x: X, error?: assert.ErrorArg): void;
+function createSubtest(assertion: Callable, ...args: unknowns) {
+  return (value: unknown) => (): void => {
+    assertion(value, ...args);
+  };
 }
 
-interface Assertion2<X, Y> {
-  (x: X, y: Y, error?: assert.ErrorArg): void;
-}
-
-interface Assertion3<X, Y, Z> {
-  (x: X, y: Y, z: Z, error?: assert.ErrorArg): void;
-}
-
-interface Guard1<X> {
-  (x: X): boolean;
-}
-
-interface Guard2<X, Y> {
-  (x: X, y: Y): boolean;
-}
-
-interface Guard3<X, Y, Z> {
-  (x: X, y: Y, z: Z): boolean;
-}
-
-class TestClass {
-  public value = 1;
-}
-
-type TestEnum = "a" | 1;
-
-const TestEnumVO = createValidationObject<TestEnum>({ 1: 1, a: "a" });
-
-const testAssertionError = new AssertionError("Sample error");
-
-const testClass = new TestClass();
-
-const testError = new Error("Sample error");
-
-const testMessage = "Sample error";
-
-const testObject = { num: 1, str: "a" };
-
-function testAssertion<X>(
-  expected: "fail" | "pass",
-  assertion: Assertion1<X>,
-  guard: Guard1<X>,
-  x: X
-): void;
-
-function testAssertion<X, Y>(
-  expected: "fail" | "pass",
-  assertion: Assertion2<X, Y>,
-  guard: Guard2<X, Y>,
-  x: X,
-  y: Y
-): void;
-
-function testAssertion<X, Y, Z>(
-  expected: "fail" | "pass",
-  assertion: Assertion3<X, Y, Z>,
-  guard: Guard3<X, Y, Z>,
-  x: X,
-  y: Y,
-  z: Z
-): void;
-
-function testAssertion(
-  expected: "fail" | "pass",
-  assertion: Function,
-  guard: Function,
-  ...args: unknown[]
-): void {
-  switch (expected) {
-    case "pass":
-      expect(guard(...args)).toBeTrue();
-      expect(() => {
-        assertion(...args);
-      }).not.toThrow();
-
-      break;
-
-    case "fail":
-      expect(guard(...args)).toBeFalse();
-      expect(() => {
-        assertion(...args);
-      }).toThrow(new AssertionError());
-      expect(() => {
-        assertion(...args, testMessage);
-      }).toThrow(testAssertionError);
-      expect(() => {
-        assertion(...args, () => testError);
-      }).toThrow(testError);
-  }
-}
-
-test("toErrorArg", () => {
+test.each([
+  { expected: new AssertionError() },
   {
-    const errorArg = assert.toErrorArg(testError);
-
-    assert.callable(errorArg);
-    expect(errorArg()).toStrictEqual(testError);
-  }
-
+    error: assert.toErrorArg("Error message"),
+    expected: new Error("Error message")
+  },
   {
-    const errorArg = assert.toErrorArg(testMessage);
-
-    expect(errorArg).toStrictEqual(testMessage);
+    error: assert.toErrorArg(new InternalError()),
+    expected: new InternalError()
   }
+])("toErrorArg", ({ error, expected }) => {
+  expect(() => {
+    assert.string(1, error);
+  }).toThrow(expected);
 });
 
 test("not", () => {
@@ -120,311 +33,221 @@ test("not", () => {
 });
 
 test("array", () => {
-  testAssertion("pass", assert.array, is.array, [1]);
-  testAssertion("pass", assert.array, is.array, ["a"]);
-  testAssertion("fail", assert.array, is.array, 1);
+  const subtest = createSubtest(assert.array);
+
+  expect(subtest([1])).not.toThrow();
+  expect(subtest(["a"])).not.toThrow();
+  expect(subtest(1)).toThrow(new AssertionError());
 });
 
 test("array.of", () => {
-  testAssertion("pass", assert.array.of, is.array.of, [1], is.number);
-  testAssertion("fail", assert.array.of, is.array.of, ["a"], is.number);
-  testAssertion("fail", assert.array.of, is.array.of, 1, is.number);
+  const subtest = createSubtest(assert.array.of, is.number);
+
+  expect(subtest([1])).not.toThrow();
+  expect(subtest(["a"])).toThrow(new AssertionError());
+  expect(subtest(1)).toThrow(new AssertionError());
 });
 
 test("boolean", () => {
-  testAssertion("pass", assert.boolean, is.boolean, true);
-  testAssertion("pass", assert.boolean, is.boolean, false);
-  testAssertion("fail", assert.boolean, is.boolean, 1);
-  testAssertion("fail", assert.boolean, is.boolean, undefined);
-});
+  const subtest = createSubtest(assert.boolean);
 
-test("booleanU", () => {
-  testAssertion("pass", assert.booleanU, is.booleanU, true);
-  testAssertion("pass", assert.booleanU, is.booleanU, false);
-  testAssertion("fail", assert.booleanU, is.booleanU, 1);
-  testAssertion("pass", assert.booleanU, is.booleanU, undefined);
-});
-
-test("byGuard", () => {
-  testAssertion("pass", assert.byGuard, guard2, true, is.boolean);
-  testAssertion("pass", assert.byGuard, guard2, false, is.boolean);
-  testAssertion("fail", assert.byGuard, guard2, 1, is.boolean);
-  testAssertion("fail", assert.byGuard, guard2, undefined, is.boolean);
-
-  function guard2<T>(value: unknown, guard: is.Guard<T>): value is T {
-    return guard(value);
-  }
+  expect(subtest(true)).not.toThrow();
+  expect(subtest(false)).not.toThrow();
+  expect(subtest(1)).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(new AssertionError());
 });
 
 test("callable", () => {
-  testAssertion("pass", assert.callable, is.callable, () => true);
-  testAssertion("fail", assert.callable, is.callable, 1);
-  testAssertion("fail", assert.callable, is.callable, undefined);
-});
+  const subtest = createSubtest(assert.callable);
 
-test("callableU", () => {
-  testAssertion("pass", assert.callableU, is.callableU, () => true);
-  testAssertion("fail", assert.callableU, is.callableU, 1);
-  testAssertion("pass", assert.callableU, is.callableU, undefined);
+  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+  class TestClass {}
+
+  expect(subtest(TestClass)).not.toThrow();
+  expect(subtest(fn.noop)).not.toThrow();
+  expect(subtest(1)).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(new AssertionError());
 });
 
 test("empty", () => {
-  testAssertion("pass", assert.empty, is.empty, null);
-  testAssertion("pass", assert.empty, is.empty, undefined);
-  testAssertion("fail", assert.empty, is.empty, 1);
+  const subtest = createSubtest(assert.empty);
+
+  expect(subtest(null)).not.toThrow();
+  expect(subtest(undefined)).not.toThrow();
+  expect(subtest(1)).toThrow(new AssertionError());
 });
 
 test("not.empty", () => {
-  testAssertion("fail", assert.not.empty, is.not.empty, null);
-  testAssertion("fail", assert.not.empty, is.not.empty, undefined);
-  testAssertion("pass", assert.not.empty, is.not.empty, 1);
+  const subtest = createSubtest(assert.not.empty);
+
+  expect(subtest(1)).not.toThrow();
+  expect(subtest(null)).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(new AssertionError());
 });
 
 test("enumeration", () => {
-  testAssertion("pass", assert.enumeration, is.enumeration, 1, TestEnumVO);
+  type TestEnum = "a" | 1;
 
-  testAssertion("pass", assert.enumeration, is.enumeration, "a", TestEnumVO);
+  const TestEnumVO = createValidationObject<TestEnum>({ 1: 1, a: "a" });
 
-  testAssertion("fail", assert.enumeration, is.enumeration, "b", TestEnumVO);
+  const subtest = createSubtest(assert.enumeration, TestEnumVO);
 
-  testAssertion(
-    "fail",
-    assert.enumeration,
-    is.enumeration,
-    undefined,
-    TestEnumVO
-  );
-});
-
-test("enumerationU", () => {
-  testAssertion("pass", assert.enumerationU, is.enumerationU, 1, TestEnumVO);
-
-  testAssertion("pass", assert.enumerationU, is.enumerationU, "a", TestEnumVO);
-
-  testAssertion("fail", assert.enumerationU, is.enumerationU, "b", TestEnumVO);
-
-  testAssertion(
-    "pass",
-    assert.enumerationU,
-    is.enumerationU,
-    undefined,
-    TestEnumVO
-  );
+  expect(subtest(1)).not.toThrow();
+  expect(subtest("a")).not.toThrow();
+  expect(subtest("b")).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(new AssertionError());
 });
 
 test("indexedObject", () => {
-  testAssertion("pass", assert.indexedObject, is.indexedObject, { a: 1 });
-  testAssertion("pass", assert.indexedObject, is.indexedObject, { a: "a" });
-  testAssertion("fail", assert.indexedObject, is.indexedObject, 1);
-  testAssertion("fail", assert.indexedObject, is.indexedObject, null);
+  const subtest = createSubtest(assert.indexedObject);
+
+  expect(subtest({ a: 1 })).not.toThrow();
+  expect(subtest({ a: "a" })).not.toThrow();
+  expect(subtest(1)).toThrow(new AssertionError());
+  expect(subtest(null)).toThrow(new AssertionError());
 });
 
 test("indexedObject.of", () => {
-  testAssertion(
-    "pass",
-    assert.indexedObject.of,
-    is.indexedObject.of,
-    { a: 1 },
-    is.number
-  );
+  const subtest = createSubtest(assert.indexedObject.of, is.number);
 
-  testAssertion(
-    "fail",
-    assert.indexedObject.of,
-    is.indexedObject.of,
-    { a: "a" },
-    is.number
-  );
-
-  testAssertion(
-    "fail",
-    assert.indexedObject.of,
-    is.indexedObject.of,
-    1,
-    is.number
-  );
-
-  testAssertion(
-    "fail",
-    assert.indexedObject.of,
-    is.indexedObject.of,
-    null,
-    is.number
-  );
+  expect(subtest({ a: 1 })).not.toThrow();
+  expect(subtest({ a: "a" })).toThrow(new AssertionError());
+  expect(subtest(1)).toThrow(new AssertionError());
+  expect(subtest(null)).toThrow(new AssertionError());
 });
 
 test("instance", () => {
-  testAssertion("pass", assert.instance, is.instance, testClass, TestClass);
-  testAssertion("fail", assert.instance, is.instance, {}, TestClass);
+  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+  class TestClass {}
+
+  const subtest = createSubtest(assert.instance, TestClass);
+
+  expect(subtest(new TestClass())).not.toThrow();
+  expect(subtest({})).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(new AssertionError());
 });
 
 test("instances", () => {
-  testAssertion("pass", assert.instances, is.instances, [testClass], TestClass);
-  testAssertion("fail", assert.instances, is.instances, [{}], TestClass);
-  testAssertion("fail", assert.instances, is.instances, 1, TestClass);
+  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+  class TestClass {}
+
+  const subtest = createSubtest(assert.instances, TestClass);
+
+  expect(subtest([new TestClass()])).not.toThrow();
+  expect(subtest([{}])).toThrow(new AssertionError());
+  expect(subtest([undefined])).toThrow(new AssertionError());
 });
 
-test("toBeNull", () => {
-  testAssertion("pass", assert.toBeNull, is.null, null);
-  testAssertion("fail", assert.toBeNull, is.null, undefined);
-  testAssertion("fail", assert.toBeNull, is.null, 1);
+test("map", () => {
+  const subtest = createSubtest(assert.map);
+
+  expect(subtest(new Map([["a", 1]]))).not.toThrow();
+  expect(subtest(new Map([[1, 1]]))).not.toThrow();
+  expect(subtest(new Map([["a", "a"]]))).not.toThrow();
+  expect(subtest({})).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(new AssertionError());
 });
 
-test("not.null", () => {
-  testAssertion("fail", assert.not.null, is.not.null, null);
-  testAssertion("pass", assert.not.null, is.not.null, undefined);
-  testAssertion("pass", assert.not.null, is.not.null, 1);
+test("map.of", () => {
+  const subtest = createSubtest(assert.map.of, is.string, is.number);
+
+  expect(subtest(new Map([["a", 1]]))).not.toThrow();
+  expect(subtest(new Map([[1, 1]]))).toThrow(new AssertionError());
+  expect(subtest(new Map([["a", "a"]]))).toThrow(new AssertionError());
+  expect(subtest({})).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(new AssertionError());
 });
 
 test("numStr", () => {
-  testAssertion("pass", assert.numStr, is.numStr, 1);
-  testAssertion("pass", assert.numStr, is.numStr, "a");
-  testAssertion("fail", assert.numStr, is.numStr, true);
-  testAssertion("fail", assert.numStr, is.numStr, undefined);
-});
+  const subtest = createSubtest(assert.numStr);
 
-test("numStrU", () => {
-  testAssertion("pass", assert.numStrU, is.numStrU, 1);
-  testAssertion("pass", assert.numStrU, is.numStrU, "a");
-  testAssertion("fail", assert.numStrU, is.numStrU, true);
-  testAssertion("pass", assert.numStrU, is.numStrU, undefined);
+  expect(subtest(1)).not.toThrow();
+  expect(subtest("a")).not.toThrow();
+  expect(subtest(true)).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(new AssertionError());
 });
 
 test("number", () => {
-  testAssertion("pass", assert.number, is.number, 1);
-  testAssertion("fail", assert.number, is.number, "a");
-  testAssertion("fail", assert.number, is.number, true);
-  testAssertion("fail", assert.number, is.number, undefined);
-});
+  const subtest = createSubtest(assert.number);
 
-test("numberU", () => {
-  testAssertion("pass", assert.numberU, is.numberU, 1);
-  testAssertion("fail", assert.numberU, is.numberU, "a");
-  testAssertion("fail", assert.numberU, is.numberU, true);
-  testAssertion("pass", assert.numberU, is.numberU, undefined);
+  expect(subtest(1)).not.toThrow();
+  expect(subtest("a")).toThrow(new AssertionError());
+  expect(subtest(true)).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(new AssertionError());
 });
 
 test("object", () => {
-  testAssertion("pass", assert.object, is.object, testObject);
-  testAssertion("pass", assert.object, is.object, {});
-  testAssertion("fail", assert.object, is.object, 1);
-  testAssertion("fail", assert.object, is.object, null);
-  testAssertion("fail", assert.object, is.object, undefined);
+  const subtest = createSubtest(assert.object);
+
+  expect(subtest({})).not.toThrow();
+  expect(subtest(1)).toThrow(new AssertionError());
+  expect(subtest(null)).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(new AssertionError());
 });
 
 test("object.of", () => {
-  testAssertion(
-    "pass",
+  const subtest = createSubtest(
     assert.object.of,
-    is.object.of,
-    testObject,
     { num: is.number },
     { str: is.string }
   );
 
-  testAssertion(
-    "fail",
-    assert.object.of,
-    is.object.of,
-    {},
-    { num: is.number },
-    { str: is.string }
-  );
-
-  testAssertion(
-    "fail",
-    assert.object.of,
-    is.object.of,
-    1,
-    { num: is.number },
-    { str: is.string }
-  );
-
-  testAssertion(
-    "fail",
-    assert.object.of,
-    is.object.of,
-    null,
-    { num: is.number },
-    { str: is.string }
-  );
-
-  testAssertion(
-    "fail",
-    assert.object.of,
-    is.object.of,
-    undefined,
-    { num: is.number },
-    { str: is.string }
-  );
+  expect(subtest({ num: 1, str: "a" })).not.toThrow();
+  expect(subtest({ num: 1 })).not.toThrow();
+  expect(subtest({ num: true, str: "a" })).toThrow(new AssertionError());
+  expect(subtest({ num: 1, str: true })).toThrow(new AssertionError());
+  expect(subtest({ str: "a" })).toThrow(new AssertionError());
+  expect(subtest(1)).toThrow(new AssertionError());
+  expect(subtest(null)).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(new AssertionError());
 });
 
-test("objectU", () => {
-  testAssertion("pass", assert.objectU, is.objectU, testObject);
-  testAssertion("pass", assert.objectU, is.objectU, {});
-  testAssertion("fail", assert.objectU, is.objectU, 1);
-  testAssertion("fail", assert.objectU, is.objectU, null);
-  testAssertion("pass", assert.objectU, is.objectU, undefined);
+test("set", () => {
+  const subtest = createSubtest(assert.set);
+
+  expect(subtest(new Set(["a"]))).not.toThrow();
+  expect(subtest(new Set([1]))).not.toThrow();
+  expect(subtest({})).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(new AssertionError());
+});
+
+test("set.of", () => {
+  const subtest = createSubtest(assert.set.of, is.string);
+
+  expect(subtest(new Set(["a"]))).not.toThrow();
+  expect(subtest(new Set([1]))).toThrow(new AssertionError());
+  expect(subtest({})).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(new AssertionError());
 });
 
 test("string", () => {
-  testAssertion("pass", assert.string, is.string, "a");
-  testAssertion("pass", assert.string, is.string, "");
-  testAssertion("fail", assert.string, is.string, 1);
-  testAssertion("fail", assert.string, is.string, undefined);
+  const subtest = createSubtest(assert.string);
+
+  expect(subtest("a")).not.toThrow();
+  expect(subtest("")).not.toThrow();
+  expect(subtest(1)).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(new AssertionError());
 });
 
-test("stringU", () => {
-  testAssertion("pass", assert.stringU, is.stringU, "a");
-  testAssertion("fail", assert.stringU, is.stringU, "");
-  testAssertion("fail", assert.stringU, is.stringU, 1);
-  testAssertion("pass", assert.stringU, is.stringU, undefined);
+test("symbol", () => {
+  const subtest = createSubtest(assert.symbol);
+
+  expect(subtest(Symbol("TestSymbol"))).not.toThrow();
+  expect(subtest(1)).toThrow(new AssertionError());
 });
 
 test("toBeFalse", () => {
-  expect(() => {
-    assert.toBeFalse(false);
-  }).not.toThrow();
+  const subtest = createSubtest(assert.toBeFalse);
 
-  expect(() => {
-    assert.toBeFalse(true);
-  }).toThrow(new AssertionError());
-
-  expect(() => {
-    assert.toBeFalse(1, testMessage);
-  }).toThrow(testAssertionError);
-
-  expect(() => {
-    assert.toBeFalse(undefined, () => testError);
-  }).toThrow(testError);
+  expect(subtest(false)).not.toThrow();
+  expect(subtest(true)).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(new AssertionError());
 });
 
 test("toBeTrue", () => {
-  expect(() => {
-    assert.toBeTrue(true);
-  }).not.toThrow();
+  const subtest = createSubtest(assert.toBeTrue);
 
-  expect(() => {
-    assert.toBeTrue(false);
-  }).toThrow(new AssertionError());
-
-  expect(() => {
-    assert.toBeTrue(1, testMessage);
-  }).toThrow(testAssertionError);
-
-  expect(() => {
-    assert.toBeTrue(undefined, () => testError);
-  }).toThrow(testError);
-});
-
-test("undefined", () => {
-  testAssertion("pass", assert.toBeUndefined, is.undefined, undefined);
-  testAssertion("fail", assert.toBeUndefined, is.undefined, null);
-  testAssertion("fail", assert.toBeUndefined, is.undefined, 1);
-});
-
-test("not.undefined", () => {
-  testAssertion("fail", assert.not.undefined, is.not.undefined, undefined);
-  testAssertion("pass", assert.not.undefined, is.not.undefined, null);
-  testAssertion("pass", assert.not.undefined, is.not.undefined, 1);
+  expect(subtest(true)).not.toThrow();
+  expect(subtest(false)).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(new AssertionError());
 });

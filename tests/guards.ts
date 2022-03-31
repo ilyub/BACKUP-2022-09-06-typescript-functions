@@ -63,16 +63,15 @@ test("array.of", () => {
 });
 
 test("boolean", () => {
-  expect(is.boolean(1)).toBeFalse();
   expect(is.boolean(true)).toBeTrue();
   expect(is.boolean(false)).toBeTrue();
+  expect(is.boolean(1)).toBeFalse();
   expect(is.boolean(undefined)).toBeFalse();
 });
 
 test("callable", () => {
-  class TestClass {
-    public value = 1;
-  }
+  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+  class TestClass {}
 
   expect(is.callable(TestClass)).toBeTrue();
   expect(is.callable(fn.noop)).toBeTrue();
@@ -98,8 +97,8 @@ test("enumeration", () => {
 });
 
 test("false", () => {
-  expect(is.false(true)).toBeFalse();
   expect(is.false(false)).toBeTrue();
+  expect(is.false(true)).toBeFalse();
   expect(is.false(undefined)).toBeFalse();
 });
 
@@ -118,9 +117,8 @@ test("indexedObject.of", () => {
 });
 
 test("instance", () => {
-  class TestClass {
-    public value = 1;
-  }
+  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+  class TestClass {}
 
   expect(is.instance(new TestClass(), TestClass)).toBeTrue();
   expect(is.instance({}, TestClass)).toBeFalse();
@@ -128,9 +126,8 @@ test("instance", () => {
 });
 
 test("instances", () => {
-  class TestClass {
-    public value = 1;
-  }
+  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+  class TestClass {}
 
   expect(is.instances([new TestClass()], TestClass)).toBeTrue();
   expect(is.instances([{}], TestClass)).toBeFalse();
@@ -139,16 +136,16 @@ test("instances", () => {
 
 test("map", () => {
   expect(is.map(new Map([["a", 1]]))).toBeTrue();
-  expect(is.map(new Map([[1, 1]]))).toBeFalse();
-  expect(is.map(new Map([["a", "a"]]))).toBeFalse();
+  expect(is.map(new Map([[1, 1]]))).toBeTrue();
+  expect(is.map(new Map([["a", "a"]]))).toBeTrue();
   expect(is.map({})).toBeFalse();
   expect(is.map(undefined)).toBeFalse();
 });
 
 test("map.of", () => {
   expect(is.map.of(new Map([["a", 1]]), is.string, is.number)).toBeTrue();
-  expect(is.map.of(new Map([[1, 1]]), is.string, is.number)).toBeTrue();
-  expect(is.map.of(new Map([["a", "a"]]), is.string, is.number)).toBeTrue();
+  expect(is.map.of(new Map([[1, 1]]), is.string, is.number)).toBeFalse();
+  expect(is.map.of(new Map([["a", "a"]]), is.string, is.number)).toBeFalse();
   expect(is.map.of({}, is.string, is.number)).toBeFalse();
   expect(is.map.of(undefined, is.string, is.number)).toBeFalse();
 });
@@ -188,9 +185,9 @@ test("object.of", () => {
   );
 
   expect(guard({ num: 1, str: "a" })).toBeTrue();
+  expect(guard({ num: 1 })).toBeTrue();
   expect(guard({ num: true, str: "a" })).toBeFalse();
   expect(guard({ num: 1, str: true })).toBeFalse();
-  expect(guard({ num: 1 })).toBeTrue();
   expect(guard({ str: "a" })).toBeFalse();
   expect(guard(1)).toBeFalse();
   expect(guard(null)).toBeFalse();
@@ -201,9 +198,9 @@ test("object.of.factory", () => {
   const guard = is.object.of.factory({ num: is.number }, { str: is.string });
 
   expect(guard({ num: 1, str: "a" })).toBeTrue();
+  expect(guard({ num: 1 })).toBeTrue();
   expect(guard({ num: true, str: "a" })).toBeFalse();
   expect(guard({ num: 1, str: true })).toBeFalse();
-  expect(guard({ num: 1 })).toBeTrue();
   expect(guard({ str: "a" })).toBeFalse();
   expect(guard(1)).toBeFalse();
   expect(guard(null)).toBeFalse();

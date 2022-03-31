@@ -1,29 +1,30 @@
+import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
+import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
+
 import { AssertionError } from "./errors/AssertionError";
 import * as is from "./guards";
 // eslint-disable-next-line @skylib/consistent-import
 import type * as types from "./types/core";
 
-export interface Assertion<T> {
+export type ErrorArg = ErrorArgFn | string;
+
+export interface ErrorArgFn {
   /**
-   * Asserts that value type is T.
+   * Creates error object.
    *
-   * @param value - Value.
+   * @returns Error object.
    */
-  (value: unknown): asserts value is T;
+  (): unknown;
 }
 
-export type ErrorArg = string | (() => unknown);
-
 /**
- * Converts error or error message to error argument usable with assertion.
+ * Converts error message/object to assertion error argument.
  *
- * @param errorOrMessage - Error or error message.
- * @returns Error argument.
+ * @param strOrError - Error message/object.
+ * @returns Assertion error argument.
  */
-export function toErrorArg(errorOrMessage: unknown): ErrorArg {
-  if (is.string(errorOrMessage)) return errorOrMessage;
-
-  return (): unknown => errorOrMessage;
+export function toErrorArg(strOrError: unknown): ErrorArg {
+  return is.string(strOrError) ? strOrError : (): unknown => strOrError;
 }
 
 /**
@@ -37,7 +38,7 @@ export function not(): never {
  * Asserts that value is an array.
  *
  * @param value - Value.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
 export function array(
   value: unknown,
@@ -51,7 +52,7 @@ export function array(
  *
  * @param value - Value.
  * @param guard - Guard for type T.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
 array.of = <T>(
   value: unknown,
@@ -65,7 +66,7 @@ array.of = <T>(
  * Asserts that value is a boolean.
  *
  * @param value - Value.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
 export function boolean(
   value: unknown,
@@ -75,24 +76,11 @@ export function boolean(
 }
 
 /**
- * Asserts that value type is booleanU.
- *
- * @param value - Value.
- * @param error - Error to be thrown.
- */
-export function booleanU(
-  value: unknown,
-  error?: ErrorArg
-): asserts value is types.booleanU {
-  byGuard(value, is.booleanU, error);
-}
-
-/**
  * Asserts that value type is T.
  *
  * @param value - Value.
  * @param guard - Guard for type T.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
 export function byGuard<T>(
   value: unknown,
@@ -101,14 +89,22 @@ export function byGuard<T>(
 ): asserts value is T {
   if (guard(value)) {
     // Valid
-  } else throw toError(error);
+  } else
+    switch (typeof error) {
+      case "function":
+        throw error();
+
+      case "string":
+      case "undefined":
+        throw new AssertionError(error);
+    }
 }
 
 /**
  * Asserts that value type is T.
  *
  * @param value - Value.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
 export function callable<T extends Function>(
   value: unknown,
@@ -118,23 +114,10 @@ export function callable<T extends Function>(
 }
 
 /**
- * Asserts that value type is T | undefined.
- *
- * @param value - Value.
- * @param error - Error to be thrown.
- */
-export function callableU<T extends Function>(
-  value: unknown,
-  error?: ErrorArg
-): asserts value is T | undefined {
-  byGuard(value, is.callableU, error);
-}
-
-/**
  * Asserts that value type is empty.
  *
  * @param value - Value.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
 export function empty(
   value: unknown,
@@ -147,7 +130,7 @@ export function empty(
  * Asserts that value type is not empty.
  *
  * @param value - Value.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
 not.empty = <T>(
   value: T,
@@ -161,7 +144,7 @@ not.empty = <T>(
  *
  * @param value - Value.
  * @param vo - Validation object.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
 export function enumeration<T extends PropertyKey>(
   value: unknown,
@@ -172,25 +155,10 @@ export function enumeration<T extends PropertyKey>(
 }
 
 /**
- * Asserts that value type is T | undefined.
- *
- * @param value - Value.
- * @param vo - Validation object.
- * @param error - Error to be thrown.
- */
-export function enumerationU<T extends PropertyKey>(
-  value: unknown,
-  vo: types.ValidationObject<T>,
-  error?: ErrorArg
-): asserts value is T | undefined {
-  byGuard(value, is.factory(is.enumerationU, vo), error);
-}
-
-/**
  * Asserts that value type is IndexedObject.
  *
  * @param value - Value.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
 export function indexedObject(
   value: unknown,
@@ -204,7 +172,7 @@ export function indexedObject(
  *
  * @param value - Value.
  * @param guard - Guard for type T.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
 indexedObject.of = <T>(
   value: unknown,
@@ -219,7 +187,7 @@ indexedObject.of = <T>(
  *
  * @param value - Value.
  * @param ctor - Constructor.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
 export function instance<T>(
   value: unknown,
@@ -234,7 +202,7 @@ export function instance<T>(
  *
  * @param value - Value.
  * @param ctor - Constructor.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
 export function instances<T>(
   value: unknown,
@@ -245,36 +213,40 @@ export function instances<T>(
 }
 
 /**
- * Asserts that value is _null_.
+ * Asserts that value type is Map.
  *
  * @param value - Value.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
-export function toBeNull(
+export function map(
   value: unknown,
   error?: ErrorArg
-): asserts value is null {
-  byGuard(value, is.null, error);
+): asserts value is ReadonlyMap<unknown, unknown> {
+  byGuard(value, is.map, error);
 }
 
 /**
- * Asserts that value is not _null_.
+ * Asserts that value type is Map\<K, V\>.
  *
  * @param value - Value.
- * @param error - Error to be thrown.
+ * @param keyGuard - Key guard.
+ * @param valueGuard - Value guard.
+ * @param error - Error.
  */
-not.null = <T>(
-  value: T,
+map.of = <K, V>(
+  value: unknown,
+  keyGuard: is.Guard<K>,
+  valueGuard: is.Guard<V>,
   error?: ErrorArg
-): asserts value is Exclude<T, null> => {
-  byGuard(value, is.not.null, error);
+): asserts value is ReadonlyMap<K, V> => {
+  byGuard(value, is.factory(is.map.of, keyGuard, valueGuard), error);
 };
 
 /**
  * Asserts that value type is NumStr.
  *
  * @param value - Value.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
 export function numStr(
   value: unknown,
@@ -284,23 +256,10 @@ export function numStr(
 }
 
 /**
- * Asserts that value type is NumStrU.
- *
- * @param value - Value.
- * @param error - Error to be thrown.
- */
-export function numStrU(
-  value: unknown,
-  error?: ErrorArg
-): asserts value is types.NumStrU {
-  byGuard(value, is.numStrU, error);
-}
-
-/**
  * Asserts that value is a number.
  *
  * @param value - Value.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
 export function number(
   value: unknown,
@@ -310,23 +269,10 @@ export function number(
 }
 
 /**
- * Asserts that value type is numberU.
- *
- * @param value - Value.
- * @param error - Error to be thrown.
- */
-export function numberU(
-  value: unknown,
-  error?: ErrorArg
-): asserts value is types.numberU {
-  byGuard(value, is.numberU, error);
-}
-
-/**
  * Asserts that value is an object.
  *
  * @param value - Value.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
 export function object(
   value: unknown,
@@ -341,14 +287,14 @@ export function object(
  * @param value - Value.
  * @param requiredGuards - Guards for required properties.
  * @param optionalGuards - Guards for optional properties.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
-object.of = <A, B>(
+object.of = <T extends object>(
   value: unknown,
-  requiredGuards: is.Guards<A>,
-  optionalGuards: is.Guards<B>,
+  requiredGuards: is.Guards<T, RequiredKeys<T>>,
+  optionalGuards: is.Guards<T, OptionalKeys<T>>,
   error?: ErrorArg
-): asserts value is Partial<B> & Required<A> => {
+): asserts value is T => {
   byGuard(
     value,
     is.factory(is.object.of, requiredGuards, optionalGuards),
@@ -357,23 +303,38 @@ object.of = <A, B>(
 };
 
 /**
- * Asserts that value type is objectU.
+ * Asserts that value type is Set.
  *
  * @param value - Value.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
-export function objectU(
+export function set(
   value: unknown,
   error?: ErrorArg
-): asserts value is types.objectU {
-  byGuard(value, is.objectU, error);
+): asserts value is ReadonlySet<unknown> {
+  byGuard(value, is.set, error);
 }
+
+/**
+ * Asserts that value type is Set\<T\>.
+ *
+ * @param value - Value.
+ * @param guard - Guard.
+ * @param error - Error.
+ */
+set.of = <T>(
+  value: unknown,
+  guard: is.Guard<T>,
+  error?: ErrorArg
+): asserts value is ReadonlySet<T> => {
+  byGuard(value, is.factory(is.set.of, guard), error);
+};
 
 /**
  * Asserts that value is a string.
  *
  * @param value - Value.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
 export function string(
   value: unknown,
@@ -383,93 +344,40 @@ export function string(
 }
 
 /**
- * Asserts that value type is stringU.
+ * Asserts that value is a symbol.
  *
  * @param value - Value.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
-export function stringU(
+export function symbol(
   value: unknown,
   error?: ErrorArg
-): asserts value is types.stringU {
-  byGuard(value, is.stringU, error);
+): asserts value is symbol {
+  byGuard(value, is.symbol, error);
 }
 
 /**
  * Asserts value to be _false_.
  *
  * @param value - Value.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
 export function toBeFalse(
   value: unknown,
   error?: ErrorArg
 ): asserts value is false {
-  if (value === false) {
-    // Valid
-  } else throw toError(error);
+  byGuard(value, is.false, error);
 }
 
 /**
  * Asserts value to be _true_.
  *
  * @param value - Value.
- * @param error - Error to be thrown.
+ * @param error - Error.
  */
 export function toBeTrue(
   value: unknown,
   error?: ErrorArg
 ): asserts value is true {
-  if (value === true) {
-    // Valid
-  } else throw toError(error);
-}
-
-/**
- * Asserts that value is _undefined_.
- *
- * @param value - Value.
- * @param error - Error to be thrown.
- */
-export function toBeUndefined(
-  value: unknown,
-  error?: ErrorArg
-): asserts value is undefined {
-  byGuard(value, is.undefined, error);
-}
-
-/**
- * Asserts that value is not _undefined_.
- *
- * @param value - Value.
- * @param error - Error to be thrown.
- */
-not.undefined = <T>(
-  value: T,
-  error?: ErrorArg
-): asserts value is Exclude<T, undefined> => {
-  byGuard(value, is.not.undefined, error);
-};
-
-/*
-|*******************************************************************************
-|* Private
-|*******************************************************************************
-|*/
-
-/**
- * Converts error argument to error.
- *
- * @param error - Error argument.
- * @returns Error.
- */
-function toError(error?: ErrorArg): unknown {
-  switch (typeof error) {
-    case "function":
-      return error();
-
-    case "string":
-    case "undefined":
-      return new AssertionError(error);
-  }
+  byGuard(value, is.true, error);
 }
