@@ -7,13 +7,6 @@ test("add", () => {
   expect(source).toStrictEqual(new Set([1]));
 });
 
-test("has", () => {
-  const source = new Set([1]);
-
-  expect(set.has(source, 1)).toBeTrue();
-  expect(set.has(source, 2)).toBeFalse();
-});
-
 test("delete", () => {
   const source = new Set([1, 2]);
 

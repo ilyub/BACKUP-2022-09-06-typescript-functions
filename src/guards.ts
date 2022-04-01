@@ -2,8 +2,8 @@ import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
 import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 
 import * as a from "./array";
+import { typedef } from "./helpers";
 import * as o from "./object";
-import * as setFn from "./set";
 // eslint-disable-next-line @skylib/consistent-import
 import type * as types from "./types/core";
 
@@ -364,7 +364,7 @@ export function enumeration<T extends PropertyKey>(
   value: unknown,
   vo: types.ValidationObject<T>
 ): value is T {
-  return setFn.has(vo, value);
+  return typedef<ReadonlySet<unknown>>(vo).has(value);
 }
 
 /**
