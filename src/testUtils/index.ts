@@ -3,7 +3,6 @@ import "jest-extended";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
 // @ts-ignore
 import * as matchers from "jest-extended/all";
-import $ from "jquery";
 import * as _ from "lodash";
 import * as fakeTimers from "@sinonjs/fake-timers";
 
@@ -190,8 +189,6 @@ jestReset.dom = (): void => {
     assert.not.empty(child);
     child.remove();
   }
-
-  $.expr.pseudos["visible"] = jqueryVisiblie;
 };
 
 /**
@@ -285,13 +282,3 @@ export function toBeSameAs(got: unknown, expected: object): ExpectReturnType {
 |*/
 
 let clock: DeepReadonly<fakeTimers.Clock> | undefined;
-
-/**
- * JQuery visible selector.
- *
- * @param el - Element.
- * @returns _True_ if element is visible, _false_ otherwise.
- */
-function jqueryVisiblie(el: Element): boolean {
-  return $(el).css("display").toLowerCase() !== "none";
-}

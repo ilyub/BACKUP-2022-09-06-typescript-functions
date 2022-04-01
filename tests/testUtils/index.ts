@@ -1,5 +1,3 @@
-import $ from "jquery";
-
 import * as testUtils from "@/testUtils";
 
 async function testResolve(): Promise<void> {
@@ -68,10 +66,6 @@ test("jestReset.dom", () => {
     testUtils.jestReset.dom();
     // eslint-disable-next-line github/no-inner-html
     expect(document.body.innerHTML).toBe("");
-  }
-
-  {
-    expect($("<div>").is(":visible")).toBeTrue();
   }
 });
 

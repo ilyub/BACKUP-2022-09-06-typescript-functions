@@ -45,12 +45,10 @@
   },
   "peerDependencies": {
     "@sinonjs/fake-timers": "^9.1.0",
-    "@types/jquery": "^3.5.13",
     "@types/lodash": "^4.14.178",
     "@types/lodash-es": "^4.17.6",
     "@types/sinonjs__fake-timers": "^8.1.1",
     "jest-extended": "^2.0.0",
-    "jquery": "^3.6.0",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
     "reflect-metadata": "^0.1.13",
