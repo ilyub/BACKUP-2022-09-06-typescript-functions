@@ -66,6 +66,11 @@ module.exports = importPrefix => {
         type: "wildcard"
       },
       {
+        autoImportSource: `${importPrefix}programFlow`,
+        sourcePattern: "@skylib/functions/*/programFlow",
+        type: "wildcard"
+      },
+      {
         autoImportSource: `${importPrefix}reflect`,
         sourcePattern: "@skylib/functions/*/reflect",
         type: "wildcard"
@@ -91,11 +96,6 @@ module.exports = importPrefix => {
         altLocalNames: ["functionsTestUtils"],
         autoImportSource: `${importPrefix}testUtils`,
         sourcePattern: "@skylib/functions/*/testUtils",
-        type: "wildcard"
-      },
-      {
-        autoImportSource: `${importPrefix}programFlow`,
-        sourcePattern: "@skylib/functions/*/programFlow",
         type: "wildcard"
       }
     ]
