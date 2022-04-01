@@ -25,7 +25,6 @@ test("clone", () => {
 
   expect(arr1).toStrictEqual([1, 2, 3]);
   expect(arr2).toStrictEqual([1, 2, 3]);
-  expect(arr1).toBeSameAs(arr1);
   expect(arr2).not.toBeSameAs(arr1);
 });
 
@@ -62,7 +61,6 @@ test("fromIterable", () => {
 
   expect(arr1).toStrictEqual([1, 2, 3]);
   expect(arr2).toStrictEqual([1, 2, 3]);
-  expect(arr1).toBeSameAs(arr1);
   expect(arr2).not.toBeSameAs(arr1);
 });
 

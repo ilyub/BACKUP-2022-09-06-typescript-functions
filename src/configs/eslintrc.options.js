@@ -94,8 +94,8 @@ module.exports = importPrefix => {
         type: "wildcard"
       },
       {
-        autoImportSource: `${importPrefix}timer`,
-        sourcePattern: "@skylib/functions/*/timer",
+        autoImportSource: `${importPrefix}programFlow`,
+        sourcePattern: "@skylib/functions/*/programFlow",
         type: "wildcard"
       }
     ]

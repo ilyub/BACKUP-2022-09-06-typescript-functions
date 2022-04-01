@@ -14,10 +14,10 @@ export function detectEol(str: string): Eol {
 }
 
 /**
- * Checks that string consists of spaces.
+ * Checks that string consists of only spaces.
  *
  * @param str - String.
- * @returns _True_ if string consists of spaces, _false_ otherwise.
+ * @returns _True_ if string consists of only spaces, _false_ otherwise.
  */
 export function empty(str: string): boolean {
   return /^\s*$/u.test(str);
@@ -38,7 +38,7 @@ export function filter(
 }
 
 /**
- * Gets leading spaces.
+ * Extracts leading spaces.
  *
  * @param str - String.
  * @returns String containing leading spaces.
@@ -80,11 +80,11 @@ export function multiline(str: string): boolean {
 /**
  * Not implemented.
  */
-function pathUtils(): never {
+function _path(): never {
   throw new Error("Not implemented");
 }
 
-export { pathUtils as path };
+export { _path as path };
 
 /**
  * Adds leading slash.
@@ -92,8 +92,8 @@ export { pathUtils as path };
  * @param path - Path.
  * @returns New string with leading slash added.
  */
-pathUtils.addLeadingSlash = (path: string): string =>
-  `/${path.replace(/^[/\\]/u, "")}`;
+_path.addLeadingSlash = (path: string): string =>
+  `/${_path.removeLeadingSlash(path)}`;
 
 /**
  * Adds trailing slash.
@@ -101,8 +101,8 @@ pathUtils.addLeadingSlash = (path: string): string =>
  * @param path - Path.
  * @returns New string with trailing slash added.
  */
-pathUtils.addTrailingSlash = (path: string): string =>
-  `${path.replace(/[/\\]$/u, "")}/`;
+_path.addTrailingSlash = (path: string): string =>
+  `${_path.removeTrailingSlash(path)}/`;
 
 /**
  * Canonicalizes path.
@@ -110,8 +110,7 @@ pathUtils.addTrailingSlash = (path: string): string =>
  * @param path - Path.
  * @returns Canonical path.
  */
-pathUtils.canonicalize = (path: string): string =>
-  path.replace(/[/\\]+/gu, "/");
+_path.canonicalize = (path: string): string => path.replace(/[/\\]+/gu, "/");
 
 /**
  * Creates path from parts.
@@ -119,8 +118,8 @@ pathUtils.canonicalize = (path: string): string =>
  * @param parts - Parts.
  * @returns Path.
  */
-pathUtils.join = (...parts: string[]): string =>
-  pathUtils.canonicalize(parts.join("/"));
+_path.join = (...parts: string[]): string =>
+  _path.canonicalize(parts.join("/"));
 
 /**
  * Removes leading slash.
@@ -128,8 +127,8 @@ pathUtils.join = (...parts: string[]): string =>
  * @param path - Path.
  * @returns New string with leading slash removed.
  */
-pathUtils.removeLeadingSlash = (path: string): string =>
-  path.replace(/^[/\\]/u, "");
+_path.removeLeadingSlash = (path: string): string =>
+  _path.canonicalize(path).replace(/^\//u, "");
 
 /**
  * Removes trailing slash.
@@ -137,8 +136,8 @@ pathUtils.removeLeadingSlash = (path: string): string =>
  * @param path - Path.
  * @returns New string with trailing slash removed.
  */
-pathUtils.removeTrailingSlash = (path: string): string =>
-  path.replace(/[/\\]$/u, "");
+_path.removeTrailingSlash = (path: string): string =>
+  _path.canonicalize(path).replace(/\/$/u, "");
 
 /**
  * Replaces all occurences of search term.
@@ -168,7 +167,7 @@ export function singleLine(str: string): boolean {
 }
 
 /**
- * Gets trailing spaces.
+ * Extracts trailing spaces.
  *
  * @param str - String.
  * @returns String containing trailing spaces.
@@ -234,7 +233,7 @@ export function ucFirst(str: string): string {
  * @returns Unpadded string.
  */
 export function unpadMultiline(str: string): string {
-  const matches = /^\s+/u.exec(str);
+  const matches = /^(?:\n|\r\n)\s+/u.exec(str);
 
   return matches
     ? replaceAll(str.trim(), a.first(matches), detectEol(str))

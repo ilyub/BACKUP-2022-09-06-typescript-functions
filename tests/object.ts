@@ -1,16 +1,7 @@
+import type { Equals } from "ts-toolbelt/out/Any/Equals";
+
 import * as is from "@/guards";
 import * as o from "@/object";
-
-test("assign", () => {
-  const obj = { a: 1, b: 2 };
-
-  const source = { b: 3 };
-
-  const expected = { a: 1, b: 3 };
-
-  expect(o.assign(obj, source)).toStrictEqual(expected);
-  expect(obj).toStrictEqual(expected);
-});
 
 test("clone", () => {
   const obj1 = { a: 1 };
@@ -22,51 +13,9 @@ test("clone", () => {
   expect(obj2).not.toBeSameAs(obj1);
 });
 
-test("defineProperty", () => {
-  const obj = { a: 1 };
-
-  const descriptor: o.Descriptor = {
-    configurable: false,
-    enumerable: false,
-    get: () => 2
-  };
-
-  expect(obj.a).toBe(1);
-  o.defineProperty(obj, "a", descriptor);
-  expect(obj.a).toBe(2);
-});
-
-test("entries", () => {
-  const obj = {
-    a: 1,
-    b: 2,
-    c: 3
-  };
-
-  const expected = [
-    ["a", 1],
-    ["b", 2],
-    ["c", 3]
-  ];
-
-  expect(o.entries(obj)).toStrictEqual(expected);
-  expect(o.entries(obj)).toStrictEqual(expected);
-});
-
 test("every", () => {
   expect(o.every({ a: 1, b: 2 }, is.number)).toBeTrue();
   expect(o.every({ a: 1, b: "a" }, is.number)).toBeFalse();
-});
-
-test("extend", () => {
-  const obj = { a: 1 };
-
-  const source = { b: 2 };
-
-  const expected = { a: 1, b: 2 };
-
-  expect(o.extend(obj, source)).toStrictEqual(expected);
-  expect(obj).toStrictEqual(expected);
 });
 
 test("filter", () => {
@@ -86,35 +35,37 @@ test("filter", () => {
 });
 
 test("freeze", () => {
-  const obj1 = {};
+  interface I {
+    value: number;
+  }
+
+  const obj1: I = { value: 1 };
 
   const obj2 = o.freeze(obj1);
 
-  expect(obj1).toBeSameAs(obj2);
-});
+  const typeCheck1: Equals<typeof obj1, { value: number }> = 1;
 
-test("freeze.deep", () => {
-  const obj1 = {};
-
-  const obj2 = o.freeze.deep(obj1);
+  const typeCheck2: Equals<typeof obj2, { readonly value: number }> = 1;
 
   expect(obj1).toBeSameAs(obj2);
+  expect(typeCheck1).toBe(1);
+  expect(typeCheck2).toBe(1);
 });
 
 test("fromEntries", () => {
   expect(o.fromEntries([["a", 1]])).toStrictEqual({ a: 1 });
+});
+
+test("fromEntries.exhaustive", () => {
   expect(o.fromEntries.exhaustive([["a", 1]])).toStrictEqual({ a: 1 });
 });
 
 test("getPrototypeOf", () => {
-  class TestClass {
-    public value = 1;
-  }
-
-  const obj = new TestClass();
+  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+  class TestClass {}
 
   expect(o.getPrototypeOf(TestClass)).toBeUndefined();
-  expect(o.getPrototypeOf(obj)).toBeSameAs(TestClass.prototype);
+  expect(o.getPrototypeOf(new TestClass())).toBeSameAs(TestClass.prototype);
 });
 
 test("hasOwnProp", () => {
@@ -139,18 +90,6 @@ test("hasOwnProp", () => {
     expect(o.hasOwnProp(symbol1, { [symbol1]: undefined })).toBeTrue();
     expect(o.hasOwnProp(symbol2, { [symbol1]: 1 })).toBeFalse();
   }
-});
-
-test("keys", () => {
-  const obj = {
-    a: 1,
-    b: 2,
-    c: 3
-  };
-
-  const expected = ["a", "b", "c"];
-
-  expect(o.keys(obj)).toStrictEqual(expected);
 });
 
 test("map", () => {
@@ -240,64 +179,52 @@ test("some", () => {
   expect(o.some({ a: 1, b: 2 }, is.string)).toBeFalse();
 });
 
-test("sort", () => {
+test.each([
   {
-    const obj = o.fromEntries.exhaustive([
-      ["a", 1],
-      ["c", 3],
-      ["b", 2]
-    ]);
-
-    const expected = {
+    expected: {
       a: 1,
       b: 2,
       c: 3
-    };
-
-    expect(o.sort(obj)).toStrictEqual(expected);
-  }
-
-  {
-    const obj = o.fromEntries.exhaustive([
-      ["a", 3],
-      ["c", 1],
+    },
+    obj: o.fromEntries.exhaustive([
+      ["a", 1],
+      ["c", 3],
       ["b", 2]
-    ]);
-
-    const expected = {
+    ])
+  },
+  {
+    compareFn(x: number, y: number): number {
+      return y - x;
+    },
+    expected: {
       a: 3,
       b: 2,
       c: 1
-    };
-
-    expect(o.sort(obj, (x, y) => y[1] - x[1])).toStrictEqual(expected);
+    },
+    obj: o.fromEntries.exhaustive([
+      ["a", 3],
+      ["c", 1],
+      ["b", 2]
+    ])
   }
+])("sort", ({ compareFn, expected, obj }) => {
+  expect(o.sort(obj, compareFn)).toStrictEqual(expected);
 });
 
 test("unfreeze", () => {
-  const obj1 = {};
+  interface I {
+    readonly value: number;
+  }
+
+  const obj1: I = { value: 1 };
 
   const obj2 = o.unfreeze(obj1);
 
-  expect(obj1).toBeSameAs(obj2);
-});
+  const typeCheck1: Equals<typeof obj1, { readonly value: number }> = 1;
 
-test("unfreeze.deep", () => {
-  const obj1 = {};
-
-  const obj2 = o.unfreeze.deep(obj1);
+  const typeCheck2: Equals<typeof obj2, { value: number }> = 1;
 
   expect(obj1).toBeSameAs(obj2);
-});
-
-test("values", () => {
-  const obj = {
-    a: 1,
-    b: 2,
-    c: 3
-  };
-
-  const expected = [1, 2, 3];
-
-  expect(o.values(obj)).toStrictEqual(expected);
+  expect(typeCheck1).toBe(1);
+  expect(typeCheck2).toBe(1);
 });

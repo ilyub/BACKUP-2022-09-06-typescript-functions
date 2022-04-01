@@ -108,8 +108,6 @@ export type Equal<A, B, C, D> = If<Equals<A, B>, C, D>;
 
 export type IndexedObject<T = unknown> = Record<PropertyKey, T>;
 
-export type Interval = ReturnType<typeof setInterval>;
-
 export type Join2<A extends object, B extends object> = keyof A extends never
   ? B
   : keyof B extends never
@@ -223,8 +221,6 @@ export interface Sync<R, A extends unknowns = emptyArray> {
    */
   (...args: A): R;
 }
-
-export type Timeout = ReturnType<typeof setTimeout>;
 
 export type UndeclaredKeys<T extends object> = Exclude<
   keyof T,

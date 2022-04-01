@@ -37,47 +37,41 @@ test("path", () => {
   expect(() => s.path()).toThrow(new Error("Not implemented"));
 });
 
-test("path.addLeadingSlash", () => {
-  expect(s.path.addLeadingSlash("a")).toBe("/a");
-  expect(s.path.addLeadingSlash("/a")).toBe("/a");
-  expect(s.path.addLeadingSlash("\\a")).toBe("/a");
+test.each(["a", "/a", "\\a", "//a", "\\\\a"])("path.addLeadingSlash", path => {
+  expect(s.path.addLeadingSlash(path)).toBe("/a");
 });
 
-test("path.addTrailingSlash", () => {
-  expect(s.path.addTrailingSlash("a")).toBe("a/");
-  expect(s.path.addTrailingSlash("a/")).toBe("a/");
-  expect(s.path.addTrailingSlash("a\\")).toBe("a/");
+test.each(["a", "a/", "a\\", "a//", "a\\\\"])("path.addTrailingSlash", path => {
+  expect(s.path.addTrailingSlash(path)).toBe("a/");
 });
 
 test("path.canonicalize", () => {
-  const path1 = "a//b\\\\c";
-
-  const path2 = "//a//b\\\\c\\\\";
-
-  expect(s.path.canonicalize(path1)).toBe("a/b/c");
-  expect(s.path.canonicalize(path2)).toBe("/a/b/c/");
+  expect(s.path.canonicalize("a//b\\\\c")).toBe("a/b/c");
+  expect(s.path.canonicalize("//a//b\\\\c\\\\")).toBe("/a/b/c/");
 });
 
-test("path.join", () => {
-  const parts1 = ["a", "b/", "c", "/d/", "/e"];
-
-  const parts2 = ["a", "b\\", "c", "\\d\\", "\\e"];
-
-  expect(s.path.join(...parts1)).toBe("a/b/c/d/e");
-  expect(s.path.join(...parts2)).toBe("a/b/c/d/e");
+test.each([
+  { parts: ["a", "b/", "c", "/d/", "/e"] },
+  { parts: ["a", "b\\", "c", "\\d\\", "\\e"] },
+  { parts: ["a", "b//", "c", "//d//", "//e"] },
+  { parts: ["a", "b\\\\", "c", "\\\\d\\\\", "\\\\e"] }
+])("path.join", ({ parts }) => {
+  expect(s.path.join(...parts)).toBe("a/b/c/d/e");
 });
 
-test("path.removeLeadingSlash", () => {
-  expect(s.path.removeLeadingSlash("a")).toBe("a");
-  expect(s.path.removeLeadingSlash("/a")).toBe("a");
-  expect(s.path.removeLeadingSlash("\\a")).toBe("a");
-});
+test.each(["a/", "/a/", "\\a//", "//a\\", "\\\\a\\\\"])(
+  "path.removeLeadingSlash",
+  path => {
+    expect(s.path.removeLeadingSlash(path)).toBe("a/");
+  }
+);
 
-test("path.removeTrailingSlash", () => {
-  expect(s.path.removeTrailingSlash("a")).toBe("a");
-  expect(s.path.removeTrailingSlash("a/")).toBe("a");
-  expect(s.path.removeTrailingSlash("a\\")).toBe("a");
-});
+test.each(["/a", "/a/", "//a\\", "\\a//", "\\\\a\\\\"])(
+  "path.removeTrailingSlash",
+  path => {
+    expect(s.path.removeTrailingSlash(path)).toBe("/a");
+  }
+);
 
 test("replaceAll", () => {
   expect(s.replaceAll("a1b1c", "1", "2")).toBe("a2b2c");
@@ -127,20 +121,16 @@ test("ucFirst", () => {
   expect(s.ucFirst("")).toBe("");
 });
 
-test("unpadMultiline", () => {
+test.each([
+  { expected: "console.log(1);", str: "console.log(1);" },
   {
-    const str = "console.log(1);";
-
-    const expected = "console.log(1);";
-
-    expect(s.unpadMultiline(str)).toStrictEqual(expected);
-  }
-
+    expected: "{\n  console.log(1);\n}",
+    str: "\n  {\n    console.log(1);\n  }\n    "
+  },
   {
-    const str = "\n  {\n    console.log(1);\n  }\n";
-
-    const expected = "{\n  console.log(1);\n}";
-
-    expect(s.unpadMultiline(str)).toStrictEqual(expected);
+    expected: "{\r\n  console.log(1);\r\n}",
+    str: "\r\n  {\r\n    console.log(1);\r\n  }\r\n    "
   }
+])("unpadMultiline", ({ expected, str }) => {
+  expect(s.unpadMultiline(str)).toStrictEqual(expected);
 });

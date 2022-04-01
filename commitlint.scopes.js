@@ -18,11 +18,11 @@ module.exports = [
   "map",
   "number",
   "object",
+  "programFlow",
   "reflect",
   "regexp",
   "set",
   "string",
   "testUtils",
-  "timer",
   "types"
 ];

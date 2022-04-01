@@ -8,18 +8,6 @@ const mk3 = Symbol("TestMetadataKey3");
 
 const pk1 = Symbol("TestPropertyKey1");
 
-test("apply", () => {
-  expect(reflect.apply(() => true, undefined, [])).toBeTrue();
-});
-
-test("construct", () => {
-  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
-  class TestClass {}
-
-  expect(reflect.construct(TestClass, [])).toBeInstanceOf(TestClass);
-  expect(reflect.construct(TestClass, [], TestClass)).toBeInstanceOf(TestClass);
-});
-
 test("defineMetadata", () => {
   const obj = {};
 
@@ -50,13 +38,6 @@ test("defineMetadataKey", () => {
     expect(reflect.getOwnMetadataKey(mk1, obj, "pk1")).toBe(1);
     expect(reflect.getOwnMetadataKey(mk2, obj, "pk1")).toBeUndefined();
   }
-});
-
-test("get", () => {
-  const obj = { pk1: 1, [pk1]: 2 };
-
-  expect(reflect.get(obj, "pk1")).toBe(1);
-  expect(reflect.get(obj, pk1)).toBe(2);
 });
 
 test("getMetadata", () => {

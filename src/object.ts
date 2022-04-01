@@ -3,93 +3,173 @@
 import * as a from "./array";
 import * as is from "./guards";
 import type {
-  DeepReadonly,
-  DeepWritable,
-  Entry,
   IndexedObject,
   objectU,
   PartialRecord,
   ReadonlyIndexedObject,
   ReadonlyRecord,
   StrictOmit,
-  unknowns,
   WithOptionalKeys,
-  WithUndeclaredKeys,
   Writable
 } from "./types/core";
 
-export interface Descriptor<T extends object = object> {
+export interface Assign {
+  /**
+   * Typed version of Object.assign.
+   *
+   * @param mutableTarget - Target.
+   * @param sources - Sources.
+   * @returns Target.
+   */
+  <T extends object>(mutableTarget: T, ...sources: Array<Partial<T>>): T;
+}
+
+export interface Callback<T extends object> {
+  /**
+   * Checks object entry.
+   *
+   * @param value - Value.
+   * @param key - Key.
+   * @returns _True_ if entry passes check, _false_ otherwise.
+   */
+  (value: T[keyof T], key: keyof T): boolean;
+}
+
+export interface CompareFn<T extends object> {
+  /**
+   * Compares two object entries.
+   *
+   * @param value1 - Value 1.
+   * @param value2 - Value 2.
+   * @param key1 - Key 1.
+   * @param key2 - Key 2.
+   */
+  (
+    value1: T[keyof T],
+    value2: T[keyof T],
+    key1: keyof T,
+    key2: keyof T
+  ): number;
+}
+
+export interface DefineProperty {
+  /**
+   * Typed version of Object.defineProperty.
+   *
+   * @param obj - Object.
+   * @param key - Property key.
+   * @param descriptor - Descriptor.
+   */
+  <T extends object, K extends keyof T = keyof T>(
+    obj: T,
+    key: PropertyKey,
+    descriptor: Descriptor<T, K>
+  ): void;
+}
+
+export interface Descriptor<
+  T extends object = object,
+  K extends keyof T = keyof T
+> {
   readonly configurable?: boolean;
   readonly enumerable?: boolean;
   /**
-   * Getter for component's property.
+   * Property getter.
    *
    * @param this - Object.
    * @returns Value.
    */
-  readonly get?: (this: T) => unknown;
+  readonly get?: (this: T) => T[K];
   /**
-   * Setter for component's property.
+   * Property setter.
    *
    * @param this - Object.
    * @param value - New value.
    */
-  readonly set?: (this: T, value: unknown) => void;
+  readonly set?: (this: T, value: T[K]) => void;
+  readonly value?: T[K];
   readonly writable?: boolean;
 }
 
-/**
- * Typed version of Object.assign.
- *
- * @param mutableTarget - Target object.
- * @param sources - Sources.
- * @returns Target.
- */
-export function assign<T extends object>(
-  mutableTarget: T,
-  ...sources: Array<Partial<T>>
-): T;
-
-/**
- * Typed version of Object.assign.
- *
- * @param mutableTarget - Target object.
- * @param sources - Sources.
- * @returns Target.
- */
-export function assign<T extends object, K extends keyof T>(
-  mutableTarget: T,
-  ...sources: Array<{ readonly [L in K]: T[L] }>
-): T;
-
-export function assign(mutableTarget: object, ...sources: unknowns): unknown {
-  return Object.assign(mutableTarget, ...sources);
+export interface Entries {
+  /**
+   * Typed version of Object.entries.
+   *
+   * @param obj - Object.
+   * @returns Object entries.
+   */
+  <T extends object>(obj: T): ReadonlyArray<readonly [keyof T, T[keyof T]]>;
 }
 
+export interface Extend {
+  /**
+   * Typed version of Object.assign.
+   *
+   * @param target - Target object.
+   * @param source - Source.
+   * @returns Target.
+   */
+  <T extends object, A>(target: T, source: A): A & T;
+  /**
+   * Typed version of Object.assign.
+   *
+   * @param target - Target object.
+   * @param source1 - Source 1.
+   * @param source2 - Source 2.
+   * @returns Target.
+   */
+  <T extends object, A, B>(target: T, source1: A, source2: B): A & B & T;
+  /**
+   * Typed version of Object.assign.
+   *
+   * @param target - Target object.
+   * @param source1 - Source 1.
+   * @param source2 - Source 2.
+   * @param source3 - Source 3.
+   * @returns Target.
+   */
+  <T extends object, A, B, C>(
+    target: T,
+    source1: A,
+    source2: B,
+    source3: C
+  ): A & B & C & T;
+}
+
+export interface Keys {
+  /**
+   * Typed version of Object.keys.
+   *
+   * @param obj - Object.
+   * @returns Object keys.
+   */
+  <T extends object>(obj: T): ReadonlyArray<keyof T>;
+}
+
+export interface Values {
+  /**
+   * Typed version of Object.values.
+   *
+   * @param obj - Object.
+   * @returns Object values.
+   */
+  <T extends object>(obj: T): ReadonlyArray<T[keyof T]>;
+}
+
+export const assign: Assign = Object.assign;
+
 /**
- * Creates object copy.
+ * Clones object.
  *
  * @param obj - Object.
- * @returns Object copy.
+ * @returns New object.
  */
 export function clone<T extends object>(obj: T): Writable<T> {
   return { ...obj };
 }
 
-/**
- * Typed version of Object.defineProperty.
- *
- * @param obj - Object.
- * @param key - Property name.
- * @param descriptor - Descriptor.
- */
-export function defineProperty<T extends object>(
-  obj: T,
-  key: PropertyKey,
-  descriptor: Descriptor<T>
-): void {
-  Object.defineProperty(obj, key, descriptor);
-}
+export const defineProperty: DefineProperty =
+  Object.defineProperty.bind(Object);
 
 /**
  * Typed version of Object.entries.
@@ -97,12 +177,7 @@ export function defineProperty<T extends object>(
  * @param obj - Object.
  * @returns Object entries.
  */
-function _entries<T extends object>(
-  obj: T
-): ReadonlyArray<readonly [keyof T, T[keyof T]]> {
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
-  return Object.entries(obj) as Array<[keyof T, T[keyof T]]>;
-}
+const _entries: Entries = Object.entries;
 
 export { _entries as entries };
 
@@ -113,83 +188,25 @@ export { _entries as entries };
  * @param callback - Callback.
  * @returns _True_ if every object property satisfies condition, _false_ otherwise.
  */
-export function every<K extends PropertyKey, S, D extends S>(
-  obj: ReadonlyRecord<K, S>,
-  callback: (value: S, key: K) => value is D
-): obj is ReadonlyRecord<K, D>;
-
-/**
- * Checks that every object property satisfies condition.
- *
- * @param obj - Object.
- * @param callback - Callback.
- * @returns _True_ if every object property satisfies condition, _false_ otherwise.
- */
-export function every<T>(
+export function every<T extends object>(
   obj: T,
-  callback: (value: T[keyof T], key: keyof T) => boolean
-): boolean;
-
-export function every<K extends PropertyKey, V>(
-  obj: ReadonlyRecord<K, V>,
-  callback: (value: V, key: K) => boolean
+  callback: Callback<T>
 ): boolean {
   return _entries(obj).every(([key, value]) => callback(value, key));
 }
 
-/**
- * Typed version of Object.assign.
- *
- * @param target - Target object.
- * @param source - Source.
- * @returns Target.
- */
-export function extend<T extends object, A>(target: T, source: A): A & T;
-
-/**
- * Typed version of Object.assign.
- *
- * @param target - Target object.
- * @param source1 - Source 1.
- * @param source2 - Source 2.
- * @returns Target.
- */
-export function extend<T extends object, A, B>(
-  target: T,
-  source1: A,
-  source2: B
-): A & B & T;
-
-/**
- * Typed version of Object.assign.
- *
- * @param target - Target object.
- * @param source1 - Source 1.
- * @param source2 - Source 2.
- * @param source3 - Source 3.
- * @returns Target.
- */
-export function extend<T extends object, A, B, C>(
-  target: T,
-  source1: A,
-  source2: B,
-  source3: C
-): A & B & C & T;
-
-export function extend(target: object, ...sources: unknown[]): unknown {
-  return Object.assign(target, ...sources);
-}
+export const extend: Extend = Object.assign;
 
 /**
  * Filters object by callback.
  *
  * @param obj - Object.
  * @param callback - Callback.
- * @returns New filtered object.
+ * @returns New object.
  */
 export function filter<T extends object>(
   obj: T,
-  callback: (value: T[keyof T], key: keyof T) => boolean
+  callback: Callback<T>
 ): Partial<T> {
   const result: Partial<T> = {};
 
@@ -203,24 +220,11 @@ export function filter<T extends object>(
  * Marks object as readonly.
  *
  * @param obj - Object.
- * @returns Object marked as readonly.
+ * @returns Object.
  */
 export function freeze<T extends object>(obj: T): Readonly<T> {
   return obj;
 }
-
-/**
- * Marks object as deep readonly.
- *
- * @param obj - Object.
- * @returns Object marked as deep readonly.
- */
-export function freezeDeep<T extends object>(obj: T): DeepReadonly<T> {
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
-  return obj as DeepReadonly<T>;
-}
-
-freeze.deep = freezeDeep;
 
 /**
  * Creates object from entries.
@@ -232,23 +236,35 @@ export function fromEntries<K extends PropertyKey, V>(
   entries: Iterable<readonly [K, V]>
 ): PartialRecord<K, V> {
   // eslint-disable-next-line no-type-assertion/no-type-assertion
-  const result = {} as Record<K, V>;
+  const result = {} as PartialRecord<K, V>;
 
   for (const entry of entries) result[entry[0]] = entry[1];
 
   return result;
 }
 
-// eslint-disable-next-line no-type-assertion/no-type-assertion
-fromEntries.exhaustive = fromEntries as <K extends PropertyKey, V>(
+/**
+ * Creates object from entries.
+ *
+ * @param entries - Entries.
+ * @returns Object.
+ */
+fromEntries.exhaustive = <K extends PropertyKey, V>(
   entries: Iterable<readonly [K, V]>
-) => Record<K, V>;
+): Record<K, V> => {
+  // eslint-disable-next-line no-type-assertion/no-type-assertion
+  const result = {} as Record<K, V>;
+
+  for (const entry of entries) result[entry[0]] = entry[1];
+
+  return result;
+};
 
 /**
- * Typed version of Object.getPrototypeOf.
+ * Returns object prototype.
  *
  * @param obj - Object.
- * @returns Prototype if available, _undefined_ otherwise.
+ * @returns Object prototype if available, _undefined_ otherwise.
  */
 export function getPrototypeOf(obj: object): objectU {
   const prototype = Object.getPrototypeOf(obj);
@@ -257,9 +273,9 @@ export function getPrototypeOf(obj: object): objectU {
 }
 
 /**
- * Alias of Object.prototype.hasOwnProperty.
+ * Checks that object has property.
  *
- * @param key - Property name.
+ * @param key - Property key.
  * @param obj - Object.
  * @returns _True_ if object has property, _false_ otherwise.
  */
@@ -267,16 +283,7 @@ export function hasOwnProp(key: PropertyKey, obj: object): boolean {
   return Object.prototype.hasOwnProperty.call(obj, key);
 }
 
-/**
- * Typed version of Object.keys.
- *
- * @param obj - Object.
- * @returns Object keys.
- */
-export function keys<T extends object>(obj: T): ReadonlyArray<keyof T> {
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
-  return Object.keys(obj) as Array<keyof T>;
-}
+export const keys: Keys = Object.keys;
 
 /**
  * Applies callback to each property.
@@ -285,20 +292,17 @@ export function keys<T extends object>(obj: T): ReadonlyArray<keyof T> {
  * @param callback - Callback.
  * @returns New object.
  */
-export function map<V, R>(
-  obj: ReadonlyRecord<string, V>,
-  callback: (value: V, key: string) => R
-): ReadonlyRecord<string, R> {
+export function map<K extends PropertyKey, V, R>(
+  obj: ReadonlyRecord<K, V>,
+  callback: (value: V, key: K) => R
+): ReadonlyRecord<K, R> {
   return fromEntries.exhaustive(
-    Object.entries(obj).map(([key, value]): [string, R] => [
-      key,
-      callback(value, key)
-    ])
+    _entries(obj).map(([key, value]) => [key, callback(value, key)])
   );
 }
 
 /**
- * Merges several objects.
+ * Merges objects.
  * If more than one object has the same key, respective values are combined into array.
  *
  * @param objects - Objects.
@@ -307,39 +311,39 @@ export function map<V, R>(
 export function merge(
   ...objects: ReadonlyIndexedObject[]
 ): ReadonlyIndexedObject {
-  const pool: IndexedObject<unknown[]> = {};
+  const result: IndexedObject<unknown[]> = {};
 
   for (const obj of objects)
     for (const [key, value] of Object.entries(obj)) {
-      const valuesByKey = pool[key];
+      const arr = result[key];
 
-      if (valuesByKey) valuesByKey.push(value);
-      else pool[key] = [value];
+      if (arr) arr.push(value);
+      else result[key] = [value];
     }
 
   return fromEntries(
-    Object.entries(pool).map(([key, valuesByKey]) => [
+    Object.entries(result).map(([key, arr]) => [
       key,
-      valuesByKey.length === 1 ? valuesByKey[0] : valuesByKey
+      arr.length === 1 ? arr[0] : arr
     ])
   );
 }
 
 /**
- * Omits keys from object.
+ * Removes keys from object.
  *
  * @param obj - Object.
- * @param exclude - Keys to exclude.
+ * @param exclude - Keys to remove.
  * @returns New object with given keys omitted.
  */
 export function omit<T extends object, K extends keyof T>(
   obj: T,
   ...exclude: K[]
 ): StrictOmit<T, K> {
-  const keysSet = new Set<keyof T>(exclude);
+  const excludeSet = new Set<keyof T>(exclude);
 
   // eslint-disable-next-line no-type-assertion/no-type-assertion
-  return filter(obj, (_value, key) => !keysSet.has(key)) as StrictOmit<T, K>;
+  return filter(obj, (_value, key) => !excludeSet.has(key)) as StrictOmit<T, K>;
 }
 
 /**
@@ -350,20 +354,9 @@ export function omit<T extends object, K extends keyof T>(
  */
 export function removeUndefinedKeys<T extends object>(
   obj: T
-): WithOptionalKeys<T>;
-
-/**
- * Removes undefined keys.
- *
- * @param obj - Object.
- * @returns New object with undefined keys removed.
- */
-export function removeUndefinedKeys<T extends object>(
-  obj: WithUndeclaredKeys<T>
-): T;
-
-export function removeUndefinedKeys(obj: object): object {
-  return filter(obj, is.not.empty);
+): WithOptionalKeys<T> {
+  // eslint-disable-next-line no-type-assertion/no-type-assertion
+  return filter(obj, is.not.empty) as WithOptionalKeys<T>;
 }
 
 /**
@@ -383,27 +376,7 @@ export function size(obj: object): number {
  * @param callback - Callback.
  * @returns _True_ if some object property satisfies condition, _false_ otherwise.
  */
-export function some<K extends PropertyKey, S, D extends S>(
-  obj: ReadonlyRecord<K, S>,
-  callback: (value: S, key: K) => value is D
-): obj is ReadonlyRecord<K, D>;
-
-/**
- * Checks that some object property satisfies condition.
- *
- * @param obj - Object.
- * @param callback - Callback.
- * @returns _True_ if some object property satisfies condition, _false_ otherwise.
- */
-export function some<K extends PropertyKey, V>(
-  obj: ReadonlyRecord<K, V>,
-  callback: (value: V, key: K) => boolean
-): boolean;
-
-export function some<K extends PropertyKey, V>(
-  obj: ReadonlyRecord<K, V>,
-  callback: (value: V, key: K) => boolean
-): boolean {
+export function some<T extends object>(obj: T, callback: Callback<T>): boolean {
   return _entries(obj).some(([key, value]) => callback(value, key));
 }
 
@@ -414,44 +387,27 @@ export function some<K extends PropertyKey, V>(
  * @param compareFn - Comparison function.
  * @returns New object.
  */
-export function sort<T extends object>(
-  obj: T,
-  compareFn?: (x: Entry<T>, y: Entry<T>) => number
-): T {
+export function sort<T extends object>(obj: T, compareFn?: CompareFn<T>): T {
   // eslint-disable-next-line no-type-assertion/no-type-assertion
-  return fromEntries(a.sort(_entries(obj), compareFn)) as T;
+  return fromEntries(
+    a.sort(
+      _entries(obj),
+      compareFn
+        ? (entry1, entry2): number =>
+            compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
+        : undefined
+    )
+  ) as T;
 }
 
 /**
  * Marks object as writable.
  *
  * @param obj - Object.
- * @returns Object marked as writable.
+ * @returns Object.
  */
 export function unfreeze<T extends object>(obj: T): Writable<T> {
   return obj;
 }
 
-/**
- * Marks object as deep writable.
- *
- * @param obj - Object.
- * @returns Object marked as deep writable.
- */
-export function unfreezeDeep<T extends object>(obj: T): DeepWritable<T> {
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
-  return obj as DeepReadonly<T>;
-}
-
-unfreeze.deep = unfreezeDeep;
-
-/**
- * Typed version of Object.values.
- *
- * @param obj - Object.
- * @returns Object values.
- */
-export function values<T extends object>(obj: T): ReadonlyArray<T[keyof T]> {
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
-  return Object.values(obj) as Array<T[keyof T]>;
-}
+export const values: Values = Object.values;

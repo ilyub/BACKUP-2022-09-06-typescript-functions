@@ -3,8 +3,8 @@ import * as cast from "./converters";
 import * as fn from "./function";
 import * as is from "./guards";
 import * as o from "./object";
+import * as programFlow from "./programFlow";
 import * as reflect from "./reflect";
-import * as timer from "./timer";
 import type { Join2, unknowns } from "./types/core";
 
 export type Facade<I, E = unknown> = E & FacadeOwnMethods<I> & I;
@@ -217,7 +217,7 @@ export function safeAccess<
  */
 export async function wait(timeout: number): Promise<void> {
   await new Promise<void>(resolve => {
-    timer.addTimeout(resolve, timeout);
+    programFlow.setTimeout(resolve, timeout);
   });
 }
 
