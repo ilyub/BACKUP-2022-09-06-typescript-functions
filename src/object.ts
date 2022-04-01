@@ -3,12 +3,12 @@
 import * as a from "./array";
 import * as is from "./guards";
 import type {
-  IndexedObject,
   objectU,
   PartialRecord,
   ReadonlyIndexedObject,
   ReadonlyRecord,
   StrictOmit,
+  unknowns,
   WithOptionalKeys,
   Writable
 } from "./types/core";
@@ -311,21 +311,23 @@ export function map<K extends PropertyKey, V, R>(
 export function merge(
   ...objects: ReadonlyIndexedObject[]
 ): ReadonlyIndexedObject {
-  const result: IndexedObject<unknown[]> = {};
+  const result = new Map<PropertyKey, unknown[]>();
 
   for (const obj of objects)
     for (const [key, value] of Object.entries(obj)) {
-      const arr = result[key];
+      const arr = result.get(key);
 
       if (arr) arr.push(value);
-      else result[key] = [value];
+      else result.set(key, [value]);
     }
 
   return fromEntries(
-    Object.entries(result).map(([key, arr]) => [
-      key,
-      arr.length === 1 ? arr[0] : arr
-    ])
+    a
+      .fromIterable(result.entries())
+      .map(([key, arr]: [PropertyKey, unknowns]) => [
+        key,
+        arr.length === 1 ? arr[0] : arr
+      ])
   );
 }
 

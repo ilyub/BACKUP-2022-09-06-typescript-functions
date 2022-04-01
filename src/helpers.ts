@@ -237,12 +237,12 @@ export function wrapProxyHandler<T extends object>(
   switch (action) {
     case "doDefault":
       return {
-        apply(target, thisArg, args): unknown {
+        apply(target, thisArg, args: unknowns): unknown {
           assert.callable(target);
 
           return reflect.apply(target, thisArg, args);
         },
-        construct(target, args, newTarget): object {
+        construct(target, args: unknowns, newTarget): object {
           assert.callable(target);
 
           const result = reflect.construct(target, args, newTarget);

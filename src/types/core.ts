@@ -106,6 +106,7 @@ export type Entry<T> = readonly [keyof T, T[keyof T]];
 
 export type Equal<A, B, C, D> = If<Equals<A, B>, C, D>;
 
+// eslint-disable-next-line @skylib/prefer-readonly
 export type IndexedObject<T = unknown> = Record<PropertyKey, T>;
 
 export type Join2<A extends object, B extends object> = keyof A extends never
@@ -252,6 +253,7 @@ export type WithUndefinedKeys<T extends object> = Join4<
   { readonly [K in ReadonlyUndeclaredKeys<T>]: T[K] | undefined }
 >;
 
+// eslint-disable-next-line @skylib/prefer-readonly
 export type Writable<T> = { -readonly [K in keyof T]: T[K] };
 
 export type WritableDeclaredKeys<T extends object> = DeclaredKeys<T> &

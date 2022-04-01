@@ -6,8 +6,10 @@ export type ArrayMap2<
   T
 > = ReadonlyMap<K, ReadonlyMap<L, readonly T[]>>;
 
+// eslint-disable-next-line @skylib/prefer-readonly
 export type WritableArrayMap<K extends PropertyKey, T> = Map<K, T[]>;
 
+// eslint-disable-next-line @skylib/prefer-readonly
 export type WritableArrayMap2<
   K extends PropertyKey,
   L extends PropertyKey,
