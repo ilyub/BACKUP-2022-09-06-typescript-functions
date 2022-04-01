@@ -16,6 +16,13 @@ test("delete", () => {
   );
 });
 
+test("get", () => {
+  const source = new Map([["a", 1]]);
+
+  expect(map.get(source, "a")).toBe(1);
+  expect(map.get(source, "b")).toBeUndefined();
+});
+
 test("has", () => {
   const source = new Map([["a", 1]]);
 

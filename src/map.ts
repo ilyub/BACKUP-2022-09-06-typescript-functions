@@ -19,6 +19,20 @@ export function _delete<K, V>(
 export { _delete as delete };
 
 /**
+ * Returns value from a map.
+ *
+ * @param map - Map.
+ * @param key - Key.
+ * @returns Value.
+ */
+export function get<T>(
+  map: ReadonlyMap<unknown, T>,
+  key: unknown
+): T | undefined {
+  return map.get(key);
+}
+
+/**
  * Checks that map has key.
  *
  * @param map - Map.
