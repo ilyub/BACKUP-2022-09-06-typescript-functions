@@ -6,6 +6,26 @@ async function testResolve(): Promise<void> {
 
 testUtils.installFakeTimer();
 
+test("executionTimeToBe", async () => {
+  {
+    const result = await testUtils.executionTimeToBe(testResolve, 0);
+
+    expect(result.pass).toBeTrue();
+    expect(result.message()).toBe(
+      "Expected callback execution time not to be 0 ms"
+    );
+  }
+
+  {
+    const result = await testUtils.executionTimeToBe(testResolve, 1);
+
+    expect(result.pass).toBeFalse();
+    expect(result.message()).toBe(
+      "Expected callback execution time (0 ms) to be 1 ms"
+    );
+  }
+});
+
 test("executionTimeToBeWithin", async () => {
   {
     const result = await testUtils.executionTimeToBeWithin(testResolve, 0, 1);
@@ -22,26 +42,6 @@ test("executionTimeToBeWithin", async () => {
     expect(result.pass).toBeFalse();
     expect(result.message()).toBe(
       "Expected callback execution time (0 ms) to be within [1, 2] ms"
-    );
-  }
-});
-
-test("executionTimeToEqual", async () => {
-  {
-    const result = await testUtils.executionTimeToEqual(testResolve, 0);
-
-    expect(result.pass).toBeTrue();
-    expect(result.message()).toBe(
-      "Expected callback execution time not to be 0 ms"
-    );
-  }
-
-  {
-    const result = await testUtils.executionTimeToEqual(testResolve, 1);
-
-    expect(result.pass).toBeFalse();
-    expect(result.message()).toBe(
-      "Expected callback execution time (0 ms) to be 1 ms"
     );
   }
 });

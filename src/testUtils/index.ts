@@ -18,6 +18,13 @@ declare global {
       /**
        * Checks that async function executes within expected time.
        *
+       * @param time - Expected time.
+       * @returns Result object.
+       */
+      readonly executionTimeToBe: (time: number) => Promise<R>;
+      /**
+       * Checks that async function executes within expected time.
+       *
        * @param min - Min time (inclusive).
        * @param max - Max time (inclusive).
        * @returns Result object.
@@ -26,13 +33,6 @@ declare global {
         min: number,
         max: number
       ) => Promise<R>;
-      /**
-       * Checks that async function executes within expected time.
-       *
-       * @param time - Expected time.
-       * @returns Result object.
-       */
-      readonly executionTimeToEqual: (time: number) => Promise<R>;
       /**
        * Checks that two objects are identical.
        *
@@ -114,7 +114,7 @@ export async function executionTimeToBeWithin(
  * @param time - Expected time.
  * @returns Result object.
  */
-export async function executionTimeToEqual(
+export async function executionTimeToBe(
   got: unknown,
   time: number
 ): Promise<ExpectReturnType> {
@@ -197,14 +197,14 @@ jestReset.dom = (): void => {
 export function jestSetup(): void {
   {
     interface ExpectExtendMap {
+      readonly executionTimeToBe: ExpectFromMatcher<"executionTimeToBe">;
       readonly executionTimeToBeWithin: ExpectFromMatcher<"executionTimeToBeWithin">;
-      readonly executionTimeToEqual: ExpectFromMatcher<"executionTimeToEqual">;
       readonly toBeSameAs: ExpectFromMatcher<"toBeSameAs">;
     }
 
     const expectExtend: ExpectExtendMap = {
+      executionTimeToBe,
       executionTimeToBeWithin,
-      executionTimeToEqual,
       toBeSameAs
     };
 

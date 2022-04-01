@@ -222,7 +222,7 @@ test("wait", async () => {
   await testUtils.run(async () => {
     await expect(async () => {
       await wait(1000);
-    }).executionTimeToEqual(1000);
+    }).executionTimeToBe(1000);
   });
 });
 
