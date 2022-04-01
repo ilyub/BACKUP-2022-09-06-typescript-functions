@@ -141,7 +141,7 @@ export async function executionTimeToEqual(
 }
 
 /**
- * Gets fake timer.
+ * Returns fake timer.
  *
  * @returns Fake timer.
  */

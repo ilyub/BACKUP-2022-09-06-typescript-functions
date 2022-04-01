@@ -6,7 +6,7 @@ import "reflect-metadata";
 export type MetadataKey = string | symbol;
 
 /**
- * Typed version of Reflect.construct.
+ * Typed version of Reflect.apply.
  *
  * @param target - Target function.
  * @param thisArg - This argument.
@@ -177,7 +177,7 @@ export function hasMetadataKey(
 }
 
 /**
- * Typed version of Reflect.hasMetadata.
+ * Typed version of Reflect.hasOwnMetadata.
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
@@ -191,7 +191,7 @@ export function hasOwnMetadata(
 }
 
 /**
- * Typed version of Reflect.hasMetadata.
+ * Typed version of Reflect.hasOwnMetadata.
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.

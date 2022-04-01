@@ -14,7 +14,24 @@ export function add<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T> {
 }
 
 /**
- * Checks if set has value.
+ * Removes value.
+ *
+ * @param set - Set.
+ * @param value - Value.
+ * @returns Set with value removed.
+ */
+export function _delete<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T> {
+  const result = new Set(set);
+
+  result.delete(value);
+
+  return result;
+}
+
+export { _delete as delete };
+
+/**
+ * Checks that set has value.
  *
  * @param set - Set.
  * @param value - Value.
@@ -23,20 +40,3 @@ export function add<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T> {
 export function has(set: ReadonlySet<unknown>, value: unknown): boolean {
   return set.has(value);
 }
-
-/**
- * Removes value.
- *
- * @param set - Set.
- * @param value - Value.
- * @returns Set with value removed.
- */
-export function setDelete<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T> {
-  const result = new Set(set);
-
-  result.delete(value);
-
-  return result;
-}
-
-export { setDelete as delete };

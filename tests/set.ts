@@ -1,17 +1,22 @@
 import * as set from "@/set";
 
-test("delete", () => {
-  const source: ReadonlySet<number> = new Set([1, 2]);
+test("add", () => {
+  const source = new Set([1]);
 
-  const expected: ReadonlySet<number> = new Set([1]);
-
-  expect(set.delete(source, 2)).toStrictEqual(expected);
+  expect(set.add(source, 2)).toStrictEqual(new Set([1, 2]));
+  expect(source).toStrictEqual(new Set([1]));
 });
 
-test("set", () => {
-  const source: ReadonlySet<number> = new Set([1]);
+test("has", () => {
+  const source = new Set([1]);
 
-  const expected: ReadonlySet<number> = new Set([1, 2]);
+  expect(set.has(source, 1)).toBeTrue();
+  expect(set.has(source, 2)).toBeFalse();
+});
 
-  expect(set.add(source, 2)).toStrictEqual(expected);
+test("delete", () => {
+  const source = new Set([1, 2]);
+
+  expect(set.delete(source, 2)).toStrictEqual(new Set([1]));
+  expect(source).toStrictEqual(new Set([1, 2]));
 });

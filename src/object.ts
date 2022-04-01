@@ -97,14 +97,14 @@ export function defineProperty<T extends object>(
  * @param obj - Object.
  * @returns Object entries.
  */
-function getEntries<T extends object>(
+function _entries<T extends object>(
   obj: T
 ): ReadonlyArray<readonly [keyof T, T[keyof T]]> {
   // eslint-disable-next-line no-type-assertion/no-type-assertion
   return Object.entries(obj) as Array<[keyof T, T[keyof T]]>;
 }
 
-export { getEntries as entries };
+export { _entries as entries };
 
 /**
  * Checks that every object property satisfies condition.
@@ -134,7 +134,7 @@ export function every<K extends PropertyKey, V>(
   obj: ReadonlyRecord<K, V>,
   callback: (value: V, key: K) => boolean
 ): boolean {
-  return getEntries(obj).every(([key, value]) => callback(value, key));
+  return _entries(obj).every(([key, value]) => callback(value, key));
 }
 
 /**
@@ -193,7 +193,7 @@ export function filter<T extends object>(
 ): Partial<T> {
   const result: Partial<T> = {};
 
-  for (const [key, value] of getEntries(obj))
+  for (const [key, value] of _entries(obj))
     if (callback(value, key)) result[key] = value;
 
   return result;
@@ -404,7 +404,7 @@ export function some<K extends PropertyKey, V>(
   obj: ReadonlyRecord<K, V>,
   callback: (value: V, key: K) => boolean
 ): boolean {
-  return getEntries(obj).some(([key, value]) => callback(value, key));
+  return _entries(obj).some(([key, value]) => callback(value, key));
 }
 
 /**
@@ -419,7 +419,7 @@ export function sort<T extends object>(
   compareFn?: (x: Entry<T>, y: Entry<T>) => number
 ): T {
   // eslint-disable-next-line no-type-assertion/no-type-assertion
-  return fromEntries(a.sort(getEntries(obj), compareFn)) as T;
+  return fromEntries(a.sort(_entries(obj), compareFn)) as T;
 }
 
 /**

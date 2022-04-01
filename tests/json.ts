@@ -1,43 +1,56 @@
 import * as json from "@/json";
 
-test("decode", () => {
-  expect(json.decode(null)).toBeNull();
-  expect(json.decode(undefined)).toBeNull();
-  expect(json.decode("abc")).toBeNull();
-  expect(json.decode("null")).toBeNull();
-  expect(json.decode("[null]")).toStrictEqual([null]);
-  expect(json.decode('{"a":1}')).toStrictEqual({ a: 1 });
-  expect(
-    json.decode('{"dataType":"map-5702-3c89-3feb-75d4","value":[[1,"a"]]}')
-  ).toStrictEqual(new Map([[1, "a"]]));
-  expect(
-    json.decode('{"dataType":"map-5702-3c89-3feb-75d4","value":[["a",1]]}')
-  ).toStrictEqual(new Map([["a", 1]]));
-  expect(
-    json.decode('{"dataType":"set-41ef-10c9-ae1f-15e8","value":[1,"a"]}')
-  ).toStrictEqual(new Set([1, "a"]));
-  expect(
-    json.decode('{"dataType":"set-41ef-10c9-ae1f-15e8","value":["a",1]}')
-  ).toStrictEqual(new Set(["a", 1]));
+test.each([
+  { expected: null, source: null },
+  { expected: null, source: undefined },
+  { expected: null, source: "abc" },
+  { expected: null, source: "null" },
+  { expected: [null], source: "[null]" },
+  { expected: { a: 1 }, source: '{"a":1}' },
+  {
+    expected: new Map([[1, "a"]]),
+    source: '{"type":"map-5702-3c89-3feb-75d4","value":[[1,"a"]]}'
+  },
+  {
+    expected: new Map([["a", 1]]),
+    source: '{"type":"map-5702-3c89-3feb-75d4","value":[["a",1]]}'
+  },
+  {
+    expected: new Set([1, "a"]),
+    source: '{"type":"set-41ef-10c9-ae1f-15e8","value":[1,"a"]}'
+  },
+  {
+    expected: new Set(["a", 1]),
+    source: '{"type":"set-41ef-10c9-ae1f-15e8","value":["a",1]}'
+  }
+])("decode", ({ expected, source }) => {
+  expect(json.decode(source)).toStrictEqual(expected);
 });
 
-test("encode", () => {
-  expect(json.encode(null)).toBe("null");
-  expect(json.encode(undefined)).toBe("null");
-  expect(json.encode([null, undefined])).toBe("[null,null]");
-  expect(json.encode({ a: 1 })).toBe('{"a":1}');
-  expect(json.encode(new Map([[1, "a"]]))).toBe(
-    '{"dataType":"map-5702-3c89-3feb-75d4","value":[[1,"a"]]}'
-  );
-  expect(json.encode(new Map([["a", 1]]))).toBe(
-    '{"dataType":"map-5702-3c89-3feb-75d4","value":[["a",1]]}'
-  );
-  expect(json.encode(new Set([1, "a"]))).toBe(
-    '{"dataType":"set-41ef-10c9-ae1f-15e8","value":[1,"a"]}'
-  );
-  expect(json.encode(new Set(["a", 1]))).toBe(
-    '{"dataType":"set-41ef-10c9-ae1f-15e8","value":["a",1]}'
-  );
+test.each([
+  { expected: "null", source: null },
+  { expected: "null", source: undefined },
+  { expected: "[null]", source: [null] },
+  { expected: "[null]", source: [undefined] },
+  { expected: '{"a":1}', source: { a: 1 } },
+  {
+    expected: '{"type":"map-5702-3c89-3feb-75d4","value":[[1,"a"]]}',
+    source: new Map([[1, "a"]])
+  },
+  {
+    expected: '{"type":"map-5702-3c89-3feb-75d4","value":[["a",1]]}',
+    source: new Map([["a", 1]])
+  },
+  {
+    expected: '{"type":"set-41ef-10c9-ae1f-15e8","value":[1,"a"]}',
+    source: new Set([1, "a"])
+  },
+  {
+    expected: '{"type":"set-41ef-10c9-ae1f-15e8","value":["a",1]}',
+    source: new Set(["a", 1])
+  }
+])("encode", ({ expected, source }) => {
+  expect(json.encode(source)).toStrictEqual(expected);
 });
 
 test("eq", () => {

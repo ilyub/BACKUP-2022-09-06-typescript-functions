@@ -291,11 +291,11 @@ export function array(value: unknown): value is types.unknowns {
 
 not.array = notFactory(array);
 
-export const arrayU = orFactory(array, undefinedGuard);
+export const arrayU = orFactory(array, _undefined);
 
 export const arrays = factory(arrayOf, array);
 
-export const arraysU = orFactory(arrays, undefinedGuard);
+export const arraysU = orFactory(arrays, _undefined);
 
 /**
  * Checks that value type is T[].
@@ -325,11 +325,11 @@ export function boolean(value: unknown): value is boolean {
 
 not.boolean = notFactory(boolean);
 
-export const booleanU = orFactory(boolean, undefinedGuard);
+export const booleanU = orFactory(boolean, _undefined);
 
 export const booleans = factory(arrayOf, boolean);
 
-export const booleansU = orFactory(booleans, undefinedGuard);
+export const booleansU = orFactory(booleans, _undefined);
 
 /**
  * Checks that value type is T.
@@ -373,13 +373,13 @@ export function enumeration<T extends PropertyKey>(
  * @param value - Value.
  * @returns _True_ if value is _false_, _false_ otherwise.
  */
-export function falseGuard(value: unknown): value is false {
+export function _false(value: unknown): value is false {
   return value === false;
 }
 
-export { falseGuard as false };
+export { _false as false };
 
-not.false = notFactory(falseGuard);
+not.false = notFactory(_false);
 
 /**
  * Checks that value type is IndexedObject.
@@ -395,11 +395,11 @@ export function indexedObject(
 
 not.indexedObject = notFactory(indexedObject);
 
-export const indexedObjectU = orFactory(indexedObject, undefinedGuard);
+export const indexedObjectU = orFactory(indexedObject, _undefined);
 
 export const indexedObjects = factory(arrayOf, indexedObject);
 
-export const indexedObjectsU = orFactory(indexedObjects, undefinedGuard);
+export const indexedObjectsU = orFactory(indexedObjects, _undefined);
 
 /**
  * Checks that value type is IndexedObject\<T\>.
@@ -457,11 +457,11 @@ export function map(value: unknown): value is ReadonlyMap<unknown, unknown> {
 
 not.map = notFactory(map);
 
-export const mapU = orFactory(map, undefinedGuard);
+export const mapU = orFactory(map, _undefined);
 
 export const maps = factory(arrayOf, map);
 
-export const mapsU = orFactory(maps, undefinedGuard);
+export const mapsU = orFactory(maps, _undefined);
 
 /**
  * Checks that value type is Map\<K, V\>.
@@ -490,13 +490,13 @@ map.of = mapOf;
  * @param value - Value.
  * @returns _True_ if value is _null_, _false_ otherwise.
  */
-function nullGuard(value: unknown): value is null {
+function _null(value: unknown): value is null {
   return value === null;
 }
 
-export { nullGuard as null };
+export { _null as null };
 
-not.null = notFactory(nullGuard);
+not.null = notFactory(_null);
 
 /**
  * Checks that value type is NumStr.
@@ -517,11 +517,11 @@ export function numStr(value: unknown): value is types.NumStr {
 
 not.numStr = notFactory(numStr);
 
-export const numStrU = orFactory(numStr, undefinedGuard);
+export const numStrU = orFactory(numStr, _undefined);
 
 export const numStrs = factory(arrayOf, numStr);
 
-export const numStrsU = orFactory(numStrs, undefinedGuard);
+export const numStrsU = orFactory(numStrs, _undefined);
 
 /**
  * Checks that value is a number.
@@ -535,11 +535,11 @@ export function number(value: unknown): value is number {
 
 not.number = notFactory(number);
 
-export const numberU = orFactory(number, undefinedGuard);
+export const numberU = orFactory(number, _undefined);
 
 export const numbers = factory(arrayOf, number);
 
-export const numbersU = orFactory(numbers, undefinedGuard);
+export const numbersU = orFactory(numbers, _undefined);
 
 /**
  * Checks that value is an object.
@@ -553,11 +553,11 @@ export function object(value: unknown): value is object {
 
 not.object = notFactory(object);
 
-export const objectU = orFactory(object, undefinedGuard);
+export const objectU = orFactory(object, _undefined);
 
 export const objects = factory(arrayOf, object);
 
-export const objectsU = orFactory(objects, undefinedGuard);
+export const objectsU = orFactory(objects, _undefined);
 
 /**
  * Checks that value type is T.
@@ -609,11 +609,11 @@ export function set(value: unknown): value is ReadonlySet<unknown> {
 
 not.set = notFactory(set);
 
-export const setU = orFactory(set, undefinedGuard);
+export const setU = orFactory(set, _undefined);
 
 export const sets = factory(arrayOf, set);
 
-export const setsU = orFactory(sets, undefinedGuard);
+export const setsU = orFactory(sets, _undefined);
 
 /**
  * Checks that value type is Set\<T\>.
@@ -643,11 +643,11 @@ export function string(value: unknown): value is string {
 
 not.string = notFactory(string);
 
-export const stringU = orFactory(string, undefinedGuard);
+export const stringU = orFactory(string, _undefined);
 
 export const strings = factory(arrayOf, string);
 
-export const stringsU = orFactory(strings, undefinedGuard);
+export const stringsU = orFactory(strings, _undefined);
 
 /**
  * Checks that value is a symbol.
@@ -661,11 +661,11 @@ export function symbol(value: unknown): value is symbol {
 
 not.symbol = notFactory(symbol);
 
-export const symbolU = orFactory(symbol, undefinedGuard);
+export const symbolU = orFactory(symbol, _undefined);
 
 export const symbols = factory(arrayOf, symbol);
 
-export const symbolsU = orFactory(symbols, undefinedGuard);
+export const symbolsU = orFactory(symbols, _undefined);
 
 /**
  * Checks that value is _true_.
@@ -673,13 +673,13 @@ export const symbolsU = orFactory(symbols, undefinedGuard);
  * @param value - Value.
  * @returns _True_ if value is _true_, _false_ otherwise.
  */
-export function trueGuard(value: unknown): value is true {
+export function _true(value: unknown): value is true {
   return value === true;
 }
 
-export { trueGuard as true };
+export { _true as true };
 
-not.true = notFactory(trueGuard);
+not.true = notFactory(_true);
 
 /**
  * Checks that value type is [A].
@@ -808,13 +808,13 @@ tuple.factory = tupleFactory;
  * @param value - Value.
  * @returns _True_ if value is _undefined_, _false_ otherwise.
  */
-function undefinedGuard(value: unknown): value is undefined {
+function _undefined(value: unknown): value is undefined {
   return value === undefined;
 }
 
-export { undefinedGuard as undefined };
+export { _undefined as undefined };
 
-not.undefined = notFactory(undefinedGuard);
+not.undefined = notFactory(_undefined);
 
 /**
  * Checks that value is _unknown_.
@@ -828,7 +828,7 @@ export function unknown(_value: unknown): _value is unknown {
 
 export const unknowns = factory(arrayOf, unknown);
 
-export const unknownsU = orFactory(unknowns, undefinedGuard);
+export const unknownsU = orFactory(unknowns, _undefined);
 
 /*
 |*******************************************************************************

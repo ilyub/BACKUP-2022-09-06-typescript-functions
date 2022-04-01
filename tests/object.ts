@@ -131,9 +131,9 @@ test("hasOwnProp", () => {
   }
 
   {
-    const symbol1 = Symbol("SampleSymbol1");
+    const symbol1 = Symbol("TestSymbol1");
 
-    const symbol2 = Symbol("SampleSymbol2");
+    const symbol2 = Symbol("TestSymbol2");
 
     expect(o.hasOwnProp(symbol1, { [symbol1]: 1 })).toBeTrue();
     expect(o.hasOwnProp(symbol1, { [symbol1]: undefined })).toBeTrue();
@@ -223,7 +223,7 @@ test("removeUndefinedKeys", () => {
 });
 
 test("size", () => {
-  const symbol = Symbol("SampleSymbol");
+  const symbol = Symbol("TestSymbol");
 
   const obj = {
     a: 1,

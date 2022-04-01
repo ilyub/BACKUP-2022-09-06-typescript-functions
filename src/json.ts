@@ -37,8 +37,8 @@ export function encode(source: unknown): string {
 /**
  * Compares two values as JSON strings.
  *
- * @param x - Value.
- * @param y - Value.
+ * @param x - Value 1.
+ * @param y - Value 2.
  * @returns _True_ if two values are not equal, _false_ otherwise.
  */
 export function eq(x: unknown, y: unknown): boolean {
@@ -48,8 +48,8 @@ export function eq(x: unknown, y: unknown): boolean {
 /**
  * Compares two values as JSON strings.
  *
- * @param x - Value.
- * @param y - Value.
+ * @param x - Value 1.
+ * @param y - Value 2.
  * @returns _True_ if two values are not equal, _false_ otherwise.
  */
 export function neq(x: unknown, y: unknown): boolean {
@@ -63,21 +63,21 @@ export function neq(x: unknown, y: unknown): boolean {
 |*/
 
 interface CustomData {
-  readonly dataType: DataType;
+  readonly type: Type;
   readonly value: unknown;
 }
 
-type DataType = "map-5702-3c89-3feb-75d4" | "set-41ef-10c9-ae1f-15e8";
+type Type = "map-5702-3c89-3feb-75d4" | "set-41ef-10c9-ae1f-15e8";
 
-const DataTypeVO = createValidationObject<DataType>({
+const TypeVO = createValidationObject<Type>({
   "map-5702-3c89-3feb-75d4": "map-5702-3c89-3feb-75d4",
   "set-41ef-10c9-ae1f-15e8": "set-41ef-10c9-ae1f-15e8"
 });
 
-const isDataType = is.factory(is.enumeration, DataTypeVO);
+const isType = is.factory(is.enumeration, TypeVO);
 
 const isCustomData = is.object.of.factory<CustomData>(
-  { dataType: isDataType, value: is.unknown },
+  { type: isType, value: is.unknown },
   {}
 );
 
@@ -85,7 +85,7 @@ const isMapEntry = is.tuple.factory(is.unknown, is.unknown);
 
 const isMapValue = is.factory(is.array.of, isMapEntry);
 
-const isSetValue = is.factory(is.array);
+const isSetValue = is.array;
 
 /**
  * JSON replacer.
@@ -98,17 +98,11 @@ function replacer(_key: unknown, value: unknown): unknown {
   // eslint-disable-next-line unicorn/no-null
   if (is.empty(value)) return null;
 
-  if (value instanceof Map)
-    return {
-      dataType: "map-5702-3c89-3feb-75d4",
-      value: a.fromIterable(value)
-    };
+  if (is.map(value))
+    return { type: "map-5702-3c89-3feb-75d4", value: a.fromIterable(value) };
 
-  if (value instanceof Set)
-    return {
-      dataType: "set-41ef-10c9-ae1f-15e8",
-      value: a.fromIterable(value)
-    };
+  if (is.set(value))
+    return { type: "set-41ef-10c9-ae1f-15e8", value: a.fromIterable(value) };
 
   return value;
 }
@@ -125,7 +119,7 @@ function reviver(_key: unknown, value: unknown): unknown {
   if (is.empty(value)) return null;
 
   if (isCustomData(value))
-    switch (value.dataType) {
+    switch (value.type) {
       case "map-5702-3c89-3feb-75d4":
         assert.byGuard(value.value, isMapValue);
 

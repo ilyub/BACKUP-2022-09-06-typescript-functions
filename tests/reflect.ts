@@ -1,24 +1,23 @@
 import * as reflect from "@/reflect";
 
-const mk1 = Symbol("SampleMetadataKey1");
+const mk1 = Symbol("TestMetadataKey1");
 
-const mk2 = Symbol("SampleMetadataKey2");
+const mk2 = Symbol("TestMetadataKey2");
 
-const mk3 = Symbol("SampleMetadataKey3");
+const mk3 = Symbol("TestMetadataKey3");
 
-const pk1 = Symbol("SamplePropertyKey1");
+const pk1 = Symbol("TestPropertyKey1");
 
 test("apply", () => {
   expect(reflect.apply(() => true, undefined, [])).toBeTrue();
 });
 
 test("construct", () => {
-  class C {
-    public value = 1;
-  }
+  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+  class TestClass {}
 
-  expect(reflect.construct(C, [])).toStrictEqual(new C());
-  expect(reflect.construct(C, [], C)).toStrictEqual(new C());
+  expect(reflect.construct(TestClass, [])).toBeInstanceOf(TestClass);
+  expect(reflect.construct(TestClass, [], TestClass)).toBeInstanceOf(TestClass);
 });
 
 test("defineMetadata", () => {
@@ -61,9 +60,8 @@ test("get", () => {
 });
 
 test("getMetadata", () => {
-  class TestClass {
-    public value = 1;
-  }
+  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+  class TestClass {}
 
   const obj = new TestClass();
 
@@ -83,9 +81,8 @@ test("getMetadata", () => {
 });
 
 test("getMetadataKey", () => {
-  class TestClass {
-    public value = 1;
-  }
+  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+  class TestClass {}
 
   const obj = new TestClass();
 
@@ -105,9 +102,8 @@ test("getMetadataKey", () => {
 });
 
 test("getOwnMetadata", () => {
-  class TestClass {
-    public value = 1;
-  }
+  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+  class TestClass {}
 
   const obj = new TestClass();
 
@@ -127,9 +123,8 @@ test("getOwnMetadata", () => {
 });
 
 test("getOwnMetadataKey", () => {
-  class TestClass {
-    public value = 1;
-  }
+  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+  class TestClass {}
 
   const obj = new TestClass();
 
@@ -149,9 +144,8 @@ test("getOwnMetadataKey", () => {
 });
 
 test("hasMetadata", () => {
-  class TestClass {
-    public value = 1;
-  }
+  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+  class TestClass {}
 
   const obj = new TestClass();
 
@@ -173,9 +167,8 @@ test("hasMetadata", () => {
 });
 
 test("hasMetadataKey", () => {
-  class TestClass {
-    public value = 1;
-  }
+  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+  class TestClass {}
 
   const obj = new TestClass();
 
@@ -197,9 +190,8 @@ test("hasMetadataKey", () => {
 });
 
 test("hasOwnMetadata", () => {
-  class TestClass {
-    public value = 1;
-  }
+  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+  class TestClass {}
 
   const obj = new TestClass();
 
@@ -221,9 +213,8 @@ test("hasOwnMetadata", () => {
 });
 
 test("hasOwnMetadataKey", () => {
-  class TestClass {
-    public value = 1;
-  }
+  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+  class TestClass {}
 
   const obj = new TestClass();
 

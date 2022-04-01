@@ -1,22 +1,11 @@
 /**
- * Checks if map has value.
- *
- * @param map - Map.
- * @param key - Key.
- * @returns _True_ if map has value, _false_ otherwise.
- */
-export function has(map: ReadonlyMap<unknown, unknown>, key: unknown): boolean {
-  return map.has(key);
-}
-
-/**
  * Removes key.
  *
  * @param map - Map.
  * @param key - Key.
  * @returns Map with key removed.
  */
-export function mapDelete<K, V>(
+export function _delete<K, V>(
   map: ReadonlyMap<K, V>,
   key: K
 ): ReadonlyMap<K, V> {
@@ -27,7 +16,18 @@ export function mapDelete<K, V>(
   return result;
 }
 
-export { mapDelete as delete };
+export { _delete as delete };
+
+/**
+ * Checks that map has key.
+ *
+ * @param map - Map.
+ * @param key - Key.
+ * @returns _True_ if map has key, _false_ otherwise.
+ */
+export function has(map: ReadonlyMap<unknown, unknown>, key: unknown): boolean {
+  return map.has(key);
+}
 
 /**
  * Sets key to value.
