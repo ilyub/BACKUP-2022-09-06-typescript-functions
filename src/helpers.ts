@@ -18,13 +18,15 @@ export interface FacadeOwnMethods<I> {
   readonly setImplementation: (implementation: I) => void;
 }
 
+export type ProxyHandlerAction = "doDefault" | "throw";
+
 export type SafeAccess<
   T extends object,
   W extends string & keyof T,
   R extends string & keyof T
 > = Join2<{ [K in W]: T[K] }, { readonly [K in R]: T[K] }>;
 
-export declare type SafeAccessGuards<T, W extends keyof T> = {
+export declare type SafeAccessGuards<T, W extends string & keyof T> = {
   readonly [K in W]: is.Guard<T[K]>;
 };
 
@@ -41,53 +43,52 @@ export function createFacade<I extends object, E = unknown>(
 ): Facade<I, E> {
   let _implementation: I | undefined;
 
-  const facadeOwnMethods: FacadeOwnMethods<I> = {
+  const facadeOwn: E & FacadeOwnMethods<I> = {
     setImplementation(value: I) {
       _implementation = value;
-    }
+    },
+    ...extension
   };
-
-  const defaultFacade = { ...extension, ...facadeOwnMethods };
 
   const proxy = new Proxy(
     fn.noop,
     wrapProxyHandler("createFacade", "throw", {
       apply(_target, thisArg, args: unknowns) {
-        return reflect.apply(implementation(), thisArg, args);
+        return reflect.apply(targetFn(), thisArg, args);
       },
       get(_target, key) {
-        return reflect.get(facade(key), key);
+        return reflect.get(target(key), key);
       },
       getOwnPropertyDescriptor(_target, key) {
-        return Object.getOwnPropertyDescriptor(facade(key), key);
+        return reflect.getOwnPropertyDescriptor(target(key), key);
       },
       has(_target, key) {
-        return reflect.has(facade(key), key);
+        return reflect.has(target(key), key);
       },
       isExtensible() {
-        return Object.isExtensible(facade());
+        return reflect.isExtensible(target());
       },
       ownKeys() {
-        return reflect.ownKeys(facade());
+        return reflect.ownKeys(target());
       },
       set(_target, key, value) {
-        return reflect.set(facade(key), key, value);
+        return reflect.set(target(key), key, value);
       }
     })
   );
 
   // eslint-disable-next-line no-type-assertion/no-type-assertion
-  return proxy as unknown as Facade<I, E>;
+  return proxy as Facade<I, E>;
 
-  function facade(key?: PropertyKey): object {
-    if (is.not.empty(key) && key in defaultFacade) return defaultFacade;
+  function target(key?: PropertyKey): object {
+    if (is.not.empty(key) && key in facadeOwn) return facadeOwn;
 
     assert.not.empty(_implementation, `Missing facade implementation: ${name}`);
 
     return _implementation;
   }
 
-  function implementation(): Function {
+  function targetFn(): Function {
     assert.callable(_implementation, `Facade is not callable: ${name}`);
 
     return _implementation;
@@ -95,7 +96,7 @@ export function createFacade<I extends object, E = unknown>(
 }
 
 /**
- * Delays resource generation until demanded.
+ * Generates resource on demand.
  *
  * @param generator - Resource generator.
  * @returns Resource.
@@ -110,7 +111,7 @@ export function onDemand<T extends object>(generator: () => T): T {
         return reflect.get(obj(), key);
       },
       getOwnPropertyDescriptor(_target, key) {
-        return Object.getOwnPropertyDescriptor(obj(), key);
+        return reflect.getOwnPropertyDescriptor(obj(), key);
       },
       has(_target, key) {
         return reflect.has(obj(), key);
@@ -119,7 +120,7 @@ export function onDemand<T extends object>(generator: () => T): T {
         return reflect.isExtensible(obj());
       },
       ownKeys() {
-        return Object.keys(obj());
+        return reflect.ownKeys(obj());
       },
       set(_target, key, value) {
         reflect.set(obj(), key, value);
@@ -140,13 +141,13 @@ export function onDemand<T extends object>(generator: () => T): T {
 }
 
 /**
- * Defines source type.
+ * Defines value type.
  *
- * @param source - Source.
- * @returns Source.
+ * @param value - Value.
+ * @returns Value.
  */
-export function typedef<T>(source: T): T {
-  return source;
+export function typedef<T>(value: T): T {
+  return value;
 }
 
 /**
@@ -166,11 +167,11 @@ export function safeAccess<
   guards: SafeAccessGuards<T, W>,
   readonlyKeys: readonly R[] = []
 ): SafeAccess<T, W, R> {
-  const guardsMap: Map<PropertyKey, is.Guard> = new Map(Object.entries(guards));
+  const guardsMap = new Map<PropertyKey, is.Guard>(o.entries(guards));
 
   const writableKeys = o.keys(guards);
 
-  const keys = [...readonlyKeys, ...writableKeys];
+  const keys = [...writableKeys, ...readonlyKeys];
 
   const keysSet = new Set<PropertyKey>(keys);
 
@@ -200,9 +201,11 @@ export function safeAccess<
       set(target, key, value) {
         const guard = guardsMap.get(key);
 
-        if (guard)
+        if (guard) {
           if (guard(value)) return reflect.set(target, key, value);
-          else throw new Error(`Type check failed: ${cast.string(key)}`);
+
+          throw new Error(`Type check failed: ${cast.string(key)}`);
+        }
 
         throw new Error(`Write access denied: ${cast.string(key)}`);
       }
@@ -231,7 +234,7 @@ export async function wait(timeout: number): Promise<void> {
  */
 export function wrapProxyHandler<T extends object>(
   id: string,
-  action: "doDefault" | "throw",
+  action: ProxyHandlerAction,
   handler: Readonly<ProxyHandler<T>>
 ): ProxyHandler<T> {
   switch (action) {
