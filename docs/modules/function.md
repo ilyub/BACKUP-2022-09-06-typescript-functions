@@ -10,39 +10,12 @@
 
 ### Functions
 
-- [doNotRunParallel](function.md#donotrunparallel)
 - [identity](function.md#identity)
 - [noop](function.md#noop)
 - [pipe](function.md#pipe)
 - [run](function.md#run)
 
 ## Functions
-
-### doNotRunParallel
-
-▸ **doNotRunParallel**<`T`\>(`async`): [`Async`](../interfaces/types_core.Async.md)<`void`, `T`\>
-
-Prevents parallel running.
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `unknown`[] = `never`[] |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `async` | [`Async`](../interfaces/types_core.Async.md)<`void`, `T`\> | Async function. |
-
-#### Returns
-
-[`Async`](../interfaces/types_core.Async.md)<`void`, `T`\>
-
-Wrapped async function.
-
-___
 
 ### identity
 
@@ -112,7 +85,7 @@ Applies callbacks to the value.
 
 `C`
 
-The value returned by callbacks sequence.
+The value returned by callback sequence.
 
 ▸ **pipe**<`A`, `B`, `C`, `D`\>(`value`, `callback1`, `callback2`, `callback3`): `D`
 
@@ -140,7 +113,7 @@ Applies callbacks to the value.
 
 `D`
 
-The value returned by callbacks sequence.
+The value returned by callback sequence.
 
 ___
 
@@ -160,7 +133,7 @@ Executes callback.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `callback` | [`Sync`](../interfaces/types_core.Sync.md)<`T`, [`emptyArray`](types_core.md#emptyarray)\> | Callback. |
+| `callback` | [`Sync`](../interfaces/types_function.Sync.md)<`T`, [`nevers`](types_core.md#nevers)\> | Callback. |
 
 #### Returns
 
@@ -182,7 +155,7 @@ Executes promise or async function.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `promiseAsync` | [`PromiseAsync`](types_core.md#promiseasync)<`T`\> | Promise or async function. |
+| `promiseAsync` | [`AsyncPromise`](types_function.md#asyncpromise)<`T`, [`nevers`](types_core.md#nevers)\> | Promise or async function. |
 
 #### Returns
 

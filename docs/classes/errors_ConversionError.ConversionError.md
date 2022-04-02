@@ -18,7 +18,9 @@
 
 ### Properties
 
+- [message](errors_ConversionError.ConversionError.md#message)
 - [name](errors_ConversionError.ConversionError.md#name)
+- [stack](errors_ConversionError.ConversionError.md#stack)
 
 ## Constructors
 
@@ -40,6 +42,16 @@ Error.constructor
 
 ## Properties
 
+### message
+
+• **message**: `string`
+
+#### Inherited from
+
+Error.message
+
+___
+
 ### name
 
 • `Readonly` **name**: ``"ConversionError"``
@@ -47,3 +59,13 @@ Error.constructor
 #### Overrides
 
 Error.name
+
+___
+
+### stack
+
+• `Optional` **stack**: `string`
+
+#### Inherited from
+
+Error.stack

@@ -4,6 +4,13 @@
 
 ## Table of contents
 
+### Type aliases
+
+- [ArrayMap](arrayMap.md#arraymap)
+- [ArrayMap2](arrayMap.md#arraymap2)
+- [WritableArrayMap](arrayMap.md#writablearraymap)
+- [WritableArrayMap2](arrayMap.md#writablearraymap2)
+
 ### Functions
 
 - [get](arrayMap.md#get)
@@ -13,13 +20,67 @@
 - [unshift](arrayMap.md#unshift)
 - [unshift2](arrayMap.md#unshift2)
 
+## Type aliases
+
+### ArrayMap
+
+Ƭ **ArrayMap**<`K`, `T`\>: `ReadonlyMap`<`K`, readonly `T`[]\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `T` | `T` |
+
+___
+
+### ArrayMap2
+
+Ƭ **ArrayMap2**<`K`, `L`, `T`\>: `ReadonlyMap`<`K`, `ReadonlyMap`<`L`, readonly `T`[]\>\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `L` | extends `PropertyKey` |
+| `T` | `T` |
+
+___
+
+### WritableArrayMap
+
+Ƭ **WritableArrayMap**<`K`, `T`\>: `Map`<`K`, `T`[]\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `T` | `T` |
+
+___
+
+### WritableArrayMap2
+
+Ƭ **WritableArrayMap2**<`K`, `L`, `T`\>: `Map`<`K`, `Map`<`L`, `T`[]\>\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `L` | extends `PropertyKey` |
+| `T` | `T` |
+
 ## Functions
 
 ### get
 
 ▸ **get**<`K`, `T`\>(`key`, `map`): readonly `T`[]
 
-Gets values from array map.
+Returns array from array map.
 
 #### Type parameters
 
@@ -33,13 +94,13 @@ Gets values from array map.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `key` | `K` | Key. |
-| `map` | `ReadonlyMap`<`K`, readonly `T`[]\> | Array map. |
+| `map` | [`ArrayMap`](arrayMap.md#arraymap)<`K`, `T`\> | Array map. |
 
 #### Returns
 
 readonly `T`[]
 
-Values.
+Array.
 
 ___
 
@@ -47,7 +108,7 @@ ___
 
 ▸ **get2**<`K`, `L`, `T`\>(`key1`, `key2`, `map`): readonly `T`[]
 
-Gets values from array map.
+Returns array from array map.
 
 #### Type parameters
 
@@ -63,13 +124,13 @@ Gets values from array map.
 | :------ | :------ | :------ |
 | `key1` | `K` | Key 1. |
 | `key2` | `L` | Key 2. |
-| `map` | `ReadonlyMap`<`K`, `ReadonlyMap`<`L`, readonly `T`[]\>\> | Array map. |
+| `map` | [`ArrayMap2`](arrayMap.md#arraymap2)<`K`, `L`, `T`\> | Array map. |
 
 #### Returns
 
 readonly `T`[]
 
-Values.
+Array.
 
 ___
 
@@ -92,7 +153,7 @@ Pushes value to array map.
 | :------ | :------ | :------ |
 | `key` | `K` | Key. |
 | `value` | `T` | Value. |
-| `mutableMap` | `Map`<`K`, `T`[]\> | Array map. |
+| `mutableMap` | [`WritableArrayMap`](arrayMap.md#writablearraymap)<`K`, `T`\> | Array map. |
 
 #### Returns
 
@@ -121,7 +182,7 @@ Pushes value to array map.
 | `key1` | `K` | Key 1. |
 | `key2` | `L` | Key 2. |
 | `value` | `T` | Value. |
-| `mutableMap` | `Map`<`K`, `Map`<`L`, `T`[]\>\> | Array map. |
+| `mutableMap` | [`WritableArrayMap2`](arrayMap.md#writablearraymap2)<`K`, `L`, `T`\> | Array map. |
 
 #### Returns
 
@@ -133,7 +194,7 @@ ___
 
 ▸ **unshift**<`K`, `T`\>(`key`, `value`, `mutableMap`): `void`
 
-Unshift value to array map.
+Unshifts value to array map.
 
 #### Type parameters
 
@@ -148,7 +209,7 @@ Unshift value to array map.
 | :------ | :------ | :------ |
 | `key` | `K` | Key. |
 | `value` | `T` | Value. |
-| `mutableMap` | `Map`<`K`, `T`[]\> | Array map. |
+| `mutableMap` | [`WritableArrayMap`](arrayMap.md#writablearraymap)<`K`, `T`\> | Array map. |
 
 #### Returns
 
@@ -160,7 +221,7 @@ ___
 
 ▸ **unshift2**<`K`, `L`, `T`\>(`key1`, `key2`, `value`, `mutableMap`): `void`
 
-Pushes value to array map.
+Unshifts value to array map.
 
 #### Type parameters
 
@@ -177,7 +238,7 @@ Pushes value to array map.
 | `key1` | `K` | Key 1. |
 | `key2` | `L` | Key 2. |
 | `value` | `T` | Value. |
-| `mutableMap` | `Map`<`K`, `Map`<`L`, `T`[]\>\> | Array map. |
+| `mutableMap` | [`WritableArrayMap2`](arrayMap.md#writablearraymap2)<`K`, `L`, `T`\> | Array map. |
 
 #### Returns
 

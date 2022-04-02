@@ -8,25 +8,25 @@
 
 | Name | Type |
 | :------ | :------ |
-| `K` | extends keyof `jest.Matchers`<`unknown`\> |
+| `K` | extends keyof [`Matchers`](../modules/testUtils.md#matchers) |
 
 ## Callable
 
 ### ExpectFromMatcher
 
-▸ **ExpectFromMatcher**(`got`, ...`args`): `ReturnType`<`Matchers`<`unknown`, {}\>[`K`]\> extends `Promise`<`unknown`\> ? `Promise`<[`ExpectReturnType`](testUtils.ExpectReturnType.md)\> : [`ExpectReturnType`](testUtils.ExpectReturnType.md)
+▸ **ExpectFromMatcher**(`got`, ...`args`): `ReturnType`<[`Matcher`](../modules/testUtils.md#matcher)<`K`\>\> extends `Promise`<`unknown`\> ? `Promise`<[`ExpectReturnType`](testUtils.ExpectReturnType.md)\> : [`ExpectReturnType`](testUtils.ExpectReturnType.md)
 
-Converts matcher function to expect function.
+Expect function.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `got` | `unknown` | Got value. |
-| `...args` | `Parameters`<`Matchers`<`unknown`, {}\>[`K`]\> | Args. |
+| `...args` | `Parameters`<[`Matcher`](../modules/testUtils.md#matcher)<`K`\>\> | Arguments. |
 
 #### Returns
 
-`ReturnType`<`Matchers`<`unknown`, {}\>[`K`]\> extends `Promise`<`unknown`\> ? `Promise`<[`ExpectReturnType`](testUtils.ExpectReturnType.md)\> : [`ExpectReturnType`](testUtils.ExpectReturnType.md)
+`ReturnType`<[`Matcher`](../modules/testUtils.md#matcher)<`K`\>\> extends `Promise`<`unknown`\> ? `Promise`<[`ExpectReturnType`](testUtils.ExpectReturnType.md)\> : [`ExpectReturnType`](testUtils.ExpectReturnType.md)
 
 Result.

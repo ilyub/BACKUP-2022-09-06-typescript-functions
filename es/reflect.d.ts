@@ -1,14 +1,14 @@
 import "reflect-metadata";
 export declare type MetadataKey = string | symbol;
 /**
- * Typed version of Reflect.construct.
+ * Typed version of Reflect.apply.
  *
  * @param target - Target function.
  * @param thisArg - This argument.
  * @param args - Arguments.
  * @returns Function execution result.
  */
-export declare function apply(target: Function, thisArg: unknown, args: ArrayLike<unknown>): unknown;
+export declare const apply: (target: Function, thisArg: unknown, args: ArrayLike<unknown>) => unknown;
 /**
  * Typed version of Reflect.construct.
  *
@@ -17,7 +17,7 @@ export declare function apply(target: Function, thisArg: unknown, args: ArrayLik
  * @param newTarget - New target function.
  * @returns Constructed object.
  */
-export declare function construct(target: Function, args: ArrayLike<unknown>, newTarget?: Function): unknown;
+export declare const construct: (target: Function, args: ArrayLike<unknown>, newTarget?: Function) => unknown;
 /**
  * Typed version of Reflect.defineMetadata.
  *
@@ -32,7 +32,7 @@ export declare function defineMetadata(metadataKey: MetadataKey, metadataValue: 
  * @param metadataKey - Metadata key.
  * @param metadataValue - Metadata value.
  * @param target - Target object.
- * @param key - Property name.
+ * @param key - Property key.
  */
 export declare function defineMetadataKey(metadataKey: MetadataKey, metadataValue: unknown, target: object, key: MetadataKey): void;
 export declare const defineProperty: typeof Reflect.defineProperty;
@@ -41,10 +41,10 @@ export declare const deleteProperty: typeof Reflect.deleteProperty;
  * Typed version of Reflect.get.
  *
  * @param target - Target object.
- * @param key - Property name.
+ * @param key - Property key.
  * @returns Property value.
  */
-export declare function get(target: object, key: PropertyKey): unknown;
+export declare const get: (target: object, key: PropertyKey) => unknown;
 /**
  * Typed version of Reflect.getMetadata.
  *
@@ -58,7 +58,7 @@ export declare function getMetadata(metadataKey: MetadataKey, target: object): u
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
- * @param key - Property name.
+ * @param key - Property key.
  * @returns Metadata value.
  */
 export declare function getMetadataKey(metadataKey: MetadataKey, target: object, key: MetadataKey): unknown;
@@ -75,7 +75,7 @@ export declare function getOwnMetadata(metadataKey: MetadataKey, target: object)
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
- * @param key - Property name.
+ * @param key - Property key.
  * @returns Metadata value.
  */
 export declare function getOwnMetadataKey(metadataKey: MetadataKey, target: object, key: MetadataKey): unknown;
@@ -95,12 +95,12 @@ export declare function hasMetadata(metadataKey: MetadataKey, target: object): b
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
- * @param key - Property name.
+ * @param key - Property key.
  * @returns _True_ if key exists, _false_ otherwise.
  */
 export declare function hasMetadataKey(metadataKey: MetadataKey, target: object, key: MetadataKey): boolean;
 /**
- * Typed version of Reflect.hasMetadata.
+ * Typed version of Reflect.hasOwnMetadata.
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
@@ -108,11 +108,11 @@ export declare function hasMetadataKey(metadataKey: MetadataKey, target: object,
  */
 export declare function hasOwnMetadata(metadataKey: MetadataKey, target: object): boolean;
 /**
- * Typed version of Reflect.hasMetadata.
+ * Typed version of Reflect.hasOwnMetadata.
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
- * @param key - Property name.
+ * @param key - Property key.
  * @returns _True_ if key exists, _false_ otherwise.
  */
 export declare function hasOwnMetadataKey(metadataKey: MetadataKey, target: object, key: MetadataKey): boolean;

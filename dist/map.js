@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.set = exports.delete = exports.mapDelete = void 0;
+exports.set = exports.delete = exports._delete = void 0;
 /**
  * Removes key.
  *
@@ -8,13 +8,13 @@ exports.set = exports.delete = exports.mapDelete = void 0;
  * @param key - Key.
  * @returns Map with key removed.
  */
-function mapDelete(map, key) {
+function _delete(map, key) {
     const result = new Map(map);
     result.delete(key);
     return result;
 }
-exports.mapDelete = mapDelete;
-exports.delete = mapDelete;
+exports._delete = _delete;
+exports.delete = _delete;
 /**
  * Sets key to value.
  *

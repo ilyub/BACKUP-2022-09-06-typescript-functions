@@ -55,6 +55,13 @@ export declare function floorStep(value: number, step: number, from?: number): n
  */
 export declare function limit(value: number, min: number, max: number): number;
 /**
+ * Calculates root-mean-square deviation.
+ *
+ * @param values - Values.
+ * @returns Root-mean-square deviation.
+ */
+export declare function rootMeanSquareDeviation(...values: number[]): number;
+/**
  * Rounds number to a given precision.
  *
  * @param value - Value.

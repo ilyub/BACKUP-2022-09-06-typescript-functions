@@ -14,7 +14,7 @@
 
 ### of
 
-▸ **of**<`T`\>(`value`, `guard`, `error?`): asserts value is Readonly<IndexedObject<T\>\>
+▸ **of**<`T`\>(`value`, `guard`, `error?`): asserts value is Readonly<TypedObject<PropertyKey, T\>\>
 
 Asserts that value type is IndexedObject\<T\>.
 
@@ -30,8 +30,8 @@ Asserts that value type is IndexedObject\<T\>.
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
 | `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error to be thrown. |
+| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
 
 #### Returns
 
-asserts value is Readonly<IndexedObject<T\>\>
+asserts value is Readonly<TypedObject<PropertyKey, T\>\>

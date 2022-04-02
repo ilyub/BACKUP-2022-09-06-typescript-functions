@@ -1,64 +1,52 @@
 "use strict";
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[object] */
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.values = exports.unfreezeDeep = exports.unfreeze = exports.sort = exports.some = exports.size = exports.removeUndefinedKeys = exports.omit = exports.merge = exports.map = exports.keys = exports.hasOwnProp = exports.getPrototypeOf = exports.fromEntries = exports.freezeDeep = exports.freeze = exports.filter = exports.extend = exports.every = exports.entries = exports.defineProperty = exports.clone = exports.assign = void 0;
+exports.values = exports.unfreeze = exports.sort = exports.some = exports.size = exports.removeUndefinedKeys = exports.omit = exports.merge = exports.map = exports.keys = exports.hasOwnProp = exports.getPrototypeOf = exports.fromEntries = exports.freeze = exports.filter = exports.extend = exports.every = exports.entries = exports.defineProperty = exports.clone = exports.assign = void 0;
 const tslib_1 = require("tslib");
 const a = tslib_1.__importStar(require("./array"));
 const is = tslib_1.__importStar(require("./guards"));
-function assign(mutableTarget, ...sources) {
-    return Object.assign(mutableTarget, ...sources);
-}
-exports.assign = assign;
+exports.assign = Object.assign;
 /**
- * Creates object copy.
+ * Clones object.
  *
  * @param obj - Object.
- * @returns Object copy.
+ * @returns New object.
  */
 function clone(obj) {
     return Object.assign({}, obj);
 }
 exports.clone = clone;
-/**
- * Typed version of Object.defineProperty.
- *
- * @param obj - Object.
- * @param key - Property name.
- * @param descriptor - Descriptor.
- */
-function defineProperty(obj, key, descriptor) {
-    Object.defineProperty(obj, key, descriptor);
-}
-exports.defineProperty = defineProperty;
+exports.defineProperty = Object.defineProperty.bind(Object);
 /**
  * Typed version of Object.entries.
  *
  * @param obj - Object.
  * @returns Object entries.
  */
-function getEntries(obj) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
-    return Object.entries(obj);
-}
-exports.entries = getEntries;
+const _entries = Object.entries;
+exports.entries = _entries;
+/**
+ * Checks that every object property satisfies condition.
+ *
+ * @param obj - Object.
+ * @param callback - Callback.
+ * @returns _True_ if every object property satisfies condition, _false_ otherwise.
+ */
 function every(obj, callback) {
-    return getEntries(obj).every(([key, value]) => callback(value, key));
+    return _entries(obj).every(([key, value]) => callback(value, key));
 }
 exports.every = every;
-function extend(target, ...sources) {
-    return Object.assign(target, ...sources);
-}
-exports.extend = extend;
+exports.extend = Object.assign;
 /**
  * Filters object by callback.
  *
  * @param obj - Object.
  * @param callback - Callback.
- * @returns New filtered object.
+ * @returns New object.
  */
 function filter(obj, callback) {
     const result = {};
-    for (const [key, value] of getEntries(obj))
+    for (const [key, value] of _entries(obj))
         if (callback(value, key))
             result[key] = value;
     return result;
@@ -68,24 +56,12 @@ exports.filter = filter;
  * Marks object as readonly.
  *
  * @param obj - Object.
- * @returns Object marked as readonly.
+ * @returns Object.
  */
 function freeze(obj) {
     return obj;
 }
 exports.freeze = freeze;
-/**
- * Marks object as deep readonly.
- *
- * @param obj - Object.
- * @returns Object marked as deep readonly.
- */
-function freezeDeep(obj) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
-    return obj;
-}
-exports.freezeDeep = freezeDeep;
-freeze.deep = freezeDeep;
 /**
  * Creates object from entries.
  *
@@ -100,13 +76,24 @@ function fromEntries(entries) {
     return result;
 }
 exports.fromEntries = fromEntries;
-// eslint-disable-next-line no-type-assertion/no-type-assertion
-fromEntries.exhaustive = fromEntries;
 /**
- * Typed version of Object.getPrototypeOf.
+ * Creates object from entries.
+ *
+ * @param entries - Entries.
+ * @returns Object.
+ */
+fromEntries.exhaustive = (entries) => {
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
+    const result = {};
+    for (const entry of entries)
+        result[entry[0]] = entry[1];
+    return result;
+};
+/**
+ * Returns object prototype.
  *
  * @param obj - Object.
- * @returns Prototype if available, _undefined_ otherwise.
+ * @returns Object prototype if available, _undefined_ otherwise.
  */
 function getPrototypeOf(obj) {
     const prototype = Object.getPrototypeOf(obj);
@@ -114,9 +101,9 @@ function getPrototypeOf(obj) {
 }
 exports.getPrototypeOf = getPrototypeOf;
 /**
- * Alias of Object.prototype.hasOwnProperty.
+ * Checks that object has property.
  *
- * @param key - Property name.
+ * @param key - Property key.
  * @param obj - Object.
  * @returns _True_ if object has property, _false_ otherwise.
  */
@@ -124,17 +111,7 @@ function hasOwnProp(key, obj) {
     return Object.prototype.hasOwnProperty.call(obj, key);
 }
 exports.hasOwnProp = hasOwnProp;
-/**
- * Typed version of Object.keys.
- *
- * @param obj - Object.
- * @returns Object keys.
- */
-function keys(obj) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
-    return Object.keys(obj);
-}
-exports.keys = keys;
+exports.keys = Object.keys;
 /**
  * Applies callback to each property.
  *
@@ -143,49 +120,55 @@ exports.keys = keys;
  * @returns New object.
  */
 function map(obj, callback) {
-    return fromEntries.exhaustive(Object.entries(obj).map(([key, value]) => [
-        key,
-        callback(value, key)
-    ]));
+    return fromEntries.exhaustive(_entries(obj).map(([key, value]) => [key, callback(value, key)]));
 }
 exports.map = map;
 /**
- * Merges several objects.
+ * Merges objects.
  * If more than one object has the same key, respective values are combined into array.
  *
  * @param objects - Objects.
  * @returns Merged object.
  */
 function merge(...objects) {
-    const pool = {};
+    const result = new Map();
     for (const obj of objects)
         for (const [key, value] of Object.entries(obj)) {
-            const valuesByKey = pool[key];
-            if (valuesByKey)
-                valuesByKey.push(value);
+            const arr = result.get(key);
+            if (arr)
+                arr.push(value);
             else
-                pool[key] = [value];
+                result.set(key, [value]);
         }
-    return fromEntries(Object.entries(pool).map(([key, valuesByKey]) => [
+    return fromEntries(a
+        .fromIterable(result.entries())
+        .map(([key, arr]) => [
         key,
-        valuesByKey.length === 1 ? valuesByKey[0] : valuesByKey
+        arr.length === 1 ? arr[0] : arr
     ]));
 }
 exports.merge = merge;
 /**
- * Omits keys from object.
+ * Removes keys from object.
  *
  * @param obj - Object.
- * @param exclude - Keys to exclude.
+ * @param exclude - Keys to remove.
  * @returns New object with given keys omitted.
  */
 function omit(obj, ...exclude) {
-    const keysSet = new Set(exclude);
+    const excludeSet = new Set(exclude);
     // eslint-disable-next-line no-type-assertion/no-type-assertion
-    return filter(obj, (_value, key) => !keysSet.has(key));
+    return filter(obj, (_value, key) => !excludeSet.has(key));
 }
 exports.omit = omit;
+/**
+ * Removes undefined keys.
+ *
+ * @param obj - Object.
+ * @returns New object with undefined keys removed.
+ */
 function removeUndefinedKeys(obj) {
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return filter(obj, is.not.empty);
 }
 exports.removeUndefinedKeys = removeUndefinedKeys;
@@ -199,8 +182,15 @@ function size(obj) {
     return Object.keys(obj).length;
 }
 exports.size = size;
+/**
+ * Checks that some object property satisfies condition.
+ *
+ * @param obj - Object.
+ * @param callback - Callback.
+ * @returns _True_ if some object property satisfies condition, _false_ otherwise.
+ */
 function some(obj, callback) {
-    return getEntries(obj).some(([key, value]) => callback(value, key));
+    return _entries(obj).some(([key, value]) => callback(value, key));
 }
 exports.some = some;
 /**
@@ -212,40 +202,20 @@ exports.some = some;
  */
 function sort(obj, compareFn) {
     // eslint-disable-next-line no-type-assertion/no-type-assertion
-    return fromEntries(a.sort(getEntries(obj), compareFn));
+    return fromEntries(a.sort(_entries(obj), compareFn
+        ? (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
+        : undefined));
 }
 exports.sort = sort;
 /**
  * Marks object as writable.
  *
  * @param obj - Object.
- * @returns Object marked as writable.
+ * @returns Object.
  */
 function unfreeze(obj) {
     return obj;
 }
 exports.unfreeze = unfreeze;
-/**
- * Marks object as deep writable.
- *
- * @param obj - Object.
- * @returns Object marked as deep writable.
- */
-function unfreezeDeep(obj) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
-    return obj;
-}
-exports.unfreezeDeep = unfreezeDeep;
-unfreeze.deep = unfreezeDeep;
-/**
- * Typed version of Object.values.
- *
- * @param obj - Object.
- * @returns Object values.
- */
-function values(obj) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
-    return Object.values(obj);
-}
-exports.values = values;
+exports.values = Object.values;
 //# sourceMappingURL=object.js.map

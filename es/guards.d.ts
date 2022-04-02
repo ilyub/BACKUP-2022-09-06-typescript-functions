@@ -1,5 +1,9 @@
+import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
+import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
+import type { ValidationObject } from "./helpers";
 import type * as types from "./types/core";
-export interface ExclusiveGuard<T> {
+import type { Constructor } from "./types/function";
+export interface ExclusionGuard<T> {
     /**
      * Checks that value type is not T.
      *
@@ -17,8 +21,8 @@ export interface Guard<T = unknown> {
      */
     (value: unknown): value is T;
 }
-export declare type Guards<T> = {
-    readonly [K in keyof T]: Guard<T[K]>;
+export declare type Guards<T, K extends keyof T = keyof T> = {
+    readonly [L in K]-?: Guard<T[L]>;
 };
 export interface MultiArgGuard<T, A extends unknown[]> {
     /**
@@ -34,7 +38,7 @@ export interface MultiArgGuard<T, A extends unknown[]> {
  * Creates single-arg guard.
  *
  * @param guard - Multi-arg guard.
- * @param args - Rest arguments.
+ * @param args - Arguments.
  * @returns Single-arg guard.
  */
 export declare function factory<T, A extends unknown[]>(guard: MultiArgGuard<T, A>, ...args: A): Guard<T>;
@@ -108,30 +112,30 @@ export declare function andFactory<A, B, C, D>(guard1: Guard<A>, guard2: Guard<B
 export declare function not<T, V>(value: V, guard: Guard<T>): value is Exclude<V, T>;
 export declare namespace not {
     export var factory: typeof notFactory;
-    export var boolean: ExclusiveGuard<boolean>;
-    export var booleanU: ExclusiveGuard<types.booleanU>;
-    export var callable: ExclusiveGuard<Function>;
-    export var callableU: ExclusiveGuard<Function | undefined>;
-    export var empty: ExclusiveGuard<types.empty>;
-    var _a: ExclusiveGuard<null>;
-    export var numStr: ExclusiveGuard<types.NumStr>;
-    export var numStrU: ExclusiveGuard<types.NumStrU>;
-    export var number: ExclusiveGuard<number>;
-    export var numberU: ExclusiveGuard<types.numberU>;
-    export var object: ExclusiveGuard<object>;
-    export var string: ExclusiveGuard<string>;
-    export var stringU: ExclusiveGuard<types.stringU>;
-    export var symbol: ExclusiveGuard<symbol>;
-    export var undefined: ExclusiveGuard<undefined>;
-    export { _a as null };
+    export var array: ExclusionGuard<types.unknowns>;
+    export var boolean: ExclusionGuard<boolean>;
+    export var empty: ExclusionGuard<types.empty>;
+    var _a: ExclusionGuard<false>;
+    export var indexedObject: ExclusionGuard<Readonly<types.TypedObject<PropertyKey, unknown>>>;
+    export var map: ExclusionGuard<ReadonlyMap<unknown, unknown>>;
+    var _b: ExclusionGuard<null>;
+    export var numStr: ExclusionGuard<types.NumStr>;
+    export var number: ExclusionGuard<number>;
+    export var object: ExclusionGuard<object>;
+    export var set: ExclusionGuard<ReadonlySet<unknown>>;
+    export var string: ExclusionGuard<string>;
+    export var symbol: ExclusionGuard<symbol>;
+    var _c: ExclusionGuard<true>;
+    export var undefined: ExclusionGuard<undefined>;
+    export { _a as false, _b as null, _c as true };
 }
 /**
- * Creates guard for not T type.
+ * Creates guard for type not T.
  *
  * @param guard - Guard for type T.
- * @returns Guard for not T type.
+ * @returns Guard for type not T.
  */
-export declare function notFactory<T>(guard: Guard<T>): ExclusiveGuard<T>;
+export declare function notFactory<T>(guard: Guard<T>): ExclusionGuard<T>;
 /**
  * Checks that value type is A | B.
  *
@@ -220,15 +224,9 @@ export declare function arrayOf<T>(value: unknown, guard: Guard<T>): value is re
  * @returns _True_ if value is a boolean, _false_ otherwise.
  */
 export declare function boolean(value: unknown): value is boolean;
+export declare const booleanU: Guard<boolean | undefined>;
 export declare const booleans: Guard<readonly boolean[]>;
 export declare const booleansU: Guard<readonly boolean[] | undefined>;
-/**
- * Checks that value type is booleanU.
- *
- * @param value - Value.
- * @returns _True_ if value type is booleanU, _false_ otherwise.
- */
-export declare function booleanU(value: unknown): value is types.booleanU;
 /**
  * Checks that value type is T.
  *
@@ -236,13 +234,6 @@ export declare function booleanU(value: unknown): value is types.booleanU;
  * @returns _True_ if value type is T, _false_ otherwise.
  */
 export declare function callable<T extends Function>(value: unknown): value is T;
-/**
- * Checks that value type is T | undefined.
- *
- * @param value - Value.
- * @returns _True_ if value type is T | undefined, _false_ otherwise.
- */
-export declare function callableU<T extends Function>(value: unknown): value is T | undefined;
 /**
  * Checks that value type is empty.
  *
@@ -257,36 +248,28 @@ export declare function empty(value: unknown): value is types.empty;
  * @param vo - Validation object.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-export declare function enumeration<T extends PropertyKey>(value: unknown, vo: types.ValidationObject<T>): value is T;
-/**
- * Checks that value type is T | undefined.
- *
- * @param value - Value.
- * @param vo - Validation object.
- * @returns _True_ if value type is T | undefined, _false_ otherwise.
- */
-export declare function enumerationU<T extends PropertyKey>(value: unknown, vo: types.ValidationObject<T>): value is T | undefined;
+export declare function enumeration<T extends PropertyKey>(value: unknown, vo: ValidationObject<T>): value is T;
 /**
  * Checks that value is _false_.
  *
  * @param value - Value.
  * @returns _True_ if value is _false_, _false_ otherwise.
  */
-export declare function falseGuard(value: unknown): value is false;
-export { falseGuard as false };
+export declare function _false(value: unknown): value is false;
+export { _false as false };
 /**
  * Checks that value type is IndexedObject.
  *
  * @param value - Value.
  * @returns _True_ if value type is IndexedObject, _false_ otherwise.
  */
-export declare function indexedObject(value: unknown): value is types.ReadonlyIndexedObject;
+export declare function indexedObject(value: unknown): value is types.IndexedObject;
 export declare namespace indexedObject {
     var of: typeof indexedObjectOf;
 }
-export declare const indexedObjectU: Guard<Readonly<types.IndexedObject<unknown>> | undefined>;
-export declare const indexedObjects: Guard<readonly Readonly<types.IndexedObject<unknown>>[]>;
-export declare const indexedObjectsU: Guard<readonly Readonly<types.IndexedObject<unknown>>[] | undefined>;
+export declare const indexedObjectU: Guard<Readonly<types.TypedObject<PropertyKey, unknown>> | undefined>;
+export declare const indexedObjects: Guard<readonly Readonly<types.TypedObject<PropertyKey, unknown>>[]>;
+export declare const indexedObjectsU: Guard<readonly Readonly<types.TypedObject<PropertyKey, unknown>>[] | undefined>;
 /**
  * Checks that value type is IndexedObject\<T\>.
  *
@@ -294,7 +277,7 @@ export declare const indexedObjectsU: Guard<readonly Readonly<types.IndexedObjec
  * @param guard - Guard for type T.
  * @returns _True_ if value type is IndexedObject\<T\>, _false_ otherwise.
  */
-export declare function indexedObjectOf<T>(value: unknown, guard: Guard<T>): value is types.ReadonlyIndexedObject<T>;
+export declare function indexedObjectOf<T>(value: unknown, guard: Guard<T>): value is types.IndexedObject<T>;
 /**
  * Checks that value type is T.
  *
@@ -302,7 +285,7 @@ export declare function indexedObjectOf<T>(value: unknown, guard: Guard<T>): val
  * @param ctor - Constructor.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-export declare function instance<T>(value: unknown, ctor: types.Constructor<T>): value is T;
+export declare function instance<T>(value: unknown, ctor: Constructor<T>): value is T;
 /**
  * Checks that value type is T[].
  *
@@ -310,7 +293,20 @@ export declare function instance<T>(value: unknown, ctor: types.Constructor<T>):
  * @param ctor - Constructor.
  * @returns _True_ if value type is T[], _false_ otherwise.
  */
-export declare function instances<T>(value: unknown, ctor: types.Constructor<T>): value is readonly T[];
+export declare function instances<T>(value: unknown, ctor: Constructor<T>): value is readonly T[];
+/**
+ * Checks that value type is Map.
+ *
+ * @param value - Value.
+ * @returns _True_ if value type is Map, _false_ otherwise.
+ */
+export declare function map(value: unknown): value is ReadonlyMap<unknown, unknown>;
+export declare namespace map {
+    var of: typeof mapOf;
+}
+export declare const mapU: Guard<ReadonlyMap<unknown, unknown> | undefined>;
+export declare const maps: Guard<readonly ReadonlyMap<unknown, unknown>[]>;
+export declare const mapsU: Guard<readonly ReadonlyMap<unknown, unknown>[] | undefined>;
 /**
  * Checks that value type is Map\<K, V\>.
  *
@@ -319,15 +315,15 @@ export declare function instances<T>(value: unknown, ctor: types.Constructor<T>)
  * @param valueGuard - Value guard.
  * @returns _True_ if value type is Map\<K, V\>, _false_ otherwise.
  */
-export declare function map<K, V>(value: unknown, keyGuard: Guard<K>, valueGuard: Guard<V>): value is ReadonlyMap<K, V>;
+export declare function mapOf<K, V>(value: unknown, keyGuard: Guard<K>, valueGuard: Guard<V>): value is ReadonlyMap<K, V>;
 /**
  * Checks that value is _null_.
  *
  * @param value - Value.
  * @returns _True_ if value is _null_, _false_ otherwise.
  */
-declare function nullGuard(value: unknown): value is null;
-export { nullGuard as null };
+declare function _null(value: unknown): value is null;
+export { _null as null };
 /**
  * Checks that value type is NumStr.
  *
@@ -335,15 +331,9 @@ export { nullGuard as null };
  * @returns _True_ if value type is NumStr, _false_ otherwise.
  */
 export declare function numStr(value: unknown): value is types.NumStr;
+export declare const numStrU: Guard<types.NumStr | undefined>;
 export declare const numStrs: Guard<readonly types.NumStr[]>;
 export declare const numStrsU: Guard<readonly types.NumStr[] | undefined>;
-/**
- * Checks that value type is NumStrU.
- *
- * @param value - Value.
- * @returns _True_ if value type is NumStrU, _false_ otherwise.
- */
-export declare function numStrU(value: unknown): value is types.NumStrU;
 /**
  * Checks that value is a number.
  *
@@ -351,15 +341,9 @@ export declare function numStrU(value: unknown): value is types.NumStrU;
  * @returns _True_ if value is a number, _false_ otherwise.
  */
 export declare function number(value: unknown): value is number;
+export declare const numberU: Guard<number | undefined>;
 export declare const numbers: Guard<readonly number[]>;
 export declare const numbersU: Guard<readonly number[] | undefined>;
-/**
- * Checks that value type is numberU.
- *
- * @param value - Value.
- * @returns _True_ if value type is numberU, _false_ otherwise.
- */
-export declare function numberU(value: unknown): value is types.numberU;
 /**
  * Checks that value is an object.
  *
@@ -370,32 +354,50 @@ export declare function object(value: unknown): value is object;
 export declare namespace object {
     var of: typeof objectOf;
 }
+export declare const objectU: Guard<object | undefined>;
 export declare const objects: Guard<readonly object[]>;
 export declare const objectsU: Guard<readonly object[] | undefined>;
 /**
  * Checks that value type is T.
  *
  * @param value - Value.
- * @param requiredGuards - Guards for required properties.
- * @param optionalGuards - Guards for optional properties.
+ * @param required - Guards for required properties.
+ * @param optional - Guards for optional properties.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-export declare function objectOf<A, B>(value: unknown, requiredGuards: Guards<A>, optionalGuards: Guards<B>): value is Partial<B> & Required<A>;
+export declare function objectOf<T extends object>(value: unknown, required: Guards<T, RequiredKeys<T>>, optional: Guards<T, OptionalKeys<T>>): value is T;
+export declare namespace objectOf {
+    var factory: typeof objectOfFactory;
+}
 /**
- * Checks that value type is objectU.
+ * Creates guard for type T.
+ *
+ * @param required - Guards for required properties.
+ * @param optional - Guards for optional properties.
+ * @returns Guard for type T.
+ */
+export declare function objectOfFactory<T extends object>(required: Guards<T, RequiredKeys<T>>, optional: Guards<T, OptionalKeys<T>>): Guard<T>;
+/**
+ * Checks that value type is Set.
  *
  * @param value - Value.
- * @returns _True_ if value type is objectU, _false_ otherwise.
+ * @returns _True_ if value type is Set, _false_ otherwise.
  */
-export declare function objectU(value: unknown): value is types.objectU;
+export declare function set(value: unknown): value is ReadonlySet<unknown>;
+export declare namespace set {
+    var of: typeof setOf;
+}
+export declare const setU: Guard<ReadonlySet<unknown> | undefined>;
+export declare const sets: Guard<readonly ReadonlySet<unknown>[]>;
+export declare const setsU: Guard<readonly ReadonlySet<unknown>[] | undefined>;
 /**
- * Checks that value type is Set<T>.
+ * Checks that value type is Set\<T\>.
  *
  * @param value - Value.
  * @param guard - Guard.
- * @returns _True_ if value type is Set<T>, _false_ otherwise.
+ * @returns _True_ if value type is Set\<T\>, _false_ otherwise.
  */
-export declare function set<T>(value: unknown, guard: Guard<T>): value is ReadonlySet<T>;
+export declare function setOf<T>(value: unknown, guard: Guard<T>): value is ReadonlySet<T>;
 /**
  * Checks that value is a string.
  *
@@ -403,15 +405,9 @@ export declare function set<T>(value: unknown, guard: Guard<T>): value is Readon
  * @returns _True_ if value is a string, _false_ otherwise.
  */
 export declare function string(value: unknown): value is string;
+export declare const stringU: Guard<string | undefined>;
 export declare const strings: Guard<readonly string[]>;
 export declare const stringsU: Guard<readonly string[] | undefined>;
-/**
- * Checks that value type is stringU.
- *
- * @param value - Value.
- * @returns _True_ if value type is stringU, _false_ otherwise.
- */
-export declare function stringU(value: unknown): value is types.stringU;
 /**
  * Checks that value is a symbol.
  *
@@ -419,6 +415,7 @@ export declare function stringU(value: unknown): value is types.stringU;
  * @returns _True_ if value is a symbol, _false_ otherwise.
  */
 export declare function symbol(value: unknown): value is symbol;
+export declare const symbolU: Guard<symbol | undefined>;
 export declare const symbols: Guard<readonly symbol[]>;
 export declare const symbolsU: Guard<readonly symbol[] | undefined>;
 /**
@@ -427,8 +424,8 @@ export declare const symbolsU: Guard<readonly symbol[] | undefined>;
  * @param value - Value.
  * @returns _True_ if value is _true_, _false_ otherwise.
  */
-export declare function trueGuard(value: unknown): value is true;
-export { trueGuard as true };
+export declare function _true(value: unknown): value is true;
+export { _true as true };
 /**
  * Checks that value type is [A].
  *
@@ -510,8 +507,8 @@ export declare function tupleFactory<A, B, C, D>(guard1: Guard<A>, guard2: Guard
  * @param value - Value.
  * @returns _True_ if value is _undefined_, _false_ otherwise.
  */
-declare function undefinedGuard(value: unknown): value is undefined;
-export { undefinedGuard as undefined };
+declare function _undefined(value: unknown): value is undefined;
+export { _undefined as undefined };
 /**
  * Checks that value is _unknown_.
  *
@@ -520,4 +517,5 @@ export { undefinedGuard as undefined };
  */
 export declare function unknown(_value: unknown): _value is unknown;
 export declare const unknowns: Guard<readonly unknown[]>;
+export declare const unknownsU: Guard<readonly unknown[] | undefined>;
 //# sourceMappingURL=guards.d.ts.map

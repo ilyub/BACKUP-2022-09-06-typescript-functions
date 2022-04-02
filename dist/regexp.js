@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.slice = exports.matchAll = exports.escapeString = exports.addFlags = void 0;
+exports.matchAll = exports.escapeString = exports.addFlags = void 0;
 const tslib_1 = require("tslib");
 const a = tslib_1.__importStar(require("./array"));
-const assert = tslib_1.__importStar(require("./assertions"));
+const fn = tslib_1.__importStar(require("./function"));
 const s = tslib_1.__importStar(require("./string"));
 /**
  * Adds flag to regular expression.
@@ -37,39 +37,13 @@ exports.escapeString = escapeString;
  */
 function matchAll(str, re) {
     re = addFlags(re, "g");
-    return a.fromIterable(function* () {
+    return a.fromIterable(fn.run(function* () {
         let match = re.exec(str);
         while (match) {
             yield match;
             match = re.exec(str);
         }
-    });
+    }));
 }
 exports.matchAll = matchAll;
-/**
- * Finds substring matching regular expression.
- *
- * @param str - String.
- * @param re - Regular expression.
- * @returns Substring if found, _undefined_ otherwise.
- */
-function slice(str, re) {
-    const result = re.exec(str);
-    return result ? result[0] : undefined;
-}
-exports.slice = slice;
-/**
- * Finds substring matching regular expression.
- *
- * @param str - String.
- * @param re - Regular expression.
- * @returns Substring if found.
- * @throws AssertionError otherwise.
- */
-slice.orFail = (str, re) => {
-    const result = re.exec(str);
-    assert.not.empty(result);
-    assert.not.empty(result[0]);
-    return result[0];
-};
 //# sourceMappingURL=regexp.js.map

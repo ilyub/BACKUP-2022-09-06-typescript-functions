@@ -14,26 +14,25 @@
 
 ### of
 
-▸ **of**<`A`, `B`\>(`value`, `requiredGuards`, `optionalGuards`, `error?`): asserts value is Partial<B\> & Required<A\>
+▸ **of**<`T`\>(`value`, `requiredGuards`, `optionalGuards`, `error?`): asserts value is T
 
 Asserts that value type is T.
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `A` |
-| `B` |
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `requiredGuards` | [`Guards`](guards.md#guards)<`A`\> | Guards for required properties. |
-| `optionalGuards` | [`Guards`](guards.md#guards)<`B`\> | Guards for optional properties. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error to be thrown. |
+| `requiredGuards` | [`Guards`](guards.md#guards)<`T`, `RequiredKeys`<`T`\>\> | Guards for required properties. |
+| `optionalGuards` | [`Guards`](guards.md#guards)<`T`, `OptionalKeys`<`T`\>\> | Guards for optional properties. |
+| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
 
 #### Returns
 
-asserts value is Partial<B\> & Required<A\>
+asserts value is T

@@ -26,7 +26,7 @@
 
 ▸ `Readonly` **message**(): `string`
 
-Generates failure message.
+Returns failure message.
 
 #### Returns
 

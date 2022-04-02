@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.delete = exports.setDelete = exports.add = void 0;
+exports.delete = exports._delete = exports.add = void 0;
 /**
  * Adds value.
  *
@@ -21,11 +21,11 @@ exports.add = add;
  * @param value - Value.
  * @returns Set with value removed.
  */
-function setDelete(set, value) {
+function _delete(set, value) {
     const result = new Set(set);
     result.delete(value);
     return result;
 }
-exports.setDelete = setDelete;
-exports.delete = setDelete;
+exports._delete = _delete;
+exports.delete = _delete;
 //# sourceMappingURL=set.js.map

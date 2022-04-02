@@ -1,21 +1,18 @@
 "use strict";
-/* skylib/eslint-plugin disable @skylib/disallow-identifier[reflect] */
+/* skylib/eslint-plugin disable @skylib/disallow-identifier[functions.reflect] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.setPrototypeOf = exports.set = exports.preventExtensions = exports.ownKeys = exports.isExtensible = exports.hasOwnMetadataKey = exports.hasOwnMetadata = exports.hasMetadataKey = exports.hasMetadata = exports.has = exports.getPrototypeOf = exports.getOwnPropertyDescriptor = exports.getOwnMetadataKey = exports.getOwnMetadata = exports.getMetadataKey = exports.getMetadata = exports.get = exports.deleteProperty = exports.defineProperty = exports.defineMetadataKey = exports.defineMetadata = exports.construct = exports.apply = void 0;
 // eslint-disable-next-line import/no-unassigned-import
 require("reflect-metadata");
 /**
- * Typed version of Reflect.construct.
+ * Typed version of Reflect.apply.
  *
  * @param target - Target function.
  * @param thisArg - This argument.
  * @param args - Arguments.
  * @returns Function execution result.
  */
-function apply(target, thisArg, args) {
-    return Reflect.apply(target, thisArg, args);
-}
-exports.apply = apply;
+exports.apply = Reflect.apply;
 /**
  * Typed version of Reflect.construct.
  *
@@ -24,12 +21,7 @@ exports.apply = apply;
  * @param newTarget - New target function.
  * @returns Constructed object.
  */
-function construct(target, args, newTarget) {
-    return newTarget
-        ? Reflect.construct(target, args, newTarget)
-        : Reflect.construct(target, args);
-}
-exports.construct = construct;
+exports.construct = Reflect.construct;
 /**
  * Typed version of Reflect.defineMetadata.
  *
@@ -47,7 +39,7 @@ exports.defineMetadata = defineMetadata;
  * @param metadataKey - Metadata key.
  * @param metadataValue - Metadata value.
  * @param target - Target object.
- * @param key - Property name.
+ * @param key - Property key.
  */
 function defineMetadataKey(metadataKey, metadataValue, target, key) {
     Reflect.defineMetadata(metadataKey, metadataValue, target, key);
@@ -59,13 +51,10 @@ exports.deleteProperty = Reflect.deleteProperty;
  * Typed version of Reflect.get.
  *
  * @param target - Target object.
- * @param key - Property name.
+ * @param key - Property key.
  * @returns Property value.
  */
-function get(target, key) {
-    return Reflect.get(target, key);
-}
-exports.get = get;
+exports.get = Reflect.get;
 /**
  * Typed version of Reflect.getMetadata.
  *
@@ -82,7 +71,7 @@ exports.getMetadata = getMetadata;
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
- * @param key - Property name.
+ * @param key - Property key.
  * @returns Metadata value.
  */
 function getMetadataKey(metadataKey, target, key) {
@@ -105,7 +94,7 @@ exports.getOwnMetadata = getOwnMetadata;
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
- * @param key - Property name.
+ * @param key - Property key.
  * @returns Metadata value.
  */
 function getOwnMetadataKey(metadataKey, target, key) {
@@ -131,7 +120,7 @@ exports.hasMetadata = hasMetadata;
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
- * @param key - Property name.
+ * @param key - Property key.
  * @returns _True_ if key exists, _false_ otherwise.
  */
 function hasMetadataKey(metadataKey, target, key) {
@@ -139,7 +128,7 @@ function hasMetadataKey(metadataKey, target, key) {
 }
 exports.hasMetadataKey = hasMetadataKey;
 /**
- * Typed version of Reflect.hasMetadata.
+ * Typed version of Reflect.hasOwnMetadata.
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
@@ -150,11 +139,11 @@ function hasOwnMetadata(metadataKey, target) {
 }
 exports.hasOwnMetadata = hasOwnMetadata;
 /**
- * Typed version of Reflect.hasMetadata.
+ * Typed version of Reflect.hasOwnMetadata.
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
- * @param key - Property name.
+ * @param key - Property key.
  * @returns _True_ if key exists, _false_ otherwise.
  */
 function hasOwnMetadataKey(metadataKey, target, key) {

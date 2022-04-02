@@ -1,4 +1,4 @@
-import type { Async, Callable, PromiseAsync, Sync } from "./types/core";
+import type { AsyncPromise, Callable, Sync } from "./types/function";
 export interface PipeCallback<V = unknown, R = unknown> {
     /**
      * Pipe callback.
@@ -8,13 +8,6 @@ export interface PipeCallback<V = unknown, R = unknown> {
      */
     (value: V): R;
 }
-/**
- * Prevents parallel running.
- *
- * @param async - Async function.
- * @returns Wrapped async function.
- */
-export declare function doNotRunParallel<T extends unknown[] = never[]>(async: Async<void, T>): Async<void, T>;
 /**
  * Identity function.
  *
@@ -29,7 +22,7 @@ export declare const noop: Callable;
  * @param value - Value.
  * @param callback1 - Callback 1.
  * @param callback2 - Callback 2.
- * @returns The value returned by callbacks sequence.
+ * @returns The value returned by callback sequence.
  */
 export declare function pipe<A, B, C>(value: A, callback1: PipeCallback<A, B>, callback2: PipeCallback<B, C>): C;
 /**
@@ -39,7 +32,7 @@ export declare function pipe<A, B, C>(value: A, callback1: PipeCallback<A, B>, c
  * @param callback1 - Callback 1.
  * @param callback2 - Callback 2.
  * @param callback3 - Callback 3.
- * @returns The value returned by callbacks sequence.
+ * @returns The value returned by callback sequence.
  */
 export declare function pipe<A, B, C, D>(value: A, callback1: PipeCallback<A, B>, callback2: PipeCallback<B, C>, callback3: PipeCallback<C, D>): D;
 /**
@@ -55,5 +48,5 @@ export declare function run<T>(callback: Sync<T>): T;
  * @param promiseAsync - Promise or async function.
  * @returns The result of callback execution.
  */
-export declare function run<T>(promiseAsync: PromiseAsync<T>): Promise<T>;
+export declare function run<T>(promiseAsync: AsyncPromise<T>): Promise<T>;
 //# sourceMappingURL=function.d.ts.map

@@ -6,33 +6,33 @@
 
 ## Table of contents
 
-### Variables
+### Functions
 
 - [exhaustive](object.fromEntries.md#exhaustive)
 
-## Variables
+## Functions
 
 ### exhaustive
 
-• **exhaustive**: <K, V\>(`entries`: `Iterable`<readonly [`K`, `V`]\>) => `Record`<`K`, `V`\>
+▸ **exhaustive**<`K`, `V`\>(`entries`): [`TypedObject`](types_core.md#typedobject)<`K`, `V`\>
 
-#### Type declaration
+Creates object from entries.
 
-▸ <`K`, `V`\>(`entries`): `Record`<`K`, `V`\>
-
-##### Type parameters
+#### Type parameters
 
 | Name | Type |
 | :------ | :------ |
 | `K` | extends `PropertyKey` |
 | `V` | `V` |
 
-##### Parameters
+#### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `entries` | `Iterable`<readonly [`K`, `V`]\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `entries` | `Iterable`<readonly [`K`, `V`]\> | Entries. |
 
-##### Returns
+#### Returns
 
-`Record`<`K`, `V`\>
+[`TypedObject`](types_core.md#typedobject)<`K`, `V`\>
+
+Object.

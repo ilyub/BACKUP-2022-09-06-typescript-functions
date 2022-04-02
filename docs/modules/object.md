@@ -6,13 +6,19 @@
 
 ### Namespaces
 
-- [freeze](object.freeze.md)
 - [fromEntries](object.fromEntries.md)
-- [unfreeze](object.unfreeze.md)
 
 ### Interfaces
 
+- [Assign](../interfaces/object.Assign.md)
+- [Callback](../interfaces/object.Callback.md)
+- [CompareFn](../interfaces/object.CompareFn.md)
+- [DefineProperty](../interfaces/object.DefineProperty.md)
 - [Descriptor](../interfaces/object.Descriptor.md)
+- [Entries](../interfaces/object.Entries.md)
+- [Extend](../interfaces/object.Extend.md)
+- [Keys](../interfaces/object.Keys.md)
+- [Values](../interfaces/object.Values.md)
 
 ### Functions
 
@@ -24,7 +30,6 @@
 - [extend](object.md#extend)
 - [filter](object.md#filter)
 - [freeze](object.md#freeze)
-- [freezeDeep](object.md#freezedeep)
 - [fromEntries](object.md#fromentries)
 - [getPrototypeOf](object.md#getprototypeof)
 - [hasOwnProp](object.md#hasownprop)
@@ -37,7 +42,6 @@
 - [some](object.md#some)
 - [sort](object.md#sort)
 - [unfreeze](object.md#unfreeze)
-- [unfreezeDeep](object.md#unfreezedeep)
 - [values](object.md#values)
 
 ## Functions
@@ -46,8 +50,6 @@
 
 ▸ **assign**<`T`\>(`mutableTarget`, ...`sources`): `T`
 
-Typed version of Object.assign.
-
 #### Type parameters
 
 | Name | Type |
@@ -56,40 +58,14 @@ Typed version of Object.assign.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `mutableTarget` | `T` | Target object. |
-| `...sources` | `Partial`<`T`\>[] | Sources. |
-
-#### Returns
-
-`T`
-
-Target.
-
-▸ **assign**<`T`, `K`\>(`mutableTarget`, ...`sources`): `T`
-
-Typed version of Object.assign.
-
-#### Type parameters
-
 | Name | Type |
 | :------ | :------ |
-| `T` | extends `object` |
-| `K` | extends `string` \| `number` \| `symbol` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `mutableTarget` | `T` | Target object. |
-| `...sources` | { readonly [L in string \| number \| symbol]: T[L] }[] | Sources. |
+| `mutableTarget` | `T` |
+| `...sources` | `Partial`<`T`\>[] |
 
 #### Returns
 
 `T`
-
-Target.
 
 ___
 
@@ -97,7 +73,7 @@ ___
 
 ▸ **clone**<`T`\>(`obj`): [`Writable`](types_core.md#writable)<`T`\>
 
-Creates object copy.
+Clones object.
 
 #### Type parameters
 
@@ -115,29 +91,28 @@ Creates object copy.
 
 [`Writable`](types_core.md#writable)<`T`\>
 
-Object copy.
+New object.
 
 ___
 
 ### defineProperty
 
-▸ **defineProperty**<`T`\>(`obj`, `key`, `descriptor`): `void`
-
-Typed version of Object.defineProperty.
+▸ **defineProperty**<`T`, `K`\>(`obj`, `key`, `descriptor`): `void`
 
 #### Type parameters
 
 | Name | Type |
 | :------ | :------ |
 | `T` | extends `object` |
+| `K` | extends `string` \| `number` \| `symbol` = keyof `T` |
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `obj` | `T` | Object. |
-| `key` | `PropertyKey` | Property name. |
-| `descriptor` | [`Descriptor`](../interfaces/object.Descriptor.md)<`T`\> | Descriptor. |
+| Name | Type |
+| :------ | :------ |
+| `obj` | `T` |
+| `key` | `PropertyKey` |
+| `descriptor` | [`Descriptor`](../interfaces/object.Descriptor.md)<`T`, `K`\> |
 
 #### Returns
 
@@ -147,7 +122,7 @@ ___
 
 ### entries
 
-▸ **entries**<`T`\>(`obj`): `ReadonlyArray`<readonly [keyof `T`, `T`[keyof `T`]]\>
+▸ **entries**<`T`\>(`obj`): readonly readonly [keyof `T`, `T`[keyof `T`]][]
 
 Typed version of Object.entries.
 
@@ -165,7 +140,7 @@ Typed version of Object.entries.
 
 #### Returns
 
-`ReadonlyArray`<readonly [keyof `T`, `T`[keyof `T`]]\>
+readonly readonly [keyof `T`, `T`[keyof `T`]][]
 
 Object entries.
 
@@ -173,7 +148,7 @@ ___
 
 ### every
 
-▸ **every**<`K`, `S`, `D`\>(`obj`, `callback`): obj is Readonly<Record<K, D\>\>
+▸ **every**<`T`\>(`obj`, `callback`): `boolean`
 
 Checks that every object property satisfies condition.
 
@@ -181,40 +156,14 @@ Checks that every object property satisfies condition.
 
 | Name | Type |
 | :------ | :------ |
-| `K` | extends `PropertyKey` |
-| `S` | `S` |
-| `D` | `D` |
+| `T` | extends `object` |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `obj` | `Readonly`<`Record`<`K`, `S`\>\> | Object. |
-| `callback` | (`value`: `S`, `key`: `K`) => value is D | Callback. |
-
-#### Returns
-
-obj is Readonly<Record<K, D\>\>
-
-_True_ if every object property satisfies condition, _false_ otherwise.
-
-▸ **every**<`K`, `V`\>(`obj`, `callback`): `boolean`
-
-Checks that every object property satisfies condition.
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `K` | extends `PropertyKey` |
-| `V` | `V` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `obj` | `Readonly`<`Record`<`K`, `V`\>\> | Object. |
-| `callback` | (`value`: `V`, `key`: `K`) => `boolean` | Callback. |
+| `obj` | `T` | Object. |
+| `callback` | [`Callback`](../interfaces/object.Callback.md)<`T`\> | Callback. |
 
 #### Returns
 
@@ -228,8 +177,6 @@ ___
 
 ▸ **extend**<`T`, `A`\>(`target`, `source`): `A` & `T`
 
-Typed version of Object.assign.
-
 #### Type parameters
 
 | Name | Type |
@@ -239,20 +186,16 @@ Typed version of Object.assign.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `target` | `T` | Target object. |
-| `source` | `A` | Source. |
+| Name | Type |
+| :------ | :------ |
+| `target` | `T` |
+| `source` | `A` |
 
 #### Returns
 
 `A` & `T`
 
-Target.
-
 ▸ **extend**<`T`, `A`, `B`\>(`target`, `source1`, `source2`): `A` & `B` & `T`
-
-Typed version of Object.assign.
 
 #### Type parameters
 
@@ -264,21 +207,17 @@ Typed version of Object.assign.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `target` | `T` | Target object. |
-| `source1` | `A` | Source 1. |
-| `source2` | `B` | Source 2. |
+| Name | Type |
+| :------ | :------ |
+| `target` | `T` |
+| `source1` | `A` |
+| `source2` | `B` |
 
 #### Returns
 
 `A` & `B` & `T`
 
-Target.
-
 ▸ **extend**<`T`, `A`, `B`, `C`\>(`target`, `source1`, `source2`, `source3`): `A` & `B` & `C` & `T`
-
-Typed version of Object.assign.
 
 #### Type parameters
 
@@ -291,18 +230,16 @@ Typed version of Object.assign.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `target` | `T` | Target object. |
-| `source1` | `A` | Source 1. |
-| `source2` | `B` | Source 2. |
-| `source3` | `C` | Source 3. |
+| Name | Type |
+| :------ | :------ |
+| `target` | `T` |
+| `source1` | `A` |
+| `source2` | `B` |
+| `source3` | `C` |
 
 #### Returns
 
 `A` & `B` & `C` & `T`
-
-Target.
 
 ___
 
@@ -323,13 +260,13 @@ Filters object by callback.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `obj` | `T` | Object. |
-| `callback` | (`value`: `T`[keyof `T`], `key`: keyof `T`) => `boolean` | Callback. |
+| `callback` | [`Callback`](../interfaces/object.Callback.md)<`T`\> | Callback. |
 
 #### Returns
 
 `Partial`<`T`\>
 
-New filtered object.
+New object.
 
 ___
 
@@ -355,39 +292,13 @@ Marks object as readonly.
 
 `Readonly`<`T`\>
 
-Object marked as readonly.
-
-___
-
-### freezeDeep
-
-▸ **freezeDeep**<`T`\>(`obj`): [`DeepReadonly`](types_core.md#deepreadonly)<`T`\>
-
-Marks object as deep readonly.
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `obj` | `T` | Object. |
-
-#### Returns
-
-[`DeepReadonly`](types_core.md#deepreadonly)<`T`\>
-
-Object marked as deep readonly.
+Object.
 
 ___
 
 ### fromEntries
 
-▸ **fromEntries**<`K`, `V`\>(`entries`): [`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\>
+▸ **fromEntries**<`K`, `V`\>(`entries`): [`PartialTypedObject`](types_core.md#partialtypedobject)<`K`, `V`\>
 
 Creates object from entries.
 
@@ -406,7 +317,7 @@ Creates object from entries.
 
 #### Returns
 
-[`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\>
+[`PartialTypedObject`](types_core.md#partialtypedobject)<`K`, `V`\>
 
 Object.
 
@@ -416,7 +327,7 @@ ___
 
 ▸ **getPrototypeOf**(`obj`): [`objectU`](types_core.md#objectu)
 
-Typed version of Object.getPrototypeOf.
+Returns object prototype.
 
 #### Parameters
 
@@ -428,7 +339,7 @@ Typed version of Object.getPrototypeOf.
 
 [`objectU`](types_core.md#objectu)
 
-Prototype if available, _undefined_ otherwise.
+Object prototype if available, _undefined_ otherwise.
 
 ___
 
@@ -436,13 +347,13 @@ ___
 
 ▸ **hasOwnProp**(`key`, `obj`): `boolean`
 
-Alias of Object.prototype.hasOwnProperty.
+Checks that object has property.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `key` | `PropertyKey` | Property name. |
+| `key` | `PropertyKey` | Property key. |
 | `obj` | `object` | Object. |
 
 #### Returns
@@ -455,9 +366,7 @@ ___
 
 ### keys
 
-▸ **keys**<`T`\>(`obj`): `ReadonlyArray`<keyof `T`\>
-
-Typed version of Object.keys.
+▸ **keys**<`T`\>(`obj`): readonly keyof `T`[]
 
 #### Type parameters
 
@@ -467,41 +376,40 @@ Typed version of Object.keys.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `obj` | `T` | Object. |
+| Name | Type |
+| :------ | :------ |
+| `obj` | `T` |
 
 #### Returns
 
-`ReadonlyArray`<keyof `T`\>
-
-Object keys.
+readonly keyof `T`[]
 
 ___
 
 ### map
 
-▸ **map**<`V`, `R`\>(`obj`, `callback`): [`ReadonlyRecord`](types_core.md#readonlyrecord)<`string`, `R`\>
+▸ **map**<`K`, `V`, `R`\>(`obj`, `callback`): [`TypedObject`](types_core.md#typedobject)<`K`, `R`\>
 
 Applies callback to each property.
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `V` |
-| `R` |
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `V` | `V` |
+| `R` | `R` |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `obj` | `Readonly`<`Record`<`string`, `V`\>\> | Object. |
-| `callback` | (`value`: `V`, `key`: `string`) => `R` | Callback. |
+| `obj` | [`TypedObject`](types_core.md#typedobject)<`K`, `V`\> | Object. |
+| `callback` | (`value`: `V`, `key`: `K`) => `R` | Callback. |
 
 #### Returns
 
-[`ReadonlyRecord`](types_core.md#readonlyrecord)<`string`, `R`\>
+[`TypedObject`](types_core.md#typedobject)<`K`, `R`\>
 
 New object.
 
@@ -509,20 +417,20 @@ ___
 
 ### merge
 
-▸ **merge**(...`objects`): [`ReadonlyIndexedObject`](types_core.md#readonlyindexedobject)
+▸ **merge**(...`objects`): [`IndexedObject`](types_core.md#indexedobject)
 
-Merges several objects.
+Merges objects.
 If more than one object has the same key, respective values are combined into array.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `...objects` | `Readonly`<[`IndexedObject`](types_core.md#indexedobject)<`unknown`\>\>[] | Objects. |
+| `...objects` | `Readonly`<[`TypedObject`](types_core.md#typedobject)<`PropertyKey`, `unknown`\>\>[] | Objects. |
 
 #### Returns
 
-[`ReadonlyIndexedObject`](types_core.md#readonlyindexedobject)
+[`IndexedObject`](types_core.md#indexedobject)
 
 Merged object.
 
@@ -530,9 +438,9 @@ ___
 
 ### omit
 
-▸ **omit**<`T`, `K`\>(`obj`, ...`exclude`): [`StrictOmit`](types_core.md#strictomit)<`T`, `K`\>
+▸ **omit**<`T`, `K`\>(`obj`, ...`exclude`): [`StrictOmit`](types_object.md#strictomit)<`T`, `K`\>
 
-Omits keys from object.
+Removes keys from object.
 
 #### Type parameters
 
@@ -546,11 +454,11 @@ Omits keys from object.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `obj` | `T` | Object. |
-| `...exclude` | `K`[] | Keys to exclude. |
+| `...exclude` | `K`[] | Keys to remove. |
 
 #### Returns
 
-[`StrictOmit`](types_core.md#strictomit)<`T`, `K`\>
+[`StrictOmit`](types_object.md#strictomit)<`T`, `K`\>
 
 New object with given keys omitted.
 
@@ -558,7 +466,7 @@ ___
 
 ### removeUndefinedKeys
 
-▸ **removeUndefinedKeys**<`T`\>(`obj`): [`WithOptionalKeys`](types_core.md#withoptionalkeys)<`T`\>
+▸ **removeUndefinedKeys**<`T`\>(`obj`): [`OptionalPropertiesToOptional`](types_object.md#optionalpropertiestooptional)<`T`\>
 
 Removes undefined keys.
 
@@ -576,29 +484,7 @@ Removes undefined keys.
 
 #### Returns
 
-[`WithOptionalKeys`](types_core.md#withoptionalkeys)<`T`\>
-
-New object with undefined keys removed.
-
-▸ **removeUndefinedKeys**<`T`\>(`obj`): `T`
-
-Removes undefined keys.
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `obj` | [`Join4`](types_core.md#join4)<{ [K in string \| number \| symbol]: T[K] }, { [K in string \| number \| symbol]?: T[K] }, { readonly [K in string \| number \| symbol]: T[K] }, { readonly [K in string \| number \| symbol]?: T[K] }\> | Object. |
-
-#### Returns
-
-`T`
+[`OptionalPropertiesToOptional`](types_object.md#optionalpropertiestooptional)<`T`\>
 
 New object with undefined keys removed.
 
@@ -626,7 +512,7 @@ ___
 
 ### some
 
-▸ **some**<`K`, `S`, `D`\>(`obj`, `callback`): obj is Readonly<Record<K, D\>\>
+▸ **some**<`T`\>(`obj`, `callback`): `boolean`
 
 Checks that some object property satisfies condition.
 
@@ -634,40 +520,14 @@ Checks that some object property satisfies condition.
 
 | Name | Type |
 | :------ | :------ |
-| `K` | extends `PropertyKey` |
-| `S` | `S` |
-| `D` | `D` |
+| `T` | extends `object` |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `obj` | `Readonly`<`Record`<`K`, `S`\>\> | Object. |
-| `callback` | (`value`: `S`, `key`: `K`) => value is D | Callback. |
-
-#### Returns
-
-obj is Readonly<Record<K, D\>\>
-
-_True_ if some object property satisfies condition, _false_ otherwise.
-
-▸ **some**<`K`, `V`\>(`obj`, `callback`): `boolean`
-
-Checks that some object property satisfies condition.
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `K` | extends `PropertyKey` |
-| `V` | `V` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `obj` | `Readonly`<`Record`<`K`, `V`\>\> | Object. |
-| `callback` | (`value`: `V`, `key`: `K`) => `boolean` | Callback. |
+| `obj` | `T` | Object. |
+| `callback` | [`Callback`](../interfaces/object.Callback.md)<`T`\> | Callback. |
 
 #### Returns
 
@@ -694,7 +554,7 @@ Sorts object.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `obj` | `T` | Object. |
-| `compareFn?` | (`x`: [`Entry`](types_core.md#entry)<`T`\>, `y`: [`Entry`](types_core.md#entry)<`T`\>) => `number` | Comparison function. |
+| `compareFn?` | [`CompareFn`](../interfaces/object.CompareFn.md)<`T`\> | Comparison function. |
 
 #### Returns
 
@@ -726,41 +586,13 @@ Marks object as writable.
 
 [`Writable`](types_core.md#writable)<`T`\>
 
-Object marked as writable.
-
-___
-
-### unfreezeDeep
-
-▸ **unfreezeDeep**<`T`\>(`obj`): [`DeepWritable`](types_core.md#deepwritable)<`T`\>
-
-Marks object as deep writable.
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `obj` | `T` | Object. |
-
-#### Returns
-
-[`DeepWritable`](types_core.md#deepwritable)<`T`\>
-
-Object marked as deep writable.
+Object.
 
 ___
 
 ### values
 
-▸ **values**<`T`\>(`obj`): `ReadonlyArray`<`T`[keyof `T`]\>
-
-Typed version of Object.values.
+▸ **values**<`T`\>(`obj`): readonly `T`[keyof `T`][]
 
 #### Type parameters
 
@@ -770,12 +602,10 @@ Typed version of Object.values.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `obj` | `T` | Object. |
+| Name | Type |
+| :------ | :------ |
+| `obj` | `T` |
 
 #### Returns
 
-`ReadonlyArray`<`T`[keyof `T`]\>
-
-Object values.
+readonly `T`[keyof `T`][]

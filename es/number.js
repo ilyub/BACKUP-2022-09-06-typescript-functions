@@ -67,6 +67,17 @@ export function limit(value, min, max) {
     return Math.min(Math.max(value, min), max);
 }
 /**
+ * Calculates root-mean-square deviation.
+ *
+ * @param values - Values.
+ * @returns Root-mean-square deviation.
+ */
+export function rootMeanSquareDeviation(...values) {
+    assert.toBeTrue(values.length > 0);
+    const averageValue = average(...values);
+    return Math.sqrt(sum(...values.map(value => (value - averageValue) ** 2)) / values.length);
+}
+/**
  * Rounds number to a given precision.
  *
  * @param value - Value.

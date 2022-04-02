@@ -14,14 +14,17 @@
 - [and](guards.and.md)
 - [array](guards.array.md)
 - [indexedObject](guards.indexedObject.md)
+- [map](guards.map.md)
 - [not](guards.not.md)
 - [object](guards.object.md)
+- [objectOf](guards.objectOf.md)
 - [or](guards.or.md)
+- [set](guards.set.md)
 - [tuple](guards.tuple.md)
 
 ### Interfaces
 
-- [ExclusiveGuard](../interfaces/guards.ExclusiveGuard.md)
+- [ExclusionGuard](../interfaces/guards.ExclusionGuard.md)
 - [Guard](../interfaces/guards.Guard.md)
 - [MultiArgGuard](../interfaces/guards.MultiArgGuard.md)
 
@@ -31,6 +34,8 @@
 
 ### Functions
 
+- [\_false](guards.md#_false)
+- [\_true](guards.md#_true)
 - [and](guards.md#and)
 - [andFactory](guards.md#andfactory)
 - [array](guards.md#array)
@@ -43,12 +48,9 @@
 - [booleans](guards.md#booleans)
 - [booleansU](guards.md#booleansu)
 - [callable](guards.md#callable)
-- [callableU](guards.md#callableu)
 - [empty](guards.md#empty)
 - [enumeration](guards.md#enumeration)
-- [enumerationU](guards.md#enumerationu)
 - [factory](guards.md#factory)
-- [falseGuard](guards.md#falseguard)
 - [indexedObject](guards.md#indexedobject)
 - [indexedObjectOf](guards.md#indexedobjectof)
 - [indexedObjectU](guards.md#indexedobjectu)
@@ -57,6 +59,10 @@
 - [instance](guards.md#instance)
 - [instances](guards.md#instances)
 - [map](guards.md#map)
+- [mapOf](guards.md#mapof)
+- [mapU](guards.md#mapu)
+- [maps](guards.md#maps)
+- [mapsU](guards.md#mapsu)
 - [not](guards.md#not)
 - [notFactory](guards.md#notfactory)
 - [null](guards.md#null)
@@ -70,51 +76,98 @@
 - [numbersU](guards.md#numbersu)
 - [object](guards.md#object)
 - [objectOf](guards.md#objectof)
+- [objectOfFactory](guards.md#objectoffactory)
 - [objectU](guards.md#objectu)
 - [objects](guards.md#objects)
 - [objectsU](guards.md#objectsu)
 - [or](guards.md#or)
 - [orFactory](guards.md#orfactory)
 - [set](guards.md#set)
+- [setOf](guards.md#setof)
+- [setU](guards.md#setu)
+- [sets](guards.md#sets)
+- [setsU](guards.md#setsu)
 - [string](guards.md#string)
 - [stringU](guards.md#stringu)
 - [strings](guards.md#strings)
 - [stringsU](guards.md#stringsu)
 - [symbol](guards.md#symbol)
+- [symbolU](guards.md#symbolu)
 - [symbols](guards.md#symbols)
 - [symbolsU](guards.md#symbolsu)
-- [trueGuard](guards.md#trueguard)
 - [tuple](guards.md#tuple)
 - [tupleFactory](guards.md#tuplefactory)
 - [undefined](guards.md#undefined)
 - [unknown](guards.md#unknown)
 - [unknowns](guards.md#unknowns)
+- [unknownsU](guards.md#unknownsu)
 
 ## References
 
 ### false
 
-Renames and re-exports [falseGuard](guards.md#falseguard)
+Renames and re-exports [_false](guards.md#_false)
 
 ___
 
 ### true
 
-Renames and re-exports [trueGuard](guards.md#trueguard)
+Renames and re-exports [_true](guards.md#_true)
 
 ## Type aliases
 
 ### Guards
 
-Ƭ **Guards**<`T`\>: { readonly [K in keyof T]: Guard<T[K]\> }
+Ƭ **Guards**<`T`, `K`\>: { readonly [L in K]-?: Guard<T[L]\> }
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `T` |
+| Name | Type |
+| :------ | :------ |
+| `T` | `T` |
+| `K` | extends keyof `T` = keyof `T` |
 
 ## Functions
+
+### \_false
+
+▸ **_false**(`value`): value is false
+
+Checks that value is _false_.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+
+#### Returns
+
+value is false
+
+_True_ if value is _false_, _false_ otherwise.
+
+___
+
+### \_true
+
+▸ **_true**(`value`): value is true
+
+Checks that value is _true_.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+
+#### Returns
+
+value is true
+
+_True_ if value is _true_, _false_ otherwise.
+
+___
 
 ### and
 
@@ -400,21 +453,17 @@ ___
 
 ### booleanU
 
-▸ **booleanU**(`value`): value is booleanU
-
-Checks that value type is booleanU.
+▸ **booleanU**(`value`): value is undefined \| boolean
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `unknown` | Value. |
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
 
 #### Returns
 
-value is booleanU
-
-_True_ if value type is booleanU, _false_ otherwise.
+value is undefined \| boolean
 
 ___
 
@@ -476,32 +525,6 @@ _True_ if value type is T, _false_ otherwise.
 
 ___
 
-### callableU
-
-▸ **callableU**<`T`\>(`value`): value is undefined \| T
-
-Checks that value type is T | undefined.
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `Function` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `unknown` | Value. |
-
-#### Returns
-
-value is undefined \| T
-
-_True_ if value type is T | undefined, _false_ otherwise.
-
-___
-
 ### empty
 
 ▸ **empty**(`value`): value is empty
@@ -539,40 +562,13 @@ Checks that value type is T.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `vo` | [`ValidationObject`](types_core.md#validationobject)<`T`\> | Validation object. |
+| `vo` | [`ValidationObject`](helpers.md#validationobject)<`T`\> | Validation object. |
 
 #### Returns
 
 value is T
 
 _True_ if value type is T, _false_ otherwise.
-
-___
-
-### enumerationU
-
-▸ **enumerationU**<`T`\>(`value`, `vo`): value is undefined \| T
-
-Checks that value type is T | undefined.
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `PropertyKey` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `unknown` | Value. |
-| `vo` | [`ValidationObject`](types_core.md#validationobject)<`T`\> | Validation object. |
-
-#### Returns
-
-value is undefined \| T
-
-_True_ if value type is T | undefined, _false_ otherwise.
 
 ___
 
@@ -594,7 +590,7 @@ Creates single-arg guard.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `guard` | [`MultiArgGuard`](../interfaces/guards.MultiArgGuard.md)<`T`, `A`\> | Multi-arg guard. |
-| `...args` | `A` | Rest arguments. |
+| `...args` | `A` | Arguments. |
 
 #### Returns
 
@@ -604,29 +600,9 @@ Single-arg guard.
 
 ___
 
-### falseGuard
-
-▸ **falseGuard**(`value`): value is false
-
-Checks that value is _false_.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `unknown` | Value. |
-
-#### Returns
-
-value is false
-
-_True_ if value is _false_, _false_ otherwise.
-
-___
-
 ### indexedObject
 
-▸ **indexedObject**(`value`): value is Readonly<IndexedObject<unknown\>\>
+▸ **indexedObject**(`value`): value is Readonly<TypedObject<PropertyKey, unknown\>\>
 
 Checks that value type is IndexedObject.
 
@@ -638,7 +614,7 @@ Checks that value type is IndexedObject.
 
 #### Returns
 
-value is Readonly<IndexedObject<unknown\>\>
+value is Readonly<TypedObject<PropertyKey, unknown\>\>
 
 _True_ if value type is IndexedObject, _false_ otherwise.
 
@@ -646,7 +622,7 @@ ___
 
 ### indexedObjectOf
 
-▸ **indexedObjectOf**<`T`\>(`value`, `guard`): value is Readonly<IndexedObject<T\>\>
+▸ **indexedObjectOf**<`T`\>(`value`, `guard`): value is Readonly<TypedObject<PropertyKey, T\>\>
 
 Checks that value type is IndexedObject\<T\>.
 
@@ -665,7 +641,7 @@ Checks that value type is IndexedObject\<T\>.
 
 #### Returns
 
-value is Readonly<IndexedObject<T\>\>
+value is Readonly<TypedObject<PropertyKey, T\>\>
 
 _True_ if value type is IndexedObject\<T\>, _false_ otherwise.
 
@@ -673,7 +649,7 @@ ___
 
 ### indexedObjectU
 
-▸ **indexedObjectU**(`value`): value is undefined \| Readonly<IndexedObject<unknown\>\>
+▸ **indexedObjectU**(`value`): value is undefined \| Readonly<TypedObject<PropertyKey, unknown\>\>
 
 #### Parameters
 
@@ -683,13 +659,13 @@ ___
 
 #### Returns
 
-value is undefined \| Readonly<IndexedObject<unknown\>\>
+value is undefined \| Readonly<TypedObject<PropertyKey, unknown\>\>
 
 ___
 
 ### indexedObjects
 
-▸ **indexedObjects**(`value`): value is readonly Readonly<IndexedObject<unknown\>\>[]
+▸ **indexedObjects**(`value`): value is readonly Readonly<TypedObject<PropertyKey, unknown\>\>[]
 
 #### Parameters
 
@@ -699,13 +675,13 @@ ___
 
 #### Returns
 
-value is readonly Readonly<IndexedObject<unknown\>\>[]
+value is readonly Readonly<TypedObject<PropertyKey, unknown\>\>[]
 
 ___
 
 ### indexedObjectsU
 
-▸ **indexedObjectsU**(`value`): value is undefined \| readonly Readonly<IndexedObject<unknown\>\>[]
+▸ **indexedObjectsU**(`value`): value is undefined \| readonly Readonly<TypedObject<PropertyKey, unknown\>\>[]
 
 #### Parameters
 
@@ -715,7 +691,7 @@ ___
 
 #### Returns
 
-value is undefined \| readonly Readonly<IndexedObject<unknown\>\>[]
+value is undefined \| readonly Readonly<TypedObject<PropertyKey, unknown\>\>[]
 
 ___
 
@@ -736,7 +712,7 @@ Checks that value type is T.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `ctor` | [`Constructor`](types_core.md#constructor)<`T`\> | Constructor. |
+| `ctor` | [`Constructor`](../interfaces/types_function.Constructor.md)<`T`\> | Constructor. |
 
 #### Returns
 
@@ -763,7 +739,7 @@ Checks that value type is T[].
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `ctor` | [`Constructor`](types_core.md#constructor)<`T`\> | Constructor. |
+| `ctor` | [`Constructor`](../interfaces/types_function.Constructor.md)<`T`\> | Constructor. |
 
 #### Returns
 
@@ -775,7 +751,27 @@ ___
 
 ### map
 
-▸ **map**<`K`, `V`\>(`value`, `keyGuard`, `valueGuard`): value is ReadonlyMap<K, V\>
+▸ **map**(`value`): value is ReadonlyMap<unknown, unknown\>
+
+Checks that value type is Map.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+
+#### Returns
+
+value is ReadonlyMap<unknown, unknown\>
+
+_True_ if value type is Map, _false_ otherwise.
+
+___
+
+### mapOf
+
+▸ **mapOf**<`K`, `V`\>(`value`, `keyGuard`, `valueGuard`): value is ReadonlyMap<K, V\>
 
 Checks that value type is Map\<K, V\>.
 
@@ -799,6 +795,54 @@ Checks that value type is Map\<K, V\>.
 value is ReadonlyMap<K, V\>
 
 _True_ if value type is Map\<K, V\>, _false_ otherwise.
+
+___
+
+### mapU
+
+▸ **mapU**(`value`): value is undefined \| ReadonlyMap<unknown, unknown\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
+
+#### Returns
+
+value is undefined \| ReadonlyMap<unknown, unknown\>
+
+___
+
+### maps
+
+▸ **maps**(`value`): value is readonly ReadonlyMap<unknown, unknown\>[]
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
+
+#### Returns
+
+value is readonly ReadonlyMap<unknown, unknown\>[]
+
+___
+
+### mapsU
+
+▸ **mapsU**(`value`): value is undefined \| readonly ReadonlyMap<unknown, unknown\>[]
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
+
+#### Returns
+
+value is undefined \| readonly ReadonlyMap<unknown, unknown\>[]
 
 ___
 
@@ -832,9 +876,9 @@ ___
 
 ### notFactory
 
-▸ **notFactory**<`T`\>(`guard`): [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`T`\>
+▸ **notFactory**<`T`\>(`guard`): [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`T`\>
 
-Creates guard for not T type.
+Creates guard for type not T.
 
 #### Type parameters
 
@@ -850,9 +894,9 @@ Creates guard for not T type.
 
 #### Returns
 
-[`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`T`\>
+[`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`T`\>
 
-Guard for not T type.
+Guard for type not T.
 
 ___
 
@@ -898,21 +942,17 @@ ___
 
 ### numStrU
 
-▸ **numStrU**(`value`): value is NumStrU
-
-Checks that value type is NumStrU.
+▸ **numStrU**(`value`): value is undefined \| NumStr
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `unknown` | Value. |
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
 
 #### Returns
 
-value is NumStrU
-
-_True_ if value type is NumStrU, _false_ otherwise.
+value is undefined \| NumStr
 
 ___
 
@@ -970,21 +1010,17 @@ ___
 
 ### numberU
 
-▸ **numberU**(`value`): value is numberU
-
-Checks that value type is numberU.
+▸ **numberU**(`value`): value is undefined \| number
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `unknown` | Value. |
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
 
 #### Returns
 
-value is numberU
-
-_True_ if value type is numberU, _false_ otherwise.
+value is undefined \| number
 
 ___
 
@@ -1042,50 +1078,72 @@ ___
 
 ### objectOf
 
-▸ **objectOf**<`A`, `B`\>(`value`, `requiredGuards`, `optionalGuards`): value is Partial<B\> & Required<A\>
+▸ **objectOf**<`T`\>(`value`, `required`, `optional`): value is T
 
 Checks that value type is T.
 
 #### Type parameters
 
-| Name |
-| :------ |
-| `A` |
-| `B` |
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `requiredGuards` | [`Guards`](guards.md#guards)<`A`\> | Guards for required properties. |
-| `optionalGuards` | [`Guards`](guards.md#guards)<`B`\> | Guards for optional properties. |
+| `required` | [`Guards`](guards.md#guards)<`T`, `RequiredKeys`<`T`\>\> | Guards for required properties. |
+| `optional` | [`Guards`](guards.md#guards)<`T`, `OptionalKeys`<`T`\>\> | Guards for optional properties. |
 
 #### Returns
 
-value is Partial<B\> & Required<A\>
+value is T
 
 _True_ if value type is T, _false_ otherwise.
 
 ___
 
-### objectU
+### objectOfFactory
 
-▸ **objectU**(`value`): value is objectU
+▸ **objectOfFactory**<`T`\>(`required`, `optional`): [`Guard`](../interfaces/guards.Guard.md)<`T`\>
 
-Checks that value type is objectU.
+Creates guard for type T.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `value` | `unknown` | Value. |
+| `required` | [`Guards`](guards.md#guards)<`T`, `RequiredKeys`<`T`\>\> | Guards for required properties. |
+| `optional` | [`Guards`](guards.md#guards)<`T`, `OptionalKeys`<`T`\>\> | Guards for optional properties. |
 
 #### Returns
 
-value is objectU
+[`Guard`](../interfaces/guards.Guard.md)<`T`\>
 
-_True_ if value type is objectU, _false_ otherwise.
+Guard for type T.
+
+___
+
+### objectU
+
+▸ **objectU**(`value`): value is undefined \| object
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
+
+#### Returns
+
+value is undefined \| object
 
 ___
 
@@ -1290,9 +1348,29 @@ ___
 
 ### set
 
-▸ **set**<`T`\>(`value`, `guard`): value is ReadonlySet<T\>
+▸ **set**(`value`): value is ReadonlySet<unknown\>
 
-Checks that value type is Set<T>.
+Checks that value type is Set.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+
+#### Returns
+
+value is ReadonlySet<unknown\>
+
+_True_ if value type is Set, _false_ otherwise.
+
+___
+
+### setOf
+
+▸ **setOf**<`T`\>(`value`, `guard`): value is ReadonlySet<T\>
+
+Checks that value type is Set\<T\>.
 
 #### Type parameters
 
@@ -1311,7 +1389,55 @@ Checks that value type is Set<T>.
 
 value is ReadonlySet<T\>
 
-_True_ if value type is Set<T>, _false_ otherwise.
+_True_ if value type is Set\<T\>, _false_ otherwise.
+
+___
+
+### setU
+
+▸ **setU**(`value`): value is undefined \| ReadonlySet<unknown\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
+
+#### Returns
+
+value is undefined \| ReadonlySet<unknown\>
+
+___
+
+### sets
+
+▸ **sets**(`value`): value is readonly ReadonlySet<unknown\>[]
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
+
+#### Returns
+
+value is readonly ReadonlySet<unknown\>[]
+
+___
+
+### setsU
+
+▸ **setsU**(`value`): value is undefined \| readonly ReadonlySet<unknown\>[]
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
+
+#### Returns
+
+value is undefined \| readonly ReadonlySet<unknown\>[]
 
 ___
 
@@ -1337,21 +1463,17 @@ ___
 
 ### stringU
 
-▸ **stringU**(`value`): value is stringU
-
-Checks that value type is stringU.
+▸ **stringU**(`value`): value is undefined \| string
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `unknown` | Value. |
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
 
 #### Returns
 
-value is stringU
-
-_True_ if value type is stringU, _false_ otherwise.
+value is undefined \| string
 
 ___
 
@@ -1407,6 +1529,22 @@ _True_ if value is a symbol, _false_ otherwise.
 
 ___
 
+### symbolU
+
+▸ **symbolU**(`value`): value is undefined \| symbol
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
+
+#### Returns
+
+value is undefined \| symbol
+
+___
+
 ### symbols
 
 ▸ **symbols**(`value`): value is readonly symbol[]
@@ -1436,26 +1574,6 @@ ___
 #### Returns
 
 value is undefined \| readonly symbol[]
-
-___
-
-### trueGuard
-
-▸ **trueGuard**(`value`): value is true
-
-Checks that value is _true_.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `unknown` | Value. |
-
-#### Returns
-
-value is true
-
-_True_ if value is _true_, _false_ otherwise.
 
 ___
 
@@ -1724,3 +1842,19 @@ ___
 #### Returns
 
 value is readonly unknown[]
+
+___
+
+### unknownsU
+
+▸ **unknownsU**(`value`): value is undefined \| readonly unknown[]
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
+
+#### Returns
+
+value is undefined \| readonly unknown[]

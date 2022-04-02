@@ -1,16 +1,16 @@
 "use strict";
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[guards] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.stringU = exports.stringsU = exports.strings = exports.string = exports.set = exports.objectU = exports.objectOf = exports.objectsU = exports.objects = exports.object = exports.numberU = exports.numbersU = exports.numbers = exports.number = exports.numStrU = exports.numStrsU = exports.numStrs = exports.numStr = exports.null = exports.map = exports.instances = exports.instance = exports.indexedObjectOf = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObjectU = exports.indexedObject = exports.false = exports.falseGuard = exports.enumerationU = exports.enumeration = exports.empty = exports.callableU = exports.callable = exports.booleanU = exports.booleansU = exports.booleans = exports.boolean = exports.arrayOf = exports.arraysU = exports.arrays = exports.arrayU = exports.array = exports.orFactory = exports.or = exports.notFactory = exports.not = exports.andFactory = exports.and = exports.factory = void 0;
-exports.unknowns = exports.unknown = exports.undefined = exports.tupleFactory = exports.tuple = exports.true = exports.trueGuard = exports.symbolsU = exports.symbols = exports.symbol = void 0;
+exports.setU = exports.set = exports.objectOfFactory = exports.objectOf = exports.objectsU = exports.objects = exports.objectU = exports.object = exports.numbersU = exports.numbers = exports.numberU = exports.number = exports.numStrsU = exports.numStrs = exports.numStrU = exports.numStr = exports.null = exports.mapOf = exports.mapsU = exports.maps = exports.mapU = exports.map = exports.instances = exports.instance = exports.indexedObjectOf = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObjectU = exports.indexedObject = exports.false = exports._false = exports.enumeration = exports.empty = exports.callable = exports.booleansU = exports.booleans = exports.booleanU = exports.boolean = exports.arrayOf = exports.arraysU = exports.arrays = exports.arrayU = exports.array = exports.orFactory = exports.or = exports.notFactory = exports.not = exports.andFactory = exports.and = exports.factory = void 0;
+exports.unknownsU = exports.unknowns = exports.unknown = exports.undefined = exports.tupleFactory = exports.tuple = exports.true = exports._true = exports.symbolsU = exports.symbols = exports.symbolU = exports.symbol = exports.stringsU = exports.strings = exports.stringU = exports.string = exports.setOf = exports.setsU = exports.sets = void 0;
 const tslib_1 = require("tslib");
 const a = tslib_1.__importStar(require("./array"));
+const helpers_1 = require("./helpers");
 const o = tslib_1.__importStar(require("./object"));
 /**
  * Creates single-arg guard.
  *
  * @param guard - Multi-arg guard.
- * @param args - Rest arguments.
+ * @param args - Arguments.
  * @returns Single-arg guard.
  */
 function factory(guard, ...args) {
@@ -38,10 +38,10 @@ function not(value, guard) {
 }
 exports.not = not;
 /**
- * Creates guard for not T type.
+ * Creates guard for type not T.
  *
  * @param guard - Guard for type T.
- * @returns Guard for not T type.
+ * @returns Guard for type not T.
  */
 function notFactory(guard) {
     return (value) => !guard(value);
@@ -67,9 +67,10 @@ function array(value) {
     return Array.isArray(value);
 }
 exports.array = array;
-exports.arrayU = orFactory(array, undefinedGuard);
+not.array = notFactory(array);
+exports.arrayU = orFactory(array, _undefined);
 exports.arrays = factory(arrayOf, array);
-exports.arraysU = orFactory(exports.arrays, undefinedGuard);
+exports.arraysU = orFactory(exports.arrays, _undefined);
 /**
  * Checks that value type is T[].
  *
@@ -78,7 +79,7 @@ exports.arraysU = orFactory(exports.arrays, undefinedGuard);
  * @returns _True_ if value type is T[], _false_ otherwise.
  */
 function arrayOf(value, guard) {
-    return Array.isArray(value) && value.every(guard);
+    return array(value) && value.every(guard);
 }
 exports.arrayOf = arrayOf;
 array.of = arrayOf;
@@ -93,19 +94,9 @@ function boolean(value) {
 }
 exports.boolean = boolean;
 not.boolean = notFactory(boolean);
+exports.booleanU = orFactory(boolean, _undefined);
 exports.booleans = factory(arrayOf, boolean);
-exports.booleansU = orFactory(exports.booleans, undefinedGuard);
-/**
- * Checks that value type is booleanU.
- *
- * @param value - Value.
- * @returns _True_ if value type is booleanU, _false_ otherwise.
- */
-function booleanU(value) {
-    return typeof value === "boolean" || value === undefined;
-}
-exports.booleanU = booleanU;
-not.booleanU = notFactory(booleanU);
+exports.booleansU = orFactory(exports.booleans, _undefined);
 /**
  * Checks that value type is T.
  *
@@ -116,18 +107,6 @@ function callable(value) {
     return typeof value === "function";
 }
 exports.callable = callable;
-not.callable = notFactory(callable);
-/**
- * Checks that value type is T | undefined.
- *
- * @param value - Value.
- * @returns _True_ if value type is T | undefined, _false_ otherwise.
- */
-function callableU(value) {
-    return typeof value === "function" || value === undefined;
-}
-exports.callableU = callableU;
-not.callableU = notFactory(callableU);
 /**
  * Checks that value type is empty.
  *
@@ -147,33 +126,21 @@ not.empty = notFactory(empty);
  * @returns _True_ if value type is T, _false_ otherwise.
  */
 function enumeration(value, vo) {
-    const untypedVo = vo;
-    return untypedVo.has(value);
+    return (0, helpers_1.typedef)(vo).has(value);
 }
 exports.enumeration = enumeration;
-/**
- * Checks that value type is T | undefined.
- *
- * @param value - Value.
- * @param vo - Validation object.
- * @returns _True_ if value type is T | undefined, _false_ otherwise.
- */
-function enumerationU(value, vo) {
-    const untypedVo = vo;
-    return untypedVo.has(value) || value === undefined;
-}
-exports.enumerationU = enumerationU;
 /**
  * Checks that value is _false_.
  *
  * @param value - Value.
  * @returns _True_ if value is _false_, _false_ otherwise.
  */
-function falseGuard(value) {
+function _false(value) {
     return value === false;
 }
-exports.falseGuard = falseGuard;
-exports.false = falseGuard;
+exports._false = _false;
+exports.false = _false;
+not.false = notFactory(_false);
 /**
  * Checks that value type is IndexedObject.
  *
@@ -184,9 +151,10 @@ function indexedObject(value) {
     return typeof value === "object" && value !== null;
 }
 exports.indexedObject = indexedObject;
-exports.indexedObjectU = orFactory(indexedObject, undefinedGuard);
+not.indexedObject = notFactory(indexedObject);
+exports.indexedObjectU = orFactory(indexedObject, _undefined);
 exports.indexedObjects = factory(arrayOf, indexedObject);
-exports.indexedObjectsU = orFactory(exports.indexedObjects, undefinedGuard);
+exports.indexedObjectsU = orFactory(exports.indexedObjects, _undefined);
 /**
  * Checks that value type is IndexedObject\<T\>.
  *
@@ -195,7 +163,7 @@ exports.indexedObjectsU = orFactory(exports.indexedObjects, undefinedGuard);
  * @returns _True_ if value type is IndexedObject\<T\>, _false_ otherwise.
  */
 function indexedObjectOf(value, guard) {
-    return object(value) && Object.values(value).every(guard);
+    return object(value) && o.values(value).every(guard);
 }
 exports.indexedObjectOf = indexedObjectOf;
 indexedObject.of = indexedObjectOf;
@@ -218,9 +186,23 @@ exports.instance = instance;
  * @returns _True_ if value type is T[], _false_ otherwise.
  */
 function instances(value, ctor) {
-    return Array.isArray(value) && value.every(x => x instanceof ctor);
+    return array(value) && value.every(v => v instanceof ctor);
 }
 exports.instances = instances;
+/**
+ * Checks that value type is Map.
+ *
+ * @param value - Value.
+ * @returns _True_ if value type is Map, _false_ otherwise.
+ */
+function map(value) {
+    return value instanceof Map;
+}
+exports.map = map;
+not.map = notFactory(map);
+exports.mapU = orFactory(map, _undefined);
+exports.maps = factory(arrayOf, map);
+exports.mapsU = orFactory(exports.maps, _undefined);
 /**
  * Checks that value type is Map\<K, V\>.
  *
@@ -229,22 +211,23 @@ exports.instances = instances;
  * @param valueGuard - Value guard.
  * @returns _True_ if value type is Map\<K, V\>, _false_ otherwise.
  */
-function map(value, keyGuard, valueGuard) {
+function mapOf(value, keyGuard, valueGuard) {
     return (value instanceof Map &&
         a.fromIterable(value).every(([k, v]) => keyGuard(k) && valueGuard(v)));
 }
-exports.map = map;
+exports.mapOf = mapOf;
+map.of = mapOf;
 /**
  * Checks that value is _null_.
  *
  * @param value - Value.
  * @returns _True_ if value is _null_, _false_ otherwise.
  */
-function nullGuard(value) {
+function _null(value) {
     return value === null;
 }
-exports.null = nullGuard;
-not.null = notFactory(nullGuard);
+exports.null = _null;
+not.null = notFactory(_null);
 /**
  * Checks that value type is NumStr.
  *
@@ -262,26 +245,9 @@ function numStr(value) {
 }
 exports.numStr = numStr;
 not.numStr = notFactory(numStr);
+exports.numStrU = orFactory(numStr, _undefined);
 exports.numStrs = factory(arrayOf, numStr);
-exports.numStrsU = orFactory(exports.numStrs, undefinedGuard);
-/**
- * Checks that value type is NumStrU.
- *
- * @param value - Value.
- * @returns _True_ if value type is NumStrU, _false_ otherwise.
- */
-function numStrU(value) {
-    switch (typeof value) {
-        case "number":
-        case "string":
-        case "undefined":
-            return true;
-        default:
-            return false;
-    }
-}
-exports.numStrU = numStrU;
-not.numStrU = notFactory(numStrU);
+exports.numStrsU = orFactory(exports.numStrs, _undefined);
 /**
  * Checks that value is a number.
  *
@@ -293,19 +259,9 @@ function number(value) {
 }
 exports.number = number;
 not.number = notFactory(number);
+exports.numberU = orFactory(number, _undefined);
 exports.numbers = factory(arrayOf, number);
-exports.numbersU = orFactory(exports.numbers, undefinedGuard);
-/**
- * Checks that value type is numberU.
- *
- * @param value - Value.
- * @returns _True_ if value type is numberU, _false_ otherwise.
- */
-function numberU(value) {
-    return typeof value === "number" || value === undefined;
-}
-exports.numberU = numberU;
-not.numberU = notFactory(numberU);
+exports.numbersU = orFactory(exports.numbers, _undefined);
 /**
  * Checks that value is an object.
  *
@@ -317,46 +273,62 @@ function object(value) {
 }
 exports.object = object;
 not.object = notFactory(object);
+exports.objectU = orFactory(object, _undefined);
 exports.objects = factory(arrayOf, object);
-exports.objectsU = orFactory(exports.objects, undefinedGuard);
+exports.objectsU = orFactory(exports.objects, _undefined);
 /**
  * Checks that value type is T.
  *
  * @param value - Value.
- * @param requiredGuards - Guards for required properties.
- * @param optionalGuards - Guards for optional properties.
+ * @param required - Guards for required properties.
+ * @param optional - Guards for optional properties.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-function objectOf(value, requiredGuards, optionalGuards) {
+function objectOf(value, required, optional) {
     return (indexedObject(value) &&
-        o.entries(requiredGuards).every(([name, guard]) => guard(value[name])) &&
-        o
-            .entries(optionalGuards)
-            .every(([name, guard]) => o.hasOwnProp(name, value) ? guard(value[name]) : true));
+        o.every(required, (guard, key) => checkRequiredProp(value, key, guard)) &&
+        o.every(optional, (guard, key) => checkOptionalProp(value, key, guard)));
 }
 exports.objectOf = objectOf;
 object.of = objectOf;
 /**
- * Checks that value type is objectU.
+ * Creates guard for type T.
+ *
+ * @param required - Guards for required properties.
+ * @param optional - Guards for optional properties.
+ * @returns Guard for type T.
+ */
+function objectOfFactory(required, optional) {
+    return (value) => objectOf(value, required, optional);
+}
+exports.objectOfFactory = objectOfFactory;
+objectOf.factory = objectOfFactory;
+/**
+ * Checks that value type is Set.
  *
  * @param value - Value.
- * @returns _True_ if value type is objectU, _false_ otherwise.
+ * @returns _True_ if value type is Set, _false_ otherwise.
  */
-function objectU(value) {
-    return object(value) || value === undefined;
+function set(value) {
+    return value instanceof Set;
 }
-exports.objectU = objectU;
+exports.set = set;
+not.set = notFactory(set);
+exports.setU = orFactory(set, _undefined);
+exports.sets = factory(arrayOf, set);
+exports.setsU = orFactory(exports.sets, _undefined);
 /**
- * Checks that value type is Set<T>.
+ * Checks that value type is Set\<T\>.
  *
  * @param value - Value.
  * @param guard - Guard.
- * @returns _True_ if value type is Set<T>, _false_ otherwise.
+ * @returns _True_ if value type is Set\<T\>, _false_ otherwise.
  */
-function set(value, guard) {
-    return value instanceof Set && a.fromIterable(value).every(x => guard(x));
+function setOf(value, guard) {
+    return value instanceof Set && a.fromIterable(value).every(v => guard(v));
 }
-exports.set = set;
+exports.setOf = setOf;
+set.of = setOf;
 /**
  * Checks that value is a string.
  *
@@ -368,19 +340,9 @@ function string(value) {
 }
 exports.string = string;
 not.string = notFactory(string);
+exports.stringU = orFactory(string, _undefined);
 exports.strings = factory(arrayOf, string);
-exports.stringsU = orFactory(exports.strings, undefinedGuard);
-/**
- * Checks that value type is stringU.
- *
- * @param value - Value.
- * @returns _True_ if value type is stringU, _false_ otherwise.
- */
-function stringU(value) {
-    return (typeof value === "string" && value !== "") || value === undefined;
-}
-exports.stringU = stringU;
-not.stringU = notFactory(stringU);
+exports.stringsU = orFactory(exports.strings, _undefined);
 /**
  * Checks that value is a symbol.
  *
@@ -392,19 +354,21 @@ function symbol(value) {
 }
 exports.symbol = symbol;
 not.symbol = notFactory(symbol);
+exports.symbolU = orFactory(symbol, _undefined);
 exports.symbols = factory(arrayOf, symbol);
-exports.symbolsU = orFactory(exports.symbols, undefinedGuard);
+exports.symbolsU = orFactory(exports.symbols, _undefined);
 /**
  * Checks that value is _true_.
  *
  * @param value - Value.
  * @returns _True_ if value is _true_, _false_ otherwise.
  */
-function trueGuard(value) {
+function _true(value) {
     return value === true;
 }
-exports.trueGuard = trueGuard;
-exports.true = trueGuard;
+exports._true = _true;
+exports.true = _true;
+not.true = notFactory(_true);
 function tuple(value, ...guards) {
     return array(value) && guards.every((guard, index) => guard(value[index]));
 }
@@ -420,11 +384,11 @@ tuple.factory = tupleFactory;
  * @param value - Value.
  * @returns _True_ if value is _undefined_, _false_ otherwise.
  */
-function undefinedGuard(value) {
+function _undefined(value) {
     return value === undefined;
 }
-exports.undefined = undefinedGuard;
-not.undefined = notFactory(undefinedGuard);
+exports.undefined = _undefined;
+not.undefined = notFactory(_undefined);
 /**
  * Checks that value is _unknown_.
  *
@@ -436,4 +400,32 @@ function unknown(_value) {
 }
 exports.unknown = unknown;
 exports.unknowns = factory(arrayOf, unknown);
+exports.unknownsU = orFactory(exports.unknowns, _undefined);
+/*
+|*******************************************************************************
+|* Private
+|*******************************************************************************
+|*/
+/**
+ * Checks optional prop.
+ *
+ * @param obj - Object.
+ * @param key - Key.
+ * @param guard - Guard.
+ * @returns Check result.
+ */
+function checkOptionalProp(obj, key, guard) {
+    return o.hasOwnProp(key, obj) ? guard(obj[key]) : true;
+}
+/**
+ * Checks required prop.
+ *
+ * @param obj - Object.
+ * @param key - Key.
+ * @param guard - Guard.
+ * @returns Check result.
+ */
+function checkRequiredProp(obj, key, guard) {
+    return o.hasOwnProp(key, obj) ? guard(obj[key]) : false;
+}
 //# sourceMappingURL=guards.js.map

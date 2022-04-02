@@ -1,55 +1,46 @@
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[object] */
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
 import * as a from "./array";
 import * as is from "./guards";
-export function assign(mutableTarget, ...sources) {
-    return Object.assign(mutableTarget, ...sources);
-}
+export const assign = Object.assign;
 /**
- * Creates object copy.
+ * Clones object.
  *
  * @param obj - Object.
- * @returns Object copy.
+ * @returns New object.
  */
 export function clone(obj) {
     return Object.assign({}, obj);
 }
-/**
- * Typed version of Object.defineProperty.
- *
- * @param obj - Object.
- * @param key - Property name.
- * @param descriptor - Descriptor.
- */
-export function defineProperty(obj, key, descriptor) {
-    Object.defineProperty(obj, key, descriptor);
-}
+export const defineProperty = Object.defineProperty.bind(Object);
 /**
  * Typed version of Object.entries.
  *
  * @param obj - Object.
  * @returns Object entries.
  */
-function getEntries(obj) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
-    return Object.entries(obj);
-}
-export { getEntries as entries };
+const _entries = Object.entries;
+export { _entries as entries };
+/**
+ * Checks that every object property satisfies condition.
+ *
+ * @param obj - Object.
+ * @param callback - Callback.
+ * @returns _True_ if every object property satisfies condition, _false_ otherwise.
+ */
 export function every(obj, callback) {
-    return getEntries(obj).every(([key, value]) => callback(value, key));
+    return _entries(obj).every(([key, value]) => callback(value, key));
 }
-export function extend(target, ...sources) {
-    return Object.assign(target, ...sources);
-}
+export const extend = Object.assign;
 /**
  * Filters object by callback.
  *
  * @param obj - Object.
  * @param callback - Callback.
- * @returns New filtered object.
+ * @returns New object.
  */
 export function filter(obj, callback) {
     const result = {};
-    for (const [key, value] of getEntries(obj))
+    for (const [key, value] of _entries(obj))
         if (callback(value, key))
             result[key] = value;
     return result;
@@ -58,22 +49,11 @@ export function filter(obj, callback) {
  * Marks object as readonly.
  *
  * @param obj - Object.
- * @returns Object marked as readonly.
+ * @returns Object.
  */
 export function freeze(obj) {
     return obj;
 }
-/**
- * Marks object as deep readonly.
- *
- * @param obj - Object.
- * @returns Object marked as deep readonly.
- */
-export function freezeDeep(obj) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
-    return obj;
-}
-freeze.deep = freezeDeep;
 /**
  * Creates object from entries.
  *
@@ -87,38 +67,40 @@ export function fromEntries(entries) {
         result[entry[0]] = entry[1];
     return result;
 }
-// eslint-disable-next-line no-type-assertion/no-type-assertion
-fromEntries.exhaustive = fromEntries;
 /**
- * Typed version of Object.getPrototypeOf.
+ * Creates object from entries.
+ *
+ * @param entries - Entries.
+ * @returns Object.
+ */
+fromEntries.exhaustive = (entries) => {
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
+    const result = {};
+    for (const entry of entries)
+        result[entry[0]] = entry[1];
+    return result;
+};
+/**
+ * Returns object prototype.
  *
  * @param obj - Object.
- * @returns Prototype if available, _undefined_ otherwise.
+ * @returns Object prototype if available, _undefined_ otherwise.
  */
 export function getPrototypeOf(obj) {
     const prototype = Object.getPrototypeOf(obj);
     return is.object(prototype) ? prototype : undefined;
 }
 /**
- * Alias of Object.prototype.hasOwnProperty.
+ * Checks that object has property.
  *
- * @param key - Property name.
+ * @param key - Property key.
  * @param obj - Object.
  * @returns _True_ if object has property, _false_ otherwise.
  */
 export function hasOwnProp(key, obj) {
     return Object.prototype.hasOwnProperty.call(obj, key);
 }
-/**
- * Typed version of Object.keys.
- *
- * @param obj - Object.
- * @returns Object keys.
- */
-export function keys(obj) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
-    return Object.keys(obj);
-}
+export const keys = Object.keys;
 /**
  * Applies callback to each property.
  *
@@ -127,46 +109,52 @@ export function keys(obj) {
  * @returns New object.
  */
 export function map(obj, callback) {
-    return fromEntries.exhaustive(Object.entries(obj).map(([key, value]) => [
-        key,
-        callback(value, key)
-    ]));
+    return fromEntries.exhaustive(_entries(obj).map(([key, value]) => [key, callback(value, key)]));
 }
 /**
- * Merges several objects.
+ * Merges objects.
  * If more than one object has the same key, respective values are combined into array.
  *
  * @param objects - Objects.
  * @returns Merged object.
  */
 export function merge(...objects) {
-    const pool = {};
+    const result = new Map();
     for (const obj of objects)
         for (const [key, value] of Object.entries(obj)) {
-            const valuesByKey = pool[key];
-            if (valuesByKey)
-                valuesByKey.push(value);
+            const arr = result.get(key);
+            if (arr)
+                arr.push(value);
             else
-                pool[key] = [value];
+                result.set(key, [value]);
         }
-    return fromEntries(Object.entries(pool).map(([key, valuesByKey]) => [
+    return fromEntries(a
+        .fromIterable(result.entries())
+        .map(([key, arr]) => [
         key,
-        valuesByKey.length === 1 ? valuesByKey[0] : valuesByKey
+        arr.length === 1 ? arr[0] : arr
     ]));
 }
 /**
- * Omits keys from object.
+ * Removes keys from object.
  *
  * @param obj - Object.
- * @param exclude - Keys to exclude.
+ * @param exclude - Keys to remove.
  * @returns New object with given keys omitted.
  */
 export function omit(obj, ...exclude) {
-    const keysSet = new Set(exclude);
+    const excludeSet = new Set(exclude);
     // eslint-disable-next-line no-type-assertion/no-type-assertion
-    return filter(obj, (_value, key) => !keysSet.has(key));
+    return filter(obj, (_value, key) => !excludeSet.has(key));
 }
+/**
+ * Removes undefined keys.
+ *
+ * @param obj - Object.
+ * @returns New object with undefined keys removed.
+ */
 export function removeUndefinedKeys(obj) {
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
     return filter(obj, is.not.empty);
 }
 /**
@@ -178,8 +166,15 @@ export function removeUndefinedKeys(obj) {
 export function size(obj) {
     return Object.keys(obj).length;
 }
+/**
+ * Checks that some object property satisfies condition.
+ *
+ * @param obj - Object.
+ * @param callback - Callback.
+ * @returns _True_ if some object property satisfies condition, _false_ otherwise.
+ */
 export function some(obj, callback) {
-    return getEntries(obj).some(([key, value]) => callback(value, key));
+    return _entries(obj).some(([key, value]) => callback(value, key));
 }
 /**
  * Sorts object.
@@ -190,36 +185,18 @@ export function some(obj, callback) {
  */
 export function sort(obj, compareFn) {
     // eslint-disable-next-line no-type-assertion/no-type-assertion
-    return fromEntries(a.sort(getEntries(obj), compareFn));
+    return fromEntries(a.sort(_entries(obj), compareFn
+        ? (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
+        : undefined));
 }
 /**
  * Marks object as writable.
  *
  * @param obj - Object.
- * @returns Object marked as writable.
+ * @returns Object.
  */
 export function unfreeze(obj) {
     return obj;
 }
-/**
- * Marks object as deep writable.
- *
- * @param obj - Object.
- * @returns Object marked as deep writable.
- */
-export function unfreezeDeep(obj) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
-    return obj;
-}
-unfreeze.deep = unfreezeDeep;
-/**
- * Typed version of Object.values.
- *
- * @param obj - Object.
- * @returns Object values.
- */
-export function values(obj) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
-    return Object.values(obj);
-}
+export const values = Object.values;
 //# sourceMappingURL=object.js.map

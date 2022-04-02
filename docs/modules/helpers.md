@@ -11,12 +11,15 @@
 ### Type aliases
 
 - [Facade](helpers.md#facade)
+- [ProxyHandlerAction](helpers.md#proxyhandleraction)
 - [SafeAccess](helpers.md#safeaccess)
 - [SafeAccessGuards](helpers.md#safeaccessguards)
+- [ValidationObject](helpers.md#validationobject)
 
 ### Functions
 
 - [createFacade](helpers.md#createfacade)
+- [createValidationObject](helpers.md#createvalidationobject)
 - [onDemand](helpers.md#ondemand)
 - [safeAccess](helpers.md#safeaccess)
 - [typedef](helpers.md#typedef)
@@ -38,9 +41,15 @@
 
 ___
 
+### ProxyHandlerAction
+
+Ƭ **ProxyHandlerAction**: ``"doDefault"`` \| ``"throw"``
+
+___
+
 ### SafeAccess
 
-Ƭ **SafeAccess**<`T`, `W`, `R`\>: [`Join2`](types_core.md#join2)<{ [K in W]: T[K] }, { readonly [K in R]: T[K] }\>
+Ƭ **SafeAccess**<`T`, `W`, `R`\>: [`Join2`](types_object.md#join2)<{ [K in W]: T[K] }, { readonly [K in R]: T[K] }\>
 
 #### Type parameters
 
@@ -61,7 +70,19 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `T` | `T` |
-| `W` | extends keyof `T` |
+| `W` | extends `string` & keyof `T` |
+
+___
+
+### ValidationObject
+
+Ƭ **ValidationObject**<`T`\>: `ReadonlySet`<`T`\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `PropertyKey` |
 
 ## Functions
 
@@ -93,11 +114,37 @@ Facade.
 
 ___
 
+### createValidationObject
+
+▸ **createValidationObject**<`T`\>(`source`): [`ValidationObject`](helpers.md#validationobject)<`T`\>
+
+Creates validation object.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `PropertyKey` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `source` | [`TypedObject`](types_core.md#typedobject)<`T`, `T`\> | Source. |
+
+#### Returns
+
+[`ValidationObject`](helpers.md#validationobject)<`T`\>
+
+Validation object.
+
+___
+
 ### onDemand
 
 ▸ **onDemand**<`T`\>(`generator`): `T`
 
-Delays resource generation until demanded.
+Generates resource on demand.
 
 #### Type parameters
 
@@ -151,9 +198,9 @@ ___
 
 ### typedef
 
-▸ **typedef**<`T`\>(`source`): `T`
+▸ **typedef**<`T`\>(`value`): `T`
 
-Defines source type.
+Defines value type.
 
 #### Type parameters
 
@@ -165,13 +212,13 @@ Defines source type.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `source` | `T` | Source. |
+| `value` | `T` | Value. |
 
 #### Returns
 
 `T`
 
-Source.
+Value.
 
 ___
 
@@ -210,7 +257,7 @@ Adds missing methods to proxy handler.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `id` | `string` | ID. |
-| `action` | ``"doDefault"`` \| ``"throw"`` | Action for missing methods. |
+| `action` | [`ProxyHandlerAction`](helpers.md#proxyhandleraction) | Action for missing methods. |
 | `handler` | `Readonly`<`ProxyHandler`<`T`\>\> | Handler. |
 
 #### Returns

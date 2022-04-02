@@ -5,12 +5,12 @@
  * @param key - Key.
  * @returns Map with key removed.
  */
-export function mapDelete(map, key) {
+export function _delete(map, key) {
     const result = new Map(map);
     result.delete(key);
     return result;
 }
-export { mapDelete as delete };
+export { _delete as delete };
 /**
  * Sets key to value.
  *

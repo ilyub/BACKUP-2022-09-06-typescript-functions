@@ -30,7 +30,7 @@ Asserts that value type is T[].
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
 | `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error to be thrown. |
+| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
 
 #### Returns
 

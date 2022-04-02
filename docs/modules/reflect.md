@@ -46,7 +46,7 @@
 
 ▸ **apply**(`target`, `thisArg`, `args`): `unknown`
 
-Typed version of Reflect.construct.
+Typed version of Reflect.apply.
 
 #### Parameters
 
@@ -119,7 +119,7 @@ Typed version of Reflect.defineMetadata.
 | `metadataKey` | [`MetadataKey`](reflect.md#metadatakey) | Metadata key. |
 | `metadataValue` | `unknown` | Metadata value. |
 | `target` | `object` | Target object. |
-| `key` | [`MetadataKey`](reflect.md#metadatakey) | Property name. |
+| `key` | [`MetadataKey`](reflect.md#metadatakey) | Property key. |
 
 #### Returns
 
@@ -173,7 +173,7 @@ Typed version of Reflect.get.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `target` | `object` | Target object. |
-| `key` | `PropertyKey` | Property name. |
+| `key` | `PropertyKey` | Property key. |
 
 #### Returns
 
@@ -216,7 +216,7 @@ Typed version of Reflect.getMetadata.
 | :------ | :------ | :------ |
 | `metadataKey` | [`MetadataKey`](reflect.md#metadatakey) | Metadata key. |
 | `target` | `object` | Target object. |
-| `key` | [`MetadataKey`](reflect.md#metadatakey) | Property name. |
+| `key` | [`MetadataKey`](reflect.md#metadatakey) | Property key. |
 
 #### Returns
 
@@ -259,7 +259,7 @@ Typed version of Reflect.getOwnMetadata.
 | :------ | :------ | :------ |
 | `metadataKey` | [`MetadataKey`](reflect.md#metadatakey) | Metadata key. |
 | `target` | `object` | Target object. |
-| `key` | [`MetadataKey`](reflect.md#metadatakey) | Property name. |
+| `key` | [`MetadataKey`](reflect.md#metadatakey) | Property key. |
 
 #### Returns
 
@@ -352,7 +352,7 @@ Typed version of Reflect.hasMetadata.
 | :------ | :------ | :------ |
 | `metadataKey` | [`MetadataKey`](reflect.md#metadatakey) | Metadata key. |
 | `target` | `object` | Target object. |
-| `key` | [`MetadataKey`](reflect.md#metadatakey) | Property name. |
+| `key` | [`MetadataKey`](reflect.md#metadatakey) | Property key. |
 
 #### Returns
 
@@ -366,7 +366,7 @@ ___
 
 ▸ **hasOwnMetadata**(`metadataKey`, `target`): `boolean`
 
-Typed version of Reflect.hasMetadata.
+Typed version of Reflect.hasOwnMetadata.
 
 #### Parameters
 
@@ -387,7 +387,7 @@ ___
 
 ▸ **hasOwnMetadataKey**(`metadataKey`, `target`, `key`): `boolean`
 
-Typed version of Reflect.hasMetadata.
+Typed version of Reflect.hasOwnMetadata.
 
 #### Parameters
 
@@ -395,7 +395,7 @@ Typed version of Reflect.hasMetadata.
 | :------ | :------ | :------ |
 | `metadataKey` | [`MetadataKey`](reflect.md#metadatakey) | Metadata key. |
 | `target` | `object` | Target object. |
-| `key` | [`MetadataKey`](reflect.md#metadatakey) | Property name. |
+| `key` | [`MetadataKey`](reflect.md#metadatakey) | Property key. |
 
 #### Returns
 

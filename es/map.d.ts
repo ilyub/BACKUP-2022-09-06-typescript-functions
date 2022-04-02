@@ -5,8 +5,8 @@
  * @param key - Key.
  * @returns Map with key removed.
  */
-export declare function mapDelete<K, V>(map: ReadonlyMap<K, V>, key: K): ReadonlyMap<K, V>;
-export { mapDelete as delete };
+export declare function _delete<K, V>(map: ReadonlyMap<K, V>, key: K): ReadonlyMap<K, V>;
+export { _delete as delete };
 /**
  * Sets key to value.
  *

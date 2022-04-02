@@ -1,14 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.wrapProxyHandler = exports.wait = exports.safeAccess = exports.typedef = exports.onDemand = exports.createFacade = void 0;
+exports.wrapProxyHandler = exports.wait = exports.safeAccess = exports.typedef = exports.onDemand = exports.createValidationObject = exports.createFacade = void 0;
 const tslib_1 = require("tslib");
 const assert = tslib_1.__importStar(require("./assertions"));
 const cast = tslib_1.__importStar(require("./converters"));
 const fn = tslib_1.__importStar(require("./function"));
 const is = tslib_1.__importStar(require("./guards"));
 const o = tslib_1.__importStar(require("./object"));
+const programFlow = tslib_1.__importStar(require("./programFlow"));
 const reflect = tslib_1.__importStar(require("./reflect"));
-const timer = tslib_1.__importStar(require("./timer"));
 /**
  * Creates facade.
  *
@@ -18,51 +18,59 @@ const timer = tslib_1.__importStar(require("./timer"));
  */
 function createFacade(name, extension) {
     let _implementation;
-    const facadeOwnMethods = {
-        setImplementation(value) {
+    const facadeOwn = Object.assign({ setImplementation(value) {
             _implementation = value;
-        }
-    };
-    const defaultFacade = Object.assign(Object.assign({}, extension), facadeOwnMethods);
-    const proxy = new Proxy(fn.noop, wrapProxyHandler("createFacade", "throw", {
+        } }, extension);
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
+    return new Proxy(fn.noop, wrapProxyHandler("createFacade", "throw", {
         apply(_target, thisArg, args) {
-            return reflect.apply(implementation(), thisArg, args);
+            return reflect.apply(targetFn(), thisArg, args);
         },
         get(_target, key) {
-            return reflect.get(facade(key), key);
+            return reflect.get(target(key), key);
         },
         getOwnPropertyDescriptor(_target, key) {
-            return Object.getOwnPropertyDescriptor(facade(key), key);
+            return reflect.getOwnPropertyDescriptor(target(key), key);
         },
         has(_target, key) {
-            return reflect.has(facade(key), key);
+            return reflect.has(target(key), key);
         },
         isExtensible() {
-            return Object.isExtensible(facade());
+            return reflect.isExtensible(target());
         },
         ownKeys() {
-            return reflect.ownKeys(facade());
+            return reflect.ownKeys(target());
         },
         set(_target, key, value) {
-            return reflect.set(facade(key), key, value);
+            return reflect.set(target(key), key, value);
         }
     }));
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
-    return proxy;
-    function facade(key) {
-        if (is.not.empty(key) && key in defaultFacade)
-            return defaultFacade;
+    function target(key) {
+        if (is.not.empty(key) && key in facadeOwn)
+            return facadeOwn;
         assert.not.empty(_implementation, `Missing facade implementation: ${name}`);
         return _implementation;
     }
-    function implementation() {
+    function targetFn() {
         assert.callable(_implementation, `Facade is not callable: ${name}`);
         return _implementation;
     }
 }
 exports.createFacade = createFacade;
 /**
- * Delays resource generation until demanded.
+ * Creates validation object.
+ *
+ * @param source - Source.
+ * @returns Validation object.
+ */
+function createValidationObject(source) {
+    if (o.entries(source).every(([key, value]) => key === String(value)))
+        return new Set(o.values(source));
+    throw new Error("Invalid source");
+}
+exports.createValidationObject = createValidationObject;
+/**
+ * Generates resource on demand.
  *
  * @param generator - Resource generator.
  * @returns Resource.
@@ -74,7 +82,7 @@ function onDemand(generator) {
             return reflect.get(obj(), key);
         },
         getOwnPropertyDescriptor(_target, key) {
-            return Object.getOwnPropertyDescriptor(obj(), key);
+            return reflect.getOwnPropertyDescriptor(obj(), key);
         },
         has(_target, key) {
             return reflect.has(obj(), key);
@@ -83,7 +91,7 @@ function onDemand(generator) {
             return reflect.isExtensible(obj());
         },
         ownKeys() {
-            return Object.keys(obj());
+            return reflect.ownKeys(obj());
         },
         set(_target, key, value) {
             reflect.set(obj(), key, value);
@@ -99,13 +107,13 @@ function onDemand(generator) {
 }
 exports.onDemand = onDemand;
 /**
- * Defines source type.
+ * Defines value type.
  *
- * @param source - Source.
- * @returns Source.
+ * @param value - Value.
+ * @returns Value.
  */
-function typedef(source) {
-    return source;
+function typedef(value) {
+    return value;
 }
 exports.typedef = typedef;
 /**
@@ -117,9 +125,9 @@ exports.typedef = typedef;
  * @returns Safe access interface.
  */
 function safeAccess(obj, guards, readonlyKeys = []) {
-    const guardsMap = new Map(Object.entries(guards));
+    const guardsMap = new Map(o.entries(guards));
     const writableKeys = o.keys(guards);
-    const keys = [...readonlyKeys, ...writableKeys];
+    const keys = [...writableKeys, ...readonlyKeys];
     const keysSet = new Set(keys);
     return new Proxy(obj, wrapProxyHandler("safeAccess", "throw", {
         get(target, key) {
@@ -143,11 +151,11 @@ function safeAccess(obj, guards, readonlyKeys = []) {
         },
         set(target, key, value) {
             const guard = guardsMap.get(key);
-            if (guard)
+            if (guard) {
                 if (guard(value))
                     return reflect.set(target, key, value);
-                else
-                    throw new Error(`Type check failed: ${cast.string(key)}`);
+                throw new Error(`Type check failed: ${cast.string(key)}`);
+            }
             throw new Error(`Write access denied: ${cast.string(key)}`);
         }
     }));
@@ -160,7 +168,7 @@ exports.safeAccess = safeAccess;
  */
 async function wait(timeout) {
     await new Promise(resolve => {
-        timer.addTimeout(resolve, timeout);
+        programFlow.setTimeout(resolve, timeout);
     });
 }
 exports.wait = wait;

@@ -63,8 +63,8 @@ Compares two values as JSON strings.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `x` | `unknown` | Value. |
-| `y` | `unknown` | Value. |
+| `x` | `unknown` | Value 1. |
+| `y` | `unknown` | Value 2. |
 
 #### Returns
 
@@ -84,8 +84,8 @@ Compares two values as JSON strings.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `x` | `unknown` | Value. |
-| `y` | `unknown` | Value. |
+| `x` | `unknown` | Value 1. |
+| `y` | `unknown` | Value 2. |
 
 #### Returns
 

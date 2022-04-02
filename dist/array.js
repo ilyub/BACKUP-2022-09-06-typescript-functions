@@ -1,7 +1,7 @@
 "use strict";
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[array] */
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unshift = exports.uniqueBy = exports.truncate = exports.toggleBy = exports.sort = exports.reverse = exports.replaceBy = exports.replace = exports.removeBy = exports.random = exports.pushOrReplaceBy = exports.push = exports.last = exports.includesBy = exports.get = exports.fromString = exports.fromRange = exports.fromIterable = exports.first = exports.findBy = exports.drop = exports.clone = exports.chain = void 0;
+exports.unshiftOrReplaceBy = exports.unshift = exports.uniqueBy = exports.truncate = exports.toggleBy = exports.sort = exports.reverse = exports.replaceBy = exports.replace = exports.removeBy = exports.random = exports.pushOrReplaceBy = exports.push = exports.last = exports.includesBy = exports.get = exports.fromString = exports.fromRange = exports.fromIterable = exports.first = exports.findBy = exports.drop = exports.clone = exports.chain = void 0;
 const tslib_1 = require("tslib");
 const _ = tslib_1.__importStar(require("lodash"));
 const assert = tslib_1.__importStar(require("./assertions"));
@@ -9,10 +9,10 @@ const is = tslib_1.__importStar(require("./guards"));
 const o = tslib_1.__importStar(require("./object"));
 const reflect = tslib_1.__importStar(require("./reflect"));
 /**
- * Creates an array of pairs [x1, x2], [x2, x3]...
+ * Creates array of pairs ("[x, y, z]" =\> "[[x, y], [y, z]]").
  *
  * @param arr - Array.
- * @returns An array of pairs.
+ * @returns Array of pairs.
  */
 function chain(arr) {
     const result = [];
@@ -36,7 +36,7 @@ exports.clone = clone;
  * @returns New array with one element removed.
  */
 function drop(arr, index) {
-    assert.toBeTrue(index >= 0 && index < arr.length, "Invalid index");
+    assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
     return [...arr.slice(0, index), ...arr.slice(index + 1)];
 }
 exports.drop = drop;
@@ -44,17 +44,18 @@ exports.drop = drop;
  * Finds element matching value.
  *
  * @param arr - Array.
- * @param value - Value for comparison.
+ * @param value - Value.
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns The first element matching value if available, _undefined_ otherwise.
  */
 function findBy(arr, value, keyOrReduce) {
     const reduce = toReduce(keyOrReduce);
-    return arr.find(element => reduce(element) === reduce(value));
+    const reduced = reduce(value);
+    return arr.find(element => reduce(element) === reduced);
 }
 exports.findBy = findBy;
 /**
- * Gets the first element.
+ * Returns the first element from an array.
  *
  * @param arr - Array.
  * @returns The first element if available.
@@ -71,13 +72,13 @@ exports.first = first;
  * @returns Array.
  */
 function fromIterable(iterable) {
-    return is.callable(iterable) ? [...iterable()] : [...iterable];
+    return [...iterable];
 }
 exports.fromIterable = fromIterable;
 /**
- * Creates array from range.
+ * Creates array of numbers.
  *
- * @param from - Starting number.
+ * @param from - Lower limit (inclusive).
  * @param to - Upper limit (inclusive).
  * @param step - Step.
  * @returns Array of numbers.
@@ -100,11 +101,11 @@ function fromString(str) {
 }
 exports.fromString = fromString;
 /**
- * Gets element by index.
+ * Returns element by index.
  *
  * @param arr - Array.
  * @param index - Index.
- * @returns Array element if available.
+ * @returns Element if available.
  * @throws Error otherwise.
  */
 function get(arr, index) {
@@ -117,17 +118,18 @@ exports.get = get;
  * Checks that array contains element matching value.
  *
  * @param arr - Array.
- * @param value - Value for comparison.
+ * @param value - Value.
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns _True_ if array contains element matching value, _false_ otherwise.
  */
 function includesBy(arr, value, keyOrReduce) {
     const reduce = toReduce(keyOrReduce);
-    return arr.some(element => reduce(element) === reduce(value));
+    const reduced = reduce(value);
+    return arr.some(element => reduce(element) === reduced);
 }
 exports.includesBy = includesBy;
 /**
- * Gets the last element.
+ * Returns the last element from an array.
  *
  * @param arr - Array.
  * @returns The last element if available.
@@ -138,7 +140,7 @@ function last(arr) {
 }
 exports.last = last;
 /**
- * Adds element to the end of array.
+ * Adds element to the end of an array.
  *
  * @param arr - Array.
  * @param value - Value.
@@ -149,7 +151,7 @@ function push(arr, value) {
 }
 exports.push = push;
 /**
- * Pushes value or replaces elements matching value if found.
+ * Replaces elements matching value if found, pushes value otherwise.
  *
  * @param arr - Array.
  * @param value - Value.
@@ -176,13 +178,14 @@ exports.random = random;
  * Removes elements matching value.
  *
  * @param arr - Array.
- * @param value - Value for comparison.
+ * @param value - Value.
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns New array with matching elements removed.
  */
 function removeBy(arr, value, keyOrReduce) {
     const reduce = toReduce(keyOrReduce);
-    return arr.filter(element => reduce(element) !== reduce(value));
+    const reduced = reduce(value);
+    return arr.filter(element => reduce(element) !== reduced);
 }
 exports.removeBy = removeBy;
 /**
@@ -190,11 +193,11 @@ exports.removeBy = removeBy;
  *
  * @param arr - Array.
  * @param index - Index to be replaced.
- * @param value - New value.
+ * @param value - Value.
  * @returns New array with one element replaced.
  */
 function replace(arr, index, value) {
-    assert.toBeTrue(index >= 0 && index < arr.length, "Invalid index");
+    assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
     return [...arr.slice(0, index), value, ...arr.slice(index + 1)];
 }
 exports.replace = replace;
@@ -202,20 +205,21 @@ exports.replace = replace;
  * Replaces elements matching value.
  *
  * @param arr - Array.
- * @param value - New value.
+ * @param value - Value.
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns New array with matching elements replaced.
  */
 function replaceBy(arr, value, keyOrReduce) {
     const reduce = toReduce(keyOrReduce);
-    return arr.map(element => reduce(element) === reduce(value) ? value : element);
+    const reduced = reduce(value);
+    return arr.map(element => (reduce(element) === reduced ? value : element));
 }
 exports.replaceBy = replaceBy;
 /**
  * Reverses array.
  *
  * @param arr - Array.
- * @returns New reversed array.
+ * @returns New array.
  */
 function reverse(arr) {
     const result = clone(arr);
@@ -228,7 +232,7 @@ exports.reverse = reverse;
  *
  * @param arr - Array.
  * @param compareFn - Comparison function.
- * @returns New sorted array.
+ * @returns New array.
  */
 function sort(arr, compareFn) {
     const result = clone(arr);
@@ -260,11 +264,11 @@ function truncate(mutableArray) {
 }
 exports.truncate = truncate;
 /**
- * Creates an array of unique elements.
+ * Creates unique array.
  *
  * @param arr - Array.
  * @param keyOrReduce - Comparison key or reduce function.
- * @returns An array of unique elements.
+ * @returns Unique array.
  */
 function uniqueBy(arr, keyOrReduce) {
     const reduce = toReduce(keyOrReduce);
@@ -279,7 +283,7 @@ function uniqueBy(arr, keyOrReduce) {
 }
 exports.uniqueBy = uniqueBy;
 /**
- * Adds element to the beginning of the array.
+ * Adds element to the beginning of an array.
  *
  * @param arr - Array.
  * @param value - Value.
@@ -289,6 +293,20 @@ function unshift(arr, value) {
     return [value, ...arr];
 }
 exports.unshift = unshift;
+/**
+ * Replaces elements matching value if found, unshifts value otherwise.
+ *
+ * @param arr - Array.
+ * @param value - Value.
+ * @param keyOrReduce - Comparison key or reduce function.
+ * @returns New array.
+ */
+function unshiftOrReplaceBy(arr, value, keyOrReduce) {
+    return includesBy(arr, value, keyOrReduce)
+        ? replaceBy(arr, value, keyOrReduce)
+        : unshift(arr, value);
+}
+exports.unshiftOrReplaceBy = unshiftOrReplaceBy;
 /*
 |*******************************************************************************
 |* Private

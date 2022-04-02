@@ -1,17 +1,15 @@
-/* skylib/eslint-plugin disable @skylib/disallow-identifier[reflect] */
+/* skylib/eslint-plugin disable @skylib/disallow-identifier[functions.reflect] */
 // eslint-disable-next-line import/no-unassigned-import
 import "reflect-metadata";
 /**
- * Typed version of Reflect.construct.
+ * Typed version of Reflect.apply.
  *
  * @param target - Target function.
  * @param thisArg - This argument.
  * @param args - Arguments.
  * @returns Function execution result.
  */
-export function apply(target, thisArg, args) {
-    return Reflect.apply(target, thisArg, args);
-}
+export const apply = Reflect.apply;
 /**
  * Typed version of Reflect.construct.
  *
@@ -20,11 +18,7 @@ export function apply(target, thisArg, args) {
  * @param newTarget - New target function.
  * @returns Constructed object.
  */
-export function construct(target, args, newTarget) {
-    return newTarget
-        ? Reflect.construct(target, args, newTarget)
-        : Reflect.construct(target, args);
-}
+export const construct = Reflect.construct;
 /**
  * Typed version of Reflect.defineMetadata.
  *
@@ -41,7 +35,7 @@ export function defineMetadata(metadataKey, metadataValue, target) {
  * @param metadataKey - Metadata key.
  * @param metadataValue - Metadata value.
  * @param target - Target object.
- * @param key - Property name.
+ * @param key - Property key.
  */
 export function defineMetadataKey(metadataKey, metadataValue, target, key) {
     Reflect.defineMetadata(metadataKey, metadataValue, target, key);
@@ -52,12 +46,10 @@ export const deleteProperty = Reflect.deleteProperty;
  * Typed version of Reflect.get.
  *
  * @param target - Target object.
- * @param key - Property name.
+ * @param key - Property key.
  * @returns Property value.
  */
-export function get(target, key) {
-    return Reflect.get(target, key);
-}
+export const get = Reflect.get;
 /**
  * Typed version of Reflect.getMetadata.
  *
@@ -73,7 +65,7 @@ export function getMetadata(metadataKey, target) {
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
- * @param key - Property name.
+ * @param key - Property key.
  * @returns Metadata value.
  */
 export function getMetadataKey(metadataKey, target, key) {
@@ -94,7 +86,7 @@ export function getOwnMetadata(metadataKey, target) {
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
- * @param key - Property name.
+ * @param key - Property key.
  * @returns Metadata value.
  */
 export function getOwnMetadataKey(metadataKey, target, key) {
@@ -118,14 +110,14 @@ export function hasMetadata(metadataKey, target) {
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
- * @param key - Property name.
+ * @param key - Property key.
  * @returns _True_ if key exists, _false_ otherwise.
  */
 export function hasMetadataKey(metadataKey, target, key) {
     return Reflect.hasMetadata(metadataKey, target, key);
 }
 /**
- * Typed version of Reflect.hasMetadata.
+ * Typed version of Reflect.hasOwnMetadata.
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
@@ -135,11 +127,11 @@ export function hasOwnMetadata(metadataKey, target) {
     return Reflect.hasOwnMetadata(metadataKey, target);
 }
 /**
- * Typed version of Reflect.hasMetadata.
+ * Typed version of Reflect.hasOwnMetadata.
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
- * @param key - Property name.
+ * @param key - Property key.
  * @returns _True_ if key exists, _false_ otherwise.
  */
 export function hasOwnMetadataKey(metadataKey, target, key) {

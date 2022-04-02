@@ -10,20 +10,20 @@
 
 ### Functions
 
-- [mapDelete](map.md#mapdelete)
+- [\_delete](map.md#_delete)
 - [set](map.md#set)
 
 ## References
 
 ### delete
 
-Renames and re-exports [mapDelete](map.md#mapdelete)
+Renames and re-exports [_delete](map.md#_delete)
 
 ## Functions
 
-### mapDelete
+### \_delete
 
-▸ **mapDelete**<`K`, `V`\>(`map`, `key`): `ReadonlyMap`<`K`, `V`\>
+▸ **_delete**<`K`, `V`\>(`map`, `key`): `ReadonlyMap`<`K`, `V`\>
 
 Removes key.
 

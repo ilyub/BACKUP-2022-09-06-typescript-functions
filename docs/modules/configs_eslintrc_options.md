@@ -16,7 +16,7 @@
 
 ### export&#x3D;
 
-• **export=**: (`importPrefix`: `any`) => { `consistentImport`: ({ `altLocalNames`: `never` ; `autoImportSource`: `string` ; `localName`: `string` = "a"; `sourcePattern`: `string` = "@skylib/functions/*/array"; `type`: `string` = "wildcard" } \| { `altLocalNames`: `never` ; `autoImportSource`: `string` ; `localName`: `never` = "a"; `sourcePattern`: `string` = "@skylib/functions/*/arrayMap"; `type`: `string` = "wildcard" } \| { `altLocalNames`: `string`[] ; `autoImportSource`: `string` ; `localName`: `never` = "a"; `sourcePattern`: `string` = "@skylib/functions/*/testUtils"; `type`: `string` = "wildcard" })[]  }
+• **export=**: (`importPrefix`: `any`) => { `consistentImport`: ({ `altLocalNames`: `never` ; `autoImportSource`: `string` ; `localName`: `string` = "a"; `sourcePattern`: `string` = "@skylib/functions/*/array"; `type`: `string` = "wildcard" } \| { `altLocalNames`: `never` ; `autoImportSource`: `string` ; `localName`: `never` = "a"; `sourcePattern`: `string` = "@skylib/functions/*/arrayMap"; `type`: `string` = "wildcard" } \| { `altLocalNames`: `string`[] ; `autoImportSource`: `string` ; `localName`: `never` = "a"; `sourcePattern`: `string` = "@skylib/functions/*/map"; `type`: `string` = "wildcard" })[] ; `disallowByRegexp`: { `contexts`: `string`[] ; `patterns`: `string`[] ; `subOptionsId`: `string` = "functions.array" }[] ; `disallowIdentifier`: { `ids`: `string`[] ; `subOptionsId`: `string` = "functions.reflect" }[]  }
 
 #### Type declaration
 
@@ -38,4 +38,6 @@ ESLint options.
 
 | Name | Type |
 | :------ | :------ |
-| `consistentImport` | ({ `altLocalNames`: `never` ; `autoImportSource`: `string` ; `localName`: `string` = "a"; `sourcePattern`: `string` = "@skylib/functions/*/array"; `type`: `string` = "wildcard" } \| { `altLocalNames`: `never` ; `autoImportSource`: `string` ; `localName`: `never` = "a"; `sourcePattern`: `string` = "@skylib/functions/*/arrayMap"; `type`: `string` = "wildcard" } \| { `altLocalNames`: `string`[] ; `autoImportSource`: `string` ; `localName`: `never` = "a"; `sourcePattern`: `string` = "@skylib/functions/*/testUtils"; `type`: `string` = "wildcard" })[] |
+| `consistentImport` | ({ `altLocalNames`: `never` ; `autoImportSource`: `string` ; `localName`: `string` = "a"; `sourcePattern`: `string` = "@skylib/functions/*/array"; `type`: `string` = "wildcard" } \| { `altLocalNames`: `never` ; `autoImportSource`: `string` ; `localName`: `never` = "a"; `sourcePattern`: `string` = "@skylib/functions/*/arrayMap"; `type`: `string` = "wildcard" } \| { `altLocalNames`: `string`[] ; `autoImportSource`: `string` ; `localName`: `never` = "a"; `sourcePattern`: `string` = "@skylib/functions/*/map"; `type`: `string` = "wildcard" })[] |
+| `disallowByRegexp` | { `contexts`: `string`[] ; `patterns`: `string`[] ; `subOptionsId`: `string` = "functions.array" }[] |
+| `disallowIdentifier` | { `ids`: `string`[] ; `subOptionsId`: `string` = "functions.reflect" }[] |

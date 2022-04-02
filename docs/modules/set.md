@@ -10,16 +10,43 @@
 
 ### Functions
 
+- [\_delete](set.md#_delete)
 - [add](set.md#add)
-- [setDelete](set.md#setdelete)
 
 ## References
 
 ### delete
 
-Renames and re-exports [setDelete](set.md#setdelete)
+Renames and re-exports [_delete](set.md#_delete)
 
 ## Functions
+
+### \_delete
+
+▸ **_delete**<`T`\>(`set`, `value`): `ReadonlySet`<`T`\>
+
+Removes value.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `set` | `ReadonlySet`<`T`\> | Set. |
+| `value` | `T` | Value. |
+
+#### Returns
+
+`ReadonlySet`<`T`\>
+
+Set with value removed.
+
+___
 
 ### add
 
@@ -45,30 +72,3 @@ Adds value.
 `ReadonlySet`<`T`\>
 
 Set with value added.
-
-___
-
-### setDelete
-
-▸ **setDelete**<`T`\>(`set`, `value`): `ReadonlySet`<`T`\>
-
-Removes value.
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `set` | `ReadonlySet`<`T`\> | Set. |
-| `value` | `T` | Value. |
-
-#### Returns
-
-`ReadonlySet`<`T`\>
-
-Set with value removed.

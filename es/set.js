@@ -17,10 +17,10 @@ export function add(set, value) {
  * @param value - Value.
  * @returns Set with value removed.
  */
-export function setDelete(set, value) {
+export function _delete(set, value) {
     const result = new Set(set);
     result.delete(value);
     return result;
 }
-export { setDelete as delete };
+export { _delete as delete };
 //# sourceMappingURL=set.js.map

@@ -16,16 +16,16 @@ export declare function encode(source: unknown): string;
 /**
  * Compares two values as JSON strings.
  *
- * @param x - Value.
- * @param y - Value.
+ * @param x - Value 1.
+ * @param y - Value 2.
  * @returns _True_ if two values are not equal, _false_ otherwise.
  */
 export declare function eq(x: unknown, y: unknown): boolean;
 /**
  * Compares two values as JSON strings.
  *
- * @param x - Value.
- * @param y - Value.
+ * @param x - Value 1.
+ * @param y - Value 2.
  * @returns _True_ if two values are not equal, _false_ otherwise.
  */
 export declare function neq(x: unknown, y: unknown): boolean;

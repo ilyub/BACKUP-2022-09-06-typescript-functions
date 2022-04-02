@@ -20,7 +20,7 @@
 
 ▸ <`T`\>(`value`, `defVal`): `Exclude`<`T`, [`empty`](types_core.md#empty)\>
 
-Converts value to non-empty.
+Converts value to not empty.
 
 ##### Type parameters
 

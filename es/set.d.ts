@@ -13,6 +13,6 @@ export declare function add<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T>;
  * @param value - Value.
  * @returns Set with value removed.
  */
-export declare function setDelete<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T>;
-export { setDelete as delete };
+export declare function _delete<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T>;
+export { _delete as delete };
 //# sourceMappingURL=set.d.ts.map

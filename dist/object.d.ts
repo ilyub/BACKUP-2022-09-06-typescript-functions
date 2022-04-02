@@ -1,64 +1,139 @@
-import type { DeepReadonly, DeepWritable, Entry, objectU, PartialRecord, ReadonlyIndexedObject, ReadonlyRecord, StrictOmit, WithOptionalKeys, WithUndeclaredKeys, Writable } from "./types/core";
-export interface Descriptor<T extends object = object> {
+import type { IndexedObject, objectU, PartialTypedObject, TypedObject, Writable } from "./types/core";
+import type { OptionalPropertiesToOptional, StrictOmit } from "./types/object";
+export interface Assign {
+    /**
+     * Typed version of Object.assign.
+     *
+     * @param mutableTarget - Target.
+     * @param sources - Sources.
+     * @returns Target.
+     */
+    <T extends object>(mutableTarget: T, ...sources: Array<Partial<T>>): T;
+}
+export interface Callback<T extends object> {
+    /**
+     * Checks object entry.
+     *
+     * @param value - Value.
+     * @param key - Key.
+     * @returns _True_ if entry passes check, _false_ otherwise.
+     */
+    (value: T[keyof T], key: keyof T): boolean;
+}
+export interface CompareFn<T extends object> {
+    /**
+     * Compares two object entries.
+     *
+     * @param value1 - Value 1.
+     * @param value2 - Value 2.
+     * @param key1 - Key 1.
+     * @param key2 - Key 2.
+     */
+    (value1: T[keyof T], value2: T[keyof T], key1: keyof T, key2: keyof T): number;
+}
+export interface DefineProperty {
+    /**
+     * Typed version of Object.defineProperty.
+     *
+     * @param obj - Object.
+     * @param key - Property key.
+     * @param descriptor - Descriptor.
+     */
+    <T extends object, K extends keyof T = keyof T>(obj: T, key: PropertyKey, descriptor: Descriptor<T, K>): void;
+}
+export interface Descriptor<T extends object = object, K extends keyof T = keyof T> {
     readonly configurable?: boolean;
     readonly enumerable?: boolean;
     /**
-     * Getter for component's property.
+     * Property getter.
      *
      * @param this - Object.
      * @returns Value.
      */
-    readonly get?: (this: T) => unknown;
+    readonly get?: (this: T) => T[K];
     /**
-     * Setter for component's property.
+     * Property setter.
      *
      * @param this - Object.
      * @param value - New value.
      */
-    readonly set?: (this: T, value: unknown) => void;
+    readonly set?: (this: T, value: T[K]) => void;
+    readonly value?: T[K];
     readonly writable?: boolean;
 }
+export interface Entries {
+    /**
+     * Typed version of Object.entries.
+     *
+     * @param obj - Object.
+     * @returns Object entries.
+     */
+    <T extends object>(obj: T): ReadonlyArray<readonly [keyof T, T[keyof T]]>;
+}
+export interface Extend {
+    /**
+     * Typed version of Object.assign.
+     *
+     * @param target - Target object.
+     * @param source - Source.
+     * @returns Target.
+     */
+    <T extends object, A>(target: T, source: A): A & T;
+    /**
+     * Typed version of Object.assign.
+     *
+     * @param target - Target object.
+     * @param source1 - Source 1.
+     * @param source2 - Source 2.
+     * @returns Target.
+     */
+    <T extends object, A, B>(target: T, source1: A, source2: B): A & B & T;
+    /**
+     * Typed version of Object.assign.
+     *
+     * @param target - Target object.
+     * @param source1 - Source 1.
+     * @param source2 - Source 2.
+     * @param source3 - Source 3.
+     * @returns Target.
+     */
+    <T extends object, A, B, C>(target: T, source1: A, source2: B, source3: C): A & B & C & T;
+}
+export interface Keys {
+    /**
+     * Typed version of Object.keys.
+     *
+     * @param obj - Object.
+     * @returns Object keys.
+     */
+    <T extends object>(obj: T): ReadonlyArray<keyof T>;
+}
+export interface Values {
+    /**
+     * Typed version of Object.values.
+     *
+     * @param obj - Object.
+     * @returns Object values.
+     */
+    <T extends object>(obj: T): ReadonlyArray<T[keyof T]>;
+}
+export declare const assign: Assign;
 /**
- * Typed version of Object.assign.
- *
- * @param mutableTarget - Target object.
- * @param sources - Sources.
- * @returns Target.
- */
-export declare function assign<T extends object>(mutableTarget: T, ...sources: Array<Partial<T>>): T;
-/**
- * Typed version of Object.assign.
- *
- * @param mutableTarget - Target object.
- * @param sources - Sources.
- * @returns Target.
- */
-export declare function assign<T extends object, K extends keyof T>(mutableTarget: T, ...sources: Array<{
-    readonly [L in K]: T[L];
-}>): T;
-/**
- * Creates object copy.
+ * Clones object.
  *
  * @param obj - Object.
- * @returns Object copy.
+ * @returns New object.
  */
 export declare function clone<T extends object>(obj: T): Writable<T>;
-/**
- * Typed version of Object.defineProperty.
- *
- * @param obj - Object.
- * @param key - Property name.
- * @param descriptor - Descriptor.
- */
-export declare function defineProperty<T extends object>(obj: T, key: PropertyKey, descriptor: Descriptor<T>): void;
+export declare const defineProperty: DefineProperty;
 /**
  * Typed version of Object.entries.
  *
  * @param obj - Object.
  * @returns Object entries.
  */
-declare function getEntries<T extends object>(obj: T): ReadonlyArray<readonly [keyof T, T[keyof T]]>;
-export { getEntries as entries };
+declare const _entries: Entries;
+export { _entries as entries };
 /**
  * Checks that every object property satisfies condition.
  *
@@ -66,99 +141,49 @@ export { getEntries as entries };
  * @param callback - Callback.
  * @returns _True_ if every object property satisfies condition, _false_ otherwise.
  */
-export declare function every<K extends PropertyKey, S, D extends S>(obj: ReadonlyRecord<K, S>, callback: (value: S, key: K) => value is D): obj is ReadonlyRecord<K, D>;
-/**
- * Checks that every object property satisfies condition.
- *
- * @param obj - Object.
- * @param callback - Callback.
- * @returns _True_ if every object property satisfies condition, _false_ otherwise.
- */
-export declare function every<K extends PropertyKey, V>(obj: ReadonlyRecord<K, V>, callback: (value: V, key: K) => boolean): boolean;
-/**
- * Typed version of Object.assign.
- *
- * @param target - Target object.
- * @param source - Source.
- * @returns Target.
- */
-export declare function extend<T extends object, A>(target: T, source: A): A & T;
-/**
- * Typed version of Object.assign.
- *
- * @param target - Target object.
- * @param source1 - Source 1.
- * @param source2 - Source 2.
- * @returns Target.
- */
-export declare function extend<T extends object, A, B>(target: T, source1: A, source2: B): A & B & T;
-/**
- * Typed version of Object.assign.
- *
- * @param target - Target object.
- * @param source1 - Source 1.
- * @param source2 - Source 2.
- * @param source3 - Source 3.
- * @returns Target.
- */
-export declare function extend<T extends object, A, B, C>(target: T, source1: A, source2: B, source3: C): A & B & C & T;
+export declare function every<T extends object>(obj: T, callback: Callback<T>): boolean;
+export declare const extend: Extend;
 /**
  * Filters object by callback.
  *
  * @param obj - Object.
  * @param callback - Callback.
- * @returns New filtered object.
+ * @returns New object.
  */
-export declare function filter<T extends object>(obj: T, callback: (value: T[keyof T], key: keyof T) => boolean): Partial<T>;
+export declare function filter<T extends object>(obj: T, callback: Callback<T>): Partial<T>;
 /**
  * Marks object as readonly.
  *
  * @param obj - Object.
- * @returns Object marked as readonly.
+ * @returns Object.
  */
 export declare function freeze<T extends object>(obj: T): Readonly<T>;
-export declare namespace freeze {
-    var deep: typeof freezeDeep;
-}
-/**
- * Marks object as deep readonly.
- *
- * @param obj - Object.
- * @returns Object marked as deep readonly.
- */
-export declare function freezeDeep<T extends object>(obj: T): DeepReadonly<T>;
 /**
  * Creates object from entries.
  *
  * @param entries - Entries.
  * @returns Object.
  */
-export declare function fromEntries<K extends PropertyKey, V>(entries: Iterable<readonly [K, V]>): PartialRecord<K, V>;
+export declare function fromEntries<K extends PropertyKey, V>(entries: Iterable<readonly [K, V]>): PartialTypedObject<K, V>;
 export declare namespace fromEntries {
-    var exhaustive: <K extends PropertyKey, V>(entries: Iterable<readonly [K, V]>) => Record<K, V>;
+    var exhaustive: <K extends PropertyKey, V>(entries: Iterable<readonly [K, V]>) => TypedObject<K, V>;
 }
 /**
- * Typed version of Object.getPrototypeOf.
+ * Returns object prototype.
  *
  * @param obj - Object.
- * @returns Prototype if available, _undefined_ otherwise.
+ * @returns Object prototype if available, _undefined_ otherwise.
  */
 export declare function getPrototypeOf(obj: object): objectU;
 /**
- * Alias of Object.prototype.hasOwnProperty.
+ * Checks that object has property.
  *
- * @param key - Property name.
+ * @param key - Property key.
  * @param obj - Object.
  * @returns _True_ if object has property, _false_ otherwise.
  */
 export declare function hasOwnProp(key: PropertyKey, obj: object): boolean;
-/**
- * Typed version of Object.keys.
- *
- * @param obj - Object.
- * @returns Object keys.
- */
-export declare function keys<T extends object>(obj: T): ReadonlyArray<keyof T>;
+export declare const keys: Keys;
 /**
  * Applies callback to each property.
  *
@@ -166,20 +191,20 @@ export declare function keys<T extends object>(obj: T): ReadonlyArray<keyof T>;
  * @param callback - Callback.
  * @returns New object.
  */
-export declare function map<V, R>(obj: ReadonlyRecord<string, V>, callback: (value: V, key: string) => R): ReadonlyRecord<string, R>;
+export declare function map<K extends PropertyKey, V, R>(obj: TypedObject<K, V>, callback: (value: V, key: K) => R): TypedObject<K, R>;
 /**
- * Merges several objects.
+ * Merges objects.
  * If more than one object has the same key, respective values are combined into array.
  *
  * @param objects - Objects.
  * @returns Merged object.
  */
-export declare function merge(...objects: ReadonlyIndexedObject[]): ReadonlyIndexedObject;
+export declare function merge(...objects: IndexedObject[]): IndexedObject;
 /**
- * Omits keys from object.
+ * Removes keys from object.
  *
  * @param obj - Object.
- * @param exclude - Keys to exclude.
+ * @param exclude - Keys to remove.
  * @returns New object with given keys omitted.
  */
 export declare function omit<T extends object, K extends keyof T>(obj: T, ...exclude: K[]): StrictOmit<T, K>;
@@ -189,14 +214,7 @@ export declare function omit<T extends object, K extends keyof T>(obj: T, ...exc
  * @param obj - Object.
  * @returns New object with undefined keys removed.
  */
-export declare function removeUndefinedKeys<T extends object>(obj: T): WithOptionalKeys<T>;
-/**
- * Removes undefined keys.
- *
- * @param obj - Object.
- * @returns New object with undefined keys removed.
- */
-export declare function removeUndefinedKeys<T extends object>(obj: WithUndeclaredKeys<T>): T;
+export declare function removeUndefinedKeys<T extends object>(obj: T): OptionalPropertiesToOptional<T>;
 /**
  * Returns the number of enumerable properties.
  *
@@ -211,15 +229,7 @@ export declare function size(obj: object): number;
  * @param callback - Callback.
  * @returns _True_ if some object property satisfies condition, _false_ otherwise.
  */
-export declare function some<K extends PropertyKey, S, D extends S>(obj: ReadonlyRecord<K, S>, callback: (value: S, key: K) => value is D): obj is ReadonlyRecord<K, D>;
-/**
- * Checks that some object property satisfies condition.
- *
- * @param obj - Object.
- * @param callback - Callback.
- * @returns _True_ if some object property satisfies condition, _false_ otherwise.
- */
-export declare function some<K extends PropertyKey, V>(obj: ReadonlyRecord<K, V>, callback: (value: V, key: K) => boolean): boolean;
+export declare function some<T extends object>(obj: T, callback: Callback<T>): boolean;
 /**
  * Sorts object.
  *
@@ -227,29 +237,13 @@ export declare function some<K extends PropertyKey, V>(obj: ReadonlyRecord<K, V>
  * @param compareFn - Comparison function.
  * @returns New object.
  */
-export declare function sort<T extends object>(obj: T, compareFn?: (x: Entry<T>, y: Entry<T>) => number): T;
+export declare function sort<T extends object>(obj: T, compareFn?: CompareFn<T>): T;
 /**
  * Marks object as writable.
  *
  * @param obj - Object.
- * @returns Object marked as writable.
+ * @returns Object.
  */
 export declare function unfreeze<T extends object>(obj: T): Writable<T>;
-export declare namespace unfreeze {
-    var deep: typeof unfreezeDeep;
-}
-/**
- * Marks object as deep writable.
- *
- * @param obj - Object.
- * @returns Object marked as deep writable.
- */
-export declare function unfreezeDeep<T extends object>(obj: T): DeepWritable<T>;
-/**
- * Typed version of Object.values.
- *
- * @param obj - Object.
- * @returns Object values.
- */
-export declare function values<T extends object>(obj: T): ReadonlyArray<T[keyof T]>;
+export declare const values: Values;
 //# sourceMappingURL=object.d.ts.map

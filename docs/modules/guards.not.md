@@ -8,64 +8,52 @@
 
 ### Variables
 
+- [array](guards.not.md#array)
 - [boolean](guards.not.md#boolean)
-- [booleanU](guards.not.md#booleanu)
-- [callable](guards.not.md#callable)
-- [callableU](guards.not.md#callableu)
 - [empty](guards.not.md#empty)
 - [factory](guards.not.md#factory)
+- [false](guards.not.md#false)
+- [indexedObject](guards.not.md#indexedobject)
+- [map](guards.not.md#map)
 - [null](guards.not.md#null)
 - [numStr](guards.not.md#numstr)
-- [numStrU](guards.not.md#numstru)
 - [number](guards.not.md#number)
-- [numberU](guards.not.md#numberu)
 - [object](guards.not.md#object)
+- [set](guards.not.md#set)
 - [string](guards.not.md#string)
-- [stringU](guards.not.md#stringu)
 - [symbol](guards.not.md#symbol)
+- [true](guards.not.md#true)
 - [undefined](guards.not.md#undefined)
 
 ## Variables
 
+### array
+
+• **array**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<[`unknowns`](types_core.md#unknowns)\>
+
+___
+
 ### boolean
 
-• **boolean**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`boolean`\>
-
-___
-
-### booleanU
-
-• **booleanU**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<[`booleanU`](types_core.md#booleanu)\>
-
-___
-
-### callable
-
-• **callable**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`Function`\>
-
-___
-
-### callableU
-
-• **callableU**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`undefined` \| `Function`\>
+• **boolean**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`boolean`\>
 
 ___
 
 ### empty
 
-• **empty**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<[`empty`](types_core.md#empty)\>
+• **empty**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<[`empty`](types_core.md#empty)\>
 
 ___
 
 ### factory
 
-• **factory**: <T\>(`guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`T`\>
+• **factory**: <T\>(`guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`T`\>
 
 #### Type declaration
 
-▸ <`T`\>(`guard`): [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`T`\>
+▸ <`T`\>(`guard`): [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`T`\>
 
-Creates guard for not T type.
+Creates guard for type not T.
 
 ##### Type parameters
 
@@ -81,66 +69,78 @@ Creates guard for not T type.
 
 ##### Returns
 
-[`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`T`\>
+[`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`T`\>
 
-Guard for not T type.
+Guard for type not T.
+
+___
+
+### false
+
+• **false**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<``false``\>
+
+___
+
+### indexedObject
+
+• **indexedObject**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`Readonly`<[`TypedObject`](types_core.md#typedobject)<`PropertyKey`, `unknown`\>\>\>
+
+___
+
+### map
+
+• **map**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`ReadonlyMap`<`unknown`, `unknown`\>\>
 
 ___
 
 ### null
 
-• **null**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<``null``\>
+• **null**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<``null``\>
 
 ___
 
 ### numStr
 
-• **numStr**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<[`NumStr`](types_core.md#numstr)\>
-
-___
-
-### numStrU
-
-• **numStrU**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<[`NumStrU`](types_core.md#numstru)\>
+• **numStr**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<[`NumStr`](types_core.md#numstr)\>
 
 ___
 
 ### number
 
-• **number**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`number`\>
-
-___
-
-### numberU
-
-• **numberU**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<[`numberU`](types_core.md#numberu)\>
+• **number**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`number`\>
 
 ___
 
 ### object
 
-• **object**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`object`\>
+• **object**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`object`\>
+
+___
+
+### set
+
+• **set**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`ReadonlySet`<`unknown`\>\>
 
 ___
 
 ### string
 
-• **string**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`string`\>
-
-___
-
-### stringU
-
-• **stringU**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<[`stringU`](types_core.md#stringu)\>
+• **string**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`string`\>
 
 ___
 
 ### symbol
 
-• **symbol**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`symbol`\>
+• **symbol**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`symbol`\>
+
+___
+
+### true
+
+• **true**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<``true``\>
 
 ___
 
 ### undefined
 
-• **undefined**: [`ExclusiveGuard`](../interfaces/guards.ExclusiveGuard.md)<`undefined`\>
+• **undefined**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`undefined`\>

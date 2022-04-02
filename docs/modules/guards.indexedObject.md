@@ -14,11 +14,11 @@
 
 ### of
 
-• **of**: <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => value is Readonly<IndexedObject<T\>\>
+• **of**: <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => value is Readonly<TypedObject<PropertyKey, T\>\>
 
 #### Type declaration
 
-▸ <`T`\>(`value`, `guard`): value is Readonly<IndexedObject<T\>\>
+▸ <`T`\>(`value`, `guard`): value is Readonly<TypedObject<PropertyKey, T\>\>
 
 Checks that value type is IndexedObject\<T\>.
 
@@ -37,6 +37,6 @@ Checks that value type is IndexedObject\<T\>.
 
 ##### Returns
 
-value is Readonly<IndexedObject<T\>\>
+value is Readonly<TypedObject<PropertyKey, T\>\>
 
 _True_ if value type is IndexedObject\<T\>, _false_ otherwise.

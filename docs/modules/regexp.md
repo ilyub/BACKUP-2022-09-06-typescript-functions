@@ -4,16 +4,11 @@
 
 ## Table of contents
 
-### Namespaces
-
-- [slice](regexp.slice.md)
-
 ### Functions
 
 - [addFlags](regexp.md#addflags)
 - [escapeString](regexp.md#escapestring)
 - [matchAll](regexp.md#matchall)
-- [slice](regexp.md#slice)
 
 ## Functions
 
@@ -76,24 +71,3 @@ Finds all matches.
 `RegExpExecArray`[]
 
 Matches.
-
-___
-
-### slice
-
-▸ **slice**(`str`, `re`): [`stringU`](types_core.md#stringu)
-
-Finds substring matching regular expression.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `str` | `string` | String. |
-| `re` | `RegExp` | Regular expression. |
-
-#### Returns
-
-[`stringU`](types_core.md#stringu)
-
-Substring if found, _undefined_ otherwise.

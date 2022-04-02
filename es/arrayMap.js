@@ -1,21 +1,21 @@
 /**
- * Gets values from array map.
+ * Returns array from array map.
  *
  * @param key - Key.
  * @param map - Array map.
- * @returns Values.
+ * @returns Array.
  */
 export function get(key, map) {
     var _a;
     return (_a = map.get(key)) !== null && _a !== void 0 ? _a : [];
 }
 /**
- * Gets values from array map.
+ * Returns array from array map.
  *
  * @param key1 - Key 1.
  * @param key2 - Key 2.
  * @param map - Array map.
- * @returns Values.
+ * @returns Array.
  */
 export function get2(key1, key2, map) {
     var _a, _b;
@@ -51,7 +51,7 @@ export function push2(key1, key2, value, mutableMap) {
         mutableMap.set(key1, new Map([[key2, [value]]]));
 }
 /**
- * Unshift value to array map.
+ * Unshifts value to array map.
  *
  * @param key - Key.
  * @param value - Value.
@@ -65,7 +65,7 @@ export function unshift(key, value, mutableMap) {
         mutableMap.set(key, [value]);
 }
 /**
- * Pushes value to array map.
+ * Unshifts value to array map.
  *
  * @param key1 - Key 1.
  * @param key2 - Key 2.

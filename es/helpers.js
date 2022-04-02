@@ -3,8 +3,8 @@ import * as cast from "./converters";
 import * as fn from "./function";
 import * as is from "./guards";
 import * as o from "./object";
+import * as programFlow from "./programFlow";
 import * as reflect from "./reflect";
-import * as timer from "./timer";
 /**
  * Creates facade.
  *
@@ -14,50 +14,57 @@ import * as timer from "./timer";
  */
 export function createFacade(name, extension) {
     let _implementation;
-    const facadeOwnMethods = {
-        setImplementation(value) {
+    const facadeOwn = Object.assign({ setImplementation(value) {
             _implementation = value;
-        }
-    };
-    const defaultFacade = Object.assign(Object.assign({}, extension), facadeOwnMethods);
-    const proxy = new Proxy(fn.noop, wrapProxyHandler("createFacade", "throw", {
+        } }, extension);
+    // eslint-disable-next-line no-type-assertion/no-type-assertion
+    return new Proxy(fn.noop, wrapProxyHandler("createFacade", "throw", {
         apply(_target, thisArg, args) {
-            return reflect.apply(implementation(), thisArg, args);
+            return reflect.apply(targetFn(), thisArg, args);
         },
         get(_target, key) {
-            return reflect.get(facade(key), key);
+            return reflect.get(target(key), key);
         },
         getOwnPropertyDescriptor(_target, key) {
-            return Object.getOwnPropertyDescriptor(facade(key), key);
+            return reflect.getOwnPropertyDescriptor(target(key), key);
         },
         has(_target, key) {
-            return reflect.has(facade(key), key);
+            return reflect.has(target(key), key);
         },
         isExtensible() {
-            return Object.isExtensible(facade());
+            return reflect.isExtensible(target());
         },
         ownKeys() {
-            return reflect.ownKeys(facade());
+            return reflect.ownKeys(target());
         },
         set(_target, key, value) {
-            return reflect.set(facade(key), key, value);
+            return reflect.set(target(key), key, value);
         }
     }));
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
-    return proxy;
-    function facade(key) {
-        if (is.not.empty(key) && key in defaultFacade)
-            return defaultFacade;
+    function target(key) {
+        if (is.not.empty(key) && key in facadeOwn)
+            return facadeOwn;
         assert.not.empty(_implementation, `Missing facade implementation: ${name}`);
         return _implementation;
     }
-    function implementation() {
+    function targetFn() {
         assert.callable(_implementation, `Facade is not callable: ${name}`);
         return _implementation;
     }
 }
 /**
- * Delays resource generation until demanded.
+ * Creates validation object.
+ *
+ * @param source - Source.
+ * @returns Validation object.
+ */
+export function createValidationObject(source) {
+    if (o.entries(source).every(([key, value]) => key === String(value)))
+        return new Set(o.values(source));
+    throw new Error("Invalid source");
+}
+/**
+ * Generates resource on demand.
  *
  * @param generator - Resource generator.
  * @returns Resource.
@@ -69,7 +76,7 @@ export function onDemand(generator) {
             return reflect.get(obj(), key);
         },
         getOwnPropertyDescriptor(_target, key) {
-            return Object.getOwnPropertyDescriptor(obj(), key);
+            return reflect.getOwnPropertyDescriptor(obj(), key);
         },
         has(_target, key) {
             return reflect.has(obj(), key);
@@ -78,7 +85,7 @@ export function onDemand(generator) {
             return reflect.isExtensible(obj());
         },
         ownKeys() {
-            return Object.keys(obj());
+            return reflect.ownKeys(obj());
         },
         set(_target, key, value) {
             reflect.set(obj(), key, value);
@@ -93,13 +100,13 @@ export function onDemand(generator) {
     }
 }
 /**
- * Defines source type.
+ * Defines value type.
  *
- * @param source - Source.
- * @returns Source.
+ * @param value - Value.
+ * @returns Value.
  */
-export function typedef(source) {
-    return source;
+export function typedef(value) {
+    return value;
 }
 /**
  * Creates safe access interface for an object.
@@ -110,9 +117,9 @@ export function typedef(source) {
  * @returns Safe access interface.
  */
 export function safeAccess(obj, guards, readonlyKeys = []) {
-    const guardsMap = new Map(Object.entries(guards));
+    const guardsMap = new Map(o.entries(guards));
     const writableKeys = o.keys(guards);
-    const keys = [...readonlyKeys, ...writableKeys];
+    const keys = [...writableKeys, ...readonlyKeys];
     const keysSet = new Set(keys);
     return new Proxy(obj, wrapProxyHandler("safeAccess", "throw", {
         get(target, key) {
@@ -136,11 +143,11 @@ export function safeAccess(obj, guards, readonlyKeys = []) {
         },
         set(target, key, value) {
             const guard = guardsMap.get(key);
-            if (guard)
+            if (guard) {
                 if (guard(value))
                     return reflect.set(target, key, value);
-                else
-                    throw new Error(`Type check failed: ${cast.string(key)}`);
+                throw new Error(`Type check failed: ${cast.string(key)}`);
+            }
             throw new Error(`Write access denied: ${cast.string(key)}`);
         }
     }));
@@ -152,7 +159,7 @@ export function safeAccess(obj, guards, readonlyKeys = []) {
  */
 export async function wait(timeout) {
     await new Promise(resolve => {
-        timer.addTimeout(resolve, timeout);
+        programFlow.setTimeout(resolve, timeout);
     });
 }
 /**

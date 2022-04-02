@@ -1,6 +1,6 @@
 [Typescript functions](../index.md) / [Exports](../modules.md) / [object](../modules/object.md) / Descriptor
 
-# Interface: Descriptor<T\>
+# Interface: Descriptor<T, K\>
 
 [object](../modules/object.md).Descriptor
 
@@ -9,6 +9,7 @@
 | Name | Type |
 | :------ | :------ |
 | `T` | extends `object` = `object` |
+| `K` | extends keyof `T` = keyof `T` |
 
 ## Table of contents
 
@@ -16,6 +17,7 @@
 
 - [configurable](object.Descriptor.md#configurable)
 - [enumerable](object.Descriptor.md#enumerable)
+- [value](object.Descriptor.md#value)
 - [writable](object.Descriptor.md#writable)
 
 ### Methods
@@ -37,6 +39,12 @@ ___
 
 ___
 
+### value
+
+• `Optional` `Readonly` **value**: `T`[`K`]
+
+___
+
 ### writable
 
 • `Optional` `Readonly` **writable**: `boolean`
@@ -45,9 +53,9 @@ ___
 
 ### get
 
-▸ `Optional` `Readonly` **get**(`this`): `unknown`
+▸ `Optional` `Readonly` **get**(`this`): `T`[`K`]
 
-Getter for component's property.
+Property getter.
 
 #### Parameters
 
@@ -57,7 +65,7 @@ Getter for component's property.
 
 #### Returns
 
-`unknown`
+`T`[`K`]
 
 Value.
 
@@ -67,14 +75,14 @@ ___
 
 ▸ `Optional` `Readonly` **set**(`this`, `value`): `void`
 
-Setter for component's property.
+Property setter.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `this` | `T` | Object. |
-| `value` | `unknown` | New value. |
+| `value` | `T`[`K`] | New value. |
 
 #### Returns
 

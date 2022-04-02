@@ -7,10 +7,10 @@ export declare type Eol = "\n" | "\r\n";
  */
 export declare function detectEol(str: string): Eol;
 /**
- * Checks that string consists of spaces.
+ * Checks that string consists of only spaces.
  *
  * @param str - String.
- * @returns _True_ if string consists of spaces, _false_ otherwise.
+ * @returns _True_ if string consists of only spaces, _false_ otherwise.
  */
 export declare function empty(str: string): boolean;
 /**
@@ -22,7 +22,7 @@ export declare function empty(str: string): boolean;
  */
 export declare function filter(str: string, predicate: (char: string, index: number) => unknown): string;
 /**
- * Gets leading spaces.
+ * Extracts leading spaces.
  *
  * @param str - String.
  * @returns String containing leading spaces.
@@ -52,8 +52,8 @@ export declare function multiline(str: string): boolean;
 /**
  * Not implemented.
  */
-declare function pathUtils(): never;
-declare namespace pathUtils {
+declare function _path(): never;
+declare namespace _path {
     var addLeadingSlash: (path: string) => string;
     var addTrailingSlash: (path: string) => string;
     var canonicalize: (path: string) => string;
@@ -61,7 +61,7 @@ declare namespace pathUtils {
     var removeLeadingSlash: (path: string) => string;
     var removeTrailingSlash: (path: string) => string;
 }
-export { pathUtils as path };
+export { _path as path };
 /**
  * Replaces all occurences of search term.
  *
@@ -79,7 +79,7 @@ export declare function replaceAll(str: string, search: string, replace: string)
  */
 export declare function singleLine(str: string): boolean;
 /**
- * Gets trailing spaces.
+ * Extracts trailing spaces.
  *
  * @param str - String.
  * @returns String containing trailing spaces.

@@ -6,7 +6,11 @@
 
 ### Interfaces
 
-- [ReduceForComparison](../interfaces/array.ReduceForComparison.md)
+- [Reduce](../interfaces/array.Reduce.md)
+
+### Type aliases
+
+- [KeyOrReduce](array.md#keyorreduce)
 
 ### Functions
 
@@ -33,6 +37,20 @@
 - [truncate](array.md#truncate)
 - [uniqueBy](array.md#uniqueby)
 - [unshift](array.md#unshift)
+- [unshiftOrReplaceBy](array.md#unshiftorreplaceby)
+
+## Type aliases
+
+### KeyOrReduce
+
+Ƭ **KeyOrReduce**<`T`, `V`\>: `PropertyKey` \| [`Reduce`](../interfaces/array.Reduce.md)<`T`, `V`\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+| `V` | extends `object` = `T` |
 
 ## Functions
 
@@ -40,7 +58,7 @@
 
 ▸ **chain**<`T`\>(`arr`): [`T`, `T`][]
 
-Creates an array of pairs [x1, x2], [x2, x3]...
+Creates array of pairs ("[x, y, z]" =\> "[[x, y], [y, z]]").
 
 #### Type parameters
 
@@ -58,7 +76,7 @@ Creates an array of pairs [x1, x2], [x2, x3]...
 
 [`T`, `T`][]
 
-An array of pairs.
+Array of pairs.
 
 ___
 
@@ -66,7 +84,7 @@ ___
 
 ▸ **clone**<`A`\>(`arr`): [`A`]
 
-Creates array copy.
+Clones array.
 
 #### Type parameters
 
@@ -84,11 +102,11 @@ Creates array copy.
 
 [`A`]
 
-Array copy.
+New array.
 
 ▸ **clone**<`A`, `B`\>(`arr`): [`A`, `B`]
 
-Creates array copy.
+Clones array.
 
 #### Type parameters
 
@@ -107,11 +125,11 @@ Creates array copy.
 
 [`A`, `B`]
 
-Array copy.
+New array.
 
 ▸ **clone**<`A`, `B`, `C`\>(`arr`): [`A`, `B`, `C`]
 
-Creates array copy.
+Clones array.
 
 #### Type parameters
 
@@ -131,11 +149,11 @@ Creates array copy.
 
 [`A`, `B`, `C`]
 
-Array copy.
+New array.
 
 ▸ **clone**<`A`, `B`, `C`, `D`\>(`arr`): [`A`, `B`, `C`, `D`]
 
-Creates array copy.
+Clones array.
 
 #### Type parameters
 
@@ -156,11 +174,11 @@ Creates array copy.
 
 [`A`, `B`, `C`, `D`]
 
-Array copy.
+New array.
 
 ▸ **clone**<`T`\>(`arr`): `T`[]
 
-Creates array copy.
+Clones array.
 
 #### Type parameters
 
@@ -178,7 +196,7 @@ Creates array copy.
 
 `T`[]
 
-Array copy.
+New array.
 
 ___
 
@@ -211,7 +229,7 @@ ___
 
 ### findBy
 
-▸ **findBy**<`T`\>(`arr`, `value`, `keyOrReduce`): `T` \| `undefined`
+▸ **findBy**<`T`, `V`\>(`arr`, `value`, `keyOrReduce`): `T` \| `undefined`
 
 Finds element matching value.
 
@@ -220,14 +238,15 @@ Finds element matching value.
 | Name | Type |
 | :------ | :------ |
 | `T` | extends `object` |
+| `V` | extends `object` |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
-| `value` | `object` | Value for comparison. |
-| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](../interfaces/array.ReduceForComparison.md)<`object`\> | Comparison key or reduce function. |
+| `value` | `V` | Value. |
+| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T` \| `V`, `T` \| `V`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -241,7 +260,7 @@ ___
 
 ▸ **first**<`T`\>(`arr`): `T`
 
-Gets the first element.
+Returns the first element from an array.
 
 **`throws`** Error otherwise.
 
@@ -281,7 +300,7 @@ Creates array from iterable.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `iterable` | [`IterableLike`](types_core.md#iterablelike)<`T`\> | Iterable. |
+| `iterable` | `Iterable`<`T`\> | Iterable. |
 
 #### Returns
 
@@ -295,13 +314,13 @@ ___
 
 ▸ **fromRange**(`from`, `to`, `step?`): `number`[]
 
-Creates array from range.
+Creates array of numbers.
 
 #### Parameters
 
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
-| `from` | `number` | `undefined` | Starting number. |
+| `from` | `number` | `undefined` | Lower limit (inclusive). |
 | `to` | `number` | `undefined` | Upper limit (inclusive). |
 | `step` | `number` | `1` | Step. |
 
@@ -337,7 +356,7 @@ ___
 
 ▸ **get**<`T`\>(`arr`, `index`): `T`
 
-Gets element by index.
+Returns element by index.
 
 **`throws`** Error otherwise.
 
@@ -358,13 +377,13 @@ Gets element by index.
 
 `T`
 
-Array element if available.
+Element if available.
 
 ___
 
 ### includesBy
 
-▸ **includesBy**<`T`\>(`arr`, `value`, `keyOrReduce`): `boolean`
+▸ **includesBy**<`T`, `V`\>(`arr`, `value`, `keyOrReduce`): `boolean`
 
 Checks that array contains element matching value.
 
@@ -373,14 +392,15 @@ Checks that array contains element matching value.
 | Name | Type |
 | :------ | :------ |
 | `T` | extends `object` |
+| `V` | extends `object` |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
-| `value` | `object` | Value for comparison. |
-| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](../interfaces/array.ReduceForComparison.md)<`object`\> | Comparison key or reduce function. |
+| `value` | `V` | Value. |
+| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`, `V`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -394,7 +414,7 @@ ___
 
 ▸ **last**<`T`\>(`arr`): `T`
 
-Gets the last element.
+Returns the last element from an array.
 
 **`throws`** Error otherwise.
 
@@ -422,7 +442,7 @@ ___
 
 ▸ **push**<`T`\>(`arr`, `value`): `T`[]
 
-Adds element to the end of array.
+Adds element to the end of an array.
 
 #### Type parameters
 
@@ -449,7 +469,7 @@ ___
 
 ▸ **pushOrReplaceBy**<`T`\>(`arr`, `value`, `keyOrReduce`): `T`[]
 
-Pushes value or replaces elements matching value if found.
+Replaces elements matching value if found, pushes value otherwise.
 
 #### Type parameters
 
@@ -463,7 +483,7 @@ Pushes value or replaces elements matching value if found.
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
 | `value` | `T` | Value. |
-| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](../interfaces/array.ReduceForComparison.md)<`object`\> | Comparison key or reduce function. |
+| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`, `T`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -501,7 +521,7 @@ ___
 
 ### removeBy
 
-▸ **removeBy**<`T`\>(`arr`, `value`, `keyOrReduce`): `T`[]
+▸ **removeBy**<`T`, `V`\>(`arr`, `value`, `keyOrReduce`): `T`[]
 
 Removes elements matching value.
 
@@ -510,14 +530,15 @@ Removes elements matching value.
 | Name | Type |
 | :------ | :------ |
 | `T` | extends `object` |
+| `V` | extends `object` |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
-| `value` | `object` | Value for comparison. |
-| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](../interfaces/array.ReduceForComparison.md)<`object`\> | Comparison key or reduce function. |
+| `value` | `V` | Value. |
+| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`, `V`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -545,7 +566,7 @@ Replaces element.
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
 | `index` | `number` | Index to be replaced. |
-| `value` | `T` | New value. |
+| `value` | `T` | Value. |
 
 #### Returns
 
@@ -572,8 +593,8 @@ Replaces elements matching value.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
-| `value` | `T` | New value. |
-| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](../interfaces/array.ReduceForComparison.md)<`object`\> | Comparison key or reduce function. |
+| `value` | `T` | Value. |
+| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`, `T`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -605,7 +626,7 @@ Reverses array.
 
 `T`[]
 
-New reversed array.
+New array.
 
 ___
 
@@ -632,7 +653,7 @@ Sorts array.
 
 `T`[]
 
-New sorted array.
+New array.
 
 ___
 
@@ -654,7 +675,7 @@ Adds/removes value to/from an array.
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
 | `value` | `T` | Value. |
-| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](../interfaces/array.ReduceForComparison.md)<`object`\> | Comparison key or reduce function. |
+| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`, `T`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -686,7 +707,7 @@ ___
 
 ▸ **uniqueBy**<`T`\>(`arr`, `keyOrReduce`): `T`[]
 
-Creates an array of unique elements.
+Creates unique array.
 
 #### Type parameters
 
@@ -699,13 +720,13 @@ Creates an array of unique elements.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
-| `keyOrReduce` | `PropertyKey` \| [`ReduceForComparison`](../interfaces/array.ReduceForComparison.md)<`T`\> | Comparison key or reduce function. |
+| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`, `T`\> | Comparison key or reduce function. |
 
 #### Returns
 
 `T`[]
 
-An array of unique elements.
+Unique array.
 
 ___
 
@@ -713,7 +734,7 @@ ___
 
 ▸ **unshift**<`T`\>(`arr`, `value`): `T`[]
 
-Adds element to the beginning of the array.
+Adds element to the beginning of an array.
 
 #### Type parameters
 
@@ -733,3 +754,31 @@ Adds element to the beginning of the array.
 `T`[]
 
 New array with one element added.
+
+___
+
+### unshiftOrReplaceBy
+
+▸ **unshiftOrReplaceBy**<`T`\>(`arr`, `value`, `keyOrReduce`): `T`[]
+
+Replaces elements matching value if found, unshifts value otherwise.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `arr` | readonly `T`[] | Array. |
+| `value` | `T` | Value. |
+| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`, `T`\> | Comparison key or reduce function. |
+
+#### Returns
+
+`T`[]
+
+New array.

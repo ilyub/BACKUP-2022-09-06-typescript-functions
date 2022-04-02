@@ -2,11 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.unshift2 = exports.unshift = exports.push2 = exports.push = exports.get2 = exports.get = void 0;
 /**
- * Gets values from array map.
+ * Returns array from array map.
  *
  * @param key - Key.
  * @param map - Array map.
- * @returns Values.
+ * @returns Array.
  */
 function get(key, map) {
     var _a;
@@ -14,12 +14,12 @@ function get(key, map) {
 }
 exports.get = get;
 /**
- * Gets values from array map.
+ * Returns array from array map.
  *
  * @param key1 - Key 1.
  * @param key2 - Key 2.
  * @param map - Array map.
- * @returns Values.
+ * @returns Array.
  */
 function get2(key1, key2, map) {
     var _a, _b;
@@ -58,7 +58,7 @@ function push2(key1, key2, value, mutableMap) {
 }
 exports.push2 = push2;
 /**
- * Unshift value to array map.
+ * Unshifts value to array map.
  *
  * @param key - Key.
  * @param value - Value.
@@ -73,7 +73,7 @@ function unshift(key, value, mutableMap) {
 }
 exports.unshift = unshift;
 /**
- * Pushes value to array map.
+ * Unshifts value to array map.
  *
  * @param key1 - Key 1.
  * @param key2 - Key 2.

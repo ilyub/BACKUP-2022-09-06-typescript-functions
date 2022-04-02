@@ -64,7 +64,7 @@ ___
 
 ▸ **empty**(`str`): `boolean`
 
-Checks that string consists of spaces.
+Checks that string consists of only spaces.
 
 #### Parameters
 
@@ -76,7 +76,7 @@ Checks that string consists of spaces.
 
 `boolean`
 
-_True_ if string consists of spaces, _false_ otherwise.
+_True_ if string consists of only spaces, _false_ otherwise.
 
 ___
 
@@ -125,7 +125,7 @@ ___
 
 ▸ **leadingSpaces**(`str`): `string`
 
-Gets leading spaces.
+Extracts leading spaces.
 
 #### Parameters
 
@@ -239,7 +239,7 @@ ___
 
 ▸ **trailingSpaces**(`str`): `string`
 
-Gets trailing spaces.
+Extracts trailing spaces.
 
 #### Parameters
 

@@ -18,7 +18,9 @@
 
 ### Properties
 
+- [message](errors_AssertionError.AssertionError.md#message)
 - [name](errors_AssertionError.AssertionError.md#name)
+- [stack](errors_AssertionError.AssertionError.md#stack)
 
 ## Constructors
 
@@ -40,6 +42,16 @@ Error.constructor
 
 ## Properties
 
+### message
+
+• **message**: `string`
+
+#### Inherited from
+
+Error.message
+
+___
+
 ### name
 
 • `Readonly` **name**: ``"AssertionError"``
@@ -47,3 +59,13 @@ Error.constructor
 #### Overrides
 
 Error.name
+
+___
+
+### stack
+
+• `Optional` **stack**: `string`
+
+#### Inherited from
+
+Error.stack

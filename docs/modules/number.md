@@ -18,6 +18,7 @@
 - [floor](number.md#floor)
 - [floorStep](number.md#floorstep)
 - [limit](number.md#limit)
+- [rootMeanSquareDeviation](number.md#rootmeansquaredeviation)
 - [round](number.md#round)
 - [roundStep](number.md#roundstep)
 - [sum](number.md#sum)
@@ -149,6 +150,26 @@ Limits value to be within [min, max] range.
 `number`
 
 Limited value.
+
+___
+
+### rootMeanSquareDeviation
+
+▸ **rootMeanSquareDeviation**(...`values`): `number`
+
+Calculates root-mean-square deviation.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `...values` | `number`[] | Values. |
+
+#### Returns
+
+`number`
+
+Root-mean-square deviation.
 
 ___
 

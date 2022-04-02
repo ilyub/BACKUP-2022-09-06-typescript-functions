@@ -14,31 +14,4 @@
 
 ### of
 
-• **of**: <A, B\>(`value`: `unknown`, `requiredGuards`: [`Guards`](guards.md#guards)<`A`\>, `optionalGuards`: [`Guards`](guards.md#guards)<`B`\>) => value is Partial<B\> & Required<A\>
-
-#### Type declaration
-
-▸ <`A`, `B`\>(`value`, `requiredGuards`, `optionalGuards`): value is Partial<B\> & Required<A\>
-
-Checks that value type is T.
-
-##### Type parameters
-
-| Name |
-| :------ |
-| `A` |
-| `B` |
-
-##### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `unknown` | Value. |
-| `requiredGuards` | [`Guards`](guards.md#guards)<`A`\> | Guards for required properties. |
-| `optionalGuards` | [`Guards`](guards.md#guards)<`B`\> | Guards for optional properties. |
-
-##### Returns
-
-value is Partial<B\> & Required<A\>
-
-_True_ if value type is T, _false_ otherwise.
+• **of**: typeof [`objectOf`](guards.md#objectof)
