@@ -41,7 +41,6 @@ test("defineMetadataKey", () => {
 });
 
 test("getMetadata", () => {
-  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
   class TestClass {}
 
   const obj = new TestClass();
@@ -62,7 +61,6 @@ test("getMetadata", () => {
 });
 
 test("getMetadataKey", () => {
-  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
   class TestClass {}
 
   const obj = new TestClass();
@@ -83,7 +81,6 @@ test("getMetadataKey", () => {
 });
 
 test("getOwnMetadata", () => {
-  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
   class TestClass {}
 
   const obj = new TestClass();
@@ -104,7 +101,6 @@ test("getOwnMetadata", () => {
 });
 
 test("getOwnMetadataKey", () => {
-  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
   class TestClass {}
 
   const obj = new TestClass();
@@ -125,7 +121,6 @@ test("getOwnMetadataKey", () => {
 });
 
 test("hasMetadata", () => {
-  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
   class TestClass {}
 
   const obj = new TestClass();
@@ -148,7 +143,6 @@ test("hasMetadata", () => {
 });
 
 test("hasMetadataKey", () => {
-  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
   class TestClass {}
 
   const obj = new TestClass();
@@ -171,7 +165,6 @@ test("hasMetadataKey", () => {
 });
 
 test("hasOwnMetadata", () => {
-  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
   class TestClass {}
 
   const obj = new TestClass();
@@ -194,7 +187,6 @@ test("hasOwnMetadata", () => {
 });
 
 test("hasOwnMetadataKey", () => {
-  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
   class TestClass {}
 
   const obj = new TestClass();

@@ -22,7 +22,7 @@ export interface Reduce<T extends object, V extends object = T> {
 }
 
 /**
- * Creates array of pairs ("[x, y, z]" => "[[x, y], [y, z]]").
+ * Creates array of pairs ("[x, y, z]" =\> "[[x, y], [y, z]]").
  *
  * @param arr - Array.
  * @returns Array of pairs.

@@ -61,7 +61,6 @@ test("boolean", () => {
 test("callable", () => {
   const subtest = createSubtest(assert.callable);
 
-  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
   class TestClass {}
 
   expect(subtest(TestClass)).not.toThrow();
@@ -118,7 +117,6 @@ test("indexedObject.of", () => {
 });
 
 test("instance", () => {
-  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
   class TestClass {}
 
   const subtest = createSubtest(assert.instance, TestClass);
@@ -129,7 +127,6 @@ test("instance", () => {
 });
 
 test("instances", () => {
-  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
   class TestClass {}
 
   const subtest = createSubtest(assert.instances, TestClass);

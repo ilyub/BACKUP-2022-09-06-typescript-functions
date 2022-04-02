@@ -70,7 +70,6 @@ test("boolean", () => {
 });
 
 test("callable", () => {
-  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
   class TestClass {}
 
   expect(is.callable(TestClass)).toBeTrue();
@@ -117,7 +116,6 @@ test("indexedObject.of", () => {
 });
 
 test("instance", () => {
-  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
   class TestClass {}
 
   expect(is.instance(new TestClass(), TestClass)).toBeTrue();
@@ -126,7 +124,6 @@ test("instance", () => {
 });
 
 test("instances", () => {
-  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
   class TestClass {}
 
   expect(is.instances([new TestClass()], TestClass)).toBeTrue();

@@ -61,7 +61,6 @@ test("fromEntries.exhaustive", () => {
 });
 
 test("getPrototypeOf", () => {
-  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
   class TestClass {}
 
   expect(o.getPrototypeOf(TestClass)).toBeUndefined();
