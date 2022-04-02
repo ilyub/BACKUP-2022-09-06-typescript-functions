@@ -40,6 +40,11 @@ test("limit", () => {
   expect(num.limit(4, 1, 3)).toBe(3);
 });
 
+test("rootMeanSquareDeviation", () => {
+  expect(num.rootMeanSquareDeviation(0, 4)).toBe(2);
+  expect(num.rootMeanSquareDeviation(1, 5)).toBe(2);
+});
+
 test("round", () => {
   expect(num.round(1.111, 1)).toBe(1.1);
   expect(num.round(1.199, 1)).toBe(1.2);

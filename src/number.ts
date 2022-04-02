@@ -79,6 +79,22 @@ export function limit(value: number, min: number, max: number): number {
 }
 
 /**
+ * Calculates root-mean-square deviation.
+ *
+ * @param values - Values.
+ * @returns Root-mean-square deviation.
+ */
+export function rootMeanSquareDeviation(...values: number[]): number {
+  assert.toBeTrue(values.length > 0);
+
+  const averageValue = average(...values);
+
+  return Math.sqrt(
+    sum(...values.map(value => (value - averageValue) ** 2)) / values.length
+  );
+}
+
+/**
  * Rounds number to a given precision.
  *
  * @param value - Value.
