@@ -4,6 +4,7 @@ import * as a from "./array";
 import * as is from "./guards";
 import type {
   IndexedObject,
+  NumStr,
   objectU,
   PartialTypedObject,
   TypedObject,
@@ -59,17 +60,15 @@ export interface DefineProperty {
    * @param key - Property key.
    * @param descriptor - Descriptor.
    */
-  <T extends object, K extends keyof T = keyof T>(
+  <T, K extends keyof T = keyof T>(
     obj: T,
-    key: PropertyKey,
+    key: K,
     descriptor: Descriptor<T, K>
   ): void;
 }
 
-export interface Descriptor<
-  T extends object = object,
-  K extends keyof T = keyof T
-> {
+export interface Descriptor<T, K extends keyof T = keyof T>
+  extends PropertyDescriptor {
   readonly configurable?: boolean;
   readonly enumerable?: boolean;
   /**
@@ -97,7 +96,14 @@ export interface Entries {
    * @param obj - Object.
    * @returns Object entries.
    */
-  <T extends object>(obj: T): ReadonlyArray<readonly [keyof T, T[keyof T]]>;
+  <K extends string, V>(obj: PartialTypedObject<K, V>): Array<[K, V]>;
+  /**
+   * Typed version of Object.entries.
+   *
+   * @param obj - Object.
+   * @returns Object entries.
+   */
+  <T extends object>(obj: T): Array<[string & keyof T, T[NumStr & keyof T]]>;
 }
 
 export interface Extend {
@@ -137,22 +143,36 @@ export interface Extend {
 
 export interface Keys {
   /**
+   * Typed version of Object.entries.
+   *
+   * @param obj - Object.
+   * @returns Object entries.
+   */
+  <K extends string, V>(obj: PartialTypedObject<K, V>): K[];
+  /**
    * Typed version of Object.keys.
    *
    * @param obj - Object.
    * @returns Object keys.
    */
-  <T extends object>(obj: T): ReadonlyArray<keyof T>;
+  <T extends object>(obj: T): Array<string & keyof T>;
 }
 
 export interface Values {
+  /**
+   * Typed version of Object.entries.
+   *
+   * @param obj - Object.
+   * @returns Object entries.
+   */
+  <K extends string, V>(obj: PartialTypedObject<K, V>): V[];
   /**
    * Typed version of Object.values.
    *
    * @param obj - Object.
    * @returns Object values.
    */
-  <T extends object>(obj: T): ReadonlyArray<T[keyof T]>;
+  <T extends object>(obj: T): Array<T[NumStr & keyof T]>;
 }
 
 export const assign: Assign = Object.assign;
@@ -291,7 +311,7 @@ export const keys: Keys = Object.keys;
  * @param callback - Callback.
  * @returns New object.
  */
-export function map<K extends PropertyKey, V, R>(
+export function map<K extends string, V, R>(
   obj: TypedObject<K, V>,
   callback: (value: V, key: K) => R
 ): TypedObject<K, R> {
@@ -392,7 +412,8 @@ export function sort<T extends object>(obj: T, compareFn?: CompareFn<T>): T {
     a.sort(
       _entries(obj),
       compareFn
-        ? (entry1, entry2): number =>
+        ? // eslint-disable-next-line @skylib/prefer-readonly
+          (entry1, entry2): number =>
             compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
         : undefined
     )
