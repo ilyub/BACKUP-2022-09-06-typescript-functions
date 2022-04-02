@@ -1,6 +1,3 @@
-import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
-import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
-
 import { AssertionError } from "./errors/AssertionError";
 import * as is from "./guards";
 import type { ValidationObject } from "./helpers";
@@ -287,21 +284,17 @@ export function object(
  * Asserts that value type is T.
  *
  * @param value - Value.
- * @param requiredGuards - Guards for required properties.
- * @param optionalGuards - Guards for optional properties.
+ * @param required - Guards for required properties.
+ * @param optional - Guards for optional properties.
  * @param error - Error.
  */
-object.of = <T extends object>(
+object.of = <R extends object, O extends object>(
   value: unknown,
-  requiredGuards: is.Guards<T, RequiredKeys<T>>,
-  optionalGuards: is.Guards<T, OptionalKeys<T>>,
+  required: is.Guards<R, keyof R>,
+  optional: is.Guards<O, keyof O>,
   error?: ErrorArg
-): asserts value is T => {
-  byGuard(
-    value,
-    is.factory(is.object.of, requiredGuards, optionalGuards),
-    error
-  );
+): asserts value is is.ObjectOfReturn<R, O> => {
+  byGuard(value, is.factory(is.object.of, required, optional), error);
 };
 
 /**
