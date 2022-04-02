@@ -1,10 +1,6 @@
 {
   "extends": "node_modules/@skylib/config/src/typedoc",
   "intentionallyNotExported": [
-    "DeepPartial1",
-    "DeepReadonly1",
-    "DeepWritable1",
-    "KeysOfType1",
     "LocaleName"
   ],
   "name": "Typescript functions",
