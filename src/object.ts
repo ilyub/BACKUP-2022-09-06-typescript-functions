@@ -1,17 +1,16 @@
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[object] */
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
 
 import * as a from "./array";
 import * as is from "./guards";
 import type {
+  IndexedObject,
   objectU,
-  PartialRecord,
-  ReadonlyIndexedObject,
-  ReadonlyRecord,
-  StrictOmit,
+  PartialTypedObject,
+  TypedObject,
   unknowns,
-  WithOptionalKeys,
   Writable
 } from "./types/core";
+import type { OptionalPropertiesToOptional, StrictOmit } from "./types/object";
 
 export interface Assign {
   /**
@@ -234,9 +233,9 @@ export function freeze<T extends object>(obj: T): Readonly<T> {
  */
 export function fromEntries<K extends PropertyKey, V>(
   entries: Iterable<readonly [K, V]>
-): PartialRecord<K, V> {
+): PartialTypedObject<K, V> {
   // eslint-disable-next-line no-type-assertion/no-type-assertion
-  const result = {} as PartialRecord<K, V>;
+  const result = {} as Writable<PartialTypedObject<K, V>>;
 
   for (const entry of entries) result[entry[0]] = entry[1];
 
@@ -251,9 +250,9 @@ export function fromEntries<K extends PropertyKey, V>(
  */
 fromEntries.exhaustive = <K extends PropertyKey, V>(
   entries: Iterable<readonly [K, V]>
-): Record<K, V> => {
+): TypedObject<K, V> => {
   // eslint-disable-next-line no-type-assertion/no-type-assertion
-  const result = {} as Record<K, V>;
+  const result = {} as Writable<TypedObject<K, V>>;
 
   for (const entry of entries) result[entry[0]] = entry[1];
 
@@ -293,9 +292,9 @@ export const keys: Keys = Object.keys;
  * @returns New object.
  */
 export function map<K extends PropertyKey, V, R>(
-  obj: ReadonlyRecord<K, V>,
+  obj: TypedObject<K, V>,
   callback: (value: V, key: K) => R
-): ReadonlyRecord<K, R> {
+): TypedObject<K, R> {
   return fromEntries.exhaustive(
     _entries(obj).map(([key, value]) => [key, callback(value, key)])
   );
@@ -308,9 +307,7 @@ export function map<K extends PropertyKey, V, R>(
  * @param objects - Objects.
  * @returns Merged object.
  */
-export function merge(
-  ...objects: ReadonlyIndexedObject[]
-): ReadonlyIndexedObject {
+export function merge(...objects: IndexedObject[]): IndexedObject {
   const result = new Map<PropertyKey, unknown[]>();
 
   for (const obj of objects)
@@ -356,9 +353,9 @@ export function omit<T extends object, K extends keyof T>(
  */
 export function removeUndefinedKeys<T extends object>(
   obj: T
-): WithOptionalKeys<T> {
+): OptionalPropertiesToOptional<T> {
   // eslint-disable-next-line no-type-assertion/no-type-assertion
-  return filter(obj, is.not.empty) as WithOptionalKeys<T>;
+  return filter(obj, is.not.empty) as OptionalPropertiesToOptional<T>;
 }
 
 /**

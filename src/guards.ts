@@ -2,10 +2,12 @@ import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
 import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 
 import * as a from "./array";
+import type { ValidationObject } from "./helpers";
 import { typedef } from "./helpers";
 import * as o from "./object";
 // eslint-disable-next-line @skylib/consistent-import
 import type * as types from "./types/core";
+import type { Constructor } from "./types/function";
 
 export interface ExclusionGuard<T> {
   /**
@@ -46,7 +48,7 @@ export interface MultiArgGuard<T, A extends unknown[]> {
  * Creates single-arg guard.
  *
  * @param guard - Multi-arg guard.
- * @param args - Rest arguments.
+ * @param args - Arguments.
  * @returns Single-arg guard.
  */
 export function factory<T, A extends unknown[]>(
@@ -362,7 +364,7 @@ not.empty = notFactory(empty);
  */
 export function enumeration<T extends PropertyKey>(
   value: unknown,
-  vo: types.ValidationObject<T>
+  vo: ValidationObject<T>
 ): value is T {
   return typedef<ReadonlySet<unknown>>(vo).has(value);
 }
@@ -387,9 +389,7 @@ not.false = notFactory(_false);
  * @param value - Value.
  * @returns _True_ if value type is IndexedObject, _false_ otherwise.
  */
-export function indexedObject(
-  value: unknown
-): value is types.ReadonlyIndexedObject {
+export function indexedObject(value: unknown): value is types.IndexedObject {
   return typeof value === "object" && value !== null;
 }
 
@@ -411,8 +411,8 @@ export const indexedObjectsU = orFactory(indexedObjects, _undefined);
 export function indexedObjectOf<T>(
   value: unknown,
   guard: Guard<T>
-): value is types.ReadonlyIndexedObject<T> {
-  return object(value) && Object.values(value).every(guard);
+): value is types.IndexedObject<T> {
+  return object(value) && o.values(value).every(guard);
 }
 
 indexedObject.of = indexedObjectOf;
@@ -424,10 +424,7 @@ indexedObject.of = indexedObjectOf;
  * @param ctor - Constructor.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-export function instance<T>(
-  value: unknown,
-  ctor: types.Constructor<T>
-): value is T {
+export function instance<T>(value: unknown, ctor: Constructor<T>): value is T {
   return value instanceof ctor;
 }
 
@@ -440,7 +437,7 @@ export function instance<T>(
  */
 export function instances<T>(
   value: unknown,
-  ctor: types.Constructor<T>
+  ctor: Constructor<T>
 ): value is readonly T[] {
   return array(value) && value.every(v => v instanceof ctor);
 }
@@ -845,7 +842,7 @@ export const unknownsU = orFactory(unknowns, _undefined);
  * @returns Check result.
  */
 function checkOptionalProp(
-  obj: types.ReadonlyIndexedObject,
+  obj: types.IndexedObject,
   key: PropertyKey,
   guard: Guard
 ): boolean {
@@ -861,7 +858,7 @@ function checkOptionalProp(
  * @returns Check result.
  */
 function checkRequiredProp(
-  obj: types.ReadonlyIndexedObject,
+  obj: types.IndexedObject,
   key: PropertyKey,
   guard: Guard
 ): boolean {

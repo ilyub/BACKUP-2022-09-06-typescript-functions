@@ -1,5 +1,4 @@
 import * as a from "@/array";
-import { AssertionError } from "@/errors/AssertionError";
 import * as regexp from "@/regexp";
 
 test("addFlags", () => {
@@ -26,16 +25,4 @@ test.each([/\w(\w)\w/u, /\w(\w)\w/gu])("matchAll", re => {
   expect(match1.index).toBe(4);
   expect(match0.input).toBe("abc xyz");
   expect(match1.input).toBe("abc xyz");
-});
-
-test("slice", () => {
-  expect(regexp.slice("abcbd", /[bc]+/u)).toBe("bcb");
-  expect(regexp.slice("ad", /[bc]+/u)).toBeUndefined();
-});
-
-test("slice.orFail", () => {
-  const error = new AssertionError();
-
-  expect(regexp.slice.orFail("abcbd", /[bc]+/u)).toBe("bcb");
-  expect(() => regexp.slice.orFail("ad", /[bc]+/u)).toThrow(error);
 });

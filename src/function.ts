@@ -1,10 +1,10 @@
 import * as is from "./guards";
 import type {
+  AsyncPromise,
+  AsyncPromiseSync,
   Callable,
-  PromiseAsync,
-  PromiseAsyncSync,
   Sync
-} from "./types/core";
+} from "./types/function";
 
 export interface PipeCallback<V = unknown, R = unknown> {
   /**
@@ -79,8 +79,8 @@ export function run<T>(callback: Sync<T>): T;
  * @param promiseAsync - Promise or async function.
  * @returns The result of callback execution.
  */
-export async function run<T>(promiseAsync: PromiseAsync<T>): Promise<T>;
+export async function run<T>(promiseAsync: AsyncPromise<T>): Promise<T>;
 
-export function run<T>(mixed: PromiseAsyncSync<T>): Promise<T> | T {
+export function run<T>(mixed: AsyncPromiseSync<T>): Promise<T> | T {
   return is.callable(mixed) ? mixed() : mixed;
 }

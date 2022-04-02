@@ -19,14 +19,12 @@
   - [map](https://ilyub.github.io/typescript-functions/modules/map.html) - Map manipulation functions.
   - [number](https://ilyub.github.io/typescript-functions/modules/number.html) - Number manipulation functions.
   - [object](https://ilyub.github.io/typescript-functions/modules/object.html) - Object manipulation functions.
+  - [programFlow](https://ilyub.github.io/typescript-functions/modules/programFlow.html) - Program flow functions.
   - [reflect](https://ilyub.github.io/typescript-functions/modules/reflect.html) - Typed versions of Reflect functions.
   - [regexp](https://ilyub.github.io/typescript-functions/modules/regexp.html) - Regular expression manipulation functions.
   - [set](https://ilyub.github.io/typescript-functions/modules/set.html) - Set manipulation functions.
   - [string](https://ilyub.github.io/typescript-functions/modules/string.html) - String manipulation functions.
   - [testUtils](https://ilyub.github.io/typescript-functions/modules/testUtils.html) - Test utils.
-  - types
-    - [types/core](https://ilyub.github.io/typescript-functions/modules/types_core.html) - Core types.
-    - [types/locales](https://ilyub.github.io/typescript-functions/modules/types_locales.html) - Locale types.
 
 ## <a name="installation"></a>Installation
 

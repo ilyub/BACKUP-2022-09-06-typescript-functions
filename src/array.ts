@@ -1,4 +1,4 @@
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[array] */
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
 
 import * as _ from "lodash";
 

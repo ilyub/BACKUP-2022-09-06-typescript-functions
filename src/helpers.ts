@@ -5,7 +5,8 @@ import * as is from "./guards";
 import * as o from "./object";
 import * as programFlow from "./programFlow";
 import * as reflect from "./reflect";
-import type { Join2, unknowns } from "./types/core";
+import type { TypedObject, unknowns } from "./types/core";
+import type { Join2 } from "./types/object";
 
 export type Facade<I, E = unknown> = E & FacadeOwnMethods<I> & I;
 
@@ -30,6 +31,8 @@ export declare type SafeAccessGuards<T, W extends string & keyof T> = {
   readonly [K in W]: is.Guard<T[K]>;
 };
 
+export type ValidationObject<T extends PropertyKey> = ReadonlySet<T>;
+
 /**
  * Creates facade.
  *
@@ -50,7 +53,8 @@ export function createFacade<I extends object, E = unknown>(
     ...extension
   };
 
-  const proxy = new Proxy(
+  // eslint-disable-next-line no-type-assertion/no-type-assertion
+  return new Proxy(
     fn.noop,
     wrapProxyHandler("createFacade", "throw", {
       apply(_target, thisArg, args: unknowns) {
@@ -75,10 +79,7 @@ export function createFacade<I extends object, E = unknown>(
         return reflect.set(target(key), key, value);
       }
     })
-  );
-
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
-  return proxy as Facade<I, E>;
+  ) as Facade<I, E>;
 
   function target(key?: PropertyKey): object {
     if (is.not.empty(key) && key in facadeOwn) return facadeOwn;
@@ -93,6 +94,21 @@ export function createFacade<I extends object, E = unknown>(
 
     return _implementation;
   }
+}
+
+/**
+ * Creates validation object.
+ *
+ * @param source - Source.
+ * @returns Validation object.
+ */
+export function createValidationObject<T extends PropertyKey>(
+  source: TypedObject<T, T>
+): ValidationObject<T> {
+  if (o.entries(source).every(([key, value]) => key === String(value)))
+    return new Set(o.values(source));
+
+  throw new Error("Invalid source");
 }
 
 /**

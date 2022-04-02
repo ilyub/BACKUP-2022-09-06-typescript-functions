@@ -1,4 +1,4 @@
-/* skylib/eslint-plugin disable @skylib/disallow-identifier[reflect] */
+/* skylib/eslint-plugin disable @skylib/disallow-identifier[functions.reflect] */
 
 // eslint-disable-next-line import/no-unassigned-import
 import "reflect-metadata";

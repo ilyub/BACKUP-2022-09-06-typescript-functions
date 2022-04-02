@@ -1,6 +1,6 @@
 import * as fn from "@/function";
 import * as is from "@/guards";
-import { createValidationObject } from "@/types/core";
+import { createValidationObject } from "@/helpers";
 
 test("factory", () => {
   const guard = is.factory(is.array.of, is.number);

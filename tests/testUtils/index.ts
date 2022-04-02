@@ -1,3 +1,6 @@
+import * as a from "@/array";
+import { wait } from "@/helpers";
+import * as num from "@/number";
 import * as testUtils from "@/testUtils";
 
 async function testResolve(): Promise<void> {
@@ -46,37 +49,6 @@ test("executionTimeToBeWithin", async () => {
   }
 });
 
-test("getClock", () => {
-  expect(testUtils.getClock()).toBeObject();
-});
-
-test("jestReset", () => {
-  const callback = jest.fn();
-
-  callback();
-  expect(callback).toHaveBeenCalledTimes(1);
-  testUtils.jestReset();
-  expect(callback).not.toHaveBeenCalled();
-});
-
-test("jestReset.dom", () => {
-  {
-    // eslint-disable-next-line github/no-inner-html
-    document.body.innerHTML = "<div></div>";
-    testUtils.jestReset.dom();
-    // eslint-disable-next-line github/no-inner-html
-    expect(document.body.innerHTML).toBe("");
-  }
-});
-
-test("run", async () => {
-  await expect(testUtils.run(testResolve)).resolves.toBeUndefined();
-});
-
-test("setRandomSystemTime", () => {
-  expect(testUtils.setRandomSystemTime).not.toThrow();
-});
-
 test("toBeSameAs", () => {
   {
     const arr1 = [1];
@@ -90,18 +62,46 @@ test("toBeSameAs", () => {
   }
 
   {
-    const result = testUtils.toBeSameAs([], []);
+    const arr1 = [1];
+
+    const arr2 = [1];
+
+    const result = testUtils.toBeSameAs(arr1, arr2);
 
     expect(result.pass).toBeFalse();
     expect(result.message()).toBe("Expected the same object");
   }
+});
 
+test("run", async () => {
+  expect.hasAssertions();
+
+  await testUtils.run(async () => {
+    await expect(async () => {
+      await wait(1000);
+    }).executionTimeToBe(1000);
+  });
+});
+
+test.each([
   {
-    const obj1 = { x: 1 };
+    max: 1000,
+    min: 0,
+    now(): number {
+      return Date.now();
+    }
+  },
+  {
+    max: Number.MAX_VALUE,
+    min: 24 * 3600 * 1000,
+    now(): number {
+      testUtils.setRandomSystemTime();
 
-    const obj2 = { x: 1 };
-
-    expect(obj1).not.toBeSameAs(obj2);
-    expect(obj1).toStrictEqual(obj2);
+      return Date.now();
+    }
   }
+])("setRandomSystemTime", ({ max, min, now }) => {
+  expect(
+    num.rootMeanSquareDeviation(...a.fromRange(1, 100).map(now))
+  ).toBeWithin(min, max);
 });

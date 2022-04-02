@@ -1,3 +1,5 @@
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.programFlow] */
+
 import * as is from "./guards";
 import type { numberU } from "./types/core";
 

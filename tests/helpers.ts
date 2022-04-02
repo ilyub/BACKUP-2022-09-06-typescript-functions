@@ -2,12 +2,14 @@ import * as fn from "@/function";
 import * as is from "@/guards";
 import {
   createFacade,
+  createValidationObject,
   onDemand,
   safeAccess,
   typedef,
   wait,
   wrapProxyHandler
 } from "@/helpers";
+import * as o from "@/object";
 import * as reflect from "@/reflect";
 import * as testUtils from "@/testUtils";
 
@@ -77,6 +79,14 @@ test("createFacade: Object", () => {
   expect(reflect.isExtensible(facade)).toBeTrue();
   expect(reflect.ownKeys(facade)).toStrictEqual(["value"]);
   expect(reflect.set(facade, "value", 2)).toBeTrue();
+});
+
+test("createValidationObject", () => {
+  type Enum = "a" | 1;
+
+  const error = new Error("Invalid source");
+
+  expect(() => createValidationObject<Enum>({ 1: "a", a: 1 })).toThrow(error);
 });
 
 test("onDemand", () => {
@@ -330,6 +340,6 @@ test("wrapProxyHandler: throw", () => {
     }
   };
 
-  for (const [name, subtest] of Object.entries(subtests))
+  for (const [name, subtest] of o.entries(subtests))
     expect(subtest).toThrow(new Error(`Not implemented: test.${name}`));
 });

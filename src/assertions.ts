@@ -3,8 +3,10 @@ import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 
 import { AssertionError } from "./errors/AssertionError";
 import * as is from "./guards";
+import type { ValidationObject } from "./helpers";
 // eslint-disable-next-line @skylib/consistent-import
 import type * as types from "./types/core";
+import type { Constructor } from "./types/function";
 
 export type ErrorArg = ErrorArgFn | string;
 
@@ -148,7 +150,7 @@ not.empty = <T>(
  */
 export function enumeration<T extends PropertyKey>(
   value: unknown,
-  vo: types.ValidationObject<T>,
+  vo: ValidationObject<T>,
   error?: ErrorArg
 ): asserts value is T {
   byGuard(value, is.factory(is.enumeration, vo), error);
@@ -163,7 +165,7 @@ export function enumeration<T extends PropertyKey>(
 export function indexedObject(
   value: unknown,
   error?: ErrorArg
-): asserts value is types.ReadonlyIndexedObject {
+): asserts value is types.IndexedObject {
   byGuard(value, is.indexedObject, error);
 }
 
@@ -178,7 +180,7 @@ indexedObject.of = <T>(
   value: unknown,
   guard: is.Guard<T>,
   error?: ErrorArg
-): asserts value is types.ReadonlyIndexedObject<T> => {
+): asserts value is types.IndexedObject<T> => {
   byGuard(value, is.factory(is.indexedObject.of, guard), error);
 };
 
@@ -191,7 +193,7 @@ indexedObject.of = <T>(
  */
 export function instance<T>(
   value: unknown,
-  ctor: types.Constructor<T>,
+  ctor: Constructor<T>,
   error?: ErrorArg
 ): asserts value is T {
   byGuard(value, is.factory(is.instance, ctor), error);
@@ -206,7 +208,7 @@ export function instance<T>(
  */
 export function instances<T>(
   value: unknown,
-  ctor: types.Constructor<T>,
+  ctor: Constructor<T>,
   error?: ErrorArg
 ): asserts value is readonly T[] {
   byGuard(value, is.factory(is.instances, ctor), error);

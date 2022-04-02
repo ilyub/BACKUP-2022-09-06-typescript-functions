@@ -2,15 +2,17 @@
 import "jest-extended";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
 // @ts-ignore
+// eslint-disable-next-line @skylib/consistent-import
 import * as matchers from "jest-extended/all";
 import * as _ from "lodash";
+// eslint-disable-next-line @skylib/consistent-import
 import * as fakeTimers from "@sinonjs/fake-timers";
 
 import * as a from "../array";
 import * as assert from "../assertions";
 import * as fn from "../function";
-import * as o from "../object";
-import type { Async, DeepReadonly, PromiseAsync } from "../types/core";
+import { onDemand } from "../helpers";
+import type { Async, AsyncPromise } from "../types/function";
 
 declare global {
   namespace jest {
@@ -19,7 +21,7 @@ declare global {
        * Checks that async function executes within expected time.
        *
        * @param time - Expected time.
-       * @returns Result object.
+       * @returns Result.
        */
       readonly executionTimeToBe: (time: number) => Promise<R>;
       /**
@@ -27,7 +29,7 @@ declare global {
        *
        * @param min - Min time (inclusive).
        * @param max - Max time (inclusive).
-       * @returns Result object.
+       * @returns Result.
        */
       readonly executionTimeToBeWithin: (
         min: number,
@@ -37,31 +39,32 @@ declare global {
        * Checks that two objects are identical.
        *
        * @param expected - Expected object.
-       * @returns Result object.
+       * @returns Result.
        */
       readonly toBeSameAs: (expected: object) => R;
     }
   }
 }
 
-export interface ExpectFromMatcher<K extends keyof jest.Matchers<unknown>> {
+export interface ExpectFromMatcher<K extends keyof Matchers> {
   /**
-   * Converts matcher function to expect function.
+   * Expect function.
    *
    * @param got - Got value.
-   * @param args - Args.
+   * @param args - Arguments.
    * @returns Result.
    */
-  (got: unknown, ...args: Parameters<jest.Matchers<unknown>[K]>): ReturnType<
-    jest.Matchers<unknown>[K]
-  > extends Promise<unknown>
+  (
+    got: unknown,
+    ...args: MatcherParameters<K>
+  ): MatcherReturnType<K> extends Promise<unknown>
     ? Promise<ExpectReturnType>
     : ExpectReturnType;
 }
 
 export interface ExpectReturnType {
   /**
-   * Generates failure message.
+   * Returns failure message.
    *
    * @returns Failure message.
    */
@@ -73,51 +76,35 @@ export interface FakeTimerOptions {
   readonly shouldAdvanceTime?: boolean;
 }
 
-/**
- * Checks that async function executes within expected time.
- *
- * @param got - Got value.
- * @param min - Min time (inclusive).
- * @param max - Max time (inclusive).
- * @returns Result object.
- */
-export async function executionTimeToBeWithin(
-  got: unknown,
-  min: number,
-  max: number
-): Promise<ExpectReturnType> {
-  assert.callable<Async<unknown>>(got, "Expecting async function");
+export type Matcher<K extends keyof Matchers> = Matchers[K];
 
-  const start = Date.now();
+export type MatcherParameters<K extends keyof Matchers> = Parameters<
+  Matcher<K>
+>;
 
-  await got();
+export type MatcherReturnType<K extends keyof Matchers> = ReturnType<
+  Matcher<K>
+>;
 
-  const executionTime = Date.now() - start;
+export type Matchers = Readonly<jest.Matchers<unknown>>;
 
-  return executionTime >= min && executionTime <= max
-    ? {
-        message: (): string =>
-          `Expected callback execution time (${executionTime} ms) not to be within [${min}, ${max}] ms`,
-        pass: true
-      }
-    : {
-        message: (): string =>
-          `Expected callback execution time (${executionTime} ms) to be within [${min}, ${max}] ms`,
-        pass: false
-      };
-}
+export const clock = onDemand(() => {
+  assert.not.empty(_clock);
+
+  return _clock;
+});
 
 /**
  * Checks that async function executes within expected time.
  *
  * @param got - Got value.
  * @param time - Expected time.
- * @returns Result object.
+ * @returns Result.
  */
-export async function executionTimeToBe(
+export const executionTimeToBe: ExpectFromMatcher<"executionTimeToBe"> = async (
   got: unknown,
   time: number
-): Promise<ExpectReturnType> {
+): Promise<ExpectReturnType> => {
   assert.callable<Async<unknown>>(got, "Expecting async function");
 
   const start = Date.now();
@@ -137,18 +124,58 @@ export async function executionTimeToBe(
           `Expected callback execution time (${executionTime} ms) to be ${time} ms`,
         pass: false
       };
-}
+};
 
 /**
- * Returns fake timer.
+ * Checks that async function executes within expected time.
  *
- * @returns Fake timer.
+ * @param got - Got value.
+ * @param min - Min time (inclusive).
+ * @param max - Max time (inclusive).
+ * @returns Result.
  */
-export function getClock(): DeepReadonly<fakeTimers.Clock> {
-  assert.not.empty(clock);
+export const executionTimeToBeWithin: ExpectFromMatcher<
+  "executionTimeToBeWithin"
+> = async (
+  got: unknown,
+  min: number,
+  max: number
+): Promise<ExpectReturnType> => {
+  assert.callable<Async<unknown>>(got, "Expecting async function");
 
-  return clock;
-}
+  const start = Date.now();
+
+  await got();
+
+  const executionTime = Date.now() - start;
+
+  return executionTime >= min && executionTime <= max
+    ? {
+        message: (): string =>
+          `Expected callback execution time (${executionTime} ms) not to be within [${min}, ${max}] ms`,
+        pass: true
+      }
+    : {
+        message: (): string =>
+          `Expected callback execution time (${executionTime} ms) to be within [${min}, ${max}] ms`,
+        pass: false
+      };
+};
+
+/**
+ * Checks that two objects are identical.
+ *
+ * @param got - Got value.
+ * @param expected - Expected object.
+ * @returns Result.
+ */
+export const toBeSameAs: ExpectFromMatcher<"toBeSameAs"> = (
+  got: unknown,
+  expected: object
+): ExpectReturnType =>
+  got === expected
+    ? { message: (): string => "Expected not the same object", pass: true }
+    : { message: (): string => "Expected the same object", pass: false };
 
 /**
  * Installs fake timer.
@@ -156,20 +183,16 @@ export function getClock(): DeepReadonly<fakeTimers.Clock> {
  * @param options - Options.
  */
 export function installFakeTimer(options: FakeTimerOptions = {}): void {
-  assert.empty(clock);
+  assert.empty(_clock);
 
-  clock = fakeTimers.install(
-    o.extend(
-      {
-        advanceTimeDelta: 10,
-        loopLimit: 1000,
-        now: Date.now(),
-        shouldAdvanceTime: false,
-        toFake: []
-      },
-      options
-    )
-  );
+  _clock = fakeTimers.install({
+    advanceTimeDelta: 10,
+    loopLimit: 1000,
+    now: Date.now(),
+    shouldAdvanceTime: false,
+    toFake: [],
+    ...options
+  });
 }
 
 /**
@@ -180,62 +203,29 @@ export function jestReset(): void {
 }
 
 /**
- * Jest reset.
- */
-jestReset.dom = (): void => {
-  while (document.body.children.length) {
-    const child = document.body.children.item(0);
-
-    assert.not.empty(child);
-    child.remove();
-  }
-};
-
-/**
  * Jest setup.
  */
 export function jestSetup(): void {
-  {
-    interface ExpectExtendMap {
-      readonly executionTimeToBe: ExpectFromMatcher<"executionTimeToBe">;
-      readonly executionTimeToBeWithin: ExpectFromMatcher<"executionTimeToBeWithin">;
-      readonly toBeSameAs: ExpectFromMatcher<"toBeSameAs">;
-    }
+  // eslint-disable-next-line no-type-assertion/no-type-assertion
+  expect.extend(matchers as jest.ExpectExtendMap);
 
-    const expectExtend: ExpectExtendMap = {
-      executionTimeToBe,
-      executionTimeToBeWithin,
-      toBeSameAs
-    };
-
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
-    expect.extend(matchers as jest.ExpectExtendMap);
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
-    expect.extend(expectExtend as ExpectExtendMap & jest.ExpectExtendMap);
-  }
+  expect.extend({
+    executionTimeToBe,
+    executionTimeToBeWithin,
+    toBeSameAs
+  });
 
   jestReset();
 }
 
 /**
- * Jest setup.
- */
-jestSetup.dom = (): void => {
-  jestReset.dom();
-};
-
-/**
  * Executes promise or async function.
- * Should be used instead of fn.run when fake timer is install.
  *
  * @param promiseAsync - Promise or async function.
  * @returns The result of callback execution.
  */
-export async function run<T>(promiseAsync: PromiseAsync<T>): Promise<T> {
-  const result = await Promise.all([
-    fn.run(promiseAsync),
-    getClock().runAllAsync()
-  ]);
+export async function run<T>(promiseAsync: AsyncPromise<T>): Promise<T> {
+  const result = await Promise.all([fn.run(promiseAsync), clock.runAllAsync()]);
 
   return result[0];
 }
@@ -244,35 +234,20 @@ export async function run<T>(promiseAsync: PromiseAsync<T>): Promise<T> {
  * Sets random system time.
  */
 export function setRandomSystemTime(): void {
-  assert.not.empty(clock);
+  clock.setSystemTime(
+    fn.run(() => {
+      const date = new Date();
 
-  const d = fn.run(() => {
-    const result = new Date();
+      date.setFullYear(_.random(2000, 2100));
+      date.setMonth(a.random([0, 11, _.random(1, 10)]));
+      date.setDate(a.random([1, 31, _.random(2, 30)]));
+      date.setHours(a.random([0, 23, _.random(1, 22)]));
+      date.setMinutes(a.random([0, 59, _.random(1, 58)]));
+      date.setSeconds(a.random([0, 59, _.random(1, 58)]));
 
-    result.setFullYear(_.random(2000, 2100));
-    result.setMonth(a.random([0, 11, _.random(1, 10)]));
-    result.setDate(a.random([1, 31, _.random(2, 30)]));
-    result.setHours(a.random([0, 23, _.random(1, 22)]));
-    result.setMinutes(a.random([0, 59, _.random(1, 58)]));
-    result.setSeconds(a.random([0, 59, _.random(1, 58)]));
-
-    return result;
-  });
-
-  clock.setSystemTime(d);
-}
-
-/**
- * Checks that two objects are identical.
- *
- * @param got - Got value.
- * @param expected - Expected object.
- * @returns Result object.
- */
-export function toBeSameAs(got: unknown, expected: object): ExpectReturnType {
-  return got === expected
-    ? { message: (): string => "Expected not the same object", pass: true }
-    : { message: (): string => "Expected the same object", pass: false };
+      return date;
+    })
+  );
 }
 
 /*
@@ -281,4 +256,4 @@ export function toBeSameAs(got: unknown, expected: object): ExpectReturnType {
 |*******************************************************************************
 |*/
 
-let clock: DeepReadonly<fakeTimers.Clock> | undefined;
+let _clock: fakeTimers.Clock | undefined;
