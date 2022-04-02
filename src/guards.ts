@@ -8,6 +8,10 @@ import * as o from "./object";
 // eslint-disable-next-line @skylib/consistent-import
 import type * as types from "./types/core";
 import type { Constructor } from "./types/function";
+import type {
+  OptionalPropertiesToOptional,
+  OptionalPropertiesToUndefined
+} from "./types/object";
 
 export interface ExclusionGuard<T> {
   /**
@@ -43,6 +47,11 @@ export interface MultiArgGuard<T, A extends unknown[]> {
    */
   (value: unknown, ...args: A): value is T;
 }
+
+export type ObjectOfReturn<
+  R extends object,
+  O extends object
+> = OptionalPropertiesToOptional<Partial<O>> & OptionalPropertiesToUndefined<R>;
 
 /**
  * Creates single-arg guard.
@@ -564,6 +573,26 @@ export const objectsU = orFactory(objects, _undefined);
  * @param optional - Guards for optional properties.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
+export function objectOf<R extends object, O extends object>(
+  value: unknown,
+  required: Guards<R, keyof R>,
+  optional: Guards<O, keyof O>
+): value is ObjectOfReturn<R, O>;
+
+/**
+ * Checks that value type is T.
+ *
+ * @param value - Value.
+ * @param required - Guards for required properties.
+ * @param optional - Guards for optional properties.
+ * @returns _True_ if value type is T, _false_ otherwise.
+ */
+export function objectOf<T extends object>(
+  value: unknown,
+  required: Guards<T, RequiredKeys<T>>,
+  optional: Guards<T, OptionalKeys<T>>
+): value is T;
+
 export function objectOf<T extends object>(
   value: unknown,
   required: Guards<T, RequiredKeys<T>>,
@@ -585,6 +614,23 @@ object.of = objectOf;
  * @param optional - Guards for optional properties.
  * @returns Guard for type T.
  */
+export function objectOfFactory<R extends object, O extends object>(
+  required: Guards<R, keyof R>,
+  optional: Guards<O, keyof O>
+): Guard<ObjectOfReturn<R, O>>;
+
+/**
+ * Creates guard for type T.
+ *
+ * @param required - Guards for required properties.
+ * @param optional - Guards for optional properties.
+ * @returns Guard for type T.
+ */
+export function objectOfFactory<T extends object>(
+  required: Guards<T, RequiredKeys<T>>,
+  optional: Guards<T, OptionalKeys<T>>
+): Guard<T>;
+
 export function objectOfFactory<T extends object>(
   required: Guards<T, RequiredKeys<T>>,
   optional: Guards<T, OptionalKeys<T>>
