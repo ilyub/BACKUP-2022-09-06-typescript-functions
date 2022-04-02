@@ -12,6 +12,8 @@ import * as a from "../array";
 import * as assert from "../assertions";
 import * as fn from "../function";
 import { onDemand } from "../helpers";
+import * as json from "../json";
+import type { unknowns } from "../types/core";
 import type { Async, AsyncPromise } from "../types/function";
 
 declare global {
@@ -213,6 +215,14 @@ export function jestSetup(): void {
     executionTimeToBe,
     executionTimeToBeWithin,
     toBeSameAs
+  });
+
+  jest.spyOn(console, "error").mockImplementation((...args: unknowns) => {
+    throw new Error(`console.error: ${json.encode(args)}`);
+  });
+
+  jest.spyOn(console, "warn").mockImplementation((...args: unknowns) => {
+    throw new Error(`console.warn: ${json.encode(args)}`);
   });
 
   jestReset();
