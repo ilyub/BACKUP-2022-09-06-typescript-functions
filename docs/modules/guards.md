@@ -31,6 +31,7 @@
 ### Type aliases
 
 - [Guards](guards.md#guards)
+- [ObjectOfReturn](guards.md#objectofreturn)
 
 ### Functions
 
@@ -126,6 +127,19 @@ Renames and re-exports [_true](guards.md#_true)
 | :------ | :------ |
 | `T` | `T` |
 | `K` | extends keyof `T` = keyof `T` |
+
+___
+
+### ObjectOfReturn
+
+Ƭ **ObjectOfReturn**<`R`, `O`\>: [`OptionalPropertiesToOptional`](types_object.md#optionalpropertiestooptional)<`Partial`<`O`\>\> & [`OptionalPropertiesToUndefined`](types_object.md#optionalpropertiestoundefined)<`R`\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `R` | extends `object` |
+| `O` | extends `object` |
 
 ## Functions
 
@@ -1078,6 +1092,31 @@ ___
 
 ### objectOf
 
+▸ **objectOf**<`R`, `O`\>(`value`, `required`, `optional`): value is ObjectOfReturn<R, O\>
+
+Checks that value type is T.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `R` | extends `object` |
+| `O` | extends `object` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+| `required` | [`Guards`](guards.md#guards)<`R`, keyof `R`\> | Guards for required properties. |
+| `optional` | [`Guards`](guards.md#guards)<`O`, keyof `O`\> | Guards for optional properties. |
+
+#### Returns
+
+value is ObjectOfReturn<R, O\>
+
+_True_ if value type is T, _false_ otherwise.
+
 ▸ **objectOf**<`T`\>(`value`, `required`, `optional`): value is T
 
 Checks that value type is T.
@@ -1105,6 +1144,30 @@ _True_ if value type is T, _false_ otherwise.
 ___
 
 ### objectOfFactory
+
+▸ **objectOfFactory**<`R`, `O`\>(`required`, `optional`): [`Guard`](../interfaces/guards.Guard.md)<[`ObjectOfReturn`](guards.md#objectofreturn)<`R`, `O`\>\>
+
+Creates guard for type T.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `R` | extends `object` |
+| `O` | extends `object` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `required` | [`Guards`](guards.md#guards)<`R`, keyof `R`\> | Guards for required properties. |
+| `optional` | [`Guards`](guards.md#guards)<`O`, keyof `O`\> | Guards for optional properties. |
+
+#### Returns
+
+[`Guard`](../interfaces/guards.Guard.md)<[`ObjectOfReturn`](guards.md#objectofreturn)<`R`, `O`\>\>
+
+Guard for type T.
 
 ▸ **objectOfFactory**<`T`\>(`required`, `optional`): [`Guard`](../interfaces/guards.Guard.md)<`T`\>
 

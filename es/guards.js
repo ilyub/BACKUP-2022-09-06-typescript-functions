@@ -248,27 +248,12 @@ not.object = notFactory(object);
 export const objectU = orFactory(object, _undefined);
 export const objects = factory(arrayOf, object);
 export const objectsU = orFactory(objects, _undefined);
-/**
- * Checks that value type is T.
- *
- * @param value - Value.
- * @param required - Guards for required properties.
- * @param optional - Guards for optional properties.
- * @returns _True_ if value type is T, _false_ otherwise.
- */
 export function objectOf(value, required, optional) {
     return (indexedObject(value) &&
         o.every(required, (guard, key) => checkRequiredProp(value, key, guard)) &&
         o.every(optional, (guard, key) => checkOptionalProp(value, key, guard)));
 }
 object.of = objectOf;
-/**
- * Creates guard for type T.
- *
- * @param required - Guards for required properties.
- * @param optional - Guards for optional properties.
- * @returns Guard for type T.
- */
 export function objectOfFactory(required, optional) {
     return (value) => objectOf(value, required, optional);
 }

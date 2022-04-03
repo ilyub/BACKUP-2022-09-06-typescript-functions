@@ -16,7 +16,7 @@ Typed version of Object.defineProperty.
 
 | Name | Type |
 | :------ | :------ |
-| `T` | extends `object` |
+| `T` | `T` |
 | `K` | extends `string` \| `number` \| `symbol` = keyof `T` |
 
 #### Parameters
@@ -24,7 +24,7 @@ Typed version of Object.defineProperty.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `obj` | `T` | Object. |
-| `key` | `PropertyKey` | Property key. |
+| `key` | `K` | Property key. |
 | `descriptor` | [`Descriptor`](object.Descriptor.md)<`T`, `K`\> | Descriptor. |
 
 #### Returns

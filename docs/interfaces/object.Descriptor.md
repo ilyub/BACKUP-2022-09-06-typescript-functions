@@ -8,8 +8,14 @@
 
 | Name | Type |
 | :------ | :------ |
-| `T` | extends `object` = `object` |
+| `T` | `T` |
 | `K` | extends keyof `T` = keyof `T` |
+
+## Hierarchy
+
+- `PropertyDescriptor`
+
+  ↳ **`Descriptor`**
 
 ## Table of contents
 
@@ -31,11 +37,19 @@
 
 • `Optional` `Readonly` **configurable**: `boolean`
 
+#### Overrides
+
+PropertyDescriptor.configurable
+
 ___
 
 ### enumerable
 
 • `Optional` `Readonly` **enumerable**: `boolean`
+
+#### Overrides
+
+PropertyDescriptor.enumerable
 
 ___
 
@@ -43,11 +57,19 @@ ___
 
 • `Optional` `Readonly` **value**: `T`[`K`]
 
+#### Overrides
+
+PropertyDescriptor.value
+
 ___
 
 ### writable
 
 • `Optional` `Readonly` **writable**: `boolean`
+
+#### Overrides
+
+PropertyDescriptor.writable
 
 ## Methods
 
@@ -69,6 +91,10 @@ Property getter.
 
 Value.
 
+#### Overrides
+
+PropertyDescriptor.get
+
 ___
 
 ### set
@@ -87,3 +113,7 @@ Property setter.
 #### Returns
 
 `void`
+
+#### Overrides
+
+PropertyDescriptor.set

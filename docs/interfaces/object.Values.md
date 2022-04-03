@@ -8,7 +8,32 @@
 
 ### Values
 
-▸ **Values**<`T`\>(`obj`): readonly `T`[keyof `T`][]
+▸ **Values**<`K`, `V`\>(`obj`): `V`[]
+
+Typed version of Object.entries.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `string` |
+| `V` | `V` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | [`PartialTypedObject`](../modules/types_core.md#partialtypedobject)<`K`, `V`\> | Object. |
+
+#### Returns
+
+`V`[]
+
+Object entries.
+
+### Values
+
+▸ **Values**<`T`\>(`obj`): `T`[`string` & keyof `T` & `number` & keyof `T`][]
 
 Typed version of Object.values.
 
@@ -26,6 +51,6 @@ Typed version of Object.values.
 
 #### Returns
 
-readonly `T`[keyof `T`][]
+`T`[`string` & keyof `T` & `number` & keyof `T`][]
 
 Object values.

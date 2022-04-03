@@ -203,7 +203,8 @@ exports.some = some;
 function sort(obj, compareFn) {
     // eslint-disable-next-line no-type-assertion/no-type-assertion
     return fromEntries(a.sort(_entries(obj), compareFn
-        ? (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
+        ? // eslint-disable-next-line @skylib/prefer-readonly
+            (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
         : undefined));
 }
 exports.sort = sort;

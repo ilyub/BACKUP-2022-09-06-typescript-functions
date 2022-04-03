@@ -1,5 +1,3 @@
-import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
-import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 import * as is from "./guards";
 import type { ValidationObject } from "./helpers";
 import type * as types from "./types/core";
@@ -132,7 +130,7 @@ export declare function number(value: unknown, error?: ErrorArg): asserts value 
  */
 export declare function object(value: unknown, error?: ErrorArg): asserts value is object;
 export declare namespace object {
-    var of: <T extends object>(value: unknown, requiredGuards: is.Guards<T, RequiredKeys<T>>, optionalGuards: is.Guards<T, OptionalKeys<T>>, error?: ErrorArg | undefined) => asserts value is T;
+    var of: <R extends object, O extends object>(value: unknown, required: is.Guards<R, keyof R>, optional: is.Guards<O, keyof O>, error?: ErrorArg | undefined) => asserts value is is.ObjectOfReturn<R, O>;
 }
 /**
  * Asserts that value type is Set.

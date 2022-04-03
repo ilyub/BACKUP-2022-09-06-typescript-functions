@@ -14,9 +14,33 @@
 
 ### factory
 
-• **factory**: <T\>(`required`: [`Guards`](guards.md#guards)<`T`, `RequiredKeys`<`T`\>\>, `optional`: [`Guards`](guards.md#guards)<`T`, `OptionalKeys`<`T`\>\>) => [`Guard`](../interfaces/guards.Guard.md)<`T`\>
+• **factory**: <R, O\>(`required`: [`Guards`](guards.md#guards)<`R`, keyof `R`\>, `optional`: [`Guards`](guards.md#guards)<`O`, keyof `O`\>) => [`Guard`](../interfaces/guards.Guard.md)<[`ObjectOfReturn`](guards.md#objectofreturn)<`R`, `O`\>\><T\>(`required`: [`Guards`](guards.md#guards)<`T`, `RequiredKeys`<`T`\>\>, `optional`: [`Guards`](guards.md#guards)<`T`, `OptionalKeys`<`T`\>\>) => [`Guard`](../interfaces/guards.Guard.md)<`T`\>
 
 #### Type declaration
+
+▸ <`R`, `O`\>(`required`, `optional`): [`Guard`](../interfaces/guards.Guard.md)<[`ObjectOfReturn`](guards.md#objectofreturn)<`R`, `O`\>\>
+
+Creates guard for type T.
+
+##### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `R` | extends `object` |
+| `O` | extends `object` |
+
+##### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `required` | [`Guards`](guards.md#guards)<`R`, keyof `R`\> | Guards for required properties. |
+| `optional` | [`Guards`](guards.md#guards)<`O`, keyof `O`\> | Guards for optional properties. |
+
+##### Returns
+
+[`Guard`](../interfaces/guards.Guard.md)<[`ObjectOfReturn`](guards.md#objectofreturn)<`R`, `O`\>\>
+
+Guard for type T.
 
 ▸ <`T`\>(`required`, `optional`): [`Guard`](../interfaces/guards.Guard.md)<`T`\>
 

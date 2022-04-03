@@ -103,7 +103,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `T` | extends `object` |
+| `T` | `T` |
 | `K` | extends `string` \| `number` \| `symbol` = keyof `T` |
 
 #### Parameters
@@ -111,7 +111,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `obj` | `T` |
-| `key` | `PropertyKey` |
+| `key` | `K` |
 | `descriptor` | [`Descriptor`](../interfaces/object.Descriptor.md)<`T`, `K`\> |
 
 #### Returns
@@ -122,7 +122,30 @@ ___
 
 ### entries
 
-▸ **entries**<`T`\>(`obj`): readonly readonly [keyof `T`, `T`[keyof `T`]][]
+▸ **entries**<`K`, `V`\>(`obj`): [`K`, `V`][]
+
+Typed version of Object.entries.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `string` |
+| `V` | `V` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | [`PartialTypedObject`](types_core.md#partialtypedobject)<`K`, `V`\> | Object. |
+
+#### Returns
+
+[`K`, `V`][]
+
+Object entries.
+
+▸ **entries**<`T`\>(`obj`): [`string` & keyof `T`, `T`[`string` & keyof `T` & `number` & keyof `T`]][]
 
 Typed version of Object.entries.
 
@@ -140,7 +163,7 @@ Typed version of Object.entries.
 
 #### Returns
 
-readonly readonly [keyof `T`, `T`[keyof `T`]][]
+[`string` & keyof `T`, `T`[`string` & keyof `T` & `number` & keyof `T`]][]
 
 Object entries.
 
@@ -366,7 +389,26 @@ ___
 
 ### keys
 
-▸ **keys**<`T`\>(`obj`): readonly keyof `T`[]
+▸ **keys**<`K`, `V`\>(`obj`): `K`[]
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `string` |
+| `V` | `V` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `obj` | [`PartialTypedObject`](types_core.md#partialtypedobject)<`K`, `V`\> |
+
+#### Returns
+
+`K`[]
+
+▸ **keys**<`T`\>(`obj`): `string` & keyof `T`[]
 
 #### Type parameters
 
@@ -382,7 +424,7 @@ ___
 
 #### Returns
 
-readonly keyof `T`[]
+`string` & keyof `T`[]
 
 ___
 
@@ -396,7 +438,7 @@ Applies callback to each property.
 
 | Name | Type |
 | :------ | :------ |
-| `K` | extends `PropertyKey` |
+| `K` | extends `string` |
 | `V` | `V` |
 | `R` | `R` |
 
@@ -592,7 +634,26 @@ ___
 
 ### values
 
-▸ **values**<`T`\>(`obj`): readonly `T`[keyof `T`][]
+▸ **values**<`K`, `V`\>(`obj`): `V`[]
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `string` |
+| `V` | `V` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `obj` | [`PartialTypedObject`](types_core.md#partialtypedobject)<`K`, `V`\> |
+
+#### Returns
+
+`V`[]
+
+▸ **values**<`T`\>(`obj`): `T`[`string` & keyof `T` & `number` & keyof `T`][]
 
 #### Type parameters
 
@@ -608,4 +669,4 @@ ___
 
 #### Returns
 
-readonly `T`[keyof `T`][]
+`T`[`string` & keyof `T` & `number` & keyof `T`][]

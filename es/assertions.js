@@ -190,12 +190,12 @@ export function object(value, error) {
  * Asserts that value type is T.
  *
  * @param value - Value.
- * @param requiredGuards - Guards for required properties.
- * @param optionalGuards - Guards for optional properties.
+ * @param required - Guards for required properties.
+ * @param optional - Guards for optional properties.
  * @param error - Error.
  */
-object.of = (value, requiredGuards, optionalGuards, error) => {
-    byGuard(value, is.factory(is.object.of, requiredGuards, optionalGuards), error);
+object.of = (value, required, optional, error) => {
+    byGuard(value, is.factory(is.object.of, required, optional), error);
 };
 /**
  * Asserts that value type is Set.

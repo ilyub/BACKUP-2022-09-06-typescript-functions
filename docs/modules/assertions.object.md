@@ -14,7 +14,7 @@
 
 ### of
 
-▸ **of**<`T`\>(`value`, `requiredGuards`, `optionalGuards`, `error?`): asserts value is T
+▸ **of**<`R`, `O`\>(`value`, `required`, `optional`, `error?`): asserts value is ObjectOfReturn<R, O\>
 
 Asserts that value type is T.
 
@@ -22,17 +22,18 @@ Asserts that value type is T.
 
 | Name | Type |
 | :------ | :------ |
-| `T` | extends `object` |
+| `R` | extends `object` |
+| `O` | extends `object` |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `requiredGuards` | [`Guards`](guards.md#guards)<`T`, `RequiredKeys`<`T`\>\> | Guards for required properties. |
-| `optionalGuards` | [`Guards`](guards.md#guards)<`T`, `OptionalKeys`<`T`\>\> | Guards for optional properties. |
+| `required` | [`Guards`](guards.md#guards)<`R`, keyof `R`\> | Guards for required properties. |
+| `optional` | [`Guards`](guards.md#guards)<`O`, keyof `O`\> | Guards for optional properties. |
 | `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
 
 #### Returns
 
-asserts value is T
+asserts value is ObjectOfReturn<R, O\>

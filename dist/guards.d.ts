@@ -3,6 +3,7 @@ import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 import type { ValidationObject } from "./helpers";
 import type * as types from "./types/core";
 import type { Constructor } from "./types/function";
+import type { OptionalPropertiesToOptional, OptionalPropertiesToUndefined } from "./types/object";
 export interface ExclusionGuard<T> {
     /**
      * Checks that value type is not T.
@@ -34,6 +35,7 @@ export interface MultiArgGuard<T, A extends unknown[]> {
      */
     (value: unknown, ...args: A): value is T;
 }
+export declare type ObjectOfReturn<R extends object, O extends object> = OptionalPropertiesToOptional<Partial<O>> & OptionalPropertiesToUndefined<R>;
 /**
  * Creates single-arg guard.
  *
@@ -365,10 +367,27 @@ export declare const objectsU: Guard<readonly object[] | undefined>;
  * @param optional - Guards for optional properties.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
+export declare function objectOf<R extends object, O extends object>(value: unknown, required: Guards<R, keyof R>, optional: Guards<O, keyof O>): value is ObjectOfReturn<R, O>;
+/**
+ * Checks that value type is T.
+ *
+ * @param value - Value.
+ * @param required - Guards for required properties.
+ * @param optional - Guards for optional properties.
+ * @returns _True_ if value type is T, _false_ otherwise.
+ */
 export declare function objectOf<T extends object>(value: unknown, required: Guards<T, RequiredKeys<T>>, optional: Guards<T, OptionalKeys<T>>): value is T;
 export declare namespace objectOf {
     var factory: typeof objectOfFactory;
 }
+/**
+ * Creates guard for type T.
+ *
+ * @param required - Guards for required properties.
+ * @param optional - Guards for optional properties.
+ * @returns Guard for type T.
+ */
+export declare function objectOfFactory<R extends object, O extends object>(required: Guards<R, keyof R>, optional: Guards<O, keyof O>): Guard<ObjectOfReturn<R, O>>;
 /**
  * Creates guard for type T.
  *
