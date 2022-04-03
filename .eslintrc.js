@@ -24,6 +24,7 @@ module.exports = {
         ignoreInterfaces: true,
         ignoreTypes: ["Promise", "ReadonlyMap", "ReadonlySet"]
       }
-    ]
+    ],
+    "eslint-comments/require-description": "warn"
   }
 };
