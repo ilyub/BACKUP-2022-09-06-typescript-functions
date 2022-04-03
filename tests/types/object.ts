@@ -5,10 +5,10 @@ import type {
   Join2,
   Join3,
   Join4,
-  OptionalPropertiesToOptional,
-  OptionalPropertiesToOptionalUndefined,
-  OptionalPropertiesToUndefined,
-  StrictOmit
+  OptionalStyle,
+  OptionalUndefinedStyle,
+  StrictOmit,
+  UndefinedStyle
 } from "@/types/object";
 
 interface TestInterface {
@@ -52,8 +52,8 @@ test("Join4", () => {
   expect(typeCheck).toBe(1);
 });
 
-test("OptionalPropertiesToOptional", () => {
-  type To = OptionalPropertiesToOptional<TestInterface>;
+test("OptionalStyle", () => {
+  type To = OptionalStyle<TestInterface>;
 
   type Expected = {
     readonly r: number;
@@ -74,8 +74,8 @@ test("OptionalPropertiesToOptional", () => {
   expect(value).toBe(1);
 });
 
-test("OptionalPropertiesToOptionalUndefined", () => {
-  type To = OptionalPropertiesToOptionalUndefined<TestInterface>;
+test("OptionalUndefinedStyle", () => {
+  type To = OptionalUndefinedStyle<TestInterface>;
 
   type Expected = {
     readonly r: number;
@@ -96,8 +96,8 @@ test("OptionalPropertiesToOptionalUndefined", () => {
   expect(value).toBe(1);
 });
 
-test("OptionalPropertiesToUndefined", () => {
-  type To = OptionalPropertiesToUndefined<TestInterface>;
+test("UndefinedStyle", () => {
+  type To = UndefinedStyle<TestInterface>;
 
   type Expected = {
     readonly r: number;

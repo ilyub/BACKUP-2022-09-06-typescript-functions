@@ -2,7 +2,7 @@
 
 /* skylib/eslint-plugin disable @skylib/disallow-identifier[functions.types.core] */
 
-export type IndexedObject<T = unknown> = TypedObject<PropertyKey, T>;
+export type IndexedObject<T = unknown> = Rec<PropertyKey, T>;
 
 export type NumStr = number | string;
 
@@ -12,7 +12,7 @@ export type NumStrU = NumStr | undefined;
 
 export type NumStrs = readonly NumStr[];
 
-export type PartialTypedObject<K extends PropertyKey, V> = {
+export type PartialRecord<K extends PropertyKey, V> = {
   readonly [L in K]?: V;
 };
 
@@ -22,7 +22,7 @@ export type PropertyKeyU = PropertyKey | undefined;
 
 export type PropertyKeys = readonly PropertyKey[];
 
-export type TypedObject<K extends PropertyKey, V> = {
+export type Rec<K extends PropertyKey, V> = {
   readonly [L in K]: V;
 };
 
@@ -32,13 +32,13 @@ export type Writable<T> = {
 };
 
 // eslint-disable-next-line @skylib/prefer-readonly -- Wait for @skylib/eslint-plugin update
-export type WritableIndexedObject<T = unknown> = Writable<IndexedObject<T>>;
+export type WritableIndexedObject<T = unknown> = WritableRecord<PropertyKey, T>;
 
-export type WritablePartialTypedObject<K extends PropertyKey, V> = {
+export type WritablePartialRecord<K extends PropertyKey, V> = {
   [L in K]?: V;
 };
 
-export type WritableTypedObject<K extends PropertyKey, V> = {
+export type WritableRecord<K extends PropertyKey, V> = {
   [L in K]: V;
 };
 

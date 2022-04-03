@@ -130,10 +130,9 @@ module.exports = importPrefix => {
             .source,
           /\b(?:empty|undefined)\s*\|\s*(?:NumStr|PropertyKey|boolean|false|null|number|object|string|true)\b/u
             .source,
-          /\bPartial\s*<\s*TypedObject\b/u.source,
+          /\bPartial\s*<\s*Rec\b/u.source,
           /\bTypedObject\s*<\s*PropertyKey\b/u.source,
-          /\bWritable\s*<\s*(?:IndexedObject|PartialTypedObject|TypedObject)\b/u
-            .source,
+          /\bWritable\s*<\s*(?:IndexedObject|PartialRecord|Rec)\b/u.source,
           /\bnumber\s*\|\s*string\b/u.source,
           /\breadonly\s+(?:NumStr|PropertyKey|boolean|never|number|object|string|unknown)\[\]/u
             .source

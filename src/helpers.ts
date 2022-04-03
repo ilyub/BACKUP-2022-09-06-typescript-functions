@@ -5,7 +5,7 @@ import * as is from "./guards";
 import * as o from "./object";
 import * as programFlow from "./programFlow";
 import * as reflect from "./reflect";
-import type { TypedObject, unknowns } from "./types/core";
+import type { Rec, unknowns } from "./types/core";
 import type { Join2 } from "./types/object";
 
 export type Facade<I, E = unknown> = E & FacadeOwnMethods<I> & I;
@@ -103,7 +103,7 @@ export function createFacade<I extends object, E = unknown>(
  * @returns Validation object.
  */
 export function createValidationObject<T extends PropertyKey>(
-  source: TypedObject<T, T>
+  source: Rec<T, T>
 ): ValidationObject<T> {
   if (o.entries(source).every(([key, value]) => key === String(value)))
     return new Set(o.values(source));

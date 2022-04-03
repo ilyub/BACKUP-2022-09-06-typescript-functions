@@ -6,13 +6,13 @@ import type {
   IndexedObject,
   NumStr,
   objectU,
-  PartialTypedObject,
-  TypedObject,
+  PartialRecord,
+  Rec,
   unknowns,
   Writable,
-  WritablePartialTypedObject
+  WritablePartialRecord
 } from "./types/core";
-import type { OptionalPropertiesToOptional, StrictOmit } from "./types/object";
+import type { OptionalStyle, StrictOmit } from "./types/object";
 
 export interface Assign {
   /**
@@ -97,7 +97,7 @@ export interface Entries {
    * @param obj - Object.
    * @returns Object entries.
    */
-  <K extends string, V>(obj: PartialTypedObject<K, V>): Array<[K, V]>;
+  <K extends string, V>(obj: PartialRecord<K, V>): Array<[K, V]>;
   /**
    * Typed version of Object.entries.
    *
@@ -149,7 +149,7 @@ export interface Keys {
    * @param obj - Object.
    * @returns Object entries.
    */
-  <K extends string, V>(obj: PartialTypedObject<K, V>): K[];
+  <K extends string, V>(obj: PartialRecord<K, V>): K[];
   /**
    * Typed version of Object.keys.
    *
@@ -166,7 +166,7 @@ export interface Values {
    * @param obj - Object.
    * @returns Object entries.
    */
-  <K extends string, V>(obj: PartialTypedObject<K, V>): V[];
+  <K extends string, V>(obj: PartialRecord<K, V>): V[];
   /**
    * Typed version of Object.values.
    *
@@ -254,8 +254,8 @@ export function freeze<T extends object>(obj: T): Readonly<T> {
  */
 export function fromEntries<K extends PropertyKey, V>(
   entries: Iterable<readonly [K, V]>
-): PartialTypedObject<K, V> {
-  const result: WritablePartialTypedObject<K, V> = {};
+): PartialRecord<K, V> {
+  const result: WritablePartialRecord<K, V> = {};
 
   for (const entry of entries) result[entry[0]] = entry[1];
 
@@ -270,13 +270,13 @@ export function fromEntries<K extends PropertyKey, V>(
  */
 fromEntries.exhaustive = <K extends PropertyKey, V>(
   entries: Iterable<readonly [K, V]>
-): TypedObject<K, V> => {
-  const result: WritablePartialTypedObject<K, V> = {};
+): Rec<K, V> => {
+  const result: WritablePartialRecord<K, V> = {};
 
   for (const entry of entries) result[entry[0]] = entry[1];
 
   // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
-  return result as TypedObject<K, V>;
+  return result as Rec<K, V>;
 };
 
 /**
@@ -312,9 +312,9 @@ export const keys: Keys = Object.keys;
  * @returns New object.
  */
 export function map<K extends string, V, R>(
-  obj: TypedObject<K, V>,
+  obj: Rec<K, V>,
   callback: (value: V, key: K) => R
-): TypedObject<K, R> {
+): Rec<K, R> {
   return fromEntries.exhaustive(
     _entries(obj).map(([key, value]) => [key, callback(value, key)])
   );
@@ -373,9 +373,9 @@ export function omit<T extends object, K extends keyof T>(
  */
 export function removeUndefinedKeys<T extends object>(
   obj: T
-): OptionalPropertiesToOptional<T> {
+): OptionalStyle<T> {
   // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
-  return filter(obj, is.not.empty) as OptionalPropertiesToOptional<T>;
+  return filter(obj, is.not.empty) as OptionalStyle<T>;
 }
 
 /**

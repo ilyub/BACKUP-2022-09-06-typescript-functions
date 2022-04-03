@@ -24,21 +24,21 @@ export type Join4<
   D extends object
 > = keyof A extends never ? Join3<B, C, D> : A & Join3<B, C, D>;
 
-export type OptionalPropertiesToOptional<T extends object> = Join4<
+export type OptionalStyle<T extends object> = Join4<
   { [K in WritableDefindKeys<T>]: T[K] },
   { [K in WritableUndefindKeys<T>]?: Exclude<T[K], undefined> },
   { readonly [K in ReadonlyDefinedKeys<T>]: T[K] },
   { readonly [K in ReadonlyUndefinedKeys<T>]?: Exclude<T[K], undefined> }
 >;
 
-export type OptionalPropertiesToOptionalUndefined<T extends object> = Join4<
+export type OptionalUndefinedStyle<T extends object> = Join4<
   { [K in WritableDefindKeys<T>]: T[K] },
   { [K in WritableUndefindKeys<T>]?: T[K] | undefined },
   { readonly [K in ReadonlyDefinedKeys<T>]: T[K] },
   { readonly [K in ReadonlyUndefinedKeys<T>]?: T[K] | undefined }
 >;
 
-export type OptionalPropertiesToUndefined<T extends object> = Join4<
+export type UndefinedStyle<T extends object> = Join4<
   { [K in WritableDefindKeys<T>]: T[K] },
   { [K in WritableUndefindKeys<T>]: T[K] | undefined },
   { readonly [K in ReadonlyDefinedKeys<T>]: T[K] },

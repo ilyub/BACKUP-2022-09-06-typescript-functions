@@ -8,10 +8,7 @@ import * as o from "./object";
 // eslint-disable-next-line @skylib/consistent-import -- Ok
 import type * as types from "./types/core";
 import type { Constructor } from "./types/function";
-import type {
-  OptionalPropertiesToOptional,
-  OptionalPropertiesToUndefined
-} from "./types/object";
+import type { OptionalStyle, UndefinedStyle } from "./types/object";
 
 export interface ExclusionGuard<T> {
   /**
@@ -48,10 +45,10 @@ export interface MultiArgGuard<T, A extends unknown[]> {
   (value: unknown, ...args: A): value is T;
 }
 
-export type ObjectOfReturn<
-  R extends object,
-  O extends object
-> = OptionalPropertiesToOptional<Partial<O>> & OptionalPropertiesToUndefined<R>;
+export type ObjectOfReturn<R extends object, O extends object> = OptionalStyle<
+  Partial<O>
+> &
+  UndefinedStyle<R>;
 
 /**
  * Creates single-arg guard.
