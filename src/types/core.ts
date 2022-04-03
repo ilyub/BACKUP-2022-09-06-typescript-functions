@@ -2,7 +2,7 @@
 
 /* skylib/eslint-plugin disable @skylib/disallow-identifier[functions.types.core] */
 
-export type IndexedObject<T = unknown> = Readonly<TypedObject<PropertyKey, T>>;
+export type IndexedObject<T = unknown> = TypedObject<PropertyKey, T>;
 
 export type NumStr = number | string;
 
@@ -29,6 +29,17 @@ export type TypedObject<K extends PropertyKey, V> = {
 // eslint-disable-next-line @skylib/prefer-readonly
 export type Writable<T> = {
   -readonly [P in keyof T]: T[P];
+};
+
+// eslint-disable-next-line @skylib/prefer-readonly
+export type WritableIndexedObject<T = unknown> = Writable<IndexedObject<T>>;
+
+export type WritablePartialTypedObject<K extends PropertyKey, V> = {
+  [L in K]?: V;
+};
+
+export type WritableTypedObject<K extends PropertyKey, V> = {
+  [L in K]: V;
 };
 
 export type booleanE = empty | boolean;

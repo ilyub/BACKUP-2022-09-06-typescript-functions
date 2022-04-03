@@ -9,7 +9,8 @@ import type {
   PartialTypedObject,
   TypedObject,
   unknowns,
-  Writable
+  Writable,
+  WritablePartialTypedObject
 } from "./types/core";
 import type { OptionalPropertiesToOptional, StrictOmit } from "./types/object";
 
@@ -254,8 +255,7 @@ export function freeze<T extends object>(obj: T): Readonly<T> {
 export function fromEntries<K extends PropertyKey, V>(
   entries: Iterable<readonly [K, V]>
 ): PartialTypedObject<K, V> {
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
-  const result = {} as Writable<PartialTypedObject<K, V>>;
+  const result: WritablePartialTypedObject<K, V> = {};
 
   for (const entry of entries) result[entry[0]] = entry[1];
 
@@ -271,12 +271,12 @@ export function fromEntries<K extends PropertyKey, V>(
 fromEntries.exhaustive = <K extends PropertyKey, V>(
   entries: Iterable<readonly [K, V]>
 ): TypedObject<K, V> => {
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
-  const result = {} as Writable<TypedObject<K, V>>;
+  const result: WritablePartialTypedObject<K, V> = {};
 
   for (const entry of entries) result[entry[0]] = entry[1];
 
-  return result;
+  // eslint-disable-next-line no-type-assertion/no-type-assertion
+  return result as TypedObject<K, V>;
 };
 
 /**
