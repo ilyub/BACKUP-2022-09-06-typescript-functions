@@ -275,7 +275,7 @@ fromEntries.exhaustive = <K extends PropertyKey, V>(
 
   for (const entry of entries) result[entry[0]] = entry[1];
 
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
+  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
   return result as TypedObject<K, V>;
 };
 
@@ -361,7 +361,7 @@ export function omit<T extends object, K extends keyof T>(
 ): StrictOmit<T, K> {
   const excludeSet = new Set<keyof T>(exclude);
 
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
+  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
   return filter(obj, (_value, key) => !excludeSet.has(key)) as StrictOmit<T, K>;
 }
 
@@ -374,7 +374,7 @@ export function omit<T extends object, K extends keyof T>(
 export function removeUndefinedKeys<T extends object>(
   obj: T
 ): OptionalPropertiesToOptional<T> {
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
+  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
   return filter(obj, is.not.empty) as OptionalPropertiesToOptional<T>;
 }
 
@@ -407,12 +407,12 @@ export function some<T extends object>(obj: T, callback: Callback<T>): boolean {
  * @returns New object.
  */
 export function sort<T extends object>(obj: T, compareFn?: CompareFn<T>): T {
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
+  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
   return fromEntries(
     a.sort(
       _entries(obj),
       compareFn
-        ? // eslint-disable-next-line @skylib/prefer-readonly
+        ? // eslint-disable-next-line @skylib/prefer-readonly -- Wait for @skylib/eslint-plugin update
           (entry1, entry2): number =>
             compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
         : undefined

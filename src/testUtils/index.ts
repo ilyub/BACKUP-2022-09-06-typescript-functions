@@ -1,11 +1,11 @@
-// eslint-disable-next-line import/no-unassigned-import
+// eslint-disable-next-line import/no-unassigned-import -- Ok
 import "jest-extended";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
-// @ts-ignore
-// eslint-disable-next-line @skylib/consistent-import
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- Wait for better solution
+// @ts-expect-error
+// eslint-disable-next-line @skylib/consistent-import -- Ok
 import * as matchers from "jest-extended/all";
 import * as _ from "lodash";
-// eslint-disable-next-line @skylib/consistent-import
+// eslint-disable-next-line @skylib/consistent-import -- Ok
 import * as fakeTimers from "@sinonjs/fake-timers";
 
 import * as a from "../array";
@@ -208,7 +208,7 @@ export function jestReset(): void {
  * Jest setup.
  */
 export function jestSetup(): void {
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
+  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
   expect.extend(matchers as jest.ExpectExtendMap);
 
   expect.extend({

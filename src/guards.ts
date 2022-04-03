@@ -5,7 +5,7 @@ import * as a from "./array";
 import type { ValidationObject } from "./helpers";
 import { typedef } from "./helpers";
 import * as o from "./object";
-// eslint-disable-next-line @skylib/consistent-import
+// eslint-disable-next-line @skylib/consistent-import -- Ok
 import type * as types from "./types/core";
 import type { Constructor } from "./types/function";
 import type {

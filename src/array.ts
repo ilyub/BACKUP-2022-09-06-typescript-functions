@@ -175,7 +175,7 @@ export function fromString(str: string): string[] {
 export function get<T>(arr: readonly T[], index: number): T {
   assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
 
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
+  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
   return arr[index] as T;
 }
 

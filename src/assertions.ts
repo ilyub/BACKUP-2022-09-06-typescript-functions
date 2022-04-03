@@ -1,7 +1,7 @@
 import { AssertionError } from "./errors/AssertionError";
 import * as is from "./guards";
 import type { ValidationObject } from "./helpers";
-// eslint-disable-next-line @skylib/consistent-import
+// eslint-disable-next-line @skylib/consistent-import -- Ok
 import type * as types from "./types/core";
 import type { Constructor } from "./types/function";
 

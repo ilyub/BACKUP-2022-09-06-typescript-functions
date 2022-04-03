@@ -1,3 +1,5 @@
+import * as _ from "lodash";
+
 import * as is from "./guards";
 import type {
   AsyncPromise,
@@ -26,8 +28,7 @@ export function identity<T>(value: T): T {
   return value;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-export const noop: Callable = () => {};
+export const noop: Callable = _.noop.bind(_);
 
 /**
  * Applies callbacks to the value.

@@ -152,7 +152,7 @@ export function replaceAll(
   search: string,
   replace: string
 ): string {
-  // eslint-disable-next-line security/detect-non-literal-regexp
+  // eslint-disable-next-line security/detect-non-literal-regexp -- Ok
   return str.replace(new RegExp(regexp.escapeString(search), "gu"), replace);
 }
 

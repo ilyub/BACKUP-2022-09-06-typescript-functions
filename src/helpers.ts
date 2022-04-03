@@ -53,7 +53,7 @@ export function createFacade<I extends object, E = unknown>(
     ...extension
   };
 
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
+  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
   return new Proxy(
     fn.noop,
     wrapProxyHandler("createFacade", "throw", {
@@ -146,7 +146,7 @@ export function onDemand<T extends object>(generator: () => T): T {
     })
   );
 
-  // eslint-disable-next-line no-type-assertion/no-type-assertion
+  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
   return proxy as T;
 
   function obj(): object {

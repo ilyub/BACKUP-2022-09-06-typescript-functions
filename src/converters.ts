@@ -1,5 +1,5 @@
 import * as is from "./guards";
-// eslint-disable-next-line @skylib/consistent-import
+// eslint-disable-next-line @skylib/consistent-import -- Ok
 import type * as types from "./types/core";
 
 /**

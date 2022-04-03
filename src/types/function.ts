@@ -30,7 +30,7 @@ export interface CallSignature<T extends Callable> {
   (this: ThisParameterType<T>, ...args: Parameters<T>): ReturnType<T>;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Ok
 export interface Callable<T = any> {
   /**
    * Function.
@@ -38,7 +38,7 @@ export interface Callable<T = any> {
    * @param args - Arguments.
    * @returns Result.
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Ok
   (...args: any[]): T;
 }
 
@@ -52,7 +52,7 @@ export interface ConstructSignature<T extends Constructor> {
   new (...args: ConstructorParameters<T>): InstanceType<T>;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Ok
 export interface Constructor<T = any> {
   /**
    * Constructor.
@@ -60,7 +60,7 @@ export interface Constructor<T = any> {
    * @param args - Arguments.
    * @returns Result.
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Ok
   new (...args: any[]): T;
 }
 
