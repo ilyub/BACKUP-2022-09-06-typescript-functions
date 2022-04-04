@@ -82,11 +82,13 @@ test("not.empty", () => {
 });
 
 test("enumeration", () => {
-  const TestEnumVO = createValidationObject({ a: "a" });
+  const TestEnumVO = createValidationObject({ 1: 1, a: "a" });
 
   const subtest = createSubtest(assert.enumeration, TestEnumVO);
 
+  expect(subtest(1)).not.toThrow();
   expect(subtest("a")).not.toThrow();
+  expect(subtest("1")).toThrow(new AssertionError());
   expect(subtest("b")).toThrow(new AssertionError());
   expect(subtest(undefined)).toThrow(new AssertionError());
 });

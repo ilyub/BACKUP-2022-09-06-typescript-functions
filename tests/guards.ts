@@ -85,9 +85,11 @@ test("empty", () => {
 });
 
 test("enumeration", () => {
-  const TestEnumVO = createValidationObject({ a: "a" });
+  const TestEnumVO = createValidationObject({ 1: 1, a: "a" });
 
+  expect(is.enumeration(1, TestEnumVO)).toBeTrue();
   expect(is.enumeration("a", TestEnumVO)).toBeTrue();
+  expect(is.enumeration("1", TestEnumVO)).toBeFalse();
   expect(is.enumeration("b", TestEnumVO)).toBeFalse();
   expect(is.enumeration(undefined, TestEnumVO)).toBeFalse();
 });

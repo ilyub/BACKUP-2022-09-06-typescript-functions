@@ -83,15 +83,15 @@ test("createFacade: Object", () => {
 
 test("createValidationObject", () => {
   {
-    const source = { a: "a", b: "b" };
+    const source = { 1: 1, a: "a" };
 
-    const expected = new Set(["a", "b"]);
+    const expected = new Set([1, "a"]);
 
     expect(createValidationObject(source)).toStrictEqual(expected);
   }
 
   {
-    const source = { a: "b", b: "a" };
+    const source = { 1: "a", a: 1 };
 
     const error = new Error("Invalid source");
 

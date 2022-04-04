@@ -5,7 +5,7 @@ import * as is from "./guards";
 import * as o from "./object";
 import * as programFlow from "./programFlow";
 import * as reflect from "./reflect";
-import type { Rec, unknowns } from "./types/core";
+import type { NumStr, Rec, unknowns } from "./types/core";
 import type { Join2 } from "./types/object";
 
 export type Facade<I, E = unknown> = E & FacadeOwnMethods<I> & I;
@@ -104,10 +104,10 @@ export function createFacade<I extends object, E = unknown>(
  * @param source - Source.
  * @returns Validation object.
  */
-export function createValidationObject<T extends string>(
+export function createValidationObject<T extends NumStr>(
   source: Rec<T, T>
 ): ValidationObject<T> {
-  if (o.entries(source).every(([key, value]) => key === value))
+  if (o.entries(source).every(([key, value]) => key === cast.string(value)))
     return new Set(o.values(source));
 
   throw new Error("Invalid source");
