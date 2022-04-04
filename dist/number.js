@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sum = exports.roundStep = exports.round = exports.rootMeanSquareDeviation = exports.limit = exports.floorStep = exports.floor = exports.ceilStep = exports.ceil = exports.average = void 0;
+exports.sum = exports.round = exports.rootMeanSquareDeviation = exports.limit = exports.floor = exports.ceil = exports.average = void 0;
 const tslib_1 = require("tslib");
 const assert = tslib_1.__importStar(require("./assertions"));
 /**
@@ -34,11 +34,7 @@ exports.ceil = ceil;
  * @param from - From.
  * @returns Ceiled value.
  */
-function ceilStep(value, step, from = 0) {
-    return Math.ceil((value - from) / step) * step + from;
-}
-exports.ceilStep = ceilStep;
-ceil.step = ceilStep;
+ceil.step = (value, step, from = 0) => Math.ceil((value - from) / step) * step + from;
 /**
  * Floors number to a given precision.
  *
@@ -59,11 +55,7 @@ exports.floor = floor;
  * @param from - From.
  * @returns Floored value.
  */
-function floorStep(value, step, from = 0) {
-    return Math.floor((value - from) / step) * step + from;
-}
-exports.floorStep = floorStep;
-floor.step = floorStep;
+floor.step = (value, step, from = 0) => Math.floor((value - from) / step) * step + from;
 /**
  * Limits value to be within [min, max] range.
  *
@@ -83,7 +75,6 @@ exports.limit = limit;
  * @returns Root-mean-square deviation.
  */
 function rootMeanSquareDeviation(...values) {
-    assert.toBeTrue(values.length > 0);
     const averageValue = average(...values);
     return Math.sqrt(sum(...values.map(value => (value - averageValue) ** 2)) / values.length);
 }
@@ -108,11 +99,7 @@ exports.round = round;
  * @param from - From.
  * @returns Rounded value.
  */
-function roundStep(value, step, from = 0) {
-    return Math.round((value - from) / step) * step + from;
-}
-exports.roundStep = roundStep;
-round.step = roundStep;
+round.step = (value, step, from = 0) => Math.round((value - from) / step) * step + from;
 /**
  * Sums values.
  *

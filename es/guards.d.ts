@@ -3,7 +3,7 @@ import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 import type { ValidationObject } from "./helpers";
 import type * as types from "./types/core";
 import type { Constructor } from "./types/function";
-import type { OptionalPropertiesToOptional, OptionalPropertiesToUndefined } from "./types/object";
+import type { OptionalStyle, UndefinedStyle } from "./types/object";
 export interface ExclusionGuard<T> {
     /**
      * Checks that value type is not T.
@@ -35,7 +35,6 @@ export interface MultiArgGuard<T, A extends unknown[]> {
      */
     (value: unknown, ...args: A): value is T;
 }
-export declare type ObjectOfReturn<R extends object, O extends object> = OptionalPropertiesToOptional<Partial<O>> & OptionalPropertiesToUndefined<R>;
 /**
  * Creates single-arg guard.
  *
@@ -45,66 +44,6 @@ export declare type ObjectOfReturn<R extends object, O extends object> = Optiona
  */
 export declare function factory<T, A extends unknown[]>(guard: MultiArgGuard<T, A>, ...args: A): Guard<T>;
 /**
- * Checks that value type is A & B.
- *
- * @param value - Value.
- * @param guard1 - Guard 1.
- * @param guard2 - Guard 2.
- * @returns _True_ if value type is A & B, _false_ otherwise.
- */
-export declare function and<A, B>(value: unknown, guard1: Guard<A>, guard2: Guard<B>): value is A & B;
-/**
- * Checks that value type is A & B & C.
- *
- * @param value - Value.
- * @param guard1 - Guard 1.
- * @param guard2 - Guard 2.
- * @param guard3 - Guard 3.
- * @returns _True_ if value type is A & B & C, _false_ otherwise.
- */
-export declare function and<A, B, C>(value: unknown, guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>): value is A & B & C;
-/**
- * Checks that value type is A & B & C & D.
- *
- * @param value - Value.
- * @param guard1 - Guard 1.
- * @param guard2 - Guard 2.
- * @param guard3 - Guard 3.
- * @param guard4 - Guard 4.
- * @returns _True_ if value type is A & B & C & D, _false_ otherwise.
- */
-export declare function and<A, B, C, D>(value: unknown, guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>, guard4: Guard<D>): value is A & B & C & D;
-export declare namespace and {
-    var factory: typeof andFactory;
-}
-/**
- * Creates guard for type A & B.
- *
- * @param guard1 - Guard 1.
- * @param guard2 - Guard 2.
- * @returns Guard for type A & B.
- */
-export declare function andFactory<A, B>(guard1: Guard<A>, guard2: Guard<B>): Guard<A & B>;
-/**
- * Creates guard for type A & B & C.
- *
- * @param guard1 - Guard 1.
- * @param guard2 - Guard 2.
- * @param guard3 - Guard 3.
- * @returns Guard for type A & B & C.
- */
-export declare function andFactory<A, B, C>(guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>): Guard<A & B & C>;
-/**
- * Creates guard for type A & B & C & D.
- *
- * @param guard1 - Guard 1.
- * @param guard2 - Guard 2.
- * @param guard3 - Guard 3.
- * @param guard4 - Guard 4.
- * @returns Guard for type A & B & C & D.
- */
-export declare function andFactory<A, B, C, D>(guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>, guard4: Guard<D>): Guard<A & B & C & D>;
-/**
  * Checks that value type is not T.
  *
  * @param value - Value.
@@ -113,37 +52,90 @@ export declare function andFactory<A, B, C, D>(guard1: Guard<A>, guard2: Guard<B
  */
 export declare function not<T, V>(value: V, guard: Guard<T>): value is Exclude<V, T>;
 export declare namespace not {
-    export var factory: typeof notFactory;
-    export var array: ExclusionGuard<types.unknowns>;
-    export var boolean: ExclusionGuard<boolean>;
-    export var empty: ExclusionGuard<types.empty>;
-    var _a: ExclusionGuard<false>;
-    export var indexedObject: ExclusionGuard<Readonly<types.TypedObject<PropertyKey, unknown>>>;
-    export var map: ExclusionGuard<ReadonlyMap<unknown, unknown>>;
-    var _b: ExclusionGuard<null>;
-    export var numStr: ExclusionGuard<types.NumStr>;
-    export var number: ExclusionGuard<number>;
-    export var object: ExclusionGuard<object>;
-    export var set: ExclusionGuard<ReadonlySet<unknown>>;
-    export var string: ExclusionGuard<string>;
-    export var symbol: ExclusionGuard<symbol>;
-    var _c: ExclusionGuard<true>;
-    export var undefined: ExclusionGuard<undefined>;
+    export var factory: <T>(guard: Guard<T>) => <V>(value: V) => value is Exclude<V, T>;
+    export var array: <V>(value: V) => value is Exclude<V, types.unknowns>;
+    export var boolean: <V>(value: V) => value is Exclude<V, boolean>;
+    export var empty: <V>(value: V) => value is Exclude<V, types.empty>;
+    var _a: <V>(value: V) => value is Exclude<V, false>;
+    export var indexedObject: <V>(value: V) => value is Exclude<V, types.IndexedObject<unknown>>;
+    export var map: <V>(value: V) => value is Exclude<V, ReadonlyMap<unknown, unknown>>;
+    var _b: <V>(value: V) => value is Exclude<V, null>;
+    export var numStr: <V>(value: V) => value is Exclude<V, types.NumStr>;
+    export var number: <V>(value: V) => value is Exclude<V, number>;
+    export var object: <V>(value: V) => value is Exclude<V, object>;
+    export var set: <V>(value: V) => value is Exclude<V, ReadonlySet<unknown>>;
+    export var string: <V>(value: V) => value is Exclude<V, string>;
+    export var symbol: <V>(value: V) => value is Exclude<V, symbol>;
+    var _c: <V>(value: V) => value is Exclude<V, true>;
+    export var undefined: <V>(value: V) => value is Exclude<V, undefined>;
     export { _a as false, _b as null, _c as true };
 }
 /**
- * Creates guard for type not T.
+ * Checks that value type is A & B.
  *
- * @param guard - Guard for type T.
- * @returns Guard for type not T.
+ * @param value - Value.
+ * @param guard1 - Guard for type A.
+ * @param guard2 - Guard for type B.
+ * @returns _True_ if value type is A & B, _false_ otherwise.
  */
-export declare function notFactory<T>(guard: Guard<T>): ExclusionGuard<T>;
+export declare function and<A, B>(value: unknown, guard1: Guard<A>, guard2: Guard<B>): value is A & B;
+/**
+ * Checks that value type is A & B & C.
+ *
+ * @param value - Value.
+ * @param guard1 - Guard for type A.
+ * @param guard2 - Guard for type B.
+ * @param guard3 - Guard for type C.
+ * @returns _True_ if value type is A & B & C, _false_ otherwise.
+ */
+export declare function and<A, B, C>(value: unknown, guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>): value is A & B & C;
+/**
+ * Checks that value type is A & B & C & D.
+ *
+ * @param value - Value.
+ * @param guard1 - Guard for type A.
+ * @param guard2 - Guard for type B.
+ * @param guard3 - Guard for type C.
+ * @param guard4 - Guard for type D.
+ * @returns _True_ if value type is A & B & C & D, _false_ otherwise.
+ */
+export declare function and<A, B, C, D>(value: unknown, guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>, guard4: Guard<D>): value is A & B & C & D;
+export declare namespace and {
+    var factory: typeof _andFactory;
+}
+/**
+ * Creates guard for type A & B.
+ *
+ * @param guard1 - Guard for type A.
+ * @param guard2 - Guard for type B.
+ * @returns Guard for type A & B.
+ */
+declare function _andFactory<A, B>(guard1: Guard<A>, guard2: Guard<B>): Guard<A & B>;
+/**
+ * Creates guard for type A & B & C.
+ *
+ * @param guard1 - Guard for type A.
+ * @param guard2 - Guard for type B.
+ * @param guard3 - Guard for type C.
+ * @returns Guard for type A & B & C.
+ */
+declare function _andFactory<A, B, C>(guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>): Guard<A & B & C>;
+/**
+ * Creates guard for type A & B & C & D.
+ *
+ * @param guard1 - Guard for type A.
+ * @param guard2 - Guard for type B.
+ * @param guard3 - Guard for type C.
+ * @param guard4 - Guard for type D.
+ * @returns Guard for type A & B & C & D.
+ */
+declare function _andFactory<A, B, C, D>(guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>, guard4: Guard<D>): Guard<A & B & C & D>;
 /**
  * Checks that value type is A | B.
  *
  * @param value - Value.
- * @param guard1 - Guard 1.
- * @param guard2 - Guard 2.
+ * @param guard1 - Guard for type A.
+ * @param guard2 - Guard for type B.
  * @returns _True_ if value type is A | B, _false_ otherwise.
  */
 export declare function or<A, B>(value: unknown, guard1: Guard<A>, guard2: Guard<B>): value is A | B;
@@ -151,9 +143,9 @@ export declare function or<A, B>(value: unknown, guard1: Guard<A>, guard2: Guard
  * Checks that value type is A | B | C.
  *
  * @param value - Value.
- * @param guard1 - Guard 1.
- * @param guard2 - Guard 2.
- * @param guard3 - Guard 3.
+ * @param guard1 - Guard for type A.
+ * @param guard2 - Guard for type B.
+ * @param guard3 - Guard for type C.
  * @returns _True_ if value type is A | B | C, _false_ otherwise.
  */
 export declare function or<A, B, C>(value: unknown, guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>): value is A | B | C;
@@ -161,43 +153,43 @@ export declare function or<A, B, C>(value: unknown, guard1: Guard<A>, guard2: Gu
  * Checks that value type is A | B | C | D.
  *
  * @param value - Value.
- * @param guard1 - Guard 1.
- * @param guard2 - Guard 2.
- * @param guard3 - Guard 3.
- * @param guard4 - Guard 4.
+ * @param guard1 - Guard for type A.
+ * @param guard2 - Guard for type B.
+ * @param guard3 - Guard for type C.
+ * @param guard4 - Guard for type D.
  * @returns _True_ if value type is A | B | C | D, _false_ otherwise.
  */
 export declare function or<A, B, C, D>(value: unknown, guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>, guard4: Guard<D>): value is A | B | C | D;
 export declare namespace or {
-    var factory: typeof orFactory;
+    var factory: typeof _orFactory;
 }
 /**
  * Creates guard for type A | B.
  *
- * @param guard1 - Guard 1.
- * @param guard2 - Guard 2.
+ * @param guard1 - Guard for type A.
+ * @param guard2 - Guard for type B.
  * @returns Guard for type A | B.
  */
-export declare function orFactory<A, B>(guard1: Guard<A>, guard2: Guard<B>): Guard<A | B>;
+declare function _orFactory<A, B>(guard1: Guard<A>, guard2: Guard<B>): Guard<A | B>;
 /**
  * Creates guard for type A | B | C.
  *
- * @param guard1 - Guard 1.
- * @param guard2 - Guard 2.
- * @param guard3 - Guard 3.
+ * @param guard1 - Guard for type A.
+ * @param guard2 - Guard for type B.
+ * @param guard3 - Guard for type C.
  * @returns Guard for type A | B | C.
  */
-export declare function orFactory<A, B, C>(guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>): Guard<A | B | C>;
+declare function _orFactory<A, B, C>(guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>): Guard<A | B | C>;
 /**
  * Creates guard for type A | B | C | D.
  *
- * @param guard1 - Guard 1.
- * @param guard2 - Guard 2.
- * @param guard3 - Guard 3.
- * @param guard4 - Guard 4.
+ * @param guard1 - Guard for type A.
+ * @param guard2 - Guard for type B.
+ * @param guard3 - Guard for type C.
+ * @param guard4 - Guard for type D.
  * @returns Guard for type A | B | C | D.
  */
-export declare function orFactory<A, B, C, D>(guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>, guard4: Guard<D>): Guard<A | B | C | D>;
+declare function _orFactory<A, B, C, D>(guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>, guard4: Guard<D>): Guard<A | B | C | D>;
 /**
  * Checks that value is an array.
  *
@@ -206,19 +198,11 @@ export declare function orFactory<A, B, C, D>(guard1: Guard<A>, guard2: Guard<B>
  */
 export declare function array(value: unknown): value is types.unknowns;
 export declare namespace array {
-    var of: typeof arrayOf;
+    var of: <T>(value: unknown, guard: Guard<T>) => value is readonly T[];
 }
 export declare const arrayU: Guard<types.unknowns | undefined>;
 export declare const arrays: Guard<readonly types.unknowns[]>;
 export declare const arraysU: Guard<readonly types.unknowns[] | undefined>;
-/**
- * Checks that value type is T[].
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @returns _True_ if value type is T[], _false_ otherwise.
- */
-export declare function arrayOf<T>(value: unknown, guard: Guard<T>): value is readonly T[];
 /**
  * Checks that value is a boolean.
  *
@@ -257,7 +241,7 @@ export declare function enumeration<T extends PropertyKey>(value: unknown, vo: V
  * @param value - Value.
  * @returns _True_ if value is _false_, _false_ otherwise.
  */
-export declare function _false(value: unknown): value is false;
+declare function _false(value: unknown): value is false;
 export { _false as false };
 /**
  * Checks that value type is IndexedObject.
@@ -267,19 +251,11 @@ export { _false as false };
  */
 export declare function indexedObject(value: unknown): value is types.IndexedObject;
 export declare namespace indexedObject {
-    var of: typeof indexedObjectOf;
+    var of: <T>(value: unknown, guard: Guard<T>) => value is types.IndexedObject<T>;
 }
-export declare const indexedObjectU: Guard<Readonly<types.TypedObject<PropertyKey, unknown>> | undefined>;
-export declare const indexedObjects: Guard<readonly Readonly<types.TypedObject<PropertyKey, unknown>>[]>;
-export declare const indexedObjectsU: Guard<readonly Readonly<types.TypedObject<PropertyKey, unknown>>[] | undefined>;
-/**
- * Checks that value type is IndexedObject\<T\>.
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @returns _True_ if value type is IndexedObject\<T\>, _false_ otherwise.
- */
-export declare function indexedObjectOf<T>(value: unknown, guard: Guard<T>): value is types.IndexedObject<T>;
+export declare const indexedObjectU: Guard<types.IndexedObject<unknown> | undefined>;
+export declare const indexedObjects: Guard<readonly types.IndexedObject<unknown>[]>;
+export declare const indexedObjectsU: Guard<readonly types.IndexedObject<unknown>[] | undefined>;
 /**
  * Checks that value type is T.
  *
@@ -304,20 +280,11 @@ export declare function instances<T>(value: unknown, ctor: Constructor<T>): valu
  */
 export declare function map(value: unknown): value is ReadonlyMap<unknown, unknown>;
 export declare namespace map {
-    var of: typeof mapOf;
+    var of: <K, V>(value: unknown, keyGuard: Guard<K>, valueGuard: Guard<V>) => value is ReadonlyMap<K, V>;
 }
 export declare const mapU: Guard<ReadonlyMap<unknown, unknown> | undefined>;
 export declare const maps: Guard<readonly ReadonlyMap<unknown, unknown>[]>;
 export declare const mapsU: Guard<readonly ReadonlyMap<unknown, unknown>[] | undefined>;
-/**
- * Checks that value type is Map\<K, V\>.
- *
- * @param value - Value.
- * @param keyGuard - Key guard.
- * @param valueGuard - Value guard.
- * @returns _True_ if value type is Map\<K, V\>, _false_ otherwise.
- */
-export declare function mapOf<K, V>(value: unknown, keyGuard: Guard<K>, valueGuard: Guard<V>): value is ReadonlyMap<K, V>;
 /**
  * Checks that value is _null_.
  *
@@ -354,48 +321,46 @@ export declare const numbersU: Guard<readonly number[] | undefined>;
  */
 export declare function object(value: unknown): value is object;
 export declare namespace object {
-    var of: typeof objectOf;
+    var factory: typeof _objectFactory;
+    var of: typeof _objectOf;
 }
+/**
+ * Creates object guard.
+ *
+ * @param required - Guards for required properties.
+ * @param optional - Guards for optional properties.
+ * @returns Object guard.
+ */
+declare function _objectFactory<R extends object, O extends object>(required: Guards<R, keyof R>, optional: Guards<O, keyof O>): Guard<OptionalStyle<Partial<O>> & UndefinedStyle<R>>;
+/**
+ * Creates object guard.
+ *
+ * @param required - Guards for required properties.
+ * @param optional - Guards for optional properties.
+ * @returns Object guard.
+ */
+declare function _objectFactory<T extends object>(required: Guards<T, RequiredKeys<T>>, optional: Guards<T, OptionalKeys<T>>): Guard<T>;
+/**
+ * Checks that value is an object.
+ *
+ * @param value - Value.
+ * @param required - Guards for required properties.
+ * @param optional - Guards for optional properties.
+ * @returns _True_ if value is an object, _false_ otherwise.
+ */
+declare function _objectOf<R extends object, O extends object>(value: unknown, required: Guards<R, keyof R>, optional: Guards<O, keyof O>): value is OptionalStyle<Partial<O>> & UndefinedStyle<R>;
+/**
+ * Checks that value is an object.
+ *
+ * @param value - Value.
+ * @param required - Guards for required properties.
+ * @param optional - Guards for optional properties.
+ * @returns _True_ if value is an object, _false_ otherwise.
+ */
+declare function _objectOf<T extends object>(value: unknown, required: Guards<T, RequiredKeys<T>>, optional: Guards<T, OptionalKeys<T>>): value is T;
 export declare const objectU: Guard<object | undefined>;
 export declare const objects: Guard<readonly object[]>;
 export declare const objectsU: Guard<readonly object[] | undefined>;
-/**
- * Checks that value type is T.
- *
- * @param value - Value.
- * @param required - Guards for required properties.
- * @param optional - Guards for optional properties.
- * @returns _True_ if value type is T, _false_ otherwise.
- */
-export declare function objectOf<R extends object, O extends object>(value: unknown, required: Guards<R, keyof R>, optional: Guards<O, keyof O>): value is ObjectOfReturn<R, O>;
-/**
- * Checks that value type is T.
- *
- * @param value - Value.
- * @param required - Guards for required properties.
- * @param optional - Guards for optional properties.
- * @returns _True_ if value type is T, _false_ otherwise.
- */
-export declare function objectOf<T extends object>(value: unknown, required: Guards<T, RequiredKeys<T>>, optional: Guards<T, OptionalKeys<T>>): value is T;
-export declare namespace objectOf {
-    var factory: typeof objectOfFactory;
-}
-/**
- * Creates guard for type T.
- *
- * @param required - Guards for required properties.
- * @param optional - Guards for optional properties.
- * @returns Guard for type T.
- */
-export declare function objectOfFactory<R extends object, O extends object>(required: Guards<R, keyof R>, optional: Guards<O, keyof O>): Guard<ObjectOfReturn<R, O>>;
-/**
- * Creates guard for type T.
- *
- * @param required - Guards for required properties.
- * @param optional - Guards for optional properties.
- * @returns Guard for type T.
- */
-export declare function objectOfFactory<T extends object>(required: Guards<T, RequiredKeys<T>>, optional: Guards<T, OptionalKeys<T>>): Guard<T>;
 /**
  * Checks that value type is Set.
  *
@@ -404,19 +369,11 @@ export declare function objectOfFactory<T extends object>(required: Guards<T, Re
  */
 export declare function set(value: unknown): value is ReadonlySet<unknown>;
 export declare namespace set {
-    var of: typeof setOf;
+    var of: <T>(value: unknown, guard: Guard<T>) => value is ReadonlySet<T>;
 }
 export declare const setU: Guard<ReadonlySet<unknown> | undefined>;
 export declare const sets: Guard<readonly ReadonlySet<unknown>[]>;
 export declare const setsU: Guard<readonly ReadonlySet<unknown>[] | undefined>;
-/**
- * Checks that value type is Set\<T\>.
- *
- * @param value - Value.
- * @param guard - Guard.
- * @returns _True_ if value type is Set\<T\>, _false_ otherwise.
- */
-export declare function setOf<T>(value: unknown, guard: Guard<T>): value is ReadonlySet<T>;
 /**
  * Checks that value is a string.
  *
@@ -424,7 +381,13 @@ export declare function setOf<T>(value: unknown, guard: Guard<T>): value is Read
  * @returns _True_ if value is a string, _false_ otherwise.
  */
 export declare function string(value: unknown): value is string;
-export declare const stringU: Guard<string | undefined>;
+/**
+ * Checks that value is a string.
+ *
+ * @param value - Value.
+ * @returns _True_ if value is a string, _false_ otherwise.
+ */
+export declare function stringU(value: unknown): value is string;
 export declare const strings: Guard<readonly string[]>;
 export declare const stringsU: Guard<readonly string[] | undefined>;
 /**
@@ -443,13 +406,13 @@ export declare const symbolsU: Guard<readonly symbol[] | undefined>;
  * @param value - Value.
  * @returns _True_ if value is _true_, _false_ otherwise.
  */
-export declare function _true(value: unknown): value is true;
+declare function _true(value: unknown): value is true;
 export { _true as true };
 /**
  * Checks that value type is [A].
  *
  * @param value - Value.
- * @param guard - Guard .
+ * @param guard - Guard for type A.
  * @returns _True_ if value type is [A], _false_ otherwise.
  */
 export declare function tuple<A>(value: unknown, guard: Guard<A>): value is readonly [A];
@@ -457,8 +420,8 @@ export declare function tuple<A>(value: unknown, guard: Guard<A>): value is read
  * Checks that value type is [A, B].
  *
  * @param value - Value.
- * @param guard1 - Guard 1.
- * @param guard2 - Guard 2.
+ * @param guard1 - Guard for type A.
+ * @param guard2 - Guard for type B.
  * @returns _True_ if value type is [A, B], _false_ otherwise.
  */
 export declare function tuple<A, B>(value: unknown, guard1: Guard<A>, guard2: Guard<B>): value is readonly [A, B];
@@ -466,9 +429,9 @@ export declare function tuple<A, B>(value: unknown, guard1: Guard<A>, guard2: Gu
  * Checks that value type is [A, B, C].
  *
  * @param value - Value.
- * @param guard1 - Guard 1.
- * @param guard2 - Guard 2.
- * @param guard3 - Guard 3.
+ * @param guard1 - Guard for type A.
+ * @param guard2 - Guard for type B.
+ * @param guard3 - Guard for type C.
  * @returns _True_ if value type is [A, B, C], _false_ otherwise.
  */
 export declare function tuple<A, B, C>(value: unknown, guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>): value is readonly [A, B, C];
@@ -476,50 +439,50 @@ export declare function tuple<A, B, C>(value: unknown, guard1: Guard<A>, guard2:
  * Checks that value type is [A, B, C, D].
  *
  * @param value - Value.
- * @param guard1 - Guard 1.
- * @param guard2 - Guard 2.
- * @param guard3 - Guard 3.
- * @param guard4 - Guard 4.
+ * @param guard1 - Guard for type A.
+ * @param guard2 - Guard for type B.
+ * @param guard3 - Guard for type C.
+ * @param guard4 - Guard for type D.
  * @returns _True_ if value type is [A, B, C, D], _false_ otherwise.
  */
 export declare function tuple<A, B, C, D>(value: unknown, guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>, guard4: Guard<D>): value is readonly [A, B, C, D];
 export declare namespace tuple {
-    var factory: typeof tupleFactory;
+    var factory: typeof _tupleFactory;
 }
 /**
  * Creates guard for type [A].
  *
- * @param guard - Guard.
+ * @param guard - Guard for type A.
  * @returns Guard for type [A].
  */
-export declare function tupleFactory<A>(guard: Guard<A>): Guard<readonly [A]>;
+declare function _tupleFactory<A>(guard: Guard<A>): Guard<readonly [A]>;
 /**
  * Creates guard for type [A, B].
  *
- * @param guard1 - Guard 1.
- * @param guard2 - Guard 2.
+ * @param guard1 - Guard for type A.
+ * @param guard2 - Guard for type B.
  * @returns Guard for type [A, B].
  */
-export declare function tupleFactory<A, B>(guard1: Guard<A>, guard2: Guard<B>): Guard<readonly [A, B]>;
+declare function _tupleFactory<A, B>(guard1: Guard<A>, guard2: Guard<B>): Guard<readonly [A, B]>;
 /**
  * Creates guard for type [A, B, C].
  *
- * @param guard1 - Guard 1.
- * @param guard2 - Guard 2.
- * @param guard3 - Guard 3.
+ * @param guard1 - Guard for type A.
+ * @param guard2 - Guard for type B.
+ * @param guard3 - Guard for type C.
  * @returns Guard for type [A, B, C].
  */
-export declare function tupleFactory<A, B, C>(guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>): Guard<readonly [A, B, C]>;
+declare function _tupleFactory<A, B, C>(guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>): Guard<readonly [A, B, C]>;
 /**
  * Creates guard for type [A, B, C, D].
  *
- * @param guard1 - Guard 1.
- * @param guard2 - Guard 2.
- * @param guard3 - Guard 3.
- * @param guard4 - Guard 4.
+ * @param guard1 - Guard for type A.
+ * @param guard2 - Guard for type B.
+ * @param guard3 - Guard for type C.
+ * @param guard4 - Guard for type D.
  * @returns Guard for type [A, B, C, D].
  */
-export declare function tupleFactory<A, B, C, D>(guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>, guard4: Guard<D>): Guard<readonly [A, B, C, D]>;
+declare function _tupleFactory<A, B, C, D>(guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>, guard4: Guard<D>): Guard<readonly [A, B, C, D]>;
 /**
  * Checks that value is _undefined_.
  *

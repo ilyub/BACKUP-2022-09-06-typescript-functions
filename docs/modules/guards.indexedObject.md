@@ -6,37 +6,33 @@
 
 ## Table of contents
 
-### Variables
+### Functions
 
 - [of](guards.indexedObject.md#of)
 
-## Variables
+## Functions
 
 ### of
 
-• **of**: <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => value is Readonly<TypedObject<PropertyKey, T\>\>
-
-#### Type declaration
-
-▸ <`T`\>(`value`, `guard`): value is Readonly<TypedObject<PropertyKey, T\>\>
+▸ **of**<`T`\>(`value`, `guard`): value is IndexedObject<T\>
 
 Checks that value type is IndexedObject\<T\>.
 
-##### Type parameters
+#### Type parameters
 
 | Name |
 | :------ |
 | `T` |
 
-##### Parameters
+#### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
 | `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
 
-##### Returns
+#### Returns
 
-value is Readonly<TypedObject<PropertyKey, T\>\>
+value is IndexedObject<T\>
 
 _True_ if value type is IndexedObject\<T\>, _false_ otherwise.

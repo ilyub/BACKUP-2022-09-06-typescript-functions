@@ -6,30 +6,26 @@
 
 ## Table of contents
 
-### Variables
+### Functions
 
 - [of](guards.map.md#of)
 
-## Variables
+## Functions
 
 ### of
 
-• **of**: <K, V\>(`value`: `unknown`, `keyGuard`: [`Guard`](../interfaces/guards.Guard.md)<`K`\>, `valueGuard`: [`Guard`](../interfaces/guards.Guard.md)<`V`\>) => value is ReadonlyMap<K, V\>
-
-#### Type declaration
-
-▸ <`K`, `V`\>(`value`, `keyGuard`, `valueGuard`): value is ReadonlyMap<K, V\>
+▸ **of**<`K`, `V`\>(`value`, `keyGuard`, `valueGuard`): value is ReadonlyMap<K, V\>
 
 Checks that value type is Map\<K, V\>.
 
-##### Type parameters
+#### Type parameters
 
 | Name |
 | :------ |
 | `K` |
 | `V` |
 
-##### Parameters
+#### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
@@ -37,7 +33,7 @@ Checks that value type is Map\<K, V\>.
 | `keyGuard` | [`Guard`](../interfaces/guards.Guard.md)<`K`\> | Key guard. |
 | `valueGuard` | [`Guard`](../interfaces/guards.Guard.md)<`V`\> | Value guard. |
 
-##### Returns
+#### Returns
 
 value is ReadonlyMap<K, V\>
 

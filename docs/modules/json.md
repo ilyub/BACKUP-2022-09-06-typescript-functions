@@ -70,7 +70,7 @@ Compares two values as JSON strings.
 
 `boolean`
 
-_True_ if two values are not equal, _false_ otherwise.
+_True_ if two values are equal, _false_ otherwise.
 
 ___
 

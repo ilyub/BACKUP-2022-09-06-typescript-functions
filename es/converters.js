@@ -12,10 +12,7 @@ export function not() {
  * @param defVal - Default value.
  * @returns Value if it is not empty, defVal otherwise.
  */
-export function notEmpty(value, defVal) {
-    return is.not.empty(value) ? value : defVal;
-}
-not.empty = notEmpty;
+not.empty = (value, defVal) => (is.not.empty(value) ? value : defVal);
 /**
  * Converts value to a number.
  *
@@ -28,7 +25,7 @@ export function number(value, defVal = 0) {
     return (_a = numberU(value)) !== null && _a !== void 0 ? _a : defVal;
 }
 /**
- * Converts value to numberU.
+ * Converts value to a number.
  *
  * @param value - Value.
  * @returns Converted value, _undefined_ on failure.
@@ -59,13 +56,13 @@ export function string(value) {
     return is.not.empty(value) ? String(value) : "";
 }
 /**
- * Converts value to stringU.
+ * Converts value to type stringU.
  *
  * @param value - Value.
  * @returns Converted value.
  */
 export function stringU(value) {
-    const result = is.not.empty(value) ? String(value) : "";
-    return result ? result : undefined;
+    const str = is.not.empty(value) ? String(value) : "";
+    return str ? str : undefined;
 }
 //# sourceMappingURL=converters.js.map

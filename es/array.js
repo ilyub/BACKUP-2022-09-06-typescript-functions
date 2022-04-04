@@ -5,7 +5,7 @@ import * as is from "./guards";
 import * as o from "./object";
 import * as reflect from "./reflect";
 /**
- * Creates array of pairs ("[x, y, z]" =\> "[[x, y], [y, z]]").
+ * Creates array of pairs ([x, y, z] =\> [[x, y], [y, z]]).
  *
  * @param arr - Array.
  * @returns Array of pairs.
@@ -23,7 +23,7 @@ export function clone(arr) {
     return [...arr];
 }
 /**
- * Removes element from an array.
+ * Removes element at given index.
  *
  * @param arr - Array.
  * @param index - Index to be removed.
@@ -89,7 +89,7 @@ export function fromString(str) {
     return [...str];
 }
 /**
- * Returns element by index.
+ * Returns element at given index.
  *
  * @param arr - Array.
  * @param index - Index.
@@ -98,7 +98,7 @@ export function fromString(str) {
  */
 export function get(arr, index) {
     assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
+    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
     return arr[index];
 }
 /**
@@ -170,10 +170,10 @@ export function removeBy(arr, value, keyOrReduce) {
     return arr.filter(element => reduce(element) !== reduced);
 }
 /**
- * Replaces element.
+ * Replaces element at given index.
  *
  * @param arr - Array.
- * @param index - Index to be replaced.
+ * @param index - Index.
  * @param value - Value.
  * @returns New array with one element replaced.
  */
@@ -247,12 +247,12 @@ export function truncate(mutableArray) {
  */
 export function uniqueBy(arr, keyOrReduce) {
     const reduce = toReduce(keyOrReduce);
-    const cache = new Set();
+    const seen = new Set();
     return arr.filter(element => {
         const reduced = reduce(element);
-        if (cache.has(reduced))
+        if (seen.has(reduced))
             return false;
-        cache.add(reduced);
+        seen.add(reduced);
         return true;
     });
 }

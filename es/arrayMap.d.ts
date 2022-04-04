@@ -3,7 +3,7 @@ export declare type ArrayMap2<K extends PropertyKey, L extends PropertyKey, T> =
 export declare type WritableArrayMap<K extends PropertyKey, T> = Map<K, T[]>;
 export declare type WritableArrayMap2<K extends PropertyKey, L extends PropertyKey, T> = Map<K, Map<L, T[]>>;
 /**
- * Returns array from array map.
+ * Extracts array from array map.
  *
  * @param key - Key.
  * @param map - Array map.
@@ -11,7 +11,7 @@ export declare type WritableArrayMap2<K extends PropertyKey, L extends PropertyK
  */
 export declare function get<K extends PropertyKey, T>(key: K, map: ArrayMap<K, T>): readonly T[];
 /**
- * Returns array from array map.
+ * Extracts array from array map.
  *
  * @param key1 - Key 1.
  * @param key2 - Key 2.

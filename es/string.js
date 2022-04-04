@@ -22,7 +22,7 @@ export function empty(str) {
  * Filters string.
  *
  * @param str - String.
- * @param predicate - Filter function.
+ * @param predicate - Predicate.
  * @returns Filtered string.
  */
 export function filter(str, predicate) {
@@ -122,7 +122,7 @@ _path.removeTrailingSlash = (path) => _path.canonicalize(path).replace(/\/$/u, "
  * @returns New string with replacements done.
  */
 export function replaceAll(str, search, replace) {
-    // eslint-disable-next-line security/detect-non-literal-regexp
+    // eslint-disable-next-line security/detect-non-literal-regexp -- Ok
     return str.replace(new RegExp(regexp.escapeString(search), "gu"), replace);
 }
 /**

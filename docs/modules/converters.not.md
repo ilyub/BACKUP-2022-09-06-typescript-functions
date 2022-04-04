@@ -6,36 +6,32 @@
 
 ## Table of contents
 
-### Variables
+### Functions
 
 - [empty](converters.not.md#empty)
 
-## Variables
+## Functions
 
 ### empty
 
-• **empty**: <T\>(`value`: `T`, `defVal`: `Exclude`<`T`, [`empty`](types_core.md#empty)\>) => `Exclude`<`T`, [`empty`](types_core.md#empty)\>
-
-#### Type declaration
-
-▸ <`T`\>(`value`, `defVal`): `Exclude`<`T`, [`empty`](types_core.md#empty)\>
+▸ **empty**<`T`\>(`value`, `defVal`): `Exclude`<`T`, [`empty`](types_core.md#empty)\>
 
 Converts value to not empty.
 
-##### Type parameters
+#### Type parameters
 
 | Name |
 | :------ |
 | `T` |
 
-##### Parameters
+#### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `T` | Value. |
 | `defVal` | `Exclude`<`T`, [`empty`](types_core.md#empty)\> | Default value. |
 
-##### Returns
+#### Returns
 
 `Exclude`<`T`, [`empty`](types_core.md#empty)\>
 

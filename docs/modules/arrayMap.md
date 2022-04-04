@@ -80,7 +80,7 @@ ___
 
 ▸ **get**<`K`, `T`\>(`key`, `map`): readonly `T`[]
 
-Returns array from array map.
+Extracts array from array map.
 
 #### Type parameters
 
@@ -108,7 +108,7 @@ ___
 
 ▸ **get2**<`K`, `L`, `T`\>(`key1`, `key2`, `map`): readonly `T`[]
 
-Returns array from array map.
+Extracts array from array map.
 
 #### Type parameters
 

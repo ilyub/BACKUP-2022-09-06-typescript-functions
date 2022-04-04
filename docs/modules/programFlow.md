@@ -4,50 +4,44 @@
 
 ## Table of contents
 
-### References
+### Functions
 
 - [clearInterval](programFlow.md#clearinterval)
 - [clearTimeout](programFlow.md#cleartimeout)
+- [setInterval](programFlow.md#setinterval)
 - [setTimeout](programFlow.md#settimeout)
 
-### Functions
-
-- [\_clearInterval](programFlow.md#_clearinterval)
-- [\_clearTimeout](programFlow.md#_cleartimeout)
-- [\_setTimeout](programFlow.md#_settimeout)
-- [setInterval](programFlow.md#setinterval)
-
-## References
+## Functions
 
 ### clearInterval
 
-Renames and re-exports [_clearInterval](programFlow.md#_clearinterval)
+▸ **clearInterval**(`id`): `void`
+
+Clears interval.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `id` | [`numberU`](types_core.md#numberu) | ID. |
+
+#### Returns
+
+`void`
 
 ___
 
 ### clearTimeout
 
-Renames and re-exports [_clearTimeout](programFlow.md#_cleartimeout)
+▸ **clearTimeout**(`id`): `void`
 
-___
-
-### setTimeout
-
-Renames and re-exports [_setTimeout](programFlow.md#_settimeout)
-
-## Functions
-
-### \_clearInterval
-
-▸ **_clearInterval**(`id`): `void`
-
-Removes interval.
+Clears timeout.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `id` | [`numberU`](types_core.md#numberu) | Id. |
+| `id` | [`numberU`](types_core.md#numberu) | ID. |
 
 #### Returns
 
@@ -55,29 +49,11 @@ Removes interval.
 
 ___
 
-### \_clearTimeout
+### setInterval
 
-▸ **_clearTimeout**(`id`): `void`
+▸ **setInterval**(`callback`, `timeout`): `number`
 
-Removes timeout.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `id` | [`numberU`](types_core.md#numberu) | Id. |
-
-#### Returns
-
-`void`
-
-___
-
-### \_setTimeout
-
-▸ **_setTimeout**(`callback`, `timeout`): `number`
-
-Adds timeout.
+Sets interval.
 
 #### Parameters
 
@@ -94,11 +70,11 @@ Handler.
 
 ___
 
-### setInterval
+### setTimeout
 
-▸ **setInterval**(`callback`, `timeout`): `number`
+▸ **setTimeout**(`callback`, `timeout`): `number`
 
-Adds interval.
+Sets timeout.
 
 #### Parameters
 

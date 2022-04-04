@@ -2,14 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.setRandomSystemTime = exports.run = exports.jestSetup = exports.jestReset = exports.installFakeTimer = exports.toBeSameAs = exports.executionTimeToBeWithin = exports.executionTimeToBe = exports.clock = void 0;
 const tslib_1 = require("tslib");
-// eslint-disable-next-line import/no-unassigned-import
 require("jest-extended");
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
-// @ts-ignore
-// eslint-disable-next-line @skylib/consistent-import
 const matchers = tslib_1.__importStar(require("jest-extended/all"));
 const _ = tslib_1.__importStar(require("lodash"));
-// eslint-disable-next-line @skylib/consistent-import
 const fakeTimers = tslib_1.__importStar(require("@sinonjs/fake-timers"));
 const a = tslib_1.__importStar(require("../array"));
 const assert = tslib_1.__importStar(require("../assertions"));
@@ -99,7 +94,6 @@ exports.jestReset = jestReset;
  * Jest setup.
  */
 function jestSetup() {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
     expect.extend(matchers);
     expect.extend({
         executionTimeToBe: exports.executionTimeToBe,

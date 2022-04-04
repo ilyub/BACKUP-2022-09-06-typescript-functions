@@ -10,7 +10,6 @@
 - [indexedObject](assertions.indexedObject.md)
 - [map](assertions.map.md)
 - [not](assertions.not.md)
-- [object](assertions.object.md)
 - [set](assertions.set.md)
 
 ### Interfaces
@@ -39,10 +38,10 @@
 - [object](assertions.md#object)
 - [set](assertions.md#set)
 - [string](assertions.md#string)
+- [stringU](assertions.md#stringu)
 - [symbol](assertions.md#symbol)
 - [toBeFalse](assertions.md#tobefalse)
 - [toBeTrue](assertions.md#tobetrue)
-- [toErrorArg](assertions.md#toerrorarg)
 
 ## Type aliases
 
@@ -188,7 +187,7 @@ ___
 
 ### indexedObject
 
-▸ **indexedObject**(`value`, `error?`): asserts value is Readonly<TypedObject<PropertyKey, unknown\>\>
+▸ **indexedObject**(`value`, `error?`): asserts value is IndexedObject<unknown\>
 
 Asserts that value type is IndexedObject.
 
@@ -201,7 +200,7 @@ Asserts that value type is IndexedObject.
 
 #### Returns
 
-asserts value is Readonly<TypedObject<PropertyKey, unknown\>\>
+asserts value is IndexedObject<unknown\>
 
 ___
 
@@ -383,6 +382,25 @@ asserts value is string
 
 ___
 
+### stringU
+
+▸ **stringU**(`value`, `error?`): asserts value is stringU
+
+Asserts that value is a string.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+
+#### Returns
+
+asserts value is stringU
+
+___
+
 ### symbol
 
 ▸ **symbol**(`value`, `error?`): asserts value is symbol
@@ -437,23 +455,3 @@ Asserts value to be _true_.
 #### Returns
 
 asserts value is true
-
-___
-
-### toErrorArg
-
-▸ **toErrorArg**(`strOrError`): [`ErrorArg`](assertions.md#errorarg)
-
-Converts error message/object to assertion error argument.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `strOrError` | `unknown` | Error message/object. |
-
-#### Returns
-
-[`ErrorArg`](assertions.md#errorarg)
-
-Assertion error argument.

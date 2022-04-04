@@ -1,5 +1,5 @@
 /**
- * Returns array from array map.
+ * Extracts array from array map.
  *
  * @param key - Key.
  * @param map - Array map.
@@ -10,7 +10,7 @@ export function get(key, map) {
     return (_a = map.get(key)) !== null && _a !== void 0 ? _a : [];
 }
 /**
- * Returns array from array map.
+ * Extracts array from array map.
  *
  * @param key1 - Key 1.
  * @param key2 - Key 2.

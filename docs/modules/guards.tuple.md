@@ -32,7 +32,7 @@ Creates guard for type [A].
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard for type A. |
 
 ##### Returns
 
@@ -55,8 +55,8 @@ Creates guard for type [A, B].
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard for type A. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard for type B. |
 
 ##### Returns
 
@@ -80,9 +80,9 @@ Creates guard for type [A, B, C].
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
-| `guard3` | [`Guard`](../interfaces/guards.Guard.md)<`C`\> | Guard 3. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard for type A. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard for type B. |
+| `guard3` | [`Guard`](../interfaces/guards.Guard.md)<`C`\> | Guard for type C. |
 
 ##### Returns
 
@@ -107,10 +107,10 @@ Creates guard for type [A, B, C, D].
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard 1. |
-| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard 2. |
-| `guard3` | [`Guard`](../interfaces/guards.Guard.md)<`C`\> | Guard 3. |
-| `guard4` | [`Guard`](../interfaces/guards.Guard.md)<`D`\> | Guard 4. |
+| `guard1` | [`Guard`](../interfaces/guards.Guard.md)<`A`\> | Guard for type A. |
+| `guard2` | [`Guard`](../interfaces/guards.Guard.md)<`B`\> | Guard for type B. |
+| `guard3` | [`Guard`](../interfaces/guards.Guard.md)<`C`\> | Guard for type C. |
+| `guard4` | [`Guard`](../interfaces/guards.Guard.md)<`D`\> | Guard for type D. |
 
 ##### Returns
 

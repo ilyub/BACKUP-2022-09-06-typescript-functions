@@ -6,36 +6,32 @@
 
 ## Table of contents
 
-### Variables
+### Functions
 
 - [of](guards.array.md#of)
 
-## Variables
+## Functions
 
 ### of
 
-• **of**: <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => value is readonly T[]
-
-#### Type declaration
-
-▸ <`T`\>(`value`, `guard`): value is readonly T[]
+▸ **of**<`T`\>(`value`, `guard`): value is readonly T[]
 
 Checks that value type is T[].
 
-##### Type parameters
+#### Type parameters
 
 | Name |
 | :------ |
 | `T` |
 
-##### Parameters
+#### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
 | `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
 
-##### Returns
+#### Returns
 
 value is readonly T[]
 

@@ -124,13 +124,13 @@ Creates validation object.
 
 | Name | Type |
 | :------ | :------ |
-| `T` | extends `PropertyKey` |
+| `T` | extends `string` |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `source` | [`TypedObject`](types_core.md#typedobject)<`T`, `T`\> | Source. |
+| `source` | [`Rec`](types_core.md#rec)<`T`, `T`\> | Source. |
 
 #### Returns
 

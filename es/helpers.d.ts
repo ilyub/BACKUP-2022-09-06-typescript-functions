@@ -1,5 +1,5 @@
 import * as is from "./guards";
-import type { TypedObject } from "./types/core";
+import type { Rec } from "./types/core";
 import type { Join2 } from "./types/object";
 export declare type Facade<I, E = unknown> = E & FacadeOwnMethods<I> & I;
 export interface FacadeOwnMethods<I> {
@@ -34,7 +34,7 @@ export declare function createFacade<I extends object, E = unknown>(name: string
  * @param source - Source.
  * @returns Validation object.
  */
-export declare function createValidationObject<T extends PropertyKey>(source: TypedObject<T, T>): ValidationObject<T>;
+export declare function createValidationObject<T extends string>(source: Rec<T, T>): ValidationObject<T>;
 /**
  * Generates resource on demand.
  *
@@ -42,13 +42,6 @@ export declare function createValidationObject<T extends PropertyKey>(source: Ty
  * @returns Resource.
  */
 export declare function onDemand<T extends object>(generator: () => T): T;
-/**
- * Defines value type.
- *
- * @param value - Value.
- * @returns Value.
- */
-export declare function typedef<T>(value: T): T;
 /**
  * Creates safe access interface for an object.
  *
@@ -58,6 +51,13 @@ export declare function typedef<T>(value: T): T;
  * @returns Safe access interface.
  */
 export declare function safeAccess<T extends object, W extends string & keyof T, R extends string & keyof T>(obj: T, guards: SafeAccessGuards<T, W>, readonlyKeys?: readonly R[]): SafeAccess<T, W, R>;
+/**
+ * Defines value type.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+export declare function typedef<T>(value: T): T;
 /**
  * Delays program execution.
  *

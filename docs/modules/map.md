@@ -4,26 +4,16 @@
 
 ## Table of contents
 
-### References
-
-- [delete](map.md#delete)
-
 ### Functions
 
-- [\_delete](map.md#_delete)
+- [delete](map.md#delete)
 - [set](map.md#set)
-
-## References
-
-### delete
-
-Renames and re-exports [_delete](map.md#_delete)
 
 ## Functions
 
-### \_delete
+### delete
 
-▸ **_delete**<`K`, `V`\>(`map`, `key`): `ReadonlyMap`<`K`, `V`\>
+▸ **delete**<`K`, `V`\>(`map`, `key`): `ReadonlyMap`<`K`, `V`\>
 
 Removes key.
 
@@ -53,7 +43,7 @@ ___
 
 ▸ **set**<`K`, `V`\>(`map`, `key`, `value`): `ReadonlyMap`<`K`, `V`\>
 
-Sets key to value.
+Sets key.
 
 #### Type parameters
 
@@ -74,4 +64,4 @@ Sets key to value.
 
 `ReadonlyMap`<`K`, `V`\>
 
-Map with key set to value.
+Map with key set.

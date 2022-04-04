@@ -1,6 +1,6 @@
 {
   "name": "@skylib/functions",
-  "version": "0.1.29",
+  "version": "1.0.0",
   "private": false,
   "description": "Typescript functions",
   "keywords": [

@@ -14,7 +14,7 @@ const s = tslib_1.__importStar(require("./string"));
  */
 function addFlags(re, flags) {
     flags = s.filter(flags, flag => !re.flags.includes(flag));
-    // eslint-disable-next-line security/detect-non-literal-regexp
+    // eslint-disable-next-line security/detect-non-literal-regexp -- Ok
     return flags ? new RegExp(re, re.flags + flags) : re;
 }
 exports.addFlags = addFlags;

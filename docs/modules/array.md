@@ -43,14 +43,13 @@
 
 ### KeyOrReduce
 
-Ƭ **KeyOrReduce**<`T`, `V`\>: `PropertyKey` \| [`Reduce`](../interfaces/array.Reduce.md)<`T`, `V`\>
+Ƭ **KeyOrReduce**<`T`\>: `PropertyKey` \| [`Reduce`](../interfaces/array.Reduce.md)<`T`\>
 
 #### Type parameters
 
 | Name | Type |
 | :------ | :------ |
 | `T` | extends `object` |
-| `V` | extends `object` = `T` |
 
 ## Functions
 
@@ -58,7 +57,7 @@
 
 ▸ **chain**<`T`\>(`arr`): [`T`, `T`][]
 
-Creates array of pairs ("[x, y, z]" =\> "[[x, y], [y, z]]").
+Creates array of pairs ([x, y, z] =\> [[x, y], [y, z]]).
 
 #### Type parameters
 
@@ -204,7 +203,7 @@ ___
 
 ▸ **drop**<`T`\>(`arr`, `index`): `T`[]
 
-Removes element from an array.
+Removes element at given index.
 
 #### Type parameters
 
@@ -246,7 +245,7 @@ Finds element matching value.
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
 | `value` | `V` | Value. |
-| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T` \| `V`, `T` \| `V`\> | Comparison key or reduce function. |
+| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T` \| `V`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -356,7 +355,7 @@ ___
 
 ▸ **get**<`T`\>(`arr`, `index`): `T`
 
-Returns element by index.
+Returns element at given index.
 
 **`throws`** Error otherwise.
 
@@ -400,7 +399,7 @@ Checks that array contains element matching value.
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
 | `value` | `V` | Value. |
-| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`, `V`\> | Comparison key or reduce function. |
+| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T` \| `V`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -483,7 +482,7 @@ Replaces elements matching value if found, pushes value otherwise.
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
 | `value` | `T` | Value. |
-| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`, `T`\> | Comparison key or reduce function. |
+| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -538,7 +537,7 @@ Removes elements matching value.
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
 | `value` | `V` | Value. |
-| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`, `V`\> | Comparison key or reduce function. |
+| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T` \| `V`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -552,7 +551,7 @@ ___
 
 ▸ **replace**<`T`\>(`arr`, `index`, `value`): `T`[]
 
-Replaces element.
+Replaces element at given index.
 
 #### Type parameters
 
@@ -565,7 +564,7 @@ Replaces element.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
-| `index` | `number` | Index to be replaced. |
+| `index` | `number` | Index. |
 | `value` | `T` | Value. |
 
 #### Returns
@@ -594,7 +593,7 @@ Replaces elements matching value.
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
 | `value` | `T` | Value. |
-| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`, `T`\> | Comparison key or reduce function. |
+| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -675,7 +674,7 @@ Adds/removes value to/from an array.
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
 | `value` | `T` | Value. |
-| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`, `T`\> | Comparison key or reduce function. |
+| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -720,7 +719,7 @@ Creates unique array.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
-| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`, `T`\> | Comparison key or reduce function. |
+| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`\> | Comparison key or reduce function. |
 
 #### Returns
 
@@ -775,7 +774,7 @@ Replaces elements matching value if found, unshifts value otherwise.
 | :------ | :------ | :------ |
 | `arr` | readonly `T`[] | Array. |
 | `value` | `T` | Value. |
-| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`, `T`\> | Comparison key or reduce function. |
+| `keyOrReduce` | [`KeyOrReduce`](array.md#keyorreduce)<`T`\> | Comparison key or reduce function. |
 
 #### Returns
 

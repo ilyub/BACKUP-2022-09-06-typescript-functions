@@ -17,10 +17,10 @@ export declare function empty(str: string): boolean;
  * Filters string.
  *
  * @param str - String.
- * @param predicate - Filter function.
+ * @param predicate - Predicate.
  * @returns Filtered string.
  */
-export declare function filter(str: string, predicate: (char: string, index: number) => unknown): string;
+export declare function filter(str: string, predicate: (char: string, index: number) => boolean): string;
 /**
  * Extracts leading spaces.
  *

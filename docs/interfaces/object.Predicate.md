@@ -1,8 +1,8 @@
-[Typescript functions](../index.md) / [Exports](../modules.md) / [object](../modules/object.md) / Callback
+[Typescript functions](../index.md) / [Exports](../modules.md) / [object](../modules/object.md) / Predicate
 
-# Interface: Callback<T\>
+# Interface: Predicate<T\>
 
-[object](../modules/object.md).Callback
+[object](../modules/object.md).Predicate
 
 ## Type parameters
 
@@ -12,9 +12,9 @@
 
 ## Callable
 
-### Callback
+### Predicate
 
-▸ **Callback**(`value`, `key`): `boolean`
+▸ **Predicate**(`value`, `key`): `boolean`
 
 Checks object entry.
 
@@ -29,4 +29,4 @@ Checks object entry.
 
 `boolean`
 
-_True_ if entry passes check, _false_ otherwise.
+_True_ if object entry passes check, _false_ otherwise.

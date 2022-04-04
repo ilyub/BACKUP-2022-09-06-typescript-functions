@@ -6,23 +6,19 @@
 
 ## Table of contents
 
-### Variables
+### Functions
 
 - [step](number.ceil.md#step)
 
-## Variables
+## Functions
 
 ### step
 
-• **step**: (`value`: `number`, `step`: `number`, `from`: `number`) => `number`
-
-#### Type declaration
-
-▸ (`value`, `step`, `from?`): `number`
+▸ **step**(`value`, `step`, `from?`): `number`
 
 Ceils number.
 
-##### Parameters
+#### Parameters
 
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
@@ -30,7 +26,7 @@ Ceils number.
 | `step` | `number` | `undefined` | Step. |
 | `from` | `number` | `0` | From. |
 
-##### Returns
+#### Returns
 
 `number`
 

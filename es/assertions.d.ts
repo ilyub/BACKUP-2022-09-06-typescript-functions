@@ -5,19 +5,12 @@ import type { Constructor } from "./types/function";
 export declare type ErrorArg = ErrorArgFn | string;
 export interface ErrorArgFn {
     /**
-     * Creates error object.
+     * Creates error instance.
      *
-     * @returns Error object.
+     * @returns Error instance.
      */
     (): unknown;
 }
-/**
- * Converts error message/object to assertion error argument.
- *
- * @param strOrError - Error message/object.
- * @returns Assertion error argument.
- */
-export declare function toErrorArg(strOrError: unknown): ErrorArg;
 /**
  * Not implemented.
  */
@@ -80,7 +73,7 @@ export declare function enumeration<T extends PropertyKey>(value: unknown, vo: V
  */
 export declare function indexedObject(value: unknown, error?: ErrorArg): asserts value is types.IndexedObject;
 export declare namespace indexedObject {
-    var of: <T>(value: unknown, guard: is.Guard<T>, error?: ErrorArg | undefined) => asserts value is Readonly<types.TypedObject<PropertyKey, T>>;
+    var of: <T>(value: unknown, guard: is.Guard<T>, error?: ErrorArg | undefined) => asserts value is types.IndexedObject<T>;
 }
 /**
  * Asserts that value type is T.
@@ -129,9 +122,6 @@ export declare function number(value: unknown, error?: ErrorArg): asserts value 
  * @param error - Error.
  */
 export declare function object(value: unknown, error?: ErrorArg): asserts value is object;
-export declare namespace object {
-    var of: <R extends object, O extends object>(value: unknown, required: is.Guards<R, keyof R>, optional: is.Guards<O, keyof O>, error?: ErrorArg | undefined) => asserts value is is.ObjectOfReturn<R, O>;
-}
 /**
  * Asserts that value type is Set.
  *
@@ -149,6 +139,13 @@ export declare namespace set {
  * @param error - Error.
  */
 export declare function string(value: unknown, error?: ErrorArg): asserts value is string;
+/**
+ * Asserts that value is a string.
+ *
+ * @param value - Value.
+ * @param error - Error.
+ */
+export declare function stringU(value: unknown, error?: ErrorArg): asserts value is types.stringU;
 /**
  * Asserts that value is a symbol.
  *

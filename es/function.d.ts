@@ -17,16 +17,16 @@ export interface PipeCallback<V = unknown, R = unknown> {
 export declare function identity<T>(value: T): T;
 export declare const noop: Callable;
 /**
- * Applies callbacks to the value.
+ * Applies callbacks to a value.
  *
  * @param value - Value.
  * @param callback1 - Callback 1.
  * @param callback2 - Callback 2.
  * @returns The value returned by callback sequence.
  */
-export declare function pipe<A, B, C>(value: A, callback1: PipeCallback<A, B>, callback2: PipeCallback<B, C>): C;
+export declare function pipe<V, A, R>(value: V, callback1: PipeCallback<V, A>, callback2: PipeCallback<A, R>): R;
 /**
- * Applies callbacks to the value.
+ * Applies callbacks to a value.
  *
  * @param value - Value.
  * @param callback1 - Callback 1.
@@ -34,7 +34,7 @@ export declare function pipe<A, B, C>(value: A, callback1: PipeCallback<A, B>, c
  * @param callback3 - Callback 3.
  * @returns The value returned by callback sequence.
  */
-export declare function pipe<A, B, C, D>(value: A, callback1: PipeCallback<A, B>, callback2: PipeCallback<B, C>, callback3: PipeCallback<C, D>): D;
+export declare function pipe<V, A, B, R>(value: V, callback1: PipeCallback<V, A>, callback2: PipeCallback<A, B>, callback3: PipeCallback<B, R>): R;
 /**
  * Executes callback.
  *

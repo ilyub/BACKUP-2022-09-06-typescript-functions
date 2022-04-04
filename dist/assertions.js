@@ -1,19 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.toBeTrue = exports.toBeFalse = exports.symbol = exports.string = exports.set = exports.object = exports.number = exports.numStr = exports.map = exports.instances = exports.instance = exports.indexedObject = exports.enumeration = exports.empty = exports.callable = exports.byGuard = exports.boolean = exports.array = exports.not = exports.toErrorArg = void 0;
+exports.toBeTrue = exports.toBeFalse = exports.symbol = exports.stringU = exports.string = exports.set = exports.object = exports.number = exports.numStr = exports.map = exports.instances = exports.instance = exports.indexedObject = exports.enumeration = exports.empty = exports.callable = exports.byGuard = exports.boolean = exports.array = exports.not = void 0;
 const tslib_1 = require("tslib");
 const AssertionError_1 = require("./errors/AssertionError");
 const is = tslib_1.__importStar(require("./guards"));
-/**
- * Converts error message/object to assertion error argument.
- *
- * @param strOrError - Error message/object.
- * @returns Assertion error argument.
- */
-function toErrorArg(strOrError) {
-    return is.string(strOrError) ? strOrError : () => strOrError;
-}
-exports.toErrorArg = toErrorArg;
 /**
  * Not implemented.
  */
@@ -206,17 +196,6 @@ function object(value, error) {
 }
 exports.object = object;
 /**
- * Asserts that value type is T.
- *
- * @param value - Value.
- * @param required - Guards for required properties.
- * @param optional - Guards for optional properties.
- * @param error - Error.
- */
-object.of = (value, required, optional, error) => {
-    byGuard(value, is.factory(is.object.of, required, optional), error);
-};
-/**
  * Asserts that value type is Set.
  *
  * @param value - Value.
@@ -230,7 +209,7 @@ exports.set = set;
  * Asserts that value type is Set\<T\>.
  *
  * @param value - Value.
- * @param guard - Guard.
+ * @param guard - Guard for type T.
  * @param error - Error.
  */
 set.of = (value, guard, error) => {
@@ -246,6 +225,16 @@ function string(value, error) {
     byGuard(value, is.string, error);
 }
 exports.string = string;
+/**
+ * Asserts that value is a string.
+ *
+ * @param value - Value.
+ * @param error - Error.
+ */
+function stringU(value, error) {
+    byGuard(value, is.stringU, error);
+}
+exports.stringU = stringU;
 /**
  * Asserts that value is a symbol.
  *

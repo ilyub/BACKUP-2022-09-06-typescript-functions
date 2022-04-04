@@ -10,7 +10,7 @@
 
 ▸ **Keys**<`K`, `V`\>(`obj`): `K`[]
 
-Typed version of Object.entries.
+Typed version of Object.keys.
 
 #### Type parameters
 
@@ -23,13 +23,13 @@ Typed version of Object.entries.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `obj` | [`PartialTypedObject`](../modules/types_core.md#partialtypedobject)<`K`, `V`\> | Object. |
+| `obj` | [`PartialRecord`](../modules/types_core.md#partialrecord)<`K`, `V`\> | Object. |
 
 #### Returns
 
 `K`[]
 
-Object entries.
+Object keys.
 
 ### Keys
 

@@ -1,15 +1,15 @@
-export declare type KeyOrReduce<T extends object, V extends object = T> = PropertyKey | Reduce<T, V>;
-export interface Reduce<T extends object, V extends object = T> {
+export declare type KeyOrReduce<T extends object> = PropertyKey | Reduce<T>;
+export interface Reduce<T extends object> {
     /**
-     * Reduces object for comparison.
+     * Reduces object.
      *
      * @param obj - Object.
      * @returns Reduced value.
      */
-    (obj: T | V): unknown;
+    (obj: T): unknown;
 }
 /**
- * Creates array of pairs ("[x, y, z]" =\> "[[x, y], [y, z]]").
+ * Creates array of pairs ([x, y, z] =\> [[x, y], [y, z]]).
  *
  * @param arr - Array.
  * @returns Array of pairs.
@@ -51,7 +51,7 @@ export declare function clone<A, B, C, D>(arr: readonly [A, B, C, D]): [A, B, C,
  */
 export declare function clone<T>(arr: readonly T[]): T[];
 /**
- * Removes element from an array.
+ * Removes element at given index.
  *
  * @param arr - Array.
  * @param index - Index to be removed.
@@ -99,7 +99,7 @@ export declare function fromRange(from: number, to: number, step?: number): numb
  */
 export declare function fromString(str: string): string[];
 /**
- * Returns element by index.
+ * Returns element at given index.
  *
  * @param arr - Array.
  * @param index - Index.
@@ -115,7 +115,7 @@ export declare function get<T>(arr: readonly T[], index: number): T;
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns _True_ if array contains element matching value, _false_ otherwise.
  */
-export declare function includesBy<T extends object, V extends object>(arr: readonly T[], value: V, keyOrReduce: KeyOrReduce<T, V>): boolean;
+export declare function includesBy<T extends object, V extends object>(arr: readonly T[], value: V, keyOrReduce: KeyOrReduce<T | V>): boolean;
 /**
  * Returns the last element from an array.
  *
@@ -156,12 +156,12 @@ export declare function random<T>(arr: readonly T[]): T;
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns New array with matching elements removed.
  */
-export declare function removeBy<T extends object, V extends object>(arr: readonly T[], value: V, keyOrReduce: KeyOrReduce<T, V>): T[];
+export declare function removeBy<T extends object, V extends object>(arr: readonly T[], value: V, keyOrReduce: KeyOrReduce<T | V>): T[];
 /**
- * Replaces element.
+ * Replaces element at given index.
  *
  * @param arr - Array.
- * @param index - Index to be replaced.
+ * @param index - Index.
  * @param value - Value.
  * @returns New array with one element replaced.
  */

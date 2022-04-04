@@ -9,7 +9,7 @@ const is = tslib_1.__importStar(require("./guards"));
 const o = tslib_1.__importStar(require("./object"));
 const reflect = tslib_1.__importStar(require("./reflect"));
 /**
- * Creates array of pairs ("[x, y, z]" =\> "[[x, y], [y, z]]").
+ * Creates array of pairs ([x, y, z] =\> [[x, y], [y, z]]).
  *
  * @param arr - Array.
  * @returns Array of pairs.
@@ -29,7 +29,7 @@ function clone(arr) {
 }
 exports.clone = clone;
 /**
- * Removes element from an array.
+ * Removes element at given index.
  *
  * @param arr - Array.
  * @param index - Index to be removed.
@@ -101,7 +101,7 @@ function fromString(str) {
 }
 exports.fromString = fromString;
 /**
- * Returns element by index.
+ * Returns element at given index.
  *
  * @param arr - Array.
  * @param index - Index.
@@ -110,7 +110,7 @@ exports.fromString = fromString;
  */
 function get(arr, index) {
     assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
+    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
     return arr[index];
 }
 exports.get = get;
@@ -189,10 +189,10 @@ function removeBy(arr, value, keyOrReduce) {
 }
 exports.removeBy = removeBy;
 /**
- * Replaces element.
+ * Replaces element at given index.
  *
  * @param arr - Array.
- * @param index - Index to be replaced.
+ * @param index - Index.
  * @param value - Value.
  * @returns New array with one element replaced.
  */
@@ -272,12 +272,12 @@ exports.truncate = truncate;
  */
 function uniqueBy(arr, keyOrReduce) {
     const reduce = toReduce(keyOrReduce);
-    const cache = new Set();
+    const seen = new Set();
     return arr.filter(element => {
         const reduced = reduce(element);
-        if (cache.has(reduced))
+        if (seen.has(reduced))
             return false;
-        cache.add(reduced);
+        seen.add(reduced);
         return true;
     });
 }

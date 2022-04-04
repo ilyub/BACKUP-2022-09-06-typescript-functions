@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.stringU = exports.string = exports.numberU = exports.number = exports.notEmpty = exports.not = void 0;
+exports.stringU = exports.string = exports.numberU = exports.number = exports.not = void 0;
 const tslib_1 = require("tslib");
 const is = tslib_1.__importStar(require("./guards"));
 /**
@@ -17,11 +17,7 @@ exports.not = not;
  * @param defVal - Default value.
  * @returns Value if it is not empty, defVal otherwise.
  */
-function notEmpty(value, defVal) {
-    return is.not.empty(value) ? value : defVal;
-}
-exports.notEmpty = notEmpty;
-not.empty = notEmpty;
+not.empty = (value, defVal) => (is.not.empty(value) ? value : defVal);
 /**
  * Converts value to a number.
  *
@@ -35,7 +31,7 @@ function number(value, defVal = 0) {
 }
 exports.number = number;
 /**
- * Converts value to numberU.
+ * Converts value to a number.
  *
  * @param value - Value.
  * @returns Converted value, _undefined_ on failure.
@@ -68,14 +64,14 @@ function string(value) {
 }
 exports.string = string;
 /**
- * Converts value to stringU.
+ * Converts value to type stringU.
  *
  * @param value - Value.
  * @returns Converted value.
  */
 function stringU(value) {
-    const result = is.not.empty(value) ? String(value) : "";
-    return result ? result : undefined;
+    const str = is.not.empty(value) ? String(value) : "";
+    return str ? str : undefined;
 }
 exports.stringU = stringU;
 //# sourceMappingURL=converters.js.map

@@ -17,8 +17,7 @@ export function createFacade(name, extension) {
     const facadeOwn = Object.assign({ setImplementation(value) {
             _implementation = value;
         } }, extension);
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
-    return new Proxy(fn.noop, wrapProxyHandler("createFacade", "throw", {
+    const proxy = new Proxy(fn.noop, wrapProxyHandler("createFacade", "throw", {
         apply(_target, thisArg, args) {
             return reflect.apply(targetFn(), thisArg, args);
         },
@@ -41,6 +40,8 @@ export function createFacade(name, extension) {
             return reflect.set(target(key), key, value);
         }
     }));
+    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+    return proxy;
     function target(key) {
         if (is.not.empty(key) && key in facadeOwn)
             return facadeOwn;
@@ -59,7 +60,7 @@ export function createFacade(name, extension) {
  * @returns Validation object.
  */
 export function createValidationObject(source) {
-    if (o.entries(source).every(([key, value]) => key === String(value)))
+    if (o.entries(source).every(([key, value]) => key === value))
         return new Set(o.values(source));
     throw new Error("Invalid source");
 }
@@ -92,21 +93,12 @@ export function onDemand(generator) {
             return true;
         }
     }));
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
+    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
     return proxy;
     function obj() {
         _obj = _obj !== null && _obj !== void 0 ? _obj : generator();
         return _obj;
     }
-}
-/**
- * Defines value type.
- *
- * @param value - Value.
- * @returns Value.
- */
-export function typedef(value) {
-    return value;
 }
 /**
  * Creates safe access interface for an object.
@@ -153,6 +145,15 @@ export function safeAccess(obj, guards, readonlyKeys = []) {
     }));
 }
 /**
+ * Defines value type.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+export function typedef(value) {
+    return value;
+}
+/**
  * Delays program execution.
  *
  * @param timeout - Timeout (ms).
@@ -173,7 +174,7 @@ export async function wait(timeout) {
 export function wrapProxyHandler(id, action, handler) {
     switch (action) {
         case "doDefault":
-            return Object.assign({ apply(target, thisArg, args) {
+            return typedef(Object.assign({ apply(target, thisArg, args) {
                     assert.callable(target);
                     return reflect.apply(target, thisArg, args);
                 },
@@ -215,9 +216,9 @@ export function wrapProxyHandler(id, action, handler) {
                 },
                 setPrototypeOf(target, proto) {
                     return reflect.setPrototypeOf(target, proto);
-                } }, handler);
+                } }, handler));
         case "throw":
-            return Object.assign({ apply() {
+            return typedef(Object.assign({ apply() {
                     throw new Error(`Not implemented: ${id}.apply`);
                 },
                 construct() {
@@ -255,7 +256,7 @@ export function wrapProxyHandler(id, action, handler) {
                 },
                 setPrototypeOf() {
                     throw new Error(`Not implemented: ${id}.setPrototypeOf`);
-                } }, handler);
+                } }, handler));
     }
 }
 //# sourceMappingURL=helpers.js.map

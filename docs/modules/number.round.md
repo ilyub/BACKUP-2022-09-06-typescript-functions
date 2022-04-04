@@ -6,23 +6,19 @@
 
 ## Table of contents
 
-### Variables
+### Functions
 
 - [step](number.round.md#step)
 
-## Variables
+## Functions
 
 ### step
 
-• **step**: (`value`: `number`, `step`: `number`, `from`: `number`) => `number`
-
-#### Type declaration
-
-▸ (`value`, `step`, `from?`): `number`
+▸ **step**(`value`, `step`, `from?`): `number`
 
 Rounds number.
 
-##### Parameters
+#### Parameters
 
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
@@ -30,7 +26,7 @@ Rounds number.
 | `step` | `number` | `undefined` | Step. |
 | `from` | `number` | `0` | From. |
 
-##### Returns
+#### Returns
 
 `number`
 

@@ -61,57 +61,57 @@ ___
 
 ### pipe
 
-▸ **pipe**<`A`, `B`, `C`\>(`value`, `callback1`, `callback2`): `C`
+▸ **pipe**<`V`, `A`, `R`\>(`value`, `callback1`, `callback2`): `R`
 
-Applies callbacks to the value.
+Applies callbacks to a value.
 
 #### Type parameters
 
 | Name |
 | :------ |
+| `V` |
 | `A` |
-| `B` |
-| `C` |
+| `R` |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `value` | `A` | Value. |
-| `callback1` | [`PipeCallback`](../interfaces/function.PipeCallback.md)<`A`, `B`\> | Callback 1. |
-| `callback2` | [`PipeCallback`](../interfaces/function.PipeCallback.md)<`B`, `C`\> | Callback 2. |
+| `value` | `V` | Value. |
+| `callback1` | [`PipeCallback`](../interfaces/function.PipeCallback.md)<`V`, `A`\> | Callback 1. |
+| `callback2` | [`PipeCallback`](../interfaces/function.PipeCallback.md)<`A`, `R`\> | Callback 2. |
 
 #### Returns
 
-`C`
+`R`
 
 The value returned by callback sequence.
 
-▸ **pipe**<`A`, `B`, `C`, `D`\>(`value`, `callback1`, `callback2`, `callback3`): `D`
+▸ **pipe**<`V`, `A`, `B`, `R`\>(`value`, `callback1`, `callback2`, `callback3`): `R`
 
-Applies callbacks to the value.
+Applies callbacks to a value.
 
 #### Type parameters
 
 | Name |
 | :------ |
+| `V` |
 | `A` |
 | `B` |
-| `C` |
-| `D` |
+| `R` |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `value` | `A` | Value. |
-| `callback1` | [`PipeCallback`](../interfaces/function.PipeCallback.md)<`A`, `B`\> | Callback 1. |
-| `callback2` | [`PipeCallback`](../interfaces/function.PipeCallback.md)<`B`, `C`\> | Callback 2. |
-| `callback3` | [`PipeCallback`](../interfaces/function.PipeCallback.md)<`C`, `D`\> | Callback 3. |
+| `value` | `V` | Value. |
+| `callback1` | [`PipeCallback`](../interfaces/function.PipeCallback.md)<`V`, `A`\> | Callback 1. |
+| `callback2` | [`PipeCallback`](../interfaces/function.PipeCallback.md)<`A`, `B`\> | Callback 2. |
+| `callback3` | [`PipeCallback`](../interfaces/function.PipeCallback.md)<`B`, `R`\> | Callback 3. |
 
 #### Returns
 
-`D`
+`R`
 
 The value returned by callback sequence.
 

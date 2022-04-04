@@ -1,15 +1,6 @@
 import { AssertionError } from "./errors/AssertionError";
 import * as is from "./guards";
 /**
- * Converts error message/object to assertion error argument.
- *
- * @param strOrError - Error message/object.
- * @returns Assertion error argument.
- */
-export function toErrorArg(strOrError) {
-    return is.string(strOrError) ? strOrError : () => strOrError;
-}
-/**
  * Not implemented.
  */
 export function not() {
@@ -187,17 +178,6 @@ export function object(value, error) {
     byGuard(value, is.object, error);
 }
 /**
- * Asserts that value type is T.
- *
- * @param value - Value.
- * @param required - Guards for required properties.
- * @param optional - Guards for optional properties.
- * @param error - Error.
- */
-object.of = (value, required, optional, error) => {
-    byGuard(value, is.factory(is.object.of, required, optional), error);
-};
-/**
  * Asserts that value type is Set.
  *
  * @param value - Value.
@@ -210,7 +190,7 @@ export function set(value, error) {
  * Asserts that value type is Set\<T\>.
  *
  * @param value - Value.
- * @param guard - Guard.
+ * @param guard - Guard for type T.
  * @param error - Error.
  */
 set.of = (value, guard, error) => {
@@ -224,6 +204,15 @@ set.of = (value, guard, error) => {
  */
 export function string(value, error) {
     byGuard(value, is.string, error);
+}
+/**
+ * Asserts that value is a string.
+ *
+ * @param value - Value.
+ * @param error - Error.
+ */
+export function stringU(value, error) {
+    byGuard(value, is.stringU, error);
 }
 /**
  * Asserts that value is a symbol.

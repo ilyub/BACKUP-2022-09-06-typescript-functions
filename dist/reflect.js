@@ -2,7 +2,6 @@
 /* skylib/eslint-plugin disable @skylib/disallow-identifier[functions.reflect] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.setPrototypeOf = exports.set = exports.preventExtensions = exports.ownKeys = exports.isExtensible = exports.hasOwnMetadataKey = exports.hasOwnMetadata = exports.hasMetadataKey = exports.hasMetadata = exports.has = exports.getPrototypeOf = exports.getOwnPropertyDescriptor = exports.getOwnMetadataKey = exports.getOwnMetadata = exports.getMetadataKey = exports.getMetadata = exports.get = exports.deleteProperty = exports.defineProperty = exports.defineMetadataKey = exports.defineMetadata = exports.construct = exports.apply = void 0;
-// eslint-disable-next-line import/no-unassigned-import
 require("reflect-metadata");
 /**
  * Typed version of Reflect.apply.

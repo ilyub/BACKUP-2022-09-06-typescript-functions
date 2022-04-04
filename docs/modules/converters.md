@@ -11,7 +11,6 @@
 ### Functions
 
 - [not](converters.md#not)
-- [notEmpty](converters.md#notempty)
 - [number](converters.md#number)
 - [numberU](converters.md#numberu)
 - [string](converters.md#string)
@@ -28,33 +27,6 @@ Not implemented.
 #### Returns
 
 `never`
-
-___
-
-### notEmpty
-
-▸ **notEmpty**<`T`\>(`value`, `defVal`): `Exclude`<`T`, [`empty`](types_core.md#empty)\>
-
-Converts value to not empty.
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `T` | Value. |
-| `defVal` | `Exclude`<`T`, [`empty`](types_core.md#empty)\> | Default value. |
-
-#### Returns
-
-`Exclude`<`T`, [`empty`](types_core.md#empty)\>
-
-Value if it is not empty, defVal otherwise.
 
 ___
 
@@ -83,7 +55,7 @@ ___
 
 ▸ **numberU**(`value`): [`numberU`](types_core.md#numberu)
 
-Converts value to numberU.
+Converts value to a number.
 
 #### Parameters
 
@@ -123,7 +95,7 @@ ___
 
 ▸ **stringU**(`value`): [`stringU`](types_core.md#stringu)
 
-Converts value to stringU.
+Converts value to type stringU.
 
 #### Parameters
 

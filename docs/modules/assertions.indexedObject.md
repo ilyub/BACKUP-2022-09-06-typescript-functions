@@ -14,7 +14,7 @@
 
 ### of
 
-▸ **of**<`T`\>(`value`, `guard`, `error?`): asserts value is Readonly<TypedObject<PropertyKey, T\>\>
+▸ **of**<`T`\>(`value`, `guard`, `error?`): asserts value is IndexedObject<T\>
 
 Asserts that value type is IndexedObject\<T\>.
 
@@ -34,4 +34,4 @@ Asserts that value type is IndexedObject\<T\>.
 
 #### Returns
 
-asserts value is Readonly<TypedObject<PropertyKey, T\>\>
+asserts value is IndexedObject<T\>

@@ -10,10 +10,10 @@
 
 ▸ **ErrorArgFn**(): `unknown`
 
-Creates error object.
+Creates error instance.
 
 #### Returns
 
 `unknown`
 
-Error object.
+Error instance.

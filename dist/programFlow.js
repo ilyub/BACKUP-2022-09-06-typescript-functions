@@ -1,33 +1,31 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.programFlow] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setTimeout = exports._setTimeout = exports.setInterval = exports.clearTimeout = exports._clearTimeout = exports.clearInterval = exports._clearInterval = void 0;
+exports.setTimeout = exports.setInterval = exports.clearTimeout = exports.clearInterval = void 0;
 const tslib_1 = require("tslib");
 const is = tslib_1.__importStar(require("./guards"));
 /**
- * Removes interval.
+ * Clears interval.
  *
- * @param id - Id.
+ * @param id - ID.
  */
 function _clearInterval(id) {
     if (is.not.empty(id))
         clearInterval(id);
 }
-exports._clearInterval = _clearInterval;
 exports.clearInterval = _clearInterval;
 /**
- * Removes timeout.
+ * Clears timeout.
  *
- * @param id - Id.
+ * @param id - ID.
  */
 function _clearTimeout(id) {
     if (is.not.empty(id))
         clearTimeout(id);
 }
-exports._clearTimeout = _clearTimeout;
 exports.clearTimeout = _clearTimeout;
 /**
- * Adds interval.
+ * Sets interval.
  *
  * @param callback - Callback.
  * @param timeout - Timeout.
@@ -38,7 +36,7 @@ function _setInterval(callback, timeout) {
 }
 exports.setInterval = _setInterval;
 /**
- * Adds timeout.
+ * Sets timeout.
  *
  * @param callback - Callback.
  * @param timeout - Timeout.
@@ -47,6 +45,5 @@ exports.setInterval = _setInterval;
 function _setTimeout(callback, timeout) {
     return setTimeout(callback, timeout);
 }
-exports._setTimeout = _setTimeout;
 exports.setTimeout = _setTimeout;
 //# sourceMappingURL=programFlow.js.map

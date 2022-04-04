@@ -1,5 +1,5 @@
 "use strict";
-/* skylib/eslint-plugin disable @skylib/disallow-identifier[json] */
+/* skylib/eslint-plugin disable @skylib/disallow-identifier[functions.json] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.neq = exports.eq = exports.encode = exports.decode = void 0;
 const tslib_1 = require("tslib");
@@ -19,10 +19,10 @@ function decode(source) {
             return JSON.parse(source, reviver);
     }
     catch (_a) {
-        // eslint-disable-next-line unicorn/no-null
+        // eslint-disable-next-line unicorn/no-null -- Ok
         return null;
     }
-    // eslint-disable-next-line unicorn/no-null
+    // eslint-disable-next-line unicorn/no-null -- Ok
     return null;
 }
 exports.decode = decode;
@@ -41,7 +41,7 @@ exports.encode = encode;
  *
  * @param x - Value 1.
  * @param y - Value 2.
- * @returns _True_ if two values are not equal, _false_ otherwise.
+ * @returns _True_ if two values are equal, _false_ otherwise.
  */
 function eq(x, y) {
     return encode(x) === encode(y);
@@ -63,10 +63,9 @@ const TypeVO = (0, helpers_1.createValidationObject)({
     "set-41ef-10c9-ae1f-15e8": "set-41ef-10c9-ae1f-15e8"
 });
 const isType = is.factory(is.enumeration, TypeVO);
-const isCustomData = is.object.of.factory({ type: isType, value: is.unknown }, {});
-const isMapEntry = is.tuple.factory(is.unknown, is.unknown);
-const isMapValue = is.factory(is.array.of, isMapEntry);
-const isSetValue = is.array;
+const isCustomData = is.object.factory({ type: isType, value: is.unknown }, {});
+const isEntry = is.tuple.factory(is.unknown, is.unknown);
+const isEntries = is.factory(is.array.of, isEntry);
 /**
  * JSON replacer.
  *
@@ -75,7 +74,7 @@ const isSetValue = is.array;
  * @returns New value.
  */
 function replacer(_key, value) {
-    // eslint-disable-next-line unicorn/no-null
+    // eslint-disable-next-line unicorn/no-null -- Ok
     if (is.empty(value))
         return null;
     if (is.map(value))
@@ -92,16 +91,16 @@ function replacer(_key, value) {
  * @returns New value.
  */
 function reviver(_key, value) {
-    // eslint-disable-next-line unicorn/no-null
+    // eslint-disable-next-line unicorn/no-null -- Ok
     if (is.empty(value))
         return null;
     if (isCustomData(value))
         switch (value.type) {
             case "map-5702-3c89-3feb-75d4":
-                assert.byGuard(value.value, isMapValue);
+                assert.byGuard(value.value, isEntries);
                 return new Map(value.value);
             case "set-41ef-10c9-ae1f-15e8":
-                assert.byGuard(value.value, isSetValue);
+                assert.byGuard(value.value, is.array);
                 return new Set(value.value);
         }
     return value;

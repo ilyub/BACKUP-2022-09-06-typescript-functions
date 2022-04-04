@@ -14,17 +14,8 @@ export declare function average(...values: number[]): number;
  */
 export declare function ceil(value: number, precision: number): number;
 export declare namespace ceil {
-    var step: typeof ceilStep;
+    var step: (value: number, step: number, from?: number) => number;
 }
-/**
- * Ceils number.
- *
- * @param value - Value.
- * @param step - Step.
- * @param from - From.
- * @returns Ceiled value.
- */
-export declare function ceilStep(value: number, step: number, from?: number): number;
 /**
  * Floors number to a given precision.
  *
@@ -34,17 +25,8 @@ export declare function ceilStep(value: number, step: number, from?: number): nu
  */
 export declare function floor(value: number, precision: number): number;
 export declare namespace floor {
-    var step: typeof floorStep;
+    var step: (value: number, step: number, from?: number) => number;
 }
-/**
- * Floors number.
- *
- * @param value - Value.
- * @param step - Step.
- * @param from - From.
- * @returns Floored value.
- */
-export declare function floorStep(value: number, step: number, from?: number): number;
 /**
  * Limits value to be within [min, max] range.
  *
@@ -70,17 +52,8 @@ export declare function rootMeanSquareDeviation(...values: number[]): number;
  */
 export declare function round(value: number, precision: number): number;
 export declare namespace round {
-    var step: typeof roundStep;
+    var step: (value: number, step: number, from?: number) => number;
 }
-/**
- * Rounds number.
- *
- * @param value - Value.
- * @param step - Step.
- * @param from - From.
- * @returns Rounded value.
- */
-export declare function roundStep(value: number, step: number, from?: number): number;
 /**
  * Sums values.
  *

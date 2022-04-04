@@ -11,12 +11,15 @@
 - [NumStrE](types_core.md#numstre)
 - [NumStrU](types_core.md#numstru)
 - [NumStrs](types_core.md#numstrs)
-- [PartialTypedObject](types_core.md#partialtypedobject)
+- [PartialRecord](types_core.md#partialrecord)
 - [PropertyKeyE](types_core.md#propertykeye)
 - [PropertyKeyU](types_core.md#propertykeyu)
 - [PropertyKeys](types_core.md#propertykeys)
-- [TypedObject](types_core.md#typedobject)
+- [Rec](types_core.md#rec)
 - [Writable](types_core.md#writable)
+- [WritableIndexedObject](types_core.md#writableindexedobject)
+- [WritablePartialRecord](types_core.md#writablepartialrecord)
+- [WritableRecord](types_core.md#writablerecord)
 - [booleanE](types_core.md#booleane)
 - [booleanU](types_core.md#booleanu)
 - [booleans](types_core.md#booleans)
@@ -39,7 +42,7 @@
 
 ### IndexedObject
 
-Ƭ **IndexedObject**<`T`\>: `Readonly`<[`TypedObject`](types_core.md#typedobject)<`PropertyKey`, `T`\>\>
+Ƭ **IndexedObject**<`T`\>: [`Rec`](types_core.md#rec)<`PropertyKey`, `T`\>
 
 #### Type parameters
 
@@ -73,9 +76,9 @@ ___
 
 ___
 
-### PartialTypedObject
+### PartialRecord
 
-Ƭ **PartialTypedObject**<`K`, `V`\>: { readonly [L in K]?: V }
+Ƭ **PartialRecord**<`K`, `V`\>: { readonly [L in K]?: V }
 
 #### Type parameters
 
@@ -104,9 +107,9 @@ ___
 
 ___
 
-### TypedObject
+### Rec
 
-Ƭ **TypedObject**<`K`, `V`\>: { readonly [L in K]: V }
+Ƭ **Rec**<`K`, `V`\>: { readonly [L in K]: V }
 
 #### Type parameters
 
@@ -126,6 +129,44 @@ ___
 | Name |
 | :------ |
 | `T` |
+
+___
+
+### WritableIndexedObject
+
+Ƭ **WritableIndexedObject**<`T`\>: [`WritableRecord`](types_core.md#writablerecord)<`PropertyKey`, `T`\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | `unknown` |
+
+___
+
+### WritablePartialRecord
+
+Ƭ **WritablePartialRecord**<`K`, `V`\>: { [L in K]?: V }
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `V` | `V` |
+
+___
+
+### WritableRecord
+
+Ƭ **WritableRecord**<`K`, `V`\>: { [L in K]: V }
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `V` | `V` |
 
 ___
 

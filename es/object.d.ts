@@ -1,25 +1,6 @@
-import type { IndexedObject, NumStr, objectU, PartialTypedObject, TypedObject, Writable } from "./types/core";
-import type { OptionalPropertiesToOptional, StrictOmit } from "./types/object";
-export interface Assign {
-    /**
-     * Typed version of Object.assign.
-     *
-     * @param mutableTarget - Target.
-     * @param sources - Sources.
-     * @returns Target.
-     */
-    <T extends object>(mutableTarget: T, ...sources: Array<Partial<T>>): T;
-}
-export interface Callback<T extends object> {
-    /**
-     * Checks object entry.
-     *
-     * @param value - Value.
-     * @param key - Key.
-     * @returns _True_ if entry passes check, _false_ otherwise.
-     */
-    (value: T[keyof T], key: keyof T): boolean;
-}
+import * as is from "./guards";
+import type { IndexedObject, NumStr, objectU, PartialRecord, Rec, Writable, WritableRecord } from "./types/core";
+import type { OptionalStyle, StrictOmit } from "./types/object";
 export interface CompareFn<T extends object> {
     /**
      * Compares two object entries.
@@ -30,16 +11,6 @@ export interface CompareFn<T extends object> {
      * @param key2 - Key 2.
      */
     (value1: T[keyof T], value2: T[keyof T], key1: keyof T, key2: keyof T): number;
-}
-export interface DefineProperty {
-    /**
-     * Typed version of Object.defineProperty.
-     *
-     * @param obj - Object.
-     * @param key - Property key.
-     * @param descriptor - Descriptor.
-     */
-    <T, K extends keyof T = keyof T>(obj: T, key: K, descriptor: Descriptor<T, K>): void;
 }
 export interface Descriptor<T, K extends keyof T = keyof T> extends PropertyDescriptor {
     readonly configurable?: boolean;
@@ -68,7 +39,7 @@ export interface Entries {
      * @param obj - Object.
      * @returns Object entries.
      */
-    <K extends string, V>(obj: PartialTypedObject<K, V>): Array<[K, V]>;
+    <K extends string, V>(obj: PartialRecord<K, V>): Array<[K, V]>;
     /**
      * Typed version of Object.entries.
      *
@@ -108,12 +79,12 @@ export interface Extend {
 }
 export interface Keys {
     /**
-     * Typed version of Object.entries.
+     * Typed version of Object.keys.
      *
      * @param obj - Object.
-     * @returns Object entries.
+     * @returns Object keys.
      */
-    <K extends string, V>(obj: PartialTypedObject<K, V>): K[];
+    <K extends string, V>(obj: PartialRecord<K, V>): K[];
     /**
      * Typed version of Object.keys.
      *
@@ -122,14 +93,24 @@ export interface Keys {
      */
     <T extends object>(obj: T): Array<string & keyof T>;
 }
+export interface Predicate<T extends object> {
+    /**
+     * Checks object entry.
+     *
+     * @param value - Value.
+     * @param key - Key.
+     * @returns _True_ if object entry passes check, _false_ otherwise.
+     */
+    (value: T[keyof T], key: keyof T): boolean;
+}
 export interface Values {
     /**
-     * Typed version of Object.entries.
+     * Typed version of Object.values.
      *
      * @param obj - Object.
-     * @returns Object entries.
+     * @returns Object values.
      */
-    <K extends string, V>(obj: PartialTypedObject<K, V>): V[];
+    <K extends string, V>(obj: PartialRecord<K, V>): V[];
     /**
      * Typed version of Object.values.
      *
@@ -138,7 +119,14 @@ export interface Values {
      */
     <T extends object>(obj: T): Array<T[NumStr & keyof T]>;
 }
-export declare const assign: Assign;
+/**
+ * Typed version of Object.assign.
+ *
+ * @param mutableTarget - Target.
+ * @param sources - Sources.
+ * @returns Target.
+ */
+export declare const assign: <T extends object>(mutableTarget: T, ...sources: Array<Partial<T>>) => T;
 /**
  * Clones object.
  *
@@ -146,32 +134,33 @@ export declare const assign: Assign;
  * @returns New object.
  */
 export declare function clone<T extends object>(obj: T): Writable<T>;
-export declare const defineProperty: DefineProperty;
 /**
- * Typed version of Object.entries.
+ * Typed version of Object.defineProperty.
  *
  * @param obj - Object.
- * @returns Object entries.
+ * @param key - Key.
+ * @param descriptor - Descriptor.
  */
+export declare const defineProperty: <T, K extends keyof T = keyof T>(obj: T, key: K, descriptor: Descriptor<T, K>) => void;
 declare const _entries: Entries;
 export { _entries as entries };
 /**
  * Checks that every object property satisfies condition.
  *
  * @param obj - Object.
- * @param callback - Callback.
+ * @param predicate - Predicate.
  * @returns _True_ if every object property satisfies condition, _false_ otherwise.
  */
-export declare function every<T extends object>(obj: T, callback: Callback<T>): boolean;
+export declare function every<T extends object>(obj: T, predicate: Predicate<T>): boolean;
 export declare const extend: Extend;
 /**
- * Filters object by callback.
+ * Filters object by predicate.
  *
  * @param obj - Object.
- * @param callback - Callback.
+ * @param predicate - Predicate.
  * @returns New object.
  */
-export declare function filter<T extends object>(obj: T, callback: Callback<T>): Partial<T>;
+export declare function filter<T extends object>(obj: T, predicate: Predicate<T>): Partial<T>;
 /**
  * Marks object as readonly.
  *
@@ -185,10 +174,20 @@ export declare function freeze<T extends object>(obj: T): Readonly<T>;
  * @param entries - Entries.
  * @returns Object.
  */
-export declare function fromEntries<K extends PropertyKey, V>(entries: Iterable<readonly [K, V]>): PartialTypedObject<K, V>;
+export declare function fromEntries<K extends PropertyKey, V>(entries: Iterable<readonly [K, V]>): PartialRecord<K, V>;
 export declare namespace fromEntries {
-    var exhaustive: <K extends PropertyKey, V>(entries: Iterable<readonly [K, V]>) => TypedObject<K, V>;
+    var exhaustive: <K extends PropertyKey, V>(entries: Iterable<readonly [K, V]>) => WritableRecord<K, V>;
 }
+/**
+ * Returns object property.
+ *
+ * @param obj - Object.
+ * @param key - Key.
+ * @param guard - Guard for type T.
+ * @returns Object property if its type is T.
+ * @throws AssertionError otherwise.
+ */
+export declare function get<T>(obj: object, key: PropertyKey, guard: is.Guard<T>): T;
 /**
  * Returns object prototype.
  *
@@ -199,7 +198,7 @@ export declare function getPrototypeOf(obj: object): objectU;
 /**
  * Checks that object has property.
  *
- * @param key - Property key.
+ * @param key - Key.
  * @param obj - Object.
  * @returns _True_ if object has property, _false_ otherwise.
  */
@@ -212,7 +211,7 @@ export declare const keys: Keys;
  * @param callback - Callback.
  * @returns New object.
  */
-export declare function map<K extends string, V, R>(obj: TypedObject<K, V>, callback: (value: V, key: K) => R): TypedObject<K, R>;
+export declare function map<K extends string, V, R>(obj: Rec<K, V>, callback: (value: V, key: K) => R): WritableRecord<K, R>;
 /**
  * Merges objects.
  * If more than one object has the same key, respective values are combined into array.
@@ -225,17 +224,17 @@ export declare function merge(...objects: IndexedObject[]): IndexedObject;
  * Removes keys from object.
  *
  * @param obj - Object.
- * @param exclude - Keys to remove.
- * @returns New object with given keys omitted.
+ * @param exclude - Keys to omit.
+ * @returns New object.
  */
-export declare function omit<T extends object, K extends keyof T>(obj: T, ...exclude: K[]): StrictOmit<T, K>;
+export declare function omit<T extends object, K extends string & keyof T>(obj: T, ...exclude: K[]): StrictOmit<T, K>;
 /**
  * Removes undefined keys.
  *
  * @param obj - Object.
  * @returns New object with undefined keys removed.
  */
-export declare function removeUndefinedKeys<T extends object>(obj: T): OptionalPropertiesToOptional<T>;
+export declare function removeUndefinedKeys<T extends object>(obj: T): OptionalStyle<T>;
 /**
  * Returns the number of enumerable properties.
  *
@@ -247,10 +246,18 @@ export declare function size(obj: object): number;
  * Checks that some object property satisfies condition.
  *
  * @param obj - Object.
- * @param callback - Callback.
+ * @param predicate - Predicate.
  * @returns _True_ if some object property satisfies condition, _false_ otherwise.
  */
-export declare function some<T extends object>(obj: T, callback: Callback<T>): boolean;
+export declare function some<T extends object>(obj: T, predicate: Predicate<T>): boolean;
+/**
+ * Sorts object.
+ *
+ * @param obj - Object.
+ * @param compareFn - Comparison function.
+ * @returns New object.
+ */
+export declare function sort<K extends string, V>(obj: Rec<K, V>, compareFn?: CompareFn<Rec<K, V>>): WritableRecord<K, V>;
 /**
  * Sorts object.
  *

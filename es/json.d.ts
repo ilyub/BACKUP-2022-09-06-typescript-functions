@@ -18,7 +18,7 @@ export declare function encode(source: unknown): string;
  *
  * @param x - Value 1.
  * @param y - Value 2.
- * @returns _True_ if two values are not equal, _false_ otherwise.
+ * @returns _True_ if two values are equal, _false_ otherwise.
  */
 export declare function eq(x: unknown, y: unknown): boolean;
 /**

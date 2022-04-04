@@ -1,6 +1,15 @@
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
 import * as a from "./array";
+import * as assert from "./assertions";
 import * as is from "./guards";
+import * as reflect from "./reflect";
+/**
+ * Typed version of Object.assign.
+ *
+ * @param mutableTarget - Target.
+ * @param sources - Sources.
+ * @returns Target.
+ */
 export const assign = Object.assign;
 /**
  * Clones object.
@@ -11,37 +20,38 @@ export const assign = Object.assign;
 export function clone(obj) {
     return Object.assign({}, obj);
 }
-export const defineProperty = Object.defineProperty.bind(Object);
 /**
- * Typed version of Object.entries.
+ * Typed version of Object.defineProperty.
  *
  * @param obj - Object.
- * @returns Object entries.
+ * @param key - Key.
+ * @param descriptor - Descriptor.
  */
+export const defineProperty = Object.defineProperty.bind(Object);
 const _entries = Object.entries;
 export { _entries as entries };
 /**
  * Checks that every object property satisfies condition.
  *
  * @param obj - Object.
- * @param callback - Callback.
+ * @param predicate - Predicate.
  * @returns _True_ if every object property satisfies condition, _false_ otherwise.
  */
-export function every(obj, callback) {
-    return _entries(obj).every(([key, value]) => callback(value, key));
+export function every(obj, predicate) {
+    return _entries(obj).every(([key, value]) => predicate(value, key));
 }
 export const extend = Object.assign;
 /**
- * Filters object by callback.
+ * Filters object by predicate.
  *
  * @param obj - Object.
- * @param callback - Callback.
+ * @param predicate - Predicate.
  * @returns New object.
  */
-export function filter(obj, callback) {
+export function filter(obj, predicate) {
     const result = {};
     for (const [key, value] of _entries(obj))
-        if (callback(value, key))
+        if (predicate(value, key))
             result[key] = value;
     return result;
 }
@@ -61,7 +71,6 @@ export function freeze(obj) {
  * @returns Object.
  */
 export function fromEntries(entries) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
     const result = {};
     for (const entry of entries)
         result[entry[0]] = entry[1];
@@ -74,12 +83,26 @@ export function fromEntries(entries) {
  * @returns Object.
  */
 fromEntries.exhaustive = (entries) => {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
     const result = {};
     for (const entry of entries)
         result[entry[0]] = entry[1];
+    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
     return result;
 };
+/**
+ * Returns object property.
+ *
+ * @param obj - Object.
+ * @param key - Key.
+ * @param guard - Guard for type T.
+ * @returns Object property if its type is T.
+ * @throws AssertionError otherwise.
+ */
+export function get(obj, key, guard) {
+    const value = reflect.get(obj, key);
+    assert.byGuard(value, guard);
+    return value;
+}
 /**
  * Returns object prototype.
  *
@@ -93,7 +116,7 @@ export function getPrototypeOf(obj) {
 /**
  * Checks that object has property.
  *
- * @param key - Property key.
+ * @param key - Key.
  * @param obj - Object.
  * @returns _True_ if object has property, _false_ otherwise.
  */
@@ -121,7 +144,7 @@ export function map(obj, callback) {
 export function merge(...objects) {
     const result = new Map();
     for (const obj of objects)
-        for (const [key, value] of Object.entries(obj)) {
+        for (const [key, value] of _entries(obj)) {
             const arr = result.get(key);
             if (arr)
                 arr.push(value);
@@ -129,7 +152,9 @@ export function merge(...objects) {
                 result.set(key, [value]);
         }
     return fromEntries(a
-        .fromIterable(result.entries())
+        .fromIterable(result)
+        // eslint-disable-next-line no-warning-comments -- Wait for @skylib/eslint-plugin update
+        // fixme
         .map(([key, arr]) => [
         key,
         arr.length === 1 ? arr[0] : arr
@@ -139,12 +164,12 @@ export function merge(...objects) {
  * Removes keys from object.
  *
  * @param obj - Object.
- * @param exclude - Keys to remove.
- * @returns New object with given keys omitted.
+ * @param exclude - Keys to omit.
+ * @returns New object.
  */
 export function omit(obj, ...exclude) {
     const excludeSet = new Set(exclude);
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
+    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
     return filter(obj, (_value, key) => !excludeSet.has(key));
 }
 /**
@@ -154,7 +179,7 @@ export function omit(obj, ...exclude) {
  * @returns New object with undefined keys removed.
  */
 export function removeUndefinedKeys(obj) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
+    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
     return filter(obj, is.not.empty);
 }
 /**
@@ -164,29 +189,21 @@ export function removeUndefinedKeys(obj) {
  * @returns The number of enumerable properties.
  */
 export function size(obj) {
-    return Object.keys(obj).length;
+    return keys(obj).length;
 }
 /**
  * Checks that some object property satisfies condition.
  *
  * @param obj - Object.
- * @param callback - Callback.
+ * @param predicate - Predicate.
  * @returns _True_ if some object property satisfies condition, _false_ otherwise.
  */
-export function some(obj, callback) {
-    return _entries(obj).some(([key, value]) => callback(value, key));
+export function some(obj, predicate) {
+    return _entries(obj).some(([key, value]) => predicate(value, key));
 }
-/**
- * Sorts object.
- *
- * @param obj - Object.
- * @param compareFn - Comparison function.
- * @returns New object.
- */
 export function sort(obj, compareFn) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion
-    return fromEntries(a.sort(_entries(obj), compareFn
-        ? // eslint-disable-next-line @skylib/prefer-readonly
+    return fromEntries.exhaustive(a.sort(_entries(obj), compareFn
+        ? // eslint-disable-next-line @skylib/prefer-readonly -- Wait for @skylib/eslint-plugin update
             (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
         : undefined));
 }

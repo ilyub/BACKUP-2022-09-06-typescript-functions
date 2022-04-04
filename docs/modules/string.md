@@ -91,7 +91,7 @@ Filters string.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `str` | `string` | String. |
-| `predicate` | (`char`: `string`, `index`: `number`) => `unknown` | Filter function. |
+| `predicate` | (`char`: `string`, `index`: `number`) => `boolean` | Predicate. |
 
 #### Returns
 

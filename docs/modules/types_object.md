@@ -9,10 +9,10 @@
 - [Join2](types_object.md#join2)
 - [Join3](types_object.md#join3)
 - [Join4](types_object.md#join4)
-- [OptionalPropertiesToOptional](types_object.md#optionalpropertiestooptional)
-- [OptionalPropertiesToOptionalUndefined](types_object.md#optionalpropertiestooptionalundefined)
-- [OptionalPropertiesToUndefined](types_object.md#optionalpropertiestoundefined)
+- [OptionalStyle](types_object.md#optionalstyle)
+- [OptionalUndefinedStyle](types_object.md#optionalundefinedstyle)
 - [StrictOmit](types_object.md#strictomit)
+- [UndefinedStyle](types_object.md#undefinedstyle)
 
 ## Type aliases
 
@@ -58,21 +58,9 @@ ___
 
 ___
 
-### OptionalPropertiesToOptional
+### OptionalStyle
 
-Ƭ **OptionalPropertiesToOptional**<`T`\>: [`Join4`](types_object.md#join4)<{ [K in WritableDefindKeys<T\>]: T[K] }, { [K in WritableUndefindKeys<T\>]?: Exclude<T[K], undefined\> }, { readonly [K in ReadonlyDefinedKeys<T\>]: T[K] }, { readonly [K in ReadonlyUndefinedKeys<T\>]?: Exclude<T[K], undefined\> }\>
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
-
-___
-
-### OptionalPropertiesToOptionalUndefined
-
-Ƭ **OptionalPropertiesToOptionalUndefined**<`T`\>: [`Join4`](types_object.md#join4)<{ [K in WritableDefindKeys<T\>]: T[K] }, { [K in WritableUndefindKeys<T\>]?: T[K] }, { readonly [K in ReadonlyDefinedKeys<T\>]: T[K] }, { readonly [K in ReadonlyUndefinedKeys<T\>]?: T[K] }\>
+Ƭ **OptionalStyle**<`T`\>: [`Join4`](types_object.md#join4)<{ [K in WritableDefindKeys<T\>]: T[K] }, { [K in WritableUndefindKeys<T\>]?: Exclude<T[K], undefined\> }, { readonly [K in ReadonlyDefinedKeys<T\>]: T[K] }, { readonly [K in ReadonlyUndefinedKeys<T\>]?: Exclude<T[K], undefined\> }\>
 
 #### Type parameters
 
@@ -82,9 +70,9 @@ ___
 
 ___
 
-### OptionalPropertiesToUndefined
+### OptionalUndefinedStyle
 
-Ƭ **OptionalPropertiesToUndefined**<`T`\>: [`Join4`](types_object.md#join4)<{ [K in WritableDefindKeys<T\>]: T[K] }, { [K in WritableUndefindKeys<T\>]: T[K] \| undefined }, { readonly [K in ReadonlyDefinedKeys<T\>]: T[K] }, { readonly [K in ReadonlyUndefinedKeys<T\>]: T[K] \| undefined }\>
+Ƭ **OptionalUndefinedStyle**<`T`\>: [`Join4`](types_object.md#join4)<{ [K in WritableDefindKeys<T\>]: T[K] }, { [K in WritableUndefindKeys<T\>]?: T[K] }, { readonly [K in ReadonlyDefinedKeys<T\>]: T[K] }, { readonly [K in ReadonlyUndefinedKeys<T\>]?: T[K] }\>
 
 #### Type parameters
 
@@ -104,3 +92,15 @@ ___
 | :------ | :------ |
 | `T` | extends `object` |
 | `K` | extends keyof `T` |
+
+___
+
+### UndefinedStyle
+
+Ƭ **UndefinedStyle**<`T`\>: [`Join4`](types_object.md#join4)<{ [K in WritableDefindKeys<T\>]: T[K] }, { [K in WritableUndefindKeys<T\>]: T[K] \| undefined }, { readonly [K in ReadonlyDefinedKeys<T\>]: T[K] }, { readonly [K in ReadonlyUndefinedKeys<T\>]: T[K] \| undefined }\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |

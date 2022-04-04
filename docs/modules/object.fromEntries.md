@@ -14,7 +14,7 @@
 
 ### exhaustive
 
-▸ **exhaustive**<`K`, `V`\>(`entries`): [`TypedObject`](types_core.md#typedobject)<`K`, `V`\>
+▸ **exhaustive**<`K`, `V`\>(`entries`): [`WritableRecord`](types_core.md#writablerecord)<`K`, `V`\>
 
 Creates object from entries.
 
@@ -33,6 +33,6 @@ Creates object from entries.
 
 #### Returns
 
-[`TypedObject`](types_core.md#typedobject)<`K`, `V`\>
+[`WritableRecord`](types_core.md#writablerecord)<`K`, `V`\>
 
 Object.

@@ -28,10 +28,7 @@ export function ceil(value, precision) {
  * @param from - From.
  * @returns Ceiled value.
  */
-export function ceilStep(value, step, from = 0) {
-    return Math.ceil((value - from) / step) * step + from;
-}
-ceil.step = ceilStep;
+ceil.step = (value, step, from = 0) => Math.ceil((value - from) / step) * step + from;
 /**
  * Floors number to a given precision.
  *
@@ -51,10 +48,7 @@ export function floor(value, precision) {
  * @param from - From.
  * @returns Floored value.
  */
-export function floorStep(value, step, from = 0) {
-    return Math.floor((value - from) / step) * step + from;
-}
-floor.step = floorStep;
+floor.step = (value, step, from = 0) => Math.floor((value - from) / step) * step + from;
 /**
  * Limits value to be within [min, max] range.
  *
@@ -73,7 +67,6 @@ export function limit(value, min, max) {
  * @returns Root-mean-square deviation.
  */
 export function rootMeanSquareDeviation(...values) {
-    assert.toBeTrue(values.length > 0);
     const averageValue = average(...values);
     return Math.sqrt(sum(...values.map(value => (value - averageValue) ** 2)) / values.length);
 }
@@ -96,10 +89,7 @@ export function round(value, precision) {
  * @param from - From.
  * @returns Rounded value.
  */
-export function roundStep(value, step, from = 0) {
-    return Math.round((value - from) / step) * step + from;
-}
-round.step = roundStep;
+round.step = (value, step, from = 0) => Math.round((value - from) / step) * step + from;
 /**
  * Sums values.
  *

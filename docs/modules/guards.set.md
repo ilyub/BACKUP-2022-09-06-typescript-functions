@@ -6,36 +6,32 @@
 
 ## Table of contents
 
-### Variables
+### Functions
 
 - [of](guards.set.md#of)
 
-## Variables
+## Functions
 
 ### of
 
-• **of**: <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => value is ReadonlySet<T\>
-
-#### Type declaration
-
-▸ <`T`\>(`value`, `guard`): value is ReadonlySet<T\>
+▸ **of**<`T`\>(`value`, `guard`): value is ReadonlySet<T\>
 
 Checks that value type is Set\<T\>.
 
-##### Type parameters
+#### Type parameters
 
 | Name |
 | :------ |
 | `T` |
 
-##### Parameters
+#### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
 
-##### Returns
+#### Returns
 
 value is ReadonlySet<T\>
 

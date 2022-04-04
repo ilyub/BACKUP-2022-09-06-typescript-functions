@@ -1,6 +1,6 @@
 [Typescript functions](../index.md) / [Exports](../modules.md) / [array](../modules/array.md) / Reduce
 
-# Interface: Reduce<T, V\>
+# Interface: Reduce<T\>
 
 [array](../modules/array.md).Reduce
 
@@ -9,7 +9,6 @@
 | Name | Type |
 | :------ | :------ |
 | `T` | extends `object` |
-| `V` | extends `object` = `T` |
 
 ## Callable
 
@@ -17,13 +16,13 @@
 
 ▸ **Reduce**(`obj`): `unknown`
 
-Reduces object for comparison.
+Reduces object.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `obj` | `T` \| `V` | Object. |
+| `obj` | `T` | Object. |
 
 #### Returns
 

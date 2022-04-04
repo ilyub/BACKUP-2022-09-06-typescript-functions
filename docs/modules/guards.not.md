@@ -11,7 +11,6 @@
 - [array](guards.not.md#array)
 - [boolean](guards.not.md#boolean)
 - [empty](guards.not.md#empty)
-- [factory](guards.not.md#factory)
 - [false](guards.not.md#false)
 - [indexedObject](guards.not.md#indexedobject)
 - [map](guards.not.md#map)
@@ -25,122 +24,440 @@
 - [true](guards.not.md#true)
 - [undefined](guards.not.md#undefined)
 
+### Functions
+
+- [factory](guards.not.md#factory)
+
 ## Variables
 
 ### array
 
-• **array**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<[`unknowns`](types_core.md#unknowns)\>
-
-___
-
-### boolean
-
-• **boolean**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`boolean`\>
-
-___
-
-### empty
-
-• **empty**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<[`empty`](types_core.md#empty)\>
-
-___
-
-### factory
-
-• **factory**: <T\>(`guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`T`\>
+• **array**: <V\>(`value`: `V`) => value is Exclude<V, unknowns\>
 
 #### Type declaration
 
-▸ <`T`\>(`guard`): [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`T`\>
-
-Creates guard for type not T.
+▸ <`V`\>(`value`): value is Exclude<V, unknowns\>
 
 ##### Type parameters
 
 | Name |
 | :------ |
-| `T` |
+| `V` |
 
 ##### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
+| Name | Type |
+| :------ | :------ |
+| `value` | `V` |
 
 ##### Returns
 
-[`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`T`\>
+value is Exclude<V, unknowns\>
 
-Guard for type not T.
+___
+
+### boolean
+
+• **boolean**: <V\>(`value`: `V`) => value is Exclude<V, boolean\>
+
+#### Type declaration
+
+▸ <`V`\>(`value`): value is Exclude<V, boolean\>
+
+##### Type parameters
+
+| Name |
+| :------ |
+| `V` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `V` |
+
+##### Returns
+
+value is Exclude<V, boolean\>
+
+___
+
+### empty
+
+• **empty**: <V\>(`value`: `V`) => value is Exclude<V, empty\>
+
+#### Type declaration
+
+▸ <`V`\>(`value`): value is Exclude<V, empty\>
+
+##### Type parameters
+
+| Name |
+| :------ |
+| `V` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `V` |
+
+##### Returns
+
+value is Exclude<V, empty\>
 
 ___
 
 ### false
 
-• **false**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<``false``\>
+• **false**: <V\>(`value`: `V`) => value is Exclude<V, false\>
+
+#### Type declaration
+
+▸ <`V`\>(`value`): value is Exclude<V, false\>
+
+##### Type parameters
+
+| Name |
+| :------ |
+| `V` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `V` |
+
+##### Returns
+
+value is Exclude<V, false\>
 
 ___
 
 ### indexedObject
 
-• **indexedObject**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`Readonly`<[`TypedObject`](types_core.md#typedobject)<`PropertyKey`, `unknown`\>\>\>
+• **indexedObject**: <V\>(`value`: `V`) => value is Exclude<V, IndexedObject<unknown\>\>
+
+#### Type declaration
+
+▸ <`V`\>(`value`): value is Exclude<V, IndexedObject<unknown\>\>
+
+##### Type parameters
+
+| Name |
+| :------ |
+| `V` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `V` |
+
+##### Returns
+
+value is Exclude<V, IndexedObject<unknown\>\>
 
 ___
 
 ### map
 
-• **map**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`ReadonlyMap`<`unknown`, `unknown`\>\>
+• **map**: <V\>(`value`: `V`) => value is Exclude<V, ReadonlyMap<unknown, unknown\>\>
+
+#### Type declaration
+
+▸ <`V`\>(`value`): value is Exclude<V, ReadonlyMap<unknown, unknown\>\>
+
+##### Type parameters
+
+| Name |
+| :------ |
+| `V` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `V` |
+
+##### Returns
+
+value is Exclude<V, ReadonlyMap<unknown, unknown\>\>
 
 ___
 
 ### null
 
-• **null**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<``null``\>
+• **null**: <V\>(`value`: `V`) => value is Exclude<V, null\>
+
+#### Type declaration
+
+▸ <`V`\>(`value`): value is Exclude<V, null\>
+
+##### Type parameters
+
+| Name |
+| :------ |
+| `V` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `V` |
+
+##### Returns
+
+value is Exclude<V, null\>
 
 ___
 
 ### numStr
 
-• **numStr**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<[`NumStr`](types_core.md#numstr)\>
+• **numStr**: <V\>(`value`: `V`) => value is Exclude<V, NumStr\>
+
+#### Type declaration
+
+▸ <`V`\>(`value`): value is Exclude<V, NumStr\>
+
+##### Type parameters
+
+| Name |
+| :------ |
+| `V` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `V` |
+
+##### Returns
+
+value is Exclude<V, NumStr\>
 
 ___
 
 ### number
 
-• **number**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`number`\>
+• **number**: <V\>(`value`: `V`) => value is Exclude<V, number\>
+
+#### Type declaration
+
+▸ <`V`\>(`value`): value is Exclude<V, number\>
+
+##### Type parameters
+
+| Name |
+| :------ |
+| `V` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `V` |
+
+##### Returns
+
+value is Exclude<V, number\>
 
 ___
 
 ### object
 
-• **object**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`object`\>
+• **object**: <V\>(`value`: `V`) => value is Exclude<V, object\>
+
+#### Type declaration
+
+▸ <`V`\>(`value`): value is Exclude<V, object\>
+
+##### Type parameters
+
+| Name |
+| :------ |
+| `V` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `V` |
+
+##### Returns
+
+value is Exclude<V, object\>
 
 ___
 
 ### set
 
-• **set**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`ReadonlySet`<`unknown`\>\>
+• **set**: <V\>(`value`: `V`) => value is Exclude<V, ReadonlySet<unknown\>\>
+
+#### Type declaration
+
+▸ <`V`\>(`value`): value is Exclude<V, ReadonlySet<unknown\>\>
+
+##### Type parameters
+
+| Name |
+| :------ |
+| `V` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `V` |
+
+##### Returns
+
+value is Exclude<V, ReadonlySet<unknown\>\>
 
 ___
 
 ### string
 
-• **string**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`string`\>
+• **string**: <V\>(`value`: `V`) => value is Exclude<V, string\>
+
+#### Type declaration
+
+▸ <`V`\>(`value`): value is Exclude<V, string\>
+
+##### Type parameters
+
+| Name |
+| :------ |
+| `V` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `V` |
+
+##### Returns
+
+value is Exclude<V, string\>
 
 ___
 
 ### symbol
 
-• **symbol**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`symbol`\>
+• **symbol**: <V\>(`value`: `V`) => value is Exclude<V, symbol\>
+
+#### Type declaration
+
+▸ <`V`\>(`value`): value is Exclude<V, symbol\>
+
+##### Type parameters
+
+| Name |
+| :------ |
+| `V` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `V` |
+
+##### Returns
+
+value is Exclude<V, symbol\>
 
 ___
 
 ### true
 
-• **true**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<``true``\>
+• **true**: <V\>(`value`: `V`) => value is Exclude<V, true\>
+
+#### Type declaration
+
+▸ <`V`\>(`value`): value is Exclude<V, true\>
+
+##### Type parameters
+
+| Name |
+| :------ |
+| `V` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `V` |
+
+##### Returns
+
+value is Exclude<V, true\>
 
 ___
 
 ### undefined
 
-• **undefined**: [`ExclusionGuard`](../interfaces/guards.ExclusionGuard.md)<`undefined`\>
+• **undefined**: <V\>(`value`: `V`) => value is Exclude<V, undefined\>
+
+#### Type declaration
+
+▸ <`V`\>(`value`): value is Exclude<V, undefined\>
+
+##### Type parameters
+
+| Name |
+| :------ |
+| `V` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `V` |
+
+##### Returns
+
+value is Exclude<V, undefined\>
+
+## Functions
+
+### factory
+
+▸ **factory**<`T`\>(`guard`): <V\>(`value`: `V`) => value is Exclude<V, T\>
+
+Creates guard for type not T.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
+
+#### Returns
+
+`fn`
+
+Guard for type not T.
+
+▸ <`V`\>(`value`): value is Exclude<V, T\>
+
+##### Type parameters
+
+| Name |
+| :------ |
+| `V` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `V` |
+
+##### Returns
+
+value is Exclude<V, T\>

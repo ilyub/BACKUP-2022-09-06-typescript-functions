@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.unshift2 = exports.unshift = exports.push2 = exports.push = exports.get2 = exports.get = void 0;
 /**
- * Returns array from array map.
+ * Extracts array from array map.
  *
  * @param key - Key.
  * @param map - Array map.
@@ -14,7 +14,7 @@ function get(key, map) {
 }
 exports.get = get;
 /**
- * Returns array from array map.
+ * Extracts array from array map.
  *
  * @param key1 - Key 1.
  * @param key2 - Key 2.

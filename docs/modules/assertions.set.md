@@ -29,7 +29,7 @@ Asserts that value type is Set\<T\>.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
 | `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
 
 #### Returns

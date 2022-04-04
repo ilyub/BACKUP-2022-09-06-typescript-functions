@@ -10,14 +10,12 @@
 
 ### Interfaces
 
-- [Assign](../interfaces/object.Assign.md)
-- [Callback](../interfaces/object.Callback.md)
 - [CompareFn](../interfaces/object.CompareFn.md)
-- [DefineProperty](../interfaces/object.DefineProperty.md)
 - [Descriptor](../interfaces/object.Descriptor.md)
 - [Entries](../interfaces/object.Entries.md)
 - [Extend](../interfaces/object.Extend.md)
 - [Keys](../interfaces/object.Keys.md)
+- [Predicate](../interfaces/object.Predicate.md)
 - [Values](../interfaces/object.Values.md)
 
 ### Functions
@@ -31,6 +29,7 @@
 - [filter](object.md#filter)
 - [freeze](object.md#freeze)
 - [fromEntries](object.md#fromentries)
+- [get](object.md#get)
 - [getPrototypeOf](object.md#getprototypeof)
 - [hasOwnProp](object.md#hasownprop)
 - [keys](object.md#keys)
@@ -50,6 +49,8 @@
 
 ▸ **assign**<`T`\>(`mutableTarget`, ...`sources`): `T`
 
+Typed version of Object.assign.
+
 #### Type parameters
 
 | Name | Type |
@@ -58,14 +59,16 @@
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `mutableTarget` | `T` |
-| `...sources` | `Partial`<`T`\>[] |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `mutableTarget` | `T` | Target. |
+| `...sources` | `Partial`<`T`\>[] | Sources. |
 
 #### Returns
 
 `T`
+
+Target.
 
 ___
 
@@ -99,6 +102,8 @@ ___
 
 ▸ **defineProperty**<`T`, `K`\>(`obj`, `key`, `descriptor`): `void`
 
+Typed version of Object.defineProperty.
+
 #### Type parameters
 
 | Name | Type |
@@ -108,11 +113,11 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `obj` | `T` |
-| `key` | `K` |
-| `descriptor` | [`Descriptor`](../interfaces/object.Descriptor.md)<`T`, `K`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | `T` | Object. |
+| `key` | `K` | Key. |
+| `descriptor` | [`Descriptor`](../interfaces/object.Descriptor.md)<`T`, `K`\> | Descriptor. |
 
 #### Returns
 
@@ -124,8 +129,6 @@ ___
 
 ▸ **entries**<`K`, `V`\>(`obj`): [`K`, `V`][]
 
-Typed version of Object.entries.
-
 #### Type parameters
 
 | Name | Type |
@@ -135,19 +138,15 @@ Typed version of Object.entries.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `obj` | [`PartialTypedObject`](types_core.md#partialtypedobject)<`K`, `V`\> | Object. |
+| Name | Type |
+| :------ | :------ |
+| `obj` | [`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\> |
 
 #### Returns
 
 [`K`, `V`][]
 
-Object entries.
-
 ▸ **entries**<`T`\>(`obj`): [`string` & keyof `T`, `T`[`string` & keyof `T` & `number` & keyof `T`]][]
-
-Typed version of Object.entries.
 
 #### Type parameters
 
@@ -157,21 +156,19 @@ Typed version of Object.entries.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `obj` | `T` | Object. |
+| Name | Type |
+| :------ | :------ |
+| `obj` | `T` |
 
 #### Returns
 
 [`string` & keyof `T`, `T`[`string` & keyof `T` & `number` & keyof `T`]][]
 
-Object entries.
-
 ___
 
 ### every
 
-▸ **every**<`T`\>(`obj`, `callback`): `boolean`
+▸ **every**<`T`\>(`obj`, `predicate`): `boolean`
 
 Checks that every object property satisfies condition.
 
@@ -186,7 +183,7 @@ Checks that every object property satisfies condition.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `obj` | `T` | Object. |
-| `callback` | [`Callback`](../interfaces/object.Callback.md)<`T`\> | Callback. |
+| `predicate` | [`Predicate`](../interfaces/object.Predicate.md)<`T`\> | Predicate. |
 
 #### Returns
 
@@ -268,9 +265,9 @@ ___
 
 ### filter
 
-▸ **filter**<`T`\>(`obj`, `callback`): `Partial`<`T`\>
+▸ **filter**<`T`\>(`obj`, `predicate`): `Partial`<`T`\>
 
-Filters object by callback.
+Filters object by predicate.
 
 #### Type parameters
 
@@ -283,7 +280,7 @@ Filters object by callback.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `obj` | `T` | Object. |
-| `callback` | [`Callback`](../interfaces/object.Callback.md)<`T`\> | Callback. |
+| `predicate` | [`Predicate`](../interfaces/object.Predicate.md)<`T`\> | Predicate. |
 
 #### Returns
 
@@ -321,7 +318,7 @@ ___
 
 ### fromEntries
 
-▸ **fromEntries**<`K`, `V`\>(`entries`): [`PartialTypedObject`](types_core.md#partialtypedobject)<`K`, `V`\>
+▸ **fromEntries**<`K`, `V`\>(`entries`): [`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\>
 
 Creates object from entries.
 
@@ -340,9 +337,39 @@ Creates object from entries.
 
 #### Returns
 
-[`PartialTypedObject`](types_core.md#partialtypedobject)<`K`, `V`\>
+[`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\>
 
 Object.
+
+___
+
+### get
+
+▸ **get**<`T`\>(`obj`, `key`, `guard`): `T`
+
+Returns object property.
+
+**`throws`** AssertionError otherwise.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | `object` | Object. |
+| `key` | `PropertyKey` | Key. |
+| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
+
+#### Returns
+
+`T`
+
+Object property if its type is T.
 
 ___
 
@@ -376,7 +403,7 @@ Checks that object has property.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `key` | `PropertyKey` | Property key. |
+| `key` | `PropertyKey` | Key. |
 | `obj` | `object` | Object. |
 
 #### Returns
@@ -402,7 +429,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `obj` | [`PartialTypedObject`](types_core.md#partialtypedobject)<`K`, `V`\> |
+| `obj` | [`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\> |
 
 #### Returns
 
@@ -430,7 +457,7 @@ ___
 
 ### map
 
-▸ **map**<`K`, `V`, `R`\>(`obj`, `callback`): [`TypedObject`](types_core.md#typedobject)<`K`, `R`\>
+▸ **map**<`K`, `V`, `R`\>(`obj`, `callback`): [`WritableRecord`](types_core.md#writablerecord)<`K`, `R`\>
 
 Applies callback to each property.
 
@@ -446,12 +473,12 @@ Applies callback to each property.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `obj` | [`TypedObject`](types_core.md#typedobject)<`K`, `V`\> | Object. |
+| `obj` | [`Rec`](types_core.md#rec)<`K`, `V`\> | Object. |
 | `callback` | (`value`: `V`, `key`: `K`) => `R` | Callback. |
 
 #### Returns
 
-[`TypedObject`](types_core.md#typedobject)<`K`, `R`\>
+[`WritableRecord`](types_core.md#writablerecord)<`K`, `R`\>
 
 New object.
 
@@ -468,7 +495,7 @@ If more than one object has the same key, respective values are combined into ar
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `...objects` | `Readonly`<[`TypedObject`](types_core.md#typedobject)<`PropertyKey`, `unknown`\>\>[] | Objects. |
+| `...objects` | [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>[] | Objects. |
 
 #### Returns
 
@@ -489,26 +516,26 @@ Removes keys from object.
 | Name | Type |
 | :------ | :------ |
 | `T` | extends `object` |
-| `K` | extends `string` \| `number` \| `symbol` |
+| `K` | extends `string` |
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `obj` | `T` | Object. |
-| `...exclude` | `K`[] | Keys to remove. |
+| `...exclude` | `K`[] | Keys to omit. |
 
 #### Returns
 
 [`StrictOmit`](types_object.md#strictomit)<`T`, `K`\>
 
-New object with given keys omitted.
+New object.
 
 ___
 
 ### removeUndefinedKeys
 
-▸ **removeUndefinedKeys**<`T`\>(`obj`): [`OptionalPropertiesToOptional`](types_object.md#optionalpropertiestooptional)<`T`\>
+▸ **removeUndefinedKeys**<`T`\>(`obj`): [`OptionalStyle`](types_object.md#optionalstyle)<`T`\>
 
 Removes undefined keys.
 
@@ -526,7 +553,7 @@ Removes undefined keys.
 
 #### Returns
 
-[`OptionalPropertiesToOptional`](types_object.md#optionalpropertiestooptional)<`T`\>
+[`OptionalStyle`](types_object.md#optionalstyle)<`T`\>
 
 New object with undefined keys removed.
 
@@ -554,7 +581,7 @@ ___
 
 ### some
 
-▸ **some**<`T`\>(`obj`, `callback`): `boolean`
+▸ **some**<`T`\>(`obj`, `predicate`): `boolean`
 
 Checks that some object property satisfies condition.
 
@@ -569,7 +596,7 @@ Checks that some object property satisfies condition.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `obj` | `T` | Object. |
-| `callback` | [`Callback`](../interfaces/object.Callback.md)<`T`\> | Callback. |
+| `predicate` | [`Predicate`](../interfaces/object.Predicate.md)<`T`\> | Predicate. |
 
 #### Returns
 
@@ -580,6 +607,30 @@ _True_ if some object property satisfies condition, _false_ otherwise.
 ___
 
 ### sort
+
+▸ **sort**<`K`, `V`\>(`obj`, `compareFn?`): [`WritableRecord`](types_core.md#writablerecord)<`K`, `V`\>
+
+Sorts object.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `string` |
+| `V` | `V` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | [`Rec`](types_core.md#rec)<`K`, `V`\> | Object. |
+| `compareFn?` | [`CompareFn`](../interfaces/object.CompareFn.md)<[`Rec`](types_core.md#rec)<`K`, `V`\>\> | Comparison function. |
+
+#### Returns
+
+[`WritableRecord`](types_core.md#writablerecord)<`K`, `V`\>
+
+New object.
 
 ▸ **sort**<`T`\>(`obj`, `compareFn?`): `T`
 
@@ -647,7 +698,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `obj` | [`PartialTypedObject`](types_core.md#partialtypedobject)<`K`, `V`\> |
+| `obj` | [`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\> |
 
 #### Returns
 

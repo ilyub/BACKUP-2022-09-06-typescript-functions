@@ -14,13 +14,10 @@
 
 - [average](number.md#average)
 - [ceil](number.md#ceil)
-- [ceilStep](number.md#ceilstep)
 - [floor](number.md#floor)
-- [floorStep](number.md#floorstep)
 - [limit](number.md#limit)
 - [rootMeanSquareDeviation](number.md#rootmeansquaredeviation)
 - [round](number.md#round)
-- [roundStep](number.md#roundstep)
 - [sum](number.md#sum)
 
 ## Functions
@@ -66,28 +63,6 @@ Ceiled value.
 
 ___
 
-### ceilStep
-
-▸ **ceilStep**(`value`, `step`, `from?`): `number`
-
-Ceils number.
-
-#### Parameters
-
-| Name | Type | Default value | Description |
-| :------ | :------ | :------ | :------ |
-| `value` | `number` | `undefined` | Value. |
-| `step` | `number` | `undefined` | Step. |
-| `from` | `number` | `0` | From. |
-
-#### Returns
-
-`number`
-
-Ceiled value.
-
-___
-
 ### floor
 
 ▸ **floor**(`value`, `precision`): `number`
@@ -100,28 +75,6 @@ Floors number to a given precision.
 | :------ | :------ | :------ |
 | `value` | `number` | Value. |
 | `precision` | `number` | The number of digits to keep. |
-
-#### Returns
-
-`number`
-
-Floored value.
-
-___
-
-### floorStep
-
-▸ **floorStep**(`value`, `step`, `from?`): `number`
-
-Floors number.
-
-#### Parameters
-
-| Name | Type | Default value | Description |
-| :------ | :------ | :------ | :------ |
-| `value` | `number` | `undefined` | Value. |
-| `step` | `number` | `undefined` | Step. |
-| `from` | `number` | `0` | From. |
 
 #### Returns
 
@@ -185,28 +138,6 @@ Rounds number to a given precision.
 | :------ | :------ | :------ |
 | `value` | `number` | Value. |
 | `precision` | `number` | The number of digits to keep. |
-
-#### Returns
-
-`number`
-
-Rounded value.
-
-___
-
-### roundStep
-
-▸ **roundStep**(`value`, `step`, `from?`): `number`
-
-Rounds number.
-
-#### Parameters
-
-| Name | Type | Default value | Description |
-| :------ | :------ | :------ | :------ |
-| `value` | `number` | `undefined` | Value. |
-| `step` | `number` | `undefined` | Step. |
-| `from` | `number` | `0` | From. |
 
 #### Returns
 
