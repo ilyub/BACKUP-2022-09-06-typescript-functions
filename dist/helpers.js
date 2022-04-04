@@ -65,7 +65,7 @@ exports.createFacade = createFacade;
  * @returns Validation object.
  */
 function createValidationObject(source) {
-    if (o.entries(source).every(([key, value]) => key === value))
+    if (o.entries(source).every(([key, value]) => key === cast.string(value)))
         return new Set(o.values(source));
     throw new Error("Invalid source");
 }

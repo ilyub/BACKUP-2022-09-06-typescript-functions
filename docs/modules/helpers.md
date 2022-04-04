@@ -124,7 +124,7 @@ Creates validation object.
 
 | Name | Type |
 | :------ | :------ |
-| `T` | extends `string` |
+| `T` | extends [`NumStr`](types_core.md#numstr) |
 
 #### Parameters
 

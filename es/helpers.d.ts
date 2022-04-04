@@ -1,5 +1,5 @@
 import * as is from "./guards";
-import type { Rec } from "./types/core";
+import type { NumStr, Rec } from "./types/core";
 import type { Join2 } from "./types/object";
 export declare type Facade<I, E = unknown> = E & FacadeOwnMethods<I> & I;
 export interface FacadeOwnMethods<I> {
@@ -34,7 +34,7 @@ export declare function createFacade<I extends object, E = unknown>(name: string
  * @param source - Source.
  * @returns Validation object.
  */
-export declare function createValidationObject<T extends string>(source: Rec<T, T>): ValidationObject<T>;
+export declare function createValidationObject<T extends NumStr>(source: Rec<T, T>): ValidationObject<T>;
 /**
  * Generates resource on demand.
  *
