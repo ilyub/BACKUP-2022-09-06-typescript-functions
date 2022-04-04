@@ -39,7 +39,7 @@
     "update-package-force-skylib": "ncu --dep peer --filter @skylib/* --upgrade"
   },
   "devDependencies": {
-    "@skylib/config": "^1.1.0",
+    "@skylib/config": "^1.2.0",
     "@skylib/eslint-plugin": "^0.1.17",
     "@skylib/typescript-types": "^0.1.2"
   },
@@ -52,8 +52,7 @@
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
     "reflect-metadata": "^0.1.13",
-    "ts-toolbelt": "^9.6.0",
-    "tslib": "^2.3.1"
+    "ts-toolbelt": "^9.6.0"
   },
   "engines": {
     "node": ">=14.0.0",
