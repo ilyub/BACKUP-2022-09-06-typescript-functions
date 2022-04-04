@@ -82,11 +82,21 @@ test("createFacade: Object", () => {
 });
 
 test("createValidationObject", () => {
-  type Enum = "a" | 1;
+  {
+    const source = { a: "a", b: "b" };
 
-  const error = new Error("Invalid source");
+    const expected = new Set(["a", "b"]);
 
-  expect(() => createValidationObject<Enum>({ 1: "a", a: 1 })).toThrow(error);
+    expect(createValidationObject(source)).toStrictEqual(expected);
+  }
+
+  {
+    const source = { a: "b", b: "a" };
+
+    const error = new Error("Invalid source");
+
+    expect(() => createValidationObject(source)).toThrow(error);
+  }
 });
 
 test("onDemand", () => {
@@ -237,8 +247,6 @@ test("wait", async () => {
 });
 
 test("wrapProxyHandler: doDefault", () => {
-  expect.hasAssertions();
-
   class TestClass {
     public x = 1;
   }
@@ -253,7 +261,7 @@ test("wrapProxyHandler: doDefault", () => {
 
   const proxyObjectDelete = new Proxy(new TestClass(), handler);
 
-  const proxyObjectFrozen = new Proxy(new TestClass(), handler);
+  const proxyObjectFreeze = new Proxy(new TestClass(), handler);
 
   const descriptor = {
     configurable: true,
@@ -276,7 +284,7 @@ test("wrapProxyHandler: doDefault", () => {
   expect(reflect.has(proxyObject, "x")).toBe(true);
   expect(reflect.isExtensible(proxyObject)).toBe(true);
   expect(reflect.ownKeys(proxyObject)).toStrictEqual(["x"]);
-  expect(reflect.preventExtensions(proxyObjectFrozen)).toBe(true);
+  expect(reflect.preventExtensions(proxyObjectFreeze)).toBe(true);
   expect(reflect.set(proxyObject, "x", 1)).toBe(true);
   expect(reflect.setPrototypeOf(proxyObject, null)).toBe(true);
 });
@@ -296,7 +304,9 @@ test("wrapProxyHandler: throw", () => {
 
   const proxyObject = new Proxy(new TestClass(), handler);
 
-  const proxyObjectFrozen = new Proxy(new TestClass(), handler);
+  const proxyObjectDelete = new Proxy(new TestClass(), handler);
+
+  const proxyObjectFreeze = new Proxy(new TestClass(), handler);
 
   const subtests = {
     apply(): void {
@@ -309,7 +319,7 @@ test("wrapProxyHandler: throw", () => {
       reflect.defineProperty(proxyObject, "x", {});
     },
     deleteProperty(): void {
-      reflect.deleteProperty(proxyObject, "x");
+      reflect.deleteProperty(proxyObjectDelete, "x");
     },
     get(): void {
       reflect.get(proxyObject, "x");
@@ -330,7 +340,7 @@ test("wrapProxyHandler: throw", () => {
       reflect.ownKeys(proxyObject);
     },
     preventExtensions(): void {
-      reflect.preventExtensions(proxyObjectFrozen);
+      reflect.preventExtensions(proxyObjectFreeze);
     },
     set(): void {
       reflect.set(proxyObject, "x", 1);

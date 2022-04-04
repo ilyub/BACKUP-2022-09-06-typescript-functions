@@ -20,7 +20,7 @@ export function add<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T> {
  * @param value - Value.
  * @returns Set with value removed.
  */
-export function _delete<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T> {
+function _delete<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T> {
   const result = new Set(set);
 
   result.delete(value);

@@ -202,6 +202,7 @@ test("reverse", () => {
 
 test("sort", () => {
   expect(a.sort([1, 3, 2])).toStrictEqual([1, 2, 3]);
+  expect(a.sort([1, 3, 2], (x, y) => x - y)).toStrictEqual([1, 2, 3]);
   expect(a.sort([1, 3, 2], (x, y) => y - x)).toStrictEqual([3, 2, 1]);
 });
 
@@ -233,6 +234,7 @@ test.each([
   }
 ])("toggleBy", ({ arr, expected, value }) => {
   expect(a.toggleBy(arr, value, "id")).toStrictEqual(expected);
+  expect(a.toggleBy(arr, value, reduce)).toStrictEqual(expected);
 });
 
 test("truncate", () => {

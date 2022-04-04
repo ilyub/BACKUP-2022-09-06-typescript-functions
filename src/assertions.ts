@@ -1,7 +1,6 @@
 import { AssertionError } from "./errors/AssertionError";
 import * as is from "./guards";
 import type { ValidationObject } from "./helpers";
-// eslint-disable-next-line @skylib/consistent-import -- Ok
 import type * as types from "./types/core";
 import type { Constructor } from "./types/function";
 
@@ -9,21 +8,11 @@ export type ErrorArg = ErrorArgFn | string;
 
 export interface ErrorArgFn {
   /**
-   * Creates error object.
+   * Creates error instance.
    *
-   * @returns Error object.
+   * @returns Error instance.
    */
   (): unknown;
-}
-
-/**
- * Converts error message/object to assertion error argument.
- *
- * @param strOrError - Error message/object.
- * @returns Assertion error argument.
- */
-export function toErrorArg(strOrError: unknown): ErrorArg {
-  return is.string(strOrError) ? strOrError : (): unknown => strOrError;
 }
 
 /**
@@ -281,23 +270,6 @@ export function object(
 }
 
 /**
- * Asserts that value type is T.
- *
- * @param value - Value.
- * @param required - Guards for required properties.
- * @param optional - Guards for optional properties.
- * @param error - Error.
- */
-object.of = <R extends object, O extends object>(
-  value: unknown,
-  required: is.Guards<R, keyof R>,
-  optional: is.Guards<O, keyof O>,
-  error?: ErrorArg
-): asserts value is is.ObjectOfReturn<R, O> => {
-  byGuard(value, is.factory(is.object.of, required, optional), error);
-};
-
-/**
  * Asserts that value type is Set.
  *
  * @param value - Value.
@@ -314,7 +286,7 @@ export function set(
  * Asserts that value type is Set\<T\>.
  *
  * @param value - Value.
- * @param guard - Guard.
+ * @param guard - Guard for type T.
  * @param error - Error.
  */
 set.of = <T>(
@@ -336,6 +308,19 @@ export function string(
   error?: ErrorArg
 ): asserts value is string {
   byGuard(value, is.string, error);
+}
+
+/**
+ * Asserts that value is a string.
+ *
+ * @param value - Value.
+ * @param error - Error.
+ */
+export function stringU(
+  value: unknown,
+  error?: ErrorArg
+): asserts value is types.stringU {
+  byGuard(value, is.stringU, error);
 }
 
 /**

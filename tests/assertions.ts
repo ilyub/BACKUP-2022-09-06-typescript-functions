@@ -1,6 +1,5 @@
 import * as assert from "@/assertions";
 import { AssertionError } from "@/errors/AssertionError";
-import { InternalError } from "@/errors/InternalError";
 import * as fn from "@/function";
 import * as is from "@/guards";
 import { createValidationObject } from "@/helpers";
@@ -13,24 +12,8 @@ function createSubtest(assertion: Callable, ...args: unknowns) {
   };
 }
 
-test.each([
-  { expected: new AssertionError() },
-  {
-    error: assert.toErrorArg("Error message"),
-    expected: new Error("Error message")
-  },
-  {
-    error: assert.toErrorArg(new InternalError()),
-    expected: new InternalError()
-  }
-])("toErrorArg", ({ error, expected }) => {
-  expect(() => {
-    assert.string(1, error);
-  }).toThrow(expected);
-});
-
 test("not", () => {
-  expect(() => assert.not()).toThrow(new Error("Not implemented"));
+  expect(assert.not).toThrow(new Error("Not implemented"));
 });
 
 test("array", () => {
@@ -56,6 +39,19 @@ test("boolean", () => {
   expect(subtest(false)).not.toThrow();
   expect(subtest(1)).toThrow(new AssertionError());
   expect(subtest(undefined)).toThrow(new AssertionError());
+});
+
+test.each([
+  { expected: new AssertionError() },
+  { error: "Test error", expected: new AssertionError("Test error") },
+  {
+    error: (): Error => new Error("Test error"),
+    expected: new Error("Test error")
+  }
+])("byGuard", ({ error, expected }) => {
+  expect(() => {
+    assert.byGuard(1, is.string, error);
+  }).toThrow(expected);
 });
 
 test("callable", () => {
@@ -86,13 +82,10 @@ test("not.empty", () => {
 });
 
 test("enumeration", () => {
-  type TestEnum = "a" | 1;
-
-  const TestEnumVO = createValidationObject<TestEnum>({ 1: 1, a: "a" });
+  const TestEnumVO = createValidationObject({ a: "a" });
 
   const subtest = createSubtest(assert.enumeration, TestEnumVO);
 
-  expect(subtest(1)).not.toThrow();
   expect(subtest("a")).not.toThrow();
   expect(subtest("b")).toThrow(new AssertionError());
   expect(subtest(undefined)).toThrow(new AssertionError());
@@ -161,6 +154,7 @@ test("numStr", () => {
 
   expect(subtest(1)).not.toThrow();
   expect(subtest("a")).not.toThrow();
+  expect(subtest(Number.NaN)).toThrow(new AssertionError());
   expect(subtest(true)).toThrow(new AssertionError());
   expect(subtest(undefined)).toThrow(new AssertionError());
 });
@@ -170,6 +164,7 @@ test("number", () => {
 
   expect(subtest(1)).not.toThrow();
   expect(subtest("a")).toThrow(new AssertionError());
+  expect(subtest(Number.NaN)).toThrow(new AssertionError());
   expect(subtest(true)).toThrow(new AssertionError());
   expect(subtest(undefined)).toThrow(new AssertionError());
 });
@@ -177,24 +172,11 @@ test("number", () => {
 test("object", () => {
   const subtest = createSubtest(assert.object);
 
-  expect(subtest({})).not.toThrow();
-  expect(subtest(1)).toThrow(new AssertionError());
-  expect(subtest(null)).toThrow(new AssertionError());
-  expect(subtest(undefined)).toThrow(new AssertionError());
-});
-
-test("object.of", () => {
-  const subtest = createSubtest(
-    assert.object.of,
-    { num: is.number },
-    { str: is.string }
-  );
-
   expect(subtest({ num: 1, str: "a" })).not.toThrow();
   expect(subtest({ num: 1 })).not.toThrow();
-  expect(subtest({ num: true, str: "a" })).toThrow(new AssertionError());
-  expect(subtest({ num: 1, str: true })).toThrow(new AssertionError());
-  expect(subtest({ str: "a" })).toThrow(new AssertionError());
+  expect(subtest({ num: 1, str: true })).not.toThrow();
+  expect(subtest({ num: true, str: "a" })).not.toThrow();
+  expect(subtest({ str: "a" })).not.toThrow();
   expect(subtest(1)).toThrow(new AssertionError());
   expect(subtest(null)).toThrow(new AssertionError());
   expect(subtest(undefined)).toThrow(new AssertionError());
@@ -223,8 +205,17 @@ test("string", () => {
 
   expect(subtest("a")).not.toThrow();
   expect(subtest("")).not.toThrow();
-  expect(subtest(1)).toThrow(new AssertionError());
   expect(subtest(undefined)).toThrow(new AssertionError());
+  expect(subtest(1)).toThrow(new AssertionError());
+});
+
+test("stringU", () => {
+  const subtest = createSubtest(assert.stringU);
+
+  expect(subtest("a")).not.toThrow();
+  expect(subtest(undefined)).not.toThrow();
+  expect(subtest("")).toThrow(new AssertionError());
+  expect(subtest(1)).toThrow(new AssertionError());
 });
 
 test("symbol", () => {

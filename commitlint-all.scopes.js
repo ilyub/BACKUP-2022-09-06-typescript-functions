@@ -1,1 +1,1 @@
-module.exports = [...require("./commitlint.scopes"), "timer"];
+module.exports = [...require("./commitlint.scopes"), "locales"];

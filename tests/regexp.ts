@@ -6,9 +6,11 @@ test("addFlags", () => {
 });
 
 test("escapeString", () => {
-  expect(regexp.escapeString("$()*+.?[\\]^{|}-")).toBe(
-    "\\$\\(\\)\\*\\+\\.\\?\\[\\\\\\]\\^\\{\\|\\}\\x2d"
-  );
+  const str = "$()*+.?[\\]^{|}-";
+
+  const expected = "\\$\\(\\)\\*\\+\\.\\?\\[\\\\\\]\\^\\{\\|\\}\\x2d";
+
+  expect(regexp.escapeString(str)).toBe(expected);
 });
 
 test.each([/\w(\w)\w/u, /\w(\w)\w/gu])("matchAll", re => {

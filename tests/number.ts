@@ -43,6 +43,7 @@ test("limit", () => {
 test("rootMeanSquareDeviation", () => {
   expect(num.rootMeanSquareDeviation(0, 4)).toBe(2);
   expect(num.rootMeanSquareDeviation(1, 5)).toBe(2);
+  expect(() => num.rootMeanSquareDeviation()).toThrow(new AssertionError());
 });
 
 test("round", () => {

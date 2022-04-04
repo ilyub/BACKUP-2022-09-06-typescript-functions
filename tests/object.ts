@@ -1,5 +1,6 @@
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
 
+import { AssertionError } from "@/errors/AssertionError";
 import * as is from "@/guards";
 import * as o from "@/object";
 
@@ -35,11 +36,11 @@ test("filter", () => {
 });
 
 test("freeze", () => {
-  interface I {
+  interface TestInterface {
     value: number;
   }
 
-  const obj1: I = { value: 1 };
+  const obj1: TestInterface = { value: 1 };
 
   const obj2 = o.freeze(obj1);
 
@@ -60,11 +61,16 @@ test("fromEntries.exhaustive", () => {
   expect(o.fromEntries.exhaustive([["a", 1]])).toStrictEqual({ a: 1 });
 });
 
+test("get", () => {
+  expect(o.get({ a: 1 }, "a", is.number)).toBe(1);
+  expect(() => o.get({ a: 1 }, "a", is.string)).toThrow(new AssertionError());
+});
+
 test("getPrototypeOf", () => {
   class TestClass {}
 
-  expect(o.getPrototypeOf(TestClass)).toBeUndefined();
   expect(o.getPrototypeOf(new TestClass())).toBeSameAs(TestClass.prototype);
+  expect(o.getPrototypeOf(TestClass)).toBeUndefined();
 });
 
 test("hasOwnProp", () => {
@@ -193,6 +199,21 @@ test.each([
   },
   {
     compareFn(x: number, y: number): number {
+      return x - y;
+    },
+    expected: {
+      a: 1,
+      b: 2,
+      c: 3
+    },
+    obj: o.fromEntries.exhaustive([
+      ["a", 1],
+      ["c", 3],
+      ["b", 2]
+    ])
+  },
+  {
+    compareFn(x: number, y: number): number {
       return y - x;
     },
     expected: {
@@ -211,11 +232,11 @@ test.each([
 });
 
 test("unfreeze", () => {
-  interface I {
+  interface TestInterface {
     readonly value: number;
   }
 
-  const obj1: I = { value: 1 };
+  const obj1: TestInterface = { value: 1 };
 
   const obj2 = o.unfreeze(obj1);
 

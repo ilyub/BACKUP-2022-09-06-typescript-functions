@@ -34,7 +34,7 @@ test("multiline", () => {
 });
 
 test("path", () => {
-  expect(() => s.path()).toThrow(new Error("Not implemented"));
+  expect(s.path).toThrow(new Error("Not implemented"));
 });
 
 test.each(["a", "/a", "\\a", "//a", "\\\\a"])("path.addLeadingSlash", path => {

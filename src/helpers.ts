@@ -47,14 +47,13 @@ export function createFacade<I extends object, E = unknown>(
   let _implementation: I | undefined;
 
   const facadeOwn: E & FacadeOwnMethods<I> = {
-    setImplementation(value: I) {
+    setImplementation(value) {
       _implementation = value;
     },
     ...extension
   };
 
-  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
-  return new Proxy(
+  const proxy = new Proxy(
     fn.noop,
     wrapProxyHandler("createFacade", "throw", {
       apply(_target, thisArg, args: unknowns) {
@@ -79,7 +78,10 @@ export function createFacade<I extends object, E = unknown>(
         return reflect.set(target(key), key, value);
       }
     })
-  ) as Facade<I, E>;
+  );
+
+  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+  return proxy as Facade<I, E>;
 
   function target(key?: PropertyKey): object {
     if (is.not.empty(key) && key in facadeOwn) return facadeOwn;
@@ -102,10 +104,10 @@ export function createFacade<I extends object, E = unknown>(
  * @param source - Source.
  * @returns Validation object.
  */
-export function createValidationObject<T extends PropertyKey>(
+export function createValidationObject<T extends string>(
   source: Rec<T, T>
 ): ValidationObject<T> {
-  if (o.entries(source).every(([key, value]) => key === String(value)))
+  if (o.entries(source).every(([key, value]) => key === value))
     return new Set(o.values(source));
 
   throw new Error("Invalid source");
@@ -157,16 +159,6 @@ export function onDemand<T extends object>(generator: () => T): T {
 }
 
 /**
- * Defines value type.
- *
- * @param value - Value.
- * @returns Value.
- */
-export function typedef<T>(value: T): T {
-  return value;
-}
-
-/**
  * Creates safe access interface for an object.
  *
  * @param obj - Object.
@@ -205,7 +197,7 @@ export function safeAccess<
 
         throw new Error(`Read access denied: ${cast.string(key)}`);
       },
-      has(_target, key): boolean {
+      has(_target, key) {
         return keysSet.has(key);
       },
       isExtensible(target) {
@@ -227,6 +219,16 @@ export function safeAccess<
       }
     })
   );
+}
+
+/**
+ * Defines value type.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+export function typedef<T>(value: T): T {
+  return value;
 }
 
 /**
@@ -255,13 +257,13 @@ export function wrapProxyHandler<T extends object>(
 ): ProxyHandler<T> {
   switch (action) {
     case "doDefault":
-      return {
-        apply(target, thisArg, args: unknowns): unknown {
+      return typedef<ProxyHandler<T>>({
+        apply(target, thisArg, args: unknowns) {
           assert.callable(target);
 
           return reflect.apply(target, thisArg, args);
         },
-        construct(target, args: unknowns, newTarget): object {
+        construct(target, args: unknowns, newTarget) {
           assert.callable(target);
 
           const result = reflect.construct(target, args, newTarget);
@@ -270,84 +272,84 @@ export function wrapProxyHandler<T extends object>(
 
           return result;
         },
-        defineProperty(target, key, attrs): boolean {
+        defineProperty(target, key, attrs) {
           return reflect.defineProperty(target, key, attrs);
         },
-        deleteProperty(target, key): boolean {
+        deleteProperty(target, key) {
           return reflect.deleteProperty(target, key);
         },
-        get(target, key): unknown {
+        get(target, key) {
           return reflect.get(target, key);
         },
-        getOwnPropertyDescriptor(target, key): PropertyDescriptor | undefined {
+        getOwnPropertyDescriptor(target, key) {
           return reflect.getOwnPropertyDescriptor(target, key);
         },
-        getPrototypeOf(target): object | null {
+        getPrototypeOf(target) {
           return reflect.getPrototypeOf(target);
         },
-        has(target, key): boolean {
+        has(target, key) {
           return reflect.has(target, key);
         },
-        isExtensible(target): boolean {
+        isExtensible(target) {
           return reflect.isExtensible(target);
         },
-        ownKeys(target): Array<string | symbol> {
+        ownKeys(target) {
           return reflect.ownKeys(target);
         },
-        preventExtensions(target): boolean {
+        preventExtensions(target) {
           return reflect.preventExtensions(target);
         },
-        set(target, key, value): boolean {
+        set(target, key, value) {
           return reflect.set(target, key, value);
         },
-        setPrototypeOf(target, proto): boolean {
+        setPrototypeOf(target, proto) {
           return reflect.setPrototypeOf(target, proto);
         },
         ...handler
-      };
+      });
 
     case "throw":
-      return {
-        apply(): never {
+      return typedef<ProxyHandler<T>>({
+        apply() {
           throw new Error(`Not implemented: ${id}.apply`);
         },
-        construct(): never {
+        construct() {
           throw new Error(`Not implemented: ${id}.construct`);
         },
-        defineProperty(): never {
+        defineProperty() {
           throw new Error(`Not implemented: ${id}.defineProperty`);
         },
-        deleteProperty(): never {
+        deleteProperty() {
           throw new Error(`Not implemented: ${id}.deleteProperty`);
         },
-        get(): never {
+        get() {
           throw new Error(`Not implemented: ${id}.get`);
         },
-        getOwnPropertyDescriptor(): never {
+        getOwnPropertyDescriptor() {
           throw new Error(`Not implemented: ${id}.getOwnPropertyDescriptor`);
         },
-        getPrototypeOf(): never {
+        getPrototypeOf() {
           throw new Error(`Not implemented: ${id}.getPrototypeOf`);
         },
-        has(): never {
+        has() {
           throw new Error(`Not implemented: ${id}.has`);
         },
-        isExtensible(): never {
+        isExtensible() {
           throw new Error(`Not implemented: ${id}.isExtensible`);
         },
-        ownKeys(): never {
+        ownKeys() {
           throw new Error(`Not implemented: ${id}.ownKeys`);
         },
-        preventExtensions(): never {
+        preventExtensions() {
           throw new Error(`Not implemented: ${id}.preventExtensions`);
         },
-        set(): never {
+        set() {
           throw new Error(`Not implemented: ${id}.set`);
         },
-        setPrototypeOf(): never {
+        setPrototypeOf() {
           throw new Error(`Not implemented: ${id}.setPrototypeOf`);
         },
         ...handler
-      };
+      });
   }
 }

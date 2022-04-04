@@ -38,13 +38,13 @@ export type OptionalUndefinedStyle<T extends object> = Join4<
   { readonly [K in ReadonlyUndefinedKeys<T>]?: T[K] | undefined }
 >;
 
+export type StrictOmit<T extends object, K extends keyof T> = Omit<T, K> & {
+  [L in K]?: never;
+};
+
 export type UndefinedStyle<T extends object> = Join4<
   { [K in WritableDefindKeys<T>]: T[K] },
   { [K in WritableUndefindKeys<T>]: T[K] | undefined },
   { readonly [K in ReadonlyDefinedKeys<T>]: T[K] },
   { readonly [K in ReadonlyUndefinedKeys<T>]: T[K] | undefined }
 >;
-
-export type StrictOmit<T extends object, K extends keyof T> = Omit<T, K> & {
-  [L in K]?: never;
-};

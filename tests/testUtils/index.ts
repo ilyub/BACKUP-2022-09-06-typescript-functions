@@ -13,19 +13,19 @@ test("executionTimeToBe", async () => {
   {
     const result = await testUtils.executionTimeToBe(testResolve, 0);
 
+    const expected = "Expected callback execution time not to be 0 ms";
+
     expect(result.pass).toBeTrue();
-    expect(result.message()).toBe(
-      "Expected callback execution time not to be 0 ms"
-    );
+    expect(result.message()).toBe(expected);
   }
 
   {
     const result = await testUtils.executionTimeToBe(testResolve, 1);
 
+    const expected = "Expected callback execution time (0 ms) to be 1 ms";
+
     expect(result.pass).toBeFalse();
-    expect(result.message()).toBe(
-      "Expected callback execution time (0 ms) to be 1 ms"
-    );
+    expect(result.message()).toBe(expected);
   }
 });
 
@@ -33,19 +33,21 @@ test("executionTimeToBeWithin", async () => {
   {
     const result = await testUtils.executionTimeToBeWithin(testResolve, 0, 1);
 
+    const expected =
+      "Expected callback execution time (0 ms) not to be within [0, 1] ms";
+
     expect(result.pass).toBeTrue();
-    expect(result.message()).toBe(
-      "Expected callback execution time (0 ms) not to be within [0, 1] ms"
-    );
+    expect(result.message()).toBe(expected);
   }
 
   {
     const result = await testUtils.executionTimeToBeWithin(testResolve, 1, 2);
 
+    const expected =
+      "Expected callback execution time (0 ms) to be within [1, 2] ms";
+
     expect(result.pass).toBeFalse();
-    expect(result.message()).toBe(
-      "Expected callback execution time (0 ms) to be within [1, 2] ms"
-    );
+    expect(result.message()).toBe(expected);
   }
 });
 
@@ -57,8 +59,10 @@ test("toBeSameAs", () => {
 
     const result = testUtils.toBeSameAs(arr1, arr2);
 
+    const expected = "Expected not the same object";
+
     expect(result.pass).toBeTrue();
-    expect(result.message()).toBe("Expected not the same object");
+    expect(result.message()).toBe(expected);
   }
 
   {
@@ -68,8 +72,10 @@ test("toBeSameAs", () => {
 
     const result = testUtils.toBeSameAs(arr1, arr2);
 
+    const expected = "Expected the same object";
+
     expect(result.pass).toBeFalse();
-    expect(result.message()).toBe("Expected the same object");
+    expect(result.message()).toBe(expected);
   }
 });
 

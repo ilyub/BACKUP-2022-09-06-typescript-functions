@@ -17,7 +17,7 @@ export type WritableArrayMap2<
 > = Map<K, Map<L, T[]>>;
 
 /**
- * Returns array from array map.
+ * Extracts array from array map.
  *
  * @param key - Key.
  * @param map - Array map.
@@ -31,7 +31,7 @@ export function get<K extends PropertyKey, T>(
 }
 
 /**
- * Returns array from array map.
+ * Extracts array from array map.
  *
  * @param key1 - Key 1.
  * @param key2 - Key 2.

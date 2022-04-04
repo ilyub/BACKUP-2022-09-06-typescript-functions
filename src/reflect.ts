@@ -1,6 +1,5 @@
 /* skylib/eslint-plugin disable @skylib/disallow-identifier[functions.reflect] */
 
-// eslint-disable-next-line import/no-unassigned-import -- Ok
 import "reflect-metadata";
 
 export type MetadataKey = string | symbol;

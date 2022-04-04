@@ -1,5 +1,4 @@
 import * as is from "./guards";
-// eslint-disable-next-line @skylib/consistent-import -- Ok
 import type * as types from "./types/core";
 
 /**
@@ -16,14 +15,10 @@ export function not(): never {
  * @param defVal - Default value.
  * @returns Value if it is not empty, defVal otherwise.
  */
-export function notEmpty<T>(
+not.empty = <T>(
   value: T,
   defVal: Exclude<T, types.empty>
-): Exclude<T, types.empty> {
-  return is.not.empty(value) ? value : defVal;
-}
-
-not.empty = notEmpty;
+): Exclude<T, types.empty> => (is.not.empty(value) ? value : defVal);
 
 /**
  * Converts value to a number.
@@ -37,7 +32,7 @@ export function number(value: unknown, defVal = 0): number {
 }
 
 /**
- * Converts value to numberU.
+ * Converts value to a number.
  *
  * @param value - Value.
  * @returns Converted value, _undefined_ on failure.
@@ -74,13 +69,13 @@ export function string(value: unknown): string {
 }
 
 /**
- * Converts value to stringU.
+ * Converts value to type stringU.
  *
  * @param value - Value.
  * @returns Converted value.
  */
 export function stringU(value: unknown): types.stringU {
-  const result = is.not.empty(value) ? String(value) : "";
+  const str = is.not.empty(value) ? String(value) : "";
 
-  return result ? result : undefined;
+  return str ? str : undefined;
 }

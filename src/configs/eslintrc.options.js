@@ -128,10 +128,10 @@ module.exports = importPrefix => {
         patterns: [
           /\b(?:NumStr|PropertyKey|boolean|false|null|number|object|string|true)\s*\|\s*(?:empty|undefined)\b/u
             .source,
+          /\b(?:Rec|WritableRecord)\s*<\s*PropertyKey\b/u.source,
           /\b(?:empty|undefined)\s*\|\s*(?:NumStr|PropertyKey|boolean|false|null|number|object|string|true)\b/u
             .source,
           /\bPartial\s*<\s*Rec\b/u.source,
-          /\bTypedObject\s*<\s*PropertyKey\b/u.source,
           /\bWritable\s*<\s*(?:IndexedObject|PartialRecord|Rec)\b/u.source,
           /\bnumber\s*\|\s*string\b/u.source,
           /\breadonly\s+(?:NumStr|PropertyKey|boolean|never|number|object|string|unknown)\[\]/u
@@ -141,6 +141,7 @@ module.exports = importPrefix => {
       }
     ],
     disallowIdentifier: [
+      { ids: ["JSON"], subOptionsId: "functions.json" },
       { ids: ["Reflect"], subOptionsId: "functions.reflect" },
       { ids: ["Record"], subOptionsId: "functions.types.core" }
     ]

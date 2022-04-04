@@ -1,11 +1,6 @@
-// eslint-disable-next-line import/no-unassigned-import -- Ok
 import "jest-extended";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- Wait for better solution
-// @ts-expect-error
-// eslint-disable-next-line @skylib/consistent-import -- Ok
 import * as matchers from "jest-extended/all";
 import * as _ from "lodash";
-// eslint-disable-next-line @skylib/consistent-import -- Ok
 import * as fakeTimers from "@sinonjs/fake-timers";
 
 import * as a from "../array";
@@ -104,9 +99,9 @@ export const clock = onDemand(() => {
  * @returns Result.
  */
 export const executionTimeToBe: ExpectFromMatcher<"executionTimeToBe"> = async (
-  got: unknown,
-  time: number
-): Promise<ExpectReturnType> => {
+  got,
+  time
+) => {
   assert.callable<Async<unknown>>(got, "Expecting async function");
 
   const start = Date.now();
@@ -117,12 +112,11 @@ export const executionTimeToBe: ExpectFromMatcher<"executionTimeToBe"> = async (
 
   return executionTime === time
     ? {
-        message: (): string =>
-          `Expected callback execution time not to be ${time} ms`,
+        message: () => `Expected callback execution time not to be ${time} ms`,
         pass: true
       }
     : {
-        message: (): string =>
+        message: () =>
           `Expected callback execution time (${executionTime} ms) to be ${time} ms`,
         pass: false
       };
@@ -138,11 +132,7 @@ export const executionTimeToBe: ExpectFromMatcher<"executionTimeToBe"> = async (
  */
 export const executionTimeToBeWithin: ExpectFromMatcher<
   "executionTimeToBeWithin"
-> = async (
-  got: unknown,
-  min: number,
-  max: number
-): Promise<ExpectReturnType> => {
+> = async (got, min, max) => {
   assert.callable<Async<unknown>>(got, "Expecting async function");
 
   const start = Date.now();
@@ -153,12 +143,12 @@ export const executionTimeToBeWithin: ExpectFromMatcher<
 
   return executionTime >= min && executionTime <= max
     ? {
-        message: (): string =>
+        message: () =>
           `Expected callback execution time (${executionTime} ms) not to be within [${min}, ${max}] ms`,
         pass: true
       }
     : {
-        message: (): string =>
+        message: () =>
           `Expected callback execution time (${executionTime} ms) to be within [${min}, ${max}] ms`,
         pass: false
       };
@@ -171,13 +161,10 @@ export const executionTimeToBeWithin: ExpectFromMatcher<
  * @param expected - Expected object.
  * @returns Result.
  */
-export const toBeSameAs: ExpectFromMatcher<"toBeSameAs"> = (
-  got: unknown,
-  expected: object
-): ExpectReturnType =>
+export const toBeSameAs: ExpectFromMatcher<"toBeSameAs"> = (got, expected) =>
   got === expected
-    ? { message: (): string => "Expected not the same object", pass: true }
-    : { message: (): string => "Expected the same object", pass: false };
+    ? { message: () => "Expected not the same object", pass: true }
+    : { message: () => "Expected the same object", pass: false };
 
 /**
  * Installs fake timer.
@@ -208,8 +195,7 @@ export function jestReset(): void {
  * Jest setup.
  */
 export function jestSetup(): void {
-  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
-  expect.extend(matchers as jest.ExpectExtendMap);
+  expect.extend(matchers);
 
   expect.extend({
     executionTimeToBe,

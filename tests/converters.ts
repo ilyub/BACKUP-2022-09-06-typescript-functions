@@ -2,7 +2,7 @@ import * as cast from "@/converters";
 import type { stringE } from "@/types/core";
 
 test("not", () => {
-  expect(() => cast.not()).toThrow(new Error("Not implemented"));
+  expect(cast.not).toThrow(new Error("Not implemented"));
 });
 
 test("not.empty", () => {

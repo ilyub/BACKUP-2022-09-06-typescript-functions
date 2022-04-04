@@ -7,22 +7,20 @@ import * as is from "./guards";
 import * as o from "./object";
 import * as reflect from "./reflect";
 
-export type KeyOrReduce<T extends object, V extends object = T> =
-  | PropertyKey
-  | Reduce<T, V>;
+export type KeyOrReduce<T extends object> = PropertyKey | Reduce<T>;
 
-export interface Reduce<T extends object, V extends object = T> {
+export interface Reduce<T extends object> {
   /**
-   * Reduces object for comparison.
+   * Reduces object.
    *
    * @param obj - Object.
    * @returns Reduced value.
    */
-  (obj: T | V): unknown;
+  (obj: T): unknown;
 }
 
 /**
- * Creates array of pairs ("[x, y, z]" =\> "[[x, y], [y, z]]").
+ * Creates array of pairs ([x, y, z] =\> [[x, y], [y, z]]).
  *
  * @param arr - Array.
  * @returns Array of pairs.
@@ -85,7 +83,7 @@ export function clone<T>(arr: readonly T[]): T[] {
 }
 
 /**
- * Removes element from an array.
+ * Removes element at given index.
  *
  * @param arr - Array.
  * @param index - Index to be removed.
@@ -165,7 +163,7 @@ export function fromString(str: string): string[] {
 }
 
 /**
- * Returns element by index.
+ * Returns element at given index.
  *
  * @param arr - Array.
  * @param index - Index.
@@ -190,7 +188,7 @@ export function get<T>(arr: readonly T[], index: number): T {
 export function includesBy<T extends object, V extends object>(
   arr: readonly T[],
   value: V,
-  keyOrReduce: KeyOrReduce<T, V>
+  keyOrReduce: KeyOrReduce<T | V>
 ): boolean {
   const reduce = toReduce(keyOrReduce);
 
@@ -260,7 +258,7 @@ export function random<T>(arr: readonly T[]): T {
 export function removeBy<T extends object, V extends object>(
   arr: readonly T[],
   value: V,
-  keyOrReduce: KeyOrReduce<T, V>
+  keyOrReduce: KeyOrReduce<T | V>
 ): T[] {
   const reduce = toReduce(keyOrReduce);
 
@@ -270,10 +268,10 @@ export function removeBy<T extends object, V extends object>(
 }
 
 /**
- * Replaces element.
+ * Replaces element at given index.
  *
  * @param arr - Array.
- * @param index - Index to be replaced.
+ * @param index - Index.
  * @param value - Value.
  * @returns New array with one element replaced.
  */
@@ -375,14 +373,14 @@ export function uniqueBy<T extends object>(
 ): T[] {
   const reduce = toReduce(keyOrReduce);
 
-  const cache = new Set();
+  const seen = new Set();
 
   return arr.filter(element => {
     const reduced = reduce(element);
 
-    if (cache.has(reduced)) return false;
+    if (seen.has(reduced)) return false;
 
-    cache.add(reduced);
+    seen.add(reduced);
 
     return true;
   });
@@ -430,8 +428,8 @@ export function unshiftOrReplaceBy<T extends object>(
  * @returns Reduce function.
  */
 function toReduce<T extends object, V extends object = T>(
-  keyOrReduce: KeyOrReduce<T, V>
-): Reduce<T, V> {
+  keyOrReduce: KeyOrReduce<T | V>
+): Reduce<T | V> {
   return is.callable(keyOrReduce)
     ? keyOrReduce
     : (obj): unknown => reflect.get(obj, keyOrReduce);

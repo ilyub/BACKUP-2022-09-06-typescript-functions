@@ -10,6 +10,18 @@ test("factory", () => {
   expect(guard(1)).toBeFalse();
 });
 
+test("not", () => {
+  expect(is.not(true, is.number)).toBeTrue();
+  expect(is.not(1, is.number)).toBeFalse();
+});
+
+test("not.factory", () => {
+  const guard = is.not.factory(is.number);
+
+  expect(guard(true)).toBeTrue();
+  expect(guard(1)).toBeFalse();
+});
+
 test("and", () => {
   expect(is.and(undefined, is.booleanU, is.numberU)).toBeTrue();
   expect(is.and(true, is.booleanU, is.numberU)).toBeFalse();
@@ -21,18 +33,6 @@ test("and.factory", () => {
 
   expect(guard(undefined)).toBeTrue();
   expect(guard(true)).toBeFalse();
-  expect(guard(1)).toBeFalse();
-});
-
-test("not", () => {
-  expect(is.not(true, is.number)).toBeTrue();
-  expect(is.not(1, is.number)).toBeFalse();
-});
-
-test("not.factory", () => {
-  const guard = is.not.factory(is.number);
-
-  expect(guard(true)).toBeTrue();
   expect(guard(1)).toBeFalse();
 });
 
@@ -79,17 +79,14 @@ test("callable", () => {
 });
 
 test("empty", () => {
-  expect(is.empty(1)).toBeFalse();
   expect(is.empty(null)).toBeTrue();
   expect(is.empty(undefined)).toBeTrue();
+  expect(is.empty(1)).toBeFalse();
 });
 
 test("enumeration", () => {
-  type TestEnum = "a" | 1;
+  const TestEnumVO = createValidationObject({ a: "a" });
 
-  const TestEnumVO = createValidationObject<TestEnum>({ 1: 1, a: "a" });
-
-  expect(is.enumeration(1, TestEnumVO)).toBeTrue();
   expect(is.enumeration("a", TestEnumVO)).toBeTrue();
   expect(is.enumeration("b", TestEnumVO)).toBeFalse();
   expect(is.enumeration(undefined, TestEnumVO)).toBeFalse();
@@ -148,14 +145,15 @@ test("map.of", () => {
 });
 
 test("null", () => {
-  expect(is.null(1)).toBeFalse();
   expect(is.null(null)).toBeTrue();
   expect(is.null(undefined)).toBeFalse();
+  expect(is.null(1)).toBeFalse();
 });
 
 test("numStr", () => {
   expect(is.numStr(1)).toBeTrue();
   expect(is.numStr("a")).toBeTrue();
+  expect(is.numStr(Number.NaN)).toBeFalse();
   expect(is.numStr(true)).toBeFalse();
   expect(is.numStr(undefined)).toBeFalse();
 });
@@ -163,15 +161,33 @@ test("numStr", () => {
 test("number", () => {
   expect(is.number(1)).toBeTrue();
   expect(is.number("a")).toBeFalse();
+  expect(is.number(Number.NaN)).toBeFalse();
   expect(is.number(true)).toBeFalse();
   expect(is.number(undefined)).toBeFalse();
 });
 
 test("object", () => {
-  expect(is.object({})).toBeTrue();
+  expect(is.object({ num: 1, str: "a" })).toBeTrue();
+  expect(is.object({ num: 1 })).toBeTrue();
+  expect(is.object({ num: 1, str: true })).toBeTrue();
+  expect(is.object({ num: true, str: "a" })).toBeTrue();
+  expect(is.object({ str: "a" })).toBeTrue();
   expect(is.object(1)).toBeFalse();
   expect(is.object(null)).toBeFalse();
   expect(is.object(undefined)).toBeFalse();
+});
+
+test("object.factory", () => {
+  const guard = is.object.factory({ num: is.number }, { str: is.string });
+
+  expect(guard({ num: 1, str: "a" })).toBeTrue();
+  expect(guard({ num: 1 })).toBeTrue();
+  expect(guard({ num: 1, str: true })).toBeFalse();
+  expect(guard({ num: true, str: "a" })).toBeFalse();
+  expect(guard({ str: "a" })).toBeFalse();
+  expect(guard(1)).toBeFalse();
+  expect(guard(null)).toBeFalse();
+  expect(guard(undefined)).toBeFalse();
 });
 
 test("object.of", () => {
@@ -183,21 +199,8 @@ test("object.of", () => {
 
   expect(guard({ num: 1, str: "a" })).toBeTrue();
   expect(guard({ num: 1 })).toBeTrue();
-  expect(guard({ num: true, str: "a" })).toBeFalse();
   expect(guard({ num: 1, str: true })).toBeFalse();
-  expect(guard({ str: "a" })).toBeFalse();
-  expect(guard(1)).toBeFalse();
-  expect(guard(null)).toBeFalse();
-  expect(guard(undefined)).toBeFalse();
-});
-
-test("object.of.factory", () => {
-  const guard = is.object.of.factory({ num: is.number }, { str: is.string });
-
-  expect(guard({ num: 1, str: "a" })).toBeTrue();
-  expect(guard({ num: 1 })).toBeTrue();
   expect(guard({ num: true, str: "a" })).toBeFalse();
-  expect(guard({ num: 1, str: true })).toBeFalse();
   expect(guard({ str: "a" })).toBeFalse();
   expect(guard(1)).toBeFalse();
   expect(guard(null)).toBeFalse();
@@ -221,8 +224,15 @@ test("set.of", () => {
 test("string", () => {
   expect(is.string("a")).toBeTrue();
   expect(is.string("")).toBeTrue();
-  expect(is.string(1)).toBeFalse();
   expect(is.string(undefined)).toBeFalse();
+  expect(is.string(1)).toBeFalse();
+});
+
+test("stringU", () => {
+  expect(is.stringU("a")).toBeTrue();
+  expect(is.stringU(undefined)).toBeTrue();
+  expect(is.stringU("")).toBeFalse();
+  expect(is.stringU(1)).toBeFalse();
 });
 
 test("symbol", () => {

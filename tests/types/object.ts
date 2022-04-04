@@ -96,6 +96,37 @@ test("OptionalUndefinedStyle", () => {
   expect(value).toBe(1);
 });
 
+test("StrictOmit", () => {
+  interface From {
+    a: string;
+    b?: string;
+    readonly c: string;
+    readonly d?: string;
+    e: string;
+    f?: string;
+    readonly g: string;
+    readonly h?: string;
+  }
+
+  type To = StrictOmit<From, "e" | "f" | "g" | "h">;
+
+  type Expected = {
+    a: string;
+    b?: string;
+    readonly c: string;
+    readonly d?: string;
+  } & {
+    e?: never;
+    f?: never;
+    g?: never;
+    h?: never;
+  };
+
+  const value: Equals<To, Expected> = 1;
+
+  expect(value).toBe(1);
+});
+
 test("UndefinedStyle", () => {
   type To = UndefinedStyle<TestInterface>;
 
@@ -111,29 +142,6 @@ test("UndefinedStyle", () => {
     wo: numberU;
     wou: numberU;
     wu: numberU;
-  };
-
-  const value: Equals<To, Expected> = 1;
-
-  expect(value).toBe(1);
-});
-
-test("StrictOmit", () => {
-  interface From {
-    a: string;
-    b?: string;
-    c: string;
-    d?: string;
-  }
-
-  type To = StrictOmit<From, "c" | "d">;
-
-  type Expected = {
-    a: string;
-    b?: string;
-  } & {
-    c?: never;
-    d?: never;
   };
 
   const value: Equals<To, Expected> = 1;

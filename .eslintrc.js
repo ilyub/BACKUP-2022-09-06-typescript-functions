@@ -1,9 +1,15 @@
 module.exports = {
   extends: [require.resolve("@skylib/config/src/eslintrc")],
-  // eslint-disable-next-line no-warning-comments -- Wait for @skylib/config
+  // eslint-disable-next-line no-warning-comments -- Wait for @skylib/config update
   // fixme
   overrides: [
-    { files: ["tests/**"], rules: { "@skylib/prefer-readonly": "off" } }
+    {
+      files: ["tests/**"],
+      rules: {
+        "@skylib/no-mutable-signature": "off",
+        "@skylib/prefer-readonly": "off"
+      }
+    }
   ],
   rules: {
     "@skylib/no-mutable-signature": [
@@ -25,17 +31,6 @@ module.exports = {
         ignoreIdentifiers: [/^mutable/u.source],
         ignoreInterfaces: true,
         ignoreTypes: ["Promise", "ReadonlyMap", "ReadonlySet"]
-      }
-    ],
-    "eslint-comments/require-description": "warn",
-    "id-length": [
-      "warn",
-      {
-        exceptionPatterns: [],
-        exceptions: [],
-        max: 25,
-        min: 1,
-        properties: "always"
       }
     ]
   }
