@@ -1,3 +1,6 @@
+import type { Equals } from "ts-toolbelt/out/Any/Equals";
+import type { If } from "ts-toolbelt/out/Any/If";
+
 import type {
   ReadonlyDefinedKeys,
   ReadonlyUndefinedKeys,
@@ -5,24 +8,26 @@ import type {
   WritableUndefindKeys
 } from "./objectKeys";
 
-export type Join2<A extends object, B extends object> = keyof A extends never
-  ? B
-  : keyof B extends never
-  ? A
-  : A & B;
+export type Empty<T extends object> = Equals<keyof T, never>;
 
-export type Join3<
-  A extends object,
-  B extends object,
-  C extends object
-> = keyof A extends never ? Join2<B, C> : A & Join2<B, C>;
+export type Join2<A extends object, B extends object> = If<
+  Empty<A>,
+  B,
+  If<Empty<B>, A, A & B>
+>;
+
+export type Join3<A extends object, B extends object, C extends object> = If<
+  Empty<A>,
+  Join2<B, C>,
+  A & Join2<B, C>
+>;
 
 export type Join4<
   A extends object,
   B extends object,
   C extends object,
   D extends object
-> = keyof A extends never ? Join3<B, C, D> : A & Join3<B, C, D>;
+> = If<Empty<A>, Join3<B, C, D>, A & Join3<B, C, D>>;
 
 export type OptionalStyle<T extends object> = Join4<
   { [K in WritableDefindKeys<T>]: T[K] },
