@@ -1,3 +1,5 @@
+import type { Extends } from "ts-toolbelt/out/Any/Extends";
+import type { If } from "ts-toolbelt/out/Any/If";
 import type { FilterKeys } from "ts-toolbelt/out/Object/FilterKeys";
 import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
 import type { ReadonlyKeys } from "ts-toolbelt/out/Object/ReadonlyKeys";
@@ -31,7 +33,7 @@ export type ObjectKeysDefined<
   T extends object,
   C extends ObjectKeysOption,
   D extends keyof T
-> = "defined" extends C ? FilterKeys<T, undefined, "<-extends"> : D;
+> = If<Extends<"defined", C>, FilterKeys<T, undefined, "<-extends">, D>;
 
 export type ObjectKeysOption =
   | "defined"
@@ -45,33 +47,35 @@ export type ObjectKeysOptional<
   T extends object,
   C extends ObjectKeysOption,
   D extends keyof T
-> = "optional" extends C ? OptionalKeys<T> : D;
+> = If<Extends<"optional", C>, OptionalKeys<T>, D>;
 
 export type ObjectKeysReadonly<
   T extends object,
   C extends ObjectKeysOption,
   D extends keyof T
-> = "readonly" extends C ? ReadonlyKeys<T> : D;
+> = If<Extends<"readonly", C>, ReadonlyKeys<T>, D>;
 
 export type ObjectKeysRequired<
   T extends object,
   C extends ObjectKeysOption,
   D extends keyof T
-> = "required" extends C ? RequiredKeys<T> : D;
+> = If<Extends<"required", C>, RequiredKeys<T>, D>;
 
 export type ObjectKeysUndefined<
   T extends object,
   C extends ObjectKeysOption,
   D extends keyof T
-> = "undefined" extends C
-  ? Exclude<keyof T, FilterKeys<T, undefined, "<-extends">>
-  : D;
+> = If<
+  Extends<"undefined", C>,
+  Exclude<keyof T, FilterKeys<T, undefined, "<-extends">>,
+  D
+>;
 
 export type ObjectKeysWritable<
   T extends object,
   C extends ObjectKeysOption,
   D extends keyof T
-> = "writable" extends C ? WritableKeys<T> : D;
+> = If<Extends<"writable", C>, WritableKeys<T>, D>;
 
 export type ReadonlyDefinedKeys<T extends object> = ObjectKeys<
   T,
