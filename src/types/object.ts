@@ -1,5 +1,7 @@
+import type { Match } from "ts-toolbelt/out/Any/_Internal";
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
 import type { If } from "ts-toolbelt/out/Any/If";
+import type { FilterKeys } from "ts-toolbelt/out/Object/FilterKeys";
 
 import type {
   ReadonlyDefinedKeys,
@@ -42,6 +44,12 @@ export type OptionalUndefinedStyle<T extends object> = Join4<
   { readonly [K in ReadonlyDefinedKeys<T>]: T[K] },
   { readonly [K in ReadonlyUndefinedKeys<T>]?: T[K] | undefined }
 >;
+
+export type PickKeys<
+  T extends object,
+  E,
+  M extends Match = "default"
+> = Exclude<keyof T, FilterKeys<T, E, M>>;
 
 export type StrictOmit<T extends object, K extends keyof T> = Omit<T, K> & {
   [L in K]?: never;
