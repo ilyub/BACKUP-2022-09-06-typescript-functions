@@ -1,5 +1,3 @@
-export {};
-
 declare global {
   namespace configurable {
     interface LocaleName {
@@ -7,3 +5,5 @@ declare global {
     }
   }
 }
+
+export {};

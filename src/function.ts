@@ -8,6 +8,8 @@ import type {
   Sync
 } from "./types/function";
 
+export const noop: Callable = _.noop.bind(_);
+
 export interface PipeCallback<V = unknown, R = unknown> {
   /**
    * Pipe callback.
@@ -27,8 +29,6 @@ export interface PipeCallback<V = unknown, R = unknown> {
 export function identity<T>(value: T): T {
   return value;
 }
-
-export const noop: Callable = _.noop.bind(_);
 
 /**
  * Applies callbacks to a value.

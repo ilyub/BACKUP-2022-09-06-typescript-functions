@@ -1,3 +1,5 @@
+export { _delete as delete };
+
 /**
  * Adds value.
  *
@@ -27,5 +29,3 @@ function _delete<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T> {
 
   return result;
 }
-
-export { _delete as delete };

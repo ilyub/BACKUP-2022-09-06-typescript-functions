@@ -1,5 +1,8 @@
 import * as a from "./array";
+import * as o from "./object";
 import * as regexp from "./regexp";
+
+export { _path as path };
 
 export type Eol = "\n" | "\r\n";
 
@@ -38,16 +41,6 @@ export function filter(
 }
 
 /**
- * Extracts leading spaces.
- *
- * @param str - String.
- * @returns String containing leading spaces.
- */
-export function leadingSpaces(str: string): string {
-  return str.slice(0, str.length - trimStart(str).length);
-}
-
-/**
  * Converts first letter to lower case.
  *
  * @param str - String.
@@ -55,6 +48,16 @@ export function leadingSpaces(str: string): string {
  */
 export function lcFirst(str: string): string {
   return str ? str.charAt(0).toLowerCase() + str.slice(1) : str;
+}
+
+/**
+ * Extracts leading spaces.
+ *
+ * @param str - String.
+ * @returns String containing leading spaces.
+ */
+export function leadingSpaces(str: string): string {
+  return str.slice(0, str.length - trimStart(str).length);
 }
 
 /**
@@ -76,68 +79,6 @@ export function lines(str: string): string[] {
 export function multiline(str: string): boolean {
   return str.includes("\n");
 }
-
-/**
- * Not implemented.
- */
-function _path(): never {
-  throw new Error("Not implemented");
-}
-
-export { _path as path };
-
-/**
- * Adds leading slash.
- *
- * @param path - Path.
- * @returns New string with leading slash added.
- */
-_path.addLeadingSlash = (path: string): string =>
-  `/${_path.removeLeadingSlash(path)}`;
-
-/**
- * Adds trailing slash.
- *
- * @param path - Path.
- * @returns New string with trailing slash added.
- */
-_path.addTrailingSlash = (path: string): string =>
-  `${_path.removeTrailingSlash(path)}/`;
-
-/**
- * Canonicalizes path.
- *
- * @param path - Path.
- * @returns Canonical path.
- */
-_path.canonicalize = (path: string): string => path.replace(/[/\\]+/gu, "/");
-
-/**
- * Creates path from parts.
- *
- * @param parts - Parts.
- * @returns Path.
- */
-_path.join = (...parts: string[]): string =>
-  _path.canonicalize(parts.join("/"));
-
-/**
- * Removes leading slash.
- *
- * @param path - Path.
- * @returns New string with leading slash removed.
- */
-_path.removeLeadingSlash = (path: string): string =>
-  _path.canonicalize(path).replace(/^\//u, "");
-
-/**
- * Removes trailing slash.
- *
- * @param path - Path.
- * @returns New string with trailing slash removed.
- */
-_path.removeTrailingSlash = (path: string): string =>
-  _path.canonicalize(path).replace(/\/$/u, "");
 
 /**
  * Replaces all occurences of search term.
@@ -239,3 +180,73 @@ export function unpadMultiline(str: string): string {
     ? replaceAll(str.trim(), a.first(matches), detectEol(str))
     : str;
 }
+
+/**
+ * Not implemented.
+ */
+const _path = o.extend(
+  (): never => {
+    throw new Error("Not implemented");
+  },
+  {
+    /**
+     * Adds leading slash.
+     *
+     * @param this - No this.
+     * @param path - Path.
+     * @returns New string with leading slash added.
+     */
+    addLeadingSlash(this: void, path: string): string {
+      return `/${_path.removeLeadingSlash(path)}`;
+    },
+    /**
+     * Adds trailing slash.
+     *
+     * @param this - No this.
+     * @param path - Path.
+     * @returns New string with trailing slash added.
+     */
+    addTrailingSlash(this: void, path: string): string {
+      return `${_path.removeTrailingSlash(path)}/`;
+    },
+    /**
+     * Canonicalizes path.
+     *
+     * @param this - No this.
+     * @param path - Path.
+     * @returns Canonical path.
+     */
+    canonicalize(this: void, path: string): string {
+      return path.replace(/[/\\]+/gu, "/");
+    },
+    /**
+     * Creates path from parts.
+     *
+     * @param parts - Parts.
+     * @returns Path.
+     */
+    join(...parts: string[]): string {
+      return _path.canonicalize(parts.join("/"));
+    },
+    /**
+     * Removes leading slash.
+     *
+     * @param this - No this.
+     * @param path - Path.
+     * @returns New string with leading slash removed.
+     */
+    removeLeadingSlash(this: void, path: string): string {
+      return _path.canonicalize(path).replace(/^\//u, "");
+    },
+    /**
+     * Removes trailing slash.
+     *
+     * @param this - No this.
+     * @param path - Path.
+     * @returns New string with trailing slash removed.
+     */
+    removeTrailingSlash(this: void, path: string): string {
+      return _path.canonicalize(path).replace(/\/$/u, "");
+    }
+  }
+);

@@ -415,12 +415,6 @@ export function unshiftOrReplaceBy<T extends object>(
     : unshift(arr, value);
 }
 
-/*
-|*******************************************************************************
-|* Private
-|*******************************************************************************
-|*/
-
 /**
  * Creates reduce function.
  *

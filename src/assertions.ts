@@ -16,13 +16,6 @@ export interface ErrorArgFn {
 }
 
 /**
- * Not implemented.
- */
-export function not(): never {
-  throw new Error("Not implemented");
-}
-
-/**
  * Asserts that value is an array.
  *
  * @param value - Value.
@@ -34,21 +27,6 @@ export function array(
 ): asserts value is types.unknowns {
   byGuard(value, is.array, error);
 }
-
-/**
- * Asserts that value type is T[].
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @param error - Error.
- */
-array.of = <T>(
-  value: unknown,
-  guard: is.Guard<T>,
-  error?: ErrorArg
-): asserts value is readonly T[] => {
-  byGuard(value, is.factory(is.array.of, guard), error);
-};
 
 /**
  * Asserts that value is a boolean.
@@ -115,19 +93,6 @@ export function empty(
 }
 
 /**
- * Asserts that value type is not empty.
- *
- * @param value - Value.
- * @param error - Error.
- */
-not.empty = <T>(
-  value: T,
-  error?: ErrorArg
-): asserts value is Exclude<T, types.empty> => {
-  byGuard(value, is.not.empty, error);
-};
-
-/**
  * Asserts that value type is T.
  *
  * @param value - Value.
@@ -154,21 +119,6 @@ export function indexedObject(
 ): asserts value is types.IndexedObject {
   byGuard(value, is.indexedObject, error);
 }
-
-/**
- * Asserts that value type is IndexedObject\<T\>.
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @param error - Error.
- */
-indexedObject.of = <T>(
-  value: unknown,
-  guard: is.Guard<T>,
-  error?: ErrorArg
-): asserts value is types.IndexedObject<T> => {
-  byGuard(value, is.factory(is.indexedObject.of, guard), error);
-};
 
 /**
  * Asserts that value type is T.
@@ -214,21 +164,11 @@ export function map(
 }
 
 /**
- * Asserts that value type is Map\<K, V\>.
- *
- * @param value - Value.
- * @param keyGuard - Key guard.
- * @param valueGuard - Value guard.
- * @param error - Error.
+ * Not implemented.
  */
-map.of = <K, V>(
-  value: unknown,
-  keyGuard: is.Guard<K>,
-  valueGuard: is.Guard<V>,
-  error?: ErrorArg
-): asserts value is ReadonlyMap<K, V> => {
-  byGuard(value, is.factory(is.map.of, keyGuard, valueGuard), error);
-};
+export function not(): never {
+  throw new Error("Not implemented");
+}
 
 /**
  * Asserts that value type is NumStr.
@@ -281,21 +221,6 @@ export function set(
 ): asserts value is ReadonlySet<unknown> {
   byGuard(value, is.set, error);
 }
-
-/**
- * Asserts that value type is Set\<T\>.
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @param error - Error.
- */
-set.of = <T>(
-  value: unknown,
-  guard: is.Guard<T>,
-  error?: ErrorArg
-): asserts value is ReadonlySet<T> => {
-  byGuard(value, is.factory(is.set.of, guard), error);
-};
 
 /**
  * Asserts that value is a string.
@@ -361,3 +286,78 @@ export function toBeTrue(
 ): asserts value is true {
   byGuard(value, is.true, error);
 }
+
+/**
+ * Asserts that value type is T[].
+ *
+ * @param value - Value.
+ * @param guard - Guard for type T.
+ * @param error - Error.
+ */
+array.of = <T>(
+  value: unknown,
+  guard: is.Guard<T>,
+  error?: ErrorArg
+): asserts value is readonly T[] => {
+  byGuard(value, is.factory(is.array.of, guard), error);
+};
+
+/**
+ * Asserts that value type is not empty.
+ *
+ * @param value - Value.
+ * @param error - Error.
+ */
+not.empty = <T>(
+  value: T,
+  error?: ErrorArg
+): asserts value is Exclude<T, types.empty> => {
+  byGuard(value, is.not.empty, error);
+};
+
+/**
+ * Asserts that value type is IndexedObject\<T\>.
+ *
+ * @param value - Value.
+ * @param guard - Guard for type T.
+ * @param error - Error.
+ */
+indexedObject.of = <T>(
+  value: unknown,
+  guard: is.Guard<T>,
+  error?: ErrorArg
+): asserts value is types.IndexedObject<T> => {
+  byGuard(value, is.factory(is.indexedObject.of, guard), error);
+};
+
+/**
+ * Asserts that value type is Map\<K, V\>.
+ *
+ * @param value - Value.
+ * @param keyGuard - Key guard.
+ * @param valueGuard - Value guard.
+ * @param error - Error.
+ */
+map.of = <K, V>(
+  value: unknown,
+  keyGuard: is.Guard<K>,
+  valueGuard: is.Guard<V>,
+  error?: ErrorArg
+): asserts value is ReadonlyMap<K, V> => {
+  byGuard(value, is.factory(is.map.of, keyGuard, valueGuard), error);
+};
+
+/**
+ * Asserts that value type is Set\<T\>.
+ *
+ * @param value - Value.
+ * @param guard - Guard for type T.
+ * @param error - Error.
+ */
+set.of = <T>(
+  value: unknown,
+  guard: is.Guard<T>,
+  error?: ErrorArg
+): asserts value is ReadonlySet<T> => {
+  byGuard(value, is.factory(is.set.of, guard), error);
+};

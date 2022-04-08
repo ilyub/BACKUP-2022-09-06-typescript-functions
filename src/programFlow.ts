@@ -3,6 +3,14 @@
 import * as is from "./guards";
 import type { numberU } from "./types/core";
 
+export { _clearInterval as clearInterval };
+
+export { _clearTimeout as clearTimeout };
+
+export { _setInterval as setInterval };
+
+export { _setTimeout as setTimeout };
+
 /**
  * Clears interval.
  *
@@ -12,8 +20,6 @@ function _clearInterval(id: numberU): void {
   if (is.not.empty(id)) clearInterval(id);
 }
 
-export { _clearInterval as clearInterval };
-
 /**
  * Clears timeout.
  *
@@ -22,8 +28,6 @@ export { _clearInterval as clearInterval };
 function _clearTimeout(id: numberU): void {
   if (is.not.empty(id)) clearTimeout(id);
 }
-
-export { _clearTimeout as clearTimeout };
 
 /**
  * Sets interval.
@@ -36,8 +40,6 @@ function _setInterval(callback: () => void, timeout: number): number {
   return setInterval(callback, timeout);
 }
 
-export { _setInterval as setInterval };
-
 /**
  * Sets timeout.
  *
@@ -48,5 +50,3 @@ export { _setInterval as setInterval };
 function _setTimeout(callback: () => void, timeout: number): number {
   return setTimeout(callback, timeout);
 }
-
-export { _setTimeout as setTimeout };

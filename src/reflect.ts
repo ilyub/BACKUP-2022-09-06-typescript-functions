@@ -2,8 +2,6 @@
 
 import "reflect-metadata";
 
-export type MetadataKey = string | symbol;
-
 /**
  * Typed version of Reflect.apply.
  *
@@ -31,6 +29,37 @@ export const construct: (
   args: ArrayLike<unknown>,
   newTarget?: Function
 ) => unknown = Reflect.construct;
+
+export const defineProperty = Reflect.defineProperty;
+
+export const deleteProperty = Reflect.deleteProperty;
+
+/**
+ * Typed version of Reflect.get.
+ *
+ * @param target - Target object.
+ * @param key - Property key.
+ * @returns Property value.
+ */
+export const get: (target: object, key: PropertyKey) => unknown = Reflect.get;
+
+export const getOwnPropertyDescriptor = Reflect.getOwnPropertyDescriptor;
+
+export const getPrototypeOf = Reflect.getPrototypeOf;
+
+export const has = Reflect.has;
+
+export const isExtensible = Reflect.isExtensible;
+
+export const ownKeys = Reflect.ownKeys;
+
+export const preventExtensions = Reflect.preventExtensions;
+
+export const set = Reflect.set;
+
+export const setPrototypeOf = Reflect.setPrototypeOf;
+
+export type MetadataKey = string | symbol;
 
 /**
  * Typed version of Reflect.defineMetadata.
@@ -63,19 +92,6 @@ export function defineMetadataKey(
 ): void {
   Reflect.defineMetadata(metadataKey, metadataValue, target, key);
 }
-
-export const defineProperty = Reflect.defineProperty;
-
-export const deleteProperty = Reflect.deleteProperty;
-
-/**
- * Typed version of Reflect.get.
- *
- * @param target - Target object.
- * @param key - Property key.
- * @returns Property value.
- */
-export const get: (target: object, key: PropertyKey) => unknown = Reflect.get;
 
 /**
  * Typed version of Reflect.getMetadata.
@@ -134,12 +150,6 @@ export function getOwnMetadataKey(
   return Reflect.getOwnMetadata(metadataKey, target, key);
 }
 
-export const getOwnPropertyDescriptor = Reflect.getOwnPropertyDescriptor;
-
-export const getPrototypeOf = Reflect.getPrototypeOf;
-
-export const has = Reflect.has;
-
 /**
  * Typed version of Reflect.hasMetadata.
  *
@@ -196,13 +206,3 @@ export function hasOwnMetadataKey(
 ): boolean {
   return Reflect.hasOwnMetadata(metadataKey, target, key);
 }
-
-export const isExtensible = Reflect.isExtensible;
-
-export const ownKeys = Reflect.ownKeys;
-
-export const preventExtensions = Reflect.preventExtensions;
-
-export const set = Reflect.set;
-
-export const setPrototypeOf = Reflect.setPrototypeOf;

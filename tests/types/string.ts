@@ -3,21 +3,21 @@ import type { Equals } from "ts-toolbelt/out/Any/Equals";
 import type { AddPrefix, RemovePrefix } from "@/types/string";
 
 test("AddPrefix", () => {
-  type To = AddPrefix<"a" | "b", "x">;
+  const typeCheck: Equals<To, Expected> = 1;
+
+  expect(typeCheck).toBe(1);
 
   type Expected = "xa" | "xb";
 
-  const typeCheck: Equals<To, Expected> = 1;
-
-  expect(typeCheck).toBe(1);
+  type To = AddPrefix<"a" | "b", "x">;
 });
 
 test("RemovePrefix", () => {
-  type To = RemovePrefix<"xa" | "xb", "x">;
-
-  type Expected = "a" | "b";
-
   const typeCheck: Equals<To, Expected> = 1;
 
   expect(typeCheck).toBe(1);
+
+  type Expected = "a" | "b";
+
+  type To = RemovePrefix<"xa" | "xb", "x">;
 });

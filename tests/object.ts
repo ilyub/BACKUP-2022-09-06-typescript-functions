@@ -36,10 +36,6 @@ test("filter", () => {
 });
 
 test("freeze", () => {
-  interface TestInterface {
-    value: number;
-  }
-
   const obj1: TestInterface = { value: 1 };
 
   const obj2 = o.freeze(obj1);
@@ -51,6 +47,10 @@ test("freeze", () => {
   expect(obj1).toBeSameAs(obj2);
   expect(typeCheck1).toBe(1);
   expect(typeCheck2).toBe(1);
+
+  interface TestInterface {
+    value: number;
+  }
 });
 
 test("fromEntries", () => {
@@ -232,10 +232,6 @@ test.each([
 });
 
 test("unfreeze", () => {
-  interface TestInterface {
-    readonly value: number;
-  }
-
   const obj1: TestInterface = { value: 1 };
 
   const obj2 = o.unfreeze(obj1);
@@ -247,4 +243,8 @@ test("unfreeze", () => {
   expect(obj1).toBeSameAs(obj2);
   expect(typeCheck1).toBe(1);
   expect(typeCheck2).toBe(1);
+
+  interface TestInterface {
+    readonly value: number;
+  }
 });

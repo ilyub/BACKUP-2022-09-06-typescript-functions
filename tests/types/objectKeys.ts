@@ -22,61 +22,61 @@ interface TestInterface {
 }
 
 test("DefinedKeys", () => {
-  type To = DefinedKeys<TestInterface>;
+  const value: Equals<To, Expected> = 1;
+
+  expect(value).toBe(1);
 
   type Expected = "r" | "w";
 
-  const value: Equals<To, Expected> = 1;
-
-  expect(value).toBe(1);
+  type To = DefinedKeys<TestInterface>;
 });
 
 test("ReadonlyDefinedKeys", () => {
-  type To = ReadonlyDefinedKeys<TestInterface>;
+  const value: Equals<To, Expected> = 1;
+
+  expect(value).toBe(1);
 
   type Expected = "r";
 
-  const value: Equals<To, Expected> = 1;
-
-  expect(value).toBe(1);
+  type To = ReadonlyDefinedKeys<TestInterface>;
 });
 
 test("ReadonlyUndefinedKeys", () => {
-  type To = ReadonlyUndefinedKeys<TestInterface>;
+  const value: Equals<To, Expected> = 1;
+
+  expect(value).toBe(1);
 
   type Expected = "ro" | "rou" | "ru";
 
-  const value: Equals<To, Expected> = 1;
-
-  expect(value).toBe(1);
+  type To = ReadonlyUndefinedKeys<TestInterface>;
 });
 
 test("UndefinedKeys", () => {
-  type To = UndefinedKeys<TestInterface>;
+  const value: Equals<To, Expected> = 1;
+
+  expect(value).toBe(1);
 
   type Expected = "ro" | "rou" | "ru" | "wo" | "wou" | "wu";
 
-  const value: Equals<To, Expected> = 1;
-
-  expect(value).toBe(1);
+  type To = UndefinedKeys<TestInterface>;
 });
 
 test("WritableDefindKeys", () => {
-  type To = WritableDefindKeys<TestInterface>;
+  const value: Equals<To, Expected> = 1;
+
+  expect(value).toBe(1);
 
   type Expected = "w";
 
-  const value: Equals<To, Expected> = 1;
-
-  expect(value).toBe(1);
+  type To = WritableDefindKeys<TestInterface>;
 });
 
 test("WritableUndefindKeys", () => {
-  type To = WritableUndefindKeys<TestInterface>;
-
-  type Expected = "wo" | "wou" | "wu";
-
   const value: Equals<To, Expected> = 1;
 
   expect(value).toBe(1);
+
+  type Expected = "wo" | "wou" | "wu";
+
+  type To = WritableUndefindKeys<TestInterface>;
 });

@@ -1,24 +1,32 @@
 import * as is from "./guards";
+import * as o from "./object";
 import type * as types from "./types/core";
 
 /**
  * Not implemented.
  */
-export function not(): never {
-  throw new Error("Not implemented");
-}
-
-/**
- * Converts value to not empty.
- *
- * @param value - Value.
- * @param defVal - Default value.
- * @returns Value if it is not empty, defVal otherwise.
- */
-not.empty = <T>(
-  value: T,
-  defVal: Exclude<T, types.empty>
-): Exclude<T, types.empty> => (is.not.empty(value) ? value : defVal);
+export const not = o.extend(
+  (): never => {
+    throw new Error("Not implemented");
+  },
+  {
+    /**
+     * Converts value to not empty.
+     *
+     * @param this - No this.
+     * @param value - Value.
+     * @param defVal - Default value.
+     * @returns Value if it is not empty, defVal otherwise.
+     */
+    empty<T>(
+      this: void,
+      value: T,
+      defVal: Exclude<T, types.empty>
+    ): Exclude<T, types.empty> {
+      return is.not.empty(value) ? value : defVal;
+    }
+  }
+);
 
 /**
  * Converts value to a number.

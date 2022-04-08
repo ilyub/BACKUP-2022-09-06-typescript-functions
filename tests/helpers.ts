@@ -16,10 +16,6 @@ import * as testUtils from "@/testUtils";
 testUtils.installFakeTimer();
 
 test("createFacade: Extension", () => {
-  interface Extension {
-    pow: (x: number) => number;
-  }
-
   const extension: Extension = { pow: x => x * x };
 
   const facade = createFacade<object, Extension>("sample-facade", extension);
@@ -36,26 +32,26 @@ test("createFacade: Extension", () => {
     expect(facade.pow(2)).toBe(8);
     expect(facade.pow(3)).toBe(27);
   }
+
+  interface Extension {
+    pow: (x: number) => number;
+  }
 });
 
 test("createFacade: Function", () => {
-  interface Facade {
-    (x: number): number;
-  }
-
   const facade = createFacade<Facade>("sample-facade", {});
 
   facade.setImplementation(x => x * x);
   expect(facade(1)).toBe(1);
   expect(facade(2)).toBe(4);
   expect(facade(3)).toBe(9);
+
+  interface Facade {
+    (x: number): number;
+  }
 });
 
 test("createFacade: Object", () => {
-  interface Facade {
-    value: number;
-  }
-
   const facade = createFacade<Facade>("sample-facade", {});
 
   class Implementation {
@@ -79,6 +75,10 @@ test("createFacade: Object", () => {
   expect(reflect.isExtensible(facade)).toBeTrue();
   expect(reflect.ownKeys(facade)).toStrictEqual(["value"]);
   expect(reflect.set(facade, "value", 2)).toBeTrue();
+
+  interface Facade {
+    value: number;
+  }
 });
 
 test("createValidationObject", () => {

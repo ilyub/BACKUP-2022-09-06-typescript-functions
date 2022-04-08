@@ -23,37 +23,39 @@ interface TestInterface {
 }
 
 test("Join2", () => {
-  type To = Join2<{ a: 1 }, { b: 2 }>;
+  const typeCheck: Equals<To, Expected> = 1;
+
+  expect(typeCheck).toBe(1);
 
   type Expected = { a: 1 } & { b: 2 };
 
-  const typeCheck: Equals<To, Expected> = 1;
-
-  expect(typeCheck).toBe(1);
+  type To = Join2<{ a: 1 }, { b: 2 }>;
 });
 
 test("Join3", () => {
-  type To = Join3<{ a: 1 }, { b: 2 }, { c: 3 }>;
+  const typeCheck: Equals<To, Expected> = 1;
+
+  expect(typeCheck).toBe(1);
 
   type Expected = { a: 1 } & { b: 2 } & { c: 3 };
 
-  const typeCheck: Equals<To, Expected> = 1;
-
-  expect(typeCheck).toBe(1);
+  type To = Join3<{ a: 1 }, { b: 2 }, { c: 3 }>;
 });
 
 test("Join4", () => {
-  type To = Join4<{ a: 1 }, { b: 2 }, { c: 3 }, { d: 4 }>;
-
-  type Expected = { a: 1 } & { b: 2 } & { c: 3 } & { d: 4 };
-
   const typeCheck: Equals<To, Expected> = 1;
 
   expect(typeCheck).toBe(1);
+
+  type Expected = { a: 1 } & { b: 2 } & { c: 3 } & { d: 4 };
+
+  type To = Join4<{ a: 1 }, { b: 2 }, { c: 3 }, { d: 4 }>;
 });
 
 test("OptionalStyle", () => {
-  type To = OptionalStyle<TestInterface>;
+  const value: Equals<To, Expected> = 1;
+
+  expect(value).toBe(1);
 
   type Expected = {
     readonly r: number;
@@ -69,13 +71,13 @@ test("OptionalStyle", () => {
     wu?: number;
   };
 
-  const value: Equals<To, Expected> = 1;
-
-  expect(value).toBe(1);
+  type To = OptionalStyle<TestInterface>;
 });
 
 test("OptionalUndefinedStyle", () => {
-  type To = OptionalUndefinedStyle<TestInterface>;
+  const value: Equals<To, Expected> = 1;
+
+  expect(value).toBe(1);
 
   type Expected = {
     readonly r: number;
@@ -91,24 +93,13 @@ test("OptionalUndefinedStyle", () => {
     wu?: numberU;
   };
 
-  const value: Equals<To, Expected> = 1;
-
-  expect(value).toBe(1);
+  type To = OptionalUndefinedStyle<TestInterface>;
 });
 
 test("StrictOmit", () => {
-  interface From {
-    a: string;
-    b?: string;
-    readonly c: string;
-    readonly d?: string;
-    e: string;
-    f?: string;
-    readonly g: string;
-    readonly h?: string;
-  }
+  const value: Equals<To, Expected> = 1;
 
-  type To = StrictOmit<From, "e" | "f" | "g" | "h">;
+  expect(value).toBe(1);
 
   type Expected = {
     a: string;
@@ -122,13 +113,24 @@ test("StrictOmit", () => {
     h?: never;
   };
 
-  const value: Equals<To, Expected> = 1;
+  interface From {
+    a: string;
+    b?: string;
+    readonly c: string;
+    readonly d?: string;
+    e: string;
+    f?: string;
+    readonly g: string;
+    readonly h?: string;
+  }
 
-  expect(value).toBe(1);
+  type To = StrictOmit<From, "e" | "f" | "g" | "h">;
 });
 
 test("UndefinedStyle", () => {
-  type To = UndefinedStyle<TestInterface>;
+  const value: Equals<To, Expected> = 1;
+
+  expect(value).toBe(1);
 
   type Expected = {
     readonly r: number;
@@ -144,7 +146,5 @@ test("UndefinedStyle", () => {
     wu: numberU;
   };
 
-  const value: Equals<To, Expected> = 1;
-
-  expect(value).toBe(1);
+  type To = UndefinedStyle<TestInterface>;
 });

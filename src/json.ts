@@ -56,26 +56,20 @@ export function neq(x: unknown, y: unknown): boolean {
   return encode(x) !== encode(y);
 }
 
-/*
-|*******************************************************************************
-|* Private
-|*******************************************************************************
-|*/
-
-type Type = "map-5702-3c89-3feb-75d4" | "set-41ef-10c9-ae1f-15e8";
-
 const TypeVO = createValidationObject<Type>({
   "map-5702-3c89-3feb-75d4": "map-5702-3c89-3feb-75d4",
   "set-41ef-10c9-ae1f-15e8": "set-41ef-10c9-ae1f-15e8"
 });
 
+const isEntry = is.tuple.factory(is.unknown, is.unknown);
+
+const isEntries = is.factory(is.array.of, isEntry);
+
 const isType = is.factory(is.enumeration, TypeVO);
 
 const isCustomData = is.object.factory({ type: isType, value: is.unknown }, {});
 
-const isEntry = is.tuple.factory(is.unknown, is.unknown);
-
-const isEntries = is.factory(is.array.of, isEntry);
+type Type = "map-5702-3c89-3feb-75d4" | "set-41ef-10c9-ae1f-15e8";
 
 /**
  * JSON replacer.

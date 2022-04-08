@@ -43,48 +43,6 @@ declare global {
   }
 }
 
-export interface ExpectFromMatcher<K extends keyof Matchers> {
-  /**
-   * Expect function.
-   *
-   * @param got - Got value.
-   * @param args - Arguments.
-   * @returns Result.
-   */
-  (
-    got: unknown,
-    ...args: MatcherParameters<K>
-  ): MatcherReturnType<K> extends Promise<unknown>
-    ? Promise<ExpectReturnType>
-    : ExpectReturnType;
-}
-
-export interface ExpectReturnType {
-  /**
-   * Returns failure message.
-   *
-   * @returns Failure message.
-   */
-  readonly message: () => string;
-  readonly pass: boolean;
-}
-
-export interface FakeTimerOptions {
-  readonly shouldAdvanceTime?: boolean;
-}
-
-export type Matcher<K extends keyof Matchers> = Matchers[K];
-
-export type MatcherParameters<K extends keyof Matchers> = Parameters<
-  Matcher<K>
->;
-
-export type MatcherReturnType<K extends keyof Matchers> = ReturnType<
-  Matcher<K>
->;
-
-export type Matchers = Readonly<jest.Matchers<unknown>>;
-
 export const clock = onDemand(() => {
   assert.not.empty(_clock);
 
@@ -166,6 +124,48 @@ export const toBeSameAs: ExpectFromMatcher<"toBeSameAs"> = (got, expected) =>
     ? { message: () => "Expected not the same object", pass: true }
     : { message: () => "Expected the same object", pass: false };
 
+export interface ExpectFromMatcher<K extends keyof Matchers> {
+  /**
+   * Expect function.
+   *
+   * @param got - Got value.
+   * @param args - Arguments.
+   * @returns Result.
+   */
+  (
+    got: unknown,
+    ...args: MatcherParameters<K>
+  ): MatcherReturnType<K> extends Promise<unknown>
+    ? Promise<ExpectReturnType>
+    : ExpectReturnType;
+}
+
+export interface ExpectReturnType {
+  /**
+   * Returns failure message.
+   *
+   * @returns Failure message.
+   */
+  readonly message: () => string;
+  readonly pass: boolean;
+}
+
+export interface FakeTimerOptions {
+  readonly shouldAdvanceTime?: boolean;
+}
+
+export type Matcher<K extends keyof Matchers> = Matchers[K];
+
+export type MatcherParameters<K extends keyof Matchers> = Parameters<
+  Matcher<K>
+>;
+
+export type MatcherReturnType<K extends keyof Matchers> = ReturnType<
+  Matcher<K>
+>;
+
+export type Matchers = Readonly<jest.Matchers<unknown>>;
+
 /**
  * Installs fake timer.
  *
@@ -245,11 +245,5 @@ export function setRandomSystemTime(): void {
     })
   );
 }
-
-/*
-|*******************************************************************************
-|* Private
-|*******************************************************************************
-|*/
 
 let _clock: fakeTimers.Clock | undefined;

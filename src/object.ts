@@ -17,63 +17,34 @@ import type {
 } from "./types/core";
 import type { OptionalStyle, StrictOmit } from "./types/object";
 
-export interface CompareFn<T extends object> {
-  /**
-   * Compares two object entries.
-   *
-   * @param value1 - Value 1.
-   * @param value2 - Value 2.
-   * @param key1 - Key 1.
-   * @param key2 - Key 2.
-   */
-  (
-    value1: T[keyof T],
-    value2: T[keyof T],
-    key1: keyof T,
-    key2: keyof T
-  ): number;
-}
+export { _entries as entries };
 
-export interface Descriptor<T, K extends keyof T = keyof T>
-  extends PropertyDescriptor {
-  readonly configurable?: boolean;
-  readonly enumerable?: boolean;
-  /**
-   * Property getter.
-   *
-   * @param this - Object.
-   * @returns Value.
-   */
-  readonly get?: (this: T) => T[K];
-  /**
-   * Property setter.
-   *
-   * @param this - Object.
-   * @param value - New value.
-   */
-  readonly set?: (this: T, value: T[K]) => void;
-  readonly value?: T[K];
-  readonly writable?: boolean;
-}
+/**
+ * Typed version of Object.assign.
+ *
+ * @param mutableTarget - Target.
+ * @param sources - Sources.
+ * @returns Target.
+ */
+export const assign: <T extends object>(
+  mutableTarget: T,
+  ...sources: Array<Partial<T>>
+) => T = Object.assign;
 
-export interface Entries {
-  /**
-   * Typed version of Object.entries.
-   *
-   * @param obj - Object.
-   * @returns Object entries.
-   */
-  <K extends string, V>(obj: PartialRecord<K, V>): Array<[K, V]>;
-  /**
-   * Typed version of Object.entries.
-   *
-   * @param obj - Object.
-   * @returns Object entries.
-   */
-  <T extends object>(obj: T): Array<[string & keyof T, T[NumStr & keyof T]]>;
-}
+/**
+ * Typed version of Object.defineProperty.
+ *
+ * @param obj - Object.
+ * @param key - Key.
+ * @param descriptor - Descriptor.
+ */
+export const defineProperty: <T, K extends keyof T = keyof T>(
+  obj: T,
+  key: K,
+  descriptor: Descriptor<T, K>
+) => void = Object.defineProperty.bind(Object);
 
-export interface Extend {
+export const extend: {
   /**
    * Typed version of Object.assign.
    *
@@ -106,9 +77,45 @@ export interface Extend {
     source2: B,
     source3: C
   ): A & B & C & T;
-}
+} = Object.assign;
 
-export interface Keys {
+export const fromEntries = extend(
+  /**
+   * Creates object from entries.
+   *
+   * @param entries - Entries.
+   * @returns Object.
+   */
+  <K extends PropertyKey, V>(
+    entries: Iterable<readonly [K, V]>
+  ): PartialRecord<K, V> => {
+    const result: WritablePartialRecord<K, V> = {};
+
+    for (const entry of entries) result[entry[0]] = entry[1];
+
+    return result;
+  },
+  {
+    /**
+     * Creates object from entries.
+     *
+     * @param entries - Entries.
+     * @returns Object.
+     */
+    exhaustive<K extends PropertyKey, V>(
+      entries: Iterable<readonly [K, V]>
+    ): WritableRecord<K, V> {
+      const result: WritablePartialRecord<K, V> = {};
+
+      for (const entry of entries) result[entry[0]] = entry[1];
+
+      // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+      return result as Rec<K, V>;
+    }
+  }
+);
+
+export const keys: {
   /**
    * Typed version of Object.keys.
    *
@@ -123,20 +130,41 @@ export interface Keys {
    * @returns Object keys.
    */
   <T extends object>(obj: T): Array<string & keyof T>;
-}
+} = Object.keys;
 
-export interface Predicate<T extends object> {
+export const sort: {
   /**
-   * Checks object entry.
+   * Sorts object.
    *
-   * @param value - Value.
-   * @param key - Key.
-   * @returns _True_ if object entry passes check, _false_ otherwise.
+   * @param obj - Object.
+   * @param compareFn - Comparison function.
+   * @returns New object.
    */
-  (value: T[keyof T], key: keyof T): boolean;
-}
+  <K extends string, V>(
+    obj: Rec<K, V>,
+    compareFn?: CompareFn<Rec<K, V>>
+  ): WritableRecord<K, V>;
+  /**
+   * Sorts object.
+   *
+   * @param obj - Object.
+   * @param compareFn - Comparison function.
+   * @returns New object.
+   */
+  <T extends object>(obj: T, compareFn?: CompareFn<T>): T;
+} = <K extends string, V>(obj: Rec<K, V>, compareFn?: CompareFn<Rec<K, V>>) =>
+  fromEntries.exhaustive(
+    a.sort(
+      _entries(obj),
+      compareFn
+        ? // eslint-disable-next-line @skylib/prefer-readonly -- Wait for @skylib/eslint-plugin update
+          (entry1, entry2): number =>
+            compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
+        : undefined
+    )
+  );
 
-export interface Values {
+export const values: {
   /**
    * Typed version of Object.values.
    *
@@ -151,19 +179,57 @@ export interface Values {
    * @returns Object values.
    */
   <T extends object>(obj: T): Array<T[NumStr & keyof T]>;
+} = Object.values;
+
+export interface CompareFn<T extends object> {
+  /**
+   * Compares two object entries.
+   *
+   * @param value1 - Value 1.
+   * @param value2 - Value 2.
+   * @param key1 - Key 1.
+   * @param key2 - Key 2.
+   */
+  (
+    value1: T[keyof T],
+    value2: T[keyof T],
+    key1: keyof T,
+    key2: keyof T
+  ): number;
 }
 
-/**
- * Typed version of Object.assign.
- *
- * @param mutableTarget - Target.
- * @param sources - Sources.
- * @returns Target.
- */
-export const assign: <T extends object>(
-  mutableTarget: T,
-  ...sources: Array<Partial<T>>
-) => T = Object.assign;
+export interface Descriptor<T, K extends keyof T = keyof T>
+  extends PropertyDescriptor {
+  readonly configurable?: boolean;
+  readonly enumerable?: boolean;
+  /**
+   * Property getter.
+   *
+   * @param this - This argument.
+   * @returns Value.
+   */
+  readonly get?: (this: T) => T[K];
+  /**
+   * Property setter.
+   *
+   * @param this - This argument.
+   * @param value - New value.
+   */
+  readonly set?: (this: T, value: T[K]) => void;
+  readonly value?: T[K];
+  readonly writable?: boolean;
+}
+
+export interface Predicate<T extends object> {
+  /**
+   * Checks object entry.
+   *
+   * @param value - Value.
+   * @param key - Key.
+   * @returns _True_ if object entry passes check, _false_ otherwise.
+   */
+  (value: T[keyof T], key: keyof T): boolean;
+}
 
 /**
  * Clones object.
@@ -174,23 +240,6 @@ export const assign: <T extends object>(
 export function clone<T extends object>(obj: T): Writable<T> {
   return { ...obj };
 }
-
-/**
- * Typed version of Object.defineProperty.
- *
- * @param obj - Object.
- * @param key - Key.
- * @param descriptor - Descriptor.
- */
-export const defineProperty: <T, K extends keyof T = keyof T>(
-  obj: T,
-  key: K,
-  descriptor: Descriptor<T, K>
-) => void = Object.defineProperty.bind(Object);
-
-const _entries: Entries = Object.entries;
-
-export { _entries as entries };
 
 /**
  * Checks that every object property satisfies condition.
@@ -205,8 +254,6 @@ export function every<T extends object>(
 ): boolean {
   return _entries(obj).every(([key, value]) => predicate(value, key));
 }
-
-export const extend: Extend = Object.assign;
 
 /**
  * Filters object by predicate.
@@ -236,39 +283,6 @@ export function filter<T extends object>(
 export function freeze<T extends object>(obj: T): Readonly<T> {
   return obj;
 }
-
-/**
- * Creates object from entries.
- *
- * @param entries - Entries.
- * @returns Object.
- */
-export function fromEntries<K extends PropertyKey, V>(
-  entries: Iterable<readonly [K, V]>
-): PartialRecord<K, V> {
-  const result: WritablePartialRecord<K, V> = {};
-
-  for (const entry of entries) result[entry[0]] = entry[1];
-
-  return result;
-}
-
-/**
- * Creates object from entries.
- *
- * @param entries - Entries.
- * @returns Object.
- */
-fromEntries.exhaustive = <K extends PropertyKey, V>(
-  entries: Iterable<readonly [K, V]>
-): WritableRecord<K, V> => {
-  const result: WritablePartialRecord<K, V> = {};
-
-  for (const entry of entries) result[entry[0]] = entry[1];
-
-  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
-  return result as Rec<K, V>;
-};
 
 /**
  * Returns object property.
@@ -309,8 +323,6 @@ export function getPrototypeOf(obj: object): objectU {
 export function hasOwnProp(key: PropertyKey, obj: object): boolean {
   return Object.prototype.hasOwnProperty.call(obj, key);
 }
-
-export const keys: Keys = Object.keys;
 
 /**
  * Applies callback to each property.
@@ -413,43 +425,6 @@ export function some<T extends object>(
 }
 
 /**
- * Sorts object.
- *
- * @param obj - Object.
- * @param compareFn - Comparison function.
- * @returns New object.
- */
-export function sort<K extends string, V>(
-  obj: Rec<K, V>,
-  compareFn?: CompareFn<Rec<K, V>>
-): WritableRecord<K, V>;
-
-/**
- * Sorts object.
- *
- * @param obj - Object.
- * @param compareFn - Comparison function.
- * @returns New object.
- */
-export function sort<T extends object>(obj: T, compareFn?: CompareFn<T>): T;
-
-export function sort<K extends string, V>(
-  obj: Rec<K, V>,
-  compareFn?: CompareFn<Rec<K, V>>
-): WritableRecord<K, V> {
-  return fromEntries.exhaustive(
-    a.sort(
-      _entries(obj),
-      compareFn
-        ? // eslint-disable-next-line @skylib/prefer-readonly -- Wait for @skylib/eslint-plugin update
-          (entry1, entry2): number =>
-            compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
-        : undefined
-    )
-  );
-}
-
-/**
  * Marks object as writable.
  *
  * @param obj - Object.
@@ -459,4 +434,19 @@ export function unfreeze<T extends object>(obj: T): Writable<T> {
   return obj;
 }
 
-export const values: Values = Object.values;
+const _entries: {
+  /**
+   * Typed version of Object.entries.
+   *
+   * @param obj - Object.
+   * @returns Object entries.
+   */
+  <K extends string, V>(obj: PartialRecord<K, V>): Array<[K, V]>;
+  /**
+   * Typed version of Object.entries.
+   *
+   * @param obj - Object.
+   * @returns Object entries.
+   */
+  <T extends object>(obj: T): Array<[string & keyof T, T[NumStr & keyof T]]>;
+} = Object.entries;
