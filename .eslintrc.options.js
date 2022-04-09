@@ -9,6 +9,7 @@ module.exports = {
     {
       filesToLint: [
         "./src/assertions.ts",
+        "./src/inline-assertions.ts",
         "./src/converters.ts",
         "./src/guards.ts"
       ],

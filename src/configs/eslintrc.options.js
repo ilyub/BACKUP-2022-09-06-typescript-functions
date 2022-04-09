@@ -43,6 +43,12 @@ module.exports = importPrefix => {
         type: "wildcard"
       },
       {
+        autoImportSource: `${importPrefix}inline-assertions`,
+        localName: "as",
+        sourcePattern: "@skylib/functions/*/inline-assertions",
+        type: "wildcard"
+      },
+      {
         autoImportSource: `${importPrefix}json`,
         sourcePattern: "@skylib/functions/*/json",
         type: "wildcard"

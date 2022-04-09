@@ -14,6 +14,7 @@ module.exports = [
   "function",
   "guards",
   "helpers",
+  "inline-assertions",
   "json",
   "map",
   "number",
