@@ -1,7 +1,11 @@
+import type { PickKeys } from "./object";
+
 declare global {
   namespace configurable {
-    interface LocaleName {}
+    interface LocaleName {
+      readonly _placeholder?: never;
+    }
   }
 }
 
-export type LocaleName = keyof configurable.LocaleName;
+export type LocaleName = PickKeys<configurable.LocaleName, true, "extends->">;

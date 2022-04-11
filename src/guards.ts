@@ -97,7 +97,6 @@ export const and: {
 } = o.extend(
   (value: unknown, ...guards: Guard[]): value is unknown =>
     guards.every(guard => guard(value)),
-
   {
     factory(...guards: Guard[]): Guard {
       return (value): value is unknown => guards.every(guard => guard(value));
