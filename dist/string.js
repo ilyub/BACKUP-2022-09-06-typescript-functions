@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unpadMultiline = exports.ucFirst = exports.trimTrailingEmptyLines = exports.trimStart = exports.trimLeadingEmptyLines = exports.trimEnd = exports.trailingSpaces = exports.singleLine = exports.replaceAll = exports.path = exports.multiline = exports.lines = exports.lcFirst = exports.leadingSpaces = exports.filter = exports.empty = exports.detectEol = void 0;
+exports.unpadMultiline = exports.ucFirst = exports.trimTrailingEmptyLines = exports.trimStart = exports.trimLeadingEmptyLines = exports.trimEnd = exports.trailingSpaces = exports.singleLine = exports.replaceAll = exports.multiline = exports.lines = exports.leadingSpaces = exports.lcFirst = exports.filter = exports.empty = exports.detectEol = exports.path = void 0;
 const tslib_1 = require("tslib");
 const a = tslib_1.__importStar(require("./array"));
+const o = tslib_1.__importStar(require("./object"));
 const regexp = tslib_1.__importStar(require("./regexp"));
 /**
  * Detects EOL sequence.
@@ -36,16 +37,6 @@ function filter(str, predicate) {
 }
 exports.filter = filter;
 /**
- * Extracts leading spaces.
- *
- * @param str - String.
- * @returns String containing leading spaces.
- */
-function leadingSpaces(str) {
-    return str.slice(0, str.length - trimStart(str).length);
-}
-exports.leadingSpaces = leadingSpaces;
-/**
  * Converts first letter to lower case.
  *
  * @param str - String.
@@ -55,6 +46,16 @@ function lcFirst(str) {
     return str ? str.charAt(0).toLowerCase() + str.slice(1) : str;
 }
 exports.lcFirst = lcFirst;
+/**
+ * Extracts leading spaces.
+ *
+ * @param str - String.
+ * @returns String containing leading spaces.
+ */
+function leadingSpaces(str) {
+    return str.slice(0, str.length - trimStart(str).length);
+}
+exports.leadingSpaces = leadingSpaces;
 /**
  * Splits string into lines.
  *
@@ -75,55 +76,6 @@ function multiline(str) {
     return str.includes("\n");
 }
 exports.multiline = multiline;
-/**
- * Not implemented.
- */
-function _path() {
-    throw new Error("Not implemented");
-}
-exports.path = _path;
-/**
- * Adds leading slash.
- *
- * @param path - Path.
- * @returns New string with leading slash added.
- */
-_path.addLeadingSlash = (path) => `/${_path.removeLeadingSlash(path)}`;
-/**
- * Adds trailing slash.
- *
- * @param path - Path.
- * @returns New string with trailing slash added.
- */
-_path.addTrailingSlash = (path) => `${_path.removeTrailingSlash(path)}/`;
-/**
- * Canonicalizes path.
- *
- * @param path - Path.
- * @returns Canonical path.
- */
-_path.canonicalize = (path) => path.replace(/[/\\]+/gu, "/");
-/**
- * Creates path from parts.
- *
- * @param parts - Parts.
- * @returns Path.
- */
-_path.join = (...parts) => _path.canonicalize(parts.join("/"));
-/**
- * Removes leading slash.
- *
- * @param path - Path.
- * @returns New string with leading slash removed.
- */
-_path.removeLeadingSlash = (path) => _path.canonicalize(path).replace(/^\//u, "");
-/**
- * Removes trailing slash.
- *
- * @param path - Path.
- * @returns New string with trailing slash removed.
- */
-_path.removeTrailingSlash = (path) => _path.canonicalize(path).replace(/\/$/u, "");
 /**
  * Replaces all occurences of search term.
  *
@@ -220,4 +172,71 @@ function unpadMultiline(str) {
         : str;
 }
 exports.unpadMultiline = unpadMultiline;
+/**
+ * Not implemented.
+ */
+const _path = o.extend(() => {
+    throw new Error("Not implemented");
+}, {
+    /**
+     * Adds leading slash.
+     *
+     * @param this - No this.
+     * @param path - Path.
+     * @returns New string with leading slash added.
+     */
+    addLeadingSlash(path) {
+        return `/${_path.removeLeadingSlash(path)}`;
+    },
+    /**
+     * Adds trailing slash.
+     *
+     * @param this - No this.
+     * @param path - Path.
+     * @returns New string with trailing slash added.
+     */
+    addTrailingSlash(path) {
+        return `${_path.removeTrailingSlash(path)}/`;
+    },
+    /**
+     * Canonicalizes path.
+     *
+     * @param this - No this.
+     * @param path - Path.
+     * @returns Canonical path.
+     */
+    canonicalize(path) {
+        return path.replace(/[/\\]+/gu, "/");
+    },
+    /**
+     * Creates path from parts.
+     *
+     * @param parts - Parts.
+     * @returns Path.
+     */
+    join(...parts) {
+        return _path.canonicalize(parts.join("/"));
+    },
+    /**
+     * Removes leading slash.
+     *
+     * @param this - No this.
+     * @param path - Path.
+     * @returns New string with leading slash removed.
+     */
+    removeLeadingSlash(path) {
+        return _path.canonicalize(path).replace(/^\//u, "");
+    },
+    /**
+     * Removes trailing slash.
+     *
+     * @param this - No this.
+     * @param path - Path.
+     * @returns New string with trailing slash removed.
+     */
+    removeTrailingSlash(path) {
+        return _path.canonicalize(path).replace(/\/$/u, "");
+    }
+});
+exports.path = _path;
 //# sourceMappingURL=string.js.map

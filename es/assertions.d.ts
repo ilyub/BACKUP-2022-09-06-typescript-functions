@@ -12,13 +12,6 @@ export interface ErrorArgFn {
     (): unknown;
 }
 /**
- * Not implemented.
- */
-export declare function not(): never;
-export declare namespace not {
-    var empty: <T>(value: T, error?: ErrorArg | undefined) => asserts value is Exclude<T, types.empty>;
-}
-/**
  * Asserts that value is an array.
  *
  * @param value - Value.
@@ -100,6 +93,13 @@ export declare function instances<T>(value: unknown, ctor: Constructor<T>, error
 export declare function map(value: unknown, error?: ErrorArg): asserts value is ReadonlyMap<unknown, unknown>;
 export declare namespace map {
     var of: <K, V>(value: unknown, keyGuard: is.Guard<K>, valueGuard: is.Guard<V>, error?: ErrorArg | undefined) => asserts value is ReadonlyMap<K, V>;
+}
+/**
+ * Not implemented.
+ */
+export declare function not(): never;
+export declare namespace not {
+    var empty: <T>(value: T, error?: ErrorArg | undefined) => asserts value is Exclude<T, types.empty>;
 }
 /**
  * Asserts that value type is NumStr.

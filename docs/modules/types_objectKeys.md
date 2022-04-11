@@ -51,7 +51,7 @@ ___
 
 ### ObjectKeysDefined
 
-Ƭ **ObjectKeysDefined**<`T`, `C`, `D`\>: ``"defined"`` extends `C` ? `FilterKeys`<`T`, `undefined`, ``"<-extends"``\> : `D`
+Ƭ **ObjectKeysDefined**<`T`, `C`, `D`\>: `If`<`Extends`<``"defined"``, `C`\>, `FilterKeys`<`T`, `undefined`, ``"<-extends"``\>, `D`\>
 
 #### Type parameters
 
@@ -71,7 +71,7 @@ ___
 
 ### ObjectKeysOptional
 
-Ƭ **ObjectKeysOptional**<`T`, `C`, `D`\>: ``"optional"`` extends `C` ? `OptionalKeys`<`T`\> : `D`
+Ƭ **ObjectKeysOptional**<`T`, `C`, `D`\>: `If`<`Extends`<``"optional"``, `C`\>, `OptionalKeys`<`T`\>, `D`\>
 
 #### Type parameters
 
@@ -85,7 +85,7 @@ ___
 
 ### ObjectKeysReadonly
 
-Ƭ **ObjectKeysReadonly**<`T`, `C`, `D`\>: ``"readonly"`` extends `C` ? `ReadonlyKeys`<`T`\> : `D`
+Ƭ **ObjectKeysReadonly**<`T`, `C`, `D`\>: `If`<`Extends`<``"readonly"``, `C`\>, `ReadonlyKeys`<`T`\>, `D`\>
 
 #### Type parameters
 
@@ -99,7 +99,7 @@ ___
 
 ### ObjectKeysRequired
 
-Ƭ **ObjectKeysRequired**<`T`, `C`, `D`\>: ``"required"`` extends `C` ? `RequiredKeys`<`T`\> : `D`
+Ƭ **ObjectKeysRequired**<`T`, `C`, `D`\>: `If`<`Extends`<``"required"``, `C`\>, `RequiredKeys`<`T`\>, `D`\>
 
 #### Type parameters
 
@@ -113,7 +113,7 @@ ___
 
 ### ObjectKeysUndefined
 
-Ƭ **ObjectKeysUndefined**<`T`, `C`, `D`\>: ``"undefined"`` extends `C` ? `Exclude`<keyof `T`, `FilterKeys`<`T`, `undefined`, ``"<-extends"``\>\> : `D`
+Ƭ **ObjectKeysUndefined**<`T`, `C`, `D`\>: `If`<`Extends`<``"undefined"``, `C`\>, `Exclude`<keyof `T`, `FilterKeys`<`T`, `undefined`, ``"<-extends"``\>\>, `D`\>
 
 #### Type parameters
 
@@ -127,7 +127,7 @@ ___
 
 ### ObjectKeysWritable
 
-Ƭ **ObjectKeysWritable**<`T`, `C`, `D`\>: ``"writable"`` extends `C` ? `WritableKeys`<`T`\> : `D`
+Ƭ **ObjectKeysWritable**<`T`, `C`, `D`\>: `If`<`Extends`<``"writable"``, `C`\>, `WritableKeys`<`T`\>, `D`\>
 
 #### Type parameters
 

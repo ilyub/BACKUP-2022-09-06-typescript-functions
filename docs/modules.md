@@ -17,6 +17,7 @@
 - [function](modules/function.md)
 - [guards](modules/guards.md)
 - [helpers](modules/helpers.md)
+- [inline-assertions](modules/inline_assertions.md)
 - [json](modules/json.md)
 - [map](modules/map.md)
 - [number](modules/number.md)

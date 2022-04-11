@@ -21,7 +21,7 @@
 - [createFacade](helpers.md#createfacade)
 - [createValidationObject](helpers.md#createvalidationobject)
 - [onDemand](helpers.md#ondemand)
-- [safeAccess](helpers.md#safeaccess)
+- [safeAccess](helpers.md#safeaccess-1)
 - [typedef](helpers.md#typedef)
 - [wait](helpers.md#wait)
 - [wrapProxyHandler](helpers.md#wrapproxyhandler)

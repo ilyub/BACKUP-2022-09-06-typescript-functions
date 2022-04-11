@@ -1,4 +1,3 @@
-export {};
 declare global {
     namespace configurable {
         interface LocaleName {
@@ -6,4 +5,5 @@ declare global {
         }
     }
 }
+export {};
 //# sourceMappingURL=global-types.d.ts.map

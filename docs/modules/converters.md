@@ -4,31 +4,26 @@
 
 ## Table of contents
 
-### Namespaces
+### Variables
 
-- [not](converters.not.md)
+- [not](converters.md#not)
 
 ### Functions
 
-- [not](converters.md#not)
 - [number](converters.md#number)
 - [numberU](converters.md#numberu)
 - [string](converters.md#string)
 - [stringU](converters.md#stringu)
 
-## Functions
+## Variables
 
 ### not
 
-▸ **not**(): `never`
+• `Const` **not**: { `empty`: <T\>(`this`: `void`, `value`: `T`, `defVal`: `Exclude`<`T`, [`empty`](types_core.md#empty)\>) => `Exclude`<`T`, [`empty`](types_core.md#empty)\>  } & () => `never`
 
 Not implemented.
 
-#### Returns
-
-`never`
-
-___
+## Functions
 
 ### number
 

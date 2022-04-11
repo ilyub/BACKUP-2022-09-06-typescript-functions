@@ -1,3 +1,4 @@
+export { _path as path };
 export declare type Eol = "\n" | "\r\n";
 /**
  * Detects EOL sequence.
@@ -22,19 +23,19 @@ export declare function empty(str: string): boolean;
  */
 export declare function filter(str: string, predicate: (char: string, index: number) => boolean): string;
 /**
- * Extracts leading spaces.
- *
- * @param str - String.
- * @returns String containing leading spaces.
- */
-export declare function leadingSpaces(str: string): string;
-/**
  * Converts first letter to lower case.
  *
  * @param str - String.
  * @returns Converted string.
  */
 export declare function lcFirst(str: string): string;
+/**
+ * Extracts leading spaces.
+ *
+ * @param str - String.
+ * @returns String containing leading spaces.
+ */
+export declare function leadingSpaces(str: string): string;
 /**
  * Splits string into lines.
  *
@@ -49,19 +50,6 @@ export declare function lines(str: string): string[];
  * @returns _True_ if string is multiline, _false_ otherwise.
  */
 export declare function multiline(str: string): boolean;
-/**
- * Not implemented.
- */
-declare function _path(): never;
-declare namespace _path {
-    var addLeadingSlash: (path: string) => string;
-    var addTrailingSlash: (path: string) => string;
-    var canonicalize: (path: string) => string;
-    var join: (...parts: string[]) => string;
-    var removeLeadingSlash: (path: string) => string;
-    var removeTrailingSlash: (path: string) => string;
-}
-export { _path as path };
 /**
  * Replaces all occurences of search term.
  *
@@ -127,4 +115,56 @@ export declare function ucFirst(str: string): string;
  * @returns Unpadded string.
  */
 export declare function unpadMultiline(str: string): string;
+/**
+ * Not implemented.
+ */
+declare const _path: {
+    /**
+     * Adds leading slash.
+     *
+     * @param this - No this.
+     * @param path - Path.
+     * @returns New string with leading slash added.
+     */
+    addLeadingSlash(this: void, path: string): string;
+    /**
+     * Adds trailing slash.
+     *
+     * @param this - No this.
+     * @param path - Path.
+     * @returns New string with trailing slash added.
+     */
+    addTrailingSlash(this: void, path: string): string;
+    /**
+     * Canonicalizes path.
+     *
+     * @param this - No this.
+     * @param path - Path.
+     * @returns Canonical path.
+     */
+    canonicalize(this: void, path: string): string;
+    /**
+     * Creates path from parts.
+     *
+     * @param parts - Parts.
+     * @returns Path.
+     */
+    join(...parts: string[]): string;
+    /**
+     * Removes leading slash.
+     *
+     * @param this - No this.
+     * @param path - Path.
+     * @returns New string with leading slash removed.
+     */
+    removeLeadingSlash(this: void, path: string): string;
+    /**
+     * Removes trailing slash.
+     *
+     * @param this - No this.
+     * @param path - Path.
+     * @returns New string with trailing slash removed.
+     */
+    removeTrailingSlash(this: void, path: string): string;
+} & (() => never);
 //# sourceMappingURL=string.d.ts.map

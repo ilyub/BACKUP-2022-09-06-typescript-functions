@@ -1,18 +1,23 @@
 import * as is from "./guards";
+import * as o from "./object";
 /**
  * Not implemented.
  */
-export function not() {
+export const not = o.extend(() => {
     throw new Error("Not implemented");
-}
-/**
- * Converts value to not empty.
- *
- * @param value - Value.
- * @param defVal - Default value.
- * @returns Value if it is not empty, defVal otherwise.
- */
-not.empty = (value, defVal) => (is.not.empty(value) ? value : defVal);
+}, {
+    /**
+     * Converts value to not empty.
+     *
+     * @param this - No this.
+     * @param value - Value.
+     * @param defVal - Default value.
+     * @returns Value if it is not empty, defVal otherwise.
+     */
+    empty(value, defVal) {
+        return is.not.empty(value) ? value : defVal;
+    }
+});
 /**
  * Converts value to a number.
  *

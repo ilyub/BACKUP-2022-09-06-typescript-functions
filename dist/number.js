@@ -1,8 +1,80 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sum = exports.round = exports.rootMeanSquareDeviation = exports.limit = exports.floor = exports.ceil = exports.average = void 0;
+exports.sum = exports.rootMeanSquareDeviation = exports.limit = exports.average = exports.round = exports.floor = exports.ceil = void 0;
 const tslib_1 = require("tslib");
 const assert = tslib_1.__importStar(require("./assertions"));
+const o = tslib_1.__importStar(require("./object"));
+/**
+ * Ceils number to a given precision.
+ *
+ * @param value - Value.
+ * @param precision - The number of digits to keep.
+ * @returns Ceiled value.
+ */
+exports.ceil = o.extend((value, precision) => {
+    const divider = 10 ** precision;
+    return Math.ceil(value * divider) / divider;
+}, {
+    /**
+     * Ceils number.
+     *
+     * @param value - Value.
+     * @param step - Step.
+     * @param from - From.
+     * @returns Ceiled value.
+     */
+    step(value, step, from = 0) {
+        return Math.ceil((value - from) / step) * step + from;
+    }
+});
+/**
+ * Floors number to a given precision.
+ *
+ * @param value - Value.
+ * @param precision - The number of digits to keep.
+ * @returns Floored value.
+ */
+exports.floor = o.extend((value, precision) => {
+    const divider = 10 ** precision;
+    return Math.floor(value * divider) / divider;
+}, {
+    /**
+     * Floors number.
+     *
+     * @param this - No this.
+     * @param value - Value.
+     * @param step - Step.
+     * @param from - From.
+     * @returns Floored value.
+     */
+    step(value, step, from = 0) {
+        return Math.floor((value - from) / step) * step + from;
+    }
+});
+/**
+ * Rounds number to a given precision.
+ *
+ * @param value - Value.
+ * @param precision - The number of digits to keep.
+ * @returns Rounded value.
+ */
+exports.round = o.extend((value, precision) => {
+    const divider = 10 ** precision;
+    return Math.round(value * divider) / divider;
+}, {
+    /**
+     * Rounds number.
+     *
+     * @param this - No this.
+     * @param value - Value.
+     * @param step - Step.
+     * @param from - From.
+     * @returns Rounded value.
+     */
+    step(value, step, from = 0) {
+        return Math.round((value - from) / step) * step + from;
+    }
+});
 /**
  * Averages values.
  *
@@ -14,48 +86,6 @@ function average(...values) {
     return sum(...values) / values.length;
 }
 exports.average = average;
-/**
- * Ceils number to a given precision.
- *
- * @param value - Value.
- * @param precision - The number of digits to keep.
- * @returns Ceiled value.
- */
-function ceil(value, precision) {
-    const divider = 10 ** precision;
-    return Math.ceil(value * divider) / divider;
-}
-exports.ceil = ceil;
-/**
- * Ceils number.
- *
- * @param value - Value.
- * @param step - Step.
- * @param from - From.
- * @returns Ceiled value.
- */
-ceil.step = (value, step, from = 0) => Math.ceil((value - from) / step) * step + from;
-/**
- * Floors number to a given precision.
- *
- * @param value - Value.
- * @param precision - The number of digits to keep.
- * @returns Floored value.
- */
-function floor(value, precision) {
-    const divider = 10 ** precision;
-    return Math.floor(value * divider) / divider;
-}
-exports.floor = floor;
-/**
- * Floors number.
- *
- * @param value - Value.
- * @param step - Step.
- * @param from - From.
- * @returns Floored value.
- */
-floor.step = (value, step, from = 0) => Math.floor((value - from) / step) * step + from;
 /**
  * Limits value to be within [min, max] range.
  *
@@ -79,27 +109,6 @@ function rootMeanSquareDeviation(...values) {
     return Math.sqrt(sum(...values.map(value => (value - averageValue) ** 2)) / values.length);
 }
 exports.rootMeanSquareDeviation = rootMeanSquareDeviation;
-/**
- * Rounds number to a given precision.
- *
- * @param value - Value.
- * @param precision - The number of digits to keep.
- * @returns Rounded value.
- */
-function round(value, precision) {
-    const divider = 10 ** precision;
-    return Math.round(value * divider) / divider;
-}
-exports.round = round;
-/**
- * Rounds number.
- *
- * @param value - Value.
- * @param step - Step.
- * @param from - From.
- * @returns Rounded value.
- */
-round.step = (value, step, from = 0) => Math.round((value - from) / step) * step + from;
 /**
  * Sums values.
  *

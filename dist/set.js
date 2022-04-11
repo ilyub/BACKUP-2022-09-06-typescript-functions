@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.delete = exports.add = void 0;
+exports.add = exports.delete = void 0;
 /**
  * Adds value.
  *

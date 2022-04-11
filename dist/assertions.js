@@ -1,16 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.toBeTrue = exports.toBeFalse = exports.symbol = exports.stringU = exports.string = exports.set = exports.object = exports.number = exports.numStr = exports.map = exports.instances = exports.instance = exports.indexedObject = exports.enumeration = exports.empty = exports.callable = exports.byGuard = exports.boolean = exports.array = exports.not = void 0;
+exports.toBeTrue = exports.toBeFalse = exports.symbol = exports.stringU = exports.string = exports.set = exports.object = exports.number = exports.numStr = exports.not = exports.map = exports.instances = exports.instance = exports.indexedObject = exports.enumeration = exports.empty = exports.callable = exports.byGuard = exports.boolean = exports.array = void 0;
 const tslib_1 = require("tslib");
 const AssertionError_1 = require("./errors/AssertionError");
 const is = tslib_1.__importStar(require("./guards"));
-/**
- * Not implemented.
- */
-function not() {
-    throw new Error("Not implemented");
-}
-exports.not = not;
 /**
  * Asserts that value is an array.
  *
@@ -21,16 +14,6 @@ function array(value, error) {
     byGuard(value, is.array, error);
 }
 exports.array = array;
-/**
- * Asserts that value type is T[].
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @param error - Error.
- */
-array.of = (value, guard, error) => {
-    byGuard(value, is.factory(is.array.of, guard), error);
-};
 /**
  * Asserts that value is a boolean.
  *
@@ -83,15 +66,6 @@ function empty(value, error) {
 }
 exports.empty = empty;
 /**
- * Asserts that value type is not empty.
- *
- * @param value - Value.
- * @param error - Error.
- */
-not.empty = (value, error) => {
-    byGuard(value, is.not.empty, error);
-};
-/**
  * Asserts that value type is T.
  *
  * @param value - Value.
@@ -112,16 +86,6 @@ function indexedObject(value, error) {
     byGuard(value, is.indexedObject, error);
 }
 exports.indexedObject = indexedObject;
-/**
- * Asserts that value type is IndexedObject\<T\>.
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @param error - Error.
- */
-indexedObject.of = (value, guard, error) => {
-    byGuard(value, is.factory(is.indexedObject.of, guard), error);
-};
 /**
  * Asserts that value type is T.
  *
@@ -155,16 +119,12 @@ function map(value, error) {
 }
 exports.map = map;
 /**
- * Asserts that value type is Map\<K, V\>.
- *
- * @param value - Value.
- * @param keyGuard - Key guard.
- * @param valueGuard - Value guard.
- * @param error - Error.
+ * Not implemented.
  */
-map.of = (value, keyGuard, valueGuard, error) => {
-    byGuard(value, is.factory(is.map.of, keyGuard, valueGuard), error);
-};
+function not() {
+    throw new Error("Not implemented");
+}
+exports.not = not;
 /**
  * Asserts that value type is NumStr.
  *
@@ -205,16 +165,6 @@ function set(value, error) {
     byGuard(value, is.set, error);
 }
 exports.set = set;
-/**
- * Asserts that value type is Set\<T\>.
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @param error - Error.
- */
-set.of = (value, guard, error) => {
-    byGuard(value, is.factory(is.set.of, guard), error);
-};
 /**
  * Asserts that value is a string.
  *
@@ -265,4 +215,54 @@ function toBeTrue(value, error) {
     byGuard(value, is.true, error);
 }
 exports.toBeTrue = toBeTrue;
+/**
+ * Asserts that value type is T[].
+ *
+ * @param value - Value.
+ * @param guard - Guard for type T.
+ * @param error - Error.
+ */
+array.of = (value, guard, error) => {
+    byGuard(value, is.factory(is.array.of, guard), error);
+};
+/**
+ * Asserts that value type is not empty.
+ *
+ * @param value - Value.
+ * @param error - Error.
+ */
+not.empty = (value, error) => {
+    byGuard(value, is.not.empty, error);
+};
+/**
+ * Asserts that value type is IndexedObject\<T\>.
+ *
+ * @param value - Value.
+ * @param guard - Guard for type T.
+ * @param error - Error.
+ */
+indexedObject.of = (value, guard, error) => {
+    byGuard(value, is.factory(is.indexedObject.of, guard), error);
+};
+/**
+ * Asserts that value type is Map\<K, V\>.
+ *
+ * @param value - Value.
+ * @param keyGuard - Key guard.
+ * @param valueGuard - Value guard.
+ * @param error - Error.
+ */
+map.of = (value, keyGuard, valueGuard, error) => {
+    byGuard(value, is.factory(is.map.of, keyGuard, valueGuard), error);
+};
+/**
+ * Asserts that value type is Set\<T\>.
+ *
+ * @param value - Value.
+ * @param guard - Guard for type T.
+ * @param error - Error.
+ */
+set.of = (value, guard, error) => {
+    byGuard(value, is.factory(is.set.of, guard), error);
+};
 //# sourceMappingURL=assertions.js.map

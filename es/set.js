@@ -1,3 +1,4 @@
+export { _delete as delete };
 /**
  * Adds value.
  *
@@ -22,5 +23,4 @@ function _delete(set, value) {
     result.delete(value);
     return result;
 }
-export { _delete as delete };
 //# sourceMappingURL=set.js.map

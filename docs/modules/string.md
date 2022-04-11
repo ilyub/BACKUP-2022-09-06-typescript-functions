@@ -4,13 +4,13 @@
 
 ## Table of contents
 
-### Namespaces
-
-- [path](string.path.md)
-
 ### Type aliases
 
 - [Eol](string.md#eol)
+
+### Variables
+
+- [path](string.md#path)
 
 ### Functions
 
@@ -21,7 +21,6 @@
 - [leadingSpaces](string.md#leadingspaces)
 - [lines](string.md#lines)
 - [multiline](string.md#multiline)
-- [path](string.md#path)
 - [replaceAll](string.md#replaceall)
 - [singleLine](string.md#singleline)
 - [trailingSpaces](string.md#trailingspaces)
@@ -37,6 +36,14 @@
 ### Eol
 
 Ƭ **Eol**: ``"\n"`` \| ``"\r\n"``
+
+## Variables
+
+### path
+
+• `Const` **path**: { `addLeadingSlash`: (`this`: `void`, `path`: `string`) => `string` ; `addTrailingSlash`: (`this`: `void`, `path`: `string`) => `string` ; `canonicalize`: (`this`: `void`, `path`: `string`) => `string` ; `join`: (...`parts`: `string`[]) => `string` ; `removeLeadingSlash`: (`this`: `void`, `path`: `string`) => `string` ; `removeTrailingSlash`: (`this`: `void`, `path`: `string`) => `string`  } & () => `never`
+
+Not implemented.
 
 ## Functions
 
@@ -178,18 +185,6 @@ Checks that string is multiline.
 `boolean`
 
 _True_ if string is multiline, _false_ otherwise.
-
-___
-
-### path
-
-▸ **path**(): `never`
-
-Not implemented.
-
-#### Returns
-
-`never`
 
 ___
 

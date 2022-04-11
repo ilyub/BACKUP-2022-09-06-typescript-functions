@@ -279,11 +279,6 @@ export function unshiftOrReplaceBy(arr, value, keyOrReduce) {
         ? replaceBy(arr, value, keyOrReduce)
         : unshift(arr, value);
 }
-/*
-|*******************************************************************************
-|* Private
-|*******************************************************************************
-|*/
 /**
  * Creates reduce function.
  *

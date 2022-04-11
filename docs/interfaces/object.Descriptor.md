@@ -83,7 +83,7 @@ Property getter.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `this` | `T` | Object. |
+| `this` | `T` | This argument. |
 
 #### Returns
 
@@ -107,7 +107,7 @@ Property setter.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `this` | `T` | Object. |
+| `this` | `T` | This argument. |
 | `value` | `T`[`K`] | New value. |
 
 #### Returns

@@ -4,21 +4,60 @@
 
 ## Table of contents
 
-### Namespaces
+### Variables
 
-- [ceil](number.ceil.md)
-- [floor](number.floor.md)
-- [round](number.round.md)
+- [ceil](number.md#ceil)
+- [floor](number.md#floor)
+- [round](number.md#round)
 
 ### Functions
 
 - [average](number.md#average)
-- [ceil](number.md#ceil)
-- [floor](number.md#floor)
 - [limit](number.md#limit)
 - [rootMeanSquareDeviation](number.md#rootmeansquaredeviation)
-- [round](number.md#round)
 - [sum](number.md#sum)
+
+## Variables
+
+### ceil
+
+• `Const` **ceil**: { `step`: (`value`: `number`, `step`: `number`, `from`: `number`) => `number`  } & (`value`: `number`, `precision`: `number`) => `number`
+
+Ceils number to a given precision.
+
+**`param`** Value.
+
+**`param`** The number of digits to keep.
+
+**`returns`** Ceiled value.
+
+___
+
+### floor
+
+• `Const` **floor**: { `step`: (`this`: `void`, `value`: `number`, `step`: `number`, `from`: `number`) => `number`  } & (`value`: `number`, `precision`: `number`) => `number`
+
+Floors number to a given precision.
+
+**`param`** Value.
+
+**`param`** The number of digits to keep.
+
+**`returns`** Floored value.
+
+___
+
+### round
+
+• `Const` **round**: { `step`: (`this`: `void`, `value`: `number`, `step`: `number`, `from`: `number`) => `number`  } & (`value`: `number`, `precision`: `number`) => `number`
+
+Rounds number to a given precision.
+
+**`param`** Value.
+
+**`param`** The number of digits to keep.
+
+**`returns`** Rounded value.
 
 ## Functions
 
@@ -39,48 +78,6 @@ Averages values.
 `number`
 
 The average.
-
-___
-
-### ceil
-
-▸ **ceil**(`value`, `precision`): `number`
-
-Ceils number to a given precision.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `number` | Value. |
-| `precision` | `number` | The number of digits to keep. |
-
-#### Returns
-
-`number`
-
-Ceiled value.
-
-___
-
-### floor
-
-▸ **floor**(`value`, `precision`): `number`
-
-Floors number to a given precision.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `number` | Value. |
-| `precision` | `number` | The number of digits to keep. |
-
-#### Returns
-
-`number`
-
-Floored value.
 
 ___
 
@@ -123,27 +120,6 @@ Calculates root-mean-square deviation.
 `number`
 
 Root-mean-square deviation.
-
-___
-
-### round
-
-▸ **round**(`value`, `precision`): `number`
-
-Rounds number to a given precision.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `number` | Value. |
-| `precision` | `number` | The number of digits to keep. |
-
-#### Returns
-
-`number`
-
-Rounded value.
 
 ___
 

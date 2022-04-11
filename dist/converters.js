@@ -3,21 +3,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.stringU = exports.string = exports.numberU = exports.number = exports.not = void 0;
 const tslib_1 = require("tslib");
 const is = tslib_1.__importStar(require("./guards"));
+const o = tslib_1.__importStar(require("./object"));
 /**
  * Not implemented.
  */
-function not() {
+exports.not = o.extend(() => {
     throw new Error("Not implemented");
-}
-exports.not = not;
-/**
- * Converts value to not empty.
- *
- * @param value - Value.
- * @param defVal - Default value.
- * @returns Value if it is not empty, defVal otherwise.
- */
-not.empty = (value, defVal) => (is.not.empty(value) ? value : defVal);
+}, {
+    /**
+     * Converts value to not empty.
+     *
+     * @param this - No this.
+     * @param value - Value.
+     * @param defVal - Default value.
+     * @returns Value if it is not empty, defVal otherwise.
+     */
+    empty(value, defVal) {
+        return is.not.empty(value) ? value : defVal;
+    }
+});
 /**
  * Converts value to a number.
  *

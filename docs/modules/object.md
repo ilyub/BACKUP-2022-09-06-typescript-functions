@@ -4,19 +4,15 @@
 
 ## Table of contents
 
-### Namespaces
-
-- [fromEntries](object.fromEntries.md)
-
 ### Interfaces
 
 - [CompareFn](../interfaces/object.CompareFn.md)
 - [Descriptor](../interfaces/object.Descriptor.md)
-- [Entries](../interfaces/object.Entries.md)
-- [Extend](../interfaces/object.Extend.md)
-- [Keys](../interfaces/object.Keys.md)
 - [Predicate](../interfaces/object.Predicate.md)
-- [Values](../interfaces/object.Values.md)
+
+### Variables
+
+- [fromEntries](object.md#fromentries)
 
 ### Functions
 
@@ -28,7 +24,6 @@
 - [extend](object.md#extend)
 - [filter](object.md#filter)
 - [freeze](object.md#freeze)
-- [fromEntries](object.md#fromentries)
 - [get](object.md#get)
 - [getPrototypeOf](object.md#getprototypeof)
 - [hasOwnProp](object.md#hasownprop)
@@ -42,6 +37,12 @@
 - [sort](object.md#sort)
 - [unfreeze](object.md#unfreeze)
 - [values](object.md#values)
+
+## Variables
+
+### fromEntries
+
+• `Const` **fromEntries**: { `exhaustive`: <K, V\>(`entries`: `Iterable`<readonly [`K`, `V`]\>) => [`WritableRecord`](types_core.md#writablerecord)<`K`, `V`\>  } & <K, V\>(`entries`: `Iterable`<readonly [`K`, `V`]\>) => [`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\>
 
 ## Functions
 
@@ -316,33 +317,6 @@ Object.
 
 ___
 
-### fromEntries
-
-▸ **fromEntries**<`K`, `V`\>(`entries`): [`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\>
-
-Creates object from entries.
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `K` | extends `PropertyKey` |
-| `V` | `V` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `entries` | `Iterable`<readonly [`K`, `V`]\> | Entries. |
-
-#### Returns
-
-[`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\>
-
-Object.
-
-___
-
 ### get
 
 ▸ **get**<`T`\>(`obj`, `key`, `guard`): `T`
@@ -610,8 +584,6 @@ ___
 
 ▸ **sort**<`K`, `V`\>(`obj`, `compareFn?`): [`WritableRecord`](types_core.md#writablerecord)<`K`, `V`\>
 
-Sorts object.
-
 #### Type parameters
 
 | Name | Type |
@@ -621,20 +593,16 @@ Sorts object.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `obj` | [`Rec`](types_core.md#rec)<`K`, `V`\> | Object. |
-| `compareFn?` | [`CompareFn`](../interfaces/object.CompareFn.md)<[`Rec`](types_core.md#rec)<`K`, `V`\>\> | Comparison function. |
+| Name | Type |
+| :------ | :------ |
+| `obj` | [`Rec`](types_core.md#rec)<`K`, `V`\> |
+| `compareFn?` | [`CompareFn`](../interfaces/object.CompareFn.md)<[`Rec`](types_core.md#rec)<`K`, `V`\>\> |
 
 #### Returns
 
 [`WritableRecord`](types_core.md#writablerecord)<`K`, `V`\>
 
-New object.
-
 ▸ **sort**<`T`\>(`obj`, `compareFn?`): `T`
-
-Sorts object.
 
 #### Type parameters
 
@@ -644,16 +612,14 @@ Sorts object.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `obj` | `T` | Object. |
-| `compareFn?` | [`CompareFn`](../interfaces/object.CompareFn.md)<`T`\> | Comparison function. |
+| Name | Type |
+| :------ | :------ |
+| `obj` | `T` |
+| `compareFn?` | [`CompareFn`](../interfaces/object.CompareFn.md)<`T`\> |
 
 #### Returns
 
 `T`
-
-New object.
 
 ___
 

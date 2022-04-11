@@ -307,11 +307,6 @@ function unshiftOrReplaceBy(arr, value, keyOrReduce) {
         : unshift(arr, value);
 }
 exports.unshiftOrReplaceBy = unshiftOrReplaceBy;
-/*
-|*******************************************************************************
-|* Private
-|*******************************************************************************
-|*/
 /**
  * Creates reduce function.
  *

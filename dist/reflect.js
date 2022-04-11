@@ -1,7 +1,7 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/disallow-identifier[functions.reflect] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setPrototypeOf = exports.set = exports.preventExtensions = exports.ownKeys = exports.isExtensible = exports.hasOwnMetadataKey = exports.hasOwnMetadata = exports.hasMetadataKey = exports.hasMetadata = exports.has = exports.getPrototypeOf = exports.getOwnPropertyDescriptor = exports.getOwnMetadataKey = exports.getOwnMetadata = exports.getMetadataKey = exports.getMetadata = exports.get = exports.deleteProperty = exports.defineProperty = exports.defineMetadataKey = exports.defineMetadata = exports.construct = exports.apply = void 0;
+exports.hasOwnMetadataKey = exports.hasOwnMetadata = exports.hasMetadataKey = exports.hasMetadata = exports.getOwnMetadataKey = exports.getOwnMetadata = exports.getMetadataKey = exports.getMetadata = exports.defineMetadataKey = exports.defineMetadata = exports.setPrototypeOf = exports.set = exports.preventExtensions = exports.ownKeys = exports.isExtensible = exports.has = exports.getPrototypeOf = exports.getOwnPropertyDescriptor = exports.get = exports.deleteProperty = exports.defineProperty = exports.construct = exports.apply = void 0;
 require("reflect-metadata");
 /**
  * Typed version of Reflect.apply.
@@ -21,6 +21,24 @@ exports.apply = Reflect.apply;
  * @returns Constructed object.
  */
 exports.construct = Reflect.construct;
+exports.defineProperty = Reflect.defineProperty;
+exports.deleteProperty = Reflect.deleteProperty;
+/**
+ * Typed version of Reflect.get.
+ *
+ * @param target - Target object.
+ * @param key - Property key.
+ * @returns Property value.
+ */
+exports.get = Reflect.get;
+exports.getOwnPropertyDescriptor = Reflect.getOwnPropertyDescriptor;
+exports.getPrototypeOf = Reflect.getPrototypeOf;
+exports.has = Reflect.has;
+exports.isExtensible = Reflect.isExtensible;
+exports.ownKeys = Reflect.ownKeys;
+exports.preventExtensions = Reflect.preventExtensions;
+exports.set = Reflect.set;
+exports.setPrototypeOf = Reflect.setPrototypeOf;
 /**
  * Typed version of Reflect.defineMetadata.
  *
@@ -44,16 +62,6 @@ function defineMetadataKey(metadataKey, metadataValue, target, key) {
     Reflect.defineMetadata(metadataKey, metadataValue, target, key);
 }
 exports.defineMetadataKey = defineMetadataKey;
-exports.defineProperty = Reflect.defineProperty;
-exports.deleteProperty = Reflect.deleteProperty;
-/**
- * Typed version of Reflect.get.
- *
- * @param target - Target object.
- * @param key - Property key.
- * @returns Property value.
- */
-exports.get = Reflect.get;
 /**
  * Typed version of Reflect.getMetadata.
  *
@@ -100,9 +108,6 @@ function getOwnMetadataKey(metadataKey, target, key) {
     return Reflect.getOwnMetadata(metadataKey, target, key);
 }
 exports.getOwnMetadataKey = getOwnMetadataKey;
-exports.getOwnPropertyDescriptor = Reflect.getOwnPropertyDescriptor;
-exports.getPrototypeOf = Reflect.getPrototypeOf;
-exports.has = Reflect.has;
 /**
  * Typed version of Reflect.hasMetadata.
  *
@@ -149,9 +154,4 @@ function hasOwnMetadataKey(metadataKey, target, key) {
     return Reflect.hasOwnMetadata(metadataKey, target, key);
 }
 exports.hasOwnMetadataKey = hasOwnMetadataKey;
-exports.isExtensible = Reflect.isExtensible;
-exports.ownKeys = Reflect.ownKeys;
-exports.preventExtensions = Reflect.preventExtensions;
-exports.set = Reflect.set;
-exports.setPrototypeOf = Reflect.setPrototypeOf;
 //# sourceMappingURL=reflect.js.map

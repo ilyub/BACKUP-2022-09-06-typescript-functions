@@ -1,5 +1,9 @@
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.programFlow] */
 import * as is from "./guards";
+export { _clearInterval as clearInterval };
+export { _clearTimeout as clearTimeout };
+export { _setInterval as setInterval };
+export { _setTimeout as setTimeout };
 /**
  * Clears interval.
  *
@@ -9,7 +13,6 @@ function _clearInterval(id) {
     if (is.not.empty(id))
         clearInterval(id);
 }
-export { _clearInterval as clearInterval };
 /**
  * Clears timeout.
  *
@@ -19,7 +22,6 @@ function _clearTimeout(id) {
     if (is.not.empty(id))
         clearTimeout(id);
 }
-export { _clearTimeout as clearTimeout };
 /**
  * Sets interval.
  *
@@ -30,7 +32,6 @@ export { _clearTimeout as clearTimeout };
 function _setInterval(callback, timeout) {
     return setInterval(callback, timeout);
 }
-export { _setInterval as setInterval };
 /**
  * Sets timeout.
  *
@@ -41,5 +42,4 @@ export { _setInterval as setInterval };
 function _setTimeout(callback, timeout) {
     return setTimeout(callback, timeout);
 }
-export { _setTimeout as setTimeout };
 //# sourceMappingURL=programFlow.js.map

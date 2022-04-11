@@ -1,54 +1,24 @@
 import * as is from "./guards";
 import type { IndexedObject, NumStr, objectU, PartialRecord, Rec, Writable, WritableRecord } from "./types/core";
 import type { OptionalStyle, StrictOmit } from "./types/object";
-export interface CompareFn<T extends object> {
-    /**
-     * Compares two object entries.
-     *
-     * @param value1 - Value 1.
-     * @param value2 - Value 2.
-     * @param key1 - Key 1.
-     * @param key2 - Key 2.
-     */
-    (value1: T[keyof T], value2: T[keyof T], key1: keyof T, key2: keyof T): number;
-}
-export interface Descriptor<T, K extends keyof T = keyof T> extends PropertyDescriptor {
-    readonly configurable?: boolean;
-    readonly enumerable?: boolean;
-    /**
-     * Property getter.
-     *
-     * @param this - Object.
-     * @returns Value.
-     */
-    readonly get?: (this: T) => T[K];
-    /**
-     * Property setter.
-     *
-     * @param this - Object.
-     * @param value - New value.
-     */
-    readonly set?: (this: T, value: T[K]) => void;
-    readonly value?: T[K];
-    readonly writable?: boolean;
-}
-export interface Entries {
-    /**
-     * Typed version of Object.entries.
-     *
-     * @param obj - Object.
-     * @returns Object entries.
-     */
-    <K extends string, V>(obj: PartialRecord<K, V>): Array<[K, V]>;
-    /**
-     * Typed version of Object.entries.
-     *
-     * @param obj - Object.
-     * @returns Object entries.
-     */
-    <T extends object>(obj: T): Array<[string & keyof T, T[NumStr & keyof T]]>;
-}
-export interface Extend {
+export { _entries as entries };
+/**
+ * Typed version of Object.assign.
+ *
+ * @param mutableTarget - Target.
+ * @param sources - Sources.
+ * @returns Target.
+ */
+export declare const assign: <T extends object>(mutableTarget: T, ...sources: Array<Partial<T>>) => T;
+/**
+ * Typed version of Object.defineProperty.
+ *
+ * @param obj - Object.
+ * @param key - Key.
+ * @param descriptor - Descriptor.
+ */
+export declare const defineProperty: <T, K extends keyof T = keyof T>(obj: T, key: K, descriptor: Descriptor<T, K>) => void;
+export declare const extend: {
     /**
      * Typed version of Object.assign.
      *
@@ -76,8 +46,17 @@ export interface Extend {
      * @returns Target.
      */
     <T extends object, A, B, C>(target: T, source1: A, source2: B, source3: C): A & B & C & T;
-}
-export interface Keys {
+};
+export declare const fromEntries: {
+    /**
+     * Creates object from entries.
+     *
+     * @param entries - Entries.
+     * @returns Object.
+     */
+    exhaustive<K extends PropertyKey, V>(entries: Iterable<readonly [K, V]>): WritableRecord<K, V>;
+} & (<K_1 extends PropertyKey, V_1>(entries: Iterable<readonly [K_1, V_1]>) => PartialRecord<K_1, V_1>);
+export declare const keys: {
     /**
      * Typed version of Object.keys.
      *
@@ -92,18 +71,26 @@ export interface Keys {
      * @returns Object keys.
      */
     <T extends object>(obj: T): Array<string & keyof T>;
-}
-export interface Predicate<T extends object> {
+};
+export declare const sort: {
     /**
-     * Checks object entry.
+     * Sorts object.
      *
-     * @param value - Value.
-     * @param key - Key.
-     * @returns _True_ if object entry passes check, _false_ otherwise.
+     * @param obj - Object.
+     * @param compareFn - Comparison function.
+     * @returns New object.
      */
-    (value: T[keyof T], key: keyof T): boolean;
-}
-export interface Values {
+    <K extends string, V>(obj: Rec<K, V>, compareFn?: CompareFn<Rec<K, V>>): WritableRecord<K, V>;
+    /**
+     * Sorts object.
+     *
+     * @param obj - Object.
+     * @param compareFn - Comparison function.
+     * @returns New object.
+     */
+    <T extends object>(obj: T, compareFn?: CompareFn<T>): T;
+};
+export declare const values: {
     /**
      * Typed version of Object.values.
      *
@@ -118,15 +105,48 @@ export interface Values {
      * @returns Object values.
      */
     <T extends object>(obj: T): Array<T[NumStr & keyof T]>;
+};
+export interface CompareFn<T extends object> {
+    /**
+     * Compares two object entries.
+     *
+     * @param value1 - Value 1.
+     * @param value2 - Value 2.
+     * @param key1 - Key 1.
+     * @param key2 - Key 2.
+     */
+    (value1: T[keyof T], value2: T[keyof T], key1: keyof T, key2: keyof T): number;
 }
-/**
- * Typed version of Object.assign.
- *
- * @param mutableTarget - Target.
- * @param sources - Sources.
- * @returns Target.
- */
-export declare const assign: <T extends object>(mutableTarget: T, ...sources: Array<Partial<T>>) => T;
+export interface Descriptor<T, K extends keyof T = keyof T> extends PropertyDescriptor {
+    readonly configurable?: boolean;
+    readonly enumerable?: boolean;
+    /**
+     * Property getter.
+     *
+     * @param this - This argument.
+     * @returns Value.
+     */
+    readonly get?: (this: T) => T[K];
+    /**
+     * Property setter.
+     *
+     * @param this - This argument.
+     * @param value - New value.
+     */
+    readonly set?: (this: T, value: T[K]) => void;
+    readonly value?: T[K];
+    readonly writable?: boolean;
+}
+export interface Predicate<T extends object> {
+    /**
+     * Checks object entry.
+     *
+     * @param value - Value.
+     * @param key - Key.
+     * @returns _True_ if object entry passes check, _false_ otherwise.
+     */
+    (value: T[keyof T], key: keyof T): boolean;
+}
 /**
  * Clones object.
  *
@@ -135,16 +155,6 @@ export declare const assign: <T extends object>(mutableTarget: T, ...sources: Ar
  */
 export declare function clone<T extends object>(obj: T): Writable<T>;
 /**
- * Typed version of Object.defineProperty.
- *
- * @param obj - Object.
- * @param key - Key.
- * @param descriptor - Descriptor.
- */
-export declare const defineProperty: <T, K extends keyof T = keyof T>(obj: T, key: K, descriptor: Descriptor<T, K>) => void;
-declare const _entries: Entries;
-export { _entries as entries };
-/**
  * Checks that every object property satisfies condition.
  *
  * @param obj - Object.
@@ -152,7 +162,6 @@ export { _entries as entries };
  * @returns _True_ if every object property satisfies condition, _false_ otherwise.
  */
 export declare function every<T extends object>(obj: T, predicate: Predicate<T>): boolean;
-export declare const extend: Extend;
 /**
  * Filters object by predicate.
  *
@@ -168,16 +177,6 @@ export declare function filter<T extends object>(obj: T, predicate: Predicate<T>
  * @returns Object.
  */
 export declare function freeze<T extends object>(obj: T): Readonly<T>;
-/**
- * Creates object from entries.
- *
- * @param entries - Entries.
- * @returns Object.
- */
-export declare function fromEntries<K extends PropertyKey, V>(entries: Iterable<readonly [K, V]>): PartialRecord<K, V>;
-export declare namespace fromEntries {
-    var exhaustive: <K extends PropertyKey, V>(entries: Iterable<readonly [K, V]>) => WritableRecord<K, V>;
-}
 /**
  * Returns object property.
  *
@@ -203,7 +202,6 @@ export declare function getPrototypeOf(obj: object): objectU;
  * @returns _True_ if object has property, _false_ otherwise.
  */
 export declare function hasOwnProp(key: PropertyKey, obj: object): boolean;
-export declare const keys: Keys;
 /**
  * Applies callback to each property.
  *
@@ -251,27 +249,26 @@ export declare function size(obj: object): number;
  */
 export declare function some<T extends object>(obj: T, predicate: Predicate<T>): boolean;
 /**
- * Sorts object.
- *
- * @param obj - Object.
- * @param compareFn - Comparison function.
- * @returns New object.
- */
-export declare function sort<K extends string, V>(obj: Rec<K, V>, compareFn?: CompareFn<Rec<K, V>>): WritableRecord<K, V>;
-/**
- * Sorts object.
- *
- * @param obj - Object.
- * @param compareFn - Comparison function.
- * @returns New object.
- */
-export declare function sort<T extends object>(obj: T, compareFn?: CompareFn<T>): T;
-/**
  * Marks object as writable.
  *
  * @param obj - Object.
  * @returns Object.
  */
 export declare function unfreeze<T extends object>(obj: T): Writable<T>;
-export declare const values: Values;
+declare const _entries: {
+    /**
+     * Typed version of Object.entries.
+     *
+     * @param obj - Object.
+     * @returns Object entries.
+     */
+    <K extends string, V>(obj: PartialRecord<K, V>): Array<[K, V]>;
+    /**
+     * Typed version of Object.entries.
+     *
+     * @param obj - Object.
+     * @returns Object entries.
+     */
+    <T extends object>(obj: T): Array<[string & keyof T, T[NumStr & keyof T]]>;
+};
 //# sourceMappingURL=object.d.ts.map

@@ -1,7 +1,7 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.values = exports.unfreeze = exports.sort = exports.some = exports.size = exports.removeUndefinedKeys = exports.omit = exports.merge = exports.map = exports.keys = exports.hasOwnProp = exports.getPrototypeOf = exports.get = exports.fromEntries = exports.freeze = exports.filter = exports.extend = exports.every = exports.entries = exports.defineProperty = exports.clone = exports.assign = void 0;
+exports.unfreeze = exports.some = exports.size = exports.removeUndefinedKeys = exports.omit = exports.merge = exports.map = exports.hasOwnProp = exports.getPrototypeOf = exports.get = exports.freeze = exports.filter = exports.every = exports.clone = exports.values = exports.sort = exports.keys = exports.fromEntries = exports.extend = exports.defineProperty = exports.assign = exports.entries = void 0;
 const tslib_1 = require("tslib");
 const a = tslib_1.__importStar(require("./array"));
 const assert = tslib_1.__importStar(require("./assertions"));
@@ -16,6 +16,49 @@ const reflect = tslib_1.__importStar(require("./reflect"));
  */
 exports.assign = Object.assign;
 /**
+ * Typed version of Object.defineProperty.
+ *
+ * @param obj - Object.
+ * @param key - Key.
+ * @param descriptor - Descriptor.
+ */
+exports.defineProperty = Object.defineProperty.bind(Object);
+exports.extend = Object.assign;
+exports.fromEntries = (0, exports.extend)(
+/**
+ * Creates object from entries.
+ *
+ * @param entries - Entries.
+ * @returns Object.
+ */
+(entries) => {
+    const result = {};
+    for (const entry of entries)
+        result[entry[0]] = entry[1];
+    return result;
+}, {
+    /**
+     * Creates object from entries.
+     *
+     * @param entries - Entries.
+     * @returns Object.
+     */
+    exhaustive(entries) {
+        const result = {};
+        for (const entry of entries)
+            result[entry[0]] = entry[1];
+        // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+        return result;
+    }
+});
+exports.keys = Object.keys;
+const sort = (obj, compareFn) => exports.fromEntries.exhaustive(a.sort(_entries(obj), compareFn
+    ? // eslint-disable-next-line @skylib/prefer-readonly -- Wait for @skylib/eslint-plugin update
+        (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
+    : undefined));
+exports.sort = sort;
+exports.values = Object.values;
+/**
  * Clones object.
  *
  * @param obj - Object.
@@ -25,16 +68,6 @@ function clone(obj) {
     return Object.assign({}, obj);
 }
 exports.clone = clone;
-/**
- * Typed version of Object.defineProperty.
- *
- * @param obj - Object.
- * @param key - Key.
- * @param descriptor - Descriptor.
- */
-exports.defineProperty = Object.defineProperty.bind(Object);
-const _entries = Object.entries;
-exports.entries = _entries;
 /**
  * Checks that every object property satisfies condition.
  *
@@ -46,7 +79,6 @@ function every(obj, predicate) {
     return _entries(obj).every(([key, value]) => predicate(value, key));
 }
 exports.every = every;
-exports.extend = Object.assign;
 /**
  * Filters object by predicate.
  *
@@ -72,32 +104,6 @@ function freeze(obj) {
     return obj;
 }
 exports.freeze = freeze;
-/**
- * Creates object from entries.
- *
- * @param entries - Entries.
- * @returns Object.
- */
-function fromEntries(entries) {
-    const result = {};
-    for (const entry of entries)
-        result[entry[0]] = entry[1];
-    return result;
-}
-exports.fromEntries = fromEntries;
-/**
- * Creates object from entries.
- *
- * @param entries - Entries.
- * @returns Object.
- */
-fromEntries.exhaustive = (entries) => {
-    const result = {};
-    for (const entry of entries)
-        result[entry[0]] = entry[1];
-    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
-    return result;
-};
 /**
  * Returns object property.
  *
@@ -135,7 +141,6 @@ function hasOwnProp(key, obj) {
     return Object.prototype.hasOwnProperty.call(obj, key);
 }
 exports.hasOwnProp = hasOwnProp;
-exports.keys = Object.keys;
 /**
  * Applies callback to each property.
  *
@@ -144,7 +149,7 @@ exports.keys = Object.keys;
  * @returns New object.
  */
 function map(obj, callback) {
-    return fromEntries.exhaustive(_entries(obj).map(([key, value]) => [key, callback(value, key)]));
+    return exports.fromEntries.exhaustive(_entries(obj).map(([key, value]) => [key, callback(value, key)]));
 }
 exports.map = map;
 /**
@@ -164,7 +169,7 @@ function merge(...objects) {
             else
                 result.set(key, [value]);
         }
-    return fromEntries(a
+    return (0, exports.fromEntries)(a
         .fromIterable(result)
         // eslint-disable-next-line no-warning-comments -- Wait for @skylib/eslint-plugin update
         // fixme
@@ -219,13 +224,6 @@ function some(obj, predicate) {
     return _entries(obj).some(([key, value]) => predicate(value, key));
 }
 exports.some = some;
-function sort(obj, compareFn) {
-    return fromEntries.exhaustive(a.sort(_entries(obj), compareFn
-        ? // eslint-disable-next-line @skylib/prefer-readonly -- Wait for @skylib/eslint-plugin update
-            (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
-        : undefined));
-}
-exports.sort = sort;
 /**
  * Marks object as writable.
  *
@@ -236,5 +234,6 @@ function unfreeze(obj) {
     return obj;
 }
 exports.unfreeze = unfreeze;
-exports.values = Object.values;
+const _entries = Object.entries;
+exports.entries = _entries;
 //# sourceMappingURL=object.js.map

@@ -6,19 +6,33 @@
 
 ### Type aliases
 
+- [Empty](types_object.md#empty)
 - [Join2](types_object.md#join2)
 - [Join3](types_object.md#join3)
 - [Join4](types_object.md#join4)
 - [OptionalStyle](types_object.md#optionalstyle)
 - [OptionalUndefinedStyle](types_object.md#optionalundefinedstyle)
+- [PickKeys](types_object.md#pickkeys)
 - [StrictOmit](types_object.md#strictomit)
 - [UndefinedStyle](types_object.md#undefinedstyle)
 
 ## Type aliases
 
+### Empty
+
+Ƭ **Empty**<`T`\>: `Equals`<keyof `T`, `never`\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+___
+
 ### Join2
 
-Ƭ **Join2**<`A`, `B`\>: keyof `A` extends `never` ? `B` : keyof `B` extends `never` ? `A` : `A` & `B`
+Ƭ **Join2**<`A`, `B`\>: `If`<[`Empty`](types_object.md#empty)<`A`\>, `B`, `If`<[`Empty`](types_object.md#empty)<`B`\>, `A`, `A` & `B`\>\>
 
 #### Type parameters
 
@@ -31,7 +45,7 @@ ___
 
 ### Join3
 
-Ƭ **Join3**<`A`, `B`, `C`\>: keyof `A` extends `never` ? [`Join2`](types_object.md#join2)<`B`, `C`\> : `A` & [`Join2`](types_object.md#join2)<`B`, `C`\>
+Ƭ **Join3**<`A`, `B`, `C`\>: `If`<[`Empty`](types_object.md#empty)<`A`\>, [`Join2`](types_object.md#join2)<`B`, `C`\>, `A` & [`Join2`](types_object.md#join2)<`B`, `C`\>\>
 
 #### Type parameters
 
@@ -45,7 +59,7 @@ ___
 
 ### Join4
 
-Ƭ **Join4**<`A`, `B`, `C`, `D`\>: keyof `A` extends `never` ? [`Join3`](types_object.md#join3)<`B`, `C`, `D`\> : `A` & [`Join3`](types_object.md#join3)<`B`, `C`, `D`\>
+Ƭ **Join4**<`A`, `B`, `C`, `D`\>: `If`<[`Empty`](types_object.md#empty)<`A`\>, [`Join3`](types_object.md#join3)<`B`, `C`, `D`\>, `A` & [`Join3`](types_object.md#join3)<`B`, `C`, `D`\>\>
 
 #### Type parameters
 
@@ -79,6 +93,20 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `T` | extends `object` |
+
+___
+
+### PickKeys
+
+Ƭ **PickKeys**<`T`, `E`, `M`\>: `Exclude`<keyof `T`, `FilterKeys`<`T`, `E`, `M`\>\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+| `E` | `E` |
+| `M` | extends `Match` = ``"default"`` |
 
 ___
 

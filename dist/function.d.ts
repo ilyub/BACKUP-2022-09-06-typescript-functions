@@ -1,4 +1,5 @@
 import type { AsyncPromise, Callable, Sync } from "./types/function";
+export declare const noop: Callable;
 export interface PipeCallback<V = unknown, R = unknown> {
     /**
      * Pipe callback.
@@ -15,7 +16,6 @@ export interface PipeCallback<V = unknown, R = unknown> {
  * @returns Value.
  */
 export declare function identity<T>(value: T): T;
-export declare const noop: Callable;
 /**
  * Applies callbacks to a value.
  *

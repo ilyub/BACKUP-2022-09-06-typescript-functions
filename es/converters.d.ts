@@ -2,10 +2,17 @@ import type * as types from "./types/core";
 /**
  * Not implemented.
  */
-export declare function not(): never;
-export declare namespace not {
-    var empty: <T>(value: T, defVal: Exclude<T, types.empty>) => Exclude<T, types.empty>;
-}
+export declare const not: {
+    /**
+     * Converts value to not empty.
+     *
+     * @param this - No this.
+     * @param value - Value.
+     * @param defVal - Default value.
+     * @returns Value if it is not empty, defVal otherwise.
+     */
+    empty<T>(this: void, value: T, defVal: Exclude<T, types.empty>): Exclude<T, types.empty>;
+} & (() => never);
 /**
  * Converts value to a number.
  *

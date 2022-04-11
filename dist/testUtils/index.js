@@ -136,10 +136,5 @@ function setRandomSystemTime() {
     }));
 }
 exports.setRandomSystemTime = setRandomSystemTime;
-/*
-|*******************************************************************************
-|* Private
-|*******************************************************************************
-|*/
 let _clock;
 //# sourceMappingURL=index.js.map

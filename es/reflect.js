@@ -18,6 +18,24 @@ export const apply = Reflect.apply;
  * @returns Constructed object.
  */
 export const construct = Reflect.construct;
+export const defineProperty = Reflect.defineProperty;
+export const deleteProperty = Reflect.deleteProperty;
+/**
+ * Typed version of Reflect.get.
+ *
+ * @param target - Target object.
+ * @param key - Property key.
+ * @returns Property value.
+ */
+export const get = Reflect.get;
+export const getOwnPropertyDescriptor = Reflect.getOwnPropertyDescriptor;
+export const getPrototypeOf = Reflect.getPrototypeOf;
+export const has = Reflect.has;
+export const isExtensible = Reflect.isExtensible;
+export const ownKeys = Reflect.ownKeys;
+export const preventExtensions = Reflect.preventExtensions;
+export const set = Reflect.set;
+export const setPrototypeOf = Reflect.setPrototypeOf;
 /**
  * Typed version of Reflect.defineMetadata.
  *
@@ -39,16 +57,6 @@ export function defineMetadata(metadataKey, metadataValue, target) {
 export function defineMetadataKey(metadataKey, metadataValue, target, key) {
     Reflect.defineMetadata(metadataKey, metadataValue, target, key);
 }
-export const defineProperty = Reflect.defineProperty;
-export const deleteProperty = Reflect.deleteProperty;
-/**
- * Typed version of Reflect.get.
- *
- * @param target - Target object.
- * @param key - Property key.
- * @returns Property value.
- */
-export const get = Reflect.get;
 /**
  * Typed version of Reflect.getMetadata.
  *
@@ -91,9 +99,6 @@ export function getOwnMetadata(metadataKey, target) {
 export function getOwnMetadataKey(metadataKey, target, key) {
     return Reflect.getOwnMetadata(metadataKey, target, key);
 }
-export const getOwnPropertyDescriptor = Reflect.getOwnPropertyDescriptor;
-export const getPrototypeOf = Reflect.getPrototypeOf;
-export const has = Reflect.has;
 /**
  * Typed version of Reflect.hasMetadata.
  *
@@ -136,9 +141,4 @@ export function hasOwnMetadata(metadataKey, target) {
 export function hasOwnMetadataKey(metadataKey, target, key) {
     return Reflect.hasOwnMetadata(metadataKey, target, key);
 }
-export const isExtensible = Reflect.isExtensible;
-export const ownKeys = Reflect.ownKeys;
-export const preventExtensions = Reflect.preventExtensions;
-export const set = Reflect.set;
-export const setPrototypeOf = Reflect.setPrototypeOf;
 //# sourceMappingURL=reflect.js.map

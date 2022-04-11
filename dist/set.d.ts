@@ -1,3 +1,4 @@
+export { _delete as delete };
 /**
  * Adds value.
  *
@@ -14,5 +15,4 @@ export declare function add<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T>;
  * @returns Set with value removed.
  */
 declare function _delete<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T>;
-export { _delete as delete };
 //# sourceMappingURL=set.d.ts.map

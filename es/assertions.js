@@ -1,12 +1,6 @@
 import { AssertionError } from "./errors/AssertionError";
 import * as is from "./guards";
 /**
- * Not implemented.
- */
-export function not() {
-    throw new Error("Not implemented");
-}
-/**
  * Asserts that value is an array.
  *
  * @param value - Value.
@@ -15,16 +9,6 @@ export function not() {
 export function array(value, error) {
     byGuard(value, is.array, error);
 }
-/**
- * Asserts that value type is T[].
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @param error - Error.
- */
-array.of = (value, guard, error) => {
-    byGuard(value, is.factory(is.array.of, guard), error);
-};
 /**
  * Asserts that value is a boolean.
  *
@@ -73,15 +57,6 @@ export function empty(value, error) {
     byGuard(value, is.empty, error);
 }
 /**
- * Asserts that value type is not empty.
- *
- * @param value - Value.
- * @param error - Error.
- */
-not.empty = (value, error) => {
-    byGuard(value, is.not.empty, error);
-};
-/**
  * Asserts that value type is T.
  *
  * @param value - Value.
@@ -100,16 +75,6 @@ export function enumeration(value, vo, error) {
 export function indexedObject(value, error) {
     byGuard(value, is.indexedObject, error);
 }
-/**
- * Asserts that value type is IndexedObject\<T\>.
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @param error - Error.
- */
-indexedObject.of = (value, guard, error) => {
-    byGuard(value, is.factory(is.indexedObject.of, guard), error);
-};
 /**
  * Asserts that value type is T.
  *
@@ -140,16 +105,11 @@ export function map(value, error) {
     byGuard(value, is.map, error);
 }
 /**
- * Asserts that value type is Map\<K, V\>.
- *
- * @param value - Value.
- * @param keyGuard - Key guard.
- * @param valueGuard - Value guard.
- * @param error - Error.
+ * Not implemented.
  */
-map.of = (value, keyGuard, valueGuard, error) => {
-    byGuard(value, is.factory(is.map.of, keyGuard, valueGuard), error);
-};
+export function not() {
+    throw new Error("Not implemented");
+}
 /**
  * Asserts that value type is NumStr.
  *
@@ -186,16 +146,6 @@ export function object(value, error) {
 export function set(value, error) {
     byGuard(value, is.set, error);
 }
-/**
- * Asserts that value type is Set\<T\>.
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @param error - Error.
- */
-set.of = (value, guard, error) => {
-    byGuard(value, is.factory(is.set.of, guard), error);
-};
 /**
  * Asserts that value is a string.
  *
@@ -241,4 +191,54 @@ export function toBeFalse(value, error) {
 export function toBeTrue(value, error) {
     byGuard(value, is.true, error);
 }
+/**
+ * Asserts that value type is T[].
+ *
+ * @param value - Value.
+ * @param guard - Guard for type T.
+ * @param error - Error.
+ */
+array.of = (value, guard, error) => {
+    byGuard(value, is.factory(is.array.of, guard), error);
+};
+/**
+ * Asserts that value type is not empty.
+ *
+ * @param value - Value.
+ * @param error - Error.
+ */
+not.empty = (value, error) => {
+    byGuard(value, is.not.empty, error);
+};
+/**
+ * Asserts that value type is IndexedObject\<T\>.
+ *
+ * @param value - Value.
+ * @param guard - Guard for type T.
+ * @param error - Error.
+ */
+indexedObject.of = (value, guard, error) => {
+    byGuard(value, is.factory(is.indexedObject.of, guard), error);
+};
+/**
+ * Asserts that value type is Map\<K, V\>.
+ *
+ * @param value - Value.
+ * @param keyGuard - Key guard.
+ * @param valueGuard - Value guard.
+ * @param error - Error.
+ */
+map.of = (value, keyGuard, valueGuard, error) => {
+    byGuard(value, is.factory(is.map.of, keyGuard, valueGuard), error);
+};
+/**
+ * Asserts that value type is Set\<T\>.
+ *
+ * @param value - Value.
+ * @param guard - Guard for type T.
+ * @param error - Error.
+ */
+set.of = (value, guard, error) => {
+    byGuard(value, is.factory(is.set.of, guard), error);
+};
 //# sourceMappingURL=assertions.js.map

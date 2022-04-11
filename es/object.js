@@ -3,6 +3,7 @@ import * as a from "./array";
 import * as assert from "./assertions";
 import * as is from "./guards";
 import * as reflect from "./reflect";
+export { _entries as entries };
 /**
  * Typed version of Object.assign.
  *
@@ -11,6 +12,48 @@ import * as reflect from "./reflect";
  * @returns Target.
  */
 export const assign = Object.assign;
+/**
+ * Typed version of Object.defineProperty.
+ *
+ * @param obj - Object.
+ * @param key - Key.
+ * @param descriptor - Descriptor.
+ */
+export const defineProperty = Object.defineProperty.bind(Object);
+export const extend = Object.assign;
+export const fromEntries = extend(
+/**
+ * Creates object from entries.
+ *
+ * @param entries - Entries.
+ * @returns Object.
+ */
+(entries) => {
+    const result = {};
+    for (const entry of entries)
+        result[entry[0]] = entry[1];
+    return result;
+}, {
+    /**
+     * Creates object from entries.
+     *
+     * @param entries - Entries.
+     * @returns Object.
+     */
+    exhaustive(entries) {
+        const result = {};
+        for (const entry of entries)
+            result[entry[0]] = entry[1];
+        // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+        return result;
+    }
+});
+export const keys = Object.keys;
+export const sort = (obj, compareFn) => fromEntries.exhaustive(a.sort(_entries(obj), compareFn
+    ? // eslint-disable-next-line @skylib/prefer-readonly -- Wait for @skylib/eslint-plugin update
+        (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
+    : undefined));
+export const values = Object.values;
 /**
  * Clones object.
  *
@@ -21,16 +64,6 @@ export function clone(obj) {
     return Object.assign({}, obj);
 }
 /**
- * Typed version of Object.defineProperty.
- *
- * @param obj - Object.
- * @param key - Key.
- * @param descriptor - Descriptor.
- */
-export const defineProperty = Object.defineProperty.bind(Object);
-const _entries = Object.entries;
-export { _entries as entries };
-/**
  * Checks that every object property satisfies condition.
  *
  * @param obj - Object.
@@ -40,7 +73,6 @@ export { _entries as entries };
 export function every(obj, predicate) {
     return _entries(obj).every(([key, value]) => predicate(value, key));
 }
-export const extend = Object.assign;
 /**
  * Filters object by predicate.
  *
@@ -64,31 +96,6 @@ export function filter(obj, predicate) {
 export function freeze(obj) {
     return obj;
 }
-/**
- * Creates object from entries.
- *
- * @param entries - Entries.
- * @returns Object.
- */
-export function fromEntries(entries) {
-    const result = {};
-    for (const entry of entries)
-        result[entry[0]] = entry[1];
-    return result;
-}
-/**
- * Creates object from entries.
- *
- * @param entries - Entries.
- * @returns Object.
- */
-fromEntries.exhaustive = (entries) => {
-    const result = {};
-    for (const entry of entries)
-        result[entry[0]] = entry[1];
-    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
-    return result;
-};
 /**
  * Returns object property.
  *
@@ -123,7 +130,6 @@ export function getPrototypeOf(obj) {
 export function hasOwnProp(key, obj) {
     return Object.prototype.hasOwnProperty.call(obj, key);
 }
-export const keys = Object.keys;
 /**
  * Applies callback to each property.
  *
@@ -201,12 +207,6 @@ export function size(obj) {
 export function some(obj, predicate) {
     return _entries(obj).some(([key, value]) => predicate(value, key));
 }
-export function sort(obj, compareFn) {
-    return fromEntries.exhaustive(a.sort(_entries(obj), compareFn
-        ? // eslint-disable-next-line @skylib/prefer-readonly -- Wait for @skylib/eslint-plugin update
-            (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
-        : undefined));
-}
 /**
  * Marks object as writable.
  *
@@ -216,5 +216,5 @@ export function sort(obj, compareFn) {
 export function unfreeze(obj) {
     return obj;
 }
-export const values = Object.values;
+const _entries = Object.entries;
 //# sourceMappingURL=object.js.map
