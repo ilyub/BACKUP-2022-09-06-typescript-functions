@@ -10,7 +10,6 @@ import type {
   objectU,
   PartialRecord,
   Rec,
-  unknowns,
   Writable,
   WritablePartialRecord,
   WritableRecord
@@ -361,12 +360,8 @@ export function merge(...objects: IndexedObject[]): IndexedObject {
   return fromEntries(
     a
       .fromIterable(result)
-      // eslint-disable-next-line no-warning-comments -- Wait for @skylib/eslint-plugin update
-      // fixme
-      .map(([key, arr]: [PropertyKey, unknowns]) => [
-        key,
-        arr.length === 1 ? arr[0] : arr
-      ])
+      // eslint-disable-next-line @skylib/prefer-readonly -- Wait for @skylib/eslint-plugin update
+      .map(([key, arr]) => [key, arr.length === 1 ? arr[0] : arr])
   );
 }
 
