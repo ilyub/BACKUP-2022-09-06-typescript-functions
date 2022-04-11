@@ -206,25 +206,6 @@ export function boolean(value: unknown, error?: assert.ErrorArg): boolean {
  * Asserts that value type is T.
  *
  * @param value - Value.
- * @param guard - Guard for type T.
- * @param error - Error.
- * @returns Value if value type is T.
- * @throws Error otherwise.
- */
-export function byGuard<T>(
-  value: unknown,
-  guard: is.Guard<T>,
-  error?: assert.ErrorArg
-): T {
-  assert.byGuard(value, guard, error);
-
-  return value;
-}
-
-/**
- * Asserts that value type is T.
- *
- * @param value - Value.
  * @param error - Error.
  * @returns Value if value type is T.
  * @throws Error otherwise.
@@ -234,20 +215,6 @@ export function callable<T extends Function>(
   error?: assert.ErrorArg
 ): T {
   assert.callable<T>(value, error);
-
-  return value;
-}
-
-/**
- * Asserts that value type is empty.
- *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value type is empty.
- * @throws Error otherwise.
- */
-export function empty(value: unknown, error?: assert.ErrorArg): types.empty {
-  assert.empty(value, error);
 
   return value;
 }

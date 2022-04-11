@@ -43,19 +43,6 @@ test("boolean", () => {
   expect(subtest(undefined)).toThrow(new AssertionError());
 });
 
-test.each([
-  { expected: new AssertionError() },
-  { error: "Test error", expected: new AssertionError("Test error") },
-  {
-    error: (): Error => new Error("Test error"),
-    expected: new Error("Test error")
-  }
-])("byGuard", ({ error, expected }) => {
-  expect(() => {
-    as.byGuard(1, is.string, error);
-  }).toThrow(expected);
-});
-
 test("callable", () => {
   const subtest = createSubtest(as.callable);
 
@@ -65,14 +52,6 @@ test("callable", () => {
   expect(subtest(fn.noop)).not.toThrow();
   expect(subtest(1)).toThrow(new AssertionError());
   expect(subtest(undefined)).toThrow(new AssertionError());
-});
-
-test("empty", () => {
-  const subtest = createSubtest(as.empty);
-
-  expect(subtest(null)).not.toThrow();
-  expect(subtest(undefined)).not.toThrow();
-  expect(subtest(1)).toThrow(new AssertionError());
 });
 
 test("not.empty", () => {
