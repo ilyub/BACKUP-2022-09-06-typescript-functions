@@ -14,7 +14,7 @@
 
 ### ExpectFromMatcher
 
-▸ **ExpectFromMatcher**(`got`, ...`args`): `ReturnType`<[`Matcher`](../modules/testUtils.md#matcher)<`K`\>\> extends `Promise`<`unknown`\> ? `Promise`<[`ExpectReturnType`](testUtils.ExpectReturnType.md)\> : [`ExpectReturnType`](testUtils.ExpectReturnType.md)
+▸ **ExpectFromMatcher**(`got`, ...`args`): `If`<`Extends`<`ReturnType`<[`Matcher`](../modules/testUtils.md#matcher)<`K`\>\>, `Promise`<`unknown`\>\>, `Promise`<[`ExpectReturnType`](testUtils.ExpectReturnType.md)\>, [`ExpectReturnType`](testUtils.ExpectReturnType.md)\>
 
 Expect function.
 
@@ -27,6 +27,6 @@ Expect function.
 
 #### Returns
 
-`ReturnType`<[`Matcher`](../modules/testUtils.md#matcher)<`K`\>\> extends `Promise`<`unknown`\> ? `Promise`<[`ExpectReturnType`](testUtils.ExpectReturnType.md)\> : [`ExpectReturnType`](testUtils.ExpectReturnType.md)
+`If`<`Extends`<`ReturnType`<[`Matcher`](../modules/testUtils.md#matcher)<`K`\>\>, `Promise`<`unknown`\>\>, `Promise`<[`ExpectReturnType`](testUtils.ExpectReturnType.md)\>, [`ExpectReturnType`](testUtils.ExpectReturnType.md)\>
 
 Result.
