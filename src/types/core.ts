@@ -26,12 +26,10 @@ export type Rec<K extends PropertyKey, V> = {
   readonly [L in K]: V;
 };
 
-// eslint-disable-next-line @skylib/prefer-readonly -- Wait for @skylib/eslint-plugin update
 export type Writable<T> = {
   -readonly [P in keyof T]: T[P];
 };
 
-// eslint-disable-next-line @skylib/prefer-readonly -- Wait for @skylib/eslint-plugin update
 export type WritableIndexedObject<T = unknown> = WritableRecord<PropertyKey, T>;
 
 export type WritablePartialRecord<K extends PropertyKey, V> = {

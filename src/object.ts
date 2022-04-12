@@ -156,8 +156,7 @@ export const sort: {
     a.sort(
       _entries(obj),
       compareFn
-        ? // eslint-disable-next-line @skylib/prefer-readonly -- Wait for @skylib/eslint-plugin update
-          (entry1, entry2): number =>
+        ? (entry1, entry2): number =>
             compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
         : undefined
     )
@@ -360,7 +359,6 @@ export function merge(...objects: IndexedObject[]): IndexedObject {
   return fromEntries(
     a
       .fromIterable(result)
-      // eslint-disable-next-line @skylib/prefer-readonly -- Wait for @skylib/eslint-plugin update
       .map(([key, arr]) => [key, arr.length === 1 ? arr[0] : arr])
   );
 }

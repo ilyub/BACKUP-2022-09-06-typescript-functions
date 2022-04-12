@@ -1,6 +1,8 @@
 import "jest-extended";
 import * as matchers from "jest-extended/all";
 import * as _ from "lodash";
+import type { Extends } from "ts-toolbelt/out/Any/Extends";
+import type { If } from "ts-toolbelt/out/Any/If";
 import * as fakeTimers from "@sinonjs/fake-timers";
 
 import * as a from "../array";
@@ -132,12 +134,11 @@ export interface ExpectFromMatcher<K extends keyof Matchers> {
    * @param args - Arguments.
    * @returns Result.
    */
-  (
-    got: unknown,
-    ...args: MatcherParameters<K>
-  ): MatcherReturnType<K> extends Promise<unknown>
-    ? Promise<ExpectReturnType>
-    : ExpectReturnType;
+  (got: unknown, ...args: MatcherParameters<K>): If<
+    Extends<MatcherReturnType<K>, Promise<unknown>>,
+    Promise<ExpectReturnType>,
+    ExpectReturnType
+  >;
 }
 
 export interface ExpectReturnType {
