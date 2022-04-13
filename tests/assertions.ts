@@ -12,10 +12,6 @@ function createSubtest(assertion: Callable, ...args: unknowns) {
   };
 }
 
-test("not", () => {
-  expect(assert.not).toThrow(new Error("Not implemented"));
-});
-
 test("array", () => {
   const subtest = createSubtest(assert.array);
 
@@ -71,14 +67,6 @@ test("empty", () => {
   expect(subtest(null)).not.toThrow();
   expect(subtest(undefined)).not.toThrow();
   expect(subtest(1)).toThrow(new AssertionError());
-});
-
-test("not.empty", () => {
-  const subtest = createSubtest(assert.not.empty);
-
-  expect(subtest(1)).not.toThrow();
-  expect(subtest(null)).toThrow(new AssertionError());
-  expect(subtest(undefined)).toThrow(new AssertionError());
 });
 
 test("enumeration", () => {
@@ -148,6 +136,18 @@ test("map.of", () => {
   expect(subtest(new Map([[1, 1]]))).toThrow(new AssertionError());
   expect(subtest(new Map([["a", "a"]]))).toThrow(new AssertionError());
   expect(subtest({})).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(new AssertionError());
+});
+
+test("not", () => {
+  expect(assert.not).toThrow(new Error("Not implemented"));
+});
+
+test("not.empty", () => {
+  const subtest = createSubtest(assert.not.empty);
+
+  expect(subtest(1)).not.toThrow();
+  expect(subtest(null)).toThrow(new AssertionError());
   expect(subtest(undefined)).toThrow(new AssertionError());
 });
 

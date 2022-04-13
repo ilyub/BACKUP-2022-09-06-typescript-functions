@@ -1,5 +1,4 @@
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
-
 import type { AddPrefix, RemovePrefix } from "@/types/string";
 
 test("AddPrefix", () => {

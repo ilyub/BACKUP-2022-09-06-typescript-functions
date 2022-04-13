@@ -1,5 +1,4 @@
 import * as _ from "lodash";
-
 import * as is from "./guards";
 import type {
   AsyncPromise,

@@ -1,5 +1,4 @@
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
-
 import type { numberU } from "@/types/core";
 import type {
   DefinedKeys,

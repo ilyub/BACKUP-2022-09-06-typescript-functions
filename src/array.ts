@@ -1,7 +1,6 @@
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
 
 import * as _ from "lodash";
-
 import * as assert from "./assertions";
 import * as is from "./guards";
 import * as o from "./object";

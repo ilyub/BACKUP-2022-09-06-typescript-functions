@@ -14,10 +14,6 @@ function createSubtest(inlineAssertion: Callable, ...args: unknowns) {
   };
 }
 
-test("not", () => {
-  expect(as.not).toThrow(new Error("Not implemented"));
-});
-
 test("array", () => {
   const subtest = createSubtest(as.array);
 
@@ -51,14 +47,6 @@ test("callable", () => {
   expect(subtest(TestClass)).not.toThrow();
   expect(subtest(fn.noop)).not.toThrow();
   expect(subtest(1)).toThrow(new AssertionError());
-  expect(subtest(undefined)).toThrow(new AssertionError());
-});
-
-test("not.empty", () => {
-  const subtest = createSubtest(as.not.empty);
-
-  expect(subtest(1)).not.toThrow();
-  expect(subtest(null)).toThrow(new AssertionError());
   expect(subtest(undefined)).toThrow(new AssertionError());
 });
 
@@ -129,6 +117,18 @@ test("map.of", () => {
   expect(subtest(new Map([[1, 1]]))).toThrow(new AssertionError());
   expect(subtest(new Map([["a", "a"]]))).toThrow(new AssertionError());
   expect(subtest({})).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(new AssertionError());
+});
+
+test("not", () => {
+  expect(as.not).toThrow(new Error("Not implemented"));
+});
+
+test("not.empty", () => {
+  const subtest = createSubtest(as.not.empty);
+
+  expect(subtest(1)).not.toThrow();
+  expect(subtest(null)).toThrow(new AssertionError());
   expect(subtest(undefined)).toThrow(new AssertionError());
 });
 

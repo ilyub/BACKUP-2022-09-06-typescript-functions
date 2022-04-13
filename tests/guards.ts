@@ -2,26 +2,6 @@ import * as fn from "@/function";
 import * as is from "@/guards";
 import { createValidationObject } from "@/helpers";
 
-test("factory", () => {
-  const guard = is.factory(is.array.of, is.number);
-
-  expect(guard([1])).toBeTrue();
-  expect(guard(["a"])).toBeFalse();
-  expect(guard(1)).toBeFalse();
-});
-
-test("not", () => {
-  expect(is.not(true, is.number)).toBeTrue();
-  expect(is.not(1, is.number)).toBeFalse();
-});
-
-test("not.factory", () => {
-  const guard = is.not.factory(is.number);
-
-  expect(guard(true)).toBeTrue();
-  expect(guard(1)).toBeFalse();
-});
-
 test("and", () => {
   expect(is.and(undefined, is.booleanU, is.numberU)).toBeTrue();
   expect(is.and(true, is.booleanU, is.numberU)).toBeFalse();
@@ -34,20 +14,6 @@ test("and.factory", () => {
   expect(guard(undefined)).toBeTrue();
   expect(guard(true)).toBeFalse();
   expect(guard(1)).toBeFalse();
-});
-
-test("or", () => {
-  expect(is.or(1, is.boolean, is.number)).toBeTrue();
-  expect(is.or(true, is.boolean, is.number)).toBeTrue();
-  expect(is.or(undefined, is.boolean, is.number)).toBeFalse();
-});
-
-test("or.factory", () => {
-  const guard = is.or.factory(is.boolean, is.number, is.string);
-
-  expect(guard(1)).toBeTrue();
-  expect(guard(true)).toBeTrue();
-  expect(guard(undefined)).toBeFalse();
 });
 
 test("array", () => {
@@ -92,6 +58,14 @@ test("enumeration", () => {
   expect(is.enumeration("1", TestEnumVO)).toBeFalse();
   expect(is.enumeration("b", TestEnumVO)).toBeFalse();
   expect(is.enumeration(undefined, TestEnumVO)).toBeFalse();
+});
+
+test("factory", () => {
+  const guard = is.factory(is.array.of, is.number);
+
+  expect(guard([1])).toBeTrue();
+  expect(guard(["a"])).toBeFalse();
+  expect(guard(1)).toBeFalse();
 });
 
 test("false", () => {
@@ -144,6 +118,18 @@ test("map.of", () => {
   expect(is.map.of(new Map([["a", "a"]]), is.string, is.number)).toBeFalse();
   expect(is.map.of({}, is.string, is.number)).toBeFalse();
   expect(is.map.of(undefined, is.string, is.number)).toBeFalse();
+});
+
+test("not", () => {
+  expect(is.not(true, is.number)).toBeTrue();
+  expect(is.not(1, is.number)).toBeFalse();
+});
+
+test("not.factory", () => {
+  const guard = is.not.factory(is.number);
+
+  expect(guard(true)).toBeTrue();
+  expect(guard(1)).toBeFalse();
 });
 
 test("null", () => {
@@ -206,6 +192,20 @@ test("object.of", () => {
   expect(guard({ str: "a" })).toBeFalse();
   expect(guard(1)).toBeFalse();
   expect(guard(null)).toBeFalse();
+  expect(guard(undefined)).toBeFalse();
+});
+
+test("or", () => {
+  expect(is.or(1, is.boolean, is.number)).toBeTrue();
+  expect(is.or(true, is.boolean, is.number)).toBeTrue();
+  expect(is.or(undefined, is.boolean, is.number)).toBeFalse();
+});
+
+test("or.factory", () => {
+  const guard = is.or.factory(is.boolean, is.number, is.string);
+
+  expect(guard(1)).toBeTrue();
+  expect(guard(true)).toBeTrue();
   expect(guard(undefined)).toBeFalse();
 });
 

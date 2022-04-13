@@ -15,13 +15,13 @@ test("filter", () => {
   expect(s.filter("a1b1c", char => char !== "1")).toBe("abc");
 });
 
-test("leadingSpaces", () => {
-  expect(s.leadingSpaces(" \n\r\t abc")).toBe(" \n\r\t ");
-});
-
 test("lcFirst", () => {
   expect(s.lcFirst("ABC")).toBe("aBC");
   expect(s.lcFirst("")).toBe("");
+});
+
+test("leadingSpaces", () => {
+  expect(s.leadingSpaces(" \n\r\t abc")).toBe(" \n\r\t ");
 });
 
 test("lines", () => {

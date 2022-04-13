@@ -1,6 +1,5 @@
 import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
 import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
-
 import * as a from "./array";
 import type { ValidationObject } from "./helpers";
 import { typedef } from "./helpers";

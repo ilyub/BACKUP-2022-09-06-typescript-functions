@@ -1,5 +1,4 @@
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
-
 import { AssertionError } from "@/errors/AssertionError";
 import * as is from "@/guards";
 import * as o from "@/object";

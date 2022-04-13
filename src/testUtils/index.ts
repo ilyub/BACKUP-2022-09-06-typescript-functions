@@ -1,10 +1,9 @@
+import * as fakeTimers from "@sinonjs/fake-timers";
 import "jest-extended";
 import * as matchers from "jest-extended/all";
 import * as _ from "lodash";
 import type { Extends } from "ts-toolbelt/out/Any/Extends";
 import type { If } from "ts-toolbelt/out/Any/If";
-import * as fakeTimers from "@sinonjs/fake-timers";
-
 import * as a from "../array";
 import * as assert from "../assertions";
 import * as fn from "../function";
