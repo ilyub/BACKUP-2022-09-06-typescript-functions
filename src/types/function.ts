@@ -39,7 +39,7 @@ export interface Callable<T = any> {
    * @returns Result.
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Ok
-  (...args: any[]): T;
+  (...args: readonly any[]): T;
 }
 
 export interface ConstructSignature<T extends Constructor> {
@@ -61,7 +61,7 @@ export interface Constructor<T = any> {
    * @returns Result.
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Ok
-  new (...args: any[]): T;
+  new (...args: readonly any[]): T;
 }
 
 export interface Sync<R, A extends unknowns = nevers> {

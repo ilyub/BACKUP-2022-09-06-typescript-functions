@@ -1,5 +1,6 @@
 import * as assert from "./assertions";
-import * as o from "./object";
+import { defineFn } from "./core";
+import type { numbers } from "./types/core";
 
 /**
  * Ceils number to a given precision.
@@ -8,7 +9,7 @@ import * as o from "./object";
  * @param precision - The number of digits to keep.
  * @returns Ceiled value.
  */
-export const ceil = o.extend(
+export const ceil = defineFn(
   (value: number, precision: number): number => {
     const divider = 10 ** precision;
 
@@ -36,7 +37,7 @@ export const ceil = o.extend(
  * @param precision - The number of digits to keep.
  * @returns Floored value.
  */
-export const floor = o.extend(
+export const floor = defineFn(
   (value: number, precision: number): number => {
     const divider = 10 ** precision;
 
@@ -65,7 +66,7 @@ export const floor = o.extend(
  * @param precision - The number of digits to keep.
  * @returns Rounded value.
  */
-export const round = o.extend(
+export const round = defineFn(
   (value: number, precision: number): number => {
     const divider = 10 ** precision;
 
@@ -93,7 +94,7 @@ export const round = o.extend(
  * @param values - Values.
  * @returns The average.
  */
-export function average(...values: number[]): number {
+export function average(...values: numbers): number {
   assert.toBeTrue(values.length > 0);
 
   return sum(...values) / values.length;
@@ -117,7 +118,7 @@ export function limit(value: number, min: number, max: number): number {
  * @param values - Values.
  * @returns Root-mean-square deviation.
  */
-export function rootMeanSquareDeviation(...values: number[]): number {
+export function rootMeanSquareDeviation(...values: numbers): number {
   const averageValue = average(...values);
 
   return Math.sqrt(
@@ -131,6 +132,6 @@ export function rootMeanSquareDeviation(...values: number[]): number {
  * @param values - Values.
  * @returns The sum.
  */
-export function sum(...values: number[]): number {
+export function sum(...values: numbers): number {
   return values.reduce((x, y) => x + y, 0);
 }

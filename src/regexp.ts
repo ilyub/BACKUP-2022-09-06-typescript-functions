@@ -2,6 +2,8 @@ import * as a from "./array";
 import * as fn from "./function";
 import * as s from "./string";
 
+export type RegExpExecArrays = readonly RegExpExecArray[];
+
 /**
  * Adds flag to regular expression.
  *
@@ -33,7 +35,7 @@ export function escapeString(str: string): string {
  * @param re - Regular expression.
  * @returns Matches.
  */
-export function matchAll(str: string, re: RegExp): RegExpExecArray[] {
+export function matchAll(str: string, re: RegExp): RegExpExecArrays {
   re = addFlags(re, "g");
 
   return a.fromIterable(

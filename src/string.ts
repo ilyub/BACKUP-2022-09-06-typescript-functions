@@ -1,6 +1,7 @@
 import * as a from "./array";
-import * as o from "./object";
+import { defineFn } from "./core";
 import * as regexp from "./regexp";
+import type { strings } from "./types/core";
 
 export { _path as path };
 
@@ -66,7 +67,7 @@ export function leadingSpaces(str: string): string {
  * @param str - String.
  * @returns Array of strings.
  */
-export function lines(str: string): string[] {
+export function lines(str: string): strings {
   return str.split(/\r\n|\n/u);
 }
 
@@ -184,7 +185,7 @@ export function unpadMultiline(str: string): string {
 /**
  * Not implemented.
  */
-const _path = o.extend(
+const _path = defineFn(
   (): never => {
     throw new Error("Not implemented");
   },
@@ -225,7 +226,7 @@ const _path = o.extend(
      * @param parts - Parts.
      * @returns Path.
      */
-    join(...parts: string[]): string {
+    join(...parts: strings): string {
       return _path.canonicalize(parts.join("/"));
     },
     /**

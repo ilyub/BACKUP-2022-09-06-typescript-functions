@@ -1,7 +1,7 @@
 import * as assert from "./assertions";
+import { defineFn } from "./core";
 import type * as is from "./guards";
 import type { ValidationObject } from "./helpers";
-import * as o from "./object";
 import type * as types from "./types/core";
 import type { Constructor } from "./types/function";
 
@@ -13,7 +13,7 @@ import type { Constructor } from "./types/function";
  * @returns Value if value is an array.
  * @throws Error otherwise.
  */
-export const array = o.extend(
+export const array = defineFn(
   (value: unknown, error?: assert.ErrorArg): types.unknowns => {
     assert.array(value, error);
 
@@ -51,7 +51,7 @@ export const array = o.extend(
  * @returns Value if value type is IndexedObject.
  * @throws Error otherwise.
  */
-export const indexedObject = o.extend(
+export const indexedObject = defineFn(
   (value: unknown, error?: assert.ErrorArg): types.IndexedObject => {
     assert.indexedObject(value, error);
 
@@ -89,7 +89,7 @@ export const indexedObject = o.extend(
  * @returns Value if value type is Map.
  * @throws Error otherwise.
  */
-export const map = o.extend(
+export const map = defineFn(
   (value: unknown, error?: assert.ErrorArg): ReadonlyMap<unknown, unknown> => {
     assert.map(value, error);
 
@@ -124,7 +124,7 @@ export const map = o.extend(
 /**
  * Not implemented.
  */
-export const not = o.extend(
+export const not = defineFn(
   (): never => {
     throw new Error("Not implemented");
   },
@@ -158,7 +158,7 @@ export const not = o.extend(
  * @returns Value if value type is Set.
  * @throws Error otherwise.
  */
-export const set = o.extend(
+export const set = defineFn(
   (value: unknown, error?: assert.ErrorArg): ReadonlySet<unknown> => {
     assert.set(value, error);
 

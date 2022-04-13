@@ -1,6 +1,7 @@
 import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
 import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 import * as a from "./array";
+import { defineFn, overloadedFn } from "./core";
 import type { ValidationObject } from "./helpers";
 import { typedef } from "./helpers";
 import * as o from "./object";
@@ -15,92 +16,109 @@ export {
   _undefined as undefined
 };
 
-export const and: {
-  /**
-   * Checks that value type is A & B.
-   *
-   * @param value - Value.
-   * @param guard1 - Guard for type A.
-   * @param guard2 - Guard for type B.
-   * @returns _True_ if value type is A & B, _false_ otherwise.
-   */
-  <A, B>(value: unknown, guard1: Guard<A>, guard2: Guard<B>): value is A & B;
-  /**
-   * Checks that value type is A & B & C.
-   *
-   * @param value - Value.
-   * @param guard1 - Guard for type A.
-   * @param guard2 - Guard for type B.
-   * @param guard3 - Guard for type C.
-   * @returns _True_ if value type is A & B & C, _false_ otherwise.
-   */
-  <A, B, C>(
-    value: unknown,
-    guard1: Guard<A>,
-    guard2: Guard<B>,
-    guard3: Guard<C>
-  ): value is A & B & C;
-  /**
-   * Checks that value type is A & B & C & D.
-   *
-   * @param value - Value.
-   * @param guard1 - Guard for type A.
-   * @param guard2 - Guard for type B.
-   * @param guard3 - Guard for type C.
-   * @param guard4 - Guard for type D.
-   * @returns _True_ if value type is A & B & C & D, _false_ otherwise.
-   */
-  <A, B, C, D>(
-    value: unknown,
-    guard1: Guard<A>,
-    guard2: Guard<B>,
-    guard3: Guard<C>,
-    guard4: Guard<D>
-  ): value is A & B & C & D;
-  readonly factory: {
+export const and = defineFn(
+  overloadedFn(() => {
+    return _and;
+
     /**
-     * Creates guard for type A & B.
+     * Checks that value type is A & B.
      *
+     * @param value - Value.
      * @param guard1 - Guard for type A.
      * @param guard2 - Guard for type B.
-     * @returns Guard for type A & B.
+     * @returns _True_ if value type is A & B, _false_ otherwise.
      */
-    <A, B>(guard1: Guard<A>, guard2: Guard<B>): Guard<A & B>;
+    function _and<A, B>(
+      value: unknown,
+      guard1: Guard<A>,
+      guard2: Guard<B>
+    ): value is A & B;
+
     /**
-     * Creates guard for type A & B & C.
+     * Checks that value type is A & B & C.
      *
+     * @param value - Value.
      * @param guard1 - Guard for type A.
      * @param guard2 - Guard for type B.
      * @param guard3 - Guard for type C.
-     * @returns Guard for type A & B & C.
+     * @returns _True_ if value type is A & B & C, _false_ otherwise.
      */
-    <A, B, C>(guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>): Guard<
-      A & B & C
-    >;
+    function _and<A, B, C>(
+      value: unknown,
+      guard1: Guard<A>,
+      guard2: Guard<B>,
+      guard3: Guard<C>
+    ): value is A & B & C;
+
     /**
-     * Creates guard for type A & B & C & D.
+     * Checks that value type is A & B & C & D.
      *
+     * @param value - Value.
      * @param guard1 - Guard for type A.
      * @param guard2 - Guard for type B.
      * @param guard3 - Guard for type C.
      * @param guard4 - Guard for type D.
-     * @returns Guard for type A & B & C & D.
+     * @returns _True_ if value type is A & B & C & D, _false_ otherwise.
      */
-    <A, B, C, D>(
+    function _and<A, B, C, D>(
+      value: unknown,
       guard1: Guard<A>,
       guard2: Guard<B>,
       guard3: Guard<C>,
       guard4: Guard<D>
-    ): Guard<A & B & C & D>;
-  };
-} = o.extend(
-  (value: unknown, ...guards: Guard[]): value is never =>
-    guards.every(guard => guard(value)),
-  {
-    factory(...guards: Guard[]) {
-      return (value: unknown): value is never =>
-        guards.every(guard => guard(value));
+    ): value is A & B & C & D;
+
+    function _and(value: unknown, ...guards: Guards): value is unknown {
+      return guards.every(guard => guard(value));
     }
+  }),
+  {
+    factory: overloadedFn(() => {
+      return _factory;
+
+      /**
+       * Creates guard for type A & B.
+       *
+       * @param guard1 - Guard for type A.
+       * @param guard2 - Guard for type B.
+       * @returns Guard for type A & B.
+       */
+      function _factory<A, B>(guard1: Guard<A>, guard2: Guard<B>): Guard<A & B>;
+
+      /**
+       * Creates guard for type A & B & C.
+       *
+       * @param guard1 - Guard for type A.
+       * @param guard2 - Guard for type B.
+       * @param guard3 - Guard for type C.
+       * @returns Guard for type A & B & C.
+       */
+      function _factory<A, B, C>(
+        guard1: Guard<A>,
+        guard2: Guard<B>,
+        guard3: Guard<C>
+      ): Guard<A & B & C>;
+
+      /**
+       * Creates guard for type A & B & C & D.
+       *
+       * @param guard1 - Guard for type A.
+       * @param guard2 - Guard for type B.
+       * @param guard3 - Guard for type C.
+       * @param guard4 - Guard for type D.
+       * @returns Guard for type A & B & C & D.
+       */
+      function _factory<A, B, C, D>(
+        guard1: Guard<A>,
+        guard2: Guard<B>,
+        guard3: Guard<C>,
+        guard4: Guard<D>
+      ): Guard<A & B & C & D>;
+
+      function _factory(...guards: Guards): Guard {
+        return (value): value is unknown => guards.every(guard => guard(value));
+      }
+    })
   }
 );
 
@@ -110,7 +128,7 @@ export const and: {
  * @param value - Value.
  * @returns _True_ if value is an array, _false_ otherwise.
  */
-export const array = o.extend(
+export const array = defineFn(
   (value: unknown): value is types.unknowns => Array.isArray(value),
   {
     /**
@@ -133,7 +151,7 @@ export const array = o.extend(
  * @param value - Value.
  * @returns _True_ if value type is IndexedObject, _false_ otherwise.
  */
-export const indexedObject = o.extend(
+export const indexedObject = defineFn(
   (value: unknown): value is types.IndexedObject =>
     typeof value === "object" && value !== null,
   {
@@ -161,7 +179,7 @@ export const indexedObject = o.extend(
  * @param value - Value.
  * @returns _True_ if value type is Map, _false_ otherwise.
  */
-export const map = o.extend(
+export const map = defineFn(
   (value: unknown): value is ReadonlyMap<unknown, unknown> =>
     value instanceof Map,
   {
@@ -194,178 +212,197 @@ export const map = o.extend(
  * @param value - Value.
  * @returns _True_ if value is an object, _false_ otherwise.
  */
-export const object: {
-  /**
-   * Checks that value is an object.
-   *
-   * @param value - Value.
-   * @returns _True_ if value is an object, _false_ otherwise.
-   */
-  (value: unknown): value is object;
-  readonly factory: {
-    /**
-     * Creates object guard.
-     *
-     * @param required - Guards for required properties.
-     * @param optional - Guards for optional properties.
-     * @returns Object guard.
-     */
-    <R extends object, O extends object>(
-      required: Guards<R, keyof R>,
-      optional: Guards<O, keyof O>
-    ): Guard<OptionalStyle<Partial<O>> & UndefinedStyle<R>>;
-    /**
-     * Creates object guard.
-     *
-     * @param required - Guards for required properties.
-     * @param optional - Guards for optional properties.
-     * @returns Object guard.
-     */
-    <T extends object>(
-      required: Guards<T, RequiredKeys<T>>,
-      optional: Guards<T, OptionalKeys<T>>
-    ): Guard<T>;
-  };
-  readonly of: {
-    /**
-     * Checks that value is an object.
-     *
-     * @param value - Value.
-     * @param required - Guards for required properties.
-     * @param optional - Guards for optional properties.
-     * @returns _True_ if value is an object, _false_ otherwise.
-     */
-    <R extends object, O extends object>(
-      value: unknown,
-      required: Guards<R, keyof R>,
-      optional: Guards<O, keyof O>
-    ): value is OptionalStyle<Partial<O>> & UndefinedStyle<R>;
-    /**
-     * Checks that value is an object.
-     *
-     * @param value - Value.
-     * @param required - Guards for required properties.
-     * @param optional - Guards for optional properties.
-     * @returns _True_ if value is an object, _false_ otherwise.
-     */
-    <T extends object>(
-      value: unknown,
-      required: Guards<T, RequiredKeys<T>>,
-      optional: Guards<T, OptionalKeys<T>>
-    ): value is T;
-  };
-} = o.extend(
+export const object = defineFn(
   (value: unknown): value is object =>
     typeof value === "object" && value !== null,
   {
-    factory<T extends object>(
-      required: Guards<T, RequiredKeys<T>>,
-      optional: Guards<T, OptionalKeys<T>>
-    ): Guard<T> {
-      return (value): value is T => object.of(value, required, optional);
-    },
-    of<T extends object>(
-      value: unknown,
-      required: Guards<T, RequiredKeys<T>>,
-      optional: Guards<T, OptionalKeys<T>>
-    ): value is T {
-      return (
-        indexedObject(value) &&
-        o.every(required, (guard, key) =>
-          checkRequiredProp(value, key, guard)
-        ) &&
-        o.every(optional, (guard, key) => checkOptionalProp(value, key, guard))
-      );
-    }
+    factory: overloadedFn(() => {
+      return _factory;
+
+      /**
+       * Creates object guard.
+       *
+       * @param required - Guards for required properties.
+       * @param optional - Guards for optional properties.
+       * @returns Object guard.
+       */
+      function _factory<R extends object, O extends object>(
+        required: PropGuards<R, keyof R>,
+        optional: PropGuards<O, keyof O>
+      ): Guard<OptionalStyle<Partial<O>> & UndefinedStyle<R>>;
+
+      /**
+       * Creates object guard.
+       *
+       * @param required - Guards for required properties.
+       * @param optional - Guards for optional properties.
+       * @returns Object guard.
+       */
+      function _factory<T extends object>(
+        required: PropGuards<T, RequiredKeys<T>>,
+        optional: PropGuards<T, OptionalKeys<T>>
+      ): Guard<T>;
+
+      function _factory<T extends object>(
+        required: PropGuards<T, RequiredKeys<T>>,
+        optional: PropGuards<T, OptionalKeys<T>>
+      ): Guard<T> {
+        return (value): value is T => object.of(value, required, optional);
+      }
+    }),
+    of: overloadedFn(() => {
+      return _of;
+
+      /**
+       * Checks that value is an object.
+       *
+       * @param value - Value.
+       * @param required - Guards for required properties.
+       * @param optional - Guards for optional properties.
+       * @returns _True_ if value is an object, _false_ otherwise.
+       */
+      function _of<R extends object, O extends object>(
+        value: unknown,
+        required: PropGuards<R, keyof R>,
+        optional: PropGuards<O, keyof O>
+      ): value is OptionalStyle<Partial<O>> & UndefinedStyle<R>;
+
+      /**
+       * Checks that value is an object.
+       *
+       * @param value - Value.
+       * @param required - Guards for required properties.
+       * @param optional - Guards for optional properties.
+       * @returns _True_ if value is an object, _false_ otherwise.
+       */
+      function _of<T extends object>(
+        value: unknown,
+        required: PropGuards<T, RequiredKeys<T>>,
+        optional: PropGuards<T, OptionalKeys<T>>
+      ): value is T;
+
+      function _of<T extends object>(
+        value: unknown,
+        required: PropGuards<T, RequiredKeys<T>>,
+        optional: PropGuards<T, OptionalKeys<T>>
+      ): value is T {
+        return (
+          indexedObject(value) &&
+          o.every(required, (guard, key) =>
+            checkRequiredProp(value, key, guard)
+          ) &&
+          o.every(optional, (guard, key) =>
+            checkOptionalProp(value, key, guard)
+          )
+        );
+      }
+    })
   }
 );
 
-export const or: {
-  /**
-   * Checks that value type is A | B.
-   *
-   * @param value - Value.
-   * @param guard1 - Guard for type A.
-   * @param guard2 - Guard for type B.
-   * @returns _True_ if value type is A | B, _false_ otherwise.
-   */
-  <A, B>(value: unknown, guard1: Guard<A>, guard2: Guard<B>): value is A | B;
-  /**
-   * Checks that value type is A | B | C.
-   *
-   * @param value - Value.
-   * @param guard1 - Guard for type A.
-   * @param guard2 - Guard for type B.
-   * @param guard3 - Guard for type C.
-   * @returns _True_ if value type is A | B | C, _false_ otherwise.
-   */
-  <A, B, C>(
-    value: unknown,
-    guard1: Guard<A>,
-    guard2: Guard<B>,
-    guard3: Guard<C>
-  ): value is A | B | C;
-  /**
-   * Checks that value type is A | B | C | D.
-   *
-   * @param value - Value.
-   * @param guard1 - Guard for type A.
-   * @param guard2 - Guard for type B.
-   * @param guard3 - Guard for type C.
-   * @param guard4 - Guard for type D.
-   * @returns _True_ if value type is A | B | C | D, _false_ otherwise.
-   */
-  <A, B, C, D>(
-    value: unknown,
-    guard1: Guard<A>,
-    guard2: Guard<B>,
-    guard3: Guard<C>,
-    guard4: Guard<D>
-  ): value is A | B | C | D;
-  readonly factory: {
+export const or = defineFn(
+  overloadedFn(() => {
+    return _or;
+
     /**
-     * Creates guard for type A | B.
+     * Checks that value type is A | B.
      *
+     * @param value - Value.
      * @param guard1 - Guard for type A.
      * @param guard2 - Guard for type B.
-     * @returns Guard for type A | B.
+     * @returns _True_ if value type is A | B, _false_ otherwise.
      */
-    <A, B>(guard1: Guard<A>, guard2: Guard<B>): Guard<A | B>;
+    function _or<A, B>(
+      value: unknown,
+      guard1: Guard<A>,
+      guard2: Guard<B>
+    ): value is A | B;
+
     /**
-     * Creates guard for type A | B | C.
+     * Checks that value type is A | B | C.
      *
+     * @param value - Value.
      * @param guard1 - Guard for type A.
      * @param guard2 - Guard for type B.
      * @param guard3 - Guard for type C.
-     * @returns Guard for type A | B | C.
+     * @returns _True_ if value type is A | B | C, _false_ otherwise.
      */
-    <A, B, C>(guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>): Guard<
-      A | B | C
-    >;
+    function _or<A, B, C>(
+      value: unknown,
+      guard1: Guard<A>,
+      guard2: Guard<B>,
+      guard3: Guard<C>
+    ): value is A | B | C;
+
     /**
-     * Creates guard for type A | B | C | D.
+     * Checks that value type is A | B | C | D.
      *
+     * @param value - Value.
      * @param guard1 - Guard for type A.
      * @param guard2 - Guard for type B.
      * @param guard3 - Guard for type C.
      * @param guard4 - Guard for type D.
-     * @returns Guard for type A | B | C | D.
+     * @returns _True_ if value type is A | B | C | D, _false_ otherwise.
      */
-    <A, B, C, D>(
+    function _or<A, B, C, D>(
+      value: unknown,
       guard1: Guard<A>,
       guard2: Guard<B>,
       guard3: Guard<C>,
       guard4: Guard<D>
-    ): Guard<A | B | C | D>;
-  };
-} = o.extend(
-  (value: unknown, ...guards: Guard[]): value is never =>
-    guards.some(guard => guard(value)),
-  {
-    factory(...guards: Guard[]) {
-      return (value: unknown): value is never =>
-        guards.some(guard => guard(value));
+    ): value is A | B | C | D;
+
+    function _or(value: unknown, ...guards: Guards): value is unknown {
+      return guards.some(guard => guard(value));
     }
+  }),
+  {
+    factory: overloadedFn(() => {
+      return _factory;
+
+      /**
+       * Creates guard for type A | B.
+       *
+       * @param guard1 - Guard for type A.
+       * @param guard2 - Guard for type B.
+       * @returns Guard for type A | B.
+       */
+      function _factory<A, B>(guard1: Guard<A>, guard2: Guard<B>): Guard<A | B>;
+
+      /**
+       * Creates guard for type A | B | C.
+       *
+       * @param guard1 - Guard for type A.
+       * @param guard2 - Guard for type B.
+       * @param guard3 - Guard for type C.
+       * @returns Guard for type A | B | C.
+       */
+      function _factory<A, B, C>(
+        guard1: Guard<A>,
+        guard2: Guard<B>,
+        guard3: Guard<C>
+      ): Guard<A | B | C>;
+
+      /**
+       * Creates guard for type A | B | C | D.
+       *
+       * @param guard1 - Guard for type A.
+       * @param guard2 - Guard for type B.
+       * @param guard3 - Guard for type C.
+       * @param guard4 - Guard for type D.
+       * @returns Guard for type A | B | C | D.
+       */
+      function _factory<A, B, C, D>(
+        guard1: Guard<A>,
+        guard2: Guard<B>,
+        guard3: Guard<C>,
+        guard4: Guard<D>
+      ): Guard<A | B | C | D>;
+
+      function _factory(...guards: Guards): Guard {
+        return (value): value is unknown => guards.some(guard => guard(value));
+      }
+    })
   }
 );
 
@@ -375,7 +412,7 @@ export const or: {
  * @param value - Value.
  * @returns _True_ if value type is Set, _false_ otherwise.
  */
-export const set = o.extend(
+export const set = defineFn(
   (value: unknown): value is ReadonlySet<unknown> => value instanceof Set,
   {
     /**
@@ -396,111 +433,132 @@ export const set = o.extend(
   }
 );
 
-export const tuple: {
-  /**
-   * Checks that value type is [A].
-   *
-   * @param value - Value.
-   * @param guard - Guard for type A.
-   * @returns _True_ if value type is [A], _false_ otherwise.
-   */
-  <A>(value: unknown, guard: Guard<A>): value is readonly [A];
-  /**
-   * Checks that value type is [A, B].
-   *
-   * @param value - Value.
-   * @param guard1 - Guard for type A.
-   * @param guard2 - Guard for type B.
-   * @returns _True_ if value type is [A, B], _false_ otherwise.
-   */
-  <A, B>(
-    value: unknown,
-    guard1: Guard<A>,
-    guard2: Guard<B>
-  ): value is readonly [A, B];
-  /**
-   * Checks that value type is [A, B, C].
-   *
-   * @param value - Value.
-   * @param guard1 - Guard for type A.
-   * @param guard2 - Guard for type B.
-   * @param guard3 - Guard for type C.
-   * @returns _True_ if value type is [A, B, C], _false_ otherwise.
-   */
-  <A, B, C>(
-    value: unknown,
-    guard1: Guard<A>,
-    guard2: Guard<B>,
-    guard3: Guard<C>
-  ): value is readonly [A, B, C];
-  /**
-   * Checks that value type is [A, B, C, D].
-   *
-   * @param value - Value.
-   * @param guard1 - Guard for type A.
-   * @param guard2 - Guard for type B.
-   * @param guard3 - Guard for type C.
-   * @param guard4 - Guard for type D.
-   * @returns _True_ if value type is [A, B, C, D], _false_ otherwise.
-   */
-  <A, B, C, D>(
-    value: unknown,
-    guard1: Guard<A>,
-    guard2: Guard<B>,
-    guard3: Guard<C>,
-    guard4: Guard<D>
-  ): value is readonly [A, B, C, D];
-  readonly factory: {
+export const tuple = defineFn(
+  overloadedFn(() => {
+    return _tuple;
+
     /**
-     * Creates guard for type [A].
+     * Checks that value type is [A].
      *
+     * @param value - Value.
      * @param guard - Guard for type A.
-     * @returns Guard for type [A].
+     * @returns _True_ if value type is [A], _false_ otherwise.
      */
-    <A>(guard: Guard<A>): Guard<readonly [A]>;
+    function _tuple<A>(value: unknown, guard: Guard<A>): value is readonly [A];
+
     /**
-     * Creates guard for type [A, B].
+     * Checks that value type is [A, B].
      *
+     * @param value - Value.
      * @param guard1 - Guard for type A.
      * @param guard2 - Guard for type B.
-     * @returns Guard for type [A, B].
+     * @returns _True_ if value type is [A, B], _false_ otherwise.
      */
-    <A, B>(guard1: Guard<A>, guard2: Guard<B>): Guard<readonly [A, B]>;
+    function _tuple<A, B>(
+      value: unknown,
+      guard1: Guard<A>,
+      guard2: Guard<B>
+    ): value is readonly [A, B];
+
     /**
-     * Creates guard for type [A, B, C].
+     * Checks that value type is [A, B, C].
      *
+     * @param value - Value.
      * @param guard1 - Guard for type A.
      * @param guard2 - Guard for type B.
      * @param guard3 - Guard for type C.
-     * @returns Guard for type [A, B, C].
+     * @returns _True_ if value type is [A, B, C], _false_ otherwise.
      */
-    <A, B, C>(guard1: Guard<A>, guard2: Guard<B>, guard3: Guard<C>): Guard<
-      readonly [A, B, C]
-    >;
+    function _tuple<A, B, C>(
+      value: unknown,
+      guard1: Guard<A>,
+      guard2: Guard<B>,
+      guard3: Guard<C>
+    ): value is readonly [A, B, C];
+
     /**
-     * Creates guard for type [A, B, C, D].
+     * Checks that value type is [A, B, C, D].
      *
+     * @param value - Value.
      * @param guard1 - Guard for type A.
      * @param guard2 - Guard for type B.
      * @param guard3 - Guard for type C.
      * @param guard4 - Guard for type D.
-     * @returns Guard for type [A, B, C, D].
+     * @returns _True_ if value type is [A, B, C, D], _false_ otherwise.
      */
-    <A, B, C, D>(
+    function _tuple<A, B, C, D>(
+      value: unknown,
       guard1: Guard<A>,
       guard2: Guard<B>,
       guard3: Guard<C>,
       guard4: Guard<D>
-    ): Guard<readonly [A, B, C, D]>;
-  };
-} = o.extend(
-  (value: unknown, ...guards: Guard[]): value is never =>
-    array(value) && guards.every((guard, index) => guard(value[index])),
-  {
-    factory(...guards: Guard[]) {
-      return (value: unknown): value is never =>
-        array(value) && guards.every((guard, index) => guard(value[index]));
+    ): value is readonly [A, B, C, D];
+
+    function _tuple(value: unknown, ...guards: Guards): value is unknown {
+      return (
+        array(value) && guards.every((guard, index) => guard(value[index]))
+      );
     }
+  }),
+  {
+    factory: overloadedFn(() => {
+      return _factory;
+
+      /**
+       * Creates guard for type [A].
+       *
+       * @param guard - Guard for type A.
+       * @returns Guard for type [A].
+       */
+      function _factory<A>(guard: Guard<A>): Guard<readonly [A]>;
+
+      /**
+       * Creates guard for type [A, B].
+       *
+       * @param guard1 - Guard for type A.
+       * @param guard2 - Guard for type B.
+       * @returns Guard for type [A, B].
+       */
+      function _factory<A, B>(
+        guard1: Guard<A>,
+        guard2: Guard<B>
+      ): Guard<readonly [A, B]>;
+
+      /**
+       * Creates guard for type [A, B, C].
+       *
+       * @param guard1 - Guard for type A.
+       * @param guard2 - Guard for type B.
+       * @param guard3 - Guard for type C.
+       * @returns Guard for type [A, B, C].
+       */
+      function _factory<A, B, C>(
+        guard1: Guard<A>,
+        guard2: Guard<B>,
+        guard3: Guard<C>
+      ): Guard<readonly [A, B, C]>;
+
+      /**
+       * Creates guard for type [A, B, C, D].
+       *
+       * @param guard1 - Guard for type A.
+       * @param guard2 - Guard for type B.
+       * @param guard3 - Guard for type C.
+       * @param guard4 - Guard for type D.
+       * @returns Guard for type [A, B, C, D].
+       */
+      function _factory<A, B, C, D>(
+        guard1: Guard<A>,
+        guard2: Guard<B>,
+        guard3: Guard<C>,
+        guard4: Guard<D>
+      ): Guard<readonly [A, B, C, D]>;
+
+      function _factory(...guards: Guards): Guard {
+        return (value): value is unknown =>
+          array(value) && guards.every((guard, index) => guard(value[index]));
+      }
+    })
   }
 );
 
@@ -511,7 +569,7 @@ export const tuple: {
  * @param guard - Guard for type T.
  * @returns _True_ if value type is not T, _false_ otherwise.
  */
-export const not = o.extend(
+export const not = defineFn(
   <T, V>(value: V, guard: Guard<T>): value is Exclude<V, T> => !guard(value),
   {
     array: _notFactory(array),
@@ -616,11 +674,9 @@ export interface Guard<T = unknown> {
   (value: unknown): value is T;
 }
 
-export type Guards<T, K extends keyof T = keyof T> = {
-  readonly [L in K]-?: Guard<T[L]>;
-};
+export type Guards = readonly Guard[];
 
-export interface MultiArgGuard<T, A extends unknown[]> {
+export interface MultiArgGuard<T, A extends types.unknowns> {
   /**
    * Checks that value type is T.
    *
@@ -630,6 +686,10 @@ export interface MultiArgGuard<T, A extends unknown[]> {
    */
   (value: unknown, ...args: A): value is T;
 }
+
+export type PropGuards<T, K extends keyof T = keyof T> = {
+  readonly [L in K]-?: Guard<T[L]>;
+};
 
 /**
  * Checks that value is a boolean.
@@ -682,7 +742,7 @@ export function enumeration<T extends PropertyKey>(
  * @param args - Arguments.
  * @returns Single-arg guard.
  */
-export function factory<T, A extends unknown[]>(
+export function factory<T, A extends types.unknowns>(
   guard: MultiArgGuard<T, A>,
   ...args: A
 ): Guard<T> {

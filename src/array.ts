@@ -5,6 +5,7 @@ import * as assert from "./assertions";
 import * as is from "./guards";
 import * as o from "./object";
 import * as reflect from "./reflect";
+import type { numbers, strings, unknowns, Writable } from "./types/core";
 
 export type KeyOrReduce<T extends object> = PropertyKey | Reduce<T>;
 
@@ -143,8 +144,8 @@ export function fromIterable<T>(iterable: Iterable<T>): T[] {
  * @param step - Step.
  * @returns Array of numbers.
  */
-export function fromRange(from: number, to: number, step = 1): number[] {
-  const result: number[] = [];
+export function fromRange(from: number, to: number, step = 1): numbers {
+  const result: Writable<numbers> = [];
 
   for (let i = from; i <= to; i += step) result.push(i);
 
@@ -157,7 +158,7 @@ export function fromRange(from: number, to: number, step = 1): number[] {
  * @param str - String.
  * @returns Array.
  */
-export function fromString(str: string): string[] {
+export function fromString(str: string): strings {
   return [...str];
 }
 
@@ -355,7 +356,7 @@ export function toggleBy<T extends object>(
  *
  * @param mutableArray - Array.
  */
-export function truncate(mutableArray: unknown[]): void {
+export function truncate(mutableArray: Writable<unknowns>): void {
   mutableArray.length = 0;
 }
 

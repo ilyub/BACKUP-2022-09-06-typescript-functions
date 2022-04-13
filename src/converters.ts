@@ -1,11 +1,11 @@
+import { defineFn } from "./core";
 import * as is from "./guards";
-import * as o from "./object";
 import type * as types from "./types/core";
 
 /**
  * Not implemented.
  */
-export const not = o.extend(
+export const not = defineFn(
   (): never => {
     throw new Error("Not implemented");
   },

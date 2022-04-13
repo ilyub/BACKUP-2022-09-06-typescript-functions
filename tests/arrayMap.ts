@@ -1,4 +1,5 @@
 import * as arrayMap from "@/arrayMap";
+import type { numbers, Writable } from "@/types/core";
 
 test("get", () => {
   const map = new Map([
@@ -23,7 +24,7 @@ test("get2", () => {
 });
 
 test("push", () => {
-  const map = new Map<string, number[]>();
+  const map = new Map<string, Writable<numbers>>();
 
   arrayMap.push("a", 1, map);
   arrayMap.push("a", 2, map);
@@ -38,7 +39,7 @@ test("push", () => {
 });
 
 test("push2", () => {
-  const map = new Map<string, Map<string, number[]>>();
+  const map = new Map<string, Map<string, Writable<numbers>>>();
 
   arrayMap.push2("a", "x", 1, map);
   arrayMap.push2("a", "x", 2, map);
@@ -60,7 +61,7 @@ test("push2", () => {
 });
 
 test("unshift", () => {
-  const map = new Map<string, number[]>();
+  const map = new Map<string, Writable<numbers>>();
 
   arrayMap.unshift("a", 1, map);
   arrayMap.unshift("a", 2, map);
@@ -75,7 +76,7 @@ test("unshift", () => {
 });
 
 test("unshift2", () => {
-  const map = new Map<string, Map<string, number[]>>();
+  const map = new Map<string, Map<string, Writable<numbers>>>();
 
   arrayMap.unshift2("a", "x", 1, map);
   arrayMap.unshift2("a", "x", 2, map);

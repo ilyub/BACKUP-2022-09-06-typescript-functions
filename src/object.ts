@@ -6,13 +6,14 @@ import * as is from "./guards";
 import * as reflect from "./reflect";
 import type {
   IndexedObject,
+  IndexedObjects,
   NumStr,
   objectU,
   PartialRecord,
   Rec,
+  unknowns,
   Writable,
-  WritablePartialRecord,
-  WritableRecord
+  WritablePartialRecord
 } from "./types/core";
 import type { OptionalStyle, StrictOmit } from "./types/object";
 
@@ -103,7 +104,7 @@ export const fromEntries = extend(
      */
     exhaustive<K extends PropertyKey, V>(
       entries: Iterable<readonly [K, V]>
-    ): WritableRecord<K, V> {
+    ): Rec<K, V> {
       const result: WritablePartialRecord<K, V> = {};
 
       for (const entry of entries) result[entry[0]] = entry[1];
@@ -130,37 +131,6 @@ export const keys: {
    */
   <T extends object>(obj: T): Array<string & keyof T>;
 } = Object.keys;
-
-export const sort: {
-  /**
-   * Sorts object.
-   *
-   * @param obj - Object.
-   * @param compareFn - Comparison function.
-   * @returns New object.
-   */
-  <K extends string, V>(
-    obj: Rec<K, V>,
-    compareFn?: CompareFn<Rec<K, V>>
-  ): WritableRecord<K, V>;
-  /**
-   * Sorts object.
-   *
-   * @param obj - Object.
-   * @param compareFn - Comparison function.
-   * @returns New object.
-   */
-  <T extends object>(obj: T, compareFn?: CompareFn<T>): T;
-} = <K extends string, V>(obj: Rec<K, V>, compareFn?: CompareFn<Rec<K, V>>) =>
-  fromEntries.exhaustive(
-    a.sort(
-      _entries(obj),
-      compareFn
-        ? (entry1, entry2): number =>
-            compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
-        : undefined
-    )
-  );
 
 export const values: {
   /**
@@ -332,7 +302,7 @@ export function hasOwnProp(key: PropertyKey, obj: object): boolean {
 export function map<K extends string, V, R>(
   obj: Rec<K, V>,
   callback: (value: V, key: K) => R
-): WritableRecord<K, R> {
+): Rec<K, R> {
   return fromEntries.exhaustive(
     _entries(obj).map(([key, value]) => [key, callback(value, key)])
   );
@@ -345,8 +315,8 @@ export function map<K extends string, V, R>(
  * @param objects - Objects.
  * @returns Merged object.
  */
-export function merge(...objects: IndexedObject[]): IndexedObject {
-  const result = new Map<PropertyKey, unknown[]>();
+export function merge(...objects: IndexedObjects): IndexedObject {
+  const result = new Map<PropertyKey, Writable<unknowns>>();
 
   for (const obj of objects)
     for (const [key, value] of _entries(obj)) {
@@ -415,6 +385,42 @@ export function some<T extends object>(
   predicate: Predicate<T>
 ): boolean {
   return _entries(obj).some(([key, value]) => predicate(value, key));
+}
+
+/**
+ * Sorts object.
+ *
+ * @param obj - Object.
+ * @param compareFn - Comparison function.
+ * @returns New object.
+ */
+export function sort<K extends string, V>(
+  obj: Rec<K, V>,
+  compareFn?: CompareFn<Rec<K, V>>
+): Rec<K, V>;
+
+/**
+ * Sorts object.
+ *
+ * @param obj - Object.
+ * @param compareFn - Comparison function.
+ * @returns New object.
+ */
+export function sort<T extends object>(obj: T, compareFn?: CompareFn<T>): T;
+
+export function sort<K extends string, V>(
+  obj: Rec<K, V>,
+  compareFn?: CompareFn<Rec<K, V>>
+): Rec<K, V> {
+  return fromEntries.exhaustive(
+    a.sort(
+      _entries(obj),
+      compareFn
+        ? (entry1, entry2): number =>
+            compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
+        : undefined
+    )
+  );
 }
 
 /**

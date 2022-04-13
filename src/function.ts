@@ -19,6 +19,8 @@ export interface PipeCallback<V = unknown, R = unknown> {
   (value: V): R;
 }
 
+export type PipeCallbacks = readonly PipeCallback[];
+
 /**
  * Identity function.
  *
@@ -59,7 +61,7 @@ export function pipe<V, A, B, R>(
   callback3: PipeCallback<B, R>
 ): R;
 
-export function pipe(value: unknown, ...callbacks: PipeCallback[]): unknown {
+export function pipe(value: unknown, ...callbacks: PipeCallbacks): unknown {
   for (const callback of callbacks) value = callback(value);
 
   return value;
