@@ -95,11 +95,12 @@ export const and: {
     ): Guard<A & B & C & D>;
   };
 } = o.extend(
-  (value: unknown, ...guards: Guard[]): value is unknown =>
+  (value: unknown, ...guards: Guard[]): value is never =>
     guards.every(guard => guard(value)),
   {
-    factory(...guards: Guard[]): Guard {
-      return (value): value is unknown => guards.every(guard => guard(value));
+    factory(...guards: Guard[]) {
+      return (value: unknown): value is never =>
+        guards.every(guard => guard(value));
     }
   }
 );
@@ -359,11 +360,12 @@ export const or: {
     ): Guard<A | B | C | D>;
   };
 } = o.extend(
-  (value: unknown, ...guards: Guard[]): value is unknown =>
+  (value: unknown, ...guards: Guard[]): value is never =>
     guards.some(guard => guard(value)),
   {
-    factory(...guards: Guard[]): Guard {
-      return (value): value is unknown => guards.some(guard => guard(value));
+    factory(...guards: Guard[]) {
+      return (value: unknown): value is never =>
+        guards.some(guard => guard(value));
     }
   }
 );
@@ -493,13 +495,11 @@ export const tuple: {
     ): Guard<readonly [A, B, C, D]>;
   };
 } = o.extend(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Ok
-  (value: unknown, ...guards: Guard[]): value is any =>
+  (value: unknown, ...guards: Guard[]): value is never =>
     array(value) && guards.every((guard, index) => guard(value[index])),
   {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Ok
-    factory(...guards: Guard[]): Guard<any> {
-      return (value): value is unknown =>
+    factory(...guards: Guard[]) {
+      return (value: unknown): value is never =>
         array(value) && guards.every((guard, index) => guard(value[index]));
     }
   }
