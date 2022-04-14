@@ -1,7 +1,7 @@
 import * as assert from "./assertions";
-import { defineFn } from "./core";
 import type * as is from "./guards";
 import type { ValidationObject } from "./helpers";
+import { defineFn } from "./moduleDefinition";
 import type * as types from "./types/core";
 import type { Constructor } from "./types/function";
 

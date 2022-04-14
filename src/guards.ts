@@ -1,9 +1,9 @@
 import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
 import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 import * as a from "./array";
-import { defineFn, overloadedFn } from "./core";
 import type { ValidationObject } from "./helpers";
 import { typedef } from "./helpers";
+import { defineFn, overloadedFn } from "./moduleDefinition";
 import * as o from "./object";
 import type * as types from "./types/core";
 import type { Constructor } from "./types/function";

@@ -1,5 +1,5 @@
 import * as assert from "./assertions";
-import { defineFn } from "./core";
+import { defineFn } from "./moduleDefinition";
 import type { numbers } from "./types/core";
 
 /**
