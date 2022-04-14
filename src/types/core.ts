@@ -2,6 +2,9 @@
 
 /* skylib/eslint-plugin disable @skylib/disallow-identifier[functions.types.core] */
 
+// eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
+export type Entry<K extends PropertyKey, T> = readonly [K, T];
+
 export type IndexedObject<T = unknown> = Rec<PropertyKey, T>;
 
 export type IndexedObjects<T = unknown> = ReadonlyArray<IndexedObject<T>>;

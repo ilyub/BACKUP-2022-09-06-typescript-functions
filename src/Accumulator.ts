@@ -1,3 +1,5 @@
+import type { Entry } from "./types/core";
+
 export class Accumulator<K extends PropertyKey, T> {
   /**
    * Creates class instance.
@@ -52,7 +54,4 @@ export class Accumulator<K extends PropertyKey, T> {
   protected readonly map: Map<K, T[]> = new Map();
 }
 
-export type IterableElement<K extends PropertyKey, T> = readonly [
-  K,
-  readonly T[]
-];
+export type IterableElement<K extends PropertyKey, T> = Entry<K, readonly T[]>;

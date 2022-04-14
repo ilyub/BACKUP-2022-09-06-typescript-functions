@@ -52,6 +52,7 @@ export function clone<A>(arr: readonly [A]): [A];
  * @param arr - Array.
  * @returns New array.
  */
+// eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
 export function clone<A, B>(arr: readonly [A, B]): [A, B];
 
 /**
@@ -60,6 +61,7 @@ export function clone<A, B>(arr: readonly [A, B]): [A, B];
  * @param arr - Array.
  * @returns New array.
  */
+// eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
 export function clone<A, B, C>(arr: readonly [A, B, C]): [A, B, C];
 
 /**
@@ -68,6 +70,7 @@ export function clone<A, B, C>(arr: readonly [A, B, C]): [A, B, C];
  * @param arr - Array.
  * @returns New array.
  */
+// eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
 export function clone<A, B, C, D>(arr: readonly [A, B, C, D]): [A, B, C, D];
 
 /**

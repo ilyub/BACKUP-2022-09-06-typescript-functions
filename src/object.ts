@@ -6,6 +6,7 @@ import * as assert from "./assertions";
 import * as is from "./guards";
 import * as reflect from "./reflect";
 import type {
+  Entry,
   IndexedObject,
   IndexedObjects,
   NumStr,
@@ -87,7 +88,7 @@ export const fromEntries = extend(
    * @returns Object.
    */
   <K extends PropertyKey, V>(
-    entries: Iterable<readonly [K, V]>
+    entries: Iterable<Entry<K, V>>
   ): PartialRecord<K, V> => {
     const result: WritablePartialRecord<K, V> = {};
 
@@ -103,7 +104,7 @@ export const fromEntries = extend(
      * @returns Object.
      */
     exhaustive<K extends PropertyKey, V>(
-      entries: Iterable<readonly [K, V]>
+      entries: Iterable<Entry<K, V>>
     ): Rec<K, V> {
       const result: WritablePartialRecord<K, V> = {};
 
@@ -435,12 +436,14 @@ const _entries: {
    * @param obj - Object.
    * @returns Object entries.
    */
-  <K extends string, V>(obj: PartialRecord<K, V>): Array<[K, V]>;
+  <K extends string, V>(obj: PartialRecord<K, V>): Array<Entry<K, V>>;
   /**
    * Typed version of Object.entries.
    *
    * @param obj - Object.
    * @returns Object entries.
    */
-  <T extends object>(obj: T): Array<[string & keyof T, T[NumStr & keyof T]]>;
+  <T extends object>(obj: T): Array<
+    Entry<string & keyof T, T[NumStr & keyof T]>
+  >;
 } = Object.entries;

@@ -61,11 +61,11 @@ export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
     } else this.map.set(key1, new Map([[key2, [value]]]));
   }
 
-  protected map: Map<K, Map<L, T[]>> = new Map();
+  protected readonly map: Map<K, Map<L, T[]>> = new Map();
 }
 
 export type IterableElement<
   K extends PropertyKey,
   L extends PropertyKey,
   T
-> = readonly [K, L, readonly T[]];
+> = readonly [K, L, readonly T[]]; // eslint-disable-line @skylib/no-multi-type-tuples -- Ok
