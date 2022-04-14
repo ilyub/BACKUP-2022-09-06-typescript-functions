@@ -1,13 +1,27 @@
+/* eslint-disable deprecation/deprecation -- Wait for next major version */
+
+/**
+ * @deprecated Use "Accumulator" class instead.
+ */
 export type ArrayMap<K extends PropertyKey, T> = ReadonlyMap<K, readonly T[]>;
 
+/**
+ * @deprecated Use "Accumulator2" class instead.
+ */
 export type ArrayMap2<
   K extends PropertyKey,
   L extends PropertyKey,
   T
 > = ReadonlyMap<K, ReadonlyMap<L, readonly T[]>>;
 
+/**
+ * @deprecated Use "Accumulator" class instead.
+ */
 export type WritableArrayMap<K extends PropertyKey, T> = Map<K, T[]>;
 
+/**
+ * @deprecated Use "Accumulator2" class instead.
+ */
 export type WritableArrayMap2<
   K extends PropertyKey,
   L extends PropertyKey,
@@ -20,6 +34,7 @@ export type WritableArrayMap2<
  * @param key - Key.
  * @param map - Array map.
  * @returns Array.
+ * @deprecated Use "Accumulator" class instead.
  */
 export function get<K extends PropertyKey, T>(
   key: K,
@@ -35,6 +50,7 @@ export function get<K extends PropertyKey, T>(
  * @param key2 - Key 2.
  * @param map - Array map.
  * @returns Array.
+ * @deprecated Use "Accumulator2" class instead.
  */
 export function get2<K extends PropertyKey, L extends PropertyKey, T>(
   key1: K,
@@ -50,6 +66,7 @@ export function get2<K extends PropertyKey, L extends PropertyKey, T>(
  * @param key - Key.
  * @param value - Value.
  * @param mutableMap - Array map.
+ * @deprecated Use "Accumulator" class instead.
  */
 export function push<K extends PropertyKey, T>(
   key: K,
@@ -69,6 +86,7 @@ export function push<K extends PropertyKey, T>(
  * @param key2 - Key 2.
  * @param value - Value.
  * @param mutableMap - Array map.
+ * @deprecated Use "Accumulator2" class instead.
  */
 export function push2<K extends PropertyKey, L extends PropertyKey, T>(
   key1: K,
@@ -88,6 +106,7 @@ export function push2<K extends PropertyKey, L extends PropertyKey, T>(
  * @param key - Key.
  * @param value - Value.
  * @param mutableMap - Array map.
+ * @deprecated Use "Accumulator" class instead.
  */
 export function unshift<K extends PropertyKey, T>(
   key: K,
@@ -107,6 +126,7 @@ export function unshift<K extends PropertyKey, T>(
  * @param key2 - Key 2.
  * @param value - Value.
  * @param mutableMap - Array map.
+ * @deprecated Use "Accumulator2" class instead.
  */
 export function unshift2<K extends PropertyKey, L extends PropertyKey, T>(
   key1: K,

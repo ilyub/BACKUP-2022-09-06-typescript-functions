@@ -1,5 +1,6 @@
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
 
+import { Accumulator } from "./Accumulator";
 import * as a from "./array";
 import * as assert from "./assertions";
 import * as is from "./guards";
@@ -11,7 +12,6 @@ import type {
   objectU,
   PartialRecord,
   Rec,
-  unknowns,
   Writable,
   WritablePartialRecord
 } from "./types/core";
@@ -316,15 +316,10 @@ export function map<K extends string, V, R>(
  * @returns Merged object.
  */
 export function merge(...objects: IndexedObjects): IndexedObject {
-  const result = new Map<PropertyKey, Writable<unknowns>>();
+  const result = new Accumulator<PropertyKey, unknown>();
 
   for (const obj of objects)
-    for (const [key, value] of _entries(obj)) {
-      const arr = result.get(key);
-
-      if (arr) arr.push(value);
-      else result.set(key, [value]);
-    }
+    for (const [key, value] of _entries(obj)) result.push(key, value);
 
   return fromEntries(
     a
