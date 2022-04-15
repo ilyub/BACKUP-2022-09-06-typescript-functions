@@ -1,6 +1,4 @@
-import * as fn from "@/function";
-import * as is from "@/guards";
-import { createValidationObject } from "@/helpers";
+import { fn, is, createValidationObject } from "@";
 
 test("and", () => {
   expect(is.and(undefined, is.booleanU, is.numberU)).toBeTrue();

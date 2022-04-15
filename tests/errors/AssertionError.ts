@@ -1,4 +1,4 @@
-import { AssertionError } from "@/errors/AssertionError";
+import { AssertionError } from "@";
 
 const error1 = new AssertionError();
 

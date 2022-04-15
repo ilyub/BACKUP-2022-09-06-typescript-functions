@@ -1,5 +1,4 @@
-import * as a from "@/array";
-import * as regexp from "@/regexp";
+import { a, regexp } from "@";
 
 test("addFlags", () => {
   expect(regexp.addFlags(/.*/u, "gu").flags).toBe("gu");

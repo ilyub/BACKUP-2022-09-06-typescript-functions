@@ -1,4 +1,4 @@
-import * as fn from "@/function";
+import { fn } from "@";
 
 test("identity", () => {
   expect(fn.identity(1)).toBe(1);

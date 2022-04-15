@@ -1,6 +1,6 @@
 import * as is from "./guards";
 import { defineFn } from "./moduleDefinition";
-import type * as types from "./types/core";
+import type * as types from "./types";
 
 /**
  * Not implemented.

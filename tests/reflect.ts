@@ -1,4 +1,4 @@
-import * as reflect from "@/reflect";
+import { reflect } from "@";
 
 const mk1 = Symbol("TestMetadataKey1");
 

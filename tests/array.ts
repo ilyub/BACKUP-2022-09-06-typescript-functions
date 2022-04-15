@@ -1,5 +1,4 @@
-import * as a from "@/array";
-import { AssertionError } from "@/errors/AssertionError";
+import { a, AssertionError } from "@";
 
 interface Reducible {
   id: unknown;

@@ -1,4 +1,4 @@
-import { ConversionError } from "@/errors/ConversionError";
+import { ConversionError } from "@";
 
 const error1 = new ConversionError();
 

@@ -2,8 +2,7 @@ import * as assert from "./assertions";
 import type * as is from "./guards";
 import type { ValidationObject } from "./helpers";
 import { defineFn } from "./moduleDefinition";
-import type * as types from "./types/core";
-import type { Constructor } from "./types/function";
+import type * as types from "./types";
 
 /**
  * Asserts that value is an array.
@@ -249,7 +248,7 @@ export function enumeration<T extends PropertyKey>(
  */
 export function instance<T>(
   value: unknown,
-  ctor: Constructor<T>,
+  ctor: types.Constructor<T>,
   error?: assert.ErrorArg
 ): T {
   assert.instance(value, ctor, error);
@@ -268,7 +267,7 @@ export function instance<T>(
  */
 export function instances<T>(
   value: unknown,
-  ctor: Constructor<T>,
+  ctor: types.Constructor<T>,
   error?: assert.ErrorArg
 ): readonly T[] {
   assert.instances(value, ctor, error);

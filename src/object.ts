@@ -14,9 +14,10 @@ import type {
   PartialRecord,
   Rec,
   Writable,
-  WritablePartialRecord
-} from "./types/core";
-import type { OptionalStyle, StrictOmit } from "./types/object";
+  WritablePartialRecord,
+  OptionalStyle,
+  StrictOmit
+} from "./types";
 
 export { _entries as entries };
 

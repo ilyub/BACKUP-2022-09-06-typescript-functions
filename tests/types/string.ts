@@ -1,5 +1,5 @@
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
-import type { AddPrefix, RemovePrefix } from "@/types/string";
+import type { AddPrefix, RemovePrefix } from "@";
 
 test("AddPrefix", () => {
   const typeCheck: Equals<To, Expected> = 1;

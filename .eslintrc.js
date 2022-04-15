@@ -14,5 +14,14 @@ module.exports = {
         "@skylib/prefer-readonly-props": "off"
       }
     }
-  ]
+  ],
+  // eslint-disable-next-line no-warning-comments -- Wait for @skylib/config update
+  // fixme
+  rules: {
+    "import/namespace": "off",
+    "import/no-internal-modules": [
+      "warn",
+      { allow: ["jest-extended/all", "ts-toolbelt/**"] }
+    ]
+  }
 };

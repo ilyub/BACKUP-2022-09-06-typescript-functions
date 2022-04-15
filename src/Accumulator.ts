@@ -1,4 +1,4 @@
-import type { Entry } from "./types/core";
+import type { Entry } from "./types";
 
 export class Accumulator<K extends PropertyKey, T> {
   /**

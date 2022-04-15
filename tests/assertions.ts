@@ -1,10 +1,5 @@
-import * as assert from "@/assertions";
-import { AssertionError } from "@/errors/AssertionError";
-import * as fn from "@/function";
-import * as is from "@/guards";
-import { createValidationObject } from "@/helpers";
-import type { unknowns } from "@/types/core";
-import type { Callable } from "@/types/function";
+import { assert, AssertionError, fn, is, createValidationObject } from "@";
+import type { unknowns, Callable } from "@";
 
 function createSubtest(assertion: Callable, ...args: unknowns) {
   return (value: unknown) => (): void => {

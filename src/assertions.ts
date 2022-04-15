@@ -1,8 +1,7 @@
-import { AssertionError } from "./errors/AssertionError";
+import { AssertionError } from "./errors";
 import * as is from "./guards";
 import type { ValidationObject } from "./helpers";
-import type * as types from "./types/core";
-import type { Constructor } from "./types/function";
+import type * as types from "./types";
 
 export type ErrorArg = ErrorArgFn | string;
 
@@ -129,7 +128,7 @@ export function indexedObject(
  */
 export function instance<T>(
   value: unknown,
-  ctor: Constructor<T>,
+  ctor: types.Constructor<T>,
   error?: ErrorArg
 ): asserts value is T {
   byGuard(value, is.factory(is.instance, ctor), error);
@@ -144,7 +143,7 @@ export function instance<T>(
  */
 export function instances<T>(
   value: unknown,
-  ctor: Constructor<T>,
+  ctor: types.Constructor<T>,
   error?: ErrorArg
 ): asserts value is readonly T[] {
   byGuard(value, is.factory(is.instances, ctor), error);

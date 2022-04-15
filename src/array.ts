@@ -1,11 +1,11 @@
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
 
-import * as _ from "lodash";
+import * as _ from "@skylib/lodash-commonjs-es";
 import * as assert from "./assertions";
 import * as is from "./guards";
 import * as o from "./object";
 import * as reflect from "./reflect";
-import type { numbers, strings, unknowns, Writable } from "./types/core";
+import type { numbers, strings, unknowns, Writable } from "./types";
 
 export type KeyOrReduce<T extends object> = PropertyKey | Reduce<T>;
 

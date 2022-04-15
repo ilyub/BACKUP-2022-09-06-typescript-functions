@@ -1,5 +1,5 @@
-import * as cast from "@/converters";
-import type { stringE } from "@/types/core";
+import { cast } from "@";
+import type { stringE } from "@";
 
 test("not", () => {
   expect(cast.not).toThrow(new Error("Not implemented"));

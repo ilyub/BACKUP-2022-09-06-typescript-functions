@@ -1,4 +1,4 @@
-import * as set from "@/set";
+import { set } from "@";
 
 test("add", () => {
   const source = new Set([1]);

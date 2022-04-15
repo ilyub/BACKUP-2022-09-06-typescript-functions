@@ -1,4 +1,4 @@
-import * as json from "@/json";
+import { json } from "@";
 
 test.each([
   { expected: null, source: null },

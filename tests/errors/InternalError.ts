@@ -1,4 +1,4 @@
-import { InternalError } from "@/errors/InternalError";
+import { InternalError } from "@";
 
 const error1 = new InternalError();
 

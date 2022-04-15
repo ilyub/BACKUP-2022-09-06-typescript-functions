@@ -1,7 +1,7 @@
 /* eslint-disable deprecation/deprecation -- Wait for next major version */
 
-import * as arrayMap from "@/arrayMap";
-import type { numbers, Writable } from "@/types/core";
+import { arrayMap } from "@";
+import type { numbers, Writable } from "@";
 
 test("get", () => {
   const map = new Map([

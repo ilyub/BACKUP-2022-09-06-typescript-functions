@@ -1,4 +1,4 @@
-import * as testUtils from "./src/testUtils";
+import { testUtils } from "./src";
 
 testUtils.jestSetup();
 beforeEach(testUtils.jestReset);

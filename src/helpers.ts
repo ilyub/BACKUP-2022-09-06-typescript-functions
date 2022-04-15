@@ -5,8 +5,7 @@ import * as is from "./guards";
 import * as o from "./object";
 import * as programFlow from "./programFlow";
 import * as reflect from "./reflect";
-import type { NumStr, Rec, unknowns } from "./types/core";
-import type { Join2 } from "./types/object";
+import type { NumStr, Rec, unknowns, Join2 } from "./types";
 
 export type Facade<I, E = unknown> = E & FacadeOwnMethods<I> & I;
 

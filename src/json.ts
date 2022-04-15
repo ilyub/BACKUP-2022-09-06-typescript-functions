@@ -4,7 +4,7 @@ import * as a from "./array";
 import * as assert from "./assertions";
 import * as is from "./guards";
 import { createValidationObject } from "./helpers";
-import type { stringE } from "./types/core";
+import type { stringE } from "./types";
 
 /**
  * Decodes JSON string.

@@ -1,17 +1,17 @@
-import * as fn from "@/function";
-import * as is from "@/guards";
 import {
+  fn,
+  is,
   createFacade,
   createValidationObject,
   onDemand,
   safeAccess,
   typedef,
   wait,
-  wrapProxyHandler
-} from "@/helpers";
-import * as o from "@/object";
-import * as reflect from "@/reflect";
-import * as testUtils from "@/testUtils";
+  wrapProxyHandler,
+  o,
+  reflect,
+  testUtils
+} from "@";
 
 testUtils.installFakeTimer();
 

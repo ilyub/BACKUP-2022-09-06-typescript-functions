@@ -1,4 +1,4 @@
-import * as map from "@/map";
+import { map } from "@";
 
 test("delete", () => {
   const source = new Map([

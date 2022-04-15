@@ -1,5 +1,4 @@
-import { Accumulator2 } from "@/Accumulator2";
-import * as a from "@/array";
+import { a, Accumulator2 } from "@";
 
 test("get", () => {
   const accumulator = new Accumulator2<string, string, unknown>([

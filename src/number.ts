@@ -1,6 +1,6 @@
 import * as assert from "./assertions";
 import { defineFn } from "./moduleDefinition";
-import type { numbers } from "./types/core";
+import type { numbers } from "./types";
 
 /**
  * Ceils number to a given precision.

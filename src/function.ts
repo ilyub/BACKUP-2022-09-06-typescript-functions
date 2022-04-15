@@ -1,11 +1,6 @@
-import * as _ from "lodash";
+import * as _ from "@skylib/lodash-commonjs-es";
 import * as is from "./guards";
-import type {
-  AsyncPromise,
-  AsyncPromiseSync,
-  Callable,
-  Sync
-} from "./types/function";
+import type { AsyncPromise, AsyncPromiseSync, Callable, Sync } from "./types";
 
 export const noop: Callable = _.noop.bind(_);
 

@@ -1,4 +1,4 @@
-import * as s from "@/string";
+import { s } from "@";
 
 test("detectEol", () => {
   expect(s.detectEol("a\nb\nc")).toBe("\n");

@@ -1,13 +1,13 @@
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
-import type { numberU } from "@/types/core";
 import type {
+  numberU,
   DefinedKeys,
   ReadonlyDefinedKeys,
   ReadonlyUndefinedKeys,
   UndefinedKeys,
   WritableDefindKeys,
   WritableUndefindKeys
-} from "@/types/objectKeys";
+} from "@";
 
 interface TestInterface {
   readonly r: number;

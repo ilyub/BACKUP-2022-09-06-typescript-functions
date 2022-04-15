@@ -5,9 +5,7 @@ import type { ValidationObject } from "./helpers";
 import { typedef } from "./helpers";
 import { defineFn, overloadedFn } from "./moduleDefinition";
 import * as o from "./object";
-import type * as types from "./types/core";
-import type { Constructor } from "./types/function";
-import type { OptionalStyle, UndefinedStyle } from "./types/object";
+import type * as types from "./types";
 
 export {
   _false as false,
@@ -229,7 +227,7 @@ export const object = defineFn(
       function _factory<R extends object, O extends object>(
         required: PropGuards<R, keyof R>,
         optional: PropGuards<O, keyof O>
-      ): Guard<OptionalStyle<Partial<O>> & UndefinedStyle<R>>;
+      ): Guard<types.OptionalStyle<Partial<O>> & types.UndefinedStyle<R>>;
 
       /**
        * Creates object guard.
@@ -265,7 +263,7 @@ export const object = defineFn(
         value: unknown,
         required: PropGuards<R, keyof R>,
         optional: PropGuards<O, keyof O>
-      ): value is OptionalStyle<Partial<O>> & UndefinedStyle<R>;
+      ): value is types.OptionalStyle<Partial<O>> & types.UndefinedStyle<R>;
 
       /**
        * Checks that value is an object.
@@ -762,7 +760,10 @@ export function factory<T, A extends types.unknowns>(
  * @param ctor - Constructor.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-export function instance<T>(value: unknown, ctor: Constructor<T>): value is T {
+export function instance<T>(
+  value: unknown,
+  ctor: types.Constructor<T>
+): value is T {
   return value instanceof ctor;
 }
 
@@ -775,7 +776,7 @@ export function instance<T>(value: unknown, ctor: Constructor<T>): value is T {
  */
 export function instances<T>(
   value: unknown,
-  ctor: Constructor<T>
+  ctor: types.Constructor<T>
 ): value is readonly T[] {
   return array(value) && value.every(v => v instanceof ctor);
 }

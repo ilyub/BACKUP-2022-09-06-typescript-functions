@@ -1,5 +1,4 @@
-import { AssertionError } from "@/errors/AssertionError";
-import * as num from "@/number";
+import { AssertionError, num } from "@";
 
 test("average", () => {
   expect(num.average(10, 20, 30)).toBe(20);

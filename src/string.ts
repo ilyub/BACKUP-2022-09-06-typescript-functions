@@ -1,7 +1,7 @@
 import * as a from "./array";
 import { defineFn } from "./moduleDefinition";
 import * as regexp from "./regexp";
-import type { strings } from "./types/core";
+import type { strings } from "./types";
 
 export { _path as path };
 
