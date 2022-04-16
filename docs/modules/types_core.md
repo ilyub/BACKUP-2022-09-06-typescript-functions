@@ -6,20 +6,27 @@
 
 ### Type aliases
 
+- [Entry](types_core.md#entry)
 - [IndexedObject](types_core.md#indexedobject)
+- [IndexedObjects](types_core.md#indexedobjects)
 - [NumStr](types_core.md#numstr)
 - [NumStrE](types_core.md#numstre)
 - [NumStrU](types_core.md#numstru)
 - [NumStrs](types_core.md#numstrs)
 - [PartialRecord](types_core.md#partialrecord)
+- [PartialRecords](types_core.md#partialrecords)
 - [PropertyKeyE](types_core.md#propertykeye)
 - [PropertyKeyU](types_core.md#propertykeyu)
 - [PropertyKeys](types_core.md#propertykeys)
 - [Rec](types_core.md#rec)
+- [Recs](types_core.md#recs)
 - [Writable](types_core.md#writable)
 - [WritableIndexedObject](types_core.md#writableindexedobject)
+- [WritableIndexedObjects](types_core.md#writableindexedobjects)
 - [WritablePartialRecord](types_core.md#writablepartialrecord)
+- [WritablePartialRecords](types_core.md#writablepartialrecords)
 - [WritableRecord](types_core.md#writablerecord)
+- [WritableRecords](types_core.md#writablerecords)
 - [booleanE](types_core.md#booleane)
 - [booleanU](types_core.md#booleanu)
 - [booleans](types_core.md#booleans)
@@ -40,9 +47,34 @@
 
 ## Type aliases
 
+### Entry
+
+Ƭ **Entry**<`K`, `T`\>: readonly [`K`, `T`]
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `T` | `T` |
+
+___
+
 ### IndexedObject
 
 Ƭ **IndexedObject**<`T`\>: [`Rec`](types_core.md#rec)<`PropertyKey`, `T`\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | `unknown` |
+
+___
+
+### IndexedObjects
+
+Ƭ **IndexedObjects**<`T`\>: `ReadonlyArray`<[`IndexedObject`](types_core.md#indexedobject)<`T`\>\>
 
 #### Type parameters
 
@@ -89,6 +121,19 @@ ___
 
 ___
 
+### PartialRecords
+
+Ƭ **PartialRecords**<`K`, `V`\>: `ReadonlyArray`<[`PartialRecords`](types_core.md#partialrecords)<`K`, `V`\>\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `V` | `V` |
+
+___
+
 ### PropertyKeyE
 
 Ƭ **PropertyKeyE**: [`empty`](types_core.md#empty) \| `PropertyKey`
@@ -110,6 +155,19 @@ ___
 ### Rec
 
 Ƭ **Rec**<`K`, `V`\>: { readonly [L in K]: V }
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `V` | `V` |
+
+___
+
+### Recs
+
+Ƭ **Recs**<`K`, `V`\>: `ReadonlyArray`<[`Rec`](types_core.md#rec)<`K`, `V`\>\>
 
 #### Type parameters
 
@@ -144,6 +202,18 @@ ___
 
 ___
 
+### WritableIndexedObjects
+
+Ƭ **WritableIndexedObjects**<`T`\>: `ReadonlyArray`<[`WritableIndexedObject`](types_core.md#writableindexedobject)<`T`\>\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | `unknown` |
+
+___
+
 ### WritablePartialRecord
 
 Ƭ **WritablePartialRecord**<`K`, `V`\>: { [L in K]?: V }
@@ -157,9 +227,35 @@ ___
 
 ___
 
+### WritablePartialRecords
+
+Ƭ **WritablePartialRecords**<`K`, `V`\>: `ReadonlyArray`<[`WritablePartialRecord`](types_core.md#writablepartialrecord)<`K`, `V`\>\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `V` | `V` |
+
+___
+
 ### WritableRecord
 
 Ƭ **WritableRecord**<`K`, `V`\>: { [L in K]: V }
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `V` | `V` |
+
+___
+
+### WritableRecords
+
+Ƭ **WritableRecords**<`K`, `V`\>: `ReadonlyArray`<[`WritableRecord`](types_core.md#writablerecord)<`K`, `V`\>\>
 
 #### Type parameters
 

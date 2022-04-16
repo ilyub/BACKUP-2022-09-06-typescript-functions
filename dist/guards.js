@@ -5,11 +5,20 @@ exports.unknown = exports.symbol = exports.stringU = exports.string = exports.nu
 const tslib_1 = require("tslib");
 const a = tslib_1.__importStar(require("./array"));
 const helpers_1 = require("./helpers");
+const moduleDefinition_1 = require("./moduleDefinition");
 const o = tslib_1.__importStar(require("./object"));
-exports.and = o.extend((value, ...guards) => guards.every(guard => guard(value)), {
-    factory(...guards) {
-        return (value) => guards.every(guard => guard(value));
+exports.and = (0, moduleDefinition_1.defineFn)((0, moduleDefinition_1.overloadedFn)(() => {
+    return _and;
+    function _and(value, ...guards) {
+        return guards.every(guard => guard(value));
     }
+}), {
+    factory: (0, moduleDefinition_1.overloadedFn)(() => {
+        return _factory;
+        function _factory(...guards) {
+            return (value) => guards.every(guard => guard(value));
+        }
+    })
 });
 /**
  * Checks that value is an array.
@@ -17,7 +26,7 @@ exports.and = o.extend((value, ...guards) => guards.every(guard => guard(value))
  * @param value - Value.
  * @returns _True_ if value is an array, _false_ otherwise.
  */
-exports.array = o.extend((value) => Array.isArray(value), {
+exports.array = (0, moduleDefinition_1.defineFn)((value) => Array.isArray(value), {
     /**
      * Checks that value type is T[].
      *
@@ -36,7 +45,7 @@ exports.array = o.extend((value) => Array.isArray(value), {
  * @param value - Value.
  * @returns _True_ if value type is IndexedObject, _false_ otherwise.
  */
-exports.indexedObject = o.extend((value) => typeof value === "object" && value !== null, {
+exports.indexedObject = (0, moduleDefinition_1.defineFn)((value) => typeof value === "object" && value !== null, {
     /**
      * Checks that value type is IndexedObject\<T\>.
      *
@@ -55,7 +64,7 @@ exports.indexedObject = o.extend((value) => typeof value === "object" && value !
  * @param value - Value.
  * @returns _True_ if value type is Map, _false_ otherwise.
  */
-exports.map = o.extend((value) => value instanceof Map, {
+exports.map = (0, moduleDefinition_1.defineFn)((value) => value instanceof Map, {
     /**
      * Checks that value type is Map\<K, V\>.
      *
@@ -76,20 +85,34 @@ exports.map = o.extend((value) => value instanceof Map, {
  * @param value - Value.
  * @returns _True_ if value is an object, _false_ otherwise.
  */
-exports.object = o.extend((value) => typeof value === "object" && value !== null, {
-    factory(required, optional) {
-        return (value) => exports.object.of(value, required, optional);
-    },
-    of(value, required, optional) {
-        return ((0, exports.indexedObject)(value) &&
-            o.every(required, (guard, key) => checkRequiredProp(value, key, guard)) &&
-            o.every(optional, (guard, key) => checkOptionalProp(value, key, guard)));
-    }
+exports.object = (0, moduleDefinition_1.defineFn)((value) => typeof value === "object" && value !== null, {
+    factory: (0, moduleDefinition_1.overloadedFn)(() => {
+        return _factory;
+        function _factory(required, optional) {
+            return (value) => exports.object.of(value, required, optional);
+        }
+    }),
+    of: (0, moduleDefinition_1.overloadedFn)(() => {
+        return _of;
+        function _of(value, required, optional) {
+            return ((0, exports.indexedObject)(value) &&
+                o.every(required, (guard, key) => checkRequiredProp(value, key, guard)) &&
+                o.every(optional, (guard, key) => checkOptionalProp(value, key, guard)));
+        }
+    })
 });
-exports.or = o.extend((value, ...guards) => guards.some(guard => guard(value)), {
-    factory(...guards) {
-        return (value) => guards.some(guard => guard(value));
+exports.or = (0, moduleDefinition_1.defineFn)((0, moduleDefinition_1.overloadedFn)(() => {
+    return _or;
+    function _or(value, ...guards) {
+        return guards.some(guard => guard(value));
     }
+}), {
+    factory: (0, moduleDefinition_1.overloadedFn)(() => {
+        return _factory;
+        function _factory(...guards) {
+            return (value) => guards.some(guard => guard(value));
+        }
+    })
 });
 /**
  * Checks that value type is Set.
@@ -97,7 +120,7 @@ exports.or = o.extend((value, ...guards) => guards.some(guard => guard(value)), 
  * @param value - Value.
  * @returns _True_ if value type is Set, _false_ otherwise.
  */
-exports.set = o.extend((value) => value instanceof Set, {
+exports.set = (0, moduleDefinition_1.defineFn)((value) => value instanceof Set, {
     /**
      * Checks that value type is Set\<T\>.
      *
@@ -110,13 +133,18 @@ exports.set = o.extend((value) => value instanceof Set, {
         return (0, exports.set)(value) && a.fromIterable(value).every(v => guard(v));
     }
 });
-exports.tuple = o.extend(
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Ok
-(value, ...guards) => (0, exports.array)(value) && guards.every((guard, index) => guard(value[index])), {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Ok
-    factory(...guards) {
-        return (value) => (0, exports.array)(value) && guards.every((guard, index) => guard(value[index]));
+exports.tuple = (0, moduleDefinition_1.defineFn)((0, moduleDefinition_1.overloadedFn)(() => {
+    return _tuple;
+    function _tuple(value, ...guards) {
+        return ((0, exports.array)(value) && guards.every((guard, index) => guard(value[index])));
     }
+}), {
+    factory: (0, moduleDefinition_1.overloadedFn)(() => {
+        return _factory;
+        function _factory(...guards) {
+            return (value) => (0, exports.array)(value) && guards.every((guard, index) => guard(value[index]));
+        }
+    })
 });
 /**
  * Checks that value type is not T.
@@ -125,7 +153,7 @@ exports.tuple = o.extend(
  * @param guard - Guard for type T.
  * @returns _True_ if value type is not T, _false_ otherwise.
  */
-exports.not = o.extend((value, guard) => !guard(value), {
+exports.not = (0, moduleDefinition_1.defineFn)((value, guard) => !guard(value), {
     array: _notFactory(exports.array),
     boolean: _notFactory(boolean),
     empty: _notFactory(empty),

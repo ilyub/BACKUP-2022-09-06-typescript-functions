@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.unshiftOrReplaceBy = exports.unshift = exports.uniqueBy = exports.truncate = exports.toggleBy = exports.sort = exports.reverse = exports.replaceBy = exports.replace = exports.removeBy = exports.random = exports.pushOrReplaceBy = exports.push = exports.last = exports.includesBy = exports.get = exports.fromString = exports.fromRange = exports.fromIterable = exports.first = exports.findBy = exports.drop = exports.clone = exports.chain = void 0;
 const tslib_1 = require("tslib");
-const _ = tslib_1.__importStar(require("lodash"));
+const _ = tslib_1.__importStar(require("@skylib/lodash-commonjs-es"));
 const assert = tslib_1.__importStar(require("./assertions"));
 const is = tslib_1.__importStar(require("./guards"));
 const o = tslib_1.__importStar(require("./object"));

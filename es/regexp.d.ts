@@ -1,3 +1,4 @@
+export declare type RegExpExecArrays = readonly RegExpExecArray[];
 /**
  * Adds flag to regular expression.
  *
@@ -20,5 +21,5 @@ export declare function escapeString(str: string): string;
  * @param re - Regular expression.
  * @returns Matches.
  */
-export declare function matchAll(str: string, re: RegExp): RegExpExecArray[];
+export declare function matchAll(str: string, re: RegExp): RegExpExecArrays;
 //# sourceMappingURL=regexp.d.ts.map

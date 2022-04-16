@@ -1,4 +1,5 @@
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
+import { Accumulator } from "./Accumulator";
 import * as a from "./array";
 import * as assert from "./assertions";
 import * as is from "./guards";
@@ -49,10 +50,6 @@ export const fromEntries = extend(
     }
 });
 export const keys = Object.keys;
-export const sort = (obj, compareFn) => fromEntries.exhaustive(a.sort(_entries(obj), compareFn
-    ? // eslint-disable-next-line @skylib/prefer-readonly -- Wait for @skylib/eslint-plugin update
-        (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
-    : undefined));
 export const values = Object.values;
 /**
  * Clones object.
@@ -148,23 +145,13 @@ export function map(obj, callback) {
  * @returns Merged object.
  */
 export function merge(...objects) {
-    const result = new Map();
+    const result = new Accumulator();
     for (const obj of objects)
-        for (const [key, value] of _entries(obj)) {
-            const arr = result.get(key);
-            if (arr)
-                arr.push(value);
-            else
-                result.set(key, [value]);
-        }
+        for (const [key, value] of _entries(obj))
+            result.push(key, value);
     return fromEntries(a
         .fromIterable(result)
-        // eslint-disable-next-line no-warning-comments -- Wait for @skylib/eslint-plugin update
-        // fixme
-        .map(([key, arr]) => [
-        key,
-        arr.length === 1 ? arr[0] : arr
-    ]));
+        .map(([key, arr]) => [key, arr.length === 1 ? arr[0] : arr]));
 }
 /**
  * Removes keys from object.
@@ -206,6 +193,11 @@ export function size(obj) {
  */
 export function some(obj, predicate) {
     return _entries(obj).some(([key, value]) => predicate(value, key));
+}
+export function sort(obj, compareFn) {
+    return fromEntries.exhaustive(a.sort(_entries(obj), compareFn
+        ? (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
+        : undefined));
 }
 /**
  * Marks object as writable.

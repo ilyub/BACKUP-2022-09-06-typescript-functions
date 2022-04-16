@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.toBeTrue = exports.toBeFalse = exports.symbol = exports.stringU = exports.string = exports.set = exports.object = exports.number = exports.numStr = exports.not = exports.map = exports.instances = exports.instance = exports.indexedObject = exports.enumeration = exports.empty = exports.callable = exports.byGuard = exports.boolean = exports.array = void 0;
 const tslib_1 = require("tslib");
-const AssertionError_1 = require("./errors/AssertionError");
+const errors_1 = require("./errors");
 const is = tslib_1.__importStar(require("./guards"));
 /**
  * Asserts that value is an array.
@@ -41,7 +41,7 @@ function byGuard(value, guard, error) {
                 throw error();
             case "string":
             case "undefined":
-                throw new AssertionError_1.AssertionError(error);
+                throw new errors_1.AssertionError(error);
         }
 }
 exports.byGuard = byGuard;

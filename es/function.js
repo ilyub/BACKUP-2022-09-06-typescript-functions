@@ -1,4 +1,4 @@
-import * as _ from "lodash-es";
+import * as _ from "@skylib/lodash-commonjs-es";
 import * as is from "./guards";
 export const noop = _.noop.bind(_);
 /**

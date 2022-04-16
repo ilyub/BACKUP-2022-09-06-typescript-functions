@@ -28,4 +28,4 @@ Constructor.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `...args` | `any`[] | Arguments. |
+| `...args` | readonly `any`[] | Arguments. |

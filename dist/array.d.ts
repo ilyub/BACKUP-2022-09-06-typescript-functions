@@ -1,3 +1,4 @@
+import type { numbers, strings, unknowns, Writable } from "./types";
 export declare type KeyOrReduce<T extends object> = PropertyKey | Reduce<T>;
 export interface Reduce<T extends object> {
     /**
@@ -90,14 +91,14 @@ export declare function fromIterable<T>(iterable: Iterable<T>): T[];
  * @param step - Step.
  * @returns Array of numbers.
  */
-export declare function fromRange(from: number, to: number, step?: number): number[];
+export declare function fromRange(from: number, to: number, step?: number): numbers;
 /**
  * Creates array from string.
  *
  * @param str - String.
  * @returns Array.
  */
-export declare function fromString(str: string): string[];
+export declare function fromString(str: string): strings;
 /**
  * Returns element at given index.
  *
@@ -204,7 +205,7 @@ export declare function toggleBy<T extends object>(arr: readonly T[], value: T, 
  *
  * @param mutableArray - Array.
  */
-export declare function truncate(mutableArray: unknown[]): void;
+export declare function truncate(mutableArray: Writable<unknowns>): void;
 /**
  * Creates unique array.
  *

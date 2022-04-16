@@ -1,4 +1,5 @@
 "use strict";
+/* eslint-disable deprecation/deprecation -- Wait for next major version */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.unshift2 = exports.unshift = exports.push2 = exports.push = exports.get2 = exports.get = void 0;
 /**
@@ -7,6 +8,7 @@ exports.unshift2 = exports.unshift = exports.push2 = exports.push = exports.get2
  * @param key - Key.
  * @param map - Array map.
  * @returns Array.
+ * @deprecated Use "Accumulator" class instead.
  */
 function get(key, map) {
     var _a;
@@ -20,6 +22,7 @@ exports.get = get;
  * @param key2 - Key 2.
  * @param map - Array map.
  * @returns Array.
+ * @deprecated Use "Accumulator2" class instead.
  */
 function get2(key1, key2, map) {
     var _a, _b;
@@ -32,6 +35,7 @@ exports.get2 = get2;
  * @param key - Key.
  * @param value - Value.
  * @param mutableMap - Array map.
+ * @deprecated Use "Accumulator" class instead.
  */
 function push(key, value, mutableMap) {
     const arr = mutableMap.get(key);
@@ -48,6 +52,7 @@ exports.push = push;
  * @param key2 - Key 2.
  * @param value - Value.
  * @param mutableMap - Array map.
+ * @deprecated Use "Accumulator2" class instead.
  */
 function push2(key1, key2, value, mutableMap) {
     const map = mutableMap.get(key1);
@@ -63,6 +68,7 @@ exports.push2 = push2;
  * @param key - Key.
  * @param value - Value.
  * @param mutableMap - Array map.
+ * @deprecated Use "Accumulator" class instead.
  */
 function unshift(key, value, mutableMap) {
     const arr = mutableMap.get(key);
@@ -79,6 +85,7 @@ exports.unshift = unshift;
  * @param key2 - Key 2.
  * @param value - Value.
  * @param mutableMap - Array map.
+ * @deprecated Use "Accumulator2" class instead.
  */
 function unshift2(key1, key2, value, mutableMap) {
     const map = mutableMap.get(key1);

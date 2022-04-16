@@ -1,6 +1,5 @@
 import * as is from "./guards";
-import type { NumStr, Rec } from "./types/core";
-import type { Join2 } from "./types/object";
+import type { NumStr, Rec, Join2 } from "./types";
 export declare type Facade<I, E = unknown> = E & FacadeOwnMethods<I> & I;
 export interface FacadeOwnMethods<I> {
     /**

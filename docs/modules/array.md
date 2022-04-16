@@ -311,7 +311,7 @@ ___
 
 ### fromRange
 
-▸ **fromRange**(`from`, `to`, `step?`): `number`[]
+▸ **fromRange**(`from`, `to`, `step?`): [`numbers`](types_core.md#numbers)
 
 Creates array of numbers.
 
@@ -325,7 +325,7 @@ Creates array of numbers.
 
 #### Returns
 
-`number`[]
+[`numbers`](types_core.md#numbers)
 
 Array of numbers.
 
@@ -333,7 +333,7 @@ ___
 
 ### fromString
 
-▸ **fromString**(`str`): `string`[]
+▸ **fromString**(`str`): [`strings`](types_core.md#strings)
 
 Creates array from string.
 
@@ -345,7 +345,7 @@ Creates array from string.
 
 #### Returns
 
-`string`[]
+[`strings`](types_core.md#strings)
 
 Array.
 

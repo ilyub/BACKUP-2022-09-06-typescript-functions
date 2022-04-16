@@ -42,7 +42,7 @@
 
 ### fromEntries
 
-• `Const` **fromEntries**: { `exhaustive`: <K, V\>(`entries`: `Iterable`<readonly [`K`, `V`]\>) => [`WritableRecord`](types_core.md#writablerecord)<`K`, `V`\>  } & <K, V\>(`entries`: `Iterable`<readonly [`K`, `V`]\>) => [`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\>
+• `Const` **fromEntries**: { `exhaustive`: <K, V\>(`entries`: `Iterable`<[`Entry`](types_core.md#entry)<`K`, `V`\>\>) => [`Rec`](types_core.md#rec)<`K`, `V`\>  } & <K, V\>(`entries`: `Iterable`<[`Entry`](types_core.md#entry)<`K`, `V`\>\>) => [`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\>
 
 ## Functions
 
@@ -128,7 +128,7 @@ ___
 
 ### entries
 
-▸ **entries**<`K`, `V`\>(`obj`): [`K`, `V`][]
+▸ **entries**<`K`, `V`\>(`obj`): [`Entry`](types_core.md#entry)<`K`, `V`\>[]
 
 #### Type parameters
 
@@ -145,9 +145,9 @@ ___
 
 #### Returns
 
-[`K`, `V`][]
+[`Entry`](types_core.md#entry)<`K`, `V`\>[]
 
-▸ **entries**<`T`\>(`obj`): [`string` & keyof `T`, `T`[`string` & keyof `T` & `number` & keyof `T`]][]
+▸ **entries**<`T`\>(`obj`): [`Entry`](types_core.md#entry)<`string` & keyof `T`, `T`[`string` & keyof `T` & `number` & keyof `T`]\>[]
 
 #### Type parameters
 
@@ -163,7 +163,7 @@ ___
 
 #### Returns
 
-[`string` & keyof `T`, `T`[`string` & keyof `T` & `number` & keyof `T`]][]
+[`Entry`](types_core.md#entry)<`string` & keyof `T`, `T`[`string` & keyof `T` & `number` & keyof `T`]\>[]
 
 ___
 
@@ -431,7 +431,7 @@ ___
 
 ### map
 
-▸ **map**<`K`, `V`, `R`\>(`obj`, `callback`): [`WritableRecord`](types_core.md#writablerecord)<`K`, `R`\>
+▸ **map**<`K`, `V`, `R`\>(`obj`, `callback`): [`Rec`](types_core.md#rec)<`K`, `R`\>
 
 Applies callback to each property.
 
@@ -452,7 +452,7 @@ Applies callback to each property.
 
 #### Returns
 
-[`WritableRecord`](types_core.md#writablerecord)<`K`, `R`\>
+[`Rec`](types_core.md#rec)<`K`, `R`\>
 
 New object.
 
@@ -469,7 +469,7 @@ If more than one object has the same key, respective values are combined into ar
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `...objects` | [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>[] | Objects. |
+| `...objects` | [`IndexedObjects`](types_core.md#indexedobjects)<`unknown`\> | Objects. |
 
 #### Returns
 
@@ -582,7 +582,9 @@ ___
 
 ### sort
 
-▸ **sort**<`K`, `V`\>(`obj`, `compareFn?`): [`WritableRecord`](types_core.md#writablerecord)<`K`, `V`\>
+▸ **sort**<`K`, `V`\>(`obj`, `compareFn?`): [`Rec`](types_core.md#rec)<`K`, `V`\>
+
+Sorts object.
 
 #### Type parameters
 
@@ -593,16 +595,20 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `obj` | [`Rec`](types_core.md#rec)<`K`, `V`\> |
-| `compareFn?` | [`CompareFn`](../interfaces/object.CompareFn.md)<[`Rec`](types_core.md#rec)<`K`, `V`\>\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | [`Rec`](types_core.md#rec)<`K`, `V`\> | Object. |
+| `compareFn?` | [`CompareFn`](../interfaces/object.CompareFn.md)<[`Rec`](types_core.md#rec)<`K`, `V`\>\> | Comparison function. |
 
 #### Returns
 
-[`WritableRecord`](types_core.md#writablerecord)<`K`, `V`\>
+[`Rec`](types_core.md#rec)<`K`, `V`\>
+
+New object.
 
 ▸ **sort**<`T`\>(`obj`, `compareFn?`): `T`
+
+Sorts object.
 
 #### Type parameters
 
@@ -612,14 +618,16 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `obj` | `T` |
-| `compareFn?` | [`CompareFn`](../interfaces/object.CompareFn.md)<`T`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | `T` | Object. |
+| `compareFn?` | [`CompareFn`](../interfaces/object.CompareFn.md)<`T`\> | Comparison function. |
 
 #### Returns
 
 `T`
+
+New object.
 
 ___
 

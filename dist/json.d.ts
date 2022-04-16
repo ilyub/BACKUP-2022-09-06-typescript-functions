@@ -1,4 +1,4 @@
-import type { stringE } from "./types/core";
+import type { stringE } from "./types";
 /**
  * Decodes JSON string.
  *

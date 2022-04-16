@@ -4,11 +4,21 @@
 
 ## Table of contents
 
+### Type aliases
+
+- [RegExpExecArrays](regexp.md#regexpexecarrays)
+
 ### Functions
 
 - [addFlags](regexp.md#addflags)
 - [escapeString](regexp.md#escapestring)
 - [matchAll](regexp.md#matchall)
+
+## Type aliases
+
+### RegExpExecArrays
+
+Ƭ **RegExpExecArrays**: readonly `RegExpExecArray`[]
 
 ## Functions
 
@@ -55,7 +65,7 @@ ___
 
 ### matchAll
 
-▸ **matchAll**(`str`, `re`): `RegExpExecArray`[]
+▸ **matchAll**(`str`, `re`): [`RegExpExecArrays`](regexp.md#regexpexecarrays)
 
 Finds all matches.
 
@@ -68,6 +78,6 @@ Finds all matches.
 
 #### Returns
 
-`RegExpExecArray`[]
+[`RegExpExecArrays`](regexp.md#regexpexecarrays)
 
 Matches.

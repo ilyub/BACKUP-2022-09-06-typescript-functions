@@ -1,9 +1,11 @@
+/* eslint-disable deprecation/deprecation -- Wait for next major version */
 /**
  * Extracts array from array map.
  *
  * @param key - Key.
  * @param map - Array map.
  * @returns Array.
+ * @deprecated Use "Accumulator" class instead.
  */
 export function get(key, map) {
     var _a;
@@ -16,6 +18,7 @@ export function get(key, map) {
  * @param key2 - Key 2.
  * @param map - Array map.
  * @returns Array.
+ * @deprecated Use "Accumulator2" class instead.
  */
 export function get2(key1, key2, map) {
     var _a, _b;
@@ -27,6 +30,7 @@ export function get2(key1, key2, map) {
  * @param key - Key.
  * @param value - Value.
  * @param mutableMap - Array map.
+ * @deprecated Use "Accumulator" class instead.
  */
 export function push(key, value, mutableMap) {
     const arr = mutableMap.get(key);
@@ -42,6 +46,7 @@ export function push(key, value, mutableMap) {
  * @param key2 - Key 2.
  * @param value - Value.
  * @param mutableMap - Array map.
+ * @deprecated Use "Accumulator2" class instead.
  */
 export function push2(key1, key2, value, mutableMap) {
     const map = mutableMap.get(key1);
@@ -56,6 +61,7 @@ export function push2(key1, key2, value, mutableMap) {
  * @param key - Key.
  * @param value - Value.
  * @param mutableMap - Array map.
+ * @deprecated Use "Accumulator" class instead.
  */
 export function unshift(key, value, mutableMap) {
     const arr = mutableMap.get(key);
@@ -71,6 +77,7 @@ export function unshift(key, value, mutableMap) {
  * @param key2 - Key 2.
  * @param value - Value.
  * @param mutableMap - Array map.
+ * @deprecated Use "Accumulator2" class instead.
  */
 export function unshift2(key1, key2, value, mutableMap) {
     const map = mutableMap.get(key1);

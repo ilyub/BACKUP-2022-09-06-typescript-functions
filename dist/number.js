@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.sum = exports.rootMeanSquareDeviation = exports.limit = exports.average = exports.round = exports.floor = exports.ceil = void 0;
 const tslib_1 = require("tslib");
 const assert = tslib_1.__importStar(require("./assertions"));
-const o = tslib_1.__importStar(require("./object"));
+const moduleDefinition_1 = require("./moduleDefinition");
 /**
  * Ceils number to a given precision.
  *
@@ -11,7 +11,7 @@ const o = tslib_1.__importStar(require("./object"));
  * @param precision - The number of digits to keep.
  * @returns Ceiled value.
  */
-exports.ceil = o.extend((value, precision) => {
+exports.ceil = (0, moduleDefinition_1.defineFn)((value, precision) => {
     const divider = 10 ** precision;
     return Math.ceil(value * divider) / divider;
 }, {
@@ -34,7 +34,7 @@ exports.ceil = o.extend((value, precision) => {
  * @param precision - The number of digits to keep.
  * @returns Floored value.
  */
-exports.floor = o.extend((value, precision) => {
+exports.floor = (0, moduleDefinition_1.defineFn)((value, precision) => {
     const divider = 10 ** precision;
     return Math.floor(value * divider) / divider;
 }, {
@@ -58,7 +58,7 @@ exports.floor = o.extend((value, precision) => {
  * @param precision - The number of digits to keep.
  * @returns Rounded value.
  */
-exports.round = o.extend((value, precision) => {
+exports.round = (0, moduleDefinition_1.defineFn)((value, precision) => {
     const divider = 10 ** precision;
     return Math.round(value * divider) / divider;
 }, {

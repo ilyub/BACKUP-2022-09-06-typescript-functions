@@ -1,3 +1,4 @@
+import type { strings } from "./types";
 export { _path as path };
 export declare type Eol = "\n" | "\r\n";
 /**
@@ -42,7 +43,7 @@ export declare function leadingSpaces(str: string): string;
  * @param str - String.
  * @returns Array of strings.
  */
-export declare function lines(str: string): string[];
+export declare function lines(str: string): strings;
 /**
  * Checks that string is multiline.
  *
@@ -118,7 +119,7 @@ export declare function unpadMultiline(str: string): string;
 /**
  * Not implemented.
  */
-declare const _path: {
+declare const _path: (() => never) & {
     /**
      * Adds leading slash.
      *
@@ -149,7 +150,7 @@ declare const _path: {
      * @param parts - Parts.
      * @returns Path.
      */
-    join(...parts: string[]): string;
+    join(...parts: strings): string;
     /**
      * Removes leading slash.
      *
@@ -166,5 +167,5 @@ declare const _path: {
      * @returns New string with trailing slash removed.
      */
     removeTrailingSlash(this: void, path: string): string;
-} & (() => never);
+};
 //# sourceMappingURL=string.d.ts.map

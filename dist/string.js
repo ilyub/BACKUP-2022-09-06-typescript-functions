@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.unpadMultiline = exports.ucFirst = exports.trimTrailingEmptyLines = exports.trimStart = exports.trimLeadingEmptyLines = exports.trimEnd = exports.trailingSpaces = exports.singleLine = exports.replaceAll = exports.multiline = exports.lines = exports.leadingSpaces = exports.lcFirst = exports.filter = exports.empty = exports.detectEol = exports.path = void 0;
 const tslib_1 = require("tslib");
 const a = tslib_1.__importStar(require("./array"));
-const o = tslib_1.__importStar(require("./object"));
+const moduleDefinition_1 = require("./moduleDefinition");
 const regexp = tslib_1.__importStar(require("./regexp"));
 /**
  * Detects EOL sequence.
@@ -175,7 +175,7 @@ exports.unpadMultiline = unpadMultiline;
 /**
  * Not implemented.
  */
-const _path = o.extend(() => {
+const _path = (0, moduleDefinition_1.defineFn)(() => {
     throw new Error("Not implemented");
 }, {
     /**

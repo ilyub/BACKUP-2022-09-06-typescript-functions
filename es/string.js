@@ -1,5 +1,5 @@
 import * as a from "./array";
-import * as o from "./object";
+import { defineFn } from "./moduleDefinition";
 import * as regexp from "./regexp";
 export { _path as path };
 /**
@@ -156,7 +156,7 @@ export function unpadMultiline(str) {
 /**
  * Not implemented.
  */
-const _path = o.extend(() => {
+const _path = defineFn(() => {
     throw new Error("Not implemented");
 }, {
     /**

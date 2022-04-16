@@ -1,5 +1,5 @@
 import * as assert from "./assertions";
-import * as o from "./object";
+import { defineFn } from "./moduleDefinition";
 /**
  * Ceils number to a given precision.
  *
@@ -7,7 +7,7 @@ import * as o from "./object";
  * @param precision - The number of digits to keep.
  * @returns Ceiled value.
  */
-export const ceil = o.extend((value, precision) => {
+export const ceil = defineFn((value, precision) => {
     const divider = 10 ** precision;
     return Math.ceil(value * divider) / divider;
 }, {
@@ -30,7 +30,7 @@ export const ceil = o.extend((value, precision) => {
  * @param precision - The number of digits to keep.
  * @returns Floored value.
  */
-export const floor = o.extend((value, precision) => {
+export const floor = defineFn((value, precision) => {
     const divider = 10 ** precision;
     return Math.floor(value * divider) / divider;
 }, {
@@ -54,7 +54,7 @@ export const floor = o.extend((value, precision) => {
  * @param precision - The number of digits to keep.
  * @returns Rounded value.
  */
-export const round = o.extend((value, precision) => {
+export const round = defineFn((value, precision) => {
     const divider = 10 ** precision;
     return Math.round(value * divider) / divider;
 }, {

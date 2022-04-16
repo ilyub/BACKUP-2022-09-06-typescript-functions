@@ -9,7 +9,7 @@
 | Name | Type |
 | :------ | :------ |
 | `T` | `T` |
-| `A` | extends `unknown`[] |
+| `A` | extends [`unknowns`](../modules/types_core.md#unknowns) |
 
 ## Callable
 

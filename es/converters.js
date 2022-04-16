@@ -1,9 +1,9 @@
 import * as is from "./guards";
-import * as o from "./object";
+import { defineFn } from "./moduleDefinition";
 /**
  * Not implemented.
  */
-export const not = o.extend(() => {
+export const not = defineFn(() => {
     throw new Error("Not implemented");
 }, {
     /**

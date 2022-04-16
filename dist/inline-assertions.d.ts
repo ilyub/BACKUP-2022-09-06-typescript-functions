@@ -1,8 +1,7 @@
 import * as assert from "./assertions";
 import type * as is from "./guards";
 import type { ValidationObject } from "./helpers";
-import type * as types from "./types/core";
-import type { Constructor } from "./types/function";
+import type * as types from "./types";
 /**
  * Asserts that value is an array.
  *
@@ -11,7 +10,7 @@ import type { Constructor } from "./types/function";
  * @returns Value if value is an array.
  * @throws Error otherwise.
  */
-export declare const array: {
+export declare const array: ((value: unknown, error?: assert.ErrorArg | undefined) => types.unknowns) & {
     /**
      * Asserts that value type is T[].
      *
@@ -23,7 +22,7 @@ export declare const array: {
      * @throws Error otherwise.
      */
     of<T>(this: void, value: unknown, guard: is.Guard<T>, error?: assert.ErrorArg | undefined): readonly T[];
-} & ((value: unknown, error?: assert.ErrorArg | undefined) => types.unknowns);
+};
 /**
  * Asserts that value type is IndexedObject.
  *
@@ -32,7 +31,7 @@ export declare const array: {
  * @returns Value if value type is IndexedObject.
  * @throws Error otherwise.
  */
-export declare const indexedObject: {
+export declare const indexedObject: ((value: unknown, error?: assert.ErrorArg | undefined) => types.IndexedObject) & {
     /**
      * Asserts that value type is IndexedObject\<T\>.
      *
@@ -44,7 +43,7 @@ export declare const indexedObject: {
      * @throws Error otherwise.
      */
     of<T>(this: void, value: unknown, guard: is.Guard<T>, error?: assert.ErrorArg | undefined): types.IndexedObject<T>;
-} & ((value: unknown, error?: assert.ErrorArg | undefined) => types.IndexedObject);
+};
 /**
  * Asserts that value type is Map.
  *
@@ -53,7 +52,7 @@ export declare const indexedObject: {
  * @returns Value if value type is Map.
  * @throws Error otherwise.
  */
-export declare const map: {
+export declare const map: ((value: unknown, error?: assert.ErrorArg | undefined) => ReadonlyMap<unknown, unknown>) & {
     /**
      * Asserts that value type is Map\<K, V\>.
      *
@@ -66,11 +65,11 @@ export declare const map: {
      * @throws Error otherwise.
      */
     of<K, V>(this: void, value: unknown, keyGuard: is.Guard<K>, valueGuard: is.Guard<V>, error?: assert.ErrorArg | undefined): ReadonlyMap<K, V>;
-} & ((value: unknown, error?: assert.ErrorArg | undefined) => ReadonlyMap<unknown, unknown>);
+};
 /**
  * Not implemented.
  */
-export declare const not: {
+export declare const not: (() => never) & {
     /**
      * Asserts that value type is not empty.
      *
@@ -81,7 +80,7 @@ export declare const not: {
      * @throws Error otherwise.
      */
     empty<T>(this: void, value: T, error?: assert.ErrorArg | undefined): Exclude<T, types.empty>;
-} & (() => never);
+};
 /**
  * Asserts that value type is Set.
  *
@@ -90,7 +89,7 @@ export declare const not: {
  * @returns Value if value type is Set.
  * @throws Error otherwise.
  */
-export declare const set: {
+export declare const set: ((value: unknown, error?: assert.ErrorArg | undefined) => ReadonlySet<unknown>) & {
     /**
      * Asserts that value type is Set\<T\>.
      *
@@ -102,7 +101,7 @@ export declare const set: {
      * @throws Error otherwise.
      */
     of<T>(this: void, value: unknown, guard: is.Guard<T>, error?: assert.ErrorArg | undefined): ReadonlySet<T>;
-} & ((value: unknown, error?: assert.ErrorArg | undefined) => ReadonlySet<unknown>);
+};
 /**
  * Asserts that value is a boolean.
  *
@@ -140,7 +139,7 @@ export declare function enumeration<T extends PropertyKey>(value: unknown, vo: V
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
-export declare function instance<T>(value: unknown, ctor: Constructor<T>, error?: assert.ErrorArg): T;
+export declare function instance<T>(value: unknown, ctor: types.Constructor<T>, error?: assert.ErrorArg): T;
 /**
  * Asserts that value type is T[].
  *
@@ -150,7 +149,7 @@ export declare function instance<T>(value: unknown, ctor: Constructor<T>, error?
  * @returns Value if value type is T[].
  * @throws Error otherwise.
  */
-export declare function instances<T>(value: unknown, ctor: Constructor<T>, error?: assert.ErrorArg): readonly T[];
+export declare function instances<T>(value: unknown, ctor: types.Constructor<T>, error?: assert.ErrorArg): readonly T[];
 /**
  * Asserts that value type is NumStr.
  *

@@ -1,3 +1,4 @@
+import type { numbers } from "./types";
 /**
  * Ceils number to a given precision.
  *
@@ -5,7 +6,7 @@
  * @param precision - The number of digits to keep.
  * @returns Ceiled value.
  */
-export declare const ceil: {
+export declare const ceil: ((value: number, precision: number) => number) & {
     /**
      * Ceils number.
      *
@@ -15,7 +16,7 @@ export declare const ceil: {
      * @returns Ceiled value.
      */
     step(value: number, step: number, from?: number): number;
-} & ((value: number, precision: number) => number);
+};
 /**
  * Floors number to a given precision.
  *
@@ -23,7 +24,7 @@ export declare const ceil: {
  * @param precision - The number of digits to keep.
  * @returns Floored value.
  */
-export declare const floor: {
+export declare const floor: ((value: number, precision: number) => number) & {
     /**
      * Floors number.
      *
@@ -34,7 +35,7 @@ export declare const floor: {
      * @returns Floored value.
      */
     step(this: void, value: number, step: number, from?: number): number;
-} & ((value: number, precision: number) => number);
+};
 /**
  * Rounds number to a given precision.
  *
@@ -42,7 +43,7 @@ export declare const floor: {
  * @param precision - The number of digits to keep.
  * @returns Rounded value.
  */
-export declare const round: {
+export declare const round: ((value: number, precision: number) => number) & {
     /**
      * Rounds number.
      *
@@ -53,14 +54,14 @@ export declare const round: {
      * @returns Rounded value.
      */
     step(this: void, value: number, step: number, from?: number): number;
-} & ((value: number, precision: number) => number);
+};
 /**
  * Averages values.
  *
  * @param values - Values.
  * @returns The average.
  */
-export declare function average(...values: number[]): number;
+export declare function average(...values: numbers): number;
 /**
  * Limits value to be within [min, max] range.
  *
@@ -76,12 +77,12 @@ export declare function limit(value: number, min: number, max: number): number;
  * @param values - Values.
  * @returns Root-mean-square deviation.
  */
-export declare function rootMeanSquareDeviation(...values: number[]): number;
+export declare function rootMeanSquareDeviation(...values: numbers): number;
 /**
  * Sums values.
  *
  * @param values - Values.
  * @returns The sum.
  */
-export declare function sum(...values: number[]): number;
+export declare function sum(...values: numbers): number;
 //# sourceMappingURL=number.d.ts.map

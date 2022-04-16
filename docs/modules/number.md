@@ -21,7 +21,7 @@
 
 ### ceil
 
-• `Const` **ceil**: { `step`: (`value`: `number`, `step`: `number`, `from`: `number`) => `number`  } & (`value`: `number`, `precision`: `number`) => `number`
+• `Const` **ceil**: (`value`: `number`, `precision`: `number`) => `number` & { `step`: (`value`: `number`, `step`: `number`, `from`: `number`) => `number`  }
 
 Ceils number to a given precision.
 
@@ -35,7 +35,7 @@ ___
 
 ### floor
 
-• `Const` **floor**: { `step`: (`this`: `void`, `value`: `number`, `step`: `number`, `from`: `number`) => `number`  } & (`value`: `number`, `precision`: `number`) => `number`
+• `Const` **floor**: (`value`: `number`, `precision`: `number`) => `number` & { `step`: (`this`: `void`, `value`: `number`, `step`: `number`, `from`: `number`) => `number`  }
 
 Floors number to a given precision.
 
@@ -49,7 +49,7 @@ ___
 
 ### round
 
-• `Const` **round**: { `step`: (`this`: `void`, `value`: `number`, `step`: `number`, `from`: `number`) => `number`  } & (`value`: `number`, `precision`: `number`) => `number`
+• `Const` **round**: (`value`: `number`, `precision`: `number`) => `number` & { `step`: (`this`: `void`, `value`: `number`, `step`: `number`, `from`: `number`) => `number`  }
 
 Rounds number to a given precision.
 
@@ -71,7 +71,7 @@ Averages values.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `...values` | `number`[] | Values. |
+| `...values` | [`numbers`](types_core.md#numbers) | Values. |
 
 #### Returns
 
@@ -113,7 +113,7 @@ Calculates root-mean-square deviation.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `...values` | `number`[] | Values. |
+| `...values` | [`numbers`](types_core.md#numbers) | Values. |
 
 #### Returns
 
@@ -133,7 +133,7 @@ Sums values.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `...values` | `number`[] | Values. |
+| `...values` | [`numbers`](types_core.md#numbers) | Values. |
 
 #### Returns
 

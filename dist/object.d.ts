@@ -1,6 +1,5 @@
 import * as is from "./guards";
-import type { IndexedObject, NumStr, objectU, PartialRecord, Rec, Writable, WritableRecord } from "./types/core";
-import type { OptionalStyle, StrictOmit } from "./types/object";
+import type { Entry, IndexedObject, IndexedObjects, NumStr, objectU, PartialRecord, Rec, Writable, OptionalStyle, StrictOmit } from "./types";
 export { _entries as entries };
 /**
  * Typed version of Object.assign.
@@ -54,8 +53,8 @@ export declare const fromEntries: {
      * @param entries - Entries.
      * @returns Object.
      */
-    exhaustive<K extends PropertyKey, V>(entries: Iterable<readonly [K, V]>): WritableRecord<K, V>;
-} & (<K_1 extends PropertyKey, V_1>(entries: Iterable<readonly [K_1, V_1]>) => PartialRecord<K_1, V_1>);
+    exhaustive<K extends PropertyKey, V>(entries: Iterable<Entry<K, V>>): Rec<K, V>;
+} & (<K_1 extends PropertyKey, V_1>(entries: Iterable<Entry<K_1, V_1>>) => PartialRecord<K_1, V_1>);
 export declare const keys: {
     /**
      * Typed version of Object.keys.
@@ -71,24 +70,6 @@ export declare const keys: {
      * @returns Object keys.
      */
     <T extends object>(obj: T): Array<string & keyof T>;
-};
-export declare const sort: {
-    /**
-     * Sorts object.
-     *
-     * @param obj - Object.
-     * @param compareFn - Comparison function.
-     * @returns New object.
-     */
-    <K extends string, V>(obj: Rec<K, V>, compareFn?: CompareFn<Rec<K, V>>): WritableRecord<K, V>;
-    /**
-     * Sorts object.
-     *
-     * @param obj - Object.
-     * @param compareFn - Comparison function.
-     * @returns New object.
-     */
-    <T extends object>(obj: T, compareFn?: CompareFn<T>): T;
 };
 export declare const values: {
     /**
@@ -209,7 +190,7 @@ export declare function hasOwnProp(key: PropertyKey, obj: object): boolean;
  * @param callback - Callback.
  * @returns New object.
  */
-export declare function map<K extends string, V, R>(obj: Rec<K, V>, callback: (value: V, key: K) => R): WritableRecord<K, R>;
+export declare function map<K extends string, V, R>(obj: Rec<K, V>, callback: (value: V, key: K) => R): Rec<K, R>;
 /**
  * Merges objects.
  * If more than one object has the same key, respective values are combined into array.
@@ -217,7 +198,7 @@ export declare function map<K extends string, V, R>(obj: Rec<K, V>, callback: (v
  * @param objects - Objects.
  * @returns Merged object.
  */
-export declare function merge(...objects: IndexedObject[]): IndexedObject;
+export declare function merge(...objects: IndexedObjects): IndexedObject;
 /**
  * Removes keys from object.
  *
@@ -249,6 +230,22 @@ export declare function size(obj: object): number;
  */
 export declare function some<T extends object>(obj: T, predicate: Predicate<T>): boolean;
 /**
+ * Sorts object.
+ *
+ * @param obj - Object.
+ * @param compareFn - Comparison function.
+ * @returns New object.
+ */
+export declare function sort<K extends string, V>(obj: Rec<K, V>, compareFn?: CompareFn<Rec<K, V>>): Rec<K, V>;
+/**
+ * Sorts object.
+ *
+ * @param obj - Object.
+ * @param compareFn - Comparison function.
+ * @returns New object.
+ */
+export declare function sort<T extends object>(obj: T, compareFn?: CompareFn<T>): T;
+/**
  * Marks object as writable.
  *
  * @param obj - Object.
@@ -262,13 +259,13 @@ declare const _entries: {
      * @param obj - Object.
      * @returns Object entries.
      */
-    <K extends string, V>(obj: PartialRecord<K, V>): Array<[K, V]>;
+    <K extends string, V>(obj: PartialRecord<K, V>): Array<Entry<K, V>>;
     /**
      * Typed version of Object.entries.
      *
      * @param obj - Object.
      * @returns Object entries.
      */
-    <T extends object>(obj: T): Array<[string & keyof T, T[NumStr & keyof T]]>;
+    <T extends object>(obj: T): Array<Entry<string & keyof T, T[NumStr & keyof T]>>;
 };
 //# sourceMappingURL=object.d.ts.map

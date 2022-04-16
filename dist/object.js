@@ -1,8 +1,9 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unfreeze = exports.some = exports.size = exports.removeUndefinedKeys = exports.omit = exports.merge = exports.map = exports.hasOwnProp = exports.getPrototypeOf = exports.get = exports.freeze = exports.filter = exports.every = exports.clone = exports.values = exports.sort = exports.keys = exports.fromEntries = exports.extend = exports.defineProperty = exports.assign = exports.entries = void 0;
+exports.unfreeze = exports.sort = exports.some = exports.size = exports.removeUndefinedKeys = exports.omit = exports.merge = exports.map = exports.hasOwnProp = exports.getPrototypeOf = exports.get = exports.freeze = exports.filter = exports.every = exports.clone = exports.values = exports.keys = exports.fromEntries = exports.extend = exports.defineProperty = exports.assign = exports.entries = void 0;
 const tslib_1 = require("tslib");
+const Accumulator_1 = require("./Accumulator");
 const a = tslib_1.__importStar(require("./array"));
 const assert = tslib_1.__importStar(require("./assertions"));
 const is = tslib_1.__importStar(require("./guards"));
@@ -52,11 +53,6 @@ exports.fromEntries = (0, exports.extend)(
     }
 });
 exports.keys = Object.keys;
-const sort = (obj, compareFn) => exports.fromEntries.exhaustive(a.sort(_entries(obj), compareFn
-    ? // eslint-disable-next-line @skylib/prefer-readonly -- Wait for @skylib/eslint-plugin update
-        (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
-    : undefined));
-exports.sort = sort;
 exports.values = Object.values;
 /**
  * Clones object.
@@ -160,23 +156,13 @@ exports.map = map;
  * @returns Merged object.
  */
 function merge(...objects) {
-    const result = new Map();
+    const result = new Accumulator_1.Accumulator();
     for (const obj of objects)
-        for (const [key, value] of _entries(obj)) {
-            const arr = result.get(key);
-            if (arr)
-                arr.push(value);
-            else
-                result.set(key, [value]);
-        }
+        for (const [key, value] of _entries(obj))
+            result.push(key, value);
     return (0, exports.fromEntries)(a
         .fromIterable(result)
-        // eslint-disable-next-line no-warning-comments -- Wait for @skylib/eslint-plugin update
-        // fixme
-        .map(([key, arr]) => [
-        key,
-        arr.length === 1 ? arr[0] : arr
-    ]));
+        .map(([key, arr]) => [key, arr.length === 1 ? arr[0] : arr]));
 }
 exports.merge = merge;
 /**
@@ -224,6 +210,12 @@ function some(obj, predicate) {
     return _entries(obj).some(([key, value]) => predicate(value, key));
 }
 exports.some = some;
+function sort(obj, compareFn) {
+    return exports.fromEntries.exhaustive(a.sort(_entries(obj), compareFn
+        ? (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
+        : undefined));
+}
+exports.sort = sort;
 /**
  * Marks object as writable.
  *

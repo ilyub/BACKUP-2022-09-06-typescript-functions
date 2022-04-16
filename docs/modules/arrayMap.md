@@ -26,6 +26,8 @@
 
 Ƭ **ArrayMap**<`K`, `T`\>: `ReadonlyMap`<`K`, readonly `T`[]\>
 
+**`deprecated`** Use "Accumulator" class instead.
+
 #### Type parameters
 
 | Name | Type |
@@ -38,6 +40,8 @@ ___
 ### ArrayMap2
 
 Ƭ **ArrayMap2**<`K`, `L`, `T`\>: `ReadonlyMap`<`K`, `ReadonlyMap`<`L`, readonly `T`[]\>\>
+
+**`deprecated`** Use "Accumulator2" class instead.
 
 #### Type parameters
 
@@ -53,6 +57,8 @@ ___
 
 Ƭ **WritableArrayMap**<`K`, `T`\>: `Map`<`K`, `T`[]\>
 
+**`deprecated`** Use "Accumulator" class instead.
+
 #### Type parameters
 
 | Name | Type |
@@ -65,6 +71,8 @@ ___
 ### WritableArrayMap2
 
 Ƭ **WritableArrayMap2**<`K`, `L`, `T`\>: `Map`<`K`, `Map`<`L`, `T`[]\>\>
+
+**`deprecated`** Use "Accumulator2" class instead.
 
 #### Type parameters
 
@@ -81,6 +89,8 @@ ___
 ▸ **get**<`K`, `T`\>(`key`, `map`): readonly `T`[]
 
 Extracts array from array map.
+
+**`deprecated`** Use "Accumulator" class instead.
 
 #### Type parameters
 
@@ -109,6 +119,8 @@ ___
 ▸ **get2**<`K`, `L`, `T`\>(`key1`, `key2`, `map`): readonly `T`[]
 
 Extracts array from array map.
+
+**`deprecated`** Use "Accumulator2" class instead.
 
 #### Type parameters
 
@@ -140,6 +152,8 @@ ___
 
 Pushes value to array map.
 
+**`deprecated`** Use "Accumulator" class instead.
+
 #### Type parameters
 
 | Name | Type |
@@ -166,6 +180,8 @@ ___
 ▸ **push2**<`K`, `L`, `T`\>(`key1`, `key2`, `value`, `mutableMap`): `void`
 
 Pushes value to array map.
+
+**`deprecated`** Use "Accumulator2" class instead.
 
 #### Type parameters
 
@@ -196,6 +212,8 @@ ___
 
 Unshifts value to array map.
 
+**`deprecated`** Use "Accumulator" class instead.
+
 #### Type parameters
 
 | Name | Type |
@@ -222,6 +240,8 @@ ___
 ▸ **unshift2**<`K`, `L`, `T`\>(`key1`, `key2`, `value`, `mutableMap`): `void`
 
 Unshifts value to array map.
+
+**`deprecated`** Use "Accumulator2" class instead.
 
 #### Type parameters
 

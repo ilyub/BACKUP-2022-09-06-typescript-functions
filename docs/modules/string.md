@@ -41,7 +41,7 @@
 
 ### path
 
-• `Const` **path**: { `addLeadingSlash`: (`this`: `void`, `path`: `string`) => `string` ; `addTrailingSlash`: (`this`: `void`, `path`: `string`) => `string` ; `canonicalize`: (`this`: `void`, `path`: `string`) => `string` ; `join`: (...`parts`: `string`[]) => `string` ; `removeLeadingSlash`: (`this`: `void`, `path`: `string`) => `string` ; `removeTrailingSlash`: (`this`: `void`, `path`: `string`) => `string`  } & () => `never`
+• `Const` **path**: () => `never` & { `addLeadingSlash`: (`this`: `void`, `path`: `string`) => `string` ; `addTrailingSlash`: (`this`: `void`, `path`: `string`) => `string` ; `canonicalize`: (`this`: `void`, `path`: `string`) => `string` ; `join`: (...`parts`: [`strings`](types_core.md#strings)) => `string` ; `removeLeadingSlash`: (`this`: `void`, `path`: `string`) => `string` ; `removeTrailingSlash`: (`this`: `void`, `path`: `string`) => `string`  }
 
 Not implemented.
 
@@ -150,7 +150,7 @@ ___
 
 ### lines
 
-▸ **lines**(`str`): `string`[]
+▸ **lines**(`str`): [`strings`](types_core.md#strings)
 
 Splits string into lines.
 
@@ -162,7 +162,7 @@ Splits string into lines.
 
 #### Returns
 
-`string`[]
+[`strings`](types_core.md#strings)
 
 Array of strings.
 

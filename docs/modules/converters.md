@@ -19,7 +19,7 @@
 
 ### not
 
-• `Const` **not**: { `empty`: <T\>(`this`: `void`, `value`: `T`, `defVal`: `Exclude`<`T`, [`empty`](types_core.md#empty)\>) => `Exclude`<`T`, [`empty`](types_core.md#empty)\>  } & () => `never`
+• `Const` **not**: () => `never` & { `empty`: <T\>(`this`: `void`, `value`: `T`, `defVal`: `Exclude`<`T`, [`empty`](types_core.md#empty)\>) => `Exclude`<`T`, [`empty`](types_core.md#empty)\>  }
 
 Not implemented.
 

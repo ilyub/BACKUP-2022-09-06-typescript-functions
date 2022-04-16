@@ -1,11 +1,20 @@
 import * as a from "./array";
 import { typedef } from "./helpers";
+import { defineFn, overloadedFn } from "./moduleDefinition";
 import * as o from "./object";
 export { _false as false, _null as null, _true as true, _undefined as undefined };
-export const and = o.extend((value, ...guards) => guards.every(guard => guard(value)), {
-    factory(...guards) {
-        return (value) => guards.every(guard => guard(value));
+export const and = defineFn(overloadedFn(() => {
+    return _and;
+    function _and(value, ...guards) {
+        return guards.every(guard => guard(value));
     }
+}), {
+    factory: overloadedFn(() => {
+        return _factory;
+        function _factory(...guards) {
+            return (value) => guards.every(guard => guard(value));
+        }
+    })
 });
 /**
  * Checks that value is an array.
@@ -13,7 +22,7 @@ export const and = o.extend((value, ...guards) => guards.every(guard => guard(va
  * @param value - Value.
  * @returns _True_ if value is an array, _false_ otherwise.
  */
-export const array = o.extend((value) => Array.isArray(value), {
+export const array = defineFn((value) => Array.isArray(value), {
     /**
      * Checks that value type is T[].
      *
@@ -32,7 +41,7 @@ export const array = o.extend((value) => Array.isArray(value), {
  * @param value - Value.
  * @returns _True_ if value type is IndexedObject, _false_ otherwise.
  */
-export const indexedObject = o.extend((value) => typeof value === "object" && value !== null, {
+export const indexedObject = defineFn((value) => typeof value === "object" && value !== null, {
     /**
      * Checks that value type is IndexedObject\<T\>.
      *
@@ -51,7 +60,7 @@ export const indexedObject = o.extend((value) => typeof value === "object" && va
  * @param value - Value.
  * @returns _True_ if value type is Map, _false_ otherwise.
  */
-export const map = o.extend((value) => value instanceof Map, {
+export const map = defineFn((value) => value instanceof Map, {
     /**
      * Checks that value type is Map\<K, V\>.
      *
@@ -72,20 +81,34 @@ export const map = o.extend((value) => value instanceof Map, {
  * @param value - Value.
  * @returns _True_ if value is an object, _false_ otherwise.
  */
-export const object = o.extend((value) => typeof value === "object" && value !== null, {
-    factory(required, optional) {
-        return (value) => object.of(value, required, optional);
-    },
-    of(value, required, optional) {
-        return (indexedObject(value) &&
-            o.every(required, (guard, key) => checkRequiredProp(value, key, guard)) &&
-            o.every(optional, (guard, key) => checkOptionalProp(value, key, guard)));
-    }
+export const object = defineFn((value) => typeof value === "object" && value !== null, {
+    factory: overloadedFn(() => {
+        return _factory;
+        function _factory(required, optional) {
+            return (value) => object.of(value, required, optional);
+        }
+    }),
+    of: overloadedFn(() => {
+        return _of;
+        function _of(value, required, optional) {
+            return (indexedObject(value) &&
+                o.every(required, (guard, key) => checkRequiredProp(value, key, guard)) &&
+                o.every(optional, (guard, key) => checkOptionalProp(value, key, guard)));
+        }
+    })
 });
-export const or = o.extend((value, ...guards) => guards.some(guard => guard(value)), {
-    factory(...guards) {
-        return (value) => guards.some(guard => guard(value));
+export const or = defineFn(overloadedFn(() => {
+    return _or;
+    function _or(value, ...guards) {
+        return guards.some(guard => guard(value));
     }
+}), {
+    factory: overloadedFn(() => {
+        return _factory;
+        function _factory(...guards) {
+            return (value) => guards.some(guard => guard(value));
+        }
+    })
 });
 /**
  * Checks that value type is Set.
@@ -93,7 +116,7 @@ export const or = o.extend((value, ...guards) => guards.some(guard => guard(valu
  * @param value - Value.
  * @returns _True_ if value type is Set, _false_ otherwise.
  */
-export const set = o.extend((value) => value instanceof Set, {
+export const set = defineFn((value) => value instanceof Set, {
     /**
      * Checks that value type is Set\<T\>.
      *
@@ -106,13 +129,18 @@ export const set = o.extend((value) => value instanceof Set, {
         return set(value) && a.fromIterable(value).every(v => guard(v));
     }
 });
-export const tuple = o.extend(
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Ok
-(value, ...guards) => array(value) && guards.every((guard, index) => guard(value[index])), {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Ok
-    factory(...guards) {
-        return (value) => array(value) && guards.every((guard, index) => guard(value[index]));
+export const tuple = defineFn(overloadedFn(() => {
+    return _tuple;
+    function _tuple(value, ...guards) {
+        return (array(value) && guards.every((guard, index) => guard(value[index])));
     }
+}), {
+    factory: overloadedFn(() => {
+        return _factory;
+        function _factory(...guards) {
+            return (value) => array(value) && guards.every((guard, index) => guard(value[index]));
+        }
+    })
 });
 /**
  * Checks that value type is not T.
@@ -121,7 +149,7 @@ export const tuple = o.extend(
  * @param guard - Guard for type T.
  * @returns _True_ if value type is not T, _false_ otherwise.
  */
-export const not = o.extend((value, guard) => !guard(value), {
+export const not = defineFn((value, guard) => !guard(value), {
     array: _notFactory(array),
     boolean: _notFactory(boolean),
     empty: _notFactory(empty),

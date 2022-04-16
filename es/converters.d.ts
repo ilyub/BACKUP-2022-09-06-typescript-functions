@@ -1,8 +1,8 @@
-import type * as types from "./types/core";
+import type * as types from "./types";
 /**
  * Not implemented.
  */
-export declare const not: {
+export declare const not: (() => never) & {
     /**
      * Converts value to not empty.
      *
@@ -12,7 +12,7 @@ export declare const not: {
      * @returns Value if it is not empty, defVal otherwise.
      */
     empty<T>(this: void, value: T, defVal: Exclude<T, types.empty>): Exclude<T, types.empty>;
-} & (() => never);
+};
 /**
  * Converts value to a number.
  *

@@ -8,12 +8,22 @@
 
 - [PipeCallback](../interfaces/function.PipeCallback.md)
 
+### Type aliases
+
+- [PipeCallbacks](function.md#pipecallbacks)
+
 ### Functions
 
 - [identity](function.md#identity)
 - [noop](function.md#noop)
 - [pipe](function.md#pipe)
 - [run](function.md#run)
+
+## Type aliases
+
+### PipeCallbacks
+
+Ƭ **PipeCallbacks**: readonly [`PipeCallback`](../interfaces/function.PipeCallback.md)[]
 
 ## Functions
 
@@ -51,7 +61,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `...args` | `any`[] |
+| `...args` | readonly `any`[] |
 
 #### Returns
 

@@ -1,7 +1,6 @@
 import * as is from "./guards";
 import type { ValidationObject } from "./helpers";
-import type * as types from "./types/core";
-import type { Constructor } from "./types/function";
+import type * as types from "./types";
 export declare type ErrorArg = ErrorArgFn | string;
 export interface ErrorArgFn {
     /**
@@ -75,7 +74,7 @@ export declare namespace indexedObject {
  * @param ctor - Constructor.
  * @param error - Error.
  */
-export declare function instance<T>(value: unknown, ctor: Constructor<T>, error?: ErrorArg): asserts value is T;
+export declare function instance<T>(value: unknown, ctor: types.Constructor<T>, error?: ErrorArg): asserts value is T;
 /**
  * Asserts that value type is T[].
  *
@@ -83,7 +82,7 @@ export declare function instance<T>(value: unknown, ctor: Constructor<T>, error?
  * @param ctor - Constructor.
  * @param error - Error.
  */
-export declare function instances<T>(value: unknown, ctor: Constructor<T>, error?: ErrorArg): asserts value is readonly T[];
+export declare function instances<T>(value: unknown, ctor: types.Constructor<T>, error?: ErrorArg): asserts value is readonly T[];
 /**
  * Asserts that value type is Map.
  *

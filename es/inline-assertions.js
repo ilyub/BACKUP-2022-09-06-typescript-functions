@@ -1,5 +1,5 @@
 import * as assert from "./assertions";
-import * as o from "./object";
+import { defineFn } from "./moduleDefinition";
 /**
  * Asserts that value is an array.
  *
@@ -8,7 +8,7 @@ import * as o from "./object";
  * @returns Value if value is an array.
  * @throws Error otherwise.
  */
-export const array = o.extend((value, error) => {
+export const array = defineFn((value, error) => {
     assert.array(value, error);
     return value;
 }, {
@@ -35,7 +35,7 @@ export const array = o.extend((value, error) => {
  * @returns Value if value type is IndexedObject.
  * @throws Error otherwise.
  */
-export const indexedObject = o.extend((value, error) => {
+export const indexedObject = defineFn((value, error) => {
     assert.indexedObject(value, error);
     return value;
 }, {
@@ -62,7 +62,7 @@ export const indexedObject = o.extend((value, error) => {
  * @returns Value if value type is Map.
  * @throws Error otherwise.
  */
-export const map = o.extend((value, error) => {
+export const map = defineFn((value, error) => {
     assert.map(value, error);
     return value;
 }, {
@@ -85,7 +85,7 @@ export const map = o.extend((value, error) => {
 /**
  * Not implemented.
  */
-export const not = o.extend(() => {
+export const not = defineFn(() => {
     throw new Error("Not implemented");
 }, {
     /**
@@ -110,7 +110,7 @@ export const not = o.extend(() => {
  * @returns Value if value type is Set.
  * @throws Error otherwise.
  */
-export const set = o.extend((value, error) => {
+export const set = defineFn((value, error) => {
     assert.set(value, error);
     return value;
 }, {

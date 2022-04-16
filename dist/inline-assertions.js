@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.symbol = exports.stringU = exports.string = exports.object = exports.number = exports.numStr = exports.instances = exports.instance = exports.enumeration = exports.callable = exports.boolean = exports.set = exports.not = exports.map = exports.indexedObject = exports.array = void 0;
 const tslib_1 = require("tslib");
 const assert = tslib_1.__importStar(require("./assertions"));
-const o = tslib_1.__importStar(require("./object"));
+const moduleDefinition_1 = require("./moduleDefinition");
 /**
  * Asserts that value is an array.
  *
@@ -12,7 +12,7 @@ const o = tslib_1.__importStar(require("./object"));
  * @returns Value if value is an array.
  * @throws Error otherwise.
  */
-exports.array = o.extend((value, error) => {
+exports.array = (0, moduleDefinition_1.defineFn)((value, error) => {
     assert.array(value, error);
     return value;
 }, {
@@ -39,7 +39,7 @@ exports.array = o.extend((value, error) => {
  * @returns Value if value type is IndexedObject.
  * @throws Error otherwise.
  */
-exports.indexedObject = o.extend((value, error) => {
+exports.indexedObject = (0, moduleDefinition_1.defineFn)((value, error) => {
     assert.indexedObject(value, error);
     return value;
 }, {
@@ -66,7 +66,7 @@ exports.indexedObject = o.extend((value, error) => {
  * @returns Value if value type is Map.
  * @throws Error otherwise.
  */
-exports.map = o.extend((value, error) => {
+exports.map = (0, moduleDefinition_1.defineFn)((value, error) => {
     assert.map(value, error);
     return value;
 }, {
@@ -89,7 +89,7 @@ exports.map = o.extend((value, error) => {
 /**
  * Not implemented.
  */
-exports.not = o.extend(() => {
+exports.not = (0, moduleDefinition_1.defineFn)(() => {
     throw new Error("Not implemented");
 }, {
     /**
@@ -114,7 +114,7 @@ exports.not = o.extend(() => {
  * @returns Value if value type is Set.
  * @throws Error otherwise.
  */
-exports.set = o.extend((value, error) => {
+exports.set = (0, moduleDefinition_1.defineFn)((value, error) => {
     assert.set(value, error);
     return value;
 }, {

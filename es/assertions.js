@@ -1,4 +1,4 @@
-import { AssertionError } from "./errors/AssertionError";
+import { AssertionError } from "./errors";
 import * as is from "./guards";
 /**
  * Asserts that value is an array.

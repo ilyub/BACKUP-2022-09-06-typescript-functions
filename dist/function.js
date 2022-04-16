@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.run = exports.pipe = exports.identity = exports.noop = void 0;
 const tslib_1 = require("tslib");
-const _ = tslib_1.__importStar(require("lodash"));
+const _ = tslib_1.__importStar(require("@skylib/lodash-commonjs-es"));
 const is = tslib_1.__importStar(require("./guards"));
 exports.noop = _.noop.bind(_);
 /**

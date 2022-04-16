@@ -1,4 +1,4 @@
-import type { numberU } from "./types/core";
+import type { numberU } from "./types";
 export { _clearInterval as clearInterval };
 export { _clearTimeout as clearTimeout };
 export { _setInterval as setInterval };
