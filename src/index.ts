@@ -18,7 +18,7 @@ export * as is from "./guards";
 
 export * from "./helpers";
 
-export * as as from "./inline-assertions";
+export * as as from "./inlineAssertions";
 
 export * as json from "./json";
 

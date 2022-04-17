@@ -23,7 +23,7 @@
 - [function](https://ilyub.github.io/typescript-functions/modules/function.html) - Function manipulation functions.
 - [guards](https://ilyub.github.io/typescript-functions/modules/guards.html) - Type guards.
 - [helpers](https://ilyub.github.io/typescript-functions/modules/helpers.html) - Helpers.
-- [inline-assertions](https://ilyub.github.io/typescript-functions/modules/inline_assertions.html) - Inline type assertions.
+- [inlineAssertions](https://ilyub.github.io/typescript-functions/modules/inlineAssertions.html) - Inline type assertions.
 - [json](https://ilyub.github.io/typescript-functions/modules/json.html) - JSON manipulation functions.
 - [map](https://ilyub.github.io/typescript-functions/modules/map.html) - Map manipulation functions.
 - [moduleDefinition](https://ilyub.github.io/typescript-functions/modules/moduleDefinition.html) - Module definition helpers.

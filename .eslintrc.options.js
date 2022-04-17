@@ -37,9 +37,9 @@ module.exports = {
       type: "wildcard"
     },
     {
-      autoImportSource: "./inline-assertions",
+      autoImportSource: "./inlineAssertions",
       localName: "as",
-      sourcePattern: "@skylib/functions/src/inline-assertions",
+      sourcePattern: "@skylib/functions/src/inlineAssertions",
       type: "wildcard"
     },
     {
@@ -98,7 +98,7 @@ module.exports = {
     {
       filesToLint: [
         "./src/assertions.ts",
-        "./src/inline-assertions.ts",
+        "./src/inlineAssertions.ts",
         "./src/converters.ts",
         "./src/guards.ts"
       ],
