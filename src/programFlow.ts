@@ -37,7 +37,10 @@ function _clearTimeout(id: numberU): void {
  * @returns Handler.
  */
 function _setInterval(callback: () => void, timeout: number): number {
-  return setInterval(callback, timeout);
+  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+  const windowSetInterval = setInterval as unknown as typeof window.setTimeout;
+
+  return windowSetInterval(callback, timeout);
 }
 
 /**
@@ -48,5 +51,8 @@ function _setInterval(callback: () => void, timeout: number): number {
  * @returns Handler.
  */
 function _setTimeout(callback: () => void, timeout: number): number {
-  return setTimeout(callback, timeout);
+  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+  const windowSetTimeout = setTimeout as unknown as typeof window.setTimeout;
+
+  return windowSetTimeout(callback, timeout);
 }

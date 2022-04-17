@@ -1,6 +1,5 @@
 import * as fakeTimers from "@sinonjs/fake-timers";
 import * as _ from "@skylib/lodash-commonjs-es";
-import "jest-extended";
 import type { AsyncPromise } from "..";
 import { onDemand, assert, fn, a } from "..";
 

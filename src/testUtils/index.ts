@@ -1,8 +1,7 @@
 import "jest-extended";
-import * as matchers from "jest-extended/all";
 import type { unknowns } from "..";
 import { json } from "..";
-import { matchers as functionsMatchers } from "./expect";
+import { matchers } from "./expect";
 
 export type { ExpectFromMatcher } from "./expect";
 
@@ -24,8 +23,9 @@ export function jestReset(): void {
  * Jest setup.
  */
 export function jestSetup(): void {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-var-requires -- Ok
+  expect.extend(require("jest-extended/all"));
   expect.extend(matchers);
-  expect.extend(functionsMatchers);
   jest.spyOn(console, "error").mockImplementation((...args: unknowns) => {
     throw new Error(`console.error: ${json.encode(args)}`);
   });
