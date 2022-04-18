@@ -40,6 +40,4 @@ export * as set from "./set";
 
 export * as s from "./string";
 
-export * as testUtils from "./testUtils";
-
 export * from "./types";

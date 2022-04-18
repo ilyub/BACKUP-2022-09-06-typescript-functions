@@ -1,4 +1,11 @@
 module.exports = {
+  consistentImport: [
+    {
+      altLocalNames: ["functionsTestUtils"],
+      sourcePattern: "@skylib/functions/testUtils",
+      type: "wildcard"
+    }
+  ],
   disallowByRegexp: [
     {
       contexts: ["code"],

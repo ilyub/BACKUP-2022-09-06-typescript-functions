@@ -9,9 +9,9 @@ import {
   wait,
   wrapProxyHandler,
   o,
-  reflect,
-  testUtils
+  reflect
 } from "@";
+import * as testUtils from "@/testUtils";
 
 testUtils.installFakeTimer();
 

@@ -105,6 +105,11 @@ module.exports = {
       localName: "types",
       sourcePattern: "@skylib/functions/src/types",
       type: "wildcard"
+    },
+    {
+      localName: "matchers",
+      sourcePattern: "jest-extended/all",
+      type: "wildcard"
     }
   ],
   extends: ["./configs/eslintrc.options"],
