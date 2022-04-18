@@ -2,7 +2,7 @@ module.exports = {
   consistentImport: [
     {
       altLocalNames: ["functionsTestUtils"],
-      sourcePattern: "@skylib/functions/testUtils",
+      sourcePattern: "@skylib/functions/dist/testUtils",
       type: "wildcard"
     }
   ],
