@@ -35,7 +35,5 @@ import * as set_1 from "./set";
 export { set_1 as set };
 import * as s_1 from "./string";
 export { s_1 as s };
-import * as testUtils_1 from "./testUtils";
-export { testUtils_1 as testUtils };
 export * from "./types";
 //# sourceMappingURL=index.js.map

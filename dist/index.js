@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.testUtils = exports.s = exports.set = exports.regexp = exports.reflect = exports.programFlow = exports.o = exports.num = exports.map = exports.json = exports.as = exports.is = exports.fn = exports.cast = exports.assert = exports.arrayMap = exports.a = exports.Accumulator2 = exports.Accumulator = void 0;
+exports.s = exports.set = exports.regexp = exports.reflect = exports.programFlow = exports.o = exports.num = exports.map = exports.json = exports.as = exports.is = exports.fn = exports.cast = exports.assert = exports.arrayMap = exports.a = exports.Accumulator2 = exports.Accumulator = void 0;
 const tslib_1 = require("tslib");
 var Accumulator_1 = require("./Accumulator");
 Object.defineProperty(exports, "Accumulator", { enumerable: true, get: function () { return Accumulator_1.Accumulator; } });
@@ -25,6 +25,5 @@ exports.reflect = tslib_1.__importStar(require("./reflect"));
 exports.regexp = tslib_1.__importStar(require("./regexp"));
 exports.set = tslib_1.__importStar(require("./set"));
 exports.s = tslib_1.__importStar(require("./string"));
-exports.testUtils = tslib_1.__importStar(require("./testUtils"));
 tslib_1.__exportStar(require("./types"), exports);
 //# sourceMappingURL=index.js.map

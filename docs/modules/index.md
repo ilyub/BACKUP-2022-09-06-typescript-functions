@@ -111,7 +111,6 @@
 - [stringE](index.md#stringe)
 - [stringU](index.md#stringu)
 - [strings](index.md#strings)
-- [testUtils](index.md#testutils)
 - [trueU](index.md#trueu)
 - [typedef](index.md#typedef)
 - [unknowns](index.md#unknowns)
@@ -747,12 +746,6 @@ ___
 ### strings
 
 Re-exports [strings](types_core.md#strings)
-
-___
-
-### testUtils
-
-Re-exports [testUtils](testUtils.md)
 
 ___
 

@@ -1,7 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.jestSetup = exports.jestReset = exports.setRandomSystemTime = exports.run = exports.installFakeTimer = exports.clock = void 0;
+const tslib_1 = require("tslib");
 require("jest-extended");
+const matchers = tslib_1.__importStar(require("jest-extended/all"));
 const __1 = require("..");
 const expect_1 = require("./expect");
 var fake_timers_1 = require("./fake-timers");
@@ -20,8 +22,7 @@ exports.jestReset = jestReset;
  * Jest setup.
  */
 function jestSetup() {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-var-requires -- Ok
-    expect.extend(require("jest-extended/all"));
+    expect.extend(matchers);
     expect.extend(expect_1.matchers);
     jest.spyOn(console, "error").mockImplementation((...args) => {
         throw new Error(`console.error: ${__1.json.encode(args)}`);
