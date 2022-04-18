@@ -204,4 +204,4 @@ export declare function stringU(value: unknown, error?: assert.ErrorArg): types.
  * @throws Error otherwise.
  */
 export declare function symbol(value: unknown, error?: assert.ErrorArg): symbol;
-//# sourceMappingURL=inline-assertions.d.ts.map
+//# sourceMappingURL=inlineAssertions.d.ts.map

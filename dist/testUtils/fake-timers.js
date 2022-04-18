@@ -4,7 +4,6 @@ exports.setRandomSystemTime = exports.run = exports.installFakeTimer = exports.c
 const tslib_1 = require("tslib");
 const fakeTimers = tslib_1.__importStar(require("@sinonjs/fake-timers"));
 const _ = tslib_1.__importStar(require("@skylib/lodash-commonjs-es"));
-require("jest-extended");
 const __1 = require("..");
 exports.clock = (0, __1.onDemand)(() => {
     __1.assert.not.empty(_clock);

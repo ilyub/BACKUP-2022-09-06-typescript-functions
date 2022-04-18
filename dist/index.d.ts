@@ -8,7 +8,7 @@ export * from "./errors";
 export * as fn from "./function";
 export * as is from "./guards";
 export * from "./helpers";
-export * as as from "./inline-assertions";
+export * as as from "./inlineAssertions";
 export * as json from "./json";
 export * as map from "./map";
 export * from "./moduleDefinition";

@@ -20,7 +20,7 @@
 - [guards](modules/guards.md)
 - [helpers](modules/helpers.md)
 - [index](modules/index.md)
-- [inline-assertions](modules/inline_assertions.md)
+- [inlineAssertions](modules/inlineAssertions.md)
 - [json](modules/json.md)
 - [map](modules/map.md)
 - [moduleDefinition](modules/moduleDefinition.md)

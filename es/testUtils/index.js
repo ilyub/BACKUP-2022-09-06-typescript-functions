@@ -1,7 +1,6 @@
 import "jest-extended";
-import * as matchers from "jest-extended/all";
 import { json } from "..";
-import { matchers as functionsMatchers } from "./expect";
+import { matchers } from "./expect";
 export { clock, installFakeTimer, run, setRandomSystemTime } from "./fake-timers";
 /**
  * Jest reset.
@@ -13,8 +12,9 @@ export function jestReset() {
  * Jest setup.
  */
 export function jestSetup() {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-var-requires -- Ok
+    expect.extend(require("jest-extended/all"));
     expect.extend(matchers);
-    expect.extend(functionsMatchers);
     jest.spyOn(console, "error").mockImplementation((...args) => {
         throw new Error(`console.error: ${json.encode(args)}`);
     });

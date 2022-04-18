@@ -32,7 +32,9 @@ exports.clearTimeout = _clearTimeout;
  * @returns Handler.
  */
 function _setInterval(callback, timeout) {
-    return setInterval(callback, timeout);
+    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+    const windowSetInterval = setInterval;
+    return windowSetInterval(callback, timeout);
 }
 exports.setInterval = _setInterval;
 /**
@@ -43,7 +45,9 @@ exports.setInterval = _setInterval;
  * @returns Handler.
  */
 function _setTimeout(callback, timeout) {
-    return setTimeout(callback, timeout);
+    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+    const windowSetTimeout = setTimeout;
+    return windowSetTimeout(callback, timeout);
 }
 exports.setTimeout = _setTimeout;
 //# sourceMappingURL=programFlow.js.map

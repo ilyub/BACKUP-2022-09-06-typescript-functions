@@ -30,7 +30,9 @@ function _clearTimeout(id) {
  * @returns Handler.
  */
 function _setInterval(callback, timeout) {
-    return setInterval(callback, timeout);
+    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+    const windowSetInterval = setInterval;
+    return windowSetInterval(callback, timeout);
 }
 /**
  * Sets timeout.
@@ -40,6 +42,8 @@ function _setInterval(callback, timeout) {
  * @returns Handler.
  */
 function _setTimeout(callback, timeout) {
-    return setTimeout(callback, timeout);
+    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+    const windowSetTimeout = setTimeout;
+    return windowSetTimeout(callback, timeout);
 }
 //# sourceMappingURL=programFlow.js.map

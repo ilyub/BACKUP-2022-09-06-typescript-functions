@@ -1,5 +1,7 @@
 import * as assert from "./assertions";
-import { defineFn } from "./moduleDefinition";
+import type * as is from "./guards";
+import type { ValidationObject } from "./helpers";
+import type * as types from "./types";
 /**
  * Asserts that value is an array.
  *
@@ -8,10 +10,7 @@ import { defineFn } from "./moduleDefinition";
  * @returns Value if value is an array.
  * @throws Error otherwise.
  */
-export const array = defineFn((value, error) => {
-    assert.array(value, error);
-    return value;
-}, {
+export declare const array: ((value: unknown, error?: assert.ErrorArg | undefined) => types.unknowns) & {
     /**
      * Asserts that value type is T[].
      *
@@ -22,11 +21,8 @@ export const array = defineFn((value, error) => {
      * @returns Value if value type is T[].
      * @throws Error otherwise.
      */
-    of(value, guard, error) {
-        assert.array.of(value, guard, error);
-        return value;
-    }
-});
+    of<T>(this: void, value: unknown, guard: is.Guard<T>, error?: assert.ErrorArg | undefined): readonly T[];
+};
 /**
  * Asserts that value type is IndexedObject.
  *
@@ -35,10 +31,7 @@ export const array = defineFn((value, error) => {
  * @returns Value if value type is IndexedObject.
  * @throws Error otherwise.
  */
-export const indexedObject = defineFn((value, error) => {
-    assert.indexedObject(value, error);
-    return value;
-}, {
+export declare const indexedObject: ((value: unknown, error?: assert.ErrorArg | undefined) => types.IndexedObject) & {
     /**
      * Asserts that value type is IndexedObject\<T\>.
      *
@@ -49,11 +42,8 @@ export const indexedObject = defineFn((value, error) => {
      * @returns Value if value type is IndexedObject\<T\>.
      * @throws Error otherwise.
      */
-    of(value, guard, error) {
-        assert.indexedObject.of(value, guard, error);
-        return value;
-    }
-});
+    of<T>(this: void, value: unknown, guard: is.Guard<T>, error?: assert.ErrorArg | undefined): types.IndexedObject<T>;
+};
 /**
  * Asserts that value type is Map.
  *
@@ -62,10 +52,7 @@ export const indexedObject = defineFn((value, error) => {
  * @returns Value if value type is Map.
  * @throws Error otherwise.
  */
-export const map = defineFn((value, error) => {
-    assert.map(value, error);
-    return value;
-}, {
+export declare const map: ((value: unknown, error?: assert.ErrorArg | undefined) => ReadonlyMap<unknown, unknown>) & {
     /**
      * Asserts that value type is Map\<K, V\>.
      *
@@ -77,17 +64,12 @@ export const map = defineFn((value, error) => {
      * @returns Value if value type is Map\<K, V\>.
      * @throws Error otherwise.
      */
-    of(value, keyGuard, valueGuard, error) {
-        assert.map.of(value, keyGuard, valueGuard, error);
-        return value;
-    }
-});
+    of<K, V>(this: void, value: unknown, keyGuard: is.Guard<K>, valueGuard: is.Guard<V>, error?: assert.ErrorArg | undefined): ReadonlyMap<K, V>;
+};
 /**
  * Not implemented.
  */
-export const not = defineFn(() => {
-    throw new Error("Not implemented");
-}, {
+export declare const not: (() => never) & {
     /**
      * Asserts that value type is not empty.
      *
@@ -97,11 +79,8 @@ export const not = defineFn(() => {
      * @returns Value if value type is not empty.
      * @throws Error otherwise.
      */
-    empty(value, error) {
-        assert.not.empty(value, error);
-        return value;
-    }
-});
+    empty<T>(this: void, value: T, error?: assert.ErrorArg | undefined): Exclude<T, types.empty>;
+};
 /**
  * Asserts that value type is Set.
  *
@@ -110,10 +89,7 @@ export const not = defineFn(() => {
  * @returns Value if value type is Set.
  * @throws Error otherwise.
  */
-export const set = defineFn((value, error) => {
-    assert.set(value, error);
-    return value;
-}, {
+export declare const set: ((value: unknown, error?: assert.ErrorArg | undefined) => ReadonlySet<unknown>) & {
     /**
      * Asserts that value type is Set\<T\>.
      *
@@ -124,11 +100,8 @@ export const set = defineFn((value, error) => {
      * @returns Value if value type is Set\<T\>.
      * @throws Error otherwise.
      */
-    of(value, guard, error) {
-        assert.set.of(value, guard, error);
-        return value;
-    }
-});
+    of<T>(this: void, value: unknown, guard: is.Guard<T>, error?: assert.ErrorArg | undefined): ReadonlySet<T>;
+};
 /**
  * Asserts that value is a boolean.
  *
@@ -137,10 +110,7 @@ export const set = defineFn((value, error) => {
  * @returns Value if value is a boolean.
  * @throws Error otherwise.
  */
-export function boolean(value, error) {
-    assert.boolean(value, error);
-    return value;
-}
+export declare function boolean(value: unknown, error?: assert.ErrorArg): boolean;
 /**
  * Asserts that value type is T.
  *
@@ -149,10 +119,7 @@ export function boolean(value, error) {
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
-export function callable(value, error) {
-    assert.callable(value, error);
-    return value;
-}
+export declare function callable<T extends Function>(value: unknown, error?: assert.ErrorArg): T;
 /**
  * Asserts that value type is T.
  *
@@ -162,10 +129,7 @@ export function callable(value, error) {
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
-export function enumeration(value, vo, error) {
-    assert.enumeration(value, vo, error);
-    return value;
-}
+export declare function enumeration<T extends PropertyKey>(value: unknown, vo: ValidationObject<T>, error?: assert.ErrorArg): T;
 /**
  * Asserts that value type is T.
  *
@@ -175,10 +139,7 @@ export function enumeration(value, vo, error) {
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
-export function instance(value, ctor, error) {
-    assert.instance(value, ctor, error);
-    return value;
-}
+export declare function instance<T>(value: unknown, ctor: types.Constructor<T>, error?: assert.ErrorArg): T;
 /**
  * Asserts that value type is T[].
  *
@@ -188,10 +149,7 @@ export function instance(value, ctor, error) {
  * @returns Value if value type is T[].
  * @throws Error otherwise.
  */
-export function instances(value, ctor, error) {
-    assert.instances(value, ctor, error);
-    return value;
-}
+export declare function instances<T>(value: unknown, ctor: types.Constructor<T>, error?: assert.ErrorArg): readonly T[];
 /**
  * Asserts that value type is NumStr.
  *
@@ -200,10 +158,7 @@ export function instances(value, ctor, error) {
  * @returns Value if value type is NumStr.
  * @throws Error otherwise.
  */
-export function numStr(value, error) {
-    assert.numStr(value, error);
-    return value;
-}
+export declare function numStr(value: unknown, error?: assert.ErrorArg): types.NumStr;
 /**
  * Asserts that value is a number.
  *
@@ -212,10 +167,7 @@ export function numStr(value, error) {
  * @returns Value if value is a number.
  * @throws Error otherwise.
  */
-export function number(value, error) {
-    assert.number(value, error);
-    return value;
-}
+export declare function number(value: unknown, error?: assert.ErrorArg): number;
 /**
  * Asserts that value is an object.
  *
@@ -224,10 +176,7 @@ export function number(value, error) {
  * @returns Value if value is an object.
  * @throws Error otherwise.
  */
-export function object(value, error) {
-    assert.object(value, error);
-    return value;
-}
+export declare function object(value: unknown, error?: assert.ErrorArg): object;
 /**
  * Asserts that value is a string.
  *
@@ -236,10 +185,7 @@ export function object(value, error) {
  * @returns Value if value is a string.
  * @throws Error otherwise.
  */
-export function string(value, error) {
-    assert.string(value, error);
-    return value;
-}
+export declare function string(value: unknown, error?: assert.ErrorArg): string;
 /**
  * Asserts that value is a string.
  *
@@ -248,10 +194,7 @@ export function string(value, error) {
  * @returns Value if value is a string.
  * @throws Error otherwise.
  */
-export function stringU(value, error) {
-    assert.stringU(value, error);
-    return value;
-}
+export declare function stringU(value: unknown, error?: assert.ErrorArg): types.stringU;
 /**
  * Asserts that value is a symbol.
  *
@@ -260,8 +203,5 @@ export function stringU(value, error) {
  * @returns Value if value is a symbol.
  * @throws Error otherwise.
  */
-export function symbol(value, error) {
-    assert.symbol(value, error);
-    return value;
-}
-//# sourceMappingURL=inline-assertions.js.map
+export declare function symbol(value: unknown, error?: assert.ErrorArg): symbol;
+//# sourceMappingURL=inlineAssertions.d.ts.map

@@ -542,7 +542,7 @@ ___
 
 ### as
 
-Renames and re-exports [inline-assertions](inline_assertions.md)
+Renames and re-exports [inlineAssertions](inlineAssertions.md)
 
 ___
 

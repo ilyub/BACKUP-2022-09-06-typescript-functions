@@ -1,5 +1,4 @@
 import * as fakeTimers from "@sinonjs/fake-timers";
-import "jest-extended";
 import type { AsyncPromise } from "..";
 export declare const clock: fakeTimers.Clock;
 export interface Options {

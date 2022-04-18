@@ -14,7 +14,7 @@ export { fn_1 as fn };
 import * as is_1 from "./guards";
 export { is_1 as is };
 export * from "./helpers";
-import * as as_1 from "./inline-assertions";
+import * as as_1 from "./inlineAssertions";
 export { as_1 as as };
 import * as json_1 from "./json";
 export { json_1 as json };

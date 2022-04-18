@@ -1,30 +1,30 @@
-[Typescript functions](../index.md) / [Exports](../modules.md) / inline-assertions
+[Typescript functions](../index.md) / [Exports](../modules.md) / inlineAssertions
 
-# Module: inline-assertions
+# Module: inlineAssertions
 
 ## Table of contents
 
 ### Variables
 
-- [array](inline_assertions.md#array)
-- [indexedObject](inline_assertions.md#indexedobject)
-- [map](inline_assertions.md#map)
-- [not](inline_assertions.md#not)
-- [set](inline_assertions.md#set)
+- [array](inlineAssertions.md#array)
+- [indexedObject](inlineAssertions.md#indexedobject)
+- [map](inlineAssertions.md#map)
+- [not](inlineAssertions.md#not)
+- [set](inlineAssertions.md#set)
 
 ### Functions
 
-- [boolean](inline_assertions.md#boolean)
-- [callable](inline_assertions.md#callable)
-- [enumeration](inline_assertions.md#enumeration)
-- [instance](inline_assertions.md#instance)
-- [instances](inline_assertions.md#instances)
-- [numStr](inline_assertions.md#numstr)
-- [number](inline_assertions.md#number)
-- [object](inline_assertions.md#object)
-- [string](inline_assertions.md#string)
-- [stringU](inline_assertions.md#stringu)
-- [symbol](inline_assertions.md#symbol)
+- [boolean](inlineAssertions.md#boolean)
+- [callable](inlineAssertions.md#callable)
+- [enumeration](inlineAssertions.md#enumeration)
+- [instance](inlineAssertions.md#instance)
+- [instances](inlineAssertions.md#instances)
+- [numStr](inlineAssertions.md#numstr)
+- [number](inlineAssertions.md#number)
+- [object](inlineAssertions.md#object)
+- [string](inlineAssertions.md#string)
+- [stringU](inlineAssertions.md#stringu)
+- [symbol](inlineAssertions.md#symbol)
 
 ## Variables
 
