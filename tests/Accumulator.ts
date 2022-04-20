@@ -38,3 +38,12 @@ test("unshift", () => {
   accumulator.unshift("b", 3);
   expect(a.fromIterable(accumulator)).toStrictEqual(expected);
 });
+
+test("values", () => {
+  const accumulator = new Accumulator<string, unknown>([
+    ["a", [1, 2]],
+    ["b", [3]]
+  ]);
+
+  expect(a.fromIterable(accumulator.values())).toStrictEqual([[1, 2], [3]]);
+});

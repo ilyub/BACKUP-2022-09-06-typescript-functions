@@ -16,7 +16,7 @@ export class Accumulator<K extends PropertyKey, T> {
   }
 
   /**
-   * Returns array by key.
+   * Returns array at given key.
    *
    * @param key - Key.
    * @returns Array.
@@ -49,6 +49,13 @@ export class Accumulator<K extends PropertyKey, T> {
 
     if (arr) arr.unshift(value);
     else this.map.set(key, [value]);
+  }
+
+  /**
+   * Returns values.
+   */
+  public *values(): IterableIterator<readonly T[]> {
+    for (const arr of this.map.values()) yield arr;
   }
 
   protected readonly map: Map<K, T[]> = new Map();
