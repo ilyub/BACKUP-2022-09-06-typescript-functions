@@ -6,6 +6,9 @@ test("get", () => {
     ["b", "y", [3]]
   ]);
 
+  expect(accumulator.get("a")).toStrictEqual(new Map([["x", [1, 2]]]));
+  expect(accumulator.get("b")).toStrictEqual(new Map([["y", [3]]]));
+  expect(accumulator.get("c")).toStrictEqual(new Map());
   expect(accumulator.get("a", "x")).toStrictEqual([1, 2]);
   expect(accumulator.get("b", "y")).toStrictEqual([3]);
   expect(accumulator.get("c", "z")).toStrictEqual([]);
@@ -41,4 +44,13 @@ test("unshift", () => {
   accumulator.unshift("a", "y", 3);
   accumulator.unshift("b", "z", 4);
   expect(a.fromIterable(accumulator)).toStrictEqual(expected);
+});
+
+test("values", () => {
+  const accumulator = new Accumulator2<string, string, unknown>([
+    ["a", "x", [1, 2]],
+    ["b", "y", [3]]
+  ]);
+
+  expect(a.fromIterable(accumulator.values())).toStrictEqual([[1, 2], [3]]);
 });

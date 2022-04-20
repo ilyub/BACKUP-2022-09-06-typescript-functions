@@ -1,3 +1,5 @@
+import { is } from "@";
+
 export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
   /**
    * Creates class instance.
@@ -15,14 +17,26 @@ export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
   }
 
   /**
-   * Returns array by keys.
+   * Returns map of arrays at given key.
+   *
+   * @param key - Key.
+   * @returns Map of arrays.
+   */
+  public get(key1: K): ReadonlyMap<L, readonly T[]>;
+
+  /**
+   * Returns array at given keys.
    *
    * @param key1 - Key 1.
    * @param key2 - Key 2.
    * @returns Array.
    */
-  public get(key1: K, key2: L): readonly T[] {
-    return this.map.get(key1)?.get(key2) ?? [];
+  public get(key1: K, key2: L): readonly T[];
+
+  public get(key1: K, key2?: L): ReadonlyMap<L, readonly T[]> | readonly T[] {
+    return is.not.empty(key2)
+      ? this.map.get(key1)?.get(key2) ?? []
+      : this.map.get(key1) ?? new Map();
   }
 
   /**
@@ -59,6 +73,14 @@ export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
       if (arr) arr.unshift(value);
       else map.set(key2, [value]);
     } else this.map.set(key1, new Map([[key2, [value]]]));
+  }
+
+  /**
+   * Returns values.
+   */
+  public *values(): IterableIterator<readonly T[]> {
+    for (const map of this.map.values())
+      for (const arr of map.values()) yield arr;
   }
 
   protected readonly map: Map<K, Map<L, T[]>> = new Map();
