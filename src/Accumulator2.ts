@@ -6,12 +6,16 @@ export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
    *
    * @param source - Source.
    */
-  public constructor(source: Iterable<IterableElement<K, L, T>> = []) {
+  public constructor(
+    source: Iterable<Accumulator2.IterableElement<K, L, T>> = []
+  ) {
     for (const [key1, key2, arr] of source)
       for (const value of arr) this.push(key1, key2, value);
   }
 
-  public *[Symbol.iterator](): IterableIterator<IterableElement<K, L, T>> {
+  public *[Symbol.iterator](): IterableIterator<
+    Accumulator2.IterableElement<K, L, T>
+  > {
     for (const [key1, map] of this.map)
       for (const [key2, arr] of map) yield [key1, key2, arr];
   }
@@ -86,8 +90,11 @@ export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
   protected readonly map: Map<K, Map<L, T[]>> = new Map();
 }
 
-export type IterableElement<
-  K extends PropertyKey,
-  L extends PropertyKey,
-  T
-> = readonly [K, L, readonly T[]]; // eslint-disable-line @skylib/no-multi-type-tuples -- Ok
+export namespace Accumulator2 {
+  export type IterableElement<
+    K extends PropertyKey,
+    L extends PropertyKey,
+    T
+    // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
+  > = readonly [K, L, readonly T[]];
+}

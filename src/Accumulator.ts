@@ -6,12 +6,14 @@ export class Accumulator<K extends PropertyKey, T> {
    *
    * @param source - Source.
    */
-  public constructor(source: Iterable<IterableElement<K, T>> = []) {
+  public constructor(source: Iterable<Accumulator.IterableElement<K, T>> = []) {
     for (const [key, arr] of source)
       for (const value of arr) this.push(key, value);
   }
 
-  public *[Symbol.iterator](): IterableIterator<IterableElement<K, T>> {
+  public *[Symbol.iterator](): IterableIterator<
+    Accumulator.IterableElement<K, T>
+  > {
     for (const [key, value] of this.map) yield [key, value];
   }
 
@@ -61,4 +63,9 @@ export class Accumulator<K extends PropertyKey, T> {
   protected readonly map: Map<K, T[]> = new Map();
 }
 
-export type IterableElement<K extends PropertyKey, T> = Entry<K, readonly T[]>;
+export namespace Accumulator {
+  export type IterableElement<K extends PropertyKey, T> = Entry<
+    K,
+    readonly T[]
+  >;
+}
