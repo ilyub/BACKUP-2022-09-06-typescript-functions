@@ -112,7 +112,7 @@ module.exports = {
       type: "wildcard"
     }
   ],
-  extends: ["./configs/eslintrc.options"],
+  extends: ["./configs/eslintrc.options.js"],
   extraDefaultExportLocations: ["jest.d.ts"],
   extraUnassignedImportLocations: ["jest-extended", "reflect-metadata"]
 };
