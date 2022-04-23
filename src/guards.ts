@@ -225,8 +225,8 @@ export const object = defineFn(
        * @returns Object guard.
        */
       function _factory<R extends object, O extends object>(
-        required: PropGuards<R, keyof R>,
-        optional: PropGuards<O, keyof O>
+        required: ObjectGuards<R, keyof R>,
+        optional: ObjectGuards<O, keyof O>
       ): Guard<types.OptionalStyle<Partial<O>> & types.UndefinedStyle<R>>;
 
       /**
@@ -237,13 +237,13 @@ export const object = defineFn(
        * @returns Object guard.
        */
       function _factory<T extends object>(
-        required: PropGuards<T, RequiredKeys<T>>,
-        optional: PropGuards<T, OptionalKeys<T>>
+        required: ObjectGuards<T, RequiredKeys<T>>,
+        optional: ObjectGuards<T, OptionalKeys<T>>
       ): Guard<T>;
 
       function _factory<T extends object>(
-        required: PropGuards<T, RequiredKeys<T>>,
-        optional: PropGuards<T, OptionalKeys<T>>
+        required: ObjectGuards<T, RequiredKeys<T>>,
+        optional: ObjectGuards<T, OptionalKeys<T>>
       ): Guard<T> {
         return (value): value is T => object.of(value, required, optional);
       }
@@ -261,8 +261,8 @@ export const object = defineFn(
        */
       function _of<R extends object, O extends object>(
         value: unknown,
-        required: PropGuards<R, keyof R>,
-        optional: PropGuards<O, keyof O>
+        required: ObjectGuards<R, keyof R>,
+        optional: ObjectGuards<O, keyof O>
       ): value is types.OptionalStyle<Partial<O>> & types.UndefinedStyle<R>;
 
       /**
@@ -275,14 +275,14 @@ export const object = defineFn(
        */
       function _of<T extends object>(
         value: unknown,
-        required: PropGuards<T, RequiredKeys<T>>,
-        optional: PropGuards<T, OptionalKeys<T>>
+        required: ObjectGuards<T, RequiredKeys<T>>,
+        optional: ObjectGuards<T, OptionalKeys<T>>
       ): value is T;
 
       function _of<T extends object>(
         value: unknown,
-        required: PropGuards<T, RequiredKeys<T>>,
-        optional: PropGuards<T, OptionalKeys<T>>
+        required: ObjectGuards<T, RequiredKeys<T>>,
+        optional: ObjectGuards<T, OptionalKeys<T>>
       ): value is T {
         return (
           indexedObject(value) &&
@@ -691,7 +691,7 @@ export interface MultiArgGuard<T, A extends types.unknowns> {
   (value: unknown, ...args: A): value is T;
 }
 
-export type PropGuards<T, K extends keyof T = keyof T> = {
+export type ObjectGuards<T, K extends keyof T = keyof T> = {
   readonly [L in K]-?: Guard<T[L]>;
 };
 

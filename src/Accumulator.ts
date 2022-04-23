@@ -1,19 +1,15 @@
-import type { Entry } from "./types";
-
 export class Accumulator<K extends PropertyKey, T> {
   /**
    * Creates class instance.
    *
    * @param source - Source.
    */
-  public constructor(source: Iterable<Accumulator.IterableElement<K, T>> = []) {
+  public constructor(source: Iterable<Accumulator.Entry<K, T>> = []) {
     for (const [key, arr] of source)
       for (const value of arr) this.push(key, value);
   }
 
-  public *[Symbol.iterator](): IterableIterator<
-    Accumulator.IterableElement<K, T>
-  > {
+  public *[Symbol.iterator](): IterableIterator<Accumulator.Entry<K, T>> {
     for (const [key, value] of this.map) yield [key, value];
   }
 
@@ -64,8 +60,6 @@ export class Accumulator<K extends PropertyKey, T> {
 }
 
 export namespace Accumulator {
-  export type IterableElement<K extends PropertyKey, T> = Entry<
-    K,
-    readonly T[]
-  >;
+  // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
+  export type Entry<K extends PropertyKey, T> = readonly [K, readonly T[]];
 }

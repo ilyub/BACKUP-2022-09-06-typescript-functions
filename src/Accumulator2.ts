@@ -6,16 +6,12 @@ export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
    *
    * @param source - Source.
    */
-  public constructor(
-    source: Iterable<Accumulator2.IterableElement<K, L, T>> = []
-  ) {
+  public constructor(source: Iterable<Accumulator2.Entry<K, L, T>> = []) {
     for (const [key1, key2, arr] of source)
       for (const value of arr) this.push(key1, key2, value);
   }
 
-  public *[Symbol.iterator](): IterableIterator<
-    Accumulator2.IterableElement<K, L, T>
-  > {
+  public *[Symbol.iterator](): IterableIterator<Accumulator2.Entry<K, L, T>> {
     for (const [key1, map] of this.map)
       for (const [key2, arr] of map) yield [key1, key2, arr];
   }
@@ -91,7 +87,7 @@ export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
 }
 
 export namespace Accumulator2 {
-  export type IterableElement<
+  export type Entry<
     K extends PropertyKey,
     L extends PropertyKey,
     T
