@@ -212,7 +212,7 @@ export function clone<T extends object>(obj: T): Writable<T> {
 }
 
 /**
- * Checks that every object property satisfies condition.
+ * Checks if every object property satisfies condition.
  *
  * @param obj - Object.
  * @param predicate - Predicate.
@@ -284,7 +284,7 @@ export function getPrototypeOf(obj: object): objectU {
 }
 
 /**
- * Checks that object has property.
+ * Checks if object has property.
  *
  * @param key - Key.
  * @param obj - Object.
@@ -371,7 +371,7 @@ export function size(obj: object): number {
 }
 
 /**
- * Checks that some object property satisfies condition.
+ * Checks if some object property satisfies condition.
  *
  * @param obj - Object.
  * @param predicate - Predicate.

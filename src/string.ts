@@ -18,10 +18,10 @@ export function detectEol(str: string): Eol {
 }
 
 /**
- * Checks that string consists of only spaces.
+ * Checks if string consists of spaces.
  *
  * @param str - String.
- * @returns _True_ if string consists of only spaces, _false_ otherwise.
+ * @returns _True_ if string consists of spaces, _false_ otherwise.
  */
 export function empty(str: string): boolean {
   return /^\s*$/u.test(str);
@@ -72,7 +72,7 @@ export function lines(str: string): strings {
 }
 
 /**
- * Checks that string is multiline.
+ * Checks if string is multiline.
  *
  * @param str - String.
  * @returns _True_ if string is multiline, _false_ otherwise.
@@ -99,7 +99,7 @@ export function replaceAll(
 }
 
 /**
- * Checks that string is single-line.
+ * Checks if string is single-line.
  *
  * @param str - String.
  * @returns _True_ if string is single-line, _false_ otherwise.

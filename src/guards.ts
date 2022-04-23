@@ -19,7 +19,7 @@ export const and = defineFn(
     return _and;
 
     /**
-     * Checks that value type is A & B.
+     * Checks if value type is A & B.
      *
      * @param value - Value.
      * @param guard1 - Guard for type A.
@@ -33,7 +33,7 @@ export const and = defineFn(
     ): value is A & B;
 
     /**
-     * Checks that value type is A & B & C.
+     * Checks if value type is A & B & C.
      *
      * @param value - Value.
      * @param guard1 - Guard for type A.
@@ -49,7 +49,7 @@ export const and = defineFn(
     ): value is A & B & C;
 
     /**
-     * Checks that value type is A & B & C & D.
+     * Checks if value type is A & B & C & D.
      *
      * @param value - Value.
      * @param guard1 - Guard for type A.
@@ -121,7 +121,7 @@ export const and = defineFn(
 );
 
 /**
- * Checks that value is an array.
+ * Checks if value is an array.
  *
  * @param value - Value.
  * @returns _True_ if value is an array, _false_ otherwise.
@@ -130,7 +130,7 @@ export const array = defineFn(
   (value: unknown): value is types.unknowns => Array.isArray(value),
   {
     /**
-     * Checks that value type is T[].
+     * Checks if value type is T[].
      *
      * @param this - No this.
      * @param value - Value.
@@ -144,7 +144,7 @@ export const array = defineFn(
 );
 
 /**
- * Checks that value type is IndexedObject.
+ * Checks if value type is IndexedObject.
  *
  * @param value - Value.
  * @returns _True_ if value type is IndexedObject, _false_ otherwise.
@@ -154,7 +154,7 @@ export const indexedObject = defineFn(
     typeof value === "object" && value !== null,
   {
     /**
-     * Checks that value type is IndexedObject\<T\>.
+     * Checks if value type is IndexedObject\<T\>.
      *
      * @param this - No this.
      * @param value - Value.
@@ -172,7 +172,7 @@ export const indexedObject = defineFn(
 );
 
 /**
- * Checks that value type is Map.
+ * Checks if value type is Map.
  *
  * @param value - Value.
  * @returns _True_ if value type is Map, _false_ otherwise.
@@ -182,7 +182,7 @@ export const map = defineFn(
     value instanceof Map,
   {
     /**
-     * Checks that value type is Map\<K, V\>.
+     * Checks if value type is Map\<K, V\>.
      *
      * @param this - No this.
      * @param value - Value.
@@ -205,7 +205,7 @@ export const map = defineFn(
 );
 
 /**
- * Checks that value is an object.
+ * Checks if value is an object.
  *
  * @param value - Value.
  * @returns _True_ if value is an object, _false_ otherwise.
@@ -252,7 +252,7 @@ export const object = defineFn(
       return _of;
 
       /**
-       * Checks that value is an object.
+       * Checks if value is an object.
        *
        * @param value - Value.
        * @param required - Guards for required properties.
@@ -266,7 +266,7 @@ export const object = defineFn(
       ): value is types.OptionalStyle<Partial<O>> & types.UndefinedStyle<R>;
 
       /**
-       * Checks that value is an object.
+       * Checks if value is an object.
        *
        * @param value - Value.
        * @param required - Guards for required properties.
@@ -303,7 +303,7 @@ export const or = defineFn(
     return _or;
 
     /**
-     * Checks that value type is A | B.
+     * Checks if value type is A | B.
      *
      * @param value - Value.
      * @param guard1 - Guard for type A.
@@ -317,7 +317,7 @@ export const or = defineFn(
     ): value is A | B;
 
     /**
-     * Checks that value type is A | B | C.
+     * Checks if value type is A | B | C.
      *
      * @param value - Value.
      * @param guard1 - Guard for type A.
@@ -333,7 +333,7 @@ export const or = defineFn(
     ): value is A | B | C;
 
     /**
-     * Checks that value type is A | B | C | D.
+     * Checks if value type is A | B | C | D.
      *
      * @param value - Value.
      * @param guard1 - Guard for type A.
@@ -405,7 +405,7 @@ export const or = defineFn(
 );
 
 /**
- * Checks that value type is Set.
+ * Checks if value type is Set.
  *
  * @param value - Value.
  * @returns _True_ if value type is Set, _false_ otherwise.
@@ -414,7 +414,7 @@ export const set = defineFn(
   (value: unknown): value is ReadonlySet<unknown> => value instanceof Set,
   {
     /**
-     * Checks that value type is Set\<T\>.
+     * Checks if value type is Set\<T\>.
      *
      * @param this - No this.
      * @param value - Value.
@@ -436,7 +436,7 @@ export const tuple = defineFn(
     return _tuple;
 
     /**
-     * Checks that value type is [A].
+     * Checks if value type is [A].
      *
      * @param value - Value.
      * @param guard - Guard for type A.
@@ -445,7 +445,7 @@ export const tuple = defineFn(
     function _tuple<A>(value: unknown, guard: Guard<A>): value is readonly [A];
 
     /**
-     * Checks that value type is [A, B].
+     * Checks if value type is [A, B].
      *
      * @param value - Value.
      * @param guard1 - Guard for type A.
@@ -460,7 +460,7 @@ export const tuple = defineFn(
     ): value is readonly [A, B];
 
     /**
-     * Checks that value type is [A, B, C].
+     * Checks if value type is [A, B, C].
      *
      * @param value - Value.
      * @param guard1 - Guard for type A.
@@ -477,7 +477,7 @@ export const tuple = defineFn(
     ): value is readonly [A, B, C];
 
     /**
-     * Checks that value type is [A, B, C, D].
+     * Checks if value type is [A, B, C, D].
      *
      * @param value - Value.
      * @param guard1 - Guard for type A.
@@ -567,7 +567,7 @@ export const tuple = defineFn(
 );
 
 /**
- * Checks that value type is not T.
+ * Checks if value type is not T.
  *
  * @param value - Value.
  * @param guard - Guard for type T.
@@ -660,7 +660,7 @@ export const unknownsU = or.factory(unknowns, _undefined);
 
 export interface ExclusionGuard<T> {
   /**
-   * Checks that value type is not T.
+   * Checks if value type is not T.
    *
    * @param value - Value.
    * @returns _True_ if value type is not T, _false_ otherwise.
@@ -670,7 +670,7 @@ export interface ExclusionGuard<T> {
 
 export interface Guard<T = unknown> {
   /**
-   * Checks that value type is T.
+   * Checks if value type is T.
    *
    * @param value - Value.
    * @returns _True_ if value type is T, _false_ otherwise.
@@ -682,7 +682,7 @@ export type Guards = readonly Guard[];
 
 export interface MultiArgGuard<T, A extends types.unknowns> {
   /**
-   * Checks that value type is T.
+   * Checks if value type is T.
    *
    * @param value - Value.
    * @param args - Arguments.
@@ -696,7 +696,7 @@ export type ObjectGuards<T, K extends keyof T = keyof T> = {
 };
 
 /**
- * Checks that value is a boolean.
+ * Checks if value is a boolean.
  *
  * @param value - Value.
  * @returns _True_ if value is a boolean, _false_ otherwise.
@@ -706,7 +706,7 @@ export function boolean(value: unknown): value is boolean {
 }
 
 /**
- * Checks that value type is T.
+ * Checks if value type is T.
  *
  * @param value - Value.
  * @returns _True_ if value type is T, _false_ otherwise.
@@ -716,7 +716,7 @@ export function callable<T extends Function>(value: unknown): value is T {
 }
 
 /**
- * Checks that value type is empty.
+ * Checks if value type is empty.
  *
  * @param value - Value.
  * @returns _True_ if value type is empty, _false_ otherwise.
@@ -726,7 +726,7 @@ export function empty(value: unknown): value is types.empty {
 }
 
 /**
- * Checks that value type is T.
+ * Checks if value type is T.
  *
  * @param value - Value.
  * @param vo - Validation object.
@@ -754,7 +754,7 @@ export function factory<T, A extends types.unknowns>(
 }
 
 /**
- * Checks that value type is T.
+ * Checks if value type is T.
  *
  * @param value - Value.
  * @param ctor - Constructor.
@@ -768,7 +768,7 @@ export function instance<T>(
 }
 
 /**
- * Checks that value type is T[].
+ * Checks if value type is T[].
  *
  * @param value - Value.
  * @param ctor - Constructor.
@@ -782,7 +782,7 @@ export function instances<T>(
 }
 
 /**
- * Checks that value type is NumStr.
+ * Checks if value type is NumStr.
  *
  * @param value - Value.
  * @returns _True_ if value type is NumStr, _false_ otherwise.
@@ -801,7 +801,7 @@ export function numStr(value: unknown): value is types.NumStr {
 }
 
 /**
- * Checks that value is a number.
+ * Checks if value is a number.
  *
  * @param value - Value.
  * @returns _True_ if value is a number, _false_ otherwise.
@@ -811,7 +811,7 @@ export function number(value: unknown): value is number {
 }
 
 /**
- * Checks that value is a string.
+ * Checks if value is a string.
  *
  * @param value - Value.
  * @returns _True_ if value is a string, _false_ otherwise.
@@ -821,7 +821,7 @@ export function string(value: unknown): value is string {
 }
 
 /**
- * Checks that value is a string.
+ * Checks if value is a string.
  *
  * @param value - Value.
  * @returns _True_ if value is a string, _false_ otherwise.
@@ -840,7 +840,7 @@ export function stringU(value: unknown): value is string {
 }
 
 /**
- * Checks that value is a symbol.
+ * Checks if value is a symbol.
  *
  * @param value - Value.
  * @returns _True_ if value is a symbol, _false_ otherwise.
@@ -850,7 +850,7 @@ export function symbol(value: unknown): value is symbol {
 }
 
 /**
- * Checks that value is _unknown_.
+ * Checks if value is _unknown_.
  *
  * @param _value - Value.
  * @returns _True_ if value is _unknown_, _false_ otherwise.
@@ -860,7 +860,7 @@ export function unknown(_value: unknown): _value is unknown {
 }
 
 /**
- * Checks that value is _false_.
+ * Checks if value is _false_.
  *
  * @param value - Value.
  * @returns _True_ if value is _false_, _false_ otherwise.
@@ -880,7 +880,7 @@ function _notFactory<T>(guard: Guard<T>) {
 }
 
 /**
- * Checks that value is _null_.
+ * Checks if value is _null_.
  *
  * @param value - Value.
  * @returns _True_ if value is _null_, _false_ otherwise.
@@ -890,7 +890,7 @@ function _null(value: unknown): value is null {
 }
 
 /**
- * Checks that value is _true_.
+ * Checks if value is _true_.
  *
  * @param value - Value.
  * @returns _True_ if value is _true_, _false_ otherwise.
@@ -900,7 +900,7 @@ function _true(value: unknown): value is true {
 }
 
 /**
- * Checks that value is _undefined_.
+ * Checks if value is _undefined_.
  *
  * @param value - Value.
  * @returns _True_ if value is _undefined_, _false_ otherwise.
@@ -910,7 +910,7 @@ function _undefined(value: unknown): value is undefined {
 }
 
 /**
- * Checks that object has optional property.
+ * Checks if object has optional property.
  *
  * @param obj - Object.
  * @param key - Key.
@@ -926,7 +926,7 @@ function checkOptionalProp(
 }
 
 /**
- * Checks object has required property.
+ * Checks if object has required property.
  *
  * @param obj - Object.
  * @param key - Key.

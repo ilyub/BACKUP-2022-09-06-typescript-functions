@@ -181,7 +181,7 @@ export function get<T>(arr: readonly T[], index: number): T {
 }
 
 /**
- * Checks that array contains element matching value.
+ * Checks if array contains element matching value.
  *
  * @param arr - Array.
  * @param value - Value.

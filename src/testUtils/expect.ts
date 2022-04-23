@@ -35,13 +35,6 @@ declare global {
   }
 }
 
-/**
- * Checks that async function executes within expected time.
- *
- * @param got - Got value.
- * @param time - Expected time.
- * @returns Result.
- */
 export const executionTimeToBe: ExpectFromMatcher<"executionTimeToBe"> = async (
   got,
   time
@@ -66,14 +59,6 @@ export const executionTimeToBe: ExpectFromMatcher<"executionTimeToBe"> = async (
       };
 };
 
-/**
- * Checks that async function executes within expected time.
- *
- * @param got - Got value.
- * @param min - Min time (inclusive).
- * @param max - Max time (inclusive).
- * @returns Result.
- */
 export const executionTimeToBeWithin: ExpectFromMatcher<
   "executionTimeToBeWithin"
 > = async (got, min, max) => {
@@ -98,13 +83,6 @@ export const executionTimeToBeWithin: ExpectFromMatcher<
       };
 };
 
-/**
- * Checks that two objects are identical.
- *
- * @param got - Got value.
- * @param expected - Expected object.
- * @returns Result.
- */
 export const toBeSameAs: ExpectFromMatcher<"toBeSameAs"> = (got, expected) =>
   got === expected
     ? { message: () => "Expected not the same object", pass: true }
