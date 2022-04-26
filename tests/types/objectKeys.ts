@@ -1,4 +1,3 @@
-import type { Equals } from "ts-toolbelt/out/Any/Equals";
 import type {
   numberU,
   DefinedKeys,
@@ -8,6 +7,7 @@ import type {
   WritableDefindKeys,
   WritableUndefindKeys
 } from "@";
+import type { Equals } from "ts-toolbelt/out/Any/Equals";
 
 interface TestInterface {
   readonly r: number;

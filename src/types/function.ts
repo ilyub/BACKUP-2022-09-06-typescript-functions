@@ -38,8 +38,8 @@ export interface Callable<T = any> {
    * @param args - Arguments.
    * @returns Result.
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Ok
-  (...args: readonly any[]): T;
+  // eslint-disable-next-line @skylib/prefer-alias-for-array-types, @typescript-eslint/no-explicit-any -- Ok
+  (...args: any[]): T;
 }
 
 export interface ConstructSignature<T extends Constructor> {
@@ -60,8 +60,8 @@ export interface Constructor<T = any> {
    * @param args - Arguments.
    * @returns Result.
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Ok
-  new (...args: readonly any[]): T;
+  // eslint-disable-next-line @skylib/prefer-alias-for-array-types, @typescript-eslint/no-explicit-any -- Ok
+  new (...args: any[]): T;
 }
 
 export interface Sync<R, A extends unknowns = nevers> {

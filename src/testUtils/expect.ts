@@ -1,7 +1,7 @@
+import { assert } from "..";
+import type { Async } from "..";
 import type { Extends } from "ts-toolbelt/out/Any/Extends";
 import type { If } from "ts-toolbelt/out/Any/If";
-import type { Async } from "..";
-import { assert } from "..";
 
 declare global {
   namespace jest {

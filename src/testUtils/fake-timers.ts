@@ -1,7 +1,7 @@
+import { onDemand, assert, fn, a } from "..";
 import * as fakeTimers from "@sinonjs/fake-timers";
 import * as _ from "@skylib/lodash-commonjs-es";
 import type { AsyncPromise } from "..";
-import { onDemand, assert, fn, a } from "..";
 
 export const clock = onDemand(() => {
   assert.not.empty(_clock);

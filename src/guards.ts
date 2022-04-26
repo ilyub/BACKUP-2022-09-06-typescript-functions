@@ -1,11 +1,11 @@
-import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
-import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 import * as a from "./array";
-import type { ValidationObject } from "./helpers";
 import { typedef } from "./helpers";
 import { defineFn, overloadedFn } from "./moduleDefinition";
 import * as o from "./object";
+import type { ValidationObject } from "./helpers";
 import type * as types from "./types";
+import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
+import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 
 export {
   _false as false,

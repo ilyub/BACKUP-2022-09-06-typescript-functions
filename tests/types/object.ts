@@ -1,4 +1,3 @@
-import type { Equals } from "ts-toolbelt/out/Any/Equals";
 import type {
   numberU,
   Join2,
@@ -9,6 +8,7 @@ import type {
   StrictOmit,
   UndefinedStyle
 } from "@";
+import type { Equals } from "ts-toolbelt/out/Any/Equals";
 
 interface TestInterface {
   readonly r: number;

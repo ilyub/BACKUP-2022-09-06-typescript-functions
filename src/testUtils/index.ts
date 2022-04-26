@@ -1,8 +1,8 @@
+import { json } from "..";
+import { matchers as functionsMatchers } from "./expect";
 import "jest-extended";
 import * as matchers from "jest-extended/all";
 import type { unknowns } from "..";
-import { json } from "..";
-import { matchers as functionsMatchers } from "./expect";
 
 export type { ExpectFromMatcher } from "./expect";
 

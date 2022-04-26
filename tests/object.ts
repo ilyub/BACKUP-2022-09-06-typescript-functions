@@ -1,5 +1,5 @@
-import type { Equals } from "ts-toolbelt/out/Any/Equals";
 import { AssertionError, is, o } from "@";
+import type { Equals } from "ts-toolbelt/out/Any/Equals";
 
 test("clone", () => {
   const obj1 = { a: 1 };
