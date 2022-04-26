@@ -1,1 +1,1 @@
-module.exports = [...require("./commitlint.scopes"), "locales"];
+module.exports = { scopes: ["locales"] };
