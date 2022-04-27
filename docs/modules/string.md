@@ -71,7 +71,7 @@ ___
 
 ▸ **empty**(`str`): `boolean`
 
-Checks that string consists of only spaces.
+Checks if string consists of spaces.
 
 #### Parameters
 
@@ -83,7 +83,7 @@ Checks that string consists of only spaces.
 
 `boolean`
 
-_True_ if string consists of only spaces, _false_ otherwise.
+_True_ if string consists of spaces, _false_ otherwise.
 
 ___
 
@@ -172,7 +172,7 @@ ___
 
 ▸ **multiline**(`str`): `boolean`
 
-Checks that string is multiline.
+Checks if string is multiline.
 
 #### Parameters
 
@@ -214,7 +214,7 @@ ___
 
 ▸ **singleLine**(`str`): `boolean`
 
-Checks that string is single-line.
+Checks if string is single-line.
 
 #### Parameters
 

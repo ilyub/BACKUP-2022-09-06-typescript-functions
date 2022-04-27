@@ -65,7 +65,7 @@ function clone(obj) {
 }
 exports.clone = clone;
 /**
- * Checks that every object property satisfies condition.
+ * Checks if every object property satisfies condition.
  *
  * @param obj - Object.
  * @param predicate - Predicate.
@@ -127,7 +127,7 @@ function getPrototypeOf(obj) {
 }
 exports.getPrototypeOf = getPrototypeOf;
 /**
- * Checks that object has property.
+ * Checks if object has property.
  *
  * @param key - Key.
  * @param obj - Object.
@@ -200,7 +200,7 @@ function size(obj) {
 }
 exports.size = size;
 /**
- * Checks that some object property satisfies condition.
+ * Checks if some object property satisfies condition.
  *
  * @param obj - Object.
  * @param predicate - Predicate.

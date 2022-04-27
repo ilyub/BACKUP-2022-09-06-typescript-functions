@@ -23,7 +23,7 @@ class Accumulator {
             yield [key, value];
     }
     /**
-     * Returns array by key.
+     * Returns array at given key.
      *
      * @param key - Key.
      * @returns Array.
@@ -57,6 +57,13 @@ class Accumulator {
             arr.unshift(value);
         else
             this.map.set(key, [value]);
+    }
+    /**
+     * Returns values.
+     */
+    *values() {
+        for (const arr of this.map.values())
+            yield arr;
     }
 }
 exports.Accumulator = Accumulator;

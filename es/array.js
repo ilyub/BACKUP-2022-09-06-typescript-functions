@@ -1,9 +1,9 @@
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
-import * as _ from "@skylib/lodash-commonjs-es";
 import * as assert from "./assertions";
 import * as is from "./guards";
 import * as o from "./object";
 import * as reflect from "./reflect";
+import * as _ from "@skylib/lodash-commonjs-es";
 /**
  * Creates array of pairs ([x, y, z] =\> [[x, y], [y, z]]).
  *
@@ -102,7 +102,7 @@ export function get(arr, index) {
     return arr[index];
 }
 /**
- * Checks that array contains element matching value.
+ * Checks if array contains element matching value.
  *
  * @param arr - Array.
  * @param value - Value.

@@ -4,10 +4,17 @@ export declare class Accumulator2<K extends PropertyKey, L extends PropertyKey, 
      *
      * @param source - Source.
      */
-    constructor(source?: Iterable<IterableElement<K, L, T>>);
-    [Symbol.iterator](): IterableIterator<IterableElement<K, L, T>>;
+    constructor(source?: Iterable<Accumulator2.Entry<K, L, T>>);
+    [Symbol.iterator](): IterableIterator<Accumulator2.Entry<K, L, T>>;
     /**
-     * Returns array by keys.
+     * Returns map of arrays at given key.
+     *
+     * @param key - Key.
+     * @returns Map of arrays.
+     */
+    get(key1: K): ReadonlyMap<L, readonly T[]>;
+    /**
+     * Returns array at given keys.
      *
      * @param key1 - Key 1.
      * @param key2 - Key 2.
@@ -30,7 +37,13 @@ export declare class Accumulator2<K extends PropertyKey, L extends PropertyKey, 
      * @param value - Value.
      */
     unshift(key1: K, key2: L, value: T): void;
+    /**
+     * Returns values.
+     */
+    values(): IterableIterator<readonly T[]>;
     protected readonly map: Map<K, Map<L, T[]>>;
 }
-export declare type IterableElement<K extends PropertyKey, L extends PropertyKey, T> = readonly [K, L, readonly T[]];
+export declare namespace Accumulator2 {
+    type Entry<K extends PropertyKey, L extends PropertyKey, T> = readonly [K, L, readonly T[]];
+}
 //# sourceMappingURL=Accumulator2.d.ts.map

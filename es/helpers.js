@@ -3,7 +3,7 @@ import * as cast from "./converters";
 import * as fn from "./function";
 import * as is from "./guards";
 import * as o from "./object";
-import * as programFlow from "./programFlow";
+import * as programFlow from "./program-flow";
 import * as reflect from "./reflect";
 /**
  * Creates facade.

@@ -29,13 +29,6 @@
 - [NumStrU](types.md#numstru)
 - [NumStrs](types.md#numstrs)
 - [ObjectKeys](types.md#objectkeys)
-- [ObjectKeysDefined](types.md#objectkeysdefined)
-- [ObjectKeysOption](types.md#objectkeysoption)
-- [ObjectKeysOptional](types.md#objectkeysoptional)
-- [ObjectKeysReadonly](types.md#objectkeysreadonly)
-- [ObjectKeysRequired](types.md#objectkeysrequired)
-- [ObjectKeysUndefined](types.md#objectkeysundefined)
-- [ObjectKeysWritable](types.md#objectkeyswritable)
 - [OptionalStyle](types.md#optionalstyle)
 - [OptionalUndefinedStyle](types.md#optionalundefinedstyle)
 - [PartialRecord](types.md#partialrecord)
@@ -133,7 +126,7 @@ ___
 
 ### DefinedKeys
 
-Re-exports [DefinedKeys](types_objectKeys.md#definedkeys)
+Re-exports [DefinedKeys](types_object_keys.md#definedkeys)
 
 ___
 
@@ -217,49 +210,7 @@ ___
 
 ### ObjectKeys
 
-Re-exports [ObjectKeys](types_objectKeys.md#objectkeys)
-
-___
-
-### ObjectKeysDefined
-
-Re-exports [ObjectKeysDefined](types_objectKeys.md#objectkeysdefined)
-
-___
-
-### ObjectKeysOption
-
-Re-exports [ObjectKeysOption](types_objectKeys.md#objectkeysoption)
-
-___
-
-### ObjectKeysOptional
-
-Re-exports [ObjectKeysOptional](types_objectKeys.md#objectkeysoptional)
-
-___
-
-### ObjectKeysReadonly
-
-Re-exports [ObjectKeysReadonly](types_objectKeys.md#objectkeysreadonly)
-
-___
-
-### ObjectKeysRequired
-
-Re-exports [ObjectKeysRequired](types_objectKeys.md#objectkeysrequired)
-
-___
-
-### ObjectKeysUndefined
-
-Re-exports [ObjectKeysUndefined](types_objectKeys.md#objectkeysundefined)
-
-___
-
-### ObjectKeysWritable
-
-Re-exports [ObjectKeysWritable](types_objectKeys.md#objectkeyswritable)
+Re-exports [ObjectKeys](types_object_keys.md#objectkeys)
 
 ___
 
@@ -313,13 +264,13 @@ ___
 
 ### ReadonlyDefinedKeys
 
-Re-exports [ReadonlyDefinedKeys](types_objectKeys.md#readonlydefinedkeys)
+Re-exports [ReadonlyDefinedKeys](types_object_keys.md#readonlydefinedkeys)
 
 ___
 
 ### ReadonlyUndefinedKeys
 
-Re-exports [ReadonlyUndefinedKeys](types_objectKeys.md#readonlyundefinedkeys)
+Re-exports [ReadonlyUndefinedKeys](types_object_keys.md#readonlyundefinedkeys)
 
 ___
 
@@ -355,7 +306,7 @@ ___
 
 ### UndefinedKeys
 
-Re-exports [UndefinedKeys](types_objectKeys.md#undefinedkeys)
+Re-exports [UndefinedKeys](types_object_keys.md#undefinedkeys)
 
 ___
 
@@ -379,7 +330,7 @@ ___
 
 ### WritableDefindKeys
 
-Re-exports [WritableDefindKeys](types_objectKeys.md#writabledefindkeys)
+Re-exports [WritableDefindKeys](types_object_keys.md#writabledefindkeys)
 
 ___
 
@@ -421,7 +372,7 @@ ___
 
 ### WritableUndefindKeys
 
-Re-exports [WritableUndefindKeys](types_objectKeys.md#writableundefindkeys)
+Re-exports [WritableUndefindKeys](types_object_keys.md#writableundefindkeys)
 
 ___
 

@@ -1,7 +1,7 @@
-import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
-import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 import type { ValidationObject } from "./helpers";
 import type * as types from "./types";
+import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
+import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 export { _false as false, _null as null, _true as true, _undefined as undefined };
 export declare const and: {
     <A, B>(value: unknown, guard1: Guard<A>, guard2: Guard<B>): value is A & B;
@@ -15,14 +15,14 @@ export declare const and: {
     };
 };
 /**
- * Checks that value is an array.
+ * Checks if value is an array.
  *
  * @param value - Value.
  * @returns _True_ if value is an array, _false_ otherwise.
  */
 export declare const array: ((value: unknown) => value is types.unknowns) & {
     /**
-     * Checks that value type is T[].
+     * Checks if value type is T[].
      *
      * @param this - No this.
      * @param value - Value.
@@ -32,14 +32,14 @@ export declare const array: ((value: unknown) => value is types.unknowns) & {
     of<T>(this: void, value: unknown, guard: Guard<T>): value is readonly T[];
 };
 /**
- * Checks that value type is IndexedObject.
+ * Checks if value type is IndexedObject.
  *
  * @param value - Value.
  * @returns _True_ if value type is IndexedObject, _false_ otherwise.
  */
 export declare const indexedObject: ((value: unknown) => value is types.IndexedObject<unknown>) & {
     /**
-     * Checks that value type is IndexedObject\<T\>.
+     * Checks if value type is IndexedObject\<T\>.
      *
      * @param this - No this.
      * @param value - Value.
@@ -49,14 +49,14 @@ export declare const indexedObject: ((value: unknown) => value is types.IndexedO
     of<T>(this: void, value: unknown, guard: Guard<T>): value is types.IndexedObject<T>;
 };
 /**
- * Checks that value type is Map.
+ * Checks if value type is Map.
  *
  * @param value - Value.
  * @returns _True_ if value type is Map, _false_ otherwise.
  */
 export declare const map: ((value: unknown) => value is ReadonlyMap<unknown, unknown>) & {
     /**
-     * Checks that value type is Map\<K, V\>.
+     * Checks if value type is Map\<K, V\>.
      *
      * @param this - No this.
      * @param value - Value.
@@ -67,19 +67,19 @@ export declare const map: ((value: unknown) => value is ReadonlyMap<unknown, unk
     of<K, V>(this: void, value: unknown, keyGuard: Guard<K>, valueGuard: Guard<V>): value is ReadonlyMap<K, V>;
 };
 /**
- * Checks that value is an object.
+ * Checks if value is an object.
  *
  * @param value - Value.
  * @returns _True_ if value is an object, _false_ otherwise.
  */
 export declare const object: ((value: unknown) => value is object) & {
     factory: {
-        <R extends object, O extends object>(required: PropGuards<R, keyof R>, optional: PropGuards<O, keyof O>): Guard<import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableDefindKeys<Partial<O>>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<Partial<O>>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O>>, never>, { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O>>, never>, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; }, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; } & { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }>>, { [K_2 in types.WritableUndefindKeys<Partial<O>>]?: Exclude<Partial<O>[K_2], undefined>; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O>>, never>, { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O>>, never>, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; }, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; } & { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }>>>, { [K_3 in types.WritableDefindKeys<Partial<O>>]: Partial<O>[K_3]; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<Partial<O>>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O>>, never>, { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O>>, never>, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; }, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; } & { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }>>, { [K_2 in types.WritableUndefindKeys<Partial<O>>]?: Exclude<Partial<O>[K_2], undefined>; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O>>, never>, { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O>>, never>, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; }, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; } & { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }>>>> & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableDefindKeys<R>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<R>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R>, never>, { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R>, never>, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; }, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; } & { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }>>, { [K_6 in types.WritableUndefindKeys<R>]: R[K_6] | undefined; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R>, never>, { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R>, never>, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; }, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; } & { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }>>>, { [K_7 in types.WritableDefindKeys<R>]: R[K_7]; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<R>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R>, never>, { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R>, never>, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; }, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; } & { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }>>, { [K_6 in types.WritableUndefindKeys<R>]: R[K_6] | undefined; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R>, never>, { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R>, never>, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; }, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; } & { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }>>>>>;
-        <T extends object>(required: PropGuards<T, RequiredKeys<T>>, optional: PropGuards<T, OptionalKeys<T>>): Guard<T>;
+        <R extends object, O extends object>(required: ObjectGuards<R, keyof R>, optional: ObjectGuards<O, keyof O>): Guard<import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableDefindKeys<Partial<O>>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<Partial<O>>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O>>, never>, { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O>>, never>, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; }, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; } & { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }>>, { [K_2 in types.WritableUndefindKeys<Partial<O>>]?: Exclude<Partial<O>[K_2], undefined>; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O>>, never>, { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O>>, never>, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; }, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; } & { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }>>>, { [K_3 in types.WritableDefindKeys<Partial<O>>]: Partial<O>[K_3]; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<Partial<O>>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O>>, never>, { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O>>, never>, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; }, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; } & { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }>>, { [K_2 in types.WritableUndefindKeys<Partial<O>>]?: Exclude<Partial<O>[K_2], undefined>; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O>>, never>, { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O>>, never>, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; }, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; } & { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }>>>> & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableDefindKeys<R>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<R>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R>, never>, { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R>, never>, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; }, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; } & { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }>>, { [K_6 in types.WritableUndefindKeys<R>]: R[K_6] | undefined; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R>, never>, { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R>, never>, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; }, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; } & { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }>>>, { [K_7 in types.WritableDefindKeys<R>]: R[K_7]; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<R>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R>, never>, { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R>, never>, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; }, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; } & { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }>>, { [K_6 in types.WritableUndefindKeys<R>]: R[K_6] | undefined; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R>, never>, { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R>, never>, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; }, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; } & { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }>>>>>;
+        <T extends object>(required: ObjectGuards<T, RequiredKeys<T>>, optional: ObjectGuards<T, OptionalKeys<T>>): Guard<T>;
     };
     of: {
-        <R_1 extends object, O_1 extends object>(value: unknown, required: PropGuards<R_1, keyof R_1>, optional: PropGuards<O_1, keyof O_1>): value is import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableDefindKeys<Partial<O_1>>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<Partial<O_1>>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O_1>>, never>, { readonly [K_8 in types.ReadonlyUndefinedKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_8], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O_1>>, never>, { readonly [K_9 in types.ReadonlyDefinedKeys<Partial<O_1>>]: Partial<O_1>[K_9]; }, { readonly [K_9 in types.ReadonlyDefinedKeys<Partial<O_1>>]: Partial<O_1>[K_9]; } & { readonly [K_8 in types.ReadonlyUndefinedKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_8], undefined>; }>>, { [K_10 in types.WritableUndefindKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_10], undefined>; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O_1>>, never>, { readonly [K_8 in types.ReadonlyUndefinedKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_8], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O_1>>, never>, { readonly [K_9 in types.ReadonlyDefinedKeys<Partial<O_1>>]: Partial<O_1>[K_9]; }, { readonly [K_9 in types.ReadonlyDefinedKeys<Partial<O_1>>]: Partial<O_1>[K_9]; } & { readonly [K_8 in types.ReadonlyUndefinedKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_8], undefined>; }>>>, { [K_11 in types.WritableDefindKeys<Partial<O_1>>]: Partial<O_1>[K_11]; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<Partial<O_1>>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O_1>>, never>, { readonly [K_8 in types.ReadonlyUndefinedKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_8], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O_1>>, never>, { readonly [K_9 in types.ReadonlyDefinedKeys<Partial<O_1>>]: Partial<O_1>[K_9]; }, { readonly [K_9 in types.ReadonlyDefinedKeys<Partial<O_1>>]: Partial<O_1>[K_9]; } & { readonly [K_8 in types.ReadonlyUndefinedKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_8], undefined>; }>>, { [K_10 in types.WritableUndefindKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_10], undefined>; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O_1>>, never>, { readonly [K_8 in types.ReadonlyUndefinedKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_8], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O_1>>, never>, { readonly [K_9 in types.ReadonlyDefinedKeys<Partial<O_1>>]: Partial<O_1>[K_9]; }, { readonly [K_9 in types.ReadonlyDefinedKeys<Partial<O_1>>]: Partial<O_1>[K_9]; } & { readonly [K_8 in types.ReadonlyUndefinedKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_8], undefined>; }>>>> & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableDefindKeys<R_1>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<R_1>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R_1>, never>, { readonly [K_12 in types.ReadonlyUndefinedKeys<R_1>]: R_1[K_12] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R_1>, never>, { readonly [K_13 in types.ReadonlyDefinedKeys<R_1>]: R_1[K_13]; }, { readonly [K_13 in types.ReadonlyDefinedKeys<R_1>]: R_1[K_13]; } & { readonly [K_12 in types.ReadonlyUndefinedKeys<R_1>]: R_1[K_12] | undefined; }>>, { [K_14 in types.WritableUndefindKeys<R_1>]: R_1[K_14] | undefined; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R_1>, never>, { readonly [K_12 in types.ReadonlyUndefinedKeys<R_1>]: R_1[K_12] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R_1>, never>, { readonly [K_13 in types.ReadonlyDefinedKeys<R_1>]: R_1[K_13]; }, { readonly [K_13 in types.ReadonlyDefinedKeys<R_1>]: R_1[K_13]; } & { readonly [K_12 in types.ReadonlyUndefinedKeys<R_1>]: R_1[K_12] | undefined; }>>>, { [K_15 in types.WritableDefindKeys<R_1>]: R_1[K_15]; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<R_1>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R_1>, never>, { readonly [K_12 in types.ReadonlyUndefinedKeys<R_1>]: R_1[K_12] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R_1>, never>, { readonly [K_13 in types.ReadonlyDefinedKeys<R_1>]: R_1[K_13]; }, { readonly [K_13 in types.ReadonlyDefinedKeys<R_1>]: R_1[K_13]; } & { readonly [K_12 in types.ReadonlyUndefinedKeys<R_1>]: R_1[K_12] | undefined; }>>, { [K_14 in types.WritableUndefindKeys<R_1>]: R_1[K_14] | undefined; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R_1>, never>, { readonly [K_12 in types.ReadonlyUndefinedKeys<R_1>]: R_1[K_12] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R_1>, never>, { readonly [K_13 in types.ReadonlyDefinedKeys<R_1>]: R_1[K_13]; }, { readonly [K_13 in types.ReadonlyDefinedKeys<R_1>]: R_1[K_13]; } & { readonly [K_12 in types.ReadonlyUndefinedKeys<R_1>]: R_1[K_12] | undefined; }>>>>;
-        <T_1 extends object>(value: unknown, required: PropGuards<T_1, RequiredKeys<T_1>>, optional: PropGuards<T_1, OptionalKeys<T_1>>): value is T_1;
+        <R_1 extends object, O_1 extends object>(value: unknown, required: ObjectGuards<R_1, keyof R_1>, optional: ObjectGuards<O_1, keyof O_1>): value is import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableDefindKeys<Partial<O_1>>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<Partial<O_1>>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O_1>>, never>, { readonly [K_8 in types.ReadonlyUndefinedKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_8], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O_1>>, never>, { readonly [K_9 in types.ReadonlyDefinedKeys<Partial<O_1>>]: Partial<O_1>[K_9]; }, { readonly [K_9 in types.ReadonlyDefinedKeys<Partial<O_1>>]: Partial<O_1>[K_9]; } & { readonly [K_8 in types.ReadonlyUndefinedKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_8], undefined>; }>>, { [K_10 in types.WritableUndefindKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_10], undefined>; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O_1>>, never>, { readonly [K_8 in types.ReadonlyUndefinedKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_8], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O_1>>, never>, { readonly [K_9 in types.ReadonlyDefinedKeys<Partial<O_1>>]: Partial<O_1>[K_9]; }, { readonly [K_9 in types.ReadonlyDefinedKeys<Partial<O_1>>]: Partial<O_1>[K_9]; } & { readonly [K_8 in types.ReadonlyUndefinedKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_8], undefined>; }>>>, { [K_11 in types.WritableDefindKeys<Partial<O_1>>]: Partial<O_1>[K_11]; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<Partial<O_1>>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O_1>>, never>, { readonly [K_8 in types.ReadonlyUndefinedKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_8], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O_1>>, never>, { readonly [K_9 in types.ReadonlyDefinedKeys<Partial<O_1>>]: Partial<O_1>[K_9]; }, { readonly [K_9 in types.ReadonlyDefinedKeys<Partial<O_1>>]: Partial<O_1>[K_9]; } & { readonly [K_8 in types.ReadonlyUndefinedKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_8], undefined>; }>>, { [K_10 in types.WritableUndefindKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_10], undefined>; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O_1>>, never>, { readonly [K_8 in types.ReadonlyUndefinedKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_8], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O_1>>, never>, { readonly [K_9 in types.ReadonlyDefinedKeys<Partial<O_1>>]: Partial<O_1>[K_9]; }, { readonly [K_9 in types.ReadonlyDefinedKeys<Partial<O_1>>]: Partial<O_1>[K_9]; } & { readonly [K_8 in types.ReadonlyUndefinedKeys<Partial<O_1>>]?: Exclude<Partial<O_1>[K_8], undefined>; }>>>> & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableDefindKeys<R_1>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<R_1>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R_1>, never>, { readonly [K_12 in types.ReadonlyUndefinedKeys<R_1>]: R_1[K_12] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R_1>, never>, { readonly [K_13 in types.ReadonlyDefinedKeys<R_1>]: R_1[K_13]; }, { readonly [K_13 in types.ReadonlyDefinedKeys<R_1>]: R_1[K_13]; } & { readonly [K_12 in types.ReadonlyUndefinedKeys<R_1>]: R_1[K_12] | undefined; }>>, { [K_14 in types.WritableUndefindKeys<R_1>]: R_1[K_14] | undefined; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R_1>, never>, { readonly [K_12 in types.ReadonlyUndefinedKeys<R_1>]: R_1[K_12] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R_1>, never>, { readonly [K_13 in types.ReadonlyDefinedKeys<R_1>]: R_1[K_13]; }, { readonly [K_13 in types.ReadonlyDefinedKeys<R_1>]: R_1[K_13]; } & { readonly [K_12 in types.ReadonlyUndefinedKeys<R_1>]: R_1[K_12] | undefined; }>>>, { [K_15 in types.WritableDefindKeys<R_1>]: R_1[K_15]; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<R_1>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R_1>, never>, { readonly [K_12 in types.ReadonlyUndefinedKeys<R_1>]: R_1[K_12] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R_1>, never>, { readonly [K_13 in types.ReadonlyDefinedKeys<R_1>]: R_1[K_13]; }, { readonly [K_13 in types.ReadonlyDefinedKeys<R_1>]: R_1[K_13]; } & { readonly [K_12 in types.ReadonlyUndefinedKeys<R_1>]: R_1[K_12] | undefined; }>>, { [K_14 in types.WritableUndefindKeys<R_1>]: R_1[K_14] | undefined; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R_1>, never>, { readonly [K_12 in types.ReadonlyUndefinedKeys<R_1>]: R_1[K_12] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R_1>, never>, { readonly [K_13 in types.ReadonlyDefinedKeys<R_1>]: R_1[K_13]; }, { readonly [K_13 in types.ReadonlyDefinedKeys<R_1>]: R_1[K_13]; } & { readonly [K_12 in types.ReadonlyUndefinedKeys<R_1>]: R_1[K_12] | undefined; }>>>>;
+        <T_1 extends object>(value: unknown, required: ObjectGuards<T_1, RequiredKeys<T_1>>, optional: ObjectGuards<T_1, OptionalKeys<T_1>>): value is T_1;
     };
 };
 export declare const or: {
@@ -94,14 +94,14 @@ export declare const or: {
     };
 };
 /**
- * Checks that value type is Set.
+ * Checks if value type is Set.
  *
  * @param value - Value.
  * @returns _True_ if value type is Set, _false_ otherwise.
  */
 export declare const set: ((value: unknown) => value is ReadonlySet<unknown>) & {
     /**
-     * Checks that value type is Set\<T\>.
+     * Checks if value type is Set\<T\>.
      *
      * @param this - No this.
      * @param value - Value.
@@ -124,7 +124,7 @@ export declare const tuple: {
     };
 };
 /**
- * Checks that value type is not T.
+ * Checks if value type is not T.
  *
  * @param value - Value.
  * @param guard - Guard for type T.
@@ -182,7 +182,7 @@ export declare const unknowns: Guard<readonly unknown[]>;
 export declare const unknownsU: Guard<readonly unknown[] | undefined>;
 export interface ExclusionGuard<T> {
     /**
-     * Checks that value type is not T.
+     * Checks if value type is not T.
      *
      * @param value - Value.
      * @returns _True_ if value type is not T, _false_ otherwise.
@@ -191,7 +191,7 @@ export interface ExclusionGuard<T> {
 }
 export interface Guard<T = unknown> {
     /**
-     * Checks that value type is T.
+     * Checks if value type is T.
      *
      * @param value - Value.
      * @returns _True_ if value type is T, _false_ otherwise.
@@ -201,7 +201,7 @@ export interface Guard<T = unknown> {
 export declare type Guards = readonly Guard[];
 export interface MultiArgGuard<T, A extends types.unknowns> {
     /**
-     * Checks that value type is T.
+     * Checks if value type is T.
      *
      * @param value - Value.
      * @param args - Arguments.
@@ -209,32 +209,32 @@ export interface MultiArgGuard<T, A extends types.unknowns> {
      */
     (value: unknown, ...args: A): value is T;
 }
-export declare type PropGuards<T, K extends keyof T = keyof T> = {
+export declare type ObjectGuards<T, K extends keyof T = keyof T> = {
     readonly [L in K]-?: Guard<T[L]>;
 };
 /**
- * Checks that value is a boolean.
+ * Checks if value is a boolean.
  *
  * @param value - Value.
  * @returns _True_ if value is a boolean, _false_ otherwise.
  */
 export declare function boolean(value: unknown): value is boolean;
 /**
- * Checks that value type is T.
+ * Checks if value type is T.
  *
  * @param value - Value.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
 export declare function callable<T extends Function>(value: unknown): value is T;
 /**
- * Checks that value type is empty.
+ * Checks if value type is empty.
  *
  * @param value - Value.
  * @returns _True_ if value type is empty, _false_ otherwise.
  */
 export declare function empty(value: unknown): value is types.empty;
 /**
- * Checks that value type is T.
+ * Checks if value type is T.
  *
  * @param value - Value.
  * @param vo - Validation object.
@@ -250,7 +250,7 @@ export declare function enumeration<T extends PropertyKey>(value: unknown, vo: V
  */
 export declare function factory<T, A extends types.unknowns>(guard: MultiArgGuard<T, A>, ...args: A): Guard<T>;
 /**
- * Checks that value type is T.
+ * Checks if value type is T.
  *
  * @param value - Value.
  * @param ctor - Constructor.
@@ -258,7 +258,7 @@ export declare function factory<T, A extends types.unknowns>(guard: MultiArgGuar
  */
 export declare function instance<T>(value: unknown, ctor: types.Constructor<T>): value is T;
 /**
- * Checks that value type is T[].
+ * Checks if value type is T[].
  *
  * @param value - Value.
  * @param ctor - Constructor.
@@ -266,49 +266,49 @@ export declare function instance<T>(value: unknown, ctor: types.Constructor<T>):
  */
 export declare function instances<T>(value: unknown, ctor: types.Constructor<T>): value is readonly T[];
 /**
- * Checks that value type is NumStr.
+ * Checks if value type is NumStr.
  *
  * @param value - Value.
  * @returns _True_ if value type is NumStr, _false_ otherwise.
  */
 export declare function numStr(value: unknown): value is types.NumStr;
 /**
- * Checks that value is a number.
+ * Checks if value is a number.
  *
  * @param value - Value.
  * @returns _True_ if value is a number, _false_ otherwise.
  */
 export declare function number(value: unknown): value is number;
 /**
- * Checks that value is a string.
+ * Checks if value is a string.
  *
  * @param value - Value.
  * @returns _True_ if value is a string, _false_ otherwise.
  */
 export declare function string(value: unknown): value is string;
 /**
- * Checks that value is a string.
+ * Checks if value is a string.
  *
  * @param value - Value.
  * @returns _True_ if value is a string, _false_ otherwise.
  */
 export declare function stringU(value: unknown): value is string;
 /**
- * Checks that value is a symbol.
+ * Checks if value is a symbol.
  *
  * @param value - Value.
  * @returns _True_ if value is a symbol, _false_ otherwise.
  */
 export declare function symbol(value: unknown): value is symbol;
 /**
- * Checks that value is _unknown_.
+ * Checks if value is _unknown_.
  *
  * @param _value - Value.
  * @returns _True_ if value is _unknown_, _false_ otherwise.
  */
 export declare function unknown(_value: unknown): _value is unknown;
 /**
- * Checks that value is _false_.
+ * Checks if value is _false_.
  *
  * @param value - Value.
  * @returns _True_ if value is _false_, _false_ otherwise.
@@ -322,21 +322,21 @@ declare function _false(value: unknown): value is false;
  */
 declare function _notFactory<T>(guard: Guard<T>): <V>(value: V) => value is Exclude<V, T>;
 /**
- * Checks that value is _null_.
+ * Checks if value is _null_.
  *
  * @param value - Value.
  * @returns _True_ if value is _null_, _false_ otherwise.
  */
 declare function _null(value: unknown): value is null;
 /**
- * Checks that value is _true_.
+ * Checks if value is _true_.
  *
  * @param value - Value.
  * @returns _True_ if value is _true_, _false_ otherwise.
  */
 declare function _true(value: unknown): value is true;
 /**
- * Checks that value is _undefined_.
+ * Checks if value is _undefined_.
  *
  * @param value - Value.
  * @returns _True_ if value is _undefined_, _false_ otherwise.

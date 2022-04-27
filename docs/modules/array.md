@@ -384,7 +384,7 @@ ___
 
 ▸ **includesBy**<`T`, `V`\>(`arr`, `value`, `keyOrReduce`): `boolean`
 
-Checks that array contains element matching value.
+Checks if array contains element matching value.
 
 #### Type parameters
 

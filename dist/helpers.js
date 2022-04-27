@@ -7,7 +7,7 @@ const cast = tslib_1.__importStar(require("./converters"));
 const fn = tslib_1.__importStar(require("./function"));
 const is = tslib_1.__importStar(require("./guards"));
 const o = tslib_1.__importStar(require("./object"));
-const programFlow = tslib_1.__importStar(require("./programFlow"));
+const programFlow = tslib_1.__importStar(require("./program-flow"));
 const reflect = tslib_1.__importStar(require("./reflect"));
 /**
  * Creates facade.

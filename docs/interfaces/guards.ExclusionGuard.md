@@ -16,7 +16,7 @@
 
 ▸ **ExclusionGuard**<`V`\>(`value`): value is Exclude<V, T\>
 
-Checks that value type is not T.
+Checks if value type is not T.
 
 #### Type parameters
 

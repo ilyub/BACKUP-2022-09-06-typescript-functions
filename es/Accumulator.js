@@ -20,7 +20,7 @@ export class Accumulator {
             yield [key, value];
     }
     /**
-     * Returns array by key.
+     * Returns array at given key.
      *
      * @param key - Key.
      * @returns Array.
@@ -54,6 +54,13 @@ export class Accumulator {
             arr.unshift(value);
         else
             this.map.set(key, [value]);
+    }
+    /**
+     * Returns values.
+     */
+    *values() {
+        for (const arr of this.map.values())
+            yield arr;
     }
 }
 //# sourceMappingURL=Accumulator.js.map

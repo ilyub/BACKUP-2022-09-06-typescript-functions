@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.unpadMultiline = exports.ucFirst = exports.trimTrailingEmptyLines = exports.trimStart = exports.trimLeadingEmptyLines = exports.trimEnd = exports.trailingSpaces = exports.singleLine = exports.replaceAll = exports.multiline = exports.lines = exports.leadingSpaces = exports.lcFirst = exports.filter = exports.empty = exports.detectEol = exports.path = void 0;
 const tslib_1 = require("tslib");
 const a = tslib_1.__importStar(require("./array"));
-const moduleDefinition_1 = require("./moduleDefinition");
+const module_definition_1 = require("./module-definition");
 const regexp = tslib_1.__importStar(require("./regexp"));
 /**
  * Detects EOL sequence.
@@ -16,10 +16,10 @@ function detectEol(str) {
 }
 exports.detectEol = detectEol;
 /**
- * Checks that string consists of only spaces.
+ * Checks if string consists of spaces.
  *
  * @param str - String.
- * @returns _True_ if string consists of only spaces, _false_ otherwise.
+ * @returns _True_ if string consists of spaces, _false_ otherwise.
  */
 function empty(str) {
     return /^\s*$/u.test(str);
@@ -67,7 +67,7 @@ function lines(str) {
 }
 exports.lines = lines;
 /**
- * Checks that string is multiline.
+ * Checks if string is multiline.
  *
  * @param str - String.
  * @returns _True_ if string is multiline, _false_ otherwise.
@@ -90,7 +90,7 @@ function replaceAll(str, search, replace) {
 }
 exports.replaceAll = replaceAll;
 /**
- * Checks that string is single-line.
+ * Checks if string is single-line.
  *
  * @param str - String.
  * @returns _True_ if string is single-line, _false_ otherwise.
@@ -175,7 +175,7 @@ exports.unpadMultiline = unpadMultiline;
 /**
  * Not implemented.
  */
-const _path = (0, moduleDefinition_1.defineFn)(() => {
+const _path = (0, module_definition_1.defineFn)(() => {
     throw new Error("Not implemented");
 }, {
     /**

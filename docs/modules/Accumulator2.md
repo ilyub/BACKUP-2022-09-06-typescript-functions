@@ -4,24 +4,10 @@
 
 ## Table of contents
 
+### Namespaces
+
+- [Accumulator2](Accumulator2.Accumulator2-1.md)
+
 ### Classes
 
-- [Accumulator2](../classes/Accumulator2.Accumulator2-1.md)
-
-### Type aliases
-
-- [IterableElement](Accumulator2.md#iterableelement)
-
-## Type aliases
-
-### IterableElement
-
-Ƭ **IterableElement**<`K`, `L`, `T`\>: readonly [`K`, `L`, readonly `T`[]]
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `K` | extends `PropertyKey` |
-| `L` | extends `PropertyKey` |
-| `T` | `T` |
+- [Accumulator2](../classes/Accumulator2.Accumulator2-2.md)

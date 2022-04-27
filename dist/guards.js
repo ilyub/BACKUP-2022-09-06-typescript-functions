@@ -5,15 +5,15 @@ exports.unknown = exports.symbol = exports.stringU = exports.string = exports.nu
 const tslib_1 = require("tslib");
 const a = tslib_1.__importStar(require("./array"));
 const helpers_1 = require("./helpers");
-const moduleDefinition_1 = require("./moduleDefinition");
+const module_definition_1 = require("./module-definition");
 const o = tslib_1.__importStar(require("./object"));
-exports.and = (0, moduleDefinition_1.defineFn)((0, moduleDefinition_1.overloadedFn)(() => {
+exports.and = (0, module_definition_1.defineFn)((0, module_definition_1.overloadedFn)(() => {
     return _and;
     function _and(value, ...guards) {
         return guards.every(guard => guard(value));
     }
 }), {
-    factory: (0, moduleDefinition_1.overloadedFn)(() => {
+    factory: (0, module_definition_1.overloadedFn)(() => {
         return _factory;
         function _factory(...guards) {
             return (value) => guards.every(guard => guard(value));
@@ -21,14 +21,14 @@ exports.and = (0, moduleDefinition_1.defineFn)((0, moduleDefinition_1.overloaded
     })
 });
 /**
- * Checks that value is an array.
+ * Checks if value is an array.
  *
  * @param value - Value.
  * @returns _True_ if value is an array, _false_ otherwise.
  */
-exports.array = (0, moduleDefinition_1.defineFn)((value) => Array.isArray(value), {
+exports.array = (0, module_definition_1.defineFn)((value) => Array.isArray(value), {
     /**
-     * Checks that value type is T[].
+     * Checks if value type is T[].
      *
      * @param this - No this.
      * @param value - Value.
@@ -40,14 +40,14 @@ exports.array = (0, moduleDefinition_1.defineFn)((value) => Array.isArray(value)
     }
 });
 /**
- * Checks that value type is IndexedObject.
+ * Checks if value type is IndexedObject.
  *
  * @param value - Value.
  * @returns _True_ if value type is IndexedObject, _false_ otherwise.
  */
-exports.indexedObject = (0, moduleDefinition_1.defineFn)((value) => typeof value === "object" && value !== null, {
+exports.indexedObject = (0, module_definition_1.defineFn)((value) => typeof value === "object" && value !== null, {
     /**
-     * Checks that value type is IndexedObject\<T\>.
+     * Checks if value type is IndexedObject\<T\>.
      *
      * @param this - No this.
      * @param value - Value.
@@ -59,14 +59,14 @@ exports.indexedObject = (0, moduleDefinition_1.defineFn)((value) => typeof value
     }
 });
 /**
- * Checks that value type is Map.
+ * Checks if value type is Map.
  *
  * @param value - Value.
  * @returns _True_ if value type is Map, _false_ otherwise.
  */
-exports.map = (0, moduleDefinition_1.defineFn)((value) => value instanceof Map, {
+exports.map = (0, module_definition_1.defineFn)((value) => value instanceof Map, {
     /**
-     * Checks that value type is Map\<K, V\>.
+     * Checks if value type is Map\<K, V\>.
      *
      * @param this - No this.
      * @param value - Value.
@@ -80,19 +80,19 @@ exports.map = (0, moduleDefinition_1.defineFn)((value) => value instanceof Map, 
     }
 });
 /**
- * Checks that value is an object.
+ * Checks if value is an object.
  *
  * @param value - Value.
  * @returns _True_ if value is an object, _false_ otherwise.
  */
-exports.object = (0, moduleDefinition_1.defineFn)((value) => typeof value === "object" && value !== null, {
-    factory: (0, moduleDefinition_1.overloadedFn)(() => {
+exports.object = (0, module_definition_1.defineFn)((value) => typeof value === "object" && value !== null, {
+    factory: (0, module_definition_1.overloadedFn)(() => {
         return _factory;
         function _factory(required, optional) {
             return (value) => exports.object.of(value, required, optional);
         }
     }),
-    of: (0, moduleDefinition_1.overloadedFn)(() => {
+    of: (0, module_definition_1.overloadedFn)(() => {
         return _of;
         function _of(value, required, optional) {
             return ((0, exports.indexedObject)(value) &&
@@ -101,13 +101,13 @@ exports.object = (0, moduleDefinition_1.defineFn)((value) => typeof value === "o
         }
     })
 });
-exports.or = (0, moduleDefinition_1.defineFn)((0, moduleDefinition_1.overloadedFn)(() => {
+exports.or = (0, module_definition_1.defineFn)((0, module_definition_1.overloadedFn)(() => {
     return _or;
     function _or(value, ...guards) {
         return guards.some(guard => guard(value));
     }
 }), {
-    factory: (0, moduleDefinition_1.overloadedFn)(() => {
+    factory: (0, module_definition_1.overloadedFn)(() => {
         return _factory;
         function _factory(...guards) {
             return (value) => guards.some(guard => guard(value));
@@ -115,14 +115,14 @@ exports.or = (0, moduleDefinition_1.defineFn)((0, moduleDefinition_1.overloadedF
     })
 });
 /**
- * Checks that value type is Set.
+ * Checks if value type is Set.
  *
  * @param value - Value.
  * @returns _True_ if value type is Set, _false_ otherwise.
  */
-exports.set = (0, moduleDefinition_1.defineFn)((value) => value instanceof Set, {
+exports.set = (0, module_definition_1.defineFn)((value) => value instanceof Set, {
     /**
-     * Checks that value type is Set\<T\>.
+     * Checks if value type is Set\<T\>.
      *
      * @param this - No this.
      * @param value - Value.
@@ -133,13 +133,13 @@ exports.set = (0, moduleDefinition_1.defineFn)((value) => value instanceof Set, 
         return (0, exports.set)(value) && a.fromIterable(value).every(v => guard(v));
     }
 });
-exports.tuple = (0, moduleDefinition_1.defineFn)((0, moduleDefinition_1.overloadedFn)(() => {
+exports.tuple = (0, module_definition_1.defineFn)((0, module_definition_1.overloadedFn)(() => {
     return _tuple;
     function _tuple(value, ...guards) {
         return ((0, exports.array)(value) && guards.every((guard, index) => guard(value[index])));
     }
 }), {
-    factory: (0, moduleDefinition_1.overloadedFn)(() => {
+    factory: (0, module_definition_1.overloadedFn)(() => {
         return _factory;
         function _factory(...guards) {
             return (value) => (0, exports.array)(value) && guards.every((guard, index) => guard(value[index]));
@@ -147,13 +147,13 @@ exports.tuple = (0, moduleDefinition_1.defineFn)((0, moduleDefinition_1.overload
     })
 });
 /**
- * Checks that value type is not T.
+ * Checks if value type is not T.
  *
  * @param value - Value.
  * @param guard - Guard for type T.
  * @returns _True_ if value type is not T, _false_ otherwise.
  */
-exports.not = (0, moduleDefinition_1.defineFn)((value, guard) => !guard(value), {
+exports.not = (0, module_definition_1.defineFn)((value, guard) => !guard(value), {
     array: _notFactory(exports.array),
     boolean: _notFactory(boolean),
     empty: _notFactory(empty),
@@ -204,7 +204,7 @@ exports.symbolsU = exports.or.factory(exports.symbols, _undefined);
 exports.unknowns = factory(exports.array.of, unknown);
 exports.unknownsU = exports.or.factory(exports.unknowns, _undefined);
 /**
- * Checks that value is a boolean.
+ * Checks if value is a boolean.
  *
  * @param value - Value.
  * @returns _True_ if value is a boolean, _false_ otherwise.
@@ -214,7 +214,7 @@ function boolean(value) {
 }
 exports.boolean = boolean;
 /**
- * Checks that value type is T.
+ * Checks if value type is T.
  *
  * @param value - Value.
  * @returns _True_ if value type is T, _false_ otherwise.
@@ -224,7 +224,7 @@ function callable(value) {
 }
 exports.callable = callable;
 /**
- * Checks that value type is empty.
+ * Checks if value type is empty.
  *
  * @param value - Value.
  * @returns _True_ if value type is empty, _false_ otherwise.
@@ -234,7 +234,7 @@ function empty(value) {
 }
 exports.empty = empty;
 /**
- * Checks that value type is T.
+ * Checks if value type is T.
  *
  * @param value - Value.
  * @param vo - Validation object.
@@ -256,7 +256,7 @@ function factory(guard, ...args) {
 }
 exports.factory = factory;
 /**
- * Checks that value type is T.
+ * Checks if value type is T.
  *
  * @param value - Value.
  * @param ctor - Constructor.
@@ -267,7 +267,7 @@ function instance(value, ctor) {
 }
 exports.instance = instance;
 /**
- * Checks that value type is T[].
+ * Checks if value type is T[].
  *
  * @param value - Value.
  * @param ctor - Constructor.
@@ -278,7 +278,7 @@ function instances(value, ctor) {
 }
 exports.instances = instances;
 /**
- * Checks that value type is NumStr.
+ * Checks if value type is NumStr.
  *
  * @param value - Value.
  * @returns _True_ if value type is NumStr, _false_ otherwise.
@@ -295,7 +295,7 @@ function numStr(value) {
 }
 exports.numStr = numStr;
 /**
- * Checks that value is a number.
+ * Checks if value is a number.
  *
  * @param value - Value.
  * @returns _True_ if value is a number, _false_ otherwise.
@@ -305,7 +305,7 @@ function number(value) {
 }
 exports.number = number;
 /**
- * Checks that value is a string.
+ * Checks if value is a string.
  *
  * @param value - Value.
  * @returns _True_ if value is a string, _false_ otherwise.
@@ -315,7 +315,7 @@ function string(value) {
 }
 exports.string = string;
 /**
- * Checks that value is a string.
+ * Checks if value is a string.
  *
  * @param value - Value.
  * @returns _True_ if value is a string, _false_ otherwise.
@@ -332,7 +332,7 @@ function stringU(value) {
 }
 exports.stringU = stringU;
 /**
- * Checks that value is a symbol.
+ * Checks if value is a symbol.
  *
  * @param value - Value.
  * @returns _True_ if value is a symbol, _false_ otherwise.
@@ -342,7 +342,7 @@ function symbol(value) {
 }
 exports.symbol = symbol;
 /**
- * Checks that value is _unknown_.
+ * Checks if value is _unknown_.
  *
  * @param _value - Value.
  * @returns _True_ if value is _unknown_, _false_ otherwise.
@@ -352,7 +352,7 @@ function unknown(_value) {
 }
 exports.unknown = unknown;
 /**
- * Checks that value is _false_.
+ * Checks if value is _false_.
  *
  * @param value - Value.
  * @returns _True_ if value is _false_, _false_ otherwise.
@@ -371,7 +371,7 @@ function _notFactory(guard) {
     return (value) => !guard(value);
 }
 /**
- * Checks that value is _null_.
+ * Checks if value is _null_.
  *
  * @param value - Value.
  * @returns _True_ if value is _null_, _false_ otherwise.
@@ -381,7 +381,7 @@ function _null(value) {
 }
 exports.null = _null;
 /**
- * Checks that value is _true_.
+ * Checks if value is _true_.
  *
  * @param value - Value.
  * @returns _True_ if value is _true_, _false_ otherwise.
@@ -391,7 +391,7 @@ function _true(value) {
 }
 exports.true = _true;
 /**
- * Checks that value is _undefined_.
+ * Checks if value is _undefined_.
  *
  * @param value - Value.
  * @returns _True_ if value is _undefined_, _false_ otherwise.
@@ -401,7 +401,7 @@ function _undefined(value) {
 }
 exports.undefined = _undefined;
 /**
- * Checks that object has optional property.
+ * Checks if object has optional property.
  *
  * @param obj - Object.
  * @param key - Key.
@@ -412,7 +412,7 @@ function checkOptionalProp(obj, key, guard) {
     return o.hasOwnProp(key, obj) ? guard(obj[key]) : true;
 }
 /**
- * Checks object has required property.
+ * Checks if object has required property.
  *
  * @param obj - Object.
  * @param key - Key.

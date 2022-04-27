@@ -61,7 +61,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `...args` | readonly `any`[] |
+| `...args` | `any`[] |
 
 #### Returns
 

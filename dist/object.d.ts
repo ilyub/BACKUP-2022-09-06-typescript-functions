@@ -136,7 +136,7 @@ export interface Predicate<T extends object> {
  */
 export declare function clone<T extends object>(obj: T): Writable<T>;
 /**
- * Checks that every object property satisfies condition.
+ * Checks if every object property satisfies condition.
  *
  * @param obj - Object.
  * @param predicate - Predicate.
@@ -176,7 +176,7 @@ export declare function get<T>(obj: object, key: PropertyKey, guard: is.Guard<T>
  */
 export declare function getPrototypeOf(obj: object): objectU;
 /**
- * Checks that object has property.
+ * Checks if object has property.
  *
  * @param key - Key.
  * @param obj - Object.
@@ -222,7 +222,7 @@ export declare function removeUndefinedKeys<T extends object>(obj: T): OptionalS
  */
 export declare function size(obj: object): number;
 /**
- * Checks that some object property satisfies condition.
+ * Checks if some object property satisfies condition.
  *
  * @param obj - Object.
  * @param predicate - Predicate.

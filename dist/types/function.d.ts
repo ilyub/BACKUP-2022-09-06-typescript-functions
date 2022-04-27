@@ -27,7 +27,7 @@ export interface Callable<T = any> {
      * @param args - Arguments.
      * @returns Result.
      */
-    (...args: readonly any[]): T;
+    (...args: any[]): T;
 }
 export interface ConstructSignature<T extends Constructor> {
     /**
@@ -45,7 +45,7 @@ export interface Constructor<T = any> {
      * @param args - Arguments.
      * @returns Result.
      */
-    new (...args: readonly any[]): T;
+    new (...args: any[]): T;
 }
 export interface Sync<R, A extends unknowns = nevers> {
     /**

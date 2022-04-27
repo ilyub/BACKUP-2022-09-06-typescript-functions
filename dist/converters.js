@@ -3,11 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.stringU = exports.string = exports.numberU = exports.number = exports.not = void 0;
 const tslib_1 = require("tslib");
 const is = tslib_1.__importStar(require("./guards"));
-const moduleDefinition_1 = require("./moduleDefinition");
+const module_definition_1 = require("./module-definition");
 /**
  * Not implemented.
  */
-exports.not = (0, moduleDefinition_1.defineFn)(() => {
+exports.not = (0, module_definition_1.defineFn)(() => {
     throw new Error("Not implemented");
 }, {
     /**

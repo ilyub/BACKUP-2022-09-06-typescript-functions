@@ -1,5 +1,5 @@
-import * as _ from "@skylib/lodash-commonjs-es";
 import * as is from "./guards";
+import * as _ from "@skylib/lodash-commonjs-es";
 export const noop = _.noop.bind(_);
 /**
  * Identity function.

@@ -1,8 +1,8 @@
+import type { ReadonlyDefinedKeys, ReadonlyUndefinedKeys, WritableDefindKeys, WritableUndefindKeys } from "./object-keys";
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
 import type { If } from "ts-toolbelt/out/Any/If";
 import type { Match } from "ts-toolbelt/out/Any/_Internal";
 import type { FilterKeys } from "ts-toolbelt/out/Object/FilterKeys";
-import type { ReadonlyDefinedKeys, ReadonlyUndefinedKeys, WritableDefindKeys, WritableUndefindKeys } from "./objectKeys";
 export declare type Empty<T extends object> = Equals<keyof T, never>;
 export declare type Join2<A extends object, B extends object> = If<Empty<A>, B, If<Empty<B>, A, A & B>>;
 export declare type Join3<A extends object, B extends object, C extends object> = If<Empty<A>, Join2<B, C>, A & Join2<B, C>>;

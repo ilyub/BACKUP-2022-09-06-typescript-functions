@@ -1,5 +1,5 @@
 import * as assert from "./assertions";
-import { defineFn } from "./moduleDefinition";
+import { defineFn } from "./module-definition";
 /**
  * Ceils number to a given precision.
  *

@@ -1,6 +1,6 @@
 import * as a from "./array";
 import { typedef } from "./helpers";
-import { defineFn, overloadedFn } from "./moduleDefinition";
+import { defineFn, overloadedFn } from "./module-definition";
 import * as o from "./object";
 export { _false as false, _null as null, _true as true, _undefined as undefined };
 export const and = defineFn(overloadedFn(() => {
@@ -17,14 +17,14 @@ export const and = defineFn(overloadedFn(() => {
     })
 });
 /**
- * Checks that value is an array.
+ * Checks if value is an array.
  *
  * @param value - Value.
  * @returns _True_ if value is an array, _false_ otherwise.
  */
 export const array = defineFn((value) => Array.isArray(value), {
     /**
-     * Checks that value type is T[].
+     * Checks if value type is T[].
      *
      * @param this - No this.
      * @param value - Value.
@@ -36,14 +36,14 @@ export const array = defineFn((value) => Array.isArray(value), {
     }
 });
 /**
- * Checks that value type is IndexedObject.
+ * Checks if value type is IndexedObject.
  *
  * @param value - Value.
  * @returns _True_ if value type is IndexedObject, _false_ otherwise.
  */
 export const indexedObject = defineFn((value) => typeof value === "object" && value !== null, {
     /**
-     * Checks that value type is IndexedObject\<T\>.
+     * Checks if value type is IndexedObject\<T\>.
      *
      * @param this - No this.
      * @param value - Value.
@@ -55,14 +55,14 @@ export const indexedObject = defineFn((value) => typeof value === "object" && va
     }
 });
 /**
- * Checks that value type is Map.
+ * Checks if value type is Map.
  *
  * @param value - Value.
  * @returns _True_ if value type is Map, _false_ otherwise.
  */
 export const map = defineFn((value) => value instanceof Map, {
     /**
-     * Checks that value type is Map\<K, V\>.
+     * Checks if value type is Map\<K, V\>.
      *
      * @param this - No this.
      * @param value - Value.
@@ -76,7 +76,7 @@ export const map = defineFn((value) => value instanceof Map, {
     }
 });
 /**
- * Checks that value is an object.
+ * Checks if value is an object.
  *
  * @param value - Value.
  * @returns _True_ if value is an object, _false_ otherwise.
@@ -111,14 +111,14 @@ export const or = defineFn(overloadedFn(() => {
     })
 });
 /**
- * Checks that value type is Set.
+ * Checks if value type is Set.
  *
  * @param value - Value.
  * @returns _True_ if value type is Set, _false_ otherwise.
  */
 export const set = defineFn((value) => value instanceof Set, {
     /**
-     * Checks that value type is Set\<T\>.
+     * Checks if value type is Set\<T\>.
      *
      * @param this - No this.
      * @param value - Value.
@@ -143,7 +143,7 @@ export const tuple = defineFn(overloadedFn(() => {
     })
 });
 /**
- * Checks that value type is not T.
+ * Checks if value type is not T.
  *
  * @param value - Value.
  * @param guard - Guard for type T.
@@ -200,7 +200,7 @@ export const symbolsU = or.factory(symbols, _undefined);
 export const unknowns = factory(array.of, unknown);
 export const unknownsU = or.factory(unknowns, _undefined);
 /**
- * Checks that value is a boolean.
+ * Checks if value is a boolean.
  *
  * @param value - Value.
  * @returns _True_ if value is a boolean, _false_ otherwise.
@@ -209,7 +209,7 @@ export function boolean(value) {
     return typeof value === "boolean";
 }
 /**
- * Checks that value type is T.
+ * Checks if value type is T.
  *
  * @param value - Value.
  * @returns _True_ if value type is T, _false_ otherwise.
@@ -218,7 +218,7 @@ export function callable(value) {
     return typeof value === "function";
 }
 /**
- * Checks that value type is empty.
+ * Checks if value type is empty.
  *
  * @param value - Value.
  * @returns _True_ if value type is empty, _false_ otherwise.
@@ -227,7 +227,7 @@ export function empty(value) {
     return value === null || value === undefined;
 }
 /**
- * Checks that value type is T.
+ * Checks if value type is T.
  *
  * @param value - Value.
  * @param vo - Validation object.
@@ -247,7 +247,7 @@ export function factory(guard, ...args) {
     return (value) => guard(value, ...args);
 }
 /**
- * Checks that value type is T.
+ * Checks if value type is T.
  *
  * @param value - Value.
  * @param ctor - Constructor.
@@ -257,7 +257,7 @@ export function instance(value, ctor) {
     return value instanceof ctor;
 }
 /**
- * Checks that value type is T[].
+ * Checks if value type is T[].
  *
  * @param value - Value.
  * @param ctor - Constructor.
@@ -267,7 +267,7 @@ export function instances(value, ctor) {
     return array(value) && value.every(v => v instanceof ctor);
 }
 /**
- * Checks that value type is NumStr.
+ * Checks if value type is NumStr.
  *
  * @param value - Value.
  * @returns _True_ if value type is NumStr, _false_ otherwise.
@@ -283,7 +283,7 @@ export function numStr(value) {
     }
 }
 /**
- * Checks that value is a number.
+ * Checks if value is a number.
  *
  * @param value - Value.
  * @returns _True_ if value is a number, _false_ otherwise.
@@ -292,7 +292,7 @@ export function number(value) {
     return typeof value === "number" && !Number.isNaN(value);
 }
 /**
- * Checks that value is a string.
+ * Checks if value is a string.
  *
  * @param value - Value.
  * @returns _True_ if value is a string, _false_ otherwise.
@@ -301,7 +301,7 @@ export function string(value) {
     return typeof value === "string";
 }
 /**
- * Checks that value is a string.
+ * Checks if value is a string.
  *
  * @param value - Value.
  * @returns _True_ if value is a string, _false_ otherwise.
@@ -317,7 +317,7 @@ export function stringU(value) {
     }
 }
 /**
- * Checks that value is a symbol.
+ * Checks if value is a symbol.
  *
  * @param value - Value.
  * @returns _True_ if value is a symbol, _false_ otherwise.
@@ -326,7 +326,7 @@ export function symbol(value) {
     return typeof value === "symbol";
 }
 /**
- * Checks that value is _unknown_.
+ * Checks if value is _unknown_.
  *
  * @param _value - Value.
  * @returns _True_ if value is _unknown_, _false_ otherwise.
@@ -335,7 +335,7 @@ export function unknown(_value) {
     return true;
 }
 /**
- * Checks that value is _false_.
+ * Checks if value is _false_.
  *
  * @param value - Value.
  * @returns _True_ if value is _false_, _false_ otherwise.
@@ -353,7 +353,7 @@ function _notFactory(guard) {
     return (value) => !guard(value);
 }
 /**
- * Checks that value is _null_.
+ * Checks if value is _null_.
  *
  * @param value - Value.
  * @returns _True_ if value is _null_, _false_ otherwise.
@@ -362,7 +362,7 @@ function _null(value) {
     return value === null;
 }
 /**
- * Checks that value is _true_.
+ * Checks if value is _true_.
  *
  * @param value - Value.
  * @returns _True_ if value is _true_, _false_ otherwise.
@@ -371,7 +371,7 @@ function _true(value) {
     return value === true;
 }
 /**
- * Checks that value is _undefined_.
+ * Checks if value is _undefined_.
  *
  * @param value - Value.
  * @returns _True_ if value is _undefined_, _false_ otherwise.
@@ -380,7 +380,7 @@ function _undefined(value) {
     return value === undefined;
 }
 /**
- * Checks that object has optional property.
+ * Checks if object has optional property.
  *
  * @param obj - Object.
  * @param key - Key.
@@ -391,7 +391,7 @@ function checkOptionalProp(obj, key, guard) {
     return o.hasOwnProp(key, obj) ? guard(obj[key]) : true;
 }
 /**
- * Checks object has required property.
+ * Checks if object has required property.
  *
  * @param obj - Object.
  * @param key - Key.

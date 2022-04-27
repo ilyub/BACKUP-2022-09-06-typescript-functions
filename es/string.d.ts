@@ -9,10 +9,10 @@ export declare type Eol = "\n" | "\r\n";
  */
 export declare function detectEol(str: string): Eol;
 /**
- * Checks that string consists of only spaces.
+ * Checks if string consists of spaces.
  *
  * @param str - String.
- * @returns _True_ if string consists of only spaces, _false_ otherwise.
+ * @returns _True_ if string consists of spaces, _false_ otherwise.
  */
 export declare function empty(str: string): boolean;
 /**
@@ -45,7 +45,7 @@ export declare function leadingSpaces(str: string): string;
  */
 export declare function lines(str: string): strings;
 /**
- * Checks that string is multiline.
+ * Checks if string is multiline.
  *
  * @param str - String.
  * @returns _True_ if string is multiline, _false_ otherwise.
@@ -61,7 +61,7 @@ export declare function multiline(str: string): boolean;
  */
 export declare function replaceAll(str: string, search: string, replace: string): string;
 /**
- * Checks that string is single-line.
+ * Checks if string is single-line.
  *
  * @param str - String.
  * @returns _True_ if string is single-line, _false_ otherwise.

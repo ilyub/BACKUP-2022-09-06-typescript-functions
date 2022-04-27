@@ -1,5 +1,5 @@
 import * as a from "./array";
-import { defineFn } from "./moduleDefinition";
+import { defineFn } from "./module-definition";
 import * as regexp from "./regexp";
 export { _path as path };
 /**
@@ -12,10 +12,10 @@ export function detectEol(str) {
     return str.includes("\r\n") ? "\r\n" : "\n";
 }
 /**
- * Checks that string consists of only spaces.
+ * Checks if string consists of spaces.
  *
  * @param str - String.
- * @returns _True_ if string consists of only spaces, _false_ otherwise.
+ * @returns _True_ if string consists of spaces, _false_ otherwise.
  */
 export function empty(str) {
     return /^\s*$/u.test(str);
@@ -58,7 +58,7 @@ export function lines(str) {
     return str.split(/\r\n|\n/u);
 }
 /**
- * Checks that string is multiline.
+ * Checks if string is multiline.
  *
  * @param str - String.
  * @returns _True_ if string is multiline, _false_ otherwise.
@@ -79,7 +79,7 @@ export function replaceAll(str, search, replace) {
     return str.replace(new RegExp(regexp.escapeString(search), "gu"), replace);
 }
 /**
- * Checks that string is single-line.
+ * Checks if string is single-line.
  *
  * @param str - String.
  * @returns _True_ if string is single-line, _false_ otherwise.

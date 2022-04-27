@@ -1,14 +1,13 @@
-import type { Entry } from "./types";
 export declare class Accumulator<K extends PropertyKey, T> {
     /**
      * Creates class instance.
      *
      * @param source - Source.
      */
-    constructor(source?: Iterable<IterableElement<K, T>>);
-    [Symbol.iterator](): IterableIterator<IterableElement<K, T>>;
+    constructor(source?: Iterable<Accumulator.Entry<K, T>>);
+    [Symbol.iterator](): IterableIterator<Accumulator.Entry<K, T>>;
     /**
-     * Returns array by key.
+     * Returns array at given key.
      *
      * @param key - Key.
      * @returns Array.
@@ -28,7 +27,13 @@ export declare class Accumulator<K extends PropertyKey, T> {
      * @param value - Value.
      */
     unshift(key: K, value: T): void;
+    /**
+     * Returns values.
+     */
+    values(): IterableIterator<readonly T[]>;
     protected readonly map: Map<K, T[]>;
 }
-export declare type IterableElement<K extends PropertyKey, T> = Entry<K, readonly T[]>;
+export declare namespace Accumulator {
+    type Entry<K extends PropertyKey, T> = readonly [K, readonly T[]];
+}
 //# sourceMappingURL=Accumulator.d.ts.map

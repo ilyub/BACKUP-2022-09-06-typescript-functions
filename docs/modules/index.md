@@ -36,13 +36,6 @@
 - [NumStrU](index.md#numstru)
 - [NumStrs](index.md#numstrs)
 - [ObjectKeys](index.md#objectkeys)
-- [ObjectKeysDefined](index.md#objectkeysdefined)
-- [ObjectKeysOption](index.md#objectkeysoption)
-- [ObjectKeysOptional](index.md#objectkeysoptional)
-- [ObjectKeysReadonly](index.md#objectkeysreadonly)
-- [ObjectKeysRequired](index.md#objectkeysrequired)
-- [ObjectKeysUndefined](index.md#objectkeysundefined)
-- [ObjectKeysWritable](index.md#objectkeyswritable)
 - [OptionalStyle](index.md#optionalstyle)
 - [OptionalUndefinedStyle](index.md#optionalundefinedstyle)
 - [PartialRecord](index.md#partialrecord)
@@ -75,7 +68,6 @@
 - [WritableRecords](index.md#writablerecords)
 - [WritableUndefindKeys](index.md#writableundefindkeys)
 - [a](index.md#a)
-- [arrayMap](index.md#arraymap)
 - [as](index.md#as)
 - [assert](index.md#assert)
 - [booleanE](index.md#booleane)
@@ -121,13 +113,13 @@
 
 ### Accumulator
 
-Re-exports [Accumulator](../classes/Accumulator.Accumulator-1.md)
+Re-exports [Accumulator](../classes/Accumulator.Accumulator-2.md)
 
 ___
 
 ### Accumulator2
 
-Re-exports [Accumulator2](../classes/Accumulator2.Accumulator2-1.md)
+Re-exports [Accumulator2](../classes/Accumulator2.Accumulator2-2.md)
 
 ___
 
@@ -193,7 +185,7 @@ ___
 
 ### DefinedKeys
 
-Re-exports [DefinedKeys](types_objectKeys.md#definedkeys)
+Re-exports [DefinedKeys](types_object_keys.md#definedkeys)
 
 ___
 
@@ -295,49 +287,7 @@ ___
 
 ### ObjectKeys
 
-Re-exports [ObjectKeys](types_objectKeys.md#objectkeys)
-
-___
-
-### ObjectKeysDefined
-
-Re-exports [ObjectKeysDefined](types_objectKeys.md#objectkeysdefined)
-
-___
-
-### ObjectKeysOption
-
-Re-exports [ObjectKeysOption](types_objectKeys.md#objectkeysoption)
-
-___
-
-### ObjectKeysOptional
-
-Re-exports [ObjectKeysOptional](types_objectKeys.md#objectkeysoptional)
-
-___
-
-### ObjectKeysReadonly
-
-Re-exports [ObjectKeysReadonly](types_objectKeys.md#objectkeysreadonly)
-
-___
-
-### ObjectKeysRequired
-
-Re-exports [ObjectKeysRequired](types_objectKeys.md#objectkeysrequired)
-
-___
-
-### ObjectKeysUndefined
-
-Re-exports [ObjectKeysUndefined](types_objectKeys.md#objectkeysundefined)
-
-___
-
-### ObjectKeysWritable
-
-Re-exports [ObjectKeysWritable](types_objectKeys.md#objectkeyswritable)
+Re-exports [ObjectKeys](types_object_keys.md#objectkeys)
 
 ___
 
@@ -397,13 +347,13 @@ ___
 
 ### ReadonlyDefinedKeys
 
-Re-exports [ReadonlyDefinedKeys](types_objectKeys.md#readonlydefinedkeys)
+Re-exports [ReadonlyDefinedKeys](types_object_keys.md#readonlydefinedkeys)
 
 ___
 
 ### ReadonlyUndefinedKeys
 
-Re-exports [ReadonlyUndefinedKeys](types_objectKeys.md#readonlyundefinedkeys)
+Re-exports [ReadonlyUndefinedKeys](types_object_keys.md#readonlyundefinedkeys)
 
 ___
 
@@ -451,7 +401,7 @@ ___
 
 ### UndefinedKeys
 
-Re-exports [UndefinedKeys](types_objectKeys.md#undefinedkeys)
+Re-exports [UndefinedKeys](types_object_keys.md#undefinedkeys)
 
 ___
 
@@ -481,7 +431,7 @@ ___
 
 ### WritableDefindKeys
 
-Re-exports [WritableDefindKeys](types_objectKeys.md#writabledefindkeys)
+Re-exports [WritableDefindKeys](types_object_keys.md#writabledefindkeys)
 
 ___
 
@@ -523,7 +473,7 @@ ___
 
 ### WritableUndefindKeys
 
-Re-exports [WritableUndefindKeys](types_objectKeys.md#writableundefindkeys)
+Re-exports [WritableUndefindKeys](types_object_keys.md#writableundefindkeys)
 
 ___
 
@@ -533,15 +483,9 @@ Renames and re-exports [array](array.md)
 
 ___
 
-### arrayMap
-
-Re-exports [arrayMap](arrayMap.md)
-
-___
-
 ### as
 
-Renames and re-exports [inlineAssertions](inlineAssertions.md)
+Renames and re-exports [inline-assertions](inline_assertions.md)
 
 ___
 
@@ -589,7 +533,7 @@ ___
 
 ### defineFn
 
-Re-exports [defineFn](moduleDefinition.md#definefn)
+Re-exports [defineFn](module_definition.md#definefn)
 
 ___
 
@@ -691,13 +635,13 @@ ___
 
 ### overloadedFn
 
-Re-exports [overloadedFn](moduleDefinition.md#overloadedfn)
+Re-exports [overloadedFn](module_definition.md#overloadedfn)
 
 ___
 
 ### programFlow
 
-Re-exports [programFlow](programFlow.md)
+Renames and re-exports [program-flow](program_flow.md)
 
 ___
 

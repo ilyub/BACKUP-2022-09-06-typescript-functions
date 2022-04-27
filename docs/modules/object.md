@@ -171,7 +171,7 @@ ___
 
 ▸ **every**<`T`\>(`obj`, `predicate`): `boolean`
 
-Checks that every object property satisfies condition.
+Checks if every object property satisfies condition.
 
 #### Type parameters
 
@@ -371,7 +371,7 @@ ___
 
 ▸ **hasOwnProp**(`key`, `obj`): `boolean`
 
-Checks that object has property.
+Checks if object has property.
 
 #### Parameters
 
@@ -557,7 +557,7 @@ ___
 
 ▸ **some**<`T`\>(`obj`, `predicate`): `boolean`
 
-Checks that some object property satisfies condition.
+Checks if some object property satisfies condition.
 
 #### Type parameters
 

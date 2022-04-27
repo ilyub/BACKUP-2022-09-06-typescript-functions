@@ -17,7 +17,7 @@
 
 ▸ **MultiArgGuard**(`value`, ...`args`): value is T
 
-Checks that value type is T.
+Checks if value type is T.
 
 #### Parameters
 

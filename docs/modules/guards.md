@@ -13,7 +13,7 @@
 ### Type aliases
 
 - [Guards](guards.md#guards)
-- [PropGuards](guards.md#propguards)
+- [ObjectGuards](guards.md#objectguards)
 
 ### Variables
 
@@ -86,9 +86,9 @@
 
 ___
 
-### PropGuards
+### ObjectGuards
 
-Ƭ **PropGuards**<`T`, `K`\>: { readonly [L in K]-?: Guard<T[L]\> }
+Ƭ **ObjectGuards**<`T`, `K`\>: { readonly [L in K]-?: Guard<T[L]\> }
 
 #### Type parameters
 
@@ -109,7 +109,7 @@ ___
 
 • `Const` **array**: (`value`: `unknown`) => value is unknowns & { `of`: <T\>(`this`: `void`, `value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => value is readonly T[]  }
 
-Checks that value is an array.
+Checks if value is an array.
 
 **`param`** Value.
 
@@ -121,7 +121,7 @@ ___
 
 • `Const` **indexedObject**: (`value`: `unknown`) => value is IndexedObject<unknown\> & { `of`: <T\>(`this`: `void`, `value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => value is IndexedObject<T\>  }
 
-Checks that value type is IndexedObject.
+Checks if value type is IndexedObject.
 
 **`param`** Value.
 
@@ -133,7 +133,7 @@ ___
 
 • `Const` **map**: (`value`: `unknown`) => value is ReadonlyMap<unknown, unknown\> & { `of`: <K, V\>(`this`: `void`, `value`: `unknown`, `keyGuard`: [`Guard`](../interfaces/guards.Guard.md)<`K`\>, `valueGuard`: [`Guard`](../interfaces/guards.Guard.md)<`V`\>) => value is ReadonlyMap<K, V\>  }
 
-Checks that value type is Map.
+Checks if value type is Map.
 
 **`param`** Value.
 
@@ -145,7 +145,7 @@ ___
 
 • `Const` **not**: <T, V\>(`value`: `V`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => value is Exclude<V, T\> & { `array`: <V\>(`value`: `V`) => value is Exclude<V, unknowns\> ; `boolean`: <V\>(`value`: `V`) => value is Exclude<V, boolean\> ; `empty`: <V\>(`value`: `V`) => value is Exclude<V, empty\> ; `factory`: <T\>(`guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => <V\>(`value`: `V`) => value is Exclude<V, T\> = \_notFactory; `false`: <V\>(`value`: `V`) => value is Exclude<V, false\> ; `indexedObject`: <V\>(`value`: `V`) => value is Exclude<V, IndexedObject<unknown\>\> ; `map`: <V\>(`value`: `V`) => value is Exclude<V, ReadonlyMap<unknown, unknown\>\> ; `null`: <V\>(`value`: `V`) => value is Exclude<V, null\> ; `numStr`: <V\>(`value`: `V`) => value is Exclude<V, NumStr\> ; `number`: <V\>(`value`: `V`) => value is Exclude<V, number\> ; `object`: <V\>(`value`: `V`) => value is Exclude<V, object\> ; `set`: <V\>(`value`: `V`) => value is Exclude<V, ReadonlySet<unknown\>\> ; `string`: <V\>(`value`: `V`) => value is Exclude<V, string\> ; `stringU`: <V\>(`value`: `V`) => value is Exclude<V, string\> ; `symbol`: <V\>(`value`: `V`) => value is Exclude<V, symbol\> ; `true`: <V\>(`value`: `V`) => value is Exclude<V, true\> ; `undefined`: <V\>(`value`: `V`) => value is Exclude<V, undefined\>  }
 
-Checks that value type is not T.
+Checks if value type is not T.
 
 **`param`** Value.
 
@@ -157,9 +157,9 @@ ___
 
 ### object
 
-• `Const` **object**: (`value`: `unknown`) => value is object & { `factory`: <R, O\>(`required`: [`PropGuards`](guards.md#propguards)<`R`, keyof `R`\>, `optional`: [`PropGuards`](guards.md#propguards)<`O`, keyof `O`\>) => [`Guard`](../interfaces/guards.Guard.md)<[`OptionalStyle`](types_object.md#optionalstyle)<`Partial`<`O`\>\> & [`UndefinedStyle`](types_object.md#undefinedstyle)<`R`\>\><T\>(`required`: [`PropGuards`](guards.md#propguards)<`T`, `RequiredKeys`<`T`\>\>, `optional`: [`PropGuards`](guards.md#propguards)<`T`, `OptionalKeys`<`T`\>\>) => [`Guard`](../interfaces/guards.Guard.md)<`T`\> ; `of`: <R, O\>(`value`: `unknown`, `required`: [`PropGuards`](guards.md#propguards)<`R`, keyof `R`\>, `optional`: [`PropGuards`](guards.md#propguards)<`O`, keyof `O`\>) => value is If<Equals<WritableDefindKeys<Partial<O\>\>, never\>, If<Equals<WritableUndefindKeys<Partial<O\>\>, never\>, If<Equals<ReadonlyDefinedKeys<Partial<O\>\>, never\>, { readonly [K in never]?: Exclude<Partial<O\>[K], undefined\> }, If<Equals<ReadonlyUndefinedKeys<Partial<O\>\>, never\>, { readonly [K in never]: Partial<O\>[K] }, { readonly [K in never]: Partial<O\>[K] } & { readonly [K in never]?: Exclude<Partial<O\>[K], undefined\> }\>\>, { [K in string \| number \| symbol]?: Exclude<Partial<O\>[K], undefined\> } & If<Equals<ReadonlyDefinedKeys<Partial<O\>\>, never\>, { readonly [K in never]?: Exclude<Partial<O\>[K], undefined\> }, If<Equals<ReadonlyUndefinedKeys<Partial<O\>\>, never\>, { readonly [K in never]: Partial<O\>[K] }, { readonly [K in never]: Partial<O\>[K] } & { readonly [K in never]?: Exclude<Partial<O\>[K], undefined\> }\>\>\>, { [K in string \| number \| symbol]: Partial<O\>[K] } & If<Equals<WritableUndefindKeys<Partial<O\>\>, never\>, If<Equals<ReadonlyDefinedKeys<Partial<O\>\>, never\>, { readonly [K in never]?: Exclude<Partial<O\>[K], undefined\> }, If<Equals<ReadonlyUndefinedKeys<Partial<O\>\>, never\>, { readonly [K in never]: Partial<O\>[K] }, { readonly [K in never]: Partial<O\>[K] } & { readonly [K in never]?: Exclude<Partial<O\>[K], undefined\> }\>\>, { [K in string \| number \| symbol]?: Exclude<Partial<O\>[K], undefined\> } & If<Equals<ReadonlyDefinedKeys<Partial<O\>\>, never\>, { readonly [K in never]?: Exclude<Partial<O\>[K], undefined\> }, If<Equals<ReadonlyUndefinedKeys<Partial<O\>\>, never\>, { readonly [K in never]: Partial<O\>[K] }, { readonly [K in never]: Partial<O\>[K] } & { readonly [K in never]?: Exclude<Partial<O\>[K], undefined\> }\>\>\>\> & If<Equals<WritableDefindKeys<R\>, never\>, If<Equals<WritableUndefindKeys<R\>, never\>, If<Equals<ReadonlyDefinedKeys<R\>, never\>, { readonly [K in never]: undefined \| R[K] }, If<Equals<ReadonlyUndefinedKeys<R\>, never\>, { readonly [K in never]: R[K] }, { readonly [K in never]: R[K] } & { readonly [K in never]: undefined \| R[K] }\>\>, { [K in string \| number \| symbol]: undefined \| R[K] } & If<Equals<ReadonlyDefinedKeys<R\>, never\>, { readonly [K in never]: undefined \| R[K] }, If<Equals<ReadonlyUndefinedKeys<R\>, never\>, { readonly [K in never]: R[K] }, { readonly [K in never]: R[K] } & { readonly [K in never]: undefined \| R[K] }\>\>\>, { [K in string \| number \| symbol]: R[K] } & If<Equals<WritableUndefindKeys<R\>, never\>, If<Equals<ReadonlyDefinedKeys<R\>, never\>, { readonly [K in never]: undefined \| R[K] }, If<Equals<ReadonlyUndefinedKeys<R\>, never\>, { readonly [K in never]: R[K] }, { readonly [K in never]: R[K] } & { readonly [K in never]: undefined \| R[K] }\>\>, { [K in string \| number \| symbol]: undefined \| R[K] } & If<Equals<ReadonlyDefinedKeys<R\>, never\>, { readonly [K in never]: undefined \| R[K] }, If<Equals<ReadonlyUndefinedKeys<R\>, never\>, { readonly [K in never]: R[K] }, { readonly [K in never]: R[K] } & { readonly [K in never]: undefined \| R[K] }\>\>\>\><T\>(`value`: `unknown`, `required`: [`PropGuards`](guards.md#propguards)<`T`, `RequiredKeys`<`T`\>\>, `optional`: [`PropGuards`](guards.md#propguards)<`T`, `OptionalKeys`<`T`\>\>) => value is T  }
+• `Const` **object**: (`value`: `unknown`) => value is object & { `factory`: <R, O\>(`required`: [`ObjectGuards`](guards.md#objectguards)<`R`, keyof `R`\>, `optional`: [`ObjectGuards`](guards.md#objectguards)<`O`, keyof `O`\>) => [`Guard`](../interfaces/guards.Guard.md)<[`OptionalStyle`](types_object.md#optionalstyle)<`Partial`<`O`\>\> & [`UndefinedStyle`](types_object.md#undefinedstyle)<`R`\>\><T\>(`required`: [`ObjectGuards`](guards.md#objectguards)<`T`, `RequiredKeys`<`T`\>\>, `optional`: [`ObjectGuards`](guards.md#objectguards)<`T`, `OptionalKeys`<`T`\>\>) => [`Guard`](../interfaces/guards.Guard.md)<`T`\> ; `of`: <R, O\>(`value`: `unknown`, `required`: [`ObjectGuards`](guards.md#objectguards)<`R`, keyof `R`\>, `optional`: [`ObjectGuards`](guards.md#objectguards)<`O`, keyof `O`\>) => value is If<Equals<WritableDefindKeys<Partial<O\>\>, never\>, If<Equals<WritableUndefindKeys<Partial<O\>\>, never\>, If<Equals<ReadonlyDefinedKeys<Partial<O\>\>, never\>, { readonly [K in never]?: Exclude<Partial<O\>[K], undefined\> }, If<Equals<ReadonlyUndefinedKeys<Partial<O\>\>, never\>, { readonly [K in never]: Partial<O\>[K] }, { readonly [K in never]: Partial<O\>[K] } & { readonly [K in never]?: Exclude<Partial<O\>[K], undefined\> }\>\>, { [K in string \| number \| symbol]?: Exclude<Partial<O\>[K], undefined\> } & If<Equals<ReadonlyDefinedKeys<Partial<O\>\>, never\>, { readonly [K in never]?: Exclude<Partial<O\>[K], undefined\> }, If<Equals<ReadonlyUndefinedKeys<Partial<O\>\>, never\>, { readonly [K in never]: Partial<O\>[K] }, { readonly [K in never]: Partial<O\>[K] } & { readonly [K in never]?: Exclude<Partial<O\>[K], undefined\> }\>\>\>, { [K in string \| number \| symbol]: Partial<O\>[K] } & If<Equals<WritableUndefindKeys<Partial<O\>\>, never\>, If<Equals<ReadonlyDefinedKeys<Partial<O\>\>, never\>, { readonly [K in never]?: Exclude<Partial<O\>[K], undefined\> }, If<Equals<ReadonlyUndefinedKeys<Partial<O\>\>, never\>, { readonly [K in never]: Partial<O\>[K] }, { readonly [K in never]: Partial<O\>[K] } & { readonly [K in never]?: Exclude<Partial<O\>[K], undefined\> }\>\>, { [K in string \| number \| symbol]?: Exclude<Partial<O\>[K], undefined\> } & If<Equals<ReadonlyDefinedKeys<Partial<O\>\>, never\>, { readonly [K in never]?: Exclude<Partial<O\>[K], undefined\> }, If<Equals<ReadonlyUndefinedKeys<Partial<O\>\>, never\>, { readonly [K in never]: Partial<O\>[K] }, { readonly [K in never]: Partial<O\>[K] } & { readonly [K in never]?: Exclude<Partial<O\>[K], undefined\> }\>\>\>\> & If<Equals<WritableDefindKeys<R\>, never\>, If<Equals<WritableUndefindKeys<R\>, never\>, If<Equals<ReadonlyDefinedKeys<R\>, never\>, { readonly [K in never]: undefined \| R[K] }, If<Equals<ReadonlyUndefinedKeys<R\>, never\>, { readonly [K in never]: R[K] }, { readonly [K in never]: R[K] } & { readonly [K in never]: undefined \| R[K] }\>\>, { [K in string \| number \| symbol]: undefined \| R[K] } & If<Equals<ReadonlyDefinedKeys<R\>, never\>, { readonly [K in never]: undefined \| R[K] }, If<Equals<ReadonlyUndefinedKeys<R\>, never\>, { readonly [K in never]: R[K] }, { readonly [K in never]: R[K] } & { readonly [K in never]: undefined \| R[K] }\>\>\>, { [K in string \| number \| symbol]: R[K] } & If<Equals<WritableUndefindKeys<R\>, never\>, If<Equals<ReadonlyDefinedKeys<R\>, never\>, { readonly [K in never]: undefined \| R[K] }, If<Equals<ReadonlyUndefinedKeys<R\>, never\>, { readonly [K in never]: R[K] }, { readonly [K in never]: R[K] } & { readonly [K in never]: undefined \| R[K] }\>\>, { [K in string \| number \| symbol]: undefined \| R[K] } & If<Equals<ReadonlyDefinedKeys<R\>, never\>, { readonly [K in never]: undefined \| R[K] }, If<Equals<ReadonlyUndefinedKeys<R\>, never\>, { readonly [K in never]: R[K] }, { readonly [K in never]: R[K] } & { readonly [K in never]: undefined \| R[K] }\>\>\>\><T\>(`value`: `unknown`, `required`: [`ObjectGuards`](guards.md#objectguards)<`T`, `RequiredKeys`<`T`\>\>, `optional`: [`ObjectGuards`](guards.md#objectguards)<`T`, `OptionalKeys`<`T`\>\>) => value is T  }
 
-Checks that value is an object.
+Checks if value is an object.
 
 **`param`** Value.
 
@@ -177,7 +177,7 @@ ___
 
 • `Const` **set**: (`value`: `unknown`) => value is ReadonlySet<unknown\> & { `of`: <T\>(`this`: `void`, `value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => value is ReadonlySet<T\>  }
 
-Checks that value type is Set.
+Checks if value type is Set.
 
 **`param`** Value.
 
@@ -243,7 +243,7 @@ ___
 
 ▸ **boolean**(`value`): value is boolean
 
-Checks that value is a boolean.
+Checks if value is a boolean.
 
 #### Parameters
 
@@ -311,7 +311,7 @@ ___
 
 ▸ **callable**<`T`\>(`value`): value is T
 
-Checks that value type is T.
+Checks if value type is T.
 
 #### Type parameters
 
@@ -337,7 +337,7 @@ ___
 
 ▸ **empty**(`value`): value is empty
 
-Checks that value type is empty.
+Checks if value type is empty.
 
 #### Parameters
 
@@ -357,7 +357,7 @@ ___
 
 ▸ **enumeration**<`T`\>(`value`, `vo`): value is T
 
-Checks that value type is T.
+Checks if value type is T.
 
 #### Type parameters
 
@@ -412,7 +412,7 @@ ___
 
 ▸ **false**(`value`): value is false
 
-Checks that value is _false_.
+Checks if value is _false_.
 
 #### Parameters
 
@@ -480,7 +480,7 @@ ___
 
 ▸ **instance**<`T`\>(`value`, `ctor`): value is T
 
-Checks that value type is T.
+Checks if value type is T.
 
 #### Type parameters
 
@@ -507,7 +507,7 @@ ___
 
 ▸ **instances**<`T`\>(`value`, `ctor`): value is readonly T[]
 
-Checks that value type is T[].
+Checks if value type is T[].
 
 #### Type parameters
 
@@ -582,7 +582,7 @@ ___
 
 ▸ **null**(`value`): value is null
 
-Checks that value is _null_.
+Checks if value is _null_.
 
 #### Parameters
 
@@ -602,7 +602,7 @@ ___
 
 ▸ **numStr**(`value`): value is NumStr
 
-Checks that value type is NumStr.
+Checks if value type is NumStr.
 
 #### Parameters
 
@@ -670,7 +670,7 @@ ___
 
 ▸ **number**(`value`): value is number
 
-Checks that value is a number.
+Checks if value is a number.
 
 #### Parameters
 
@@ -834,7 +834,7 @@ ___
 
 ▸ **string**(`value`): value is string
 
-Checks that value is a string.
+Checks if value is a string.
 
 #### Parameters
 
@@ -854,7 +854,7 @@ ___
 
 ▸ **stringU**(`value`): value is string
 
-Checks that value is a string.
+Checks if value is a string.
 
 #### Parameters
 
@@ -906,7 +906,7 @@ ___
 
 ▸ **symbol**(`value`): value is symbol
 
-Checks that value is a symbol.
+Checks if value is a symbol.
 
 #### Parameters
 
@@ -974,7 +974,7 @@ ___
 
 ▸ **true**(`value`): value is true
 
-Checks that value is _true_.
+Checks if value is _true_.
 
 #### Parameters
 
@@ -994,7 +994,7 @@ ___
 
 ▸ **undefined**(`value`): value is undefined
 
-Checks that value is _undefined_.
+Checks if value is _undefined_.
 
 #### Parameters
 
@@ -1014,7 +1014,7 @@ ___
 
 ▸ **unknown**(`_value`): \_value is unknown
 
-Checks that value is _unknown_.
+Checks if value is _unknown_.
 
 #### Parameters
 
