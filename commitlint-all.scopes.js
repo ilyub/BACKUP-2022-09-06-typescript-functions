@@ -1,1 +1,3 @@
-module.exports = { scopes: ["locales"] };
+module.exports = {
+  scopes: ["arrayMap", "locales", "moduleDefinition", "testUtils"]
+};

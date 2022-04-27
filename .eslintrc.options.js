@@ -8,11 +8,6 @@ module.exports = {
       type: "wildcard"
     },
     {
-      autoImportSource: "./array-map",
-      sourcePattern: "@skylib/functions/src/array-map",
-      type: "wildcard"
-    },
-    {
       autoImportSource: "./assertions",
       localName: "assert",
       sourcePattern: "@skylib/functions/src/assertions",

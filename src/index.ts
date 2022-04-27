@@ -1,8 +1,6 @@
 // eslint-disable-next-line @skylib/export-all-name -- Ok
 export * as a from "./array";
 
-export * as arrayMap from "./array-map";
-
 // eslint-disable-next-line @skylib/export-all-name -- Ok
 export * as assert from "./assertions";
 
