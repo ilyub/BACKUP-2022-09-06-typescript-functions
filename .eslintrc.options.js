@@ -8,8 +8,8 @@ module.exports = {
       type: "wildcard"
     },
     {
-      autoImportSource: "./arrayMap",
-      sourcePattern: "@skylib/functions/src/arrayMap",
+      autoImportSource: "./array-map",
+      sourcePattern: "@skylib/functions/src/array-map",
       type: "wildcard"
     },
     {
@@ -37,9 +37,9 @@ module.exports = {
       type: "wildcard"
     },
     {
-      autoImportSource: "./inlineAssertions",
+      autoImportSource: "./inline-assertions",
       localName: "as",
-      sourcePattern: "@skylib/functions/src/inlineAssertions",
+      sourcePattern: "@skylib/functions/src/inline-assertions",
       type: "wildcard"
     },
     {
@@ -65,8 +65,8 @@ module.exports = {
       type: "wildcard"
     },
     {
-      autoImportSource: "./programFlow",
-      sourcePattern: "@skylib/functions/src/programFlow",
+      autoImportSource: "./program-flow",
+      sourcePattern: "@skylib/functions/src/program-flow",
       type: "wildcard"
     },
     {
@@ -91,14 +91,14 @@ module.exports = {
       type: "wildcard"
     },
     {
-      autoImportSource: "./testUtils",
-      sourcePattern: "@skylib/functions/src/testUtils",
+      autoImportSource: "./test-utils",
+      sourcePattern: "@skylib/functions/src/test-utils",
       type: "wildcard"
     },
     {
       filesToLint: [
         "./src/assertions.ts",
-        "./src/inlineAssertions.ts",
+        "./src/inline-assertions.ts",
         "./src/converters.ts",
         "./src/guards.ts"
       ],

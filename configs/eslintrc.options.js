@@ -2,7 +2,7 @@ module.exports = {
   consistentImport: [
     {
       altLocalNames: ["functionsTestUtils"],
-      sourcePattern: "@skylib/functions/dist/testUtils",
+      sourcePattern: "@skylib/functions/dist/test-utils",
       type: "wildcard"
     }
   ],
@@ -28,7 +28,7 @@ module.exports = {
         /(?<!programFlow\s*\.\s*)\b(?:clearInterval|clearTimeout|setInterval|setTimeout)\b/u
           .source
       ],
-      subOptionsId: "functions.programFlow"
+      subOptionsId: "functions.program-flow"
     },
     {
       contexts: ["code"],

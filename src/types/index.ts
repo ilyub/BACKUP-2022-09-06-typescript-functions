@@ -6,6 +6,6 @@ export * from "./function";
 
 export * from "./object";
 
-export * from "./objectKeys";
+export * from "./object-keys";
 
 export * from "./string";

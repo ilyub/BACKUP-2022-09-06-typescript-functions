@@ -1,5 +1,5 @@
 import * as is from "./guards";
-import { defineFn } from "./moduleDefinition";
+import { defineFn } from "./module-definition";
 import type * as types from "./types";
 
 /**

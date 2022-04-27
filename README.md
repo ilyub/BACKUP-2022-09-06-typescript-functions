@@ -23,15 +23,15 @@
 - [function](https://ilyub.github.io/typescript-functions/modules/function.html) - Function manipulation functions.
 - [guards](https://ilyub.github.io/typescript-functions/modules/guards.html) - Type guards.
 - [helpers](https://ilyub.github.io/typescript-functions/modules/helpers.html) - Helpers.
-- [inlineAssertions](https://ilyub.github.io/typescript-functions/modules/inlineAssertions.html) - Inline type assertions.
+- [inline-assertions](https://ilyub.github.io/typescript-functions/modules/inline-assertions.html) - Inline type assertions.
 - [json](https://ilyub.github.io/typescript-functions/modules/json.html) - JSON manipulation functions.
 - [map](https://ilyub.github.io/typescript-functions/modules/map.html) - Map manipulation functions.
-- [moduleDefinition](https://ilyub.github.io/typescript-functions/modules/moduleDefinition.html) - Module definition helpers.
+- [module-definition](https://ilyub.github.io/typescript-functions/modules/module-definition.html) - Module definition helpers.
 - [number](https://ilyub.github.io/typescript-functions/modules/number.html) - Number manipulation functions.
 - [object](https://ilyub.github.io/typescript-functions/modules/object.html) - Object manipulation functions.
-- [programFlow](https://ilyub.github.io/typescript-functions/modules/programFlow.html) - Program flow functions.
+- [program-flow](https://ilyub.github.io/typescript-functions/modules/program-flow.html) - Program flow functions.
 - [reflect](https://ilyub.github.io/typescript-functions/modules/reflect.html) - Typed versions of Reflect functions.
 - [regexp](https://ilyub.github.io/typescript-functions/modules/regexp.html) - Regular expression manipulation functions.
 - [set](https://ilyub.github.io/typescript-functions/modules/set.html) - Set manipulation functions.
 - [string](https://ilyub.github.io/typescript-functions/modules/string.html) - String manipulation functions.
-- [testUtils](https://ilyub.github.io/typescript-functions/modules/testUtils.html) - Test utils.
+- [test-utils](https://ilyub.github.io/typescript-functions/modules/test-utils.html) - Test utils.

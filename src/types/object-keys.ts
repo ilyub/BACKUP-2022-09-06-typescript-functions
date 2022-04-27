@@ -6,7 +6,7 @@ import type {
   ObjectKeysRequired,
   ObjectKeysUndefined,
   ObjectKeysWritable
-} from "./objectKeys.internal";
+} from "./object-keys.internal";
 
 export type DefinedKeys<T extends object> = ObjectKeys<T, "defined", never>;
 

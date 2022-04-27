@@ -1,6 +1,6 @@
 import * as a from "./array";
 import { typedef } from "./helpers";
-import { defineFn, overloadedFn } from "./moduleDefinition";
+import { defineFn, overloadedFn } from "./module-definition";
 import * as o from "./object";
 import type { ValidationObject } from "./helpers";
 import type * as types from "./types";

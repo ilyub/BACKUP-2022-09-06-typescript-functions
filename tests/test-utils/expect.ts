@@ -3,7 +3,7 @@ import {
   executionTimeToBeWithin,
   toBeSameAs
   // eslint-disable-next-line import/no-internal-modules -- Ok
-} from "@/testUtils/expect";
+} from "@/test-utils/expect";
 
 async function testResolve(): Promise<void> {
   await Promise.resolve();

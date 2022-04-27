@@ -3,7 +3,7 @@ import type {
   ReadonlyUndefinedKeys,
   WritableDefindKeys,
   WritableUndefindKeys
-} from "./objectKeys";
+} from "./object-keys";
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
 import type { If } from "ts-toolbelt/out/Any/If";
 import type { Match } from "ts-toolbelt/out/Any/_Internal";

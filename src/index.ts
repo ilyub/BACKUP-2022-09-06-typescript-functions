@@ -1,7 +1,7 @@
 // eslint-disable-next-line @skylib/export-all-name -- Ok
 export * as a from "./array";
 
-export * as arrayMap from "./arrayMap";
+export * as arrayMap from "./array-map";
 
 // eslint-disable-next-line @skylib/export-all-name -- Ok
 export * as assert from "./assertions";
@@ -20,13 +20,13 @@ export * as is from "./guards";
 export * from "./helpers";
 
 // eslint-disable-next-line @skylib/export-all-name -- Ok
-export * as as from "./inlineAssertions";
+export * as as from "./inline-assertions";
 
 export * as json from "./json";
 
 export * as map from "./map";
 
-export * from "./moduleDefinition";
+export * from "./module-definition";
 
 // eslint-disable-next-line @skylib/export-all-name -- Ok
 export * as num from "./number";
@@ -34,7 +34,7 @@ export * as num from "./number";
 // eslint-disable-next-line @skylib/export-all-name -- Ok
 export * as o from "./object";
 
-export * as programFlow from "./programFlow";
+export * as programFlow from "./program-flow";
 
 export * as reflect from "./reflect";
 

@@ -1,3 +1,5 @@
+/* eslint-disable @skylib/consistent-filename -- Ok */
+
 import { a, Accumulator } from "@";
 
 test("get", () => {

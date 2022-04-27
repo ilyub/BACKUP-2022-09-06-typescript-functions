@@ -1,5 +1,5 @@
 import * as a from "./array";
-import { defineFn } from "./moduleDefinition";
+import { defineFn } from "./module-definition";
 import * as regexp from "./regexp";
 import type { strings } from "./types";
 
