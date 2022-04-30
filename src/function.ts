@@ -73,10 +73,10 @@ export function run<T>(callback: Sync<T>): T;
 /**
  * Executes promise or async function.
  *
- * @param promiseAsync - Promise or async function.
+ * @param mixed - Promise or async function.
  * @returns The result of callback execution.
  */
-export async function run<T>(promiseAsync: AsyncPromise<T>): Promise<T>;
+export async function run<T>(mixed: AsyncPromise<T>): Promise<T>;
 
 export function run<T>(mixed: AsyncPromiseSync<T>): Promise<T> | T {
   return is.callable(mixed) ? mixed() : mixed;

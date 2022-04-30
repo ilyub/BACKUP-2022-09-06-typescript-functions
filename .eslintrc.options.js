@@ -2,6 +2,11 @@ module.exports = {
   consistentImport: [
     { sourcePattern: "@sinonjs/fake-timers", type: "wildcard" },
     {
+      localName: "matchers",
+      sourcePattern: "jest-extended/all",
+      type: "wildcard"
+    },
+    {
       autoImportSource: "./array",
       localName: "a",
       sourcePattern: "@skylib/functions/src/array",
@@ -91,6 +96,7 @@ module.exports = {
       type: "wildcard"
     },
     {
+      autoImportSource: "./types",
       filesToLint: [
         "./src/assertions.ts",
         "./src/inline-assertions.ts",
@@ -99,11 +105,6 @@ module.exports = {
       ],
       localName: "types",
       sourcePattern: "@skylib/functions/src/types",
-      type: "wildcard"
-    },
-    {
-      localName: "matchers",
-      sourcePattern: "jest-extended/all",
       type: "wildcard"
     }
   ],

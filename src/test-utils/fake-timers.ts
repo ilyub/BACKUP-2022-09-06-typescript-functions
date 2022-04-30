@@ -34,11 +34,11 @@ export function installFakeTimer(options: Options = {}): void {
 /**
  * Executes promise or async function.
  *
- * @param promiseAsync - Promise or async function.
+ * @param mixed - Promise or async function.
  * @returns The result of callback execution.
  */
-export async function run<T>(promiseAsync: AsyncPromise<T>): Promise<T> {
-  const result = await Promise.all([fn.run(promiseAsync), clock.runAllAsync()]);
+export async function run<T>(mixed: AsyncPromise<T>): Promise<T> {
+  const result = await Promise.all([fn.run(mixed), clock.runAllAsync()]);
 
   return result[0];
 }

@@ -9,10 +9,10 @@ declare global {
       /**
        * Checks that async function executes within expected time.
        *
-       * @param time - Expected time.
+       * @param expected - Expected time.
        * @returns Result.
        */
-      readonly executionTimeToBe: (time: number) => Promise<R>;
+      readonly executionTimeToBe: (expected: number) => Promise<R>;
       /**
        * Checks that async function executes within expected time.
        *
@@ -37,7 +37,7 @@ declare global {
 
 export const executionTimeToBe: ExpectFromMatcher<"executionTimeToBe"> = async (
   got,
-  time
+  expected
 ) => {
   assert.callable<Async<unknown>>(got, "Expecting async function");
 
@@ -45,16 +45,17 @@ export const executionTimeToBe: ExpectFromMatcher<"executionTimeToBe"> = async (
 
   await got();
 
-  const executionTime = Date.now() - start;
+  const gotTime = Date.now() - start;
 
-  return executionTime === time
+  return gotTime === expected
     ? {
-        message: () => `Expected callback execution time not to be ${time} ms`,
+        message: () =>
+          `Expected callback execution time not to be ${expected} ms`,
         pass: true
       }
     : {
         message: () =>
-          `Expected callback execution time (${executionTime} ms) to be ${time} ms`,
+          `Expected callback execution time (${gotTime} ms) to be ${expected} ms`,
         pass: false
       };
 };
@@ -68,17 +69,17 @@ export const executionTimeToBeWithin: ExpectFromMatcher<
 
   await got();
 
-  const executionTime = Date.now() - start;
+  const gotTime = Date.now() - start;
 
-  return executionTime >= min && executionTime <= max
+  return gotTime >= min && gotTime <= max
     ? {
         message: () =>
-          `Expected callback execution time (${executionTime} ms) not to be within [${min}, ${max}] ms`,
+          `Expected callback execution time (${gotTime} ms) not to be within [${min}, ${max}] ms`,
         pass: true
       }
     : {
         message: () =>
-          `Expected callback execution time (${executionTime} ms) to be within [${min}, ${max}] ms`,
+          `Expected callback execution time (${gotTime} ms) to be within [${min}, ${max}] ms`,
         pass: false
       };
 };
