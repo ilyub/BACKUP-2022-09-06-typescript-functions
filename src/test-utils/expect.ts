@@ -14,17 +14,6 @@ declare global {
        */
       readonly executionTimeToBe: (expected: number) => Promise<R>;
       /**
-       * Checks that async function executes within expected time.
-       *
-       * @param min - Min time (inclusive).
-       * @param max - Max time (inclusive).
-       * @returns Result.
-       */
-      readonly executionTimeToBeWithin: (
-        min: number,
-        max: number
-      ) => Promise<R>;
-      /**
        * Checks that two objects are identical.
        *
        * @param expected - Expected object.
@@ -60,40 +49,12 @@ export const executionTimeToBe: ExpectFromMatcher<"executionTimeToBe"> = async (
       };
 };
 
-export const executionTimeToBeWithin: ExpectFromMatcher<
-  "executionTimeToBeWithin"
-> = async (got, min, max) => {
-  assert.callable<Async<unknown>>(got, "Expecting async function");
-
-  const start = Date.now();
-
-  await got();
-
-  const gotTime = Date.now() - start;
-
-  return gotTime >= min && gotTime <= max
-    ? {
-        message: () =>
-          `Expected callback execution time (${gotTime} ms) not to be within [${min}, ${max}] ms`,
-        pass: true
-      }
-    : {
-        message: () =>
-          `Expected callback execution time (${gotTime} ms) to be within [${min}, ${max}] ms`,
-        pass: false
-      };
-};
-
 export const toBeSameAs: ExpectFromMatcher<"toBeSameAs"> = (got, expected) =>
   got === expected
     ? { message: () => "Expected not the same object", pass: true }
     : { message: () => "Expected the same object", pass: false };
 
-export const matchers = {
-  executionTimeToBe,
-  executionTimeToBeWithin,
-  toBeSameAs
-} as const;
+export const matchers = { executionTimeToBe, toBeSameAs } as const;
 
 export interface ExpectFromMatcher<K extends keyof Matchers> {
   /**
