@@ -46,7 +46,7 @@ ___
 
 ### run
 
-▸ **run**<`T`\>(`promiseAsync`): `Promise`<`T`\>
+▸ **run**<`T`\>(`mixed`): `Promise`<`T`\>
 
 Executes promise or async function.
 
@@ -60,7 +60,7 @@ Executes promise or async function.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `promiseAsync` | [`AsyncPromise`](types_function.md#asyncpromise)<`T`, [`nevers`](types_core.md#nevers)\> | Promise or async function. |
+| `mixed` | [`AsyncPromise`](types_function.md#asyncpromise)<`T`, [`nevers`](types_core.md#nevers)\> | Promise or async function. |
 
 #### Returns
 

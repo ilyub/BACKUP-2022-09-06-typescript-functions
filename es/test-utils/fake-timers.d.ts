@@ -13,10 +13,10 @@ export declare function installFakeTimer(options?: Options): void;
 /**
  * Executes promise or async function.
  *
- * @param promiseAsync - Promise or async function.
+ * @param mixed - Promise or async function.
  * @returns The result of callback execution.
  */
-export declare function run<T>(promiseAsync: AsyncPromise<T>): Promise<T>;
+export declare function run<T>(mixed: AsyncPromise<T>): Promise<T>;
 /**
  * Sets random system time.
  */

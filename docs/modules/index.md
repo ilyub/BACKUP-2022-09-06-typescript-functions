@@ -25,6 +25,8 @@
 - [FacadeOwnMethods](index.md#facadeownmethods)
 - [IndexedObject](index.md#indexedobject)
 - [IndexedObjects](index.md#indexedobjects)
+- [IndexedRecord](index.md#indexedrecord)
+- [IndexedRecords](index.md#indexedrecords)
 - [InternalError](index.md#internalerror)
 - [Join2](index.md#join2)
 - [Join3](index.md#join3)
@@ -62,6 +64,8 @@
 - [WritableDefindKeys](index.md#writabledefindkeys)
 - [WritableIndexedObject](index.md#writableindexedobject)
 - [WritableIndexedObjects](index.md#writableindexedobjects)
+- [WritableIndexedRecord](index.md#writableindexedrecord)
+- [WritableIndexedRecords](index.md#writableindexedrecords)
 - [WritablePartialRecord](index.md#writablepartialrecord)
 - [WritablePartialRecords](index.md#writablepartialrecords)
 - [WritableRecord](index.md#writablerecord)
@@ -222,6 +226,18 @@ ___
 ### IndexedObjects
 
 Re-exports [IndexedObjects](types_core.md#indexedobjects)
+
+___
+
+### IndexedRecord
+
+Re-exports [IndexedRecord](types_core.md#indexedrecord)
+
+___
+
+### IndexedRecords
+
+Re-exports [IndexedRecords](types_core.md#indexedrecords)
 
 ___
 
@@ -444,6 +460,18 @@ ___
 ### WritableIndexedObjects
 
 Re-exports [WritableIndexedObjects](types_core.md#writableindexedobjects)
+
+___
+
+### WritableIndexedRecord
+
+Re-exports [WritableIndexedRecord](types_core.md#writableindexedrecord)
+
+___
+
+### WritableIndexedRecords
+
+Re-exports [WritableIndexedRecords](types_core.md#writableindexedrecords)
 
 ___
 

@@ -1,7 +1,4 @@
 import type * as types from "./types";
-/**
- * Not implemented.
- */
 export declare const not: (() => never) & {
     /**
      * Converts value to not empty.

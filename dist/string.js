@@ -172,10 +172,11 @@ function unpadMultiline(str) {
         : str;
 }
 exports.unpadMultiline = unpadMultiline;
+const _path = (0, module_definition_1.defineFn)(
 /**
  * Not implemented.
  */
-const _path = (0, module_definition_1.defineFn)(() => {
+() => {
     throw new Error("Not implemented");
 }, {
     /**

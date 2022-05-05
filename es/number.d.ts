@@ -1,11 +1,4 @@
 import type { numbers } from "./types";
-/**
- * Ceils number to a given precision.
- *
- * @param value - Value.
- * @param precision - The number of digits to keep.
- * @returns Ceiled value.
- */
 export declare const ceil: ((value: number, precision: number) => number) & {
     /**
      * Ceils number.
@@ -17,13 +10,6 @@ export declare const ceil: ((value: number, precision: number) => number) & {
      */
     step(value: number, step: number, from?: number): number;
 };
-/**
- * Floors number to a given precision.
- *
- * @param value - Value.
- * @param precision - The number of digits to keep.
- * @returns Floored value.
- */
 export declare const floor: ((value: number, precision: number) => number) & {
     /**
      * Floors number.
@@ -36,13 +22,6 @@ export declare const floor: ((value: number, precision: number) => number) & {
      */
     step(this: void, value: number, step: number, from?: number): number;
 };
-/**
- * Rounds number to a given precision.
- *
- * @param value - Value.
- * @param precision - The number of digits to keep.
- * @returns Rounded value.
- */
 export declare const round: ((value: number, precision: number) => number) & {
     /**
      * Rounds number.

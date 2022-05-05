@@ -6,18 +6,10 @@ declare global {
             /**
              * Checks that async function executes within expected time.
              *
-             * @param time - Expected time.
+             * @param expected - Expected time.
              * @returns Result.
              */
-            readonly executionTimeToBe: (time: number) => Promise<R>;
-            /**
-             * Checks that async function executes within expected time.
-             *
-             * @param min - Min time (inclusive).
-             * @param max - Max time (inclusive).
-             * @returns Result.
-             */
-            readonly executionTimeToBeWithin: (min: number, max: number) => Promise<R>;
+            readonly executionTimeToBe: (expected: number) => Promise<R>;
             /**
              * Checks that two objects are identical.
              *
@@ -29,11 +21,9 @@ declare global {
     }
 }
 export declare const executionTimeToBe: ExpectFromMatcher<"executionTimeToBe">;
-export declare const executionTimeToBeWithin: ExpectFromMatcher<"executionTimeToBeWithin">;
 export declare const toBeSameAs: ExpectFromMatcher<"toBeSameAs">;
 export declare const matchers: {
     readonly executionTimeToBe: ExpectFromMatcher<"executionTimeToBe">;
-    readonly executionTimeToBeWithin: ExpectFromMatcher<"executionTimeToBeWithin">;
     readonly toBeSameAs: ExpectFromMatcher<"toBeSameAs">;
 };
 export interface ExpectFromMatcher<K extends keyof Matchers> {

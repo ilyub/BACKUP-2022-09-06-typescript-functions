@@ -1,46 +1,26 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.matchers = exports.toBeSameAs = exports.executionTimeToBeWithin = exports.executionTimeToBe = void 0;
+exports.matchers = exports.toBeSameAs = exports.executionTimeToBe = void 0;
 const __1 = require("..");
-const executionTimeToBe = async (got, time) => {
+const executionTimeToBe = async (got, expected) => {
     __1.assert.callable(got, "Expecting async function");
     const start = Date.now();
     await got();
-    const executionTime = Date.now() - start;
-    return executionTime === time
+    const gotTime = Date.now() - start;
+    return gotTime === expected
         ? {
-            message: () => `Expected callback execution time not to be ${time} ms`,
+            message: () => `Expected callback execution time not to be ${expected} ms`,
             pass: true
         }
         : {
-            message: () => `Expected callback execution time (${executionTime} ms) to be ${time} ms`,
+            message: () => `Expected callback execution time (${gotTime} ms) to be ${expected} ms`,
             pass: false
         };
 };
 exports.executionTimeToBe = executionTimeToBe;
-const executionTimeToBeWithin = async (got, min, max) => {
-    __1.assert.callable(got, "Expecting async function");
-    const start = Date.now();
-    await got();
-    const executionTime = Date.now() - start;
-    return executionTime >= min && executionTime <= max
-        ? {
-            message: () => `Expected callback execution time (${executionTime} ms) not to be within [${min}, ${max}] ms`,
-            pass: true
-        }
-        : {
-            message: () => `Expected callback execution time (${executionTime} ms) to be within [${min}, ${max}] ms`,
-            pass: false
-        };
-};
-exports.executionTimeToBeWithin = executionTimeToBeWithin;
 const toBeSameAs = (got, expected) => got === expected
     ? { message: () => "Expected not the same object", pass: true }
     : { message: () => "Expected the same object", pass: false };
 exports.toBeSameAs = toBeSameAs;
-exports.matchers = {
-    executionTimeToBe: exports.executionTimeToBe,
-    executionTimeToBeWithin: exports.executionTimeToBeWithin,
-    toBeSameAs: exports.toBeSameAs
-};
+exports.matchers = { executionTimeToBe: exports.executionTimeToBe, toBeSameAs: exports.toBeSameAs };
 //# sourceMappingURL=expect.js.map

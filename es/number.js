@@ -1,5 +1,6 @@
 import * as assert from "./assertions";
 import { defineFn } from "./module-definition";
+export const ceil = defineFn(
 /**
  * Ceils number to a given precision.
  *
@@ -7,7 +8,7 @@ import { defineFn } from "./module-definition";
  * @param precision - The number of digits to keep.
  * @returns Ceiled value.
  */
-export const ceil = defineFn((value, precision) => {
+(value, precision) => {
     const divider = 10 ** precision;
     return Math.ceil(value * divider) / divider;
 }, {
@@ -23,6 +24,7 @@ export const ceil = defineFn((value, precision) => {
         return Math.ceil((value - from) / step) * step + from;
     }
 });
+export const floor = defineFn(
 /**
  * Floors number to a given precision.
  *
@@ -30,7 +32,7 @@ export const ceil = defineFn((value, precision) => {
  * @param precision - The number of digits to keep.
  * @returns Floored value.
  */
-export const floor = defineFn((value, precision) => {
+(value, precision) => {
     const divider = 10 ** precision;
     return Math.floor(value * divider) / divider;
 }, {
@@ -47,6 +49,7 @@ export const floor = defineFn((value, precision) => {
         return Math.floor((value - from) / step) * step + from;
     }
 });
+export const round = defineFn(
 /**
  * Rounds number to a given precision.
  *
@@ -54,7 +57,7 @@ export const floor = defineFn((value, precision) => {
  * @param precision - The number of digits to keep.
  * @returns Rounded value.
  */
-export const round = defineFn((value, precision) => {
+(value, precision) => {
     const divider = 10 ** precision;
     return Math.round(value * divider) / divider;
 }, {

@@ -22,9 +22,8 @@
 
 ### Functions
 
-- [executionTimeToBe](test_utils_expect.md#executiontimetobe-1)
-- [executionTimeToBeWithin](test_utils_expect.md#executiontimetobewithin-1)
-- [toBeSameAs](test_utils_expect.md#tobesameas-1)
+- [executionTimeToBe](test_utils_expect.md#executiontimetobe)
+- [toBeSameAs](test_utils_expect.md#tobesameas)
 
 ## Type aliases
 
@@ -79,7 +78,6 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `executionTimeToBe` | [`ExpectFromMatcher`](../interfaces/test_utils_expect.ExpectFromMatcher.md)<``"executionTimeToBe"``\> |
-| `executionTimeToBeWithin` | [`ExpectFromMatcher`](../interfaces/test_utils_expect.ExpectFromMatcher.md)<``"executionTimeToBeWithin"``\> |
 | `toBeSameAs` | [`ExpectFromMatcher`](../interfaces/test_utils_expect.ExpectFromMatcher.md)<``"toBeSameAs"``\> |
 
 ## Functions
@@ -93,24 +91,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `got` | `unknown` |
-| `...args` | [time: number] |
-
-#### Returns
-
-`Promise`<[`ExpectReturnType`](../interfaces/test_utils_expect.ExpectReturnType.md)\>
-
-___
-
-### executionTimeToBeWithin
-
-▸ **executionTimeToBeWithin**(`got`, ...`args`): `Promise`<[`ExpectReturnType`](../interfaces/test_utils_expect.ExpectReturnType.md)\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `got` | `unknown` |
-| `...args` | [min: number, max: number] |
+| `...args` | [expected: number] |
 
 #### Returns
 

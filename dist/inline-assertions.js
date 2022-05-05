@@ -4,6 +4,7 @@ exports.symbol = exports.stringU = exports.string = exports.object = exports.num
 const tslib_1 = require("tslib");
 const assert = tslib_1.__importStar(require("./assertions"));
 const module_definition_1 = require("./module-definition");
+exports.array = (0, module_definition_1.defineFn)(
 /**
  * Asserts that value is an array.
  *
@@ -12,7 +13,7 @@ const module_definition_1 = require("./module-definition");
  * @returns Value if value is an array.
  * @throws Error otherwise.
  */
-exports.array = (0, module_definition_1.defineFn)((value, error) => {
+(value, error) => {
     assert.array(value, error);
     return value;
 }, {
@@ -31,6 +32,7 @@ exports.array = (0, module_definition_1.defineFn)((value, error) => {
         return value;
     }
 });
+exports.indexedObject = (0, module_definition_1.defineFn)(
 /**
  * Asserts that value type is IndexedObject.
  *
@@ -39,7 +41,7 @@ exports.array = (0, module_definition_1.defineFn)((value, error) => {
  * @returns Value if value type is IndexedObject.
  * @throws Error otherwise.
  */
-exports.indexedObject = (0, module_definition_1.defineFn)((value, error) => {
+(value, error) => {
     assert.indexedObject(value, error);
     return value;
 }, {
@@ -58,6 +60,7 @@ exports.indexedObject = (0, module_definition_1.defineFn)((value, error) => {
         return value;
     }
 });
+exports.map = (0, module_definition_1.defineFn)(
 /**
  * Asserts that value type is Map.
  *
@@ -66,7 +69,7 @@ exports.indexedObject = (0, module_definition_1.defineFn)((value, error) => {
  * @returns Value if value type is Map.
  * @throws Error otherwise.
  */
-exports.map = (0, module_definition_1.defineFn)((value, error) => {
+(value, error) => {
     assert.map(value, error);
     return value;
 }, {
@@ -86,10 +89,11 @@ exports.map = (0, module_definition_1.defineFn)((value, error) => {
         return value;
     }
 });
+exports.not = (0, module_definition_1.defineFn)(
 /**
  * Not implemented.
  */
-exports.not = (0, module_definition_1.defineFn)(() => {
+() => {
     throw new Error("Not implemented");
 }, {
     /**
@@ -106,6 +110,7 @@ exports.not = (0, module_definition_1.defineFn)(() => {
         return value;
     }
 });
+exports.set = (0, module_definition_1.defineFn)(
 /**
  * Asserts that value type is Set.
  *
@@ -114,7 +119,7 @@ exports.not = (0, module_definition_1.defineFn)(() => {
  * @returns Value if value type is Set.
  * @throws Error otherwise.
  */
-exports.set = (0, module_definition_1.defineFn)((value, error) => {
+(value, error) => {
     assert.set(value, error);
     return value;
 }, {

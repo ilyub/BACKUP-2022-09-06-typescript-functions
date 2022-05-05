@@ -1,4 +1,5 @@
 "use strict";
+/* eslint-disable @skylib/primary-export-only -- Wait for @skylib/eslint update */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.instance = exports.factory = exports.enumeration = exports.empty = exports.callable = exports.boolean = exports.unknownsU = exports.unknowns = exports.symbolsU = exports.symbols = exports.symbolU = exports.stringsU = exports.strings = exports.setsU = exports.sets = exports.setU = exports.objectsU = exports.objects = exports.objectU = exports.numbersU = exports.numbers = exports.numberU = exports.numStrsU = exports.numStrs = exports.numStrU = exports.mapsU = exports.maps = exports.mapU = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObjectU = exports.booleansU = exports.booleans = exports.booleanU = exports.arraysU = exports.arrays = exports.arrayU = exports.not = exports.tuple = exports.set = exports.or = exports.object = exports.map = exports.indexedObject = exports.array = exports.and = exports.undefined = exports.true = exports.null = exports.false = void 0;
 exports.unknown = exports.symbol = exports.stringU = exports.string = exports.number = exports.numStr = exports.instances = void 0;
@@ -20,13 +21,14 @@ exports.and = (0, module_definition_1.defineFn)((0, module_definition_1.overload
         }
     })
 });
+exports.array = (0, module_definition_1.defineFn)(
 /**
  * Checks if value is an array.
  *
  * @param value - Value.
  * @returns _True_ if value is an array, _false_ otherwise.
  */
-exports.array = (0, module_definition_1.defineFn)((value) => Array.isArray(value), {
+(value) => Array.isArray(value), {
     /**
      * Checks if value type is T[].
      *
@@ -39,13 +41,14 @@ exports.array = (0, module_definition_1.defineFn)((value) => Array.isArray(value
         return (0, exports.array)(value) && value.every(guard);
     }
 });
+exports.indexedObject = (0, module_definition_1.defineFn)(
 /**
  * Checks if value type is IndexedObject.
  *
  * @param value - Value.
  * @returns _True_ if value type is IndexedObject, _false_ otherwise.
  */
-exports.indexedObject = (0, module_definition_1.defineFn)((value) => typeof value === "object" && value !== null, {
+(value) => typeof value === "object" && value !== null, {
     /**
      * Checks if value type is IndexedObject\<T\>.
      *
@@ -58,13 +61,14 @@ exports.indexedObject = (0, module_definition_1.defineFn)((value) => typeof valu
         return (0, exports.object)(value) && o.values(value).every(guard);
     }
 });
+exports.map = (0, module_definition_1.defineFn)(
 /**
  * Checks if value type is Map.
  *
  * @param value - Value.
  * @returns _True_ if value type is Map, _false_ otherwise.
  */
-exports.map = (0, module_definition_1.defineFn)((value) => value instanceof Map, {
+(value) => value instanceof Map, {
     /**
      * Checks if value type is Map\<K, V\>.
      *
@@ -79,13 +83,14 @@ exports.map = (0, module_definition_1.defineFn)((value) => value instanceof Map,
             a.fromIterable(value).every(([k, v]) => keyGuard(k) && valueGuard(v)));
     }
 });
+exports.object = (0, module_definition_1.defineFn)(
 /**
  * Checks if value is an object.
  *
  * @param value - Value.
  * @returns _True_ if value is an object, _false_ otherwise.
  */
-exports.object = (0, module_definition_1.defineFn)((value) => typeof value === "object" && value !== null, {
+(value) => typeof value === "object" && value !== null, {
     factory: (0, module_definition_1.overloadedFn)(() => {
         return _factory;
         function _factory(required, optional) {
@@ -114,13 +119,14 @@ exports.or = (0, module_definition_1.defineFn)((0, module_definition_1.overloade
         }
     })
 });
+exports.set = (0, module_definition_1.defineFn)(
 /**
  * Checks if value type is Set.
  *
  * @param value - Value.
  * @returns _True_ if value type is Set, _false_ otherwise.
  */
-exports.set = (0, module_definition_1.defineFn)((value) => value instanceof Set, {
+(value) => value instanceof Set, {
     /**
      * Checks if value type is Set\<T\>.
      *
@@ -146,6 +152,7 @@ exports.tuple = (0, module_definition_1.defineFn)((0, module_definition_1.overlo
         }
     })
 });
+exports.not = (0, module_definition_1.defineFn)(
 /**
  * Checks if value type is not T.
  *
@@ -153,7 +160,7 @@ exports.tuple = (0, module_definition_1.defineFn)((0, module_definition_1.overlo
  * @param guard - Guard for type T.
  * @returns _True_ if value type is not T, _false_ otherwise.
  */
-exports.not = (0, module_definition_1.defineFn)((value, guard) => !guard(value), {
+(value, guard) => !guard(value), {
     array: _notFactory(exports.array),
     boolean: _notFactory(boolean),
     empty: _notFactory(empty),

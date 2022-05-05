@@ -1,5 +1,6 @@
 import * as assert from "./assertions";
 import { defineFn } from "./module-definition";
+export const array = defineFn(
 /**
  * Asserts that value is an array.
  *
@@ -8,7 +9,7 @@ import { defineFn } from "./module-definition";
  * @returns Value if value is an array.
  * @throws Error otherwise.
  */
-export const array = defineFn((value, error) => {
+(value, error) => {
     assert.array(value, error);
     return value;
 }, {
@@ -27,6 +28,7 @@ export const array = defineFn((value, error) => {
         return value;
     }
 });
+export const indexedObject = defineFn(
 /**
  * Asserts that value type is IndexedObject.
  *
@@ -35,7 +37,7 @@ export const array = defineFn((value, error) => {
  * @returns Value if value type is IndexedObject.
  * @throws Error otherwise.
  */
-export const indexedObject = defineFn((value, error) => {
+(value, error) => {
     assert.indexedObject(value, error);
     return value;
 }, {
@@ -54,6 +56,7 @@ export const indexedObject = defineFn((value, error) => {
         return value;
     }
 });
+export const map = defineFn(
 /**
  * Asserts that value type is Map.
  *
@@ -62,7 +65,7 @@ export const indexedObject = defineFn((value, error) => {
  * @returns Value if value type is Map.
  * @throws Error otherwise.
  */
-export const map = defineFn((value, error) => {
+(value, error) => {
     assert.map(value, error);
     return value;
 }, {
@@ -82,10 +85,11 @@ export const map = defineFn((value, error) => {
         return value;
     }
 });
+export const not = defineFn(
 /**
  * Not implemented.
  */
-export const not = defineFn(() => {
+() => {
     throw new Error("Not implemented");
 }, {
     /**
@@ -102,6 +106,7 @@ export const not = defineFn(() => {
         return value;
     }
 });
+export const set = defineFn(
 /**
  * Asserts that value type is Set.
  *
@@ -110,7 +115,7 @@ export const not = defineFn(() => {
  * @returns Value if value type is Set.
  * @throws Error otherwise.
  */
-export const set = defineFn((value, error) => {
+(value, error) => {
     assert.set(value, error);
     return value;
 }, {

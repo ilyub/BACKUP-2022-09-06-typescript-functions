@@ -23,41 +23,17 @@
 
 • `Const` **ceil**: (`value`: `number`, `precision`: `number`) => `number` & { `step`: (`value`: `number`, `step`: `number`, `from`: `number`) => `number`  }
 
-Ceils number to a given precision.
-
-**`param`** Value.
-
-**`param`** The number of digits to keep.
-
-**`returns`** Ceiled value.
-
 ___
 
 ### floor
 
 • `Const` **floor**: (`value`: `number`, `precision`: `number`) => `number` & { `step`: (`this`: `void`, `value`: `number`, `step`: `number`, `from`: `number`) => `number`  }
 
-Floors number to a given precision.
-
-**`param`** Value.
-
-**`param`** The number of digits to keep.
-
-**`returns`** Floored value.
-
 ___
 
 ### round
 
 • `Const` **round**: (`value`: `number`, `precision`: `number`) => `number` & { `step`: (`this`: `void`, `value`: `number`, `step`: `number`, `from`: `number`) => `number`  }
-
-Rounds number to a given precision.
-
-**`param`** Value.
-
-**`param`** The number of digits to keep.
-
-**`returns`** Rounded value.
 
 ## Functions
 

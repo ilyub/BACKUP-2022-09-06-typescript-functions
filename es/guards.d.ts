@@ -14,12 +14,6 @@ export declare const and: {
         <A_5, B_5, C_3, D_1>(guard1: Guard<A_5>, guard2: Guard<B_5>, guard3: Guard<C_3>, guard4: Guard<D_1>): Guard<A_5 & B_5 & C_3 & D_1>;
     };
 };
-/**
- * Checks if value is an array.
- *
- * @param value - Value.
- * @returns _True_ if value is an array, _false_ otherwise.
- */
 export declare const array: ((value: unknown) => value is types.unknowns) & {
     /**
      * Checks if value type is T[].
@@ -31,12 +25,6 @@ export declare const array: ((value: unknown) => value is types.unknowns) & {
      */
     of<T>(this: void, value: unknown, guard: Guard<T>): value is readonly T[];
 };
-/**
- * Checks if value type is IndexedObject.
- *
- * @param value - Value.
- * @returns _True_ if value type is IndexedObject, _false_ otherwise.
- */
 export declare const indexedObject: ((value: unknown) => value is types.IndexedObject<unknown>) & {
     /**
      * Checks if value type is IndexedObject\<T\>.
@@ -48,12 +36,6 @@ export declare const indexedObject: ((value: unknown) => value is types.IndexedO
      */
     of<T>(this: void, value: unknown, guard: Guard<T>): value is types.IndexedObject<T>;
 };
-/**
- * Checks if value type is Map.
- *
- * @param value - Value.
- * @returns _True_ if value type is Map, _false_ otherwise.
- */
 export declare const map: ((value: unknown) => value is ReadonlyMap<unknown, unknown>) & {
     /**
      * Checks if value type is Map\<K, V\>.
@@ -66,12 +48,6 @@ export declare const map: ((value: unknown) => value is ReadonlyMap<unknown, unk
      */
     of<K, V>(this: void, value: unknown, keyGuard: Guard<K>, valueGuard: Guard<V>): value is ReadonlyMap<K, V>;
 };
-/**
- * Checks if value is an object.
- *
- * @param value - Value.
- * @returns _True_ if value is an object, _false_ otherwise.
- */
 export declare const object: ((value: unknown) => value is object) & {
     factory: {
         <R extends object, O extends object>(required: ObjectGuards<R, keyof R>, optional: ObjectGuards<O, keyof O>): Guard<import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableDefindKeys<Partial<O>>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<Partial<O>>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O>>, never>, { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O>>, never>, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; }, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; } & { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }>>, { [K_2 in types.WritableUndefindKeys<Partial<O>>]?: Exclude<Partial<O>[K_2], undefined>; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O>>, never>, { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O>>, never>, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; }, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; } & { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }>>>, { [K_3 in types.WritableDefindKeys<Partial<O>>]: Partial<O>[K_3]; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<Partial<O>>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O>>, never>, { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O>>, never>, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; }, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; } & { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }>>, { [K_2 in types.WritableUndefindKeys<Partial<O>>]?: Exclude<Partial<O>[K_2], undefined>; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<Partial<O>>, never>, { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<Partial<O>>, never>, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; }, { readonly [K_1 in types.ReadonlyDefinedKeys<Partial<O>>]: Partial<O>[K_1]; } & { readonly [K in types.ReadonlyUndefinedKeys<Partial<O>>]?: Exclude<Partial<O>[K], undefined>; }>>>> & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableDefindKeys<R>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<R>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R>, never>, { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R>, never>, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; }, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; } & { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }>>, { [K_6 in types.WritableUndefindKeys<R>]: R[K_6] | undefined; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R>, never>, { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R>, never>, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; }, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; } & { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }>>>, { [K_7 in types.WritableDefindKeys<R>]: R[K_7]; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.WritableUndefindKeys<R>, never>, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R>, never>, { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R>, never>, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; }, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; } & { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }>>, { [K_6 in types.WritableUndefindKeys<R>]: R[K_6] | undefined; } & import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyDefinedKeys<R>, never>, { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }, import("ts-toolbelt/out/Any/If").If<import("ts-toolbelt/out/Any/Equals").Equals<types.ReadonlyUndefinedKeys<R>, never>, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; }, { readonly [K_5 in types.ReadonlyDefinedKeys<R>]: R[K_5]; } & { readonly [K_4 in types.ReadonlyUndefinedKeys<R>]: R[K_4] | undefined; }>>>>>;
@@ -93,12 +69,6 @@ export declare const or: {
         <A_5, B_5, C_3, D_1>(guard1: Guard<A_5>, guard2: Guard<B_5>, guard3: Guard<C_3>, guard4: Guard<D_1>): Guard<A_5 | B_5 | C_3 | D_1>;
     };
 };
-/**
- * Checks if value type is Set.
- *
- * @param value - Value.
- * @returns _True_ if value type is Set, _false_ otherwise.
- */
 export declare const set: ((value: unknown) => value is ReadonlySet<unknown>) & {
     /**
      * Checks if value type is Set\<T\>.
@@ -123,13 +93,6 @@ export declare const tuple: {
         <A_7, B_5, C_3, D_1>(guard1: Guard<A_7>, guard2: Guard<B_5>, guard3: Guard<C_3>, guard4: Guard<D_1>): Guard<readonly [A_7, B_5, C_3, D_1]>;
     };
 };
-/**
- * Checks if value type is not T.
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @returns _True_ if value type is not T, _false_ otherwise.
- */
 export declare const not: (<T, V>(value: V, guard: Guard<T>) => value is Exclude<V, T>) & {
     array: <V_1>(value: V_1) => value is Exclude<V_1, types.unknowns>;
     boolean: <V_2>(value: V_2) => value is Exclude<V_2, boolean>;

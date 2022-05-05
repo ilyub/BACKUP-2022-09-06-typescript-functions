@@ -19,6 +19,8 @@
 - [Entry](types.md#entry)
 - [IndexedObject](types.md#indexedobject)
 - [IndexedObjects](types.md#indexedobjects)
+- [IndexedRecord](types.md#indexedrecord)
+- [IndexedRecords](types.md#indexedrecords)
 - [Join2](types.md#join2)
 - [Join3](types.md#join3)
 - [Join4](types.md#join4)
@@ -51,6 +53,8 @@
 - [WritableDefindKeys](types.md#writabledefindkeys)
 - [WritableIndexedObject](types.md#writableindexedobject)
 - [WritableIndexedObjects](types.md#writableindexedobjects)
+- [WritableIndexedRecord](types.md#writableindexedrecord)
+- [WritableIndexedRecords](types.md#writableindexedrecords)
 - [WritablePartialRecord](types.md#writablepartialrecord)
 - [WritablePartialRecords](types.md#writablepartialrecords)
 - [WritableRecord](types.md#writablerecord)
@@ -151,6 +155,18 @@ ___
 ### IndexedObjects
 
 Re-exports [IndexedObjects](types_core.md#indexedobjects)
+
+___
+
+### IndexedRecord
+
+Re-exports [IndexedRecord](types_core.md#indexedrecord)
+
+___
+
+### IndexedRecords
+
+Re-exports [IndexedRecords](types_core.md#indexedrecords)
 
 ___
 
@@ -343,6 +359,18 @@ ___
 ### WritableIndexedObjects
 
 Re-exports [WritableIndexedObjects](types_core.md#writableindexedobjects)
+
+___
+
+### WritableIndexedRecord
+
+Re-exports [WritableIndexedRecord](types_core.md#writableindexedrecord)
+
+___
+
+### WritableIndexedRecords
+
+Re-exports [WritableIndexedRecords](types_core.md#writableindexedrecords)
 
 ___
 

@@ -1,3 +1,4 @@
+/* eslint-disable @skylib/primary-export-only -- Wait for @skylib/eslint update */
 import * as a from "./array";
 import { typedef } from "./helpers";
 import { defineFn, overloadedFn } from "./module-definition";
@@ -16,13 +17,14 @@ export const and = defineFn(overloadedFn(() => {
         }
     })
 });
+export const array = defineFn(
 /**
  * Checks if value is an array.
  *
  * @param value - Value.
  * @returns _True_ if value is an array, _false_ otherwise.
  */
-export const array = defineFn((value) => Array.isArray(value), {
+(value) => Array.isArray(value), {
     /**
      * Checks if value type is T[].
      *
@@ -35,13 +37,14 @@ export const array = defineFn((value) => Array.isArray(value), {
         return array(value) && value.every(guard);
     }
 });
+export const indexedObject = defineFn(
 /**
  * Checks if value type is IndexedObject.
  *
  * @param value - Value.
  * @returns _True_ if value type is IndexedObject, _false_ otherwise.
  */
-export const indexedObject = defineFn((value) => typeof value === "object" && value !== null, {
+(value) => typeof value === "object" && value !== null, {
     /**
      * Checks if value type is IndexedObject\<T\>.
      *
@@ -54,13 +57,14 @@ export const indexedObject = defineFn((value) => typeof value === "object" && va
         return object(value) && o.values(value).every(guard);
     }
 });
+export const map = defineFn(
 /**
  * Checks if value type is Map.
  *
  * @param value - Value.
  * @returns _True_ if value type is Map, _false_ otherwise.
  */
-export const map = defineFn((value) => value instanceof Map, {
+(value) => value instanceof Map, {
     /**
      * Checks if value type is Map\<K, V\>.
      *
@@ -75,13 +79,14 @@ export const map = defineFn((value) => value instanceof Map, {
             a.fromIterable(value).every(([k, v]) => keyGuard(k) && valueGuard(v)));
     }
 });
+export const object = defineFn(
 /**
  * Checks if value is an object.
  *
  * @param value - Value.
  * @returns _True_ if value is an object, _false_ otherwise.
  */
-export const object = defineFn((value) => typeof value === "object" && value !== null, {
+(value) => typeof value === "object" && value !== null, {
     factory: overloadedFn(() => {
         return _factory;
         function _factory(required, optional) {
@@ -110,13 +115,14 @@ export const or = defineFn(overloadedFn(() => {
         }
     })
 });
+export const set = defineFn(
 /**
  * Checks if value type is Set.
  *
  * @param value - Value.
  * @returns _True_ if value type is Set, _false_ otherwise.
  */
-export const set = defineFn((value) => value instanceof Set, {
+(value) => value instanceof Set, {
     /**
      * Checks if value type is Set\<T\>.
      *
@@ -142,6 +148,7 @@ export const tuple = defineFn(overloadedFn(() => {
         }
     })
 });
+export const not = defineFn(
 /**
  * Checks if value type is not T.
  *
@@ -149,7 +156,7 @@ export const tuple = defineFn(overloadedFn(() => {
  * @param guard - Guard for type T.
  * @returns _True_ if value type is not T, _false_ otherwise.
  */
-export const not = defineFn((value, guard) => !guard(value), {
+(value, guard) => !guard(value), {
     array: _notFactory(array),
     boolean: _notFactory(boolean),
     empty: _notFactory(empty),

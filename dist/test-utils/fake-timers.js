@@ -22,11 +22,11 @@ exports.installFakeTimer = installFakeTimer;
 /**
  * Executes promise or async function.
  *
- * @param promiseAsync - Promise or async function.
+ * @param mixed - Promise or async function.
  * @returns The result of callback execution.
  */
-async function run(promiseAsync) {
-    const result = await Promise.all([__1.fn.run(promiseAsync), exports.clock.runAllAsync()]);
+async function run(mixed) {
+    const result = await Promise.all([__1.fn.run(mixed), exports.clock.runAllAsync()]);
     return result[0];
 }
 exports.run = run;

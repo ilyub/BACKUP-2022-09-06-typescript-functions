@@ -9,6 +9,8 @@
 - [Entry](types_core.md#entry)
 - [IndexedObject](types_core.md#indexedobject)
 - [IndexedObjects](types_core.md#indexedobjects)
+- [IndexedRecord](types_core.md#indexedrecord)
+- [IndexedRecords](types_core.md#indexedrecords)
 - [NumStr](types_core.md#numstr)
 - [NumStrE](types_core.md#numstre)
 - [NumStrU](types_core.md#numstru)
@@ -23,6 +25,8 @@
 - [Writable](types_core.md#writable)
 - [WritableIndexedObject](types_core.md#writableindexedobject)
 - [WritableIndexedObjects](types_core.md#writableindexedobjects)
+- [WritableIndexedRecord](types_core.md#writableindexedrecord)
+- [WritableIndexedRecords](types_core.md#writableindexedrecords)
 - [WritablePartialRecord](types_core.md#writablepartialrecord)
 - [WritablePartialRecords](types_core.md#writablepartialrecords)
 - [WritableRecord](types_core.md#writablerecord)
@@ -75,6 +79,30 @@ ___
 ### IndexedObjects
 
 Ƭ **IndexedObjects**<`T`\>: `ReadonlyArray`<[`IndexedObject`](types_core.md#indexedobject)<`T`\>\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | `unknown` |
+
+___
+
+### IndexedRecord
+
+Ƭ **IndexedRecord**<`T`\>: [`Rec`](types_core.md#rec)<`string`, `T`\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | `unknown` |
+
+___
+
+### IndexedRecords
+
+Ƭ **IndexedRecords**<`T`\>: `ReadonlyArray`<[`IndexedRecord`](types_core.md#indexedrecord)<`T`\>\>
 
 #### Type parameters
 
@@ -205,6 +233,30 @@ ___
 ### WritableIndexedObjects
 
 Ƭ **WritableIndexedObjects**<`T`\>: `ReadonlyArray`<[`WritableIndexedObject`](types_core.md#writableindexedobject)<`T`\>\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | `unknown` |
+
+___
+
+### WritableIndexedRecord
+
+Ƭ **WritableIndexedRecord**<`T`\>: [`WritableRecord`](types_core.md#writablerecord)<`string`, `T`\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | `unknown` |
+
+___
+
+### WritableIndexedRecords
+
+Ƭ **WritableIndexedRecords**<`T`\>: `ReadonlyArray`<[`WritableIndexedRecord`](types_core.md#writableindexedrecord)<`T`\>\>
 
 #### Type parameters
 

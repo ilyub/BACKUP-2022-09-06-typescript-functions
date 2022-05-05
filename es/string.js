@@ -153,10 +153,11 @@ export function unpadMultiline(str) {
         ? replaceAll(str.trim(), a.first(matches), detectEol(str))
         : str;
 }
+const _path = defineFn(
 /**
  * Not implemented.
  */
-const _path = defineFn(() => {
+() => {
     throw new Error("Not implemented");
 }, {
     /**

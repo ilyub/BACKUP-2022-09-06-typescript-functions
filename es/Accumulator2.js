@@ -1,4 +1,4 @@
-import { is } from "@";
+import * as is from "./guards";
 export class Accumulator2 {
     /**
      * Creates class instance.

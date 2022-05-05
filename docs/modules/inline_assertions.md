@@ -32,31 +32,11 @@
 
 • `Const` **array**: (`value`: `unknown`, `error?`: [`ErrorArg`](assertions.md#errorarg)) => [`unknowns`](types_core.md#unknowns) & { `of`: <T\>(`this`: `void`, `value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>, `error?`: [`ErrorArg`](assertions.md#errorarg)) => readonly `T`[]  }
 
-Asserts that value is an array.
-
-**`param`** Value.
-
-**`param`** Error.
-
-**`returns`** Value if value is an array.
-
-**`throws`** Error otherwise.
-
 ___
 
 ### indexedObject
 
 • `Const` **indexedObject**: (`value`: `unknown`, `error?`: [`ErrorArg`](assertions.md#errorarg)) => [`IndexedObject`](types_core.md#indexedobject)<`unknown`\> & { `of`: <T\>(`this`: `void`, `value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>, `error?`: [`ErrorArg`](assertions.md#errorarg)) => [`IndexedObject`](types_core.md#indexedobject)<`T`\>  }
-
-Asserts that value type is IndexedObject.
-
-**`param`** Value.
-
-**`param`** Error.
-
-**`returns`** Value if value type is IndexedObject.
-
-**`throws`** Error otherwise.
 
 ___
 
@@ -64,39 +44,17 @@ ___
 
 • `Const` **map**: (`value`: `unknown`, `error?`: [`ErrorArg`](assertions.md#errorarg)) => `ReadonlyMap`<`unknown`, `unknown`\> & { `of`: <K, V\>(`this`: `void`, `value`: `unknown`, `keyGuard`: [`Guard`](../interfaces/guards.Guard.md)<`K`\>, `valueGuard`: [`Guard`](../interfaces/guards.Guard.md)<`V`\>, `error?`: [`ErrorArg`](assertions.md#errorarg)) => `ReadonlyMap`<`K`, `V`\>  }
 
-Asserts that value type is Map.
-
-**`param`** Value.
-
-**`param`** Error.
-
-**`returns`** Value if value type is Map.
-
-**`throws`** Error otherwise.
-
 ___
 
 ### not
 
 • `Const` **not**: () => `never` & { `empty`: <T\>(`this`: `void`, `value`: `T`, `error?`: [`ErrorArg`](assertions.md#errorarg)) => `Exclude`<`T`, [`empty`](types_core.md#empty)\>  }
 
-Not implemented.
-
 ___
 
 ### set
 
 • `Const` **set**: (`value`: `unknown`, `error?`: [`ErrorArg`](assertions.md#errorarg)) => `ReadonlySet`<`unknown`\> & { `of`: <T\>(`this`: `void`, `value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>, `error?`: [`ErrorArg`](assertions.md#errorarg)) => `ReadonlySet`<`T`\>  }
-
-Asserts that value type is Set.
-
-**`param`** Value.
-
-**`param`** Error.
-
-**`returns`** Value if value type is Set.
-
-**`throws`** Error otherwise.
 
 ## Functions
 

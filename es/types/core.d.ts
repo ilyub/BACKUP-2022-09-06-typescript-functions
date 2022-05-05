@@ -1,6 +1,8 @@
 export declare type Entry<K extends PropertyKey, T> = readonly [K, T];
 export declare type IndexedObject<T = unknown> = Rec<PropertyKey, T>;
 export declare type IndexedObjects<T = unknown> = ReadonlyArray<IndexedObject<T>>;
+export declare type IndexedRecord<T = unknown> = Rec<string, T>;
+export declare type IndexedRecords<T = unknown> = ReadonlyArray<IndexedRecord<T>>;
 export declare type NumStr = number | string;
 export declare type NumStrE = empty | NumStr;
 export declare type NumStrU = NumStr | undefined;
@@ -21,6 +23,8 @@ export declare type Writable<T> = {
 };
 export declare type WritableIndexedObject<T = unknown> = WritableRecord<PropertyKey, T>;
 export declare type WritableIndexedObjects<T = unknown> = ReadonlyArray<WritableIndexedObject<T>>;
+export declare type WritableIndexedRecord<T = unknown> = WritableRecord<string, T>;
+export declare type WritableIndexedRecords<T = unknown> = ReadonlyArray<WritableIndexedRecord<T>>;
 export declare type WritablePartialRecord<K extends PropertyKey, V> = {
     [L in K]?: V;
 };

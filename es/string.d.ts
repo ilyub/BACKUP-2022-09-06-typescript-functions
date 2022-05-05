@@ -116,9 +116,6 @@ export declare function ucFirst(str: string): string;
  * @returns Unpadded string.
  */
 export declare function unpadMultiline(str: string): string;
-/**
- * Not implemented.
- */
 declare const _path: (() => never) & {
     /**
      * Adds leading slash.

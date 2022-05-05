@@ -2,14 +2,6 @@ import * as assert from "./assertions";
 import type * as is from "./guards";
 import type { ValidationObject } from "./helpers";
 import type * as types from "./types";
-/**
- * Asserts that value is an array.
- *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value is an array.
- * @throws Error otherwise.
- */
 export declare const array: ((value: unknown, error?: assert.ErrorArg | undefined) => types.unknowns) & {
     /**
      * Asserts that value type is T[].
@@ -23,14 +15,6 @@ export declare const array: ((value: unknown, error?: assert.ErrorArg | undefine
      */
     of<T>(this: void, value: unknown, guard: is.Guard<T>, error?: assert.ErrorArg | undefined): readonly T[];
 };
-/**
- * Asserts that value type is IndexedObject.
- *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value type is IndexedObject.
- * @throws Error otherwise.
- */
 export declare const indexedObject: ((value: unknown, error?: assert.ErrorArg | undefined) => types.IndexedObject) & {
     /**
      * Asserts that value type is IndexedObject\<T\>.
@@ -44,14 +28,6 @@ export declare const indexedObject: ((value: unknown, error?: assert.ErrorArg | 
      */
     of<T>(this: void, value: unknown, guard: is.Guard<T>, error?: assert.ErrorArg | undefined): types.IndexedObject<T>;
 };
-/**
- * Asserts that value type is Map.
- *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value type is Map.
- * @throws Error otherwise.
- */
 export declare const map: ((value: unknown, error?: assert.ErrorArg | undefined) => ReadonlyMap<unknown, unknown>) & {
     /**
      * Asserts that value type is Map\<K, V\>.
@@ -66,9 +42,6 @@ export declare const map: ((value: unknown, error?: assert.ErrorArg | undefined)
      */
     of<K, V>(this: void, value: unknown, keyGuard: is.Guard<K>, valueGuard: is.Guard<V>, error?: assert.ErrorArg | undefined): ReadonlyMap<K, V>;
 };
-/**
- * Not implemented.
- */
 export declare const not: (() => never) & {
     /**
      * Asserts that value type is not empty.
@@ -81,14 +54,6 @@ export declare const not: (() => never) & {
      */
     empty<T>(this: void, value: T, error?: assert.ErrorArg | undefined): Exclude<T, types.empty>;
 };
-/**
- * Asserts that value type is Set.
- *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value type is Set.
- * @throws Error otherwise.
- */
 export declare const set: ((value: unknown, error?: assert.ErrorArg | undefined) => ReadonlySet<unknown>) & {
     /**
      * Asserts that value type is Set\<T\>.

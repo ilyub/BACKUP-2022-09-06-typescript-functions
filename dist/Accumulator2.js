@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Accumulator2 = void 0;
-const _1 = require("@");
+const tslib_1 = require("tslib");
+const is = tslib_1.__importStar(require("./guards"));
 class Accumulator2 {
     /**
      * Creates class instance.
@@ -26,7 +27,7 @@ class Accumulator2 {
     }
     get(key1, key2) {
         var _a, _b, _c;
-        return _1.is.not.empty(key2)
+        return is.not.empty(key2)
             ? (_b = (_a = this.map.get(key1)) === null || _a === void 0 ? void 0 : _a.get(key2)) !== null && _b !== void 0 ? _b : []
             : (_c = this.map.get(key1)) !== null && _c !== void 0 ? _c : new Map();
     }

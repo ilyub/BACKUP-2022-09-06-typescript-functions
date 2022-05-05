@@ -4,10 +4,11 @@ exports.stringU = exports.string = exports.numberU = exports.number = exports.no
 const tslib_1 = require("tslib");
 const is = tslib_1.__importStar(require("./guards"));
 const module_definition_1 = require("./module-definition");
+exports.not = (0, module_definition_1.defineFn)(
 /**
  * Not implemented.
  */
-exports.not = (0, module_definition_1.defineFn)(() => {
+() => {
     throw new Error("Not implemented");
 }, {
     /**

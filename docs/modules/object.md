@@ -469,7 +469,7 @@ If more than one object has the same key, respective values are combined into ar
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `...objects` | [`IndexedObjects`](types_core.md#indexedobjects)<`unknown`\> | Objects. |
+| `...objects` | [`IndexedRecords`](types_core.md#indexedrecords)<`unknown`\> | Objects. |
 
 #### Returns
 

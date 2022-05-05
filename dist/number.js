@@ -4,6 +4,7 @@ exports.sum = exports.rootMeanSquareDeviation = exports.limit = exports.average 
 const tslib_1 = require("tslib");
 const assert = tslib_1.__importStar(require("./assertions"));
 const module_definition_1 = require("./module-definition");
+exports.ceil = (0, module_definition_1.defineFn)(
 /**
  * Ceils number to a given precision.
  *
@@ -11,7 +12,7 @@ const module_definition_1 = require("./module-definition");
  * @param precision - The number of digits to keep.
  * @returns Ceiled value.
  */
-exports.ceil = (0, module_definition_1.defineFn)((value, precision) => {
+(value, precision) => {
     const divider = 10 ** precision;
     return Math.ceil(value * divider) / divider;
 }, {
@@ -27,6 +28,7 @@ exports.ceil = (0, module_definition_1.defineFn)((value, precision) => {
         return Math.ceil((value - from) / step) * step + from;
     }
 });
+exports.floor = (0, module_definition_1.defineFn)(
 /**
  * Floors number to a given precision.
  *
@@ -34,7 +36,7 @@ exports.ceil = (0, module_definition_1.defineFn)((value, precision) => {
  * @param precision - The number of digits to keep.
  * @returns Floored value.
  */
-exports.floor = (0, module_definition_1.defineFn)((value, precision) => {
+(value, precision) => {
     const divider = 10 ** precision;
     return Math.floor(value * divider) / divider;
 }, {
@@ -51,6 +53,7 @@ exports.floor = (0, module_definition_1.defineFn)((value, precision) => {
         return Math.floor((value - from) / step) * step + from;
     }
 });
+exports.round = (0, module_definition_1.defineFn)(
 /**
  * Rounds number to a given precision.
  *
@@ -58,7 +61,7 @@ exports.floor = (0, module_definition_1.defineFn)((value, precision) => {
  * @param precision - The number of digits to keep.
  * @returns Rounded value.
  */
-exports.round = (0, module_definition_1.defineFn)((value, precision) => {
+(value, precision) => {
     const divider = 10 ** precision;
     return Math.round(value * divider) / divider;
 }, {

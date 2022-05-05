@@ -1,5 +1,5 @@
 import * as is from "./guards";
-import type { Entry, IndexedObject, IndexedObjects, NumStr, objectU, PartialRecord, Rec, Writable, OptionalStyle, StrictOmit } from "./types";
+import type { Entry, IndexedObject, NumStr, objectU, PartialRecord, Rec, Writable, OptionalStyle, StrictOmit, IndexedRecords } from "./types";
 export { _entries as entries };
 /**
  * Typed version of Object.assign.
@@ -198,7 +198,7 @@ export declare function map<K extends string, V, R>(obj: Rec<K, V>, callback: (v
  * @param objects - Objects.
  * @returns Merged object.
  */
-export declare function merge(...objects: IndexedObjects): IndexedObject;
+export declare function merge(...objects: IndexedRecords): IndexedObject;
 /**
  * Removes keys from object.
  *
