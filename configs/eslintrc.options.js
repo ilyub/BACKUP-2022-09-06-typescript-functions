@@ -58,6 +58,11 @@ module.exports = {
       message: 'Use "defineFn" instead',
       selector:
         ":matches(ExportNamedDeclaration, Program, TSModuleBlock) > VariableDeclaration > VariableDeclarator > CallExpression > :matches(.callee[name=assign], .callee[property.name=assign])"
+    },
+    {
+      message: "Unsafe function",
+      selector:
+        "CallExpression > MemberExpression.callee[object.name=o][property.name=unfreeze]"
     }
   ],
   requireJsdoc: [

@@ -231,6 +231,7 @@ test.each([
 test("unfreeze", () => {
   const obj1: TestInterface = { value: 1 };
 
+  // eslint-disable-next-line no-restricted-syntax -- Ok
   const obj2 = o.unfreeze(obj1);
 
   const typeCheck1: Equals<typeof obj1, { readonly value: number }> = 1;
