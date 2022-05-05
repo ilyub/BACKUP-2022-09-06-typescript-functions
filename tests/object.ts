@@ -60,7 +60,7 @@ test("fromEntries.exhaustive", () => {
 
 test("get", () => {
   expect(o.get({ a: 1 }, "a", is.number)).toBe(1);
-  expect(() => o.get({ a: 1 }, "a", is.string)).toThrow(new AssertionError());
+  expect(() => o.get({ a: 1 }, "a", is.string)).toThrow(AssertionError);
 });
 
 test("getPrototypeOf", () => {

@@ -4,7 +4,7 @@ test("average", () => {
   expect(num.average(10, 20, 30)).toBe(20);
   expect(num.average(10, 20)).toBe(15);
   expect(num.average(10)).toBe(10);
-  expect(() => num.average()).toThrow(new AssertionError());
+  expect(() => num.average()).toThrow(AssertionError);
 });
 
 test("ceil", () => {
@@ -42,7 +42,7 @@ test("limit", () => {
 test("rootMeanSquareDeviation", () => {
   expect(num.rootMeanSquareDeviation(0, 4)).toBe(2);
   expect(num.rootMeanSquareDeviation(1, 5)).toBe(2);
-  expect(() => num.rootMeanSquareDeviation()).toThrow(new AssertionError());
+  expect(() => num.rootMeanSquareDeviation()).toThrow(AssertionError);
 });
 
 test("round", () => {

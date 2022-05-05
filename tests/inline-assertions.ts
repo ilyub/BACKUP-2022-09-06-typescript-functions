@@ -14,15 +14,15 @@ test("array", () => {
 
   expect(subtest([1])).not.toThrow();
   expect(subtest(["a"])).not.toThrow();
-  expect(subtest(1)).toThrow(new AssertionError());
+  expect(subtest(1)).toThrow(AssertionError);
 });
 
 test("array.of", () => {
   const subtest = createSubtest(as.array.of, is.number);
 
   expect(subtest([1])).not.toThrow();
-  expect(subtest(["a"])).toThrow(new AssertionError());
-  expect(subtest(1)).toThrow(new AssertionError());
+  expect(subtest(["a"])).toThrow(AssertionError);
+  expect(subtest(1)).toThrow(AssertionError);
 });
 
 test("boolean", () => {
@@ -30,8 +30,8 @@ test("boolean", () => {
 
   expect(subtest(true)).not.toThrow();
   expect(subtest(false)).not.toThrow();
-  expect(subtest(1)).toThrow(new AssertionError());
-  expect(subtest(undefined)).toThrow(new AssertionError());
+  expect(subtest(1)).toThrow(AssertionError);
+  expect(subtest(undefined)).toThrow(AssertionError);
 });
 
 test("callable", () => {
@@ -41,8 +41,8 @@ test("callable", () => {
 
   expect(subtest(TestClass)).not.toThrow();
   expect(subtest(fn.noop)).not.toThrow();
-  expect(subtest(1)).toThrow(new AssertionError());
-  expect(subtest(undefined)).toThrow(new AssertionError());
+  expect(subtest(1)).toThrow(AssertionError);
+  expect(subtest(undefined)).toThrow(AssertionError);
 });
 
 test("enumeration", () => {
@@ -52,9 +52,9 @@ test("enumeration", () => {
 
   expect(subtest(1)).not.toThrow();
   expect(subtest("a")).not.toThrow();
-  expect(subtest("1")).toThrow(new AssertionError());
-  expect(subtest("b")).toThrow(new AssertionError());
-  expect(subtest(undefined)).toThrow(new AssertionError());
+  expect(subtest("1")).toThrow(AssertionError);
+  expect(subtest("b")).toThrow(AssertionError);
+  expect(subtest(undefined)).toThrow(AssertionError);
 });
 
 test("indexedObject", () => {
@@ -62,17 +62,17 @@ test("indexedObject", () => {
 
   expect(subtest({ a: 1 })).not.toThrow();
   expect(subtest({ a: "a" })).not.toThrow();
-  expect(subtest(1)).toThrow(new AssertionError());
-  expect(subtest(null)).toThrow(new AssertionError());
+  expect(subtest(1)).toThrow(AssertionError);
+  expect(subtest(null)).toThrow(AssertionError);
 });
 
 test("indexedObject.of", () => {
   const subtest = createSubtest(as.indexedObject.of, is.number);
 
   expect(subtest({ a: 1 })).not.toThrow();
-  expect(subtest({ a: "a" })).toThrow(new AssertionError());
-  expect(subtest(1)).toThrow(new AssertionError());
-  expect(subtest(null)).toThrow(new AssertionError());
+  expect(subtest({ a: "a" })).toThrow(AssertionError);
+  expect(subtest(1)).toThrow(AssertionError);
+  expect(subtest(null)).toThrow(AssertionError);
 });
 
 test("instance", () => {
@@ -81,8 +81,8 @@ test("instance", () => {
   const subtest = createSubtest(as.instance, TestClass);
 
   expect(subtest(new TestClass())).not.toThrow();
-  expect(subtest({})).toThrow(new AssertionError());
-  expect(subtest(undefined)).toThrow(new AssertionError());
+  expect(subtest({})).toThrow(AssertionError);
+  expect(subtest(undefined)).toThrow(AssertionError);
 });
 
 test("instances", () => {
@@ -91,8 +91,8 @@ test("instances", () => {
   const subtest = createSubtest(as.instances, TestClass);
 
   expect(subtest([new TestClass()])).not.toThrow();
-  expect(subtest([{}])).toThrow(new AssertionError());
-  expect(subtest([undefined])).toThrow(new AssertionError());
+  expect(subtest([{}])).toThrow(AssertionError);
+  expect(subtest([undefined])).toThrow(AssertionError);
 });
 
 test("map", () => {
@@ -101,18 +101,18 @@ test("map", () => {
   expect(subtest(new Map([["a", 1]]))).not.toThrow();
   expect(subtest(new Map([[1, 1]]))).not.toThrow();
   expect(subtest(new Map([["a", "a"]]))).not.toThrow();
-  expect(subtest({})).toThrow(new AssertionError());
-  expect(subtest(undefined)).toThrow(new AssertionError());
+  expect(subtest({})).toThrow(AssertionError);
+  expect(subtest(undefined)).toThrow(AssertionError);
 });
 
 test("map.of", () => {
   const subtest = createSubtest(as.map.of, is.string, is.number);
 
   expect(subtest(new Map([["a", 1]]))).not.toThrow();
-  expect(subtest(new Map([[1, 1]]))).toThrow(new AssertionError());
-  expect(subtest(new Map([["a", "a"]]))).toThrow(new AssertionError());
-  expect(subtest({})).toThrow(new AssertionError());
-  expect(subtest(undefined)).toThrow(new AssertionError());
+  expect(subtest(new Map([[1, 1]]))).toThrow(AssertionError);
+  expect(subtest(new Map([["a", "a"]]))).toThrow(AssertionError);
+  expect(subtest({})).toThrow(AssertionError);
+  expect(subtest(undefined)).toThrow(AssertionError);
 });
 
 test("not", () => {
@@ -123,8 +123,8 @@ test("not.empty", () => {
   const subtest = createSubtest(as.not.empty);
 
   expect(subtest(1)).not.toThrow();
-  expect(subtest(null)).toThrow(new AssertionError());
-  expect(subtest(undefined)).toThrow(new AssertionError());
+  expect(subtest(null)).toThrow(AssertionError);
+  expect(subtest(undefined)).toThrow(AssertionError);
 });
 
 test("numStr", () => {
@@ -132,19 +132,19 @@ test("numStr", () => {
 
   expect(subtest(1)).not.toThrow();
   expect(subtest("a")).not.toThrow();
-  expect(subtest(Number.NaN)).toThrow(new AssertionError());
-  expect(subtest(true)).toThrow(new AssertionError());
-  expect(subtest(undefined)).toThrow(new AssertionError());
+  expect(subtest(Number.NaN)).toThrow(AssertionError);
+  expect(subtest(true)).toThrow(AssertionError);
+  expect(subtest(undefined)).toThrow(AssertionError);
 });
 
 test("number", () => {
   const subtest = createSubtest(as.number);
 
   expect(subtest(1)).not.toThrow();
-  expect(subtest("a")).toThrow(new AssertionError());
-  expect(subtest(Number.NaN)).toThrow(new AssertionError());
-  expect(subtest(true)).toThrow(new AssertionError());
-  expect(subtest(undefined)).toThrow(new AssertionError());
+  expect(subtest("a")).toThrow(AssertionError);
+  expect(subtest(Number.NaN)).toThrow(AssertionError);
+  expect(subtest(true)).toThrow(AssertionError);
+  expect(subtest(undefined)).toThrow(AssertionError);
 });
 
 test("object", () => {
@@ -155,9 +155,9 @@ test("object", () => {
   expect(subtest({ num: 1, str: true })).not.toThrow();
   expect(subtest({ num: true, str: "a" })).not.toThrow();
   expect(subtest({ str: "a" })).not.toThrow();
-  expect(subtest(1)).toThrow(new AssertionError());
-  expect(subtest(null)).toThrow(new AssertionError());
-  expect(subtest(undefined)).toThrow(new AssertionError());
+  expect(subtest(1)).toThrow(AssertionError);
+  expect(subtest(null)).toThrow(AssertionError);
+  expect(subtest(undefined)).toThrow(AssertionError);
 });
 
 test("set", () => {
@@ -165,17 +165,17 @@ test("set", () => {
 
   expect(subtest(new Set(["a"]))).not.toThrow();
   expect(subtest(new Set([1]))).not.toThrow();
-  expect(subtest({})).toThrow(new AssertionError());
-  expect(subtest(undefined)).toThrow(new AssertionError());
+  expect(subtest({})).toThrow(AssertionError);
+  expect(subtest(undefined)).toThrow(AssertionError);
 });
 
 test("set.of", () => {
   const subtest = createSubtest(as.set.of, is.string);
 
   expect(subtest(new Set(["a"]))).not.toThrow();
-  expect(subtest(new Set([1]))).toThrow(new AssertionError());
-  expect(subtest({})).toThrow(new AssertionError());
-  expect(subtest(undefined)).toThrow(new AssertionError());
+  expect(subtest(new Set([1]))).toThrow(AssertionError);
+  expect(subtest({})).toThrow(AssertionError);
+  expect(subtest(undefined)).toThrow(AssertionError);
 });
 
 test("string", () => {
@@ -183,8 +183,8 @@ test("string", () => {
 
   expect(subtest("a")).not.toThrow();
   expect(subtest("")).not.toThrow();
-  expect(subtest(undefined)).toThrow(new AssertionError());
-  expect(subtest(1)).toThrow(new AssertionError());
+  expect(subtest(undefined)).toThrow(AssertionError);
+  expect(subtest(1)).toThrow(AssertionError);
 });
 
 test("stringU", () => {
@@ -192,13 +192,13 @@ test("stringU", () => {
 
   expect(subtest("a")).not.toThrow();
   expect(subtest(undefined)).not.toThrow();
-  expect(subtest("")).toThrow(new AssertionError());
-  expect(subtest(1)).toThrow(new AssertionError());
+  expect(subtest("")).toThrow(AssertionError);
+  expect(subtest(1)).toThrow(AssertionError);
 });
 
 test("symbol", () => {
   const subtest = createSubtest(as.symbol);
 
   expect(subtest(Symbol("TestSymbol"))).not.toThrow();
-  expect(subtest(1)).toThrow(new AssertionError());
+  expect(subtest(1)).toThrow(AssertionError);
 });
