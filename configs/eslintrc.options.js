@@ -51,5 +51,16 @@ module.exports = {
     { ids: ["JSON"], subOptionsId: "functions.json" },
     { ids: ["Reflect"], subOptionsId: "functions.reflect" },
     { ids: ["Record"], subOptionsId: "functions.types.core" }
+  ],
+  noRestrictedSyntax: [
+    {
+      message: 'Use "defineFn" instead',
+      selector:
+        ":matches(ExportNamedDeclaration, Program, TSModuleBlock) > VariableDeclaration > VariableDeclarator > CallExpression > :matches(.callee[name=assign], .callee[property.name=assign])"
+    }
+  ],
+  requireJsdoc: [
+    ":matches(ExportNamedDeclaration, Program, TSModuleBlock) > VariableDeclaration > VariableDeclarator > CallExpression[callee.name=defineFn] > :matches(ArrowFunctionExpression, FunctionExpression)",
+    ":matches(ExportNamedDeclaration, Program, TSModuleBlock) > VariableDeclaration > VariableDeclarator > CallExpression[callee.name=defineFn] > ObjectExpression > Property > :matches(ArrowFunctionExpression, FunctionExpression)"
   ]
 };
