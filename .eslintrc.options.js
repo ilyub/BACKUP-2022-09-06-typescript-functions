@@ -4,7 +4,7 @@ module.exports = {
     {
       localName: "matchers",
       sourcePattern: "jest-extended/all",
-      type: "wildcard"
+      type: "default"
     },
     {
       autoImportSource: "./array",
