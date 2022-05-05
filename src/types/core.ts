@@ -9,6 +9,10 @@ export type IndexedObject<T = unknown> = Rec<PropertyKey, T>;
 
 export type IndexedObjects<T = unknown> = ReadonlyArray<IndexedObject<T>>;
 
+export type IndexedRecord<T = unknown> = Rec<string, T>;
+
+export type IndexedRecords<T = unknown> = ReadonlyArray<IndexedRecord<T>>;
+
 export type NumStr = number | string;
 
 export type NumStrE = empty | NumStr;
@@ -45,6 +49,12 @@ export type WritableIndexedObject<T = unknown> = WritableRecord<PropertyKey, T>;
 
 export type WritableIndexedObjects<T = unknown> = ReadonlyArray<
   WritableIndexedObject<T>
+>;
+
+export type WritableIndexedRecord<T = unknown> = WritableRecord<string, T>;
+
+export type WritableIndexedRecords<T = unknown> = ReadonlyArray<
+  WritableIndexedRecord<T>
 >;
 
 export type WritablePartialRecord<K extends PropertyKey, V> = {

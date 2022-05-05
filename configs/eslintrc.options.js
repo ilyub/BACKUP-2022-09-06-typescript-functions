@@ -39,7 +39,8 @@ module.exports = {
         /\b(?:empty|undefined)\s*\|\s*(?:NumStr|PropertyKey|boolean|false|null|number|object|string|true)\b/u
           .source,
         /\bPartial\s*<\s*Rec\b/u.source,
-        /\bWritable\s*<\s*(?:IndexedObject|PartialRecord|Rec)\b/u.source,
+        /\bWritable\s*<\s*(?:IndexedObject|IndexedRecord|PartialRecord|Rec)\b/u
+          .source,
         /\bnumber\s*\|\s*string\b/u.source,
         /\breadonly\s+(?:NumStr|PropertyKey|boolean|never|number|object|string|unknown)\[\]/u
           .source

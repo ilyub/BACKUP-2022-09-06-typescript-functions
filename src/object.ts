@@ -8,7 +8,6 @@ import * as reflect from "./reflect";
 import type {
   Entry,
   IndexedObject,
-  IndexedObjects,
   NumStr,
   objectU,
   PartialRecord,
@@ -16,7 +15,8 @@ import type {
   Writable,
   WritablePartialRecord,
   OptionalStyle,
-  StrictOmit
+  StrictOmit,
+  IndexedRecords
 } from "./types";
 
 export { _entries as entries };
@@ -317,8 +317,8 @@ export function map<K extends string, V, R>(
  * @param objects - Objects.
  * @returns Merged object.
  */
-export function merge(...objects: IndexedObjects): IndexedObject {
-  const result = new Accumulator<PropertyKey, unknown>();
+export function merge(...objects: IndexedRecords): IndexedObject {
+  const result = new Accumulator<string, unknown>();
 
   for (const obj of objects)
     for (const [key, value] of _entries(obj)) result.push(key, value);
