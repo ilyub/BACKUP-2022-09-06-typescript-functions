@@ -2,14 +2,14 @@ import * as assert from "./assertions";
 import { defineFn } from "./module-definition";
 import type { numbers } from "./types";
 
-/**
- * Ceils number to a given precision.
- *
- * @param value - Value.
- * @param precision - The number of digits to keep.
- * @returns Ceiled value.
- */
 export const ceil = defineFn(
+  /**
+   * Ceils number to a given precision.
+   *
+   * @param value - Value.
+   * @param precision - The number of digits to keep.
+   * @returns Ceiled value.
+   */
   (value: number, precision: number): number => {
     const divider = 10 ** precision;
 
@@ -30,14 +30,14 @@ export const ceil = defineFn(
   }
 );
 
-/**
- * Floors number to a given precision.
- *
- * @param value - Value.
- * @param precision - The number of digits to keep.
- * @returns Floored value.
- */
 export const floor = defineFn(
+  /**
+   * Floors number to a given precision.
+   *
+   * @param value - Value.
+   * @param precision - The number of digits to keep.
+   * @returns Floored value.
+   */
   (value: number, precision: number): number => {
     const divider = 10 ** precision;
 
@@ -59,14 +59,14 @@ export const floor = defineFn(
   }
 );
 
-/**
- * Rounds number to a given precision.
- *
- * @param value - Value.
- * @param precision - The number of digits to keep.
- * @returns Rounded value.
- */
 export const round = defineFn(
+  /**
+   * Rounds number to a given precision.
+   *
+   * @param value - Value.
+   * @param precision - The number of digits to keep.
+   * @returns Rounded value.
+   */
   (value: number, precision: number): number => {
     const divider = 10 ** precision;
 

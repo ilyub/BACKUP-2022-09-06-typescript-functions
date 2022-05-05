@@ -182,10 +182,10 @@ export function unpadMultiline(str: string): string {
     : str;
 }
 
-/**
- * Not implemented.
- */
 const _path = defineFn(
+  /**
+   * Not implemented.
+   */
   (): never => {
     throw new Error("Not implemented");
   },

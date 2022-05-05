@@ -2,10 +2,10 @@ import * as is from "./guards";
 import { defineFn } from "./module-definition";
 import type * as types from "./types";
 
-/**
- * Not implemented.
- */
 export const not = defineFn(
+  /**
+   * Not implemented.
+   */
   (): never => {
     throw new Error("Not implemented");
   },

@@ -4,15 +4,15 @@ import type * as is from "./guards";
 import type { ValidationObject } from "./helpers";
 import type * as types from "./types";
 
-/**
- * Asserts that value is an array.
- *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value is an array.
- * @throws Error otherwise.
- */
 export const array = defineFn(
+  /**
+   * Asserts that value is an array.
+   *
+   * @param value - Value.
+   * @param error - Error.
+   * @returns Value if value is an array.
+   * @throws Error otherwise.
+   */
   (value: unknown, error?: assert.ErrorArg): types.unknowns => {
     assert.array(value, error);
 
@@ -42,15 +42,15 @@ export const array = defineFn(
   }
 );
 
-/**
- * Asserts that value type is IndexedObject.
- *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value type is IndexedObject.
- * @throws Error otherwise.
- */
 export const indexedObject = defineFn(
+  /**
+   * Asserts that value type is IndexedObject.
+   *
+   * @param value - Value.
+   * @param error - Error.
+   * @returns Value if value type is IndexedObject.
+   * @throws Error otherwise.
+   */
   (value: unknown, error?: assert.ErrorArg): types.IndexedObject => {
     assert.indexedObject(value, error);
 
@@ -80,15 +80,15 @@ export const indexedObject = defineFn(
   }
 );
 
-/**
- * Asserts that value type is Map.
- *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value type is Map.
- * @throws Error otherwise.
- */
 export const map = defineFn(
+  /**
+   * Asserts that value type is Map.
+   *
+   * @param value - Value.
+   * @param error - Error.
+   * @returns Value if value type is Map.
+   * @throws Error otherwise.
+   */
   (value: unknown, error?: assert.ErrorArg): ReadonlyMap<unknown, unknown> => {
     assert.map(value, error);
 
@@ -120,10 +120,10 @@ export const map = defineFn(
   }
 );
 
-/**
- * Not implemented.
- */
 export const not = defineFn(
+  /**
+   * Not implemented.
+   */
   (): never => {
     throw new Error("Not implemented");
   },
@@ -149,15 +149,15 @@ export const not = defineFn(
   }
 );
 
-/**
- * Asserts that value type is Set.
- *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value type is Set.
- * @throws Error otherwise.
- */
 export const set = defineFn(
+  /**
+   * Asserts that value type is Set.
+   *
+   * @param value - Value.
+   * @param error - Error.
+   * @returns Value if value type is Set.
+   * @throws Error otherwise.
+   */
   (value: unknown, error?: assert.ErrorArg): ReadonlySet<unknown> => {
     assert.set(value, error);
 

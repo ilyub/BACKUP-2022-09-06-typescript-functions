@@ -1,3 +1,5 @@
+/* eslint-disable @skylib/primary-export-only -- Wait for @skylib/eslint update */
+
 import * as a from "./array";
 import { typedef } from "./helpers";
 import { defineFn, overloadedFn } from "./module-definition";
@@ -120,13 +122,13 @@ export const and = defineFn(
   }
 );
 
-/**
- * Checks if value is an array.
- *
- * @param value - Value.
- * @returns _True_ if value is an array, _false_ otherwise.
- */
 export const array = defineFn(
+  /**
+   * Checks if value is an array.
+   *
+   * @param value - Value.
+   * @returns _True_ if value is an array, _false_ otherwise.
+   */
   (value: unknown): value is types.unknowns => Array.isArray(value),
   {
     /**
@@ -143,13 +145,13 @@ export const array = defineFn(
   }
 );
 
-/**
- * Checks if value type is IndexedObject.
- *
- * @param value - Value.
- * @returns _True_ if value type is IndexedObject, _false_ otherwise.
- */
 export const indexedObject = defineFn(
+  /**
+   * Checks if value type is IndexedObject.
+   *
+   * @param value - Value.
+   * @returns _True_ if value type is IndexedObject, _false_ otherwise.
+   */
   (value: unknown): value is types.IndexedObject =>
     typeof value === "object" && value !== null,
   {
@@ -171,13 +173,13 @@ export const indexedObject = defineFn(
   }
 );
 
-/**
- * Checks if value type is Map.
- *
- * @param value - Value.
- * @returns _True_ if value type is Map, _false_ otherwise.
- */
 export const map = defineFn(
+  /**
+   * Checks if value type is Map.
+   *
+   * @param value - Value.
+   * @returns _True_ if value type is Map, _false_ otherwise.
+   */
   (value: unknown): value is ReadonlyMap<unknown, unknown> =>
     value instanceof Map,
   {
@@ -204,13 +206,13 @@ export const map = defineFn(
   }
 );
 
-/**
- * Checks if value is an object.
- *
- * @param value - Value.
- * @returns _True_ if value is an object, _false_ otherwise.
- */
 export const object = defineFn(
+  /**
+   * Checks if value is an object.
+   *
+   * @param value - Value.
+   * @returns _True_ if value is an object, _false_ otherwise.
+   */
   (value: unknown): value is object =>
     typeof value === "object" && value !== null,
   {
@@ -404,13 +406,13 @@ export const or = defineFn(
   }
 );
 
-/**
- * Checks if value type is Set.
- *
- * @param value - Value.
- * @returns _True_ if value type is Set, _false_ otherwise.
- */
 export const set = defineFn(
+  /**
+   * Checks if value type is Set.
+   *
+   * @param value - Value.
+   * @returns _True_ if value type is Set, _false_ otherwise.
+   */
   (value: unknown): value is ReadonlySet<unknown> => value instanceof Set,
   {
     /**
@@ -566,14 +568,14 @@ export const tuple = defineFn(
   }
 );
 
-/**
- * Checks if value type is not T.
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @returns _True_ if value type is not T, _false_ otherwise.
- */
 export const not = defineFn(
+  /**
+   * Checks if value type is not T.
+   *
+   * @param value - Value.
+   * @param guard - Guard for type T.
+   * @returns _True_ if value type is not T, _false_ otherwise.
+   */
   <T, V>(value: V, guard: Guard<T>): value is Exclude<V, T> => !guard(value),
   {
     array: _notFactory(array),
