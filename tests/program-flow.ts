@@ -11,25 +11,25 @@ test("setInterval, clearInterval", async () => {
 
     const callback2 = jest.fn();
 
-    const handler1 = programFlow.setInterval(callback1, 200);
+    const handler1 = programFlow.setInterval(callback1, 2000);
 
-    const handler2 = programFlow.setInterval(callback2, 200);
+    const handler2 = programFlow.setInterval(callback2, 2000);
 
     {
-      await wait(100);
+      await wait(1000);
       expect(callback1).not.toHaveBeenCalled();
       expect(callback2).not.toHaveBeenCalled();
     }
 
     {
-      await wait(200);
+      await wait(1000);
       expect(callback1).toHaveBeenCalledTimes(1);
       expect(callback2).toHaveBeenCalledTimes(1);
     }
 
     {
       programFlow.clearInterval(handler1);
-      await wait(200);
+      await wait(2000);
       expect(callback1).toHaveBeenCalledTimes(1);
       expect(callback2).toHaveBeenCalledTimes(2);
     }
@@ -47,25 +47,25 @@ test("setTimeout, clearTimeout", async () => {
 
     const callback2 = jest.fn();
 
-    const handlers1 = programFlow.setTimeout(callback1, 200);
+    const handlers1 = programFlow.setTimeout(callback1, 2000);
 
-    const handlers2 = programFlow.setTimeout(callback2, 200);
+    const handlers2 = programFlow.setTimeout(callback2, 2000);
 
     {
-      await wait(100);
+      await wait(1000);
       expect(callback1).not.toHaveBeenCalled();
       expect(callback2).not.toHaveBeenCalled();
     }
 
     {
       programFlow.clearTimeout(handlers1);
-      await wait(200);
+      await wait(1000);
       expect(callback1).not.toHaveBeenCalled();
       expect(callback2).toHaveBeenCalledTimes(1);
     }
 
     {
-      await wait(200);
+      await wait(1000);
       expect(callback1).not.toHaveBeenCalled();
       expect(callback2).toHaveBeenCalledTimes(1);
     }
