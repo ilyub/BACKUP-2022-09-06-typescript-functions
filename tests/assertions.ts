@@ -237,3 +237,7 @@ test("toBeTrue", () => {
   expect(subtest(false)).toThrow(AssertionError);
   expect(subtest(undefined)).toThrow(AssertionError);
 });
+
+test("wrapError", () => {
+  expect(assert.wrapError(1)()).toBe(1);
+});

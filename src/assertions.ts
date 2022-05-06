@@ -287,6 +287,16 @@ export function toBeTrue(
 }
 
 /**
+ * Wraps error.
+ *
+ * @param e - Error.
+ * @returns Wrapped error.
+ */
+export function wrapError<T>(e: T): () => T {
+  return () => e;
+}
+
+/**
  * Asserts that value type is T[].
  *
  * @param value - Value.
