@@ -784,6 +784,16 @@ export function instances<T>(
 }
 
 /**
+ * Checks if value is _never_.
+ *
+ * @param _value - Value.
+ * @returns _False_.
+ */
+export function never(_value: unknown): _value is never {
+  return false;
+}
+
+/**
  * Checks if value type is NumStr.
  *
  * @param value - Value.
@@ -855,7 +865,7 @@ export function symbol(value: unknown): value is symbol {
  * Checks if value is _unknown_.
  *
  * @param _value - Value.
- * @returns _True_ if value is _unknown_, _false_ otherwise.
+ * @returns _True_.
  */
 export function unknown(_value: unknown): _value is unknown {
   return true;

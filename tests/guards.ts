@@ -118,6 +118,12 @@ test("map.of", () => {
   expect(is.map.of(undefined, is.string, is.number)).toBeFalse();
 });
 
+test("never", () => {
+  expect(is.never(1)).toBeFalse();
+  expect(is.never(null)).toBeFalse();
+  expect(is.never(undefined)).toBeFalse();
+});
+
 test("not", () => {
   expect(is.not(true, is.number)).toBeTrue();
   expect(is.not(1, is.number)).toBeFalse();
