@@ -192,6 +192,15 @@ export function toBeTrue(value, error) {
     byGuard(value, is.true, error);
 }
 /**
+ * Wraps error.
+ *
+ * @param e - Error.
+ * @returns Wrapped error.
+ */
+export function wrapError(e) {
+    return () => e;
+}
+/**
  * Asserts that value type is T[].
  *
  * @param value - Value.

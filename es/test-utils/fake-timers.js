@@ -2,7 +2,7 @@ import { onDemand, assert, fn, a } from "..";
 import * as fakeTimers from "@sinonjs/fake-timers";
 import * as _ from "@skylib/lodash-commonjs-es";
 export const clock = onDemand(() => {
-    assert.not.empty(_clock);
+    assert.not.empty(_clock, "Fake timer is not installed");
     return _clock;
 });
 /**

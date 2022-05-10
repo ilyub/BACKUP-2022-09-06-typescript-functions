@@ -42,6 +42,7 @@
 - [symbol](assertions.md#symbol)
 - [toBeFalse](assertions.md#tobefalse)
 - [toBeTrue](assertions.md#tobetrue)
+- [wrapError](assertions.md#wraperror)
 
 ## Type aliases
 
@@ -455,3 +456,39 @@ Asserts value to be _true_.
 #### Returns
 
 asserts value is true
+
+___
+
+### wrapError
+
+▸ **wrapError**<`T`\>(`e`): () => `T`
+
+Wraps error.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `e` | `T` | Error. |
+
+#### Returns
+
+`fn`
+
+Wrapped error.
+
+▸ (): `T`
+
+Wraps error.
+
+##### Returns
+
+`T`
+
+Wrapped error.

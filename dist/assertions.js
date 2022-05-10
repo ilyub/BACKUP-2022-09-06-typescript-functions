@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.toBeTrue = exports.toBeFalse = exports.symbol = exports.stringU = exports.string = exports.set = exports.object = exports.number = exports.numStr = exports.not = exports.map = exports.instances = exports.instance = exports.indexedObject = exports.enumeration = exports.empty = exports.callable = exports.byGuard = exports.boolean = exports.array = void 0;
+exports.wrapError = exports.toBeTrue = exports.toBeFalse = exports.symbol = exports.stringU = exports.string = exports.set = exports.object = exports.number = exports.numStr = exports.not = exports.map = exports.instances = exports.instance = exports.indexedObject = exports.enumeration = exports.empty = exports.callable = exports.byGuard = exports.boolean = exports.array = void 0;
 const tslib_1 = require("tslib");
 const errors_1 = require("./errors");
 const is = tslib_1.__importStar(require("./guards"));
@@ -215,6 +215,16 @@ function toBeTrue(value, error) {
     byGuard(value, is.true, error);
 }
 exports.toBeTrue = toBeTrue;
+/**
+ * Wraps error.
+ *
+ * @param e - Error.
+ * @returns Wrapped error.
+ */
+function wrapError(e) {
+    return () => e;
+}
+exports.wrapError = wrapError;
 /**
  * Asserts that value type is T[].
  *

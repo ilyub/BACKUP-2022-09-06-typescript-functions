@@ -166,4 +166,11 @@ export declare function toBeFalse(value: unknown, error?: ErrorArg): asserts val
  * @param error - Error.
  */
 export declare function toBeTrue(value: unknown, error?: ErrorArg): asserts value is true;
+/**
+ * Wraps error.
+ *
+ * @param e - Error.
+ * @returns Wrapped error.
+ */
+export declare function wrapError<T>(e: T): () => T;
 //# sourceMappingURL=assertions.d.ts.map

@@ -6,7 +6,7 @@ const __1 = require("..");
 const fakeTimers = tslib_1.__importStar(require("@sinonjs/fake-timers"));
 const _ = tslib_1.__importStar(require("@skylib/lodash-commonjs-es"));
 exports.clock = (0, __1.onDemand)(() => {
-    __1.assert.not.empty(_clock);
+    __1.assert.not.empty(_clock, "Fake timer is not installed");
     return _clock;
 });
 /**
