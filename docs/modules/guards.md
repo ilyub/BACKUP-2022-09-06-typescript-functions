@@ -49,6 +49,7 @@
 - [mapU](guards.md#mapu)
 - [maps](guards.md#maps)
 - [mapsU](guards.md#mapsu)
+- [never](guards.md#never)
 - [null](guards.md#null)
 - [numStr](guards.md#numstr)
 - [numStrU](guards.md#numstru)
@@ -540,6 +541,26 @@ value is undefined \| readonly ReadonlyMap<unknown, unknown\>[]
 
 ___
 
+### never
+
+▸ **never**(`_value`): \_value is never
+
+Checks if value is _never_.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `_value` | `unknown` | Value. |
+
+#### Returns
+
+\_value is never
+
+_False_.
+
+___
+
 ### null
 
 ▸ **null**(`value`): value is null
@@ -988,7 +1009,7 @@ Checks if value is _unknown_.
 
 \_value is unknown
 
-_True_ if value is _unknown_, _false_ otherwise.
+_True_.
 
 ___
 

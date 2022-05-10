@@ -274,6 +274,15 @@ export function instances(value, ctor) {
     return array(value) && value.every(v => v instanceof ctor);
 }
 /**
+ * Checks if value is _never_.
+ *
+ * @param _value - Value.
+ * @returns _False_.
+ */
+export function never(_value) {
+    return false;
+}
+/**
  * Checks if value type is NumStr.
  *
  * @param value - Value.
@@ -336,7 +345,7 @@ export function symbol(value) {
  * Checks if value is _unknown_.
  *
  * @param _value - Value.
- * @returns _True_ if value is _unknown_, _false_ otherwise.
+ * @returns _True_.
  */
 export function unknown(_value) {
     return true;

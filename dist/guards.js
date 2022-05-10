@@ -2,7 +2,7 @@
 /* eslint-disable @skylib/primary-export-only -- Wait for @skylib/eslint update */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.instance = exports.factory = exports.enumeration = exports.empty = exports.callable = exports.boolean = exports.unknownsU = exports.unknowns = exports.symbolsU = exports.symbols = exports.symbolU = exports.stringsU = exports.strings = exports.setsU = exports.sets = exports.setU = exports.objectsU = exports.objects = exports.objectU = exports.numbersU = exports.numbers = exports.numberU = exports.numStrsU = exports.numStrs = exports.numStrU = exports.mapsU = exports.maps = exports.mapU = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObjectU = exports.booleansU = exports.booleans = exports.booleanU = exports.arraysU = exports.arrays = exports.arrayU = exports.not = exports.tuple = exports.set = exports.or = exports.object = exports.map = exports.indexedObject = exports.array = exports.and = exports.undefined = exports.true = exports.null = exports.false = void 0;
-exports.unknown = exports.symbol = exports.stringU = exports.string = exports.number = exports.numStr = exports.instances = void 0;
+exports.unknown = exports.symbol = exports.stringU = exports.string = exports.number = exports.numStr = exports.never = exports.instances = void 0;
 const tslib_1 = require("tslib");
 const a = tslib_1.__importStar(require("./array"));
 const helpers_1 = require("./helpers");
@@ -285,6 +285,16 @@ function instances(value, ctor) {
 }
 exports.instances = instances;
 /**
+ * Checks if value is _never_.
+ *
+ * @param _value - Value.
+ * @returns _False_.
+ */
+function never(_value) {
+    return false;
+}
+exports.never = never;
+/**
  * Checks if value type is NumStr.
  *
  * @param value - Value.
@@ -352,7 +362,7 @@ exports.symbol = symbol;
  * Checks if value is _unknown_.
  *
  * @param _value - Value.
- * @returns _True_ if value is _unknown_, _false_ otherwise.
+ * @returns _True_.
  */
 function unknown(_value) {
     return true;
