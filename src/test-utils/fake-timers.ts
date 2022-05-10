@@ -4,7 +4,7 @@ import * as _ from "@skylib/lodash-commonjs-es";
 import type { AsyncPromise } from "..";
 
 export const clock = onDemand(() => {
-  assert.not.empty(_clock);
+  assert.not.empty(_clock, "Fake timer is not installed");
 
   return _clock;
 });
