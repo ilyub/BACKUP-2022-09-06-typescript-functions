@@ -1,4 +1,4 @@
-import { assert } from "..";
+import { as } from "..";
 import type { Async } from "..";
 import type { Extends } from "ts-toolbelt/out/Any/Extends";
 import type { If } from "ts-toolbelt/out/Any/If";
@@ -28,11 +28,9 @@ export const executionTimeToBe: ExpectFromMatcher<"executionTimeToBe"> = async (
   got,
   expected
 ) => {
-  assert.callable<Async<unknown>>(got, "Expecting async function");
-
   const start = Date.now();
 
-  await got();
+  await as.callable<Async<unknown>>(got, "Expecting async function")();
 
   const gotTime = Date.now() - start;
 
@@ -54,7 +52,10 @@ export const toBeSameAs: ExpectFromMatcher<"toBeSameAs"> = (got, expected) =>
     ? { message: () => "Expected not the same object", pass: true }
     : { message: () => "Expected the same object", pass: false };
 
-export const matchers = { executionTimeToBe, toBeSameAs } as const;
+export const matchers = {
+  executionTimeToBe,
+  toBeSameAs
+} as const;
 
 export interface ExpectFromMatcher<K extends keyof Matchers> {
   /**

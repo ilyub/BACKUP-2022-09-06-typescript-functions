@@ -134,14 +134,12 @@ export const array = defineFn(
     /**
      * Checks if value type is T[].
      *
-     * @param this - No this.
      * @param value - Value.
      * @param guard - Guard for type T.
      * @returns _True_ if value type is T[], _false_ otherwise.
      */
-    of<T>(this: void, value: unknown, guard: Guard<T>): value is readonly T[] {
-      return array(value) && value.every(guard);
-    }
+    of: <T>(value: unknown, guard: Guard<T>): value is readonly T[] =>
+      array(value) && value.every(guard)
   }
 );
 
@@ -158,18 +156,12 @@ export const indexedObject = defineFn(
     /**
      * Checks if value type is IndexedObject\<T\>.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param guard - Guard for type T.
      * @returns _True_ if value type is IndexedObject\<T\>, _false_ otherwise.
      */
-    of<T>(
-      this: void,
-      value: unknown,
-      guard: Guard<T>
-    ): value is types.IndexedObject<T> {
-      return object(value) && o.values(value).every(guard);
-    }
+    of: <T>(value: unknown, guard: Guard<T>): value is types.IndexedObject<T> =>
+      object(value) && o.values(value).every(guard)
   }
 );
 
@@ -186,23 +178,18 @@ export const map = defineFn(
     /**
      * Checks if value type is Map\<K, V\>.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param keyGuard - Key guard.
      * @param valueGuard - Value guard.
      * @returns _True_ if value type is Map\<K, V\>, _false_ otherwise.
      */
-    of<K, V>(
-      this: void,
+    of: <K, V>(
       value: unknown,
       keyGuard: Guard<K>,
       valueGuard: Guard<V>
-    ): value is ReadonlyMap<K, V> {
-      return (
-        map(value) &&
-        a.fromIterable(value).every(([k, v]) => keyGuard(k) && valueGuard(v))
-      );
-    }
+    ): value is ReadonlyMap<K, V> =>
+      map(value) &&
+      a.fromIterable(value).every(([k, v]) => keyGuard(k) && valueGuard(v))
   }
 );
 
@@ -418,18 +405,12 @@ export const set = defineFn(
     /**
      * Checks if value type is Set\<T\>.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param guard - Guard for type T.
      * @returns _True_ if value type is Set\<T\>, _false_ otherwise.
      */
-    of<T>(
-      this: void,
-      value: unknown,
-      guard: Guard<T>
-    ): value is ReadonlySet<T> {
-      return set(value) && a.fromIterable(value).every(v => guard(v));
-    }
+    of: <T>(value: unknown, guard: Guard<T>): value is ReadonlySet<T> =>
+      set(value) && a.fromIterable(value).every(v => guard(v))
   }
 );
 

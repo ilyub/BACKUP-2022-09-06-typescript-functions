@@ -309,43 +309,43 @@ test("wrapProxyHandler: throw", () => {
   const proxyObjectFreeze = new Proxy(new TestClass(), handler);
 
   const subtests = {
-    apply(): void {
+    apply: (): void => {
       reflect.apply(proxyFunction, undefined, []);
     },
-    construct(): void {
+    construct: (): void => {
       reflect.construct(proxyClass, []);
     },
-    defineProperty(): void {
+    defineProperty: (): void => {
       reflect.defineProperty(proxyObject, "x", {});
     },
-    deleteProperty(): void {
+    deleteProperty: (): void => {
       reflect.deleteProperty(proxyObjectDelete, "x");
     },
-    get(): void {
+    get: (): void => {
       reflect.get(proxyObject, "x");
     },
-    getOwnPropertyDescriptor(): void {
+    getOwnPropertyDescriptor: (): void => {
       reflect.getOwnPropertyDescriptor(proxyObject, "x");
     },
-    getPrototypeOf(): void {
+    getPrototypeOf: (): void => {
       reflect.getPrototypeOf(proxyObject);
     },
-    has(): void {
+    has: (): void => {
       reflect.has(proxyObject, "x");
     },
-    isExtensible(): void {
+    isExtensible: (): void => {
       reflect.isExtensible(proxyObject);
     },
-    ownKeys(): void {
+    ownKeys: (): void => {
       reflect.ownKeys(proxyObject);
     },
-    preventExtensions(): void {
+    preventExtensions: (): void => {
       reflect.preventExtensions(proxyObjectFreeze);
     },
-    set(): void {
+    set: (): void => {
       reflect.set(proxyObject, "x", 1);
     },
-    setPrototypeOf(): void {
+    setPrototypeOf: (): void => {
       reflect.setPrototypeOf(proxyObject, null);
     }
   };

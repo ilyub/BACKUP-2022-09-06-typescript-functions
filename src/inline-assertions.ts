@@ -13,7 +13,7 @@ export const array = defineFn(
    * @returns Value if value is an array.
    * @throws Error otherwise.
    */
-  (value: unknown, error?: assert.ErrorArg): types.unknowns => {
+  (value: unknown, error?: assert.ErrorArg) => {
     assert.array(value, error);
 
     return value;
@@ -22,19 +22,13 @@ export const array = defineFn(
     /**
      * Asserts that value type is T[].
      *
-     * @param this - No this.
      * @param value - Value.
      * @param guard - Guard for type T.
      * @param error - Error.
      * @returns Value if value type is T[].
      * @throws Error otherwise.
      */
-    of<T>(
-      this: void,
-      value: unknown,
-      guard: is.Guard<T>,
-      error?: assert.ErrorArg
-    ): readonly T[] {
+    of: <T>(value: unknown, guard: is.Guard<T>, error?: assert.ErrorArg) => {
       assert.array.of(value, guard, error);
 
       return value;
@@ -51,7 +45,7 @@ export const indexedObject = defineFn(
    * @returns Value if value type is IndexedObject.
    * @throws Error otherwise.
    */
-  (value: unknown, error?: assert.ErrorArg): types.IndexedObject => {
+  (value: unknown, error?: assert.ErrorArg) => {
     assert.indexedObject(value, error);
 
     return value;
@@ -60,19 +54,13 @@ export const indexedObject = defineFn(
     /**
      * Asserts that value type is IndexedObject\<T\>.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param guard - Guard for type T.
      * @param error - Error.
      * @returns Value if value type is IndexedObject\<T\>.
      * @throws Error otherwise.
      */
-    of<T>(
-      this: void,
-      value: unknown,
-      guard: is.Guard<T>,
-      error?: assert.ErrorArg
-    ): types.IndexedObject<T> {
+    of: <T>(value: unknown, guard: is.Guard<T>, error?: assert.ErrorArg) => {
       assert.indexedObject.of(value, guard, error);
 
       return value;
@@ -89,7 +77,7 @@ export const map = defineFn(
    * @returns Value if value type is Map.
    * @throws Error otherwise.
    */
-  (value: unknown, error?: assert.ErrorArg): ReadonlyMap<unknown, unknown> => {
+  (value: unknown, error?: assert.ErrorArg) => {
     assert.map(value, error);
 
     return value;
@@ -98,7 +86,6 @@ export const map = defineFn(
     /**
      * Asserts that value type is Map\<K, V\>.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param keyGuard - Key guard.
      * @param valueGuard - Value guard.
@@ -106,13 +93,12 @@ export const map = defineFn(
      * @returns Value if value type is Map\<K, V\>.
      * @throws Error otherwise.
      */
-    of<K, V>(
-      this: void,
+    of: <K, V>(
       value: unknown,
       keyGuard: is.Guard<K>,
       valueGuard: is.Guard<V>,
       error?: assert.ErrorArg
-    ): ReadonlyMap<K, V> {
+    ) => {
       assert.map.of(value, keyGuard, valueGuard, error);
 
       return value;
@@ -124,24 +110,19 @@ export const not = defineFn(
   /**
    * Not implemented.
    */
-  (): never => {
+  () => {
     throw new Error("Not implemented");
   },
   {
     /**
      * Asserts that value type is not empty.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param error - Error.
      * @returns Value if value type is not empty.
      * @throws Error otherwise.
      */
-    empty<T>(
-      this: void,
-      value: T,
-      error?: assert.ErrorArg
-    ): Exclude<T, types.empty> {
+    empty: <T>(value: T, error?: assert.ErrorArg) => {
       assert.not.empty<T>(value, error);
 
       return value;
@@ -158,7 +139,7 @@ export const set = defineFn(
    * @returns Value if value type is Set.
    * @throws Error otherwise.
    */
-  (value: unknown, error?: assert.ErrorArg): ReadonlySet<unknown> => {
+  (value: unknown, error?: assert.ErrorArg) => {
     assert.set(value, error);
 
     return value;
@@ -167,19 +148,13 @@ export const set = defineFn(
     /**
      * Asserts that value type is Set\<T\>.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param guard - Guard for type T.
      * @param error - Error.
      * @returns Value if value type is Set\<T\>.
      * @throws Error otherwise.
      */
-    of<T>(
-      this: void,
-      value: unknown,
-      guard: is.Guard<T>,
-      error?: assert.ErrorArg
-    ): ReadonlySet<T> {
+    of: <T>(value: unknown, guard: is.Guard<T>, error?: assert.ErrorArg) => {
       assert.set.of(value, guard, error);
 
       return value;

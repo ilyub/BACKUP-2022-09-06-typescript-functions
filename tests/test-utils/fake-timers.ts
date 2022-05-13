@@ -21,14 +21,12 @@ test.each([
   {
     max: 1000,
     min: 0,
-    now(): number {
-      return Date.now();
-    }
+    now: (): number => Date.now()
   },
   {
     max: Number.MAX_VALUE,
     min: 24 * 3600 * 1000,
-    now(): number {
+    now: (): number => {
       testUtils.setRandomSystemTime();
 
       return Date.now();

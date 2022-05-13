@@ -88,9 +88,7 @@ export const fromEntries = extend(
    * @param entries - Entries.
    * @returns Object.
    */
-  <K extends PropertyKey, V>(
-    entries: Iterable<Entry<K, V>>
-  ): PartialRecord<K, V> => {
+  <K extends PropertyKey, V>(entries: Iterable<Entry<K, V>>) => {
     const result: WritablePartialRecord<K, V> = {};
 
     for (const entry of entries) result[entry[0]] = entry[1];
@@ -104,9 +102,7 @@ export const fromEntries = extend(
      * @param entries - Entries.
      * @returns Object.
      */
-    exhaustive<K extends PropertyKey, V>(
-      entries: Iterable<Entry<K, V>>
-    ): Rec<K, V> {
+    exhaustive: <K extends PropertyKey, V>(entries: Iterable<Entry<K, V>>) => {
       const result: WritablePartialRecord<K, V> = {};
 
       for (const entry of entries) result[entry[0]] = entry[1];

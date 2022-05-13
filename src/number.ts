@@ -10,7 +10,7 @@ export const ceil = defineFn(
    * @param precision - The number of digits to keep.
    * @returns Ceiled value.
    */
-  (value: number, precision: number): number => {
+  (value: number, precision: number) => {
     const divider = 10 ** precision;
 
     return Math.ceil(value * divider) / divider;
@@ -24,9 +24,8 @@ export const ceil = defineFn(
      * @param from - From.
      * @returns Ceiled value.
      */
-    step(value: number, step: number, from = 0): number {
-      return Math.ceil((value - from) / step) * step + from;
-    }
+    step: (value: number, step: number, from = 0) =>
+      Math.ceil((value - from) / step) * step + from
   }
 );
 
@@ -38,7 +37,7 @@ export const floor = defineFn(
    * @param precision - The number of digits to keep.
    * @returns Floored value.
    */
-  (value: number, precision: number): number => {
+  (value: number, precision: number) => {
     const divider = 10 ** precision;
 
     return Math.floor(value * divider) / divider;
@@ -47,15 +46,13 @@ export const floor = defineFn(
     /**
      * Floors number.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param step - Step.
      * @param from - From.
      * @returns Floored value.
      */
-    step(this: void, value: number, step: number, from = 0): number {
-      return Math.floor((value - from) / step) * step + from;
-    }
+    step: (value: number, step: number, from = 0) =>
+      Math.floor((value - from) / step) * step + from
   }
 );
 
@@ -67,7 +64,7 @@ export const round = defineFn(
    * @param precision - The number of digits to keep.
    * @returns Rounded value.
    */
-  (value: number, precision: number): number => {
+  (value: number, precision: number) => {
     const divider = 10 ** precision;
 
     return Math.round(value * divider) / divider;
@@ -76,15 +73,13 @@ export const round = defineFn(
     /**
      * Rounds number.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param step - Step.
      * @param from - From.
      * @returns Rounded value.
      */
-    step(this: void, value: number, step: number, from = 0): number {
-      return Math.round((value - from) / step) * step + from;
-    }
+    step: (value: number, step: number, from = 0) =>
+      Math.round((value - from) / step) * step + from
   }
 );
 

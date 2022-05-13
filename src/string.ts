@@ -186,68 +186,53 @@ const _path = defineFn(
   /**
    * Not implemented.
    */
-  (): never => {
+  () => {
     throw new Error("Not implemented");
   },
   {
     /**
      * Adds leading slash.
      *
-     * @param this - No this.
      * @param path - Path.
      * @returns New string with leading slash added.
      */
-    addLeadingSlash(this: void, path: string): string {
-      return `/${_path.removeLeadingSlash(path)}`;
-    },
+    addLeadingSlash: (path: string) => `/${_path.removeLeadingSlash(path)}`,
     /**
      * Adds trailing slash.
      *
-     * @param this - No this.
      * @param path - Path.
      * @returns New string with trailing slash added.
      */
-    addTrailingSlash(this: void, path: string): string {
-      return `${_path.removeTrailingSlash(path)}/`;
-    },
+    addTrailingSlash: (path: string) => `${_path.removeTrailingSlash(path)}/`,
     /**
      * Canonicalizes path.
      *
-     * @param this - No this.
      * @param path - Path.
      * @returns Canonical path.
      */
-    canonicalize(this: void, path: string): string {
-      return path.replace(/[/\\]+/gu, "/");
-    },
+    canonicalize: (path: string) => path.replace(/[/\\]+/gu, "/"),
     /**
      * Creates path from parts.
      *
      * @param parts - Parts.
      * @returns Path.
      */
-    join(...parts: strings): string {
-      return _path.canonicalize(parts.join("/"));
-    },
+    join: (...parts: strings) => _path.canonicalize(parts.join("/")),
     /**
      * Removes leading slash.
      *
-     * @param this - No this.
      * @param path - Path.
      * @returns New string with leading slash removed.
      */
-    removeLeadingSlash(this: void, path: string): string {
-      return _path.canonicalize(path).replace(/^\//u, "");
-    },
+    removeLeadingSlash: (path: string) =>
+      _path.canonicalize(path).replace(/^\//u, ""),
     /**
      * Removes trailing slash.
      *
-     * @param this - No this.
      * @param path - Path.
      * @returns New string with trailing slash removed.
      */
-    removeTrailingSlash(this: void, path: string): string {
-      return _path.canonicalize(path).replace(/\/$/u, "");
-    }
+    removeTrailingSlash: (path: string) =>
+      _path.canonicalize(path).replace(/\/$/u, "")
   }
 );
