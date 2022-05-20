@@ -166,8 +166,6 @@ export interface CompareFn<T extends object> {
 
 export interface Descriptor<T, K extends keyof T = keyof T>
   extends PropertyDescriptor {
-  readonly configurable?: boolean;
-  readonly enumerable?: boolean;
   /**
    * Property getter.
    *
@@ -183,7 +181,6 @@ export interface Descriptor<T, K extends keyof T = keyof T>
    */
   readonly set?: (this: T, value: T[K]) => void;
   readonly value?: T[K];
-  readonly writable?: boolean;
 }
 
 export interface Predicate<T extends object> {

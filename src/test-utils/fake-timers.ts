@@ -8,7 +8,7 @@ export const clock = onDemand(() =>
 );
 
 export interface Options {
-  readonly shouldAdvanceTime?: boolean;
+  readonly shouldAdvanceTime?: true;
 }
 
 /**
