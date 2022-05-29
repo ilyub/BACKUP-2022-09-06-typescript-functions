@@ -1,12 +1,12 @@
 import { reflect } from "@";
 
-const mk1 = Symbol("TestMetadataKey1");
+const mk1 = Symbol("test-metadata-key-1");
 
-const mk2 = Symbol("TestMetadataKey2");
+const mk2 = Symbol("test-metadata-key-2");
 
-const mk3 = Symbol("TestMetadataKey3");
+const mk3 = Symbol("test-metadata-key-3");
 
-const pk1 = Symbol("TestPropertyKey1");
+const pk1 = Symbol("test-metadata-key-4");
 
 test("defineMetadata", () => {
   const obj = {};

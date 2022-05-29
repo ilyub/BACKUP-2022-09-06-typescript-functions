@@ -84,9 +84,9 @@ test("hasOwnProp", () => {
   }
 
   {
-    const symbol1 = Symbol("TestSymbol1");
+    const symbol1 = Symbol("test-symbol-1");
 
-    const symbol2 = Symbol("TestSymbol2");
+    const symbol2 = Symbol("test-symbol-2");
 
     expect(o.hasOwnProp(symbol1, { [symbol1]: 1 })).toBeTrue();
     expect(o.hasOwnProp(symbol1, { [symbol1]: undefined })).toBeTrue();
@@ -164,7 +164,7 @@ test("removeUndefinedKeys", () => {
 });
 
 test("size", () => {
-  const symbol = Symbol("TestSymbol");
+  const symbol = Symbol("test-symbol");
 
   const obj = {
     a: 1,
@@ -227,6 +227,7 @@ test.each([
 test("unfreeze", () => {
   const obj1: TestInterface = { value: 1 };
 
+  // eslint-disable-next-line no-restricted-syntax -- Ok
   const obj2 = o.unfreeze(obj1);
 
   const typeCheck1: Equals<typeof obj1, { readonly value: number }> = 1;
