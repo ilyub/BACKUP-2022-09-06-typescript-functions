@@ -60,6 +60,26 @@ module.exports = {
         ":matches(ExportNamedDeclaration, Program, TSModuleBlock) > VariableDeclaration > VariableDeclarator > CallExpression > :matches(.callee[name=assign], .callee[property.name=assign])"
     },
     {
+      message: 'Use "a.first" instead',
+      selector:
+        "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=0]"
+    },
+    {
+      message: 'Use "a.second" instead',
+      selector:
+        "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=1]"
+    },
+    {
+      message: 'Use "a.third" instead',
+      selector:
+        "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=2]"
+    },
+    {
+      message: 'Use "not.toHaveBeenCalled" instead',
+      selector:
+        "CallExpression[callee.property.name=toHaveBeenCalledTimes] > Literal.arguments:first-child[value=0]"
+    },
+    {
       message: "Unsafe function",
       selector:
         "CallExpression > MemberExpression.callee[object.name=o][property.name=unfreeze]"
