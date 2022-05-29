@@ -1,7 +1,7 @@
 /* eslint-disable @skylib/primary-export-only -- Wait for @skylib/eslint update */
 
 import * as a from "./array";
-import { defineFn, overloadedFn, typedef } from "./core";
+import { defineFn, overload, typedef } from "./core";
 import * as o from "./object";
 import type { ValidationObject } from "./helpers";
 import type * as types from "./types";
@@ -16,8 +16,8 @@ export {
 };
 
 export const and = defineFn(
-  overloadedFn(() => {
-    return _and;
+  overload(() => {
+    return result;
 
     /**
      * Checks if value type is A & B.
@@ -27,7 +27,7 @@ export const and = defineFn(
      * @param guard2 - Guard for type B.
      * @returns _True_ if value type is A & B, _false_ otherwise.
      */
-    function _and<A, B>(
+    function result<A, B>(
       value: unknown,
       guard1: Guard<A>,
       guard2: Guard<B>
@@ -42,7 +42,7 @@ export const and = defineFn(
      * @param guard3 - Guard for type C.
      * @returns _True_ if value type is A & B & C, _false_ otherwise.
      */
-    function _and<A, B, C>(
+    function result<A, B, C>(
       value: unknown,
       guard1: Guard<A>,
       guard2: Guard<B>,
@@ -59,7 +59,7 @@ export const and = defineFn(
      * @param guard4 - Guard for type D.
      * @returns _True_ if value type is A & B & C & D, _false_ otherwise.
      */
-    function _and<A, B, C, D>(
+    function result<A, B, C, D>(
       value: unknown,
       guard1: Guard<A>,
       guard2: Guard<B>,
@@ -67,13 +67,13 @@ export const and = defineFn(
       guard4: Guard<D>
     ): value is A & B & C & D;
 
-    function _and(value: unknown, ...guards: Guards): value is unknown {
+    function result(value: unknown, ...guards: Guards): value is unknown {
       return guards.every(guard => guard(value));
     }
   }),
   {
-    factory: overloadedFn(() => {
-      return _factory;
+    factory: overload(() => {
+      return result;
 
       /**
        * Creates guard for type A & B.
@@ -82,7 +82,7 @@ export const and = defineFn(
        * @param guard2 - Guard for type B.
        * @returns Guard for type A & B.
        */
-      function _factory<A, B>(guard1: Guard<A>, guard2: Guard<B>): Guard<A & B>;
+      function result<A, B>(guard1: Guard<A>, guard2: Guard<B>): Guard<A & B>;
 
       /**
        * Creates guard for type A & B & C.
@@ -92,7 +92,7 @@ export const and = defineFn(
        * @param guard3 - Guard for type C.
        * @returns Guard for type A & B & C.
        */
-      function _factory<A, B, C>(
+      function result<A, B, C>(
         guard1: Guard<A>,
         guard2: Guard<B>,
         guard3: Guard<C>
@@ -107,14 +107,14 @@ export const and = defineFn(
        * @param guard4 - Guard for type D.
        * @returns Guard for type A & B & C & D.
        */
-      function _factory<A, B, C, D>(
+      function result<A, B, C, D>(
         guard1: Guard<A>,
         guard2: Guard<B>,
         guard3: Guard<C>,
         guard4: Guard<D>
       ): Guard<A & B & C & D>;
 
-      function _factory(...guards: Guards): Guard {
+      function result(...guards: Guards): Guard {
         return (value): value is unknown => guards.every(guard => guard(value));
       }
     })
@@ -122,8 +122,8 @@ export const and = defineFn(
 );
 
 export const or = defineFn(
-  overloadedFn(() => {
-    return _or;
+  overload(() => {
+    return result;
 
     /**
      * Checks if value type is A | B.
@@ -133,7 +133,7 @@ export const or = defineFn(
      * @param guard2 - Guard for type B.
      * @returns _True_ if value type is A | B, _false_ otherwise.
      */
-    function _or<A, B>(
+    function result<A, B>(
       value: unknown,
       guard1: Guard<A>,
       guard2: Guard<B>
@@ -148,7 +148,7 @@ export const or = defineFn(
      * @param guard3 - Guard for type C.
      * @returns _True_ if value type is A | B | C, _false_ otherwise.
      */
-    function _or<A, B, C>(
+    function result<A, B, C>(
       value: unknown,
       guard1: Guard<A>,
       guard2: Guard<B>,
@@ -165,7 +165,7 @@ export const or = defineFn(
      * @param guard4 - Guard for type D.
      * @returns _True_ if value type is A | B | C | D, _false_ otherwise.
      */
-    function _or<A, B, C, D>(
+    function result<A, B, C, D>(
       value: unknown,
       guard1: Guard<A>,
       guard2: Guard<B>,
@@ -173,13 +173,13 @@ export const or = defineFn(
       guard4: Guard<D>
     ): value is A | B | C | D;
 
-    function _or(value: unknown, ...guards: Guards): value is unknown {
+    function result(value: unknown, ...guards: Guards): value is unknown {
       return guards.some(guard => guard(value));
     }
   }),
   {
-    factory: overloadedFn(() => {
-      return _factory;
+    factory: overload(() => {
+      return result;
 
       /**
        * Creates guard for type A | B.
@@ -188,7 +188,7 @@ export const or = defineFn(
        * @param guard2 - Guard for type B.
        * @returns Guard for type A | B.
        */
-      function _factory<A, B>(guard1: Guard<A>, guard2: Guard<B>): Guard<A | B>;
+      function result<A, B>(guard1: Guard<A>, guard2: Guard<B>): Guard<A | B>;
 
       /**
        * Creates guard for type A | B | C.
@@ -198,7 +198,7 @@ export const or = defineFn(
        * @param guard3 - Guard for type C.
        * @returns Guard for type A | B | C.
        */
-      function _factory<A, B, C>(
+      function result<A, B, C>(
         guard1: Guard<A>,
         guard2: Guard<B>,
         guard3: Guard<C>
@@ -213,14 +213,14 @@ export const or = defineFn(
        * @param guard4 - Guard for type D.
        * @returns Guard for type A | B | C | D.
        */
-      function _factory<A, B, C, D>(
+      function result<A, B, C, D>(
         guard1: Guard<A>,
         guard2: Guard<B>,
         guard3: Guard<C>,
         guard4: Guard<D>
       ): Guard<A | B | C | D>;
 
-      function _factory(...guards: Guards): Guard {
+      function result(...guards: Guards): Guard {
         return (value): value is unknown => guards.some(guard => guard(value));
       }
     })
@@ -344,8 +344,8 @@ export const object = defineFn(
   (value: unknown): value is object =>
     typeof value === "object" && value !== null,
   {
-    factory: overloadedFn(() => {
-      return _factory;
+    factory: overload(() => {
+      return result;
 
       /**
        * Creates object guard.
@@ -354,7 +354,7 @@ export const object = defineFn(
        * @param optional - Guards for optional properties.
        * @returns Object guard.
        */
-      function _factory<R extends object, O extends object>(
+      function result<R extends object, O extends object>(
         required: ObjectGuards<R, keyof R>,
         optional: ObjectGuards<O, keyof O>
       ): Guard<types.OptionalStyle<Partial<O>> & types.UndefinedStyle<R>>;
@@ -366,20 +366,20 @@ export const object = defineFn(
        * @param optional - Guards for optional properties.
        * @returns Object guard.
        */
-      function _factory<T extends object>(
+      function result<T extends object>(
         required: ObjectGuards<T, RequiredKeys<T>>,
         optional: ObjectGuards<T, OptionalKeys<T>>
       ): Guard<T>;
 
-      function _factory<T extends object>(
+      function result<T extends object>(
         required: ObjectGuards<T, RequiredKeys<T>>,
         optional: ObjectGuards<T, OptionalKeys<T>>
       ): Guard<T> {
         return (value): value is T => object.of(value, required, optional);
       }
     }),
-    of: overloadedFn(() => {
-      return _of;
+    of: overload(() => {
+      return result;
 
       /**
        * Checks if value is an object.
@@ -389,7 +389,7 @@ export const object = defineFn(
        * @param optional - Guards for optional properties.
        * @returns _True_ if value is an object, _false_ otherwise.
        */
-      function _of<R extends object, O extends object>(
+      function result<R extends object, O extends object>(
         value: unknown,
         required: ObjectGuards<R, keyof R>,
         optional: ObjectGuards<O, keyof O>
@@ -403,13 +403,13 @@ export const object = defineFn(
        * @param optional - Guards for optional properties.
        * @returns _True_ if value is an object, _false_ otherwise.
        */
-      function _of<T extends object>(
+      function result<T extends object>(
         value: unknown,
         required: ObjectGuards<T, RequiredKeys<T>>,
         optional: ObjectGuards<T, OptionalKeys<T>>
       ): value is T;
 
-      function _of<T extends object>(
+      function result<T extends object>(
         value: unknown,
         required: ObjectGuards<T, RequiredKeys<T>>,
         optional: ObjectGuards<T, OptionalKeys<T>>
@@ -472,8 +472,8 @@ export const symbols = factory(array.of, symbol);
 export const symbolsU = or.factory(symbols, _undefined);
 
 export const tuple = defineFn(
-  overloadedFn(() => {
-    return _tuple;
+  overload(() => {
+    return result;
 
     /**
      * Checks if value type is [A].
@@ -482,7 +482,7 @@ export const tuple = defineFn(
      * @param guard - Guard for type A.
      * @returns _True_ if value type is [A], _false_ otherwise.
      */
-    function _tuple<A>(value: unknown, guard: Guard<A>): value is readonly [A];
+    function result<A>(value: unknown, guard: Guard<A>): value is readonly [A];
 
     /**
      * Checks if value type is [A, B].
@@ -492,7 +492,7 @@ export const tuple = defineFn(
      * @param guard2 - Guard for type B.
      * @returns _True_ if value type is [A, B], _false_ otherwise.
      */
-    function _tuple<A, B>(
+    function result<A, B>(
       value: unknown,
       guard1: Guard<A>,
       guard2: Guard<B>
@@ -508,7 +508,7 @@ export const tuple = defineFn(
      * @param guard3 - Guard for type C.
      * @returns _True_ if value type is [A, B, C], _false_ otherwise.
      */
-    function _tuple<A, B, C>(
+    function result<A, B, C>(
       value: unknown,
       guard1: Guard<A>,
       guard2: Guard<B>,
@@ -526,7 +526,7 @@ export const tuple = defineFn(
      * @param guard4 - Guard for type D.
      * @returns _True_ if value type is [A, B, C, D], _false_ otherwise.
      */
-    function _tuple<A, B, C, D>(
+    function result<A, B, C, D>(
       value: unknown,
       guard1: Guard<A>,
       guard2: Guard<B>,
@@ -535,15 +535,15 @@ export const tuple = defineFn(
       // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
     ): value is readonly [A, B, C, D];
 
-    function _tuple(value: unknown, ...guards: Guards): value is unknown {
+    function result(value: unknown, ...guards: Guards): value is unknown {
       return (
         array(value) && guards.every((guard, index) => guard(value[index]))
       );
     }
   }),
   {
-    factory: overloadedFn(() => {
-      return _factory;
+    factory: overload(() => {
+      return result;
 
       /**
        * Creates guard for type [A].
@@ -551,7 +551,7 @@ export const tuple = defineFn(
        * @param guard - Guard for type A.
        * @returns Guard for type [A].
        */
-      function _factory<A>(guard: Guard<A>): Guard<readonly [A]>;
+      function result<A>(guard: Guard<A>): Guard<readonly [A]>;
 
       /**
        * Creates guard for type [A, B].
@@ -560,7 +560,7 @@ export const tuple = defineFn(
        * @param guard2 - Guard for type B.
        * @returns Guard for type [A, B].
        */
-      function _factory<A, B>(
+      function result<A, B>(
         guard1: Guard<A>,
         guard2: Guard<B>
         // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
@@ -574,7 +574,7 @@ export const tuple = defineFn(
        * @param guard3 - Guard for type C.
        * @returns Guard for type [A, B, C].
        */
-      function _factory<A, B, C>(
+      function result<A, B, C>(
         guard1: Guard<A>,
         guard2: Guard<B>,
         guard3: Guard<C>
@@ -590,7 +590,7 @@ export const tuple = defineFn(
        * @param guard4 - Guard for type D.
        * @returns Guard for type [A, B, C, D].
        */
-      function _factory<A, B, C, D>(
+      function result<A, B, C, D>(
         guard1: Guard<A>,
         guard2: Guard<B>,
         guard3: Guard<C>,
@@ -598,7 +598,7 @@ export const tuple = defineFn(
         // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
       ): Guard<readonly [A, B, C, D]>;
 
-      function _factory(...guards: Guards): Guard {
+      function result(...guards: Guards): Guard {
         return (value): value is unknown =>
           array(value) && guards.every((guard, index) => guard(value[index]));
       }

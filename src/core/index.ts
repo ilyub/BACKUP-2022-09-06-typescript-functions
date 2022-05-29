@@ -16,7 +16,7 @@ export const defineFn: <F, P>(fn: F, props: P) => F & Readonly<P> =
  * @param callback - Callback.
  * @returns The result of callback execution.
  */
-export function overloadedFn<T>(callback: () => T): T {
+export function overload<T>(callback: () => T): T {
   return callback();
 }
 
