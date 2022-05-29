@@ -1,20 +1,187 @@
+import { defineFn } from "./core";
 import { ErrorArg } from "./errors";
 import * as is from "./guards";
 import type { ValidationObject } from "./helpers";
 import type * as types from "./types";
 
-/**
- * Asserts that value is an array.
- *
- * @param value - Value.
- * @param error - Error.
- */
-export function array(
-  value: unknown,
-  error?: ErrorArg
-): asserts value is types.unknowns {
-  byGuard(value, is.array, error);
-}
+export const not: {
+  /**
+   * Asserts that value type is not empty.
+   *
+   * @param value - Value.
+   * @param error - Error.
+   * @returns Void.
+   */
+  readonly empty: <T>(
+    value: T,
+    error?: ErrorArg
+  ) => asserts value is Exclude<T, types.empty>;
+} = {
+  empty: (value, error) => {
+    byGuard(value, is.not.empty, error);
+  }
+} as const;
+
+export const array: {
+  /**
+   * Asserts that value is an array.
+   *
+   * @param value - Value.
+   * @param error - Error.
+   */
+  (value: unknown, error?: ErrorArg): asserts value is types.unknowns;
+  /**
+   * Asserts that value type is T[].
+   *
+   * @param value - Value.
+   * @param guard - Guard for type T.
+   * @param error - Error.
+   * @returns Void.
+   */
+  readonly of: <T>(
+    value: unknown,
+    guard: is.Guard<T>,
+    error?: ErrorArg
+  ) => asserts value is readonly T[];
+} = defineFn(
+  // eslint-disable-next-line @skylib/require-jsdoc -- Ok
+  (value: unknown, error?: ErrorArg): asserts value is types.unknowns => {
+    byGuard(value, is.array, error);
+  },
+  {
+    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
+    of: <T>(
+      value: unknown,
+      guard: is.Guard<T>,
+      error?: ErrorArg
+    ): asserts value is readonly T[] => {
+      byGuard(value, is.factory(is.array.of, guard), error);
+    }
+  }
+);
+
+export const indexedObject: {
+  /**
+   * Asserts that value type is IndexedObject.
+   *
+   * @param value - Value.
+   * @param error - Error.
+   */
+  (value: unknown, error?: ErrorArg): asserts value is types.IndexedObject;
+  /**
+   * Asserts that value type is IndexedObject\<T\>.
+   *
+   * @param value - Value.
+   * @param guard - Guard for type T.
+   * @param error - Error.
+   * @returns Void.
+   */
+  of: <T>(
+    value: unknown,
+    guard: is.Guard<T>,
+    error?: ErrorArg
+  ) => asserts value is types.IndexedObject<T>;
+} = defineFn(
+  // eslint-disable-next-line @skylib/require-jsdoc -- Ok
+  (value: unknown, error?: ErrorArg): asserts value is types.IndexedObject => {
+    byGuard(value, is.indexedObject, error);
+  },
+  {
+    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
+    of: <T>(
+      value: unknown,
+      guard: is.Guard<T>,
+      error?: ErrorArg
+    ): asserts value is types.IndexedObject<T> => {
+      byGuard(value, is.factory(is.indexedObject.of, guard), error);
+    }
+  }
+);
+
+export const map: {
+  /**
+   * Asserts that value type is Map.
+   *
+   * @param value - Value.
+   * @param error - Error.
+   */
+  (value: unknown, error?: ErrorArg): asserts value is ReadonlyMap<
+    unknown,
+    unknown
+  >;
+  /**
+   * Asserts that value type is Map\<K, V\>.
+   *
+   * @param value - Value.
+   * @param keyGuard - Key guard.
+   * @param valueGuard - Value guard.
+   * @param error - Error.
+   * @returns Void.
+   */
+  readonly of: <K, V>(
+    value: unknown,
+    keyGuard: is.Guard<K>,
+    valueGuard: is.Guard<V>,
+    error?: ErrorArg
+  ) => asserts value is ReadonlyMap<K, V>;
+} = defineFn(
+  // eslint-disable-next-line @skylib/require-jsdoc -- Ok
+  (
+    value: unknown,
+    error?: ErrorArg
+  ): asserts value is ReadonlyMap<unknown, unknown> => {
+    byGuard(value, is.map, error);
+  },
+  {
+    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
+    of: <K, V>(
+      value: unknown,
+      keyGuard: is.Guard<K>,
+      valueGuard: is.Guard<V>,
+      error?: ErrorArg
+    ): asserts value is ReadonlyMap<K, V> => {
+      byGuard(value, is.factory(is.map.of, keyGuard, valueGuard), error);
+    }
+  }
+);
+
+export const set: {
+  /**
+   * Asserts that value type is Set.
+   *
+   * @param value - Value.
+   * @param error - Error.
+   */
+  (value: unknown, error?: ErrorArg): asserts value is ReadonlySet<unknown>;
+  /**
+   * Asserts that value type is Set\<T\>.
+   *
+   * @param value - Value.
+   * @param guard - Guard for type T.
+   * @param error - Error.
+   * @returns Void.
+   */
+  readonly of: <T>(
+    value: unknown,
+    guard: is.Guard<T>,
+    error?: ErrorArg
+  ) => asserts value is ReadonlySet<T>;
+} = defineFn(
+  // eslint-disable-next-line @skylib/require-jsdoc -- Ok
+  (value: unknown, error?: ErrorArg): asserts value is ReadonlySet<unknown> => {
+    byGuard(value, is.set, error);
+  },
+  {
+    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
+    of: <T>(
+      value: unknown,
+      guard: is.Guard<T>,
+      error?: ErrorArg
+    ): asserts value is ReadonlySet<T> => {
+      byGuard(value, is.factory(is.set.of, guard), error);
+    }
+  }
+);
 
 /**
  * Asserts that value is a boolean.
@@ -88,19 +255,6 @@ export function enumeration<T extends PropertyKey>(
 }
 
 /**
- * Asserts that value type is IndexedObject.
- *
- * @param value - Value.
- * @param error - Error.
- */
-export function indexedObject(
-  value: unknown,
-  error?: ErrorArg
-): asserts value is types.IndexedObject {
-  byGuard(value, is.indexedObject, error);
-}
-
-/**
  * Asserts that value type is T.
  *
  * @param value - Value.
@@ -128,26 +282,6 @@ export function instances<T>(
   error?: ErrorArg
 ): asserts value is readonly T[] {
   byGuard(value, is.factory(is.instances, ctor), error);
-}
-
-/**
- * Asserts that value type is Map.
- *
- * @param value - Value.
- * @param error - Error.
- */
-export function map(
-  value: unknown,
-  error?: ErrorArg
-): asserts value is ReadonlyMap<unknown, unknown> {
-  byGuard(value, is.map, error);
-}
-
-/**
- * Not implemented.
- */
-export function not(): never {
-  throw new Error("Not implemented");
 }
 
 /**
@@ -187,19 +321,6 @@ export function object(
   error?: ErrorArg
 ): asserts value is object {
   byGuard(value, is.object, error);
-}
-
-/**
- * Asserts that value type is Set.
- *
- * @param value - Value.
- * @param error - Error.
- */
-export function set(
-  value: unknown,
-  error?: ErrorArg
-): asserts value is ReadonlySet<unknown> {
-  byGuard(value, is.set, error);
 }
 
 /**
@@ -277,78 +398,3 @@ export function toBeTrue(
 export function wrapError<T>(e: T): () => T {
   return () => e;
 }
-
-/**
- * Asserts that value type is T[].
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @param error - Error.
- */
-array.of = <T>(
-  value: unknown,
-  guard: is.Guard<T>,
-  error?: ErrorArg
-): asserts value is readonly T[] => {
-  byGuard(value, is.factory(is.array.of, guard), error);
-};
-
-/**
- * Asserts that value type is not empty.
- *
- * @param value - Value.
- * @param error - Error.
- */
-not.empty = <T>(
-  value: T,
-  error?: ErrorArg
-): asserts value is Exclude<T, types.empty> => {
-  byGuard(value, is.not.empty, error);
-};
-
-/**
- * Asserts that value type is IndexedObject\<T\>.
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @param error - Error.
- */
-indexedObject.of = <T>(
-  value: unknown,
-  guard: is.Guard<T>,
-  error?: ErrorArg
-): asserts value is types.IndexedObject<T> => {
-  byGuard(value, is.factory(is.indexedObject.of, guard), error);
-};
-
-/**
- * Asserts that value type is Map\<K, V\>.
- *
- * @param value - Value.
- * @param keyGuard - Key guard.
- * @param valueGuard - Value guard.
- * @param error - Error.
- */
-map.of = <K, V>(
-  value: unknown,
-  keyGuard: is.Guard<K>,
-  valueGuard: is.Guard<V>,
-  error?: ErrorArg
-): asserts value is ReadonlyMap<K, V> => {
-  byGuard(value, is.factory(is.map.of, keyGuard, valueGuard), error);
-};
-
-/**
- * Asserts that value type is Set\<T\>.
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @param error - Error.
- */
-set.of = <T>(
-  value: unknown,
-  guard: is.Guard<T>,
-  error?: ErrorArg
-): asserts value is ReadonlySet<T> => {
-  byGuard(value, is.factory(is.set.of, guard), error);
-};

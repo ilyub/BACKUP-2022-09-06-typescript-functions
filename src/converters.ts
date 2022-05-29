@@ -1,26 +1,17 @@
-import { defineFn } from "./core";
 import * as is from "./guards";
 import type * as types from "./types";
 
-export const not = defineFn(
+export const not = {
   /**
-   * Not implemented.
+   * Converts value to not empty.
+   *
+   * @param value - Value.
+   * @param defVal - Default value.
+   * @returns Value if it is not empty, defVal otherwise.
    */
-  () => {
-    throw new Error("Not implemented");
-  },
-  {
-    /**
-     * Converts value to not empty.
-     *
-     * @param value - Value.
-     * @param defVal - Default value.
-     * @returns Value if it is not empty, defVal otherwise.
-     */
-    empty: <T>(value: T, defVal: Exclude<T, types.empty>) =>
-      is.not.empty(value) ? value : defVal
-  }
-);
+  empty: <T>(value: T, defVal: Exclude<T, types.empty>) =>
+    is.not.empty(value) ? value : defVal
+} as const;
 
 /**
  * Converts value to a number.

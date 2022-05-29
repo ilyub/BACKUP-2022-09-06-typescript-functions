@@ -134,10 +134,6 @@ test("map.of", () => {
   expect(subtest(undefined)).toThrow(AssertionError);
 });
 
-test("not", () => {
-  expect(assert.not).toThrow(new Error("Not implemented"));
-});
-
 test("not.empty", () => {
   const subtest = createSubtest(assert.not.empty);
 

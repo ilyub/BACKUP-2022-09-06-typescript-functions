@@ -1,5 +1,4 @@
 import * as a from "./array";
-import { defineFn } from "./core";
 import * as regexp from "./regexp";
 import type { strings } from "./types";
 
@@ -182,57 +181,49 @@ export function unpadMultiline(str: string): string {
     : str;
 }
 
-const _path = defineFn(
+const _path = {
   /**
-   * Not implemented.
+   * Adds leading slash.
+   *
+   * @param path - Path.
+   * @returns New string with leading slash added.
    */
-  () => {
-    throw new Error("Not implemented");
-  },
-  {
-    /**
-     * Adds leading slash.
-     *
-     * @param path - Path.
-     * @returns New string with leading slash added.
-     */
-    addLeadingSlash: (path: string) => `/${_path.removeLeadingSlash(path)}`,
-    /**
-     * Adds trailing slash.
-     *
-     * @param path - Path.
-     * @returns New string with trailing slash added.
-     */
-    addTrailingSlash: (path: string) => `${_path.removeTrailingSlash(path)}/`,
-    /**
-     * Canonicalizes path.
-     *
-     * @param path - Path.
-     * @returns Canonical path.
-     */
-    canonicalize: (path: string) => path.replace(/[/\\]+/gu, "/"),
-    /**
-     * Creates path from parts.
-     *
-     * @param parts - Parts.
-     * @returns Path.
-     */
-    join: (...parts: strings) => _path.canonicalize(parts.join("/")),
-    /**
-     * Removes leading slash.
-     *
-     * @param path - Path.
-     * @returns New string with leading slash removed.
-     */
-    removeLeadingSlash: (path: string) =>
-      _path.canonicalize(path).replace(/^\//u, ""),
-    /**
-     * Removes trailing slash.
-     *
-     * @param path - Path.
-     * @returns New string with trailing slash removed.
-     */
-    removeTrailingSlash: (path: string) =>
-      _path.canonicalize(path).replace(/\/$/u, "")
-  }
-);
+  addLeadingSlash: (path: string) => `/${_path.removeLeadingSlash(path)}`,
+  /**
+   * Adds trailing slash.
+   *
+   * @param path - Path.
+   * @returns New string with trailing slash added.
+   */
+  addTrailingSlash: (path: string) => `${_path.removeTrailingSlash(path)}/`,
+  /**
+   * Canonicalizes path.
+   *
+   * @param path - Path.
+   * @returns Canonical path.
+   */
+  canonicalize: (path: string) => path.replace(/[/\\]+/gu, "/"),
+  /**
+   * Creates path from parts.
+   *
+   * @param parts - Parts.
+   * @returns Path.
+   */
+  join: (...parts: strings) => _path.canonicalize(parts.join("/")),
+  /**
+   * Removes leading slash.
+   *
+   * @param path - Path.
+   * @returns New string with leading slash removed.
+   */
+  removeLeadingSlash: (path: string) =>
+    _path.canonicalize(path).replace(/^\//u, ""),
+  /**
+   * Removes trailing slash.
+   *
+   * @param path - Path.
+   * @returns New string with trailing slash removed.
+   */
+  removeTrailingSlash: (path: string) =>
+    _path.canonicalize(path).replace(/\/$/u, "")
+} as const;

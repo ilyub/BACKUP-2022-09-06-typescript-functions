@@ -1,10 +1,6 @@
 import { cast } from "@";
 import type { stringE } from "@";
 
-test("not", () => {
-  expect(cast.not).toThrow(new Error("Not implemented"));
-});
-
 test("not.empty", () => {
   expect(cast.not.empty<stringE>("a", "b")).toBe("a");
   expect(cast.not.empty<stringE>(null, "b")).toBe("b");
