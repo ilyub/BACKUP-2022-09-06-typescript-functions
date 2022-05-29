@@ -62,4 +62,9 @@ export class Accumulator<K extends PropertyKey, T> {
 export namespace Accumulator {
   // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
   export type Entry<K extends PropertyKey, T> = readonly [K, readonly T[]];
+
+  export type Locked<K extends PropertyKey, T> = Omit<
+    Readonly<Accumulator<K, T>>,
+    "push" | "unshift"
+  >;
 }
