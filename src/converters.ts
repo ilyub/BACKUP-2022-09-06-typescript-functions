@@ -1,5 +1,5 @@
+import { defineFn } from "./core";
 import * as is from "./guards";
-import { defineFn } from "./module-definition";
 import type * as types from "./types";
 
 export const not = defineFn(

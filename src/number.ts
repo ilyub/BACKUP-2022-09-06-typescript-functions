@@ -1,5 +1,5 @@
 import * as assert from "./assertions";
-import { defineFn } from "./module-definition";
+import { defineFn } from "./core";
 import type { numbers } from "./types";
 
 export const ceil = defineFn(

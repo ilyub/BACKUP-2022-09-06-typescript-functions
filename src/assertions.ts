@@ -1,18 +1,7 @@
-import { AssertionError } from "./errors";
+import { ErrorArg } from "./errors";
 import * as is from "./guards";
 import type { ValidationObject } from "./helpers";
 import type * as types from "./types";
-
-export type ErrorArg = ErrorArgFn | string;
-
-export interface ErrorArgFn {
-  /**
-   * Creates error instance.
-   *
-   * @returns Error instance.
-   */
-  (): unknown;
-}
 
 /**
  * Asserts that value is an array.
@@ -54,15 +43,7 @@ export function byGuard<T>(
 ): asserts value is T {
   if (guard(value)) {
     // Valid
-  } else
-    switch (typeof error) {
-      case "function":
-        throw error();
-
-      case "string":
-      case "undefined":
-        throw new AssertionError(error);
-    }
+  } else throw ErrorArg.toError(error);
 }
 
 /**
@@ -291,6 +272,7 @@ export function toBeTrue(
  *
  * @param e - Error.
  * @returns Wrapped error.
+ * @deprecated Use ErrorArg.wrapError instead.
  */
 export function wrapError<T>(e: T): () => T {
   return () => e;

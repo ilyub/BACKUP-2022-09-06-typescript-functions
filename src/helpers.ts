@@ -1,4 +1,5 @@
 import * as cast from "./converters";
+import { typedef } from "./core";
 import * as fn from "./function";
 import * as is from "./guards";
 import * as as from "./inline-assertions";
@@ -190,16 +191,6 @@ export function safeAccess<
       }
     })
   );
-}
-
-/**
- * Defines value type.
- *
- * @param value - Value.
- * @returns Value.
- */
-export function typedef<T>(value: T): T {
-  return value;
 }
 
 /**

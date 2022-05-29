@@ -242,7 +242,7 @@ test("stringU", () => {
 });
 
 test("symbol", () => {
-  expect(is.symbol(Symbol("TestSymbol"))).toBeTrue();
+  expect(is.symbol(Symbol("test-symbol"))).toBeTrue();
   expect(is.symbol(1)).toBeFalse();
 });
 

@@ -218,7 +218,7 @@ test("stringU", () => {
 test("symbol", () => {
   const subtest = createSubtest(assert.symbol);
 
-  expect(subtest(Symbol("TestSymbol"))).not.toThrow();
+  expect(subtest(Symbol("test-symbol"))).not.toThrow();
   expect(subtest(1)).toThrow(AssertionError);
 });
 
@@ -239,5 +239,6 @@ test("toBeTrue", () => {
 });
 
 test("wrapError", () => {
+  // eslint-disable-next-line deprecation/deprecation -- Wait for next major version
   expect(assert.wrapError(1)()).toBe(1);
 });

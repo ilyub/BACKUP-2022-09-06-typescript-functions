@@ -7,7 +7,8 @@
  * @param props - Properties.
  * @returns Function with properties.
  */
-export const defineFn: <F, P>(fn: F, props: P) => F & P = Object.assign;
+export const defineFn: <F, P>(fn: F, props: P) => F & Readonly<P> =
+  Object.assign;
 
 /**
  * Defines function with overloads.
@@ -17,4 +18,14 @@ export const defineFn: <F, P>(fn: F, props: P) => F & P = Object.assign;
  */
 export function overloadedFn<T>(callback: () => T): T {
   return callback();
+}
+
+/**
+ * Defines value type.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+export function typedef<T>(value: T): T {
+  return value;
 }

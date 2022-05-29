@@ -7,6 +7,8 @@ export * as assert from "./assertions";
 // eslint-disable-next-line @skylib/export-all-name -- Ok
 export * as cast from "./converters";
 
+export * from "./core";
+
 export * from "./errors";
 
 // eslint-disable-next-line @skylib/export-all-name -- Ok
@@ -23,8 +25,6 @@ export * as as from "./inline-assertions";
 export * as json from "./json";
 
 export * as map from "./map";
-
-export * from "./module-definition";
 
 // eslint-disable-next-line @skylib/export-all-name -- Ok
 export * as num from "./number";

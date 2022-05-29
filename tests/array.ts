@@ -48,9 +48,9 @@ test("findBy", () => {
 });
 
 test("first", () => {
-  expect(a.first([1, 2, 3])).toBe(1);
-  expect(a.first([null, 2, 3])).toBeNull();
-  expect(a.first([undefined, 2, 3])).toBeUndefined();
+  expect(a.first([1, 2, 3, 4])).toBe(1);
+  expect(a.first([null, 2, 3, 4])).toBeNull();
+  expect(a.first([undefined, 2, 3, 4])).toBeUndefined();
 });
 
 test("fromIterable", () => {
@@ -74,9 +74,9 @@ test("fromString", () => {
 });
 
 test("get", () => {
-  expect(a.get([1, 2, 3], 1)).toBe(2);
-  expect(a.get([1, null, 3], 1)).toBeNull();
-  expect(a.get([1, undefined, 3], 1)).toBeUndefined();
+  expect(a.get([1, 2, 3, 4], 1)).toBe(2);
+  expect(a.get([1, null, 3, 4], 1)).toBeNull();
+  expect(a.get([1, undefined, 3, 4], 1)).toBeUndefined();
 });
 
 test("includesBy", () => {
@@ -94,9 +94,9 @@ test("includesBy", () => {
 });
 
 test("last", () => {
-  expect(a.last([1, 2, 3])).toBe(3);
-  expect(a.last([1, 2, null])).toBeNull();
-  expect(a.last([1, 2, undefined])).toBeUndefined();
+  expect(a.last([1, 2, 3, 4])).toBe(4);
+  expect(a.last([1, 2, 3, null])).toBeNull();
+  expect(a.last([1, 2, 3, undefined])).toBeUndefined();
 });
 
 test("push", () => {
@@ -199,10 +199,22 @@ test("reverse", () => {
   expect(a.reverse([1, 2, 3])).toStrictEqual([3, 2, 1]);
 });
 
+test("second", () => {
+  expect(a.second([1, 2, 3, 4])).toBe(2);
+  expect(a.second([1, null, 3, 4])).toBeNull();
+  expect(a.second([1, undefined, 3, 4])).toBeUndefined();
+});
+
 test("sort", () => {
   expect(a.sort([1, 3, 2])).toStrictEqual([1, 2, 3]);
   expect(a.sort([1, 3, 2], (x, y) => x - y)).toStrictEqual([1, 2, 3]);
   expect(a.sort([1, 3, 2], (x, y) => y - x)).toStrictEqual([3, 2, 1]);
+});
+
+test("third", () => {
+  expect(a.third([1, 2, 3, 4])).toBe(3);
+  expect(a.third([1, 2, null, 4])).toBeNull();
+  expect(a.third([1, 2, undefined, 4])).toBeUndefined();
 });
 
 test.each([

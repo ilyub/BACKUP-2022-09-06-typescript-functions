@@ -1,8 +1,7 @@
 /* eslint-disable @skylib/primary-export-only -- Wait for @skylib/eslint update */
 
 import * as a from "./array";
-import { typedef } from "./helpers";
-import { defineFn, overloadedFn } from "./module-definition";
+import { defineFn, overloadedFn, typedef } from "./core";
 import * as o from "./object";
 import type { ValidationObject } from "./helpers";
 import type * as types from "./types";
@@ -122,171 +121,6 @@ export const and = defineFn(
   }
 );
 
-export const array = defineFn(
-  /**
-   * Checks if value is an array.
-   *
-   * @param value - Value.
-   * @returns _True_ if value is an array, _false_ otherwise.
-   */
-  (value: unknown): value is types.unknowns => Array.isArray(value),
-  {
-    /**
-     * Checks if value type is T[].
-     *
-     * @param value - Value.
-     * @param guard - Guard for type T.
-     * @returns _True_ if value type is T[], _false_ otherwise.
-     */
-    of: <T>(value: unknown, guard: Guard<T>): value is readonly T[] =>
-      array(value) && value.every(guard)
-  }
-);
-
-export const indexedObject = defineFn(
-  /**
-   * Checks if value type is IndexedObject.
-   *
-   * @param value - Value.
-   * @returns _True_ if value type is IndexedObject, _false_ otherwise.
-   */
-  (value: unknown): value is types.IndexedObject =>
-    typeof value === "object" && value !== null,
-  {
-    /**
-     * Checks if value type is IndexedObject\<T\>.
-     *
-     * @param value - Value.
-     * @param guard - Guard for type T.
-     * @returns _True_ if value type is IndexedObject\<T\>, _false_ otherwise.
-     */
-    of: <T>(value: unknown, guard: Guard<T>): value is types.IndexedObject<T> =>
-      object(value) && o.values(value).every(guard)
-  }
-);
-
-export const map = defineFn(
-  /**
-   * Checks if value type is Map.
-   *
-   * @param value - Value.
-   * @returns _True_ if value type is Map, _false_ otherwise.
-   */
-  (value: unknown): value is ReadonlyMap<unknown, unknown> =>
-    value instanceof Map,
-  {
-    /**
-     * Checks if value type is Map\<K, V\>.
-     *
-     * @param value - Value.
-     * @param keyGuard - Key guard.
-     * @param valueGuard - Value guard.
-     * @returns _True_ if value type is Map\<K, V\>, _false_ otherwise.
-     */
-    of: <K, V>(
-      value: unknown,
-      keyGuard: Guard<K>,
-      valueGuard: Guard<V>
-    ): value is ReadonlyMap<K, V> =>
-      map(value) &&
-      a.fromIterable(value).every(([k, v]) => keyGuard(k) && valueGuard(v))
-  }
-);
-
-export const object = defineFn(
-  /**
-   * Checks if value is an object.
-   *
-   * @param value - Value.
-   * @returns _True_ if value is an object, _false_ otherwise.
-   */
-  (value: unknown): value is object =>
-    typeof value === "object" && value !== null,
-  {
-    factory: overloadedFn(() => {
-      return _factory;
-
-      /**
-       * Creates object guard.
-       *
-       * @param required - Guards for required properties.
-       * @param optional - Guards for optional properties.
-       * @returns Object guard.
-       */
-      function _factory<R extends object, O extends object>(
-        required: ObjectGuards<R, keyof R>,
-        optional: ObjectGuards<O, keyof O>
-      ): Guard<types.OptionalStyle<Partial<O>> & types.UndefinedStyle<R>>;
-
-      /**
-       * Creates object guard.
-       *
-       * @param required - Guards for required properties.
-       * @param optional - Guards for optional properties.
-       * @returns Object guard.
-       */
-      function _factory<T extends object>(
-        required: ObjectGuards<T, RequiredKeys<T>>,
-        optional: ObjectGuards<T, OptionalKeys<T>>
-      ): Guard<T>;
-
-      function _factory<T extends object>(
-        required: ObjectGuards<T, RequiredKeys<T>>,
-        optional: ObjectGuards<T, OptionalKeys<T>>
-      ): Guard<T> {
-        return (value): value is T => object.of(value, required, optional);
-      }
-    }),
-    of: overloadedFn(() => {
-      return _of;
-
-      /**
-       * Checks if value is an object.
-       *
-       * @param value - Value.
-       * @param required - Guards for required properties.
-       * @param optional - Guards for optional properties.
-       * @returns _True_ if value is an object, _false_ otherwise.
-       */
-      function _of<R extends object, O extends object>(
-        value: unknown,
-        required: ObjectGuards<R, keyof R>,
-        optional: ObjectGuards<O, keyof O>
-      ): value is types.OptionalStyle<Partial<O>> & types.UndefinedStyle<R>;
-
-      /**
-       * Checks if value is an object.
-       *
-       * @param value - Value.
-       * @param required - Guards for required properties.
-       * @param optional - Guards for optional properties.
-       * @returns _True_ if value is an object, _false_ otherwise.
-       */
-      function _of<T extends object>(
-        value: unknown,
-        required: ObjectGuards<T, RequiredKeys<T>>,
-        optional: ObjectGuards<T, OptionalKeys<T>>
-      ): value is T;
-
-      function _of<T extends object>(
-        value: unknown,
-        required: ObjectGuards<T, RequiredKeys<T>>,
-        optional: ObjectGuards<T, OptionalKeys<T>>
-      ): value is T {
-        return (
-          indexedObject(value) &&
-          o.every(required, (guard, key) =>
-            checkRequiredProp(value, key, guard)
-          ) &&
-          o.every(optional, (guard, key) =>
-            checkOptionalProp(value, key, guard)
-          )
-        );
-      }
-    })
-  }
-);
-
 export const or = defineFn(
   overloadedFn(() => {
     return _or;
@@ -393,6 +227,213 @@ export const or = defineFn(
   }
 );
 
+export const array = defineFn(
+  /**
+   * Checks if value is an array.
+   *
+   * @param value - Value.
+   * @returns _True_ if value is an array, _false_ otherwise.
+   */
+  (value: unknown): value is types.unknowns => Array.isArray(value),
+  {
+    /**
+     * Checks if value type is T[].
+     *
+     * @param value - Value.
+     * @param guard - Guard for type T.
+     * @returns _True_ if value type is T[], _false_ otherwise.
+     */
+    of: <T>(value: unknown, guard: Guard<T>): value is readonly T[] =>
+      array(value) && value.every(guard)
+  }
+);
+
+export const arrayU = or.factory(array, _undefined);
+
+export const arrays = factory(array.of, array);
+
+export const arraysU = or.factory(arrays, _undefined);
+
+export const booleanU = or.factory(boolean, _undefined);
+
+export const booleans = factory(array.of, boolean);
+
+export const booleansU = or.factory(booleans, _undefined);
+
+export const indexedObject = defineFn(
+  /**
+   * Checks if value type is IndexedObject.
+   *
+   * @param value - Value.
+   * @returns _True_ if value type is IndexedObject, _false_ otherwise.
+   */
+  (value: unknown): value is types.IndexedObject =>
+    typeof value === "object" && value !== null,
+  {
+    /**
+     * Checks if value type is IndexedObject\<T\>.
+     *
+     * @param value - Value.
+     * @param guard - Guard for type T.
+     * @returns _True_ if value type is IndexedObject\<T\>, _false_ otherwise.
+     */
+    of: <T>(value: unknown, guard: Guard<T>): value is types.IndexedObject<T> =>
+      object(value) && o.values(value).every(guard)
+  }
+);
+
+export const indexedObjectU = or.factory(indexedObject, _undefined);
+
+export const indexedObjects = factory(array.of, indexedObject);
+
+export const indexedObjectsU = or.factory(indexedObjects, _undefined);
+
+export const map = defineFn(
+  /**
+   * Checks if value type is Map.
+   *
+   * @param value - Value.
+   * @returns _True_ if value type is Map, _false_ otherwise.
+   */
+  (value: unknown): value is ReadonlyMap<unknown, unknown> =>
+    value instanceof Map,
+  {
+    /**
+     * Checks if value type is Map\<K, V\>.
+     *
+     * @param value - Value.
+     * @param keyGuard - Key guard.
+     * @param valueGuard - Value guard.
+     * @returns _True_ if value type is Map\<K, V\>, _false_ otherwise.
+     */
+    of: <K, V>(
+      value: unknown,
+      keyGuard: Guard<K>,
+      valueGuard: Guard<V>
+    ): value is ReadonlyMap<K, V> =>
+      map(value) &&
+      a.fromIterable(value).every(([k, v]) => keyGuard(k) && valueGuard(v))
+  }
+);
+
+export const mapU = or.factory(map, _undefined);
+
+export const maps = factory(array.of, map);
+
+export const mapsU = or.factory(maps, _undefined);
+
+export const numStrU = or.factory(numStr, _undefined);
+
+export const numStrs = factory(array.of, numStr);
+
+export const numStrsU = or.factory(numStrs, _undefined);
+
+export const numberU = or.factory(number, _undefined);
+
+export const numbers = factory(array.of, number);
+
+export const numbersU = or.factory(numbers, _undefined);
+
+export const object = defineFn(
+  /**
+   * Checks if value is an object.
+   *
+   * @param value - Value.
+   * @returns _True_ if value is an object, _false_ otherwise.
+   */
+  (value: unknown): value is object =>
+    typeof value === "object" && value !== null,
+  {
+    factory: overloadedFn(() => {
+      return _factory;
+
+      /**
+       * Creates object guard.
+       *
+       * @param required - Guards for required properties.
+       * @param optional - Guards for optional properties.
+       * @returns Object guard.
+       */
+      function _factory<R extends object, O extends object>(
+        required: ObjectGuards<R, keyof R>,
+        optional: ObjectGuards<O, keyof O>
+      ): Guard<types.OptionalStyle<Partial<O>> & types.UndefinedStyle<R>>;
+
+      /**
+       * Creates object guard.
+       *
+       * @param required - Guards for required properties.
+       * @param optional - Guards for optional properties.
+       * @returns Object guard.
+       */
+      function _factory<T extends object>(
+        required: ObjectGuards<T, RequiredKeys<T>>,
+        optional: ObjectGuards<T, OptionalKeys<T>>
+      ): Guard<T>;
+
+      function _factory<T extends object>(
+        required: ObjectGuards<T, RequiredKeys<T>>,
+        optional: ObjectGuards<T, OptionalKeys<T>>
+      ): Guard<T> {
+        return (value): value is T => object.of(value, required, optional);
+      }
+    }),
+    of: overloadedFn(() => {
+      return _of;
+
+      /**
+       * Checks if value is an object.
+       *
+       * @param value - Value.
+       * @param required - Guards for required properties.
+       * @param optional - Guards for optional properties.
+       * @returns _True_ if value is an object, _false_ otherwise.
+       */
+      function _of<R extends object, O extends object>(
+        value: unknown,
+        required: ObjectGuards<R, keyof R>,
+        optional: ObjectGuards<O, keyof O>
+      ): value is types.OptionalStyle<Partial<O>> & types.UndefinedStyle<R>;
+
+      /**
+       * Checks if value is an object.
+       *
+       * @param value - Value.
+       * @param required - Guards for required properties.
+       * @param optional - Guards for optional properties.
+       * @returns _True_ if value is an object, _false_ otherwise.
+       */
+      function _of<T extends object>(
+        value: unknown,
+        required: ObjectGuards<T, RequiredKeys<T>>,
+        optional: ObjectGuards<T, OptionalKeys<T>>
+      ): value is T;
+
+      function _of<T extends object>(
+        value: unknown,
+        required: ObjectGuards<T, RequiredKeys<T>>,
+        optional: ObjectGuards<T, OptionalKeys<T>>
+      ): value is T {
+        return (
+          indexedObject(value) &&
+          o.every(required, (guard, key) =>
+            checkRequiredProp(value, key, guard)
+          ) &&
+          o.every(optional, (guard, key) =>
+            checkOptionalProp(value, key, guard)
+          )
+        );
+      }
+    })
+  }
+);
+
+export const objectU = or.factory(object, _undefined);
+
+export const objects = factory(array.of, object);
+
+export const objectsU = or.factory(objects, _undefined);
+
 export const set = defineFn(
   /**
    * Checks if value type is Set.
@@ -413,6 +454,22 @@ export const set = defineFn(
       set(value) && a.fromIterable(value).every(v => guard(v))
   }
 );
+
+export const setU = or.factory(set, _undefined);
+
+export const sets = factory(array.of, set);
+
+export const setsU = or.factory(sets, _undefined);
+
+export const strings = factory(array.of, string);
+
+export const stringsU = or.factory(strings, _undefined);
+
+export const symbolU = or.factory(symbol, _undefined);
+
+export const symbols = factory(array.of, symbol);
+
+export const symbolsU = or.factory(symbols, _undefined);
 
 export const tuple = defineFn(
   overloadedFn(() => {
@@ -549,6 +606,10 @@ export const tuple = defineFn(
   }
 );
 
+export const unknowns = factory(array.of, unknown);
+
+export const unknownsU = or.factory(unknowns, _undefined);
+
 export const not = defineFn(
   /**
    * Checks if value type is not T.
@@ -578,68 +639,6 @@ export const not = defineFn(
     undefined: _notFactory(_undefined)
   }
 );
-
-export const arrayU = or.factory(array, _undefined);
-
-export const arrays = factory(array.of, array);
-
-export const arraysU = or.factory(arrays, _undefined);
-
-export const booleanU = or.factory(boolean, _undefined);
-
-export const booleans = factory(array.of, boolean);
-
-export const booleansU = or.factory(booleans, _undefined);
-
-export const indexedObjectU = or.factory(indexedObject, _undefined);
-
-export const indexedObjects = factory(array.of, indexedObject);
-
-export const indexedObjectsU = or.factory(indexedObjects, _undefined);
-
-export const mapU = or.factory(map, _undefined);
-
-export const maps = factory(array.of, map);
-
-export const mapsU = or.factory(maps, _undefined);
-
-export const numStrU = or.factory(numStr, _undefined);
-
-export const numStrs = factory(array.of, numStr);
-
-export const numStrsU = or.factory(numStrs, _undefined);
-
-export const numberU = or.factory(number, _undefined);
-
-export const numbers = factory(array.of, number);
-
-export const numbersU = or.factory(numbers, _undefined);
-
-export const objectU = or.factory(object, _undefined);
-
-export const objects = factory(array.of, object);
-
-export const objectsU = or.factory(objects, _undefined);
-
-export const setU = or.factory(set, _undefined);
-
-export const sets = factory(array.of, set);
-
-export const setsU = or.factory(sets, _undefined);
-
-export const strings = factory(array.of, string);
-
-export const stringsU = or.factory(strings, _undefined);
-
-export const symbolU = or.factory(symbol, _undefined);
-
-export const symbols = factory(array.of, symbol);
-
-export const symbolsU = or.factory(symbols, _undefined);
-
-export const unknowns = factory(array.of, unknown);
-
-export const unknownsU = or.factory(unknowns, _undefined);
 
 export interface ExclusionGuard<T> {
   /**
@@ -819,7 +818,7 @@ export function string(value: unknown): value is string {
  * @param value - Value.
  * @returns _True_ if value is a string, _false_ otherwise.
  */
-export function stringU(value: unknown): value is string {
+export function stringU(value: unknown): value is types.stringU {
   switch (typeof value) {
     case "string":
       return value !== "";

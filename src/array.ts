@@ -319,6 +319,17 @@ export function reverse<T>(arr: readonly T[]): T[] {
 }
 
 /**
+ * Returns the second element from an array.
+ *
+ * @param arr - Array.
+ * @returns The second element if available.
+ * @throws Error otherwise.
+ */
+export function second<T>(arr: readonly T[]): T {
+  return get(arr, 1);
+}
+
+/**
  * Sorts array.
  *
  * @param arr - Array.
@@ -334,6 +345,17 @@ export function sort<T>(
   result.sort(compareFn);
 
   return result;
+}
+
+/**
+ * Returns the third element from an array.
+ *
+ * @param arr - Array.
+ * @returns The third element if available.
+ * @throws Error otherwise.
+ */
+export function third<T>(arr: readonly T[]): T {
+  return get(arr, 2);
 }
 
 /**
