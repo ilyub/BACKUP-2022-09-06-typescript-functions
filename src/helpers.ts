@@ -58,6 +58,7 @@ export function createFacade<I extends object, E = unknown>(
     wrapProxyHandler("createFacade", "throw", {
       apply: (_target, thisArg, args: unknowns) =>
         reflect.apply(targetFn(), thisArg, args),
+      // eslint-disable-next-line no-restricted-syntax -- Ok
       get: (_target, key) => reflect.get(target(key), key),
       getOwnPropertyDescriptor: (_target, key) =>
         reflect.getOwnPropertyDescriptor(target(key), key),
@@ -112,6 +113,7 @@ export function onDemand<T extends object>(generator: () => T): T {
   const proxy = new Proxy(
     {},
     wrapProxyHandler("onDemand", "throw", {
+      // eslint-disable-next-line no-restricted-syntax -- Ok
       get: (_target, key) => reflect.get(obj(), key),
       getOwnPropertyDescriptor: (_target, key) =>
         reflect.getOwnPropertyDescriptor(obj(), key),
@@ -165,6 +167,7 @@ export function safeAccess<
     obj,
     wrapProxyHandler("safeAccess", "throw", {
       get: (target, key) => {
+        // eslint-disable-next-line no-restricted-syntax -- Ok
         if (keysSet.has(key)) return reflect.get(target, key);
 
         throw new Error(`Read access denied: ${cast.string(key)}`);
@@ -227,6 +230,7 @@ export function wrapProxyHandler<T extends object>(
         defineProperty: (target, key, attrs) =>
           reflect.defineProperty(target, key, attrs),
         deleteProperty: (target, key) => reflect.deleteProperty(target, key),
+        // eslint-disable-next-line no-restricted-syntax -- Ok
         get: (target, key) => reflect.get(target, key),
         getOwnPropertyDescriptor: (target, key) =>
           reflect.getOwnPropertyDescriptor(target, key),

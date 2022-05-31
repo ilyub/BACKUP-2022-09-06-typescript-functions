@@ -60,6 +60,11 @@ module.exports = {
         ":matches(ExportNamedDeclaration, Program, TSModuleBlock) > VariableDeclaration > VariableDeclarator > CallExpression > :matches(.callee[name=assign], .callee[property.name=assign])"
     },
     {
+      message: "Unsafe function",
+      selector:
+        "CallExpression[callee.object.name=/^o|reflect$/u][callee.property.name=get]"
+    },
+    {
       message: 'Use "a.first" instead',
       selector:
         "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=0]"

@@ -59,8 +59,11 @@ test("fromEntries.exhaustive", () => {
 });
 
 test("get", () => {
+  // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/config update
   expect(o.get({ a: 1 }, "a", is.number)).toBe(1);
+  // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/config update
   expect(o.get({}, "a", is.number, 2)).toBe(2);
+  // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/config update
   expect(() => o.get({ a: 1 }, "a", is.string)).toThrow(AssertionError);
 });
 
@@ -228,7 +231,7 @@ test.each([
 test("unfreeze", () => {
   const obj1: TestInterface = { value: 1 };
 
-  // eslint-disable-next-line no-restricted-syntax -- Ok
+  // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/config update
   const obj2 = o.unfreeze(obj1);
 
   const typeCheck1: Equals<typeof obj1, { readonly value: number }> = 1;

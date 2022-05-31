@@ -66,6 +66,7 @@ test("createFacade: Object", () => {
     writable: true
   };
 
+  // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/config update
   expect(reflect.get(facade, "value")).toBe(1);
   expect(reflect.getOwnPropertyDescriptor(facade, "value")).toStrictEqual(
     descriptor
@@ -112,6 +113,7 @@ test("onDemand", () => {
     writable: true
   };
 
+  // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/config update
   expect(reflect.get(obj, "value")).toBe(1);
   expect(reflect.getOwnPropertyDescriptor(obj, "value")).toStrictEqual(
     descriptor
@@ -135,8 +137,11 @@ test("safeAccess: get", () => {
 
   const error = new Error("Read access denied: c");
 
+  // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/config update
   expect(reflect.get(obj, "a")).toBe(1);
+  // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/config update
   expect(reflect.get(obj, "b")).toBe(2);
+  // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/config update
   expect(() => reflect.get(obj, "c")).toThrow(error);
 });
 
@@ -269,6 +274,7 @@ test("wrapProxyHandler: doDefault", () => {
   expect(reflect.construct(proxyClass, [])).toBeInstanceOf(TestClass);
   expect(reflect.defineProperty(proxyObject, "x", {})).toBe(true);
   expect(reflect.deleteProperty(proxyObjectDelete, "x")).toBe(true);
+  // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/config update
   expect(reflect.get(proxyObject, "x")).toBe(1);
   expect(reflect.getOwnPropertyDescriptor(proxyObject, "x")).toStrictEqual(
     descriptor
@@ -317,6 +323,7 @@ test("wrapProxyHandler: throw", () => {
       reflect.deleteProperty(proxyObjectDelete, "x");
     },
     get: (): void => {
+      // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/config update
       reflect.get(proxyObject, "x");
     },
     getOwnPropertyDescriptor: (): void => {
