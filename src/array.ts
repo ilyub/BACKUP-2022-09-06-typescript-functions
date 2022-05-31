@@ -3,7 +3,6 @@
 import * as assert from "./assertions";
 import * as is from "./guards";
 import * as o from "./object";
-import * as reflect from "./reflect";
 import * as _ from "@skylib/lodash-commonjs-es";
 import type { numbers, strings, unknowns, Writable } from "./types";
 
@@ -451,5 +450,5 @@ function toReduce<T extends object, V extends object = T>(
 ): Reduce<T | V> {
   return is.callable(keyOrReduce)
     ? keyOrReduce
-    : (obj): unknown => reflect.get(obj, keyOrReduce);
+    : (obj): unknown => o.get(obj, keyOrReduce);
 }

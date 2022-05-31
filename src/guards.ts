@@ -1,8 +1,10 @@
 /* eslint-disable @skylib/primary-export-only -- Wait for @skylib/eslint update */
 
-import * as a from "./array";
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
+
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
+
 import { defineFn, overload, typedef } from "./core";
-import * as o from "./object";
 import type { ValidationObject } from "./helpers";
 import type * as types from "./types";
 import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
@@ -278,7 +280,7 @@ export const indexedObject = defineFn(
      * @returns _True_ if value type is IndexedObject\<T\>, _false_ otherwise.
      */
     of: <T>(value: unknown, guard: Guard<T>): value is types.IndexedObject<T> =>
-      object(value) && o.values(value).every(guard)
+      object(value) && Object.values(value).every(guard)
   }
 );
 
@@ -311,8 +313,7 @@ export const map = defineFn(
       keyGuard: Guard<K>,
       valueGuard: Guard<V>
     ): value is ReadonlyMap<K, V> =>
-      map(value) &&
-      a.fromIterable(value).every(([k, v]) => keyGuard(k) && valueGuard(v))
+      map(value) && [...value].every(([k, v]) => keyGuard(k) && valueGuard(v))
   }
 );
 
@@ -416,11 +417,13 @@ export const object = defineFn(
       ): value is T {
         return (
           indexedObject(value) &&
-          o.every(required, (guard, key) =>
-            checkRequiredProp(value, key, guard)
+          Object.entries(required).every(([key, guard]) =>
+            // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+            checkRequiredProp(value, key, guard as Guard)
           ) &&
-          o.every(optional, (guard, key) =>
-            checkOptionalProp(value, key, guard)
+          Object.entries(optional).every(([key, guard]) =>
+            // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+            checkOptionalProp(value, key, guard as Guard)
           )
         );
       }
@@ -451,7 +454,7 @@ export const set = defineFn(
      * @returns _True_ if value type is Set\<T\>, _false_ otherwise.
      */
     of: <T>(value: unknown, guard: Guard<T>): value is ReadonlySet<T> =>
-      set(value) && a.fromIterable(value).every(v => guard(v))
+      set(value) && [...value].every(v => guard(v))
   }
 );
 
@@ -914,7 +917,9 @@ function checkOptionalProp(
   key: PropertyKey,
   guard: Guard
 ): boolean {
-  return o.hasOwnProp(key, obj) ? guard(obj[key]) : true;
+  return Object.prototype.hasOwnProperty.call(obj, key)
+    ? guard(obj[key])
+    : true;
 }
 
 /**
@@ -930,5 +935,7 @@ function checkRequiredProp(
   key: PropertyKey,
   guard: Guard
 ): boolean {
-  return o.hasOwnProp(key, obj) ? guard(obj[key]) : false;
+  return Object.prototype.hasOwnProperty.call(obj, key)
+    ? guard(obj[key])
+    : false;
 }

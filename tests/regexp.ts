@@ -13,9 +13,9 @@ test("escapeString", () => {
 test.each([/\w(\w)\w/u, /\w(\w)\w/gu])("matchAll", re => {
   const matches = regexp.matchAll("abc xyz", re);
 
-  const match0 = a.get(matches, 0);
+  const match0 = a.first(matches);
 
-  const match1 = a.get(matches, 1);
+  const match1 = a.second(matches);
 
   expect(matches).toHaveLength(2);
   expect(a.clone(match0)).toStrictEqual(["abc", "b"]);

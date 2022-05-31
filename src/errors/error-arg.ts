@@ -1,9 +1,9 @@
 import { AssertionError } from "./AssertionError";
 
-export type ErrorArg = ErrorArg.Factory | string;
+export type ErrorArg = ErrorArg.Fn | string;
 
 export namespace ErrorArg {
-  export interface Factory {
+  export interface Fn {
     /**
      * Creates error.
      *
