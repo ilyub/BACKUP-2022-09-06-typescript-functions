@@ -1,5 +1,7 @@
 /* skylib/eslint-plugin disable @skylib/disallow-identifier[functions.reflect] */
 
+import * as is from "./guards";
+import * as as from "./inline-assertions";
 import "reflect-metadata";
 
 /**
@@ -33,15 +35,6 @@ export const construct: (
 export const defineProperty = Reflect.defineProperty;
 
 export const deleteProperty = Reflect.deleteProperty;
-
-/**
- * Typed version of Reflect.get.
- *
- * @param target - Target object.
- * @param key - Property key.
- * @returns Property value.
- */
-export const get: (target: object, key: PropertyKey) => unknown = Reflect.get;
 
 export const getOwnPropertyDescriptor = Reflect.getOwnPropertyDescriptor;
 
@@ -94,14 +87,73 @@ export function defineMetadataKey(
 }
 
 /**
+ * Typed version of Reflect.get.
+ *
+ * @param target - Target object.
+ * @param key - Property key.
+ * @returns Property value.
+ */
+export function get(target: object, key: PropertyKey): unknown;
+
+/**
+ * Typed version of Reflect.get.
+ *
+ * @param target - Target object.
+ * @param key - Property key.
+ * @param guard - Guard for type T.
+ * @param defVal - Default value.
+ * @returns Property value if its type is T.
+ * @throws AssertionError otherwise.
+ */
+export function get<T>(
+  target: object,
+  key: PropertyKey,
+  guard?: is.Guard<T>,
+  defVal?: T
+): T;
+
+export function get(
+  target: object,
+  key: PropertyKey,
+  guard: is.Guard = is.unknown,
+  defVal?: unknown
+): unknown {
+  return as.byGuard(Reflect.get(target, key) ?? defVal, guard);
+}
+
+/**
  * Typed version of Reflect.getMetadata.
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
  * @returns Metadata value.
  */
-export function getMetadata(metadataKey: MetadataKey, target: object): unknown {
-  return Reflect.getMetadata(metadataKey, target);
+export function getMetadata(metadataKey: MetadataKey, target: object): unknown;
+
+/**
+ * Typed version of Reflect.getMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @param guard - Guard for type T.
+ * @param defVal - Default value.
+ * @returns Metadata value if its type is T.
+ * @throws AssertionError otherwise.
+ */
+export function getMetadata<T>(
+  metadataKey: MetadataKey,
+  target: object,
+  guard?: is.Guard<T>,
+  defVal?: T
+): T;
+
+export function getMetadata(
+  metadataKey: MetadataKey,
+  target: object,
+  guard: is.Guard = is.unknown,
+  defVal?: unknown
+): unknown {
+  return as.byGuard(Reflect.getMetadata(metadataKey, target) ?? defVal, guard);
 }
 
 /**
@@ -116,8 +168,38 @@ export function getMetadataKey(
   metadataKey: MetadataKey,
   target: object,
   key: MetadataKey
+): unknown;
+
+/**
+ * Typed version of Reflect.getMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @param key - Property key.
+ * @param guard - Guard for type T.
+ * @param defVal - Default value.
+ * @returns Metadata value if its type is T.
+ * @throws AssertionError otherwise.
+ */
+export function getMetadataKey<T>(
+  metadataKey: MetadataKey,
+  target: object,
+  key: MetadataKey,
+  guard?: is.Guard<T>,
+  defVal?: T
+): T;
+
+export function getMetadataKey(
+  metadataKey: MetadataKey,
+  target: object,
+  key: MetadataKey,
+  guard: is.Guard = is.unknown,
+  defVal?: unknown
 ): unknown {
-  return Reflect.getMetadata(metadataKey, target, key);
+  return as.byGuard(
+    Reflect.getMetadata(metadataKey, target, key) ?? defVal,
+    guard
+  );
 }
 
 /**
@@ -130,8 +212,35 @@ export function getMetadataKey(
 export function getOwnMetadata(
   metadataKey: MetadataKey,
   target: object
+): unknown;
+
+/**
+ * Typed version of Reflect.getOwnMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @param guard - Guard for type T.
+ * @param defVal - Default value.
+ * @returns Metadata value if its type is T.
+ * @throws AssertionError otherwise.
+ */
+export function getOwnMetadata<T>(
+  metadataKey: MetadataKey,
+  target: object,
+  guard?: is.Guard<T>,
+  defVal?: T
+): T;
+
+export function getOwnMetadata(
+  metadataKey: MetadataKey,
+  target: object,
+  guard: is.Guard = is.unknown,
+  defVal?: unknown
 ): unknown {
-  return Reflect.getOwnMetadata(metadataKey, target);
+  return as.byGuard(
+    Reflect.getOwnMetadata(metadataKey, target) ?? defVal,
+    guard
+  );
 }
 
 /**
@@ -146,8 +255,38 @@ export function getOwnMetadataKey(
   metadataKey: MetadataKey,
   target: object,
   key: MetadataKey
+): unknown;
+
+/**
+ * Typed version of Reflect.getOwnMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @param key - Property key.
+ * @param guard - Guard for type T.
+ * @param defVal - Default value.
+ * @returns Metadata value if its type is T.
+ * @throws AssertionError otherwise.
+ */
+export function getOwnMetadataKey<T>(
+  metadataKey: MetadataKey,
+  target: object,
+  key: MetadataKey,
+  guard?: is.Guard<T>,
+  defVal?: T
+): T;
+
+export function getOwnMetadataKey(
+  metadataKey: MetadataKey,
+  target: object,
+  key: MetadataKey,
+  guard: is.Guard = is.unknown,
+  defVal?: unknown
 ): unknown {
-  return Reflect.getOwnMetadata(metadataKey, target, key);
+  return as.byGuard(
+    Reflect.getOwnMetadata(metadataKey, target, key) ?? defVal,
+    guard
+  );
 }
 
 /**

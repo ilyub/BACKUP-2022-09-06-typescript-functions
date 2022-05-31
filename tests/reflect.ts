@@ -1,4 +1,4 @@
-import { reflect } from "@";
+import { AssertionError, is, reflect } from "@";
 
 const mk1 = Symbol("test-metadata-key-1");
 
@@ -40,6 +40,12 @@ test("defineMetadataKey", () => {
   }
 });
 
+test("get", () => {
+  expect(reflect.get({ a: 1 }, "a", is.number)).toBe(1);
+  expect(reflect.get({}, "a", is.number, 1)).toBe(1);
+  expect(() => reflect.get({ a: 1 }, "a", is.string)).toThrow(AssertionError);
+});
+
 test("getMetadata", () => {
   class TestClass {}
 
@@ -50,6 +56,10 @@ test("getMetadata", () => {
     reflect.defineMetadata("mk2", 2, obj);
     expect(reflect.getMetadata("mk1", obj)).toBe(1);
     expect(reflect.getMetadata("mk2", obj)).toBe(2);
+    expect(reflect.getMetadata("mk3", obj, is.number, 2)).toBe(2);
+    expect(() => reflect.getMetadata("mk2", obj, is.string)).toThrow(
+      AssertionError
+    );
   }
 
   {
@@ -57,6 +67,10 @@ test("getMetadata", () => {
     reflect.defineMetadata(mk2, 2, obj);
     expect(reflect.getMetadata(mk1, obj)).toBe(1);
     expect(reflect.getMetadata(mk2, obj)).toBe(2);
+    expect(reflect.getMetadata(mk3, obj, is.number, 2)).toBe(2);
+    expect(() => reflect.getMetadata(mk2, obj, is.string)).toThrow(
+      AssertionError
+    );
   }
 });
 
@@ -70,6 +84,10 @@ test("getMetadataKey", () => {
     reflect.defineMetadataKey("mk2", 2, obj, pk1);
     expect(reflect.getMetadataKey("mk1", obj, pk1)).toBe(1);
     expect(reflect.getMetadataKey("mk2", obj, pk1)).toBe(2);
+    expect(reflect.getMetadataKey("mk3", obj, pk1, is.number, 2)).toBe(2);
+    expect(() => reflect.getMetadataKey("mk2", obj, pk1, is.string)).toThrow(
+      AssertionError
+    );
   }
 
   {
@@ -77,6 +95,10 @@ test("getMetadataKey", () => {
     reflect.defineMetadataKey(mk2, 2, obj, "pk1");
     expect(reflect.getMetadataKey(mk1, obj, "pk1")).toBe(1);
     expect(reflect.getMetadataKey(mk2, obj, "pk1")).toBe(2);
+    expect(reflect.getMetadataKey(mk3, obj, "pk1", is.number, 2)).toBe(2);
+    expect(() => reflect.getMetadataKey(mk2, obj, "pk1", is.string)).toThrow(
+      AssertionError
+    );
   }
 });
 
@@ -90,6 +112,10 @@ test("getOwnMetadata", () => {
     reflect.defineMetadata("mk2", 2, obj);
     expect(reflect.getOwnMetadata("mk1", obj)).toBeUndefined();
     expect(reflect.getOwnMetadata("mk2", obj)).toBe(2);
+    expect(reflect.getOwnMetadata("mk3", obj, is.number, 2)).toBe(2);
+    expect(() => reflect.getOwnMetadata("mk2", obj, is.string)).toThrow(
+      AssertionError
+    );
   }
 
   {
@@ -97,6 +123,10 @@ test("getOwnMetadata", () => {
     reflect.defineMetadata(mk2, 2, obj);
     expect(reflect.getOwnMetadata(mk1, obj)).toBeUndefined();
     expect(reflect.getOwnMetadata(mk2, obj)).toBe(2);
+    expect(reflect.getOwnMetadata(mk3, obj, is.number, 2)).toBe(2);
+    expect(() => reflect.getOwnMetadata(mk2, obj, is.string)).toThrow(
+      AssertionError
+    );
   }
 });
 
@@ -110,6 +140,10 @@ test("getOwnMetadataKey", () => {
     reflect.defineMetadataKey("mk2", 2, obj, pk1);
     expect(reflect.getOwnMetadataKey("mk1", obj, pk1)).toBeUndefined();
     expect(reflect.getOwnMetadataKey("mk2", obj, pk1)).toBe(2);
+    expect(reflect.getOwnMetadataKey("mk3", obj, pk1, is.number, 2)).toBe(2);
+    expect(() => reflect.getMetadataKey("mk2", obj, pk1, is.string)).toThrow(
+      AssertionError
+    );
   }
 
   {
@@ -117,6 +151,10 @@ test("getOwnMetadataKey", () => {
     reflect.defineMetadataKey(mk2, 2, obj, "pk1");
     expect(reflect.getOwnMetadataKey(mk1, obj, "pk1")).toBeUndefined();
     expect(reflect.getOwnMetadataKey(mk2, obj, "pk1")).toBe(2);
+    expect(reflect.getOwnMetadataKey(mk3, obj, "pk1", is.number, 2)).toBe(2);
+    expect(() => reflect.getMetadataKey(mk2, obj, "pk1", is.string)).toThrow(
+      AssertionError
+    );
   }
 });
 
