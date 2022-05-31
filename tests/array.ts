@@ -94,7 +94,7 @@ test("includesBy", () => {
 });
 
 test("last", () => {
-  expect(a.last([1, 2, 3, 4, 5])).toBe(4);
+  expect(a.last([1, 2, 3, 4, 5])).toBe(5);
   expect(a.last([1, 2, 3, 4, null])).toBeNull();
   expect(a.last([1, 2, 3, 4, undefined])).toBeUndefined();
 });
