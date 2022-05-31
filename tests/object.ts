@@ -60,6 +60,7 @@ test("fromEntries.exhaustive", () => {
 
 test("get", () => {
   expect(o.get({ a: 1 }, "a", is.number)).toBe(1);
+  expect(o.get({}, "a", is.number, 2)).toBe(2);
   expect(() => o.get({ a: 1 }, "a", is.string)).toThrow(AssertionError);
 });
 

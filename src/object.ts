@@ -2,9 +2,8 @@
 
 import { Accumulator } from "./Accumulator";
 import * as a from "./array";
-import * as assert from "./assertions";
 import * as is from "./guards";
-import * as reflect from "./reflect";
+import * as as from "./inline-assertions";
 import type {
   Entry,
   IndexedObject,
@@ -255,16 +254,35 @@ export function freeze<T extends object>(obj: T): Readonly<T> {
  *
  * @param obj - Object.
  * @param key - Key.
+ * @returns Object property.
+ */
+export function get(obj: object, key: PropertyKey): unknown;
+
+/**
+ * Returns object property.
+ *
+ * @param obj - Object.
+ * @param key - Key.
  * @param guard - Guard for type T.
+ * @param defVal - Default value.
  * @returns Object property if its type is T.
  * @throws AssertionError otherwise.
  */
-export function get<T>(obj: object, key: PropertyKey, guard: is.Guard<T>): T {
-  const value = reflect.get(obj, key);
+export function get<T>(
+  obj: object,
+  key: PropertyKey,
+  guard?: is.Guard<T>,
+  defVal?: T
+): T;
 
-  assert.byGuard(value, guard);
-
-  return value;
+export function get(
+  obj: object,
+  key: PropertyKey,
+  guard: is.Guard = is.unknown,
+  defVal?: unknown
+): unknown {
+  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+  return as.byGuard((obj as IndexedObject)[key] ?? defVal, guard);
 }
 
 /**
