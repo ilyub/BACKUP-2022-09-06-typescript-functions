@@ -25,6 +25,15 @@ test("array.of", () => {
   expect(subtest(1)).toThrow(AssertionError);
 });
 
+test("byGuard", () => {
+  const subtest = createSubtest(as.byGuard, is.string);
+
+  expect(subtest("a")).not.toThrow();
+  expect(subtest("")).not.toThrow();
+  expect(subtest(undefined)).toThrow(AssertionError);
+  expect(subtest(1)).toThrow(AssertionError);
+});
+
 test("callable", () => {
   const subtest = createSubtest(as.callable);
 

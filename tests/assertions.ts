@@ -40,9 +40,12 @@ test.each([
     expected: new Error("Test error")
   }
 ])("byGuard", ({ error, expected }) => {
-  expect(() => {
-    assert.byGuard(1, is.string, error);
-  }).toThrow(expected);
+  const subtest = createSubtest(assert.byGuard, is.string, error);
+
+  expect(subtest("a")).not.toThrow();
+  expect(subtest("")).not.toThrow();
+  expect(subtest(undefined)).toThrow(expected);
+  expect(subtest(1)).toThrow(expected);
 });
 
 test("callable", () => {

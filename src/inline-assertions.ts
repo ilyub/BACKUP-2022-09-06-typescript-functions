@@ -191,6 +191,25 @@ export const not = {
  * Asserts that value type is T.
  *
  * @param value - Value.
+ * @param guard - Guard for type T.
+ * @param error - Error.
+ * @returns Value if value type is T.
+ * @throws Error otherwise.
+ */
+export function byGuard<T>(
+  value: unknown,
+  guard: is.Guard<T>,
+  error?: ErrorArg
+): T {
+  assert.byGuard(value, guard, error);
+
+  return value;
+}
+
+/**
+ * Asserts that value type is T.
+ *
+ * @param value - Value.
  * @param error - Error.
  * @returns Value if value type is T.
  * @throws Error otherwise.
