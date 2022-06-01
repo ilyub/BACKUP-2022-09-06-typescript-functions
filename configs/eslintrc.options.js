@@ -60,6 +60,19 @@ module.exports = {
         ":matches(ExportNamedDeclaration, Program, TSModuleBlock) > VariableDeclaration > VariableDeclarator > CallExpression > :matches(.callee[name=assign], .callee[property.name=assign])"
     },
     {
+      message: 'Use "cast.number" instead',
+      selector: "CallExpression > Identifier.callee[name=Number]"
+    },
+    {
+      message: 'Use "cast.string" instead',
+      selector: "CallExpression > Identifier.callee[name=String]"
+    },
+    {
+      message: 'Use "evaluate" instead',
+      selector:
+        "CallExpression[arguments.length=0] > ArrowFunctionExpression.callee"
+    },
+    {
       message: "Unsafe function",
       selector:
         "CallExpression[callee.object.name=/^o|reflect$/u][callee.property.name=get]"

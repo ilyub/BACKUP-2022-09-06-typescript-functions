@@ -29,6 +29,7 @@ export type ValidationObject<T extends PropertyKey> = ReadonlySet<T>;
 export function createValidationObject<T extends NumStr>(
   source: Rec<T, T>
 ): ValidationObject<T> {
+  // eslint-disable-next-line no-restricted-syntax -- Ok
   if (Object.entries(source).every(([key, value]) => key === String(value)))
     return new Set(Object.values(source));
 
