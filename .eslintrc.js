@@ -118,7 +118,7 @@ module.exports = {
 function createRules(type, ...args) {
   const captures = {};
 
-  for (const [index, arg] of args.slice(-1).entries())
+  for (const [index, arg] of args.slice(0, -1).entries())
     captures[`part${index + 1}`] = arg;
 
   const groups = args.at(-1);
