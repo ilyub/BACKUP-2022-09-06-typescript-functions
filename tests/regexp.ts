@@ -4,12 +4,6 @@ test("addFlags", () => {
   expect(regexp.addFlags(/.*/u, "gu").flags).toBe("gu");
 });
 
-test("escapeString", () => {
-  expect(regexp.escapeString("$()*+.?[\\]^{|}-")).toBe(
-    "\\$\\(\\)\\*\\+\\.\\?\\[\\\\\\]\\^\\{\\|\\}\\x2d"
-  );
-});
-
 test.each([/\w(\w)\w/u, /\w(\w)\w/gu])("matchAll", re => {
   const matches = regexp.matchAll("abc xyz", re);
 

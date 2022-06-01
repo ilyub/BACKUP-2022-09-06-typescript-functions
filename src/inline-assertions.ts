@@ -2,7 +2,7 @@ import * as assert from "./assertions";
 import { defineFn } from "./core";
 import { ErrorArg } from "./errors";
 import * as is from "./guards";
-import type { ValidationObject } from "./helpers";
+import type { ValidationObject } from "./core";
 import type * as types from "./types";
 
 export {

@@ -1,9 +1,10 @@
 /* skylib/eslint-plugin disable @skylib/disallow-identifier[functions.json] */
 
-import * as a from "./array";
-import * as assert from "./assertions";
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
+
+import { createValidationObject } from "./core";
 import * as is from "./guards";
-import { createValidationObject } from "./helpers";
+import * as as from "./inline-assertions";
 import type { stringE } from "./types";
 
 /**
@@ -83,10 +84,10 @@ function replacer(_key: unknown, value: unknown): unknown {
   if (is.empty(value)) return null;
 
   if (is.map(value))
-    return { type: "map-5702-3c89-3feb-75d4", value: a.fromIterable(value) };
+    return { type: "map-5702-3c89-3feb-75d4", value: [...value] };
 
   if (is.set(value))
-    return { type: "set-41ef-10c9-ae1f-15e8", value: a.fromIterable(value) };
+    return { type: "set-41ef-10c9-ae1f-15e8", value: [...value] };
 
   return value;
 }
@@ -105,14 +106,10 @@ function reviver(_key: unknown, value: unknown): unknown {
   if (isCustomData(value))
     switch (value.type) {
       case "map-5702-3c89-3feb-75d4":
-        assert.byGuard(value.value, isEntries);
-
-        return new Map(value.value);
+        return new Map(as.byGuard(value.value, isEntries));
 
       case "set-41ef-10c9-ae1f-15e8":
-        assert.byGuard(value.value, is.array);
-
-        return new Set(value.value);
+        return new Set(as.byGuard(value.value, is.array));
     }
 
   return value;

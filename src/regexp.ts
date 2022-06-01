@@ -1,6 +1,5 @@
-import * as a from "./array";
-import * as fn from "./function";
-import * as s from "./string";
+import * as _ from "@skylib/lodash-commonjs-es";
+import type { Writable } from "./types";
 
 export type RegExpExecArrays = readonly RegExpExecArray[];
 
@@ -12,20 +11,8 @@ export type RegExpExecArrays = readonly RegExpExecArray[];
  * @returns New regular expression.
  */
 export function addFlags(re: RegExp, flags: string): RegExp {
-  flags = s.filter(flags, flag => !re.flags.includes(flag));
-
   // eslint-disable-next-line security/detect-non-literal-regexp -- Ok
-  return flags ? new RegExp(re, re.flags + flags) : re;
-}
-
-/**
- * Escapes regular expression special characters.
- *
- * @param str - String.
- * @returns Escaped string.
- */
-export function escapeString(str: string): string {
-  return str.replace(/[$()*+.?[\\\]^{|}]/gu, "\\$&").replace(/-/gu, "\\x2d");
+  return flags ? new RegExp(re, _.uniq([...re.flags, ...flags]).join("")) : re;
 }
 
 /**
@@ -38,14 +25,14 @@ export function escapeString(str: string): string {
 export function matchAll(str: string, re: RegExp): RegExpExecArrays {
   re = addFlags(re, "g");
 
-  return a.fromIterable(
-    fn.run(function* (): Generator<RegExpExecArray> {
-      let match = re.exec(str);
+  const result: Writable<RegExpExecArrays> = [];
 
-      while (match) {
-        yield match;
-        match = re.exec(str);
-      }
-    })
-  );
+  let match = re.exec(str);
+
+  while (match) {
+    result.push(match);
+    match = re.exec(str);
+  }
+
+  return result;
 }

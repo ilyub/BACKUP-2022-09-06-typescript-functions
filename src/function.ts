@@ -67,6 +67,7 @@ export function pipe(value: unknown, ...callbacks: PipeCallbacks): unknown {
  *
  * @param callback - Callback.
  * @returns The result of callback execution.
+ * @deprecated Use "evaluate" instead.
  */
 export function run<T>(callback: Sync<T>): T;
 
@@ -75,6 +76,7 @@ export function run<T>(callback: Sync<T>): T;
  *
  * @param mixed - Promise or async function.
  * @returns The result of callback execution.
+ * @deprecated Use "evaluate" instead.
  */
 export async function run<T>(mixed: AsyncPromise<T>): Promise<T>;
 

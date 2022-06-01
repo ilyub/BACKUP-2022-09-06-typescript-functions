@@ -4,14 +4,9 @@ import "jest-extended";
 import matchers from "jest-extended/all";
 import type { unknowns } from "..";
 
-export type { ExpectFromMatcher } from "./expect";
+export * from "./fake-timers";
 
-export {
-  clock,
-  installFakeTimer,
-  run,
-  setRandomSystemTime
-} from "./fake-timers";
+export type { ExpectFromMatcher } from "./expect";
 
 /**
  * Jest reset.

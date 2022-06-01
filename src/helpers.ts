@@ -6,7 +6,7 @@ import * as as from "./inline-assertions";
 import * as o from "./object";
 import * as programFlow from "./program-flow";
 import * as reflect from "./reflect";
-import type { NumStr, Rec, unknowns, Join2 } from "./types";
+import type { unknowns, Join2 } from "./types";
 
 export type Facade<I, E = unknown> = E & FacadeOwnMethods<I> & I;
 
@@ -30,8 +30,6 @@ export type SafeAccess<
 export declare type SafeAccessGuards<T, W extends string & keyof T> = {
   readonly [K in W]: is.Guard<T[K]>;
 };
-
-export type ValidationObject<T extends PropertyKey> = ReadonlySet<T>;
 
 /**
  * Creates facade.
@@ -84,21 +82,6 @@ export function createFacade<I extends object, E = unknown>(
   function targetFn(): Function {
     return as.callable(_implementation, `Facade is not callable: ${name}`);
   }
-}
-
-/**
- * Creates validation object.
- *
- * @param source - Source.
- * @returns Validation object.
- */
-export function createValidationObject<T extends NumStr>(
-  source: Rec<T, T>
-): ValidationObject<T> {
-  if (o.entries(source).every(([key, value]) => key === cast.string(value)))
-    return new Set(o.values(source));
-
-  throw new Error("Invalid source");
 }
 
 /**

@@ -1,8 +1,10 @@
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
 
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
+
 import * as assert from "./assertions";
 import * as is from "./guards";
-import * as o from "./object";
+import * as as from "./inline-assertions";
 import * as _ from "@skylib/lodash-commonjs-es";
 import type { numbers, strings, unknowns, Writable } from "./types";
 
@@ -92,7 +94,10 @@ export function clone<T>(arr: readonly T[]): T[] {
  * @returns New array with one element removed.
  */
 export function drop<T>(arr: readonly T[], index: number): T[] {
-  assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
+  assert.toBeTrue(
+    Object.prototype.hasOwnProperty.call(arr, index),
+    "Invalid index"
+  );
 
   return [...arr.slice(0, index), ...arr.slice(index + 1)];
 }
@@ -173,7 +178,10 @@ export function fromString(str: string): strings {
  * @throws Error otherwise.
  */
 export function get<T>(arr: readonly T[], index: number): T {
-  assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
+  assert.toBeTrue(
+    Object.prototype.hasOwnProperty.call(arr, index),
+    "Invalid index"
+  );
 
   // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
   return arr[index] as T;
@@ -278,7 +286,10 @@ export function removeBy<T extends object, V extends object>(
  * @returns New array with one element replaced.
  */
 export function replace<T>(arr: readonly T[], index: number, value: T): T[] {
-  assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
+  assert.toBeTrue(
+    Object.prototype.hasOwnProperty.call(arr, index),
+    "Invalid index"
+  );
 
   return [...arr.slice(0, index), value, ...arr.slice(index + 1)];
 }
@@ -450,5 +461,5 @@ function toReduce<T extends object, V extends object = T>(
 ): Reduce<T | V> {
   return is.callable(keyOrReduce)
     ? keyOrReduce
-    : (obj): unknown => o.get(obj, keyOrReduce);
+    : (obj): unknown => as.indexedObject(obj)[keyOrReduce];
 }

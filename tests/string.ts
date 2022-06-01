@@ -11,8 +11,10 @@ test("empty", () => {
   expect(s.empty(" \n\r\t - \n\r\t ")).toBeFalse();
 });
 
-test("filter", () => {
-  expect(s.filter("a1b1c", char => char !== "1")).toBe("abc");
+test("escapeRegExpSpecialChars", () => {
+  expect(s.escapeRegExpSpecialChars("$()*+.?[\\]^{|}-")).toBe(
+    "\\$\\(\\)\\*\\+\\.\\?\\[\\\\\\]\\^\\{\\|\\}\\x2d"
+  );
 });
 
 test("lcFirst", () => {

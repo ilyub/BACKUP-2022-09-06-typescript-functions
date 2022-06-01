@@ -5,7 +5,7 @@
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
 
 import { defineFn, overload, typedef } from "./core";
-import type { ValidationObject } from "./helpers";
+import type { ValidationObject } from "./core";
 import type * as types from "./types";
 import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
 import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";

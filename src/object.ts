@@ -1,7 +1,7 @@
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
+
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
 
-import { Accumulator } from "./Accumulator";
-import * as a from "./array";
 import * as is from "./guards";
 import * as as from "./inline-assertions";
 import type {
@@ -14,11 +14,8 @@ import type {
   Writable,
   WritablePartialRecord,
   OptionalStyle,
-  StrictOmit,
-  IndexedRecords
+  StrictOmit
 } from "./types";
-
-export { _entries as entries };
 
 /**
  * Typed version of Object.assign.
@@ -44,6 +41,25 @@ export const defineProperty: <T, K extends keyof T = keyof T>(
   key: K,
   descriptor: Descriptor<T, K>
 ) => void = Object.defineProperty.bind(Object);
+
+export const entries: {
+  /**
+   * Typed version of Object.entries.
+   *
+   * @param obj - Object.
+   * @returns Object entries.
+   */
+  <K extends string, V>(obj: PartialRecord<K, V>): Array<Entry<K, V>>;
+  /**
+   * Typed version of Object.entries.
+   *
+   * @param obj - Object.
+   * @returns Object entries.
+   */
+  <T extends object>(obj: T): Array<
+    Entry<string & keyof T, T[NumStr & keyof T]>
+  >;
+} = Object.entries;
 
 export const extend: {
   /**
@@ -87,6 +103,7 @@ export const fromEntries = extend(
    * @param entries - Entries.
    * @returns Object.
    */
+  // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
   <K extends PropertyKey, V>(entries: Iterable<Entry<K, V>>) => {
     const result: WritablePartialRecord<K, V> = {};
 
@@ -101,6 +118,7 @@ export const fromEntries = extend(
      * @param entries - Entries.
      * @returns Object.
      */
+    // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
     exhaustive: <K extends PropertyKey, V>(entries: Iterable<Entry<K, V>>) => {
       const result: WritablePartialRecord<K, V> = {};
 
@@ -217,7 +235,7 @@ export function every<T extends object>(
   obj: T,
   predicate: Predicate<T>
 ): boolean {
-  return _entries(obj).every(([key, value]) => predicate(value, key));
+  return entries(obj).every(([key, value]) => predicate(value, key));
 }
 
 /**
@@ -233,7 +251,7 @@ export function filter<T extends object>(
 ): Partial<T> {
   const result: Partial<T> = {};
 
-  for (const [key, value] of _entries(obj))
+  for (const [key, value] of entries(obj))
     if (predicate(value, key)) result[key] = value;
 
   return result;
@@ -320,27 +338,7 @@ export function map<K extends string, V, R>(
   callback: (value: V, key: K) => R
 ): Rec<K, R> {
   return fromEntries.exhaustive(
-    _entries(obj).map(([key, value]) => [key, callback(value, key)])
-  );
-}
-
-/**
- * Merges objects.
- * If more than one object has the same key, respective values are combined into array.
- *
- * @param objects - Objects.
- * @returns Merged object.
- */
-export function merge(...objects: IndexedRecords): IndexedObject {
-  const result = new Accumulator<string, unknown>();
-
-  for (const obj of objects)
-    for (const [key, value] of _entries(obj)) result.push(key, value);
-
-  return fromEntries(
-    a
-      .fromIterable(result)
-      .map(([key, arr]) => [key, arr.length === 1 ? arr[0] : arr])
+    entries(obj).map(([key, value]) => [key, callback(value, key)])
   );
 }
 
@@ -395,7 +393,7 @@ export function some<T extends object>(
   obj: T,
   predicate: Predicate<T>
 ): boolean {
-  return _entries(obj).some(([key, value]) => predicate(value, key));
+  return entries(obj).some(([key, value]) => predicate(value, key));
 }
 
 /**
@@ -423,15 +421,16 @@ export function sort<K extends string, V>(
   obj: Rec<K, V>,
   compareFn?: CompareFn<Rec<K, V>>
 ): Rec<K, V> {
-  return fromEntries.exhaustive(
-    a.sort(
-      _entries(obj),
-      compareFn
-        ? (entry1, entry2): number =>
-            compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
-        : undefined
-    )
+  const arr = entries(obj);
+
+  arr.sort(
+    compareFn
+      ? (entry1, entry2): number =>
+          compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
+      : undefined
   );
+
+  return fromEntries.exhaustive(arr);
 }
 
 /**
@@ -443,22 +442,3 @@ export function sort<K extends string, V>(
 export function unfreeze<T extends object>(obj: T): Writable<T> {
   return obj;
 }
-
-const _entries: {
-  /**
-   * Typed version of Object.entries.
-   *
-   * @param obj - Object.
-   * @returns Object entries.
-   */
-  <K extends string, V>(obj: PartialRecord<K, V>): Array<Entry<K, V>>;
-  /**
-   * Typed version of Object.entries.
-   *
-   * @param obj - Object.
-   * @returns Object entries.
-   */
-  <T extends object>(obj: T): Array<
-    Entry<string & keyof T, T[NumStr & keyof T]>
-  >;
-} = Object.entries;

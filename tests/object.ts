@@ -118,34 +118,6 @@ test("map", () => {
   }
 });
 
-test("merge", () => {
-  expect(
-    o.merge(
-      {
-        a: 1,
-        b: [1],
-        c: "a"
-      },
-      {
-        b: 2,
-        c: [2],
-        d: "b"
-      },
-      {
-        c: 3,
-        d: [3],
-        e: "c"
-      }
-    )
-  ).toStrictEqual({
-    a: 1,
-    b: [[1], 2],
-    c: ["a", [2], 3],
-    d: ["b", [3]],
-    e: "c"
-  });
-});
-
 test("omit", () => {
   expect(
     o.omit(
