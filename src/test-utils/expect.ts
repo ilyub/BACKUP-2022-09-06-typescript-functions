@@ -9,10 +9,14 @@ declare global {
       /**
        * Checks that async function executes within expected time.
        *
-       * @param expected - Expected time.
+       * @param expected - Expected time (ms).
+       * @param precision - Precision (ms).
        * @returns Result.
        */
-      readonly executionTimeToBe: (expected: number) => Promise<R>;
+      readonly executionTimeToBe: (
+        expected: number,
+        precision?: number
+      ) => Promise<R>;
       /**
        * Checks that two objects are identical.
        *
@@ -26,7 +30,8 @@ declare global {
 
 export const executionTimeToBe: ExpectFromMatcher<"executionTimeToBe"> = async (
   got,
-  expected
+  expected,
+  precision = 10
 ) => {
   const start = Date.now();
 
@@ -34,7 +39,7 @@ export const executionTimeToBe: ExpectFromMatcher<"executionTimeToBe"> = async (
 
   const gotTime = Date.now() - start;
 
-  return gotTime === expected
+  return Math.abs(gotTime - expected) <= precision
     ? {
         message: () =>
           `Expected callback execution time not to be ${expected} ms`,

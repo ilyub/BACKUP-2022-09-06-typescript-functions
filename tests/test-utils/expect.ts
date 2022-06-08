@@ -1,31 +1,38 @@
+import * as testUtils from "@/test-utils";
 import {
   executionTimeToBe,
   toBeSameAs
   // eslint-disable-next-line import/no-internal-modules -- Ok
 } from "@/test-utils/expect";
 
+testUtils.installFakeTimer();
+
 async function testResolve(): Promise<void> {
   await Promise.resolve();
 }
 
 test("executionTimeToBe", async () => {
-  {
-    const result = await executionTimeToBe(testResolve, 0);
+  expect.hasAssertions();
 
-    const expected = "Expected callback execution time not to be 0 ms";
+  await testUtils.run(async () => {
+    {
+      const result = await executionTimeToBe(testResolve, 0);
 
-    expect(result.pass).toBeTrue();
-    expect(result.message()).toStrictEqual(expected);
-  }
+      const expected = "Expected callback execution time not to be 0 ms";
 
-  {
-    const result = await executionTimeToBe(testResolve, 1);
+      expect(result.pass).toBeTrue();
+      expect(result.message()).toStrictEqual(expected);
+    }
 
-    const expected = "Expected callback execution time (0 ms) to be 1 ms";
+    {
+      const result = await executionTimeToBe(testResolve, 1000);
 
-    expect(result.pass).toBeFalse();
-    expect(result.message()).toStrictEqual(expected);
-  }
+      const expected = "Expected callback execution time (0 ms) to be 1000 ms";
+
+      expect(result.pass).toBeFalse();
+      expect(result.message()).toStrictEqual(expected);
+    }
+  });
 });
 
 test("toBeSameAs", () => {
