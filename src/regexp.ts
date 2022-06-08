@@ -11,8 +11,10 @@ export type RegExpExecArrays = readonly RegExpExecArray[];
  * @returns New regular expression.
  */
 export function addFlags(re: RegExp, flags: string): RegExp {
+  flags = _.uniq([...re.flags, ...flags]).join("");
+
   // eslint-disable-next-line security/detect-non-literal-regexp -- Ok
-  return flags ? new RegExp(re, _.uniq([...re.flags, ...flags]).join("")) : re;
+  return flags === re.flags ? re : new RegExp(re, flags);
 }
 
 /**

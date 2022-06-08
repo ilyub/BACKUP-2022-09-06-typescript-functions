@@ -1,7 +1,8 @@
 import { a, regexp } from "@";
 
 test("addFlags", () => {
-  expect(regexp.addFlags(/.*/u, "gu").flags).toBe("gu");
+  expect(regexp.addFlags(/.*/gu, "gu").flags).toBe("gu");
+  expect(regexp.addFlags(/.*/gu, "iu").flags).toBe("giu");
 });
 
 test.each([/\w(\w)\w/u, /\w(\w)\w/gu])("matchAll", re => {
