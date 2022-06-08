@@ -1,5 +1,3 @@
-/* eslint-disable @skylib/consistent-filename -- Ok */
-
 import { AssertionError } from "@";
 
 const error1 = new AssertionError();

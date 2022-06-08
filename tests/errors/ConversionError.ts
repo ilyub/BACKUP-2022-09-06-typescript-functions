@@ -1,5 +1,3 @@
-/* eslint-disable @skylib/consistent-filename -- Ok */
-
 import { ConversionError } from "@";
 
 const error1 = new ConversionError();
