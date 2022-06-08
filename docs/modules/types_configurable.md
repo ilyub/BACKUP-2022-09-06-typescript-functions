@@ -4,11 +4,11 @@
 
 ## Table of contents
 
-### Type aliases
+### Type Aliases
 
 - [LocaleName](types_configurable.md#localename)
 
-## Type aliases
+## Type Aliases
 
 ### LocaleName
 

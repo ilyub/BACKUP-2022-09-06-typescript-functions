@@ -4,7 +4,7 @@
 
 ## Table of contents
 
-### Type aliases
+### Type Aliases
 
 - [Entry](types_core.md#entry)
 - [IndexedObject](types_core.md#indexedobject)
@@ -49,7 +49,7 @@
 - [trueU](types_core.md#trueu)
 - [unknowns](types_core.md#unknowns)
 
-## Type aliases
+## Type Aliases
 
 ### Entry
 

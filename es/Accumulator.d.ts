@@ -35,5 +35,6 @@ export declare class Accumulator<K extends PropertyKey, T> {
 }
 export declare namespace Accumulator {
     type Entry<K extends PropertyKey, T> = readonly [K, readonly T[]];
+    type Locked<K extends PropertyKey, T> = Omit<Readonly<Accumulator<K, T>>, "push" | "unshift">;
 }
 //# sourceMappingURL=Accumulator.d.ts.map

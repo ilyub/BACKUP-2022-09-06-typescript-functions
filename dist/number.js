@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.sum = exports.rootMeanSquareDeviation = exports.limit = exports.average = exports.round = exports.floor = exports.ceil = void 0;
 const tslib_1 = require("tslib");
 const assert = tslib_1.__importStar(require("./assertions"));
-const module_definition_1 = require("./module-definition");
-exports.ceil = (0, module_definition_1.defineFn)(
+const core_1 = require("./core");
+exports.ceil = (0, core_1.defineFn)(
 /**
  * Ceils number to a given precision.
  *
@@ -24,11 +24,9 @@ exports.ceil = (0, module_definition_1.defineFn)(
      * @param from - From.
      * @returns Ceiled value.
      */
-    step(value, step, from = 0) {
-        return Math.ceil((value - from) / step) * step + from;
-    }
+    step: (value, step, from = 0) => Math.ceil((value - from) / step) * step + from
 });
-exports.floor = (0, module_definition_1.defineFn)(
+exports.floor = (0, core_1.defineFn)(
 /**
  * Floors number to a given precision.
  *
@@ -43,17 +41,14 @@ exports.floor = (0, module_definition_1.defineFn)(
     /**
      * Floors number.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param step - Step.
      * @param from - From.
      * @returns Floored value.
      */
-    step(value, step, from = 0) {
-        return Math.floor((value - from) / step) * step + from;
-    }
+    step: (value, step, from = 0) => Math.floor((value - from) / step) * step + from
 });
-exports.round = (0, module_definition_1.defineFn)(
+exports.round = (0, core_1.defineFn)(
 /**
  * Rounds number to a given precision.
  *
@@ -68,15 +63,12 @@ exports.round = (0, module_definition_1.defineFn)(
     /**
      * Rounds number.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param step - Step.
      * @param from - From.
      * @returns Rounded value.
      */
-    step(value, step, from = 0) {
-        return Math.round((value - from) / step) * step + from;
-    }
+    step: (value, step, from = 0) => Math.round((value - from) / step) * step + from
 });
 /**
  * Averages values.

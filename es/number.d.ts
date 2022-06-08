@@ -1,5 +1,5 @@
 import type { numbers } from "./types";
-export declare const ceil: ((value: number, precision: number) => number) & {
+export declare const ceil: ((value: number, precision: number) => number) & Readonly<{
     /**
      * Ceils number.
      *
@@ -8,32 +8,30 @@ export declare const ceil: ((value: number, precision: number) => number) & {
      * @param from - From.
      * @returns Ceiled value.
      */
-    step(value: number, step: number, from?: number): number;
-};
-export declare const floor: ((value: number, precision: number) => number) & {
+    step: (value: number, step: number, from?: number) => number;
+}>;
+export declare const floor: ((value: number, precision: number) => number) & Readonly<{
     /**
      * Floors number.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param step - Step.
      * @param from - From.
      * @returns Floored value.
      */
-    step(this: void, value: number, step: number, from?: number): number;
-};
-export declare const round: ((value: number, precision: number) => number) & {
+    step: (value: number, step: number, from?: number) => number;
+}>;
+export declare const round: ((value: number, precision: number) => number) & Readonly<{
     /**
      * Rounds number.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param step - Step.
      * @param from - From.
      * @returns Rounded value.
      */
-    step(this: void, value: number, step: number, from?: number): number;
-};
+    step: (value: number, step: number, from?: number) => number;
+}>;
 /**
  * Averages values.
  *

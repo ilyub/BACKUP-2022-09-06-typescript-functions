@@ -1,24 +1,14 @@
 import * as is from "./guards";
-import { defineFn } from "./module-definition";
-export const not = defineFn(
-/**
- * Not implemented.
- */
-() => {
-    throw new Error("Not implemented");
-}, {
+export const not = {
     /**
      * Converts value to not empty.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param defVal - Default value.
      * @returns Value if it is not empty, defVal otherwise.
      */
-    empty(value, defVal) {
-        return is.not.empty(value) ? value : defVal;
-    }
-});
+    empty: (value, defVal) => is.not.empty(value) ? value : defVal
+};
 /**
  * Converts value to a number.
  *
@@ -39,12 +29,14 @@ export function number(value, defVal = 0) {
 export function numberU(value) {
     switch (typeof value) {
         case "boolean":
+            // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/eslint-plugin update
             return Number(value);
         case "number":
             return value;
         case "string": {
             if (value === "" || value === "\n" || value === "\r\n")
                 return undefined;
+            // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/eslint-plugin update
             const result = Number(value);
             return Number.isNaN(result) ? undefined : result;
         }
@@ -59,6 +51,7 @@ export function numberU(value) {
  * @returns Converted value.
  */
 export function string(value) {
+    // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/eslint-plugin update
     return is.not.empty(value) ? String(value) : "";
 }
 /**
@@ -68,6 +61,7 @@ export function string(value) {
  * @returns Converted value.
  */
 export function stringU(value) {
+    // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/eslint-plugin update
     const str = is.not.empty(value) ? String(value) : "";
     return str ? str : undefined;
 }

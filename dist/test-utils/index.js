@@ -1,16 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.jestSetup = exports.jestReset = exports.setRandomSystemTime = exports.run = exports.installFakeTimer = exports.clock = void 0;
+exports.jestSetup = exports.jestReset = void 0;
 const tslib_1 = require("tslib");
 const __1 = require("..");
 const expect_1 = require("./expect");
 require("jest-extended");
 const all_1 = tslib_1.__importDefault(require("jest-extended/all"));
-var fake_timers_1 = require("./fake-timers");
-Object.defineProperty(exports, "clock", { enumerable: true, get: function () { return fake_timers_1.clock; } });
-Object.defineProperty(exports, "installFakeTimer", { enumerable: true, get: function () { return fake_timers_1.installFakeTimer; } });
-Object.defineProperty(exports, "run", { enumerable: true, get: function () { return fake_timers_1.run; } });
-Object.defineProperty(exports, "setRandomSystemTime", { enumerable: true, get: function () { return fake_timers_1.setRandomSystemTime; } });
+tslib_1.__exportStar(require("./fake-timers"), exports);
 /**
  * Jest reset.
  */

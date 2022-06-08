@@ -29,7 +29,6 @@
 - [hasOwnProp](object.md#hasownprop)
 - [keys](object.md#keys)
 - [map](object.md#map)
-- [merge](object.md#merge)
 - [omit](object.md#omit)
 - [removeUndefinedKeys](object.md#removeundefinedkeys)
 - [size](object.md#size)
@@ -42,7 +41,7 @@
 
 ### fromEntries
 
-• `Const` **fromEntries**: { `exhaustive`: <K, V\>(`entries`: `Iterable`<[`Entry`](types_core.md#entry)<`K`, `V`\>\>) => [`Rec`](types_core.md#rec)<`K`, `V`\>  } & <K, V\>(`entries`: `Iterable`<[`Entry`](types_core.md#entry)<`K`, `V`\>\>) => [`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\>
+• `Const` **fromEntries**: { `exhaustive`: <K, V\>(`entries`: `Iterable`<[`Entry`](types_core.md#entry)<`K`, `V`\>\>) => [`Rec`](types_core.md#rec)<`K`, `V`\>  } & <K, V\>(`entries`: `Iterable`<[`Entry`](types_core.md#entry)<`K`, `V`\>\>) => [`WritablePartialRecord`](types_core.md#writablepartialrecord)<`K`, `V`\>
 
 ## Functions
 
@@ -319,7 +318,24 @@ ___
 
 ### get
 
-▸ **get**<`T`\>(`obj`, `key`, `guard`): `T`
+▸ **get**(`obj`, `key`): `unknown`
+
+Returns object property.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | `object` | Object. |
+| `key` | `PropertyKey` | Key. |
+
+#### Returns
+
+`unknown`
+
+Object property.
+
+▸ **get**<`T`\>(`obj`, `key`, `guard?`, `defVal?`): `T`
 
 Returns object property.
 
@@ -337,7 +353,8 @@ Returns object property.
 | :------ | :------ | :------ |
 | `obj` | `object` | Object. |
 | `key` | `PropertyKey` | Key. |
-| `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
+| `guard?` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
+| `defVal?` | `T` | Default value. |
 
 #### Returns
 
@@ -455,27 +472,6 @@ Applies callback to each property.
 [`Rec`](types_core.md#rec)<`K`, `R`\>
 
 New object.
-
-___
-
-### merge
-
-▸ **merge**(...`objects`): [`IndexedObject`](types_core.md#indexedobject)
-
-Merges objects.
-If more than one object has the same key, respective values are combined into array.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `...objects` | [`IndexedRecords`](types_core.md#indexedrecords)<`unknown`\> | Objects. |
-
-#### Returns
-
-[`IndexedObject`](types_core.md#indexedobject)
-
-Merged object.
 
 ___
 

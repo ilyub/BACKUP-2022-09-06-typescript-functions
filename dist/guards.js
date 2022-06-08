@@ -1,27 +1,38 @@
 "use strict";
 /* eslint-disable @skylib/primary-export-only -- Wait for @skylib/eslint update */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.instance = exports.factory = exports.enumeration = exports.empty = exports.callable = exports.boolean = exports.unknownsU = exports.unknowns = exports.symbolsU = exports.symbols = exports.symbolU = exports.stringsU = exports.strings = exports.setsU = exports.sets = exports.setU = exports.objectsU = exports.objects = exports.objectU = exports.numbersU = exports.numbers = exports.numberU = exports.numStrsU = exports.numStrs = exports.numStrU = exports.mapsU = exports.maps = exports.mapU = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObjectU = exports.booleansU = exports.booleans = exports.booleanU = exports.arraysU = exports.arrays = exports.arrayU = exports.not = exports.tuple = exports.set = exports.or = exports.object = exports.map = exports.indexedObject = exports.array = exports.and = exports.undefined = exports.true = exports.null = exports.false = void 0;
+exports.instance = exports.factory = exports.enumeration = exports.empty = exports.callable = exports.boolean = exports.not = exports.unknownsU = exports.unknowns = exports.tuple = exports.symbolsU = exports.symbols = exports.symbolU = exports.stringsU = exports.strings = exports.setsU = exports.sets = exports.setU = exports.set = exports.objectsU = exports.objects = exports.objectU = exports.object = exports.numbersU = exports.numbers = exports.numberU = exports.numStrsU = exports.numStrs = exports.numStrU = exports.mapsU = exports.maps = exports.mapU = exports.map = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObjectU = exports.indexedObject = exports.booleansU = exports.booleans = exports.booleanU = exports.arraysU = exports.arrays = exports.arrayU = exports.array = exports.or = exports.and = exports.undefined = exports.true = exports.null = exports.false = void 0;
 exports.unknown = exports.symbol = exports.stringU = exports.string = exports.number = exports.numStr = exports.never = exports.instances = void 0;
-const tslib_1 = require("tslib");
-const a = tslib_1.__importStar(require("./array"));
-const helpers_1 = require("./helpers");
-const module_definition_1 = require("./module-definition");
-const o = tslib_1.__importStar(require("./object"));
-exports.and = (0, module_definition_1.defineFn)((0, module_definition_1.overloadedFn)(() => {
-    return _and;
-    function _and(value, ...guards) {
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
+const core_1 = require("./core");
+exports.and = (0, core_1.defineFn)((0, core_1.overload)(() => {
+    return result;
+    function result(value, ...guards) {
         return guards.every(guard => guard(value));
     }
 }), {
-    factory: (0, module_definition_1.overloadedFn)(() => {
-        return _factory;
-        function _factory(...guards) {
+    factory: (0, core_1.overload)(() => {
+        return result;
+        function result(...guards) {
             return (value) => guards.every(guard => guard(value));
         }
     })
 });
-exports.array = (0, module_definition_1.defineFn)(
+exports.or = (0, core_1.defineFn)((0, core_1.overload)(() => {
+    return result;
+    function result(value, ...guards) {
+        return guards.some(guard => guard(value));
+    }
+}), {
+    factory: (0, core_1.overload)(() => {
+        return result;
+        function result(...guards) {
+            return (value) => guards.some(guard => guard(value));
+        }
+    })
+});
+exports.array = (0, core_1.defineFn)(
 /**
  * Checks if value is an array.
  *
@@ -32,16 +43,19 @@ exports.array = (0, module_definition_1.defineFn)(
     /**
      * Checks if value type is T[].
      *
-     * @param this - No this.
      * @param value - Value.
      * @param guard - Guard for type T.
      * @returns _True_ if value type is T[], _false_ otherwise.
      */
-    of(value, guard) {
-        return (0, exports.array)(value) && value.every(guard);
-    }
+    of: (value, guard) => (0, exports.array)(value) && value.every(guard)
 });
-exports.indexedObject = (0, module_definition_1.defineFn)(
+exports.arrayU = exports.or.factory(exports.array, _undefined);
+exports.arrays = factory(exports.array.of, exports.array);
+exports.arraysU = exports.or.factory(exports.arrays, _undefined);
+exports.booleanU = exports.or.factory(boolean, _undefined);
+exports.booleans = factory(exports.array.of, boolean);
+exports.booleansU = exports.or.factory(exports.booleans, _undefined);
+exports.indexedObject = (0, core_1.defineFn)(
 /**
  * Checks if value type is IndexedObject.
  *
@@ -52,16 +66,16 @@ exports.indexedObject = (0, module_definition_1.defineFn)(
     /**
      * Checks if value type is IndexedObject\<T\>.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param guard - Guard for type T.
      * @returns _True_ if value type is IndexedObject\<T\>, _false_ otherwise.
      */
-    of(value, guard) {
-        return (0, exports.object)(value) && o.values(value).every(guard);
-    }
+    of: (value, guard) => (0, exports.object)(value) && Object.values(value).every(guard)
 });
-exports.map = (0, module_definition_1.defineFn)(
+exports.indexedObjectU = exports.or.factory(exports.indexedObject, _undefined);
+exports.indexedObjects = factory(exports.array.of, exports.indexedObject);
+exports.indexedObjectsU = exports.or.factory(exports.indexedObjects, _undefined);
+exports.map = (0, core_1.defineFn)(
 /**
  * Checks if value type is Map.
  *
@@ -72,18 +86,23 @@ exports.map = (0, module_definition_1.defineFn)(
     /**
      * Checks if value type is Map\<K, V\>.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param keyGuard - Key guard.
      * @param valueGuard - Value guard.
      * @returns _True_ if value type is Map\<K, V\>, _false_ otherwise.
      */
-    of(value, keyGuard, valueGuard) {
-        return ((0, exports.map)(value) &&
-            a.fromIterable(value).every(([k, v]) => keyGuard(k) && valueGuard(v)));
-    }
+    of: (value, keyGuard, valueGuard) => (0, exports.map)(value) && [...value].every(([k, v]) => keyGuard(k) && valueGuard(v))
 });
-exports.object = (0, module_definition_1.defineFn)(
+exports.mapU = exports.or.factory(exports.map, _undefined);
+exports.maps = factory(exports.array.of, exports.map);
+exports.mapsU = exports.or.factory(exports.maps, _undefined);
+exports.numStrU = exports.or.factory(numStr, _undefined);
+exports.numStrs = factory(exports.array.of, numStr);
+exports.numStrsU = exports.or.factory(exports.numStrs, _undefined);
+exports.numberU = exports.or.factory(number, _undefined);
+exports.numbers = factory(exports.array.of, number);
+exports.numbersU = exports.or.factory(exports.numbers, _undefined);
+exports.object = (0, core_1.defineFn)(
 /**
  * Checks if value is an object.
  *
@@ -91,35 +110,29 @@ exports.object = (0, module_definition_1.defineFn)(
  * @returns _True_ if value is an object, _false_ otherwise.
  */
 (value) => typeof value === "object" && value !== null, {
-    factory: (0, module_definition_1.overloadedFn)(() => {
-        return _factory;
-        function _factory(required, optional) {
+    factory: (0, core_1.overload)(() => {
+        return result;
+        function result(required, optional) {
             return (value) => exports.object.of(value, required, optional);
         }
     }),
-    of: (0, module_definition_1.overloadedFn)(() => {
-        return _of;
-        function _of(value, required, optional) {
+    of: (0, core_1.overload)(() => {
+        return result;
+        function result(value, required, optional) {
             return ((0, exports.indexedObject)(value) &&
-                o.every(required, (guard, key) => checkRequiredProp(value, key, guard)) &&
-                o.every(optional, (guard, key) => checkOptionalProp(value, key, guard)));
+                Object.entries(required).every(([key, guard]) => 
+                // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+                checkRequiredProp(value, key, guard)) &&
+                Object.entries(optional).every(([key, guard]) => 
+                // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+                checkOptionalProp(value, key, guard)));
         }
     })
 });
-exports.or = (0, module_definition_1.defineFn)((0, module_definition_1.overloadedFn)(() => {
-    return _or;
-    function _or(value, ...guards) {
-        return guards.some(guard => guard(value));
-    }
-}), {
-    factory: (0, module_definition_1.overloadedFn)(() => {
-        return _factory;
-        function _factory(...guards) {
-            return (value) => guards.some(guard => guard(value));
-        }
-    })
-});
-exports.set = (0, module_definition_1.defineFn)(
+exports.objectU = exports.or.factory(exports.object, _undefined);
+exports.objects = factory(exports.array.of, exports.object);
+exports.objectsU = exports.or.factory(exports.objects, _undefined);
+exports.set = (0, core_1.defineFn)(
 /**
  * Checks if value type is Set.
  *
@@ -130,29 +143,36 @@ exports.set = (0, module_definition_1.defineFn)(
     /**
      * Checks if value type is Set\<T\>.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param guard - Guard for type T.
      * @returns _True_ if value type is Set\<T\>, _false_ otherwise.
      */
-    of(value, guard) {
-        return (0, exports.set)(value) && a.fromIterable(value).every(v => guard(v));
-    }
+    of: (value, guard) => (0, exports.set)(value) && [...value].every(v => guard(v))
 });
-exports.tuple = (0, module_definition_1.defineFn)((0, module_definition_1.overloadedFn)(() => {
-    return _tuple;
-    function _tuple(value, ...guards) {
+exports.setU = exports.or.factory(exports.set, _undefined);
+exports.sets = factory(exports.array.of, exports.set);
+exports.setsU = exports.or.factory(exports.sets, _undefined);
+exports.strings = factory(exports.array.of, string);
+exports.stringsU = exports.or.factory(exports.strings, _undefined);
+exports.symbolU = exports.or.factory(symbol, _undefined);
+exports.symbols = factory(exports.array.of, symbol);
+exports.symbolsU = exports.or.factory(exports.symbols, _undefined);
+exports.tuple = (0, core_1.defineFn)((0, core_1.overload)(() => {
+    return result;
+    function result(value, ...guards) {
         return ((0, exports.array)(value) && guards.every((guard, index) => guard(value[index])));
     }
 }), {
-    factory: (0, module_definition_1.overloadedFn)(() => {
-        return _factory;
-        function _factory(...guards) {
+    factory: (0, core_1.overload)(() => {
+        return result;
+        function result(...guards) {
             return (value) => (0, exports.array)(value) && guards.every((guard, index) => guard(value[index]));
         }
     })
 });
-exports.not = (0, module_definition_1.defineFn)(
+exports.unknowns = factory(exports.array.of, unknown);
+exports.unknownsU = exports.or.factory(exports.unknowns, _undefined);
+exports.not = (0, core_1.defineFn)(
 /**
  * Checks if value type is not T.
  *
@@ -179,37 +199,6 @@ exports.not = (0, module_definition_1.defineFn)(
     true: _notFactory(_true),
     undefined: _notFactory(_undefined)
 });
-exports.arrayU = exports.or.factory(exports.array, _undefined);
-exports.arrays = factory(exports.array.of, exports.array);
-exports.arraysU = exports.or.factory(exports.arrays, _undefined);
-exports.booleanU = exports.or.factory(boolean, _undefined);
-exports.booleans = factory(exports.array.of, boolean);
-exports.booleansU = exports.or.factory(exports.booleans, _undefined);
-exports.indexedObjectU = exports.or.factory(exports.indexedObject, _undefined);
-exports.indexedObjects = factory(exports.array.of, exports.indexedObject);
-exports.indexedObjectsU = exports.or.factory(exports.indexedObjects, _undefined);
-exports.mapU = exports.or.factory(exports.map, _undefined);
-exports.maps = factory(exports.array.of, exports.map);
-exports.mapsU = exports.or.factory(exports.maps, _undefined);
-exports.numStrU = exports.or.factory(numStr, _undefined);
-exports.numStrs = factory(exports.array.of, numStr);
-exports.numStrsU = exports.or.factory(exports.numStrs, _undefined);
-exports.numberU = exports.or.factory(number, _undefined);
-exports.numbers = factory(exports.array.of, number);
-exports.numbersU = exports.or.factory(exports.numbers, _undefined);
-exports.objectU = exports.or.factory(exports.object, _undefined);
-exports.objects = factory(exports.array.of, exports.object);
-exports.objectsU = exports.or.factory(exports.objects, _undefined);
-exports.setU = exports.or.factory(exports.set, _undefined);
-exports.sets = factory(exports.array.of, exports.set);
-exports.setsU = exports.or.factory(exports.sets, _undefined);
-exports.strings = factory(exports.array.of, string);
-exports.stringsU = exports.or.factory(exports.strings, _undefined);
-exports.symbolU = exports.or.factory(symbol, _undefined);
-exports.symbols = factory(exports.array.of, symbol);
-exports.symbolsU = exports.or.factory(exports.symbols, _undefined);
-exports.unknowns = factory(exports.array.of, unknown);
-exports.unknownsU = exports.or.factory(exports.unknowns, _undefined);
 /**
  * Checks if value is a boolean.
  *
@@ -248,7 +237,7 @@ exports.empty = empty;
  * @returns _True_ if value type is T, _false_ otherwise.
  */
 function enumeration(value, vo) {
-    return (0, helpers_1.typedef)(vo).has(value);
+    return (0, core_1.typedef)(vo).has(value);
 }
 exports.enumeration = enumeration;
 /**
@@ -426,7 +415,9 @@ exports.undefined = _undefined;
  * @returns _True_ if object has optional property, _false_ otherwise.
  */
 function checkOptionalProp(obj, key, guard) {
-    return o.hasOwnProp(key, obj) ? guard(obj[key]) : true;
+    return Object.prototype.hasOwnProperty.call(obj, key)
+        ? guard(obj[key])
+        : true;
 }
 /**
  * Checks if object has required property.
@@ -437,6 +428,8 @@ function checkOptionalProp(obj, key, guard) {
  * @returns _True_ if object has required property, _false_ otherwise.
  */
 function checkRequiredProp(obj, key, guard) {
-    return o.hasOwnProp(key, obj) ? guard(obj[key]) : false;
+    return Object.prototype.hasOwnProperty.call(obj, key)
+        ? guard(obj[key])
+        : false;
 }
 //# sourceMappingURL=guards.js.map

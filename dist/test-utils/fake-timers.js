@@ -5,10 +5,7 @@ const tslib_1 = require("tslib");
 const __1 = require("..");
 const fakeTimers = tslib_1.__importStar(require("@sinonjs/fake-timers"));
 const _ = tslib_1.__importStar(require("@skylib/lodash-commonjs-es"));
-exports.clock = (0, __1.onDemand)(() => {
-    __1.assert.not.empty(_clock, "Fake timer is not installed");
-    return _clock;
-});
+exports.clock = (0, __1.onDemand)(() => __1.as.not.empty(_clock, "Fake timer is not installed"));
 /**
  * Installs fake timer.
  *
@@ -26,7 +23,7 @@ exports.installFakeTimer = installFakeTimer;
  * @returns The result of callback execution.
  */
 async function run(mixed) {
-    const result = await Promise.all([__1.fn.run(mixed), exports.clock.runAllAsync()]);
+    const result = await Promise.all([(0, __1.evaluate)(mixed), exports.clock.runAllAsync()]);
     return result[0];
 }
 exports.run = run;
@@ -34,7 +31,7 @@ exports.run = run;
  * Sets random system time.
  */
 function setRandomSystemTime() {
-    exports.clock.setSystemTime(__1.fn.run(() => {
+    exports.clock.setSystemTime((0, __1.evaluate)(() => {
         const date = new Date();
         date.setFullYear(_.random(2000, 2100));
         date.setMonth(__1.a.random([0, 11, _.random(1, 10)]));

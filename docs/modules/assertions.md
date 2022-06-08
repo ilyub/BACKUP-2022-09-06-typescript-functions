@@ -4,39 +4,26 @@
 
 ## Table of contents
 
-### Namespaces
+### Variables
 
-- [array](assertions.array.md)
-- [indexedObject](assertions.indexedObject.md)
-- [map](assertions.map.md)
-- [not](assertions.not.md)
-- [set](assertions.set.md)
-
-### Interfaces
-
-- [ErrorArgFn](../interfaces/assertions.ErrorArgFn.md)
-
-### Type aliases
-
-- [ErrorArg](assertions.md#errorarg)
+- [array](assertions.md#array)
+- [indexedObject](assertions.md#indexedobject)
+- [map](assertions.md#map)
+- [not](assertions.md#not)
+- [set](assertions.md#set)
 
 ### Functions
 
-- [array](assertions.md#array)
 - [boolean](assertions.md#boolean)
 - [byGuard](assertions.md#byguard)
 - [callable](assertions.md#callable)
 - [empty](assertions.md#empty)
 - [enumeration](assertions.md#enumeration)
-- [indexedObject](assertions.md#indexedobject)
 - [instance](assertions.md#instance)
 - [instances](assertions.md#instances)
-- [map](assertions.md#map)
-- [not](assertions.md#not)
 - [numStr](assertions.md#numstr)
 - [number](assertions.md#number)
 - [object](assertions.md#object)
-- [set](assertions.md#set)
 - [string](assertions.md#string)
 - [stringU](assertions.md#stringu)
 - [symbol](assertions.md#symbol)
@@ -44,32 +31,135 @@
 - [toBeTrue](assertions.md#tobetrue)
 - [wrapError](assertions.md#wraperror)
 
-## Type aliases
-
-### ErrorArg
-
-Ƭ **ErrorArg**: [`ErrorArgFn`](../interfaces/assertions.ErrorArgFn.md) \| `string`
-
-## Functions
+## Variables
 
 ### array
 
-▸ **array**(`value`, `error?`): asserts value is unknowns
+• `Const` **array**: `Object`
+
+#### Call signature
+
+▸ (`value`, `error?`): asserts value is unknowns
 
 Asserts that value is an array.
 
-#### Parameters
+##### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
-#### Returns
+##### Returns
 
 asserts value is unknowns
 
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `of` | <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => asserts value is readonly T[] |
+
 ___
+
+### indexedObject
+
+• `Const` **indexedObject**: `Object`
+
+#### Call signature
+
+▸ (`value`, `error?`): asserts value is IndexedObject<unknown\>
+
+Asserts that value type is IndexedObject.
+
+##### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
+
+##### Returns
+
+asserts value is IndexedObject<unknown\>
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `of` | <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => asserts value is IndexedObject<T\> |
+
+___
+
+### map
+
+• `Const` **map**: `Object`
+
+#### Call signature
+
+▸ (`value`, `error?`): asserts value is ReadonlyMap<unknown, unknown\>
+
+Asserts that value type is Map.
+
+##### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
+
+##### Returns
+
+asserts value is ReadonlyMap<unknown, unknown\>
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `of` | <K, V\>(`value`: `unknown`, `keyGuard`: [`Guard`](../interfaces/guards.Guard.md)<`K`\>, `valueGuard`: [`Guard`](../interfaces/guards.Guard.md)<`V`\>, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => asserts value is ReadonlyMap<K, V\> |
+
+___
+
+### not
+
+• `Const` **not**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `empty` | <T\>(`value`: `T`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => asserts value is Exclude<T, empty\> |
+
+___
+
+### set
+
+• `Const` **set**: `Object`
+
+#### Call signature
+
+▸ (`value`, `error?`): asserts value is ReadonlySet<unknown\>
+
+Asserts that value type is Set.
+
+##### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
+
+##### Returns
+
+asserts value is ReadonlySet<unknown\>
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `of` | <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => asserts value is ReadonlySet<T\> |
+
+## Functions
 
 ### boolean
 
@@ -82,7 +172,7 @@ Asserts that value is a boolean.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
@@ -108,7 +198,7 @@ Asserts that value type is T.
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
 | `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
@@ -133,7 +223,7 @@ Asserts that value type is T.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
@@ -152,7 +242,7 @@ Asserts that value type is empty.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
@@ -177,31 +267,12 @@ Asserts that value type is T.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `vo` | [`ValidationObject`](helpers.md#validationobject)<`T`\> | Validation object. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+| `vo` | [`ValidationObject`](core.md#validationobject)<`T`\> | Validation object. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
 asserts value is T
-
-___
-
-### indexedObject
-
-▸ **indexedObject**(`value`, `error?`): asserts value is IndexedObject<unknown\>
-
-Asserts that value type is IndexedObject.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `unknown` | Value. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
-
-#### Returns
-
-asserts value is IndexedObject<unknown\>
 
 ___
 
@@ -223,7 +294,7 @@ Asserts that value type is T.
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
 | `ctor` | [`Constructor`](../interfaces/types_function.Constructor.md)<`T`\> | Constructor. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
@@ -249,42 +320,11 @@ Asserts that value type is T[].
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
 | `ctor` | [`Constructor`](../interfaces/types_function.Constructor.md)<`T`\> | Constructor. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
 asserts value is readonly T[]
-
-___
-
-### map
-
-▸ **map**(`value`, `error?`): asserts value is ReadonlyMap<unknown, unknown\>
-
-Asserts that value type is Map.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `unknown` | Value. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
-
-#### Returns
-
-asserts value is ReadonlyMap<unknown, unknown\>
-
-___
-
-### not
-
-▸ **not**(): `never`
-
-Not implemented.
-
-#### Returns
-
-`never`
 
 ___
 
@@ -299,7 +339,7 @@ Asserts that value type is NumStr.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
@@ -318,7 +358,7 @@ Asserts that value is a number.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
@@ -337,30 +377,11 @@ Asserts that value is an object.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
 asserts value is object
-
-___
-
-### set
-
-▸ **set**(`value`, `error?`): asserts value is ReadonlySet<unknown\>
-
-Asserts that value type is Set.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `unknown` | Value. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
-
-#### Returns
-
-asserts value is ReadonlySet<unknown\>
 
 ___
 
@@ -375,7 +396,7 @@ Asserts that value is a string.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
@@ -394,7 +415,7 @@ Asserts that value is a string.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
@@ -413,7 +434,7 @@ Asserts that value is a symbol.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
@@ -432,7 +453,7 @@ Asserts value to be _false_.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
@@ -451,7 +472,7 @@ Asserts value to be _true_.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `error?` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
@@ -464,6 +485,8 @@ ___
 ▸ **wrapError**<`T`\>(`e`): () => `T`
 
 Wraps error.
+
+**`deprecated`** Use ErrorArg.wrapError instead.
 
 #### Type parameters
 
@@ -486,6 +509,8 @@ Wrapped error.
 ▸ (): `T`
 
 Wraps error.
+
+**`deprecated`** Use ErrorArg.wrapError instead.
 
 ##### Returns
 

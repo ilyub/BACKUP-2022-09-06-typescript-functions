@@ -4,7 +4,7 @@
 
 ## Table of contents
 
-### Type aliases
+### Type Aliases
 
 - [Eol](string.md#eol)
 
@@ -16,7 +16,7 @@
 
 - [detectEol](string.md#detecteol)
 - [empty](string.md#empty)
-- [filter](string.md#filter)
+- [escapeRegExpSpecialChars](string.md#escaperegexpspecialchars)
 - [lcFirst](string.md#lcfirst)
 - [leadingSpaces](string.md#leadingspaces)
 - [lines](string.md#lines)
@@ -31,7 +31,7 @@
 - [ucFirst](string.md#ucfirst)
 - [unpadMultiline](string.md#unpadmultiline)
 
-## Type aliases
+## Type Aliases
 
 ### Eol
 
@@ -41,7 +41,18 @@
 
 ### path
 
-• `Const` **path**: () => `never` & { `addLeadingSlash`: (`this`: `void`, `path`: `string`) => `string` ; `addTrailingSlash`: (`this`: `void`, `path`: `string`) => `string` ; `canonicalize`: (`this`: `void`, `path`: `string`) => `string` ; `join`: (...`parts`: [`strings`](types_core.md#strings)) => `string` ; `removeLeadingSlash`: (`this`: `void`, `path`: `string`) => `string` ; `removeTrailingSlash`: (`this`: `void`, `path`: `string`) => `string`  }
+• `Const` **path**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `addLeadingSlash` | (`path`: `string`) => `string` |
+| `addTrailingSlash` | (`path`: `string`) => `string` |
+| `canonicalize` | (`path`: `string`) => `string` |
+| `join` | (...`parts`: [`strings`](types_core.md#strings)) => `string` |
+| `removeLeadingSlash` | (`path`: `string`) => `string` |
+| `removeTrailingSlash` | (`path`: `string`) => `string` |
 
 ## Functions
 
@@ -85,24 +96,23 @@ _True_ if string consists of spaces, _false_ otherwise.
 
 ___
 
-### filter
+### escapeRegExpSpecialChars
 
-▸ **filter**(`str`, `predicate`): `string`
+▸ **escapeRegExpSpecialChars**(`str`): `string`
 
-Filters string.
+Escapes regular expression special characters.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `str` | `string` | String. |
-| `predicate` | (`char`: `string`, `index`: `number`) => `boolean` | Predicate. |
 
 #### Returns
 
 `string`
 
-Filtered string.
+Escaped string.
 
 ___
 

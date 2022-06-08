@@ -184,6 +184,14 @@ export declare function replaceBy<T extends object>(arr: readonly T[], value: T,
  */
 export declare function reverse<T>(arr: readonly T[]): T[];
 /**
+ * Returns the second element from an array.
+ *
+ * @param arr - Array.
+ * @returns The second element if available.
+ * @throws Error otherwise.
+ */
+export declare function second<T>(arr: readonly T[]): T;
+/**
  * Sorts array.
  *
  * @param arr - Array.
@@ -191,6 +199,14 @@ export declare function reverse<T>(arr: readonly T[]): T[];
  * @returns New array.
  */
 export declare function sort<T>(arr: readonly T[], compareFn?: (x: T, y: T) => number): T[];
+/**
+ * Returns the third element from an array.
+ *
+ * @param arr - Array.
+ * @returns The third element if available.
+ * @throws Error otherwise.
+ */
+export declare function third<T>(arr: readonly T[]): T;
 /**
  * Adds/removes value to/from an array.
  *

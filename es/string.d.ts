@@ -1,5 +1,12 @@
 import type { strings } from "./types";
-export { _path as path };
+export declare const path: {
+    readonly addLeadingSlash: (path: string) => string;
+    readonly addTrailingSlash: (path: string) => string;
+    readonly canonicalize: (path: string) => string;
+    readonly join: (...parts: strings) => string;
+    readonly removeLeadingSlash: (path: string) => string;
+    readonly removeTrailingSlash: (path: string) => string;
+};
 export declare type Eol = "\n" | "\r\n";
 /**
  * Detects EOL sequence.
@@ -16,13 +23,12 @@ export declare function detectEol(str: string): Eol;
  */
 export declare function empty(str: string): boolean;
 /**
- * Filters string.
+ * Escapes regular expression special characters.
  *
  * @param str - String.
- * @param predicate - Predicate.
- * @returns Filtered string.
+ * @returns Escaped string.
  */
-export declare function filter(str: string, predicate: (char: string, index: number) => boolean): string;
+export declare function escapeRegExpSpecialChars(str: string): string;
 /**
  * Converts first letter to lower case.
  *
@@ -116,53 +122,4 @@ export declare function ucFirst(str: string): string;
  * @returns Unpadded string.
  */
 export declare function unpadMultiline(str: string): string;
-declare const _path: (() => never) & {
-    /**
-     * Adds leading slash.
-     *
-     * @param this - No this.
-     * @param path - Path.
-     * @returns New string with leading slash added.
-     */
-    addLeadingSlash(this: void, path: string): string;
-    /**
-     * Adds trailing slash.
-     *
-     * @param this - No this.
-     * @param path - Path.
-     * @returns New string with trailing slash added.
-     */
-    addTrailingSlash(this: void, path: string): string;
-    /**
-     * Canonicalizes path.
-     *
-     * @param this - No this.
-     * @param path - Path.
-     * @returns Canonical path.
-     */
-    canonicalize(this: void, path: string): string;
-    /**
-     * Creates path from parts.
-     *
-     * @param parts - Parts.
-     * @returns Path.
-     */
-    join(...parts: strings): string;
-    /**
-     * Removes leading slash.
-     *
-     * @param this - No this.
-     * @param path - Path.
-     * @returns New string with leading slash removed.
-     */
-    removeLeadingSlash(this: void, path: string): string;
-    /**
-     * Removes trailing slash.
-     *
-     * @param this - No this.
-     * @param path - Path.
-     * @returns New string with trailing slash removed.
-     */
-    removeTrailingSlash(this: void, path: string): string;
-};
 //# sourceMappingURL=string.d.ts.map

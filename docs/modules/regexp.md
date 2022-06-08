@@ -4,17 +4,16 @@
 
 ## Table of contents
 
-### Type aliases
+### Type Aliases
 
 - [RegExpExecArrays](regexp.md#regexpexecarrays)
 
 ### Functions
 
 - [addFlags](regexp.md#addflags)
-- [escapeString](regexp.md#escapestring)
 - [matchAll](regexp.md#matchall)
 
-## Type aliases
+## Type Aliases
 
 ### RegExpExecArrays
 
@@ -40,26 +39,6 @@ Adds flag to regular expression.
 `RegExp`
 
 New regular expression.
-
-___
-
-### escapeString
-
-▸ **escapeString**(`str`): `string`
-
-Escapes regular expression special characters.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `str` | `string` | String. |
-
-#### Returns
-
-`string`
-
-Escaped string.
 
 ___
 

@@ -1,10 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.matchAll = exports.escapeString = exports.addFlags = void 0;
+exports.matchAll = exports.addFlags = void 0;
 const tslib_1 = require("tslib");
-const a = tslib_1.__importStar(require("./array"));
-const fn = tslib_1.__importStar(require("./function"));
-const s = tslib_1.__importStar(require("./string"));
+const _ = tslib_1.__importStar(require("@skylib/lodash-commonjs-es"));
 /**
  * Adds flag to regular expression.
  *
@@ -13,21 +11,11 @@ const s = tslib_1.__importStar(require("./string"));
  * @returns New regular expression.
  */
 function addFlags(re, flags) {
-    flags = s.filter(flags, flag => !re.flags.includes(flag));
+    flags = _.uniq([...re.flags, ...flags]).join("");
     // eslint-disable-next-line security/detect-non-literal-regexp -- Ok
-    return flags ? new RegExp(re, re.flags + flags) : re;
+    return flags === re.flags ? re : new RegExp(re, flags);
 }
 exports.addFlags = addFlags;
-/**
- * Escapes regular expression special characters.
- *
- * @param str - String.
- * @returns Escaped string.
- */
-function escapeString(str) {
-    return str.replace(/[$()*+.?[\\\]^{|}]/gu, "\\$&").replace(/-/gu, "\\x2d");
-}
-exports.escapeString = escapeString;
 /**
  * Finds all matches.
  *
@@ -37,13 +25,13 @@ exports.escapeString = escapeString;
  */
 function matchAll(str, re) {
     re = addFlags(re, "g");
-    return a.fromIterable(fn.run(function* () {
-        let match = re.exec(str);
-        while (match) {
-            yield match;
-            match = re.exec(str);
-        }
-    }));
+    const result = [];
+    let match = re.exec(str);
+    while (match) {
+        result.push(match);
+        match = re.exec(str);
+    }
+    return result;
 }
 exports.matchAll = matchAll;
 //# sourceMappingURL=regexp.js.map

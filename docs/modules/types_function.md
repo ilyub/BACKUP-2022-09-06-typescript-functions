@@ -13,12 +13,12 @@
 - [Constructor](../interfaces/types_function.Constructor.md)
 - [Sync](../interfaces/types_function.Sync.md)
 
-### Type aliases
+### Type Aliases
 
 - [AsyncPromise](types_function.md#asyncpromise)
 - [AsyncPromiseSync](types_function.md#asyncpromisesync)
 
-## Type aliases
+## Type Aliases
 
 ### AsyncPromise
 

@@ -1,10 +1,7 @@
-import { onDemand, assert, fn, a } from "..";
+import { onDemand, assert, a, as, evaluate } from "..";
 import * as fakeTimers from "@sinonjs/fake-timers";
 import * as _ from "@skylib/lodash-commonjs-es";
-export const clock = onDemand(() => {
-    assert.not.empty(_clock, "Fake timer is not installed");
-    return _clock;
-});
+export const clock = onDemand(() => as.not.empty(_clock, "Fake timer is not installed"));
 /**
  * Installs fake timer.
  *
@@ -21,14 +18,14 @@ export function installFakeTimer(options = {}) {
  * @returns The result of callback execution.
  */
 export async function run(mixed) {
-    const result = await Promise.all([fn.run(mixed), clock.runAllAsync()]);
+    const result = await Promise.all([evaluate(mixed), clock.runAllAsync()]);
     return result[0];
 }
 /**
  * Sets random system time.
  */
 export function setRandomSystemTime() {
-    clock.setSystemTime(fn.run(() => {
+    clock.setSystemTime(evaluate(() => {
         const date = new Date();
         date.setFullYear(_.random(2000, 2100));
         date.setMonth(a.random([0, 11, _.random(1, 10)]));

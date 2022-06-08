@@ -8,13 +8,6 @@ export declare type RegExpExecArrays = readonly RegExpExecArray[];
  */
 export declare function addFlags(re: RegExp, flags: string): RegExp;
 /**
- * Escapes regular expression special characters.
- *
- * @param str - String.
- * @returns Escaped string.
- */
-export declare function escapeString(str: string): string;
-/**
  * Finds all matches.
  *
  * @param str - String.

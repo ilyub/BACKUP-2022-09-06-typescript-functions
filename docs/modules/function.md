@@ -8,7 +8,7 @@
 
 - [PipeCallback](../interfaces/function.PipeCallback.md)
 
-### Type aliases
+### Type Aliases
 
 - [PipeCallbacks](function.md#pipecallbacks)
 
@@ -19,7 +19,7 @@
 - [pipe](function.md#pipe)
 - [run](function.md#run)
 
-## Type aliases
+## Type Aliases
 
 ### PipeCallbacks
 
@@ -133,6 +133,8 @@ ___
 
 Executes callback.
 
+**`deprecated`** Use "evaluate" instead.
+
 #### Type parameters
 
 | Name |
@@ -154,6 +156,8 @@ The result of callback execution.
 ▸ **run**<`T`\>(`mixed`): `Promise`<`T`\>
 
 Executes promise or async function.
+
+**`deprecated`** Use "evaluate" instead.
 
 #### Type parameters
 

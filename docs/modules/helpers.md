@@ -8,25 +8,22 @@
 
 - [FacadeOwnMethods](../interfaces/helpers.FacadeOwnMethods.md)
 
-### Type aliases
+### Type Aliases
 
 - [Facade](helpers.md#facade)
 - [ProxyHandlerAction](helpers.md#proxyhandleraction)
 - [SafeAccess](helpers.md#safeaccess)
 - [SafeAccessGuards](helpers.md#safeaccessguards)
-- [ValidationObject](helpers.md#validationobject)
 
 ### Functions
 
 - [createFacade](helpers.md#createfacade)
-- [createValidationObject](helpers.md#createvalidationobject)
 - [onDemand](helpers.md#ondemand)
 - [safeAccess](helpers.md#safeaccess-1)
-- [typedef](helpers.md#typedef)
 - [wait](helpers.md#wait)
 - [wrapProxyHandler](helpers.md#wrapproxyhandler)
 
-## Type aliases
+## Type Aliases
 
 ### Facade
 
@@ -72,18 +69,6 @@ ___
 | `T` | `T` |
 | `W` | extends `string` & keyof `T` |
 
-___
-
-### ValidationObject
-
-Ƭ **ValidationObject**<`T`\>: `ReadonlySet`<`T`\>
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `PropertyKey` |
-
 ## Functions
 
 ### createFacade
@@ -111,32 +96,6 @@ Creates facade.
 [`Facade`](helpers.md#facade)<`I`, `E`\>
 
 Facade.
-
-___
-
-### createValidationObject
-
-▸ **createValidationObject**<`T`\>(`source`): [`ValidationObject`](helpers.md#validationobject)<`T`\>
-
-Creates validation object.
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends [`NumStr`](types_core.md#numstr) |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `source` | [`Rec`](types_core.md#rec)<`T`, `T`\> | Source. |
-
-#### Returns
-
-[`ValidationObject`](helpers.md#validationobject)<`T`\>
-
-Validation object.
 
 ___
 
@@ -193,32 +152,6 @@ Creates safe access interface for an object.
 [`SafeAccess`](helpers.md#safeaccess)<`T`, `W`, `R`\>
 
 Safe access interface.
-
-___
-
-### typedef
-
-▸ **typedef**<`T`\>(`value`): `T`
-
-Defines value type.
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `T` | Value. |
-
-#### Returns
-
-`T`
-
-Value.
 
 ___
 

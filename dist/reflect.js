@@ -1,7 +1,10 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/disallow-identifier[functions.reflect] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.hasOwnMetadataKey = exports.hasOwnMetadata = exports.hasMetadataKey = exports.hasMetadata = exports.getOwnMetadataKey = exports.getOwnMetadata = exports.getMetadataKey = exports.getMetadata = exports.defineMetadataKey = exports.defineMetadata = exports.setPrototypeOf = exports.set = exports.preventExtensions = exports.ownKeys = exports.isExtensible = exports.has = exports.getPrototypeOf = exports.getOwnPropertyDescriptor = exports.get = exports.deleteProperty = exports.defineProperty = exports.construct = exports.apply = void 0;
+exports.hasOwnMetadataKey = exports.hasOwnMetadata = exports.hasMetadataKey = exports.hasMetadata = exports.getOwnMetadataKey = exports.getOwnMetadata = exports.getMetadataKey = exports.getMetadata = exports.get = exports.defineMetadataKey = exports.defineMetadata = exports.setPrototypeOf = exports.set = exports.preventExtensions = exports.ownKeys = exports.isExtensible = exports.has = exports.getPrototypeOf = exports.getOwnPropertyDescriptor = exports.deleteProperty = exports.defineProperty = exports.construct = exports.apply = void 0;
+const tslib_1 = require("tslib");
+const is = tslib_1.__importStar(require("./guards"));
+const as = tslib_1.__importStar(require("./inline-assertions"));
 require("reflect-metadata");
 /**
  * Typed version of Reflect.apply.
@@ -23,14 +26,6 @@ exports.apply = Reflect.apply;
 exports.construct = Reflect.construct;
 exports.defineProperty = Reflect.defineProperty;
 exports.deleteProperty = Reflect.deleteProperty;
-/**
- * Typed version of Reflect.get.
- *
- * @param target - Target object.
- * @param key - Property key.
- * @returns Property value.
- */
-exports.get = Reflect.get;
 exports.getOwnPropertyDescriptor = Reflect.getOwnPropertyDescriptor;
 exports.getPrototypeOf = Reflect.getPrototypeOf;
 exports.has = Reflect.has;
@@ -62,50 +57,29 @@ function defineMetadataKey(metadataKey, metadataValue, target, key) {
     Reflect.defineMetadata(metadataKey, metadataValue, target, key);
 }
 exports.defineMetadataKey = defineMetadataKey;
-/**
- * Typed version of Reflect.getMetadata.
- *
- * @param metadataKey - Metadata key.
- * @param target - Target object.
- * @returns Metadata value.
- */
-function getMetadata(metadataKey, target) {
-    return Reflect.getMetadata(metadataKey, target);
+function get(target, key, guard = is.unknown, defVal) {
+    var _a;
+    return as.byGuard((_a = Reflect.get(target, key)) !== null && _a !== void 0 ? _a : defVal, guard);
+}
+exports.get = get;
+function getMetadata(metadataKey, target, guard = is.unknown, defVal) {
+    var _a;
+    return as.byGuard((_a = Reflect.getMetadata(metadataKey, target)) !== null && _a !== void 0 ? _a : defVal, guard);
 }
 exports.getMetadata = getMetadata;
-/**
- * Typed version of Reflect.getMetadata.
- *
- * @param metadataKey - Metadata key.
- * @param target - Target object.
- * @param key - Property key.
- * @returns Metadata value.
- */
-function getMetadataKey(metadataKey, target, key) {
-    return Reflect.getMetadata(metadataKey, target, key);
+function getMetadataKey(metadataKey, target, key, guard = is.unknown, defVal) {
+    var _a;
+    return as.byGuard((_a = Reflect.getMetadata(metadataKey, target, key)) !== null && _a !== void 0 ? _a : defVal, guard);
 }
 exports.getMetadataKey = getMetadataKey;
-/**
- * Typed version of Reflect.getOwnMetadata.
- *
- * @param metadataKey - Metadata key.
- * @param target - Target object.
- * @returns Metadata value.
- */
-function getOwnMetadata(metadataKey, target) {
-    return Reflect.getOwnMetadata(metadataKey, target);
+function getOwnMetadata(metadataKey, target, guard = is.unknown, defVal) {
+    var _a;
+    return as.byGuard((_a = Reflect.getOwnMetadata(metadataKey, target)) !== null && _a !== void 0 ? _a : defVal, guard);
 }
 exports.getOwnMetadata = getOwnMetadata;
-/**
- * Typed version of Reflect.getOwnMetadata.
- *
- * @param metadataKey - Metadata key.
- * @param target - Target object.
- * @param key - Property key.
- * @returns Metadata value.
- */
-function getOwnMetadataKey(metadataKey, target, key) {
-    return Reflect.getOwnMetadata(metadataKey, target, key);
+function getOwnMetadataKey(metadataKey, target, key, guard = is.unknown, defVal) {
+    var _a;
+    return as.byGuard((_a = Reflect.getOwnMetadata(metadataKey, target, key)) !== null && _a !== void 0 ? _a : defVal, guard);
 }
 exports.getOwnMetadataKey = getOwnMetadataKey;
 /**

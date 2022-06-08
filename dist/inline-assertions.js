@@ -1,82 +1,57 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.symbol = exports.stringU = exports.string = exports.object = exports.number = exports.numStr = exports.instances = exports.instance = exports.enumeration = exports.callable = exports.boolean = exports.set = exports.not = exports.map = exports.indexedObject = exports.array = void 0;
+exports.not = exports.unknownsU = exports.unknowns = exports.unknown = exports.symbolsU = exports.symbols = exports.symbolU = exports.symbol = exports.stringsU = exports.strings = exports.stringU = exports.string = exports.setsU = exports.sets = exports.setU = exports.set = exports.objectsU = exports.objects = exports.objectU = exports.object = exports.numbersU = exports.numbers = exports.numberU = exports.number = exports.numStrsU = exports.numStrs = exports.numStrU = exports.numStr = exports.never = exports.mapsU = exports.maps = exports.mapU = exports.map = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObjectU = exports.indexedObject = exports.empty = exports.booleansU = exports.booleans = exports.booleanU = exports.boolean = exports.arraysU = exports.arrays = exports.arrayU = exports.array = exports.undefined = exports.true = exports.null = exports.false = void 0;
+exports.instances = exports.instance = exports.enumeration = exports.callable = exports.byGuard = void 0;
 const tslib_1 = require("tslib");
 const assert = tslib_1.__importStar(require("./assertions"));
-const module_definition_1 = require("./module-definition");
-exports.array = (0, module_definition_1.defineFn)(
-/**
- * Asserts that value is an array.
- *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value is an array.
- * @throws Error otherwise.
- */
-(value, error) => {
-    assert.array(value, error);
-    return value;
-}, {
+const core_1 = require("./core");
+const errors_1 = require("./errors");
+const is = tslib_1.__importStar(require("./guards"));
+exports.array = (0, core_1.defineFn)(factory(is.array), {
     /**
      * Asserts that value type is T[].
      *
-     * @param this - No this.
      * @param value - Value.
      * @param guard - Guard for type T.
      * @param error - Error.
      * @returns Value if value type is T[].
      * @throws Error otherwise.
      */
-    of(value, guard, error) {
+    of: (value, guard, error) => {
         assert.array.of(value, guard, error);
         return value;
     }
 });
-exports.indexedObject = (0, module_definition_1.defineFn)(
-/**
- * Asserts that value type is IndexedObject.
- *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value type is IndexedObject.
- * @throws Error otherwise.
- */
-(value, error) => {
-    assert.indexedObject(value, error);
-    return value;
-}, {
+exports.arrayU = factory(is.arrayU);
+exports.arrays = factory(is.arrays);
+exports.arraysU = factory(is.arraysU);
+exports.boolean = factory(is.boolean);
+exports.booleanU = factory(is.booleanU);
+exports.booleans = factory(is.booleans);
+exports.booleansU = factory(is.booleansU);
+exports.empty = factory(is.empty);
+exports.indexedObject = (0, core_1.defineFn)(factory(is.indexedObject), {
     /**
      * Asserts that value type is IndexedObject\<T\>.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param guard - Guard for type T.
      * @param error - Error.
      * @returns Value if value type is IndexedObject\<T\>.
      * @throws Error otherwise.
      */
-    of(value, guard, error) {
+    of: (value, guard, error) => {
         assert.indexedObject.of(value, guard, error);
         return value;
     }
 });
-exports.map = (0, module_definition_1.defineFn)(
-/**
- * Asserts that value type is Map.
- *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value type is Map.
- * @throws Error otherwise.
- */
-(value, error) => {
-    assert.map(value, error);
-    return value;
-}, {
+exports.indexedObjectU = factory(is.indexedObjectU);
+exports.indexedObjects = factory(is.indexedObjects);
+exports.indexedObjectsU = factory(is.indexedObjectsU);
+exports.map = (0, core_1.defineFn)(factory(is.map), {
     /**
      * Asserts that value type is Map\<K, V\>.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param keyGuard - Key guard.
      * @param valueGuard - Value guard.
@@ -84,73 +59,88 @@ exports.map = (0, module_definition_1.defineFn)(
      * @returns Value if value type is Map\<K, V\>.
      * @throws Error otherwise.
      */
-    of(value, keyGuard, valueGuard, error) {
+    of: (value, keyGuard, valueGuard, error) => {
         assert.map.of(value, keyGuard, valueGuard, error);
         return value;
     }
 });
-exports.not = (0, module_definition_1.defineFn)(
-/**
- * Not implemented.
- */
-() => {
-    throw new Error("Not implemented");
-}, {
-    /**
-     * Asserts that value type is not empty.
-     *
-     * @param this - No this.
-     * @param value - Value.
-     * @param error - Error.
-     * @returns Value if value type is not empty.
-     * @throws Error otherwise.
-     */
-    empty(value, error) {
-        assert.not.empty(value, error);
-        return value;
-    }
-});
-exports.set = (0, module_definition_1.defineFn)(
-/**
- * Asserts that value type is Set.
- *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value type is Set.
- * @throws Error otherwise.
- */
-(value, error) => {
-    assert.set(value, error);
-    return value;
-}, {
+exports.mapU = factory(is.mapU);
+exports.maps = factory(is.maps);
+exports.mapsU = factory(is.mapsU);
+exports.never = factory(is.never);
+exports.numStr = factory(is.numStr);
+exports.numStrU = factory(is.numStrU);
+exports.numStrs = factory(is.numStrs);
+exports.numStrsU = factory(is.numStrsU);
+exports.number = factory(is.number);
+exports.numberU = factory(is.numberU);
+exports.numbers = factory(is.numbers);
+exports.numbersU = factory(is.numbersU);
+exports.object = factory(is.object);
+exports.objectU = factory(is.objectU);
+exports.objects = factory(is.objects);
+exports.objectsU = factory(is.objectsU);
+exports.set = (0, core_1.defineFn)(factory(is.set), {
     /**
      * Asserts that value type is Set\<T\>.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param guard - Guard for type T.
      * @param error - Error.
      * @returns Value if value type is Set\<T\>.
      * @throws Error otherwise.
      */
-    of(value, guard, error) {
+    of: (value, guard, error) => {
         assert.set.of(value, guard, error);
         return value;
     }
 });
+exports.setU = factory(is.setU);
+exports.sets = factory(is.sets);
+exports.setsU = factory(is.setsU);
+exports.string = factory(is.string);
+exports.stringU = factory(is.stringU);
+exports.strings = factory(is.strings);
+exports.stringsU = factory(is.stringsU);
+exports.symbol = factory(is.symbol);
+exports.symbolU = factory(is.symbolU);
+exports.symbols = factory(is.symbols);
+exports.symbolsU = factory(is.symbolsU);
+exports.unknown = factory(is.unknown);
+exports.unknowns = factory(is.unknowns);
+exports.unknownsU = factory(is.unknownsU);
+exports.not = {
+    array: notFactory(is.not.array),
+    boolean: notFactory(is.not.boolean),
+    empty: notFactory(is.not.empty),
+    false: notFactory(is.not.false),
+    indexedObject: notFactory(is.not.indexedObject),
+    map: notFactory(is.not.map),
+    null: notFactory(is.not.null),
+    numStr: notFactory(is.not.numStr),
+    number: notFactory(is.not.number),
+    object: notFactory(is.not.object),
+    set: notFactory(is.not.set),
+    string: notFactory(is.not.string),
+    stringU: notFactory(is.not.stringU),
+    symbol: notFactory(is.not.symbol),
+    true: notFactory(is.not.true),
+    undefined: notFactory(is.not.undefined)
+};
 /**
- * Asserts that value is a boolean.
+ * Asserts that value type is T.
  *
  * @param value - Value.
+ * @param guard - Guard for type T.
  * @param error - Error.
- * @returns Value if value is a boolean.
+ * @returns Value if value type is T.
  * @throws Error otherwise.
  */
-function boolean(value, error) {
-    assert.boolean(value, error);
+function byGuard(value, guard, error) {
+    assert.byGuard(value, guard, error);
     return value;
 }
-exports.boolean = boolean;
+exports.byGuard = byGuard;
 /**
  * Asserts that value type is T.
  *
@@ -206,82 +196,54 @@ function instances(value, ctor, error) {
     return value;
 }
 exports.instances = instances;
+const _false = factory(is.false);
+exports.false = _false;
+const _null = factory(is.null);
+exports.null = _null;
+const _true = factory(is.true);
+exports.true = _true;
+const _undefined = factory(is.undefined);
+exports.undefined = _undefined;
 /**
- * Asserts that value type is NumStr.
+ * Creates inline assertion.
  *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value type is NumStr.
- * @throws Error otherwise.
+ * @param guard - Guard for type T.
+ * @returns Inline assertion for type T.
  */
-function numStr(value, error) {
-    assert.numStr(value, error);
-    return value;
+function factory(guard) {
+    /**
+     * Asserts that value has expected type.
+     *
+     * @param value - Value.
+     * @param error - Error.
+     * @returns Value if value has expected type.
+     * @throws Error otherwise.
+     */
+    return (value, error) => {
+        if (guard(value))
+            return value;
+        throw errors_1.ErrorArg.toError(error);
+    };
 }
-exports.numStr = numStr;
 /**
- * Asserts that value is a number.
+ * Creates inline assertion.
  *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value is a number.
- * @throws Error otherwise.
+ * @param guard - Guard for type not T.
+ * @returns Inline assertion for type not T.
  */
-function number(value, error) {
-    assert.number(value, error);
-    return value;
+function notFactory(guard) {
+    /**
+     * Asserts that value has expected type.
+     *
+     * @param value - Value.
+     * @param error - Error.
+     * @returns Value if value has expected type.
+     * @throws Error otherwise.
+     */
+    return (value, error) => {
+        if (guard(value))
+            return value;
+        throw errors_1.ErrorArg.toError(error);
+    };
 }
-exports.number = number;
-/**
- * Asserts that value is an object.
- *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value is an object.
- * @throws Error otherwise.
- */
-function object(value, error) {
-    assert.object(value, error);
-    return value;
-}
-exports.object = object;
-/**
- * Asserts that value is a string.
- *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value is a string.
- * @throws Error otherwise.
- */
-function string(value, error) {
-    assert.string(value, error);
-    return value;
-}
-exports.string = string;
-/**
- * Asserts that value is a string.
- *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value is a string.
- * @throws Error otherwise.
- */
-function stringU(value, error) {
-    assert.stringU(value, error);
-    return value;
-}
-exports.stringU = stringU;
-/**
- * Asserts that value is a symbol.
- *
- * @param value - Value.
- * @param error - Error.
- * @returns Value if value is a symbol.
- * @throws Error otherwise.
- */
-function symbol(value, error) {
-    assert.symbol(value, error);
-    return value;
-}
-exports.symbol = symbol;
 //# sourceMappingURL=inline-assertions.js.map

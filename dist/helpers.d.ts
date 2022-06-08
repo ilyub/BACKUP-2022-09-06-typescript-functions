@@ -1,5 +1,5 @@
 import * as is from "./guards";
-import type { NumStr, Rec, Join2 } from "./types";
+import type { Join2 } from "./types";
 export declare type Facade<I, E = unknown> = E & FacadeOwnMethods<I> & I;
 export interface FacadeOwnMethods<I> {
     /**
@@ -18,7 +18,6 @@ export declare type SafeAccess<T extends object, W extends string & keyof T, R e
 export declare type SafeAccessGuards<T, W extends string & keyof T> = {
     readonly [K in W]: is.Guard<T[K]>;
 };
-export declare type ValidationObject<T extends PropertyKey> = ReadonlySet<T>;
 /**
  * Creates facade.
  *
@@ -27,13 +26,6 @@ export declare type ValidationObject<T extends PropertyKey> = ReadonlySet<T>;
  * @returns Facade.
  */
 export declare function createFacade<I extends object, E = unknown>(name: string, extension: E): Facade<I, E>;
-/**
- * Creates validation object.
- *
- * @param source - Source.
- * @returns Validation object.
- */
-export declare function createValidationObject<T extends NumStr>(source: Rec<T, T>): ValidationObject<T>;
 /**
  * Generates resource on demand.
  *
@@ -50,13 +42,6 @@ export declare function onDemand<T extends object>(generator: () => T): T;
  * @returns Safe access interface.
  */
 export declare function safeAccess<T extends object, W extends string & keyof T, R extends string & keyof T>(obj: T, guards: SafeAccessGuards<T, W>, readonlyKeys?: readonly R[]): SafeAccess<T, W, R>;
-/**
- * Defines value type.
- *
- * @param value - Value.
- * @returns Value.
- */
-export declare function typedef<T>(value: T): T;
 /**
  * Delays program execution.
  *

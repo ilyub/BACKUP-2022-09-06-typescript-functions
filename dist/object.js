@@ -1,13 +1,11 @@
 "use strict";
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unfreeze = exports.sort = exports.some = exports.size = exports.removeUndefinedKeys = exports.omit = exports.merge = exports.map = exports.hasOwnProp = exports.getPrototypeOf = exports.get = exports.freeze = exports.filter = exports.every = exports.clone = exports.values = exports.keys = exports.fromEntries = exports.extend = exports.defineProperty = exports.assign = exports.entries = void 0;
+exports.unfreeze = exports.sort = exports.some = exports.size = exports.removeUndefinedKeys = exports.omit = exports.map = exports.hasOwnProp = exports.getPrototypeOf = exports.get = exports.freeze = exports.filter = exports.every = exports.clone = exports.values = exports.keys = exports.fromEntries = exports.extend = exports.entries = exports.defineProperty = exports.assign = void 0;
 const tslib_1 = require("tslib");
-const Accumulator_1 = require("./Accumulator");
-const a = tslib_1.__importStar(require("./array"));
-const assert = tslib_1.__importStar(require("./assertions"));
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
 const is = tslib_1.__importStar(require("./guards"));
-const reflect = tslib_1.__importStar(require("./reflect"));
+const as = tslib_1.__importStar(require("./inline-assertions"));
 /**
  * Typed version of Object.assign.
  *
@@ -24,6 +22,7 @@ exports.assign = Object.assign;
  * @param descriptor - Descriptor.
  */
 exports.defineProperty = Object.defineProperty.bind(Object);
+exports.entries = Object.entries;
 exports.extend = Object.assign;
 exports.fromEntries = (0, exports.extend)(
 /**
@@ -32,6 +31,7 @@ exports.fromEntries = (0, exports.extend)(
  * @param entries - Entries.
  * @returns Object.
  */
+// eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
 (entries) => {
     const result = {};
     for (const entry of entries)
@@ -44,7 +44,8 @@ exports.fromEntries = (0, exports.extend)(
      * @param entries - Entries.
      * @returns Object.
      */
-    exhaustive(entries) {
+    // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
+    exhaustive: (entries) => {
         const result = {};
         for (const entry of entries)
             result[entry[0]] = entry[1];
@@ -72,7 +73,7 @@ exports.clone = clone;
  * @returns _True_ if every object property satisfies condition, _false_ otherwise.
  */
 function every(obj, predicate) {
-    return _entries(obj).every(([key, value]) => predicate(value, key));
+    return (0, exports.entries)(obj).every(([key, value]) => predicate(value, key));
 }
 exports.every = every;
 /**
@@ -84,7 +85,7 @@ exports.every = every;
  */
 function filter(obj, predicate) {
     const result = {};
-    for (const [key, value] of _entries(obj))
+    for (const [key, value] of (0, exports.entries)(obj))
         if (predicate(value, key))
             result[key] = value;
     return result;
@@ -100,19 +101,10 @@ function freeze(obj) {
     return obj;
 }
 exports.freeze = freeze;
-/**
- * Returns object property.
- *
- * @param obj - Object.
- * @param key - Key.
- * @param guard - Guard for type T.
- * @returns Object property if its type is T.
- * @throws AssertionError otherwise.
- */
-function get(obj, key, guard) {
-    const value = reflect.get(obj, key);
-    assert.byGuard(value, guard);
-    return value;
+function get(obj, key, guard = is.unknown, defVal) {
+    var _a;
+    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+    return as.byGuard((_a = obj[key]) !== null && _a !== void 0 ? _a : defVal, guard);
 }
 exports.get = get;
 /**
@@ -145,26 +137,9 @@ exports.hasOwnProp = hasOwnProp;
  * @returns New object.
  */
 function map(obj, callback) {
-    return exports.fromEntries.exhaustive(_entries(obj).map(([key, value]) => [key, callback(value, key)]));
+    return exports.fromEntries.exhaustive((0, exports.entries)(obj).map(([key, value]) => [key, callback(value, key)]));
 }
 exports.map = map;
-/**
- * Merges objects.
- * If more than one object has the same key, respective values are combined into array.
- *
- * @param objects - Objects.
- * @returns Merged object.
- */
-function merge(...objects) {
-    const result = new Accumulator_1.Accumulator();
-    for (const obj of objects)
-        for (const [key, value] of _entries(obj))
-            result.push(key, value);
-    return (0, exports.fromEntries)(a
-        .fromIterable(result)
-        .map(([key, arr]) => [key, arr.length === 1 ? arr[0] : arr]));
-}
-exports.merge = merge;
 /**
  * Removes keys from object.
  *
@@ -207,13 +182,15 @@ exports.size = size;
  * @returns _True_ if some object property satisfies condition, _false_ otherwise.
  */
 function some(obj, predicate) {
-    return _entries(obj).some(([key, value]) => predicate(value, key));
+    return (0, exports.entries)(obj).some(([key, value]) => predicate(value, key));
 }
 exports.some = some;
 function sort(obj, compareFn) {
-    return exports.fromEntries.exhaustive(a.sort(_entries(obj), compareFn
+    const arr = (0, exports.entries)(obj);
+    arr.sort(compareFn
         ? (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
-        : undefined));
+        : undefined);
+    return exports.fromEntries.exhaustive(arr);
 }
 exports.sort = sort;
 /**
@@ -226,6 +203,4 @@ function unfreeze(obj) {
     return obj;
 }
 exports.unfreeze = unfreeze;
-const _entries = Object.entries;
-exports.entries = _entries;
 //# sourceMappingURL=object.js.map

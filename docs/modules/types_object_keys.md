@@ -4,7 +4,7 @@
 
 ## Table of contents
 
-### Type aliases
+### Type Aliases
 
 - [DefinedKeys](types_object_keys.md#definedkeys)
 - [ObjectKeys](types_object_keys.md#objectkeys)
@@ -14,7 +14,7 @@
 - [WritableDefindKeys](types_object_keys.md#writabledefindkeys)
 - [WritableUndefindKeys](types_object_keys.md#writableundefindkeys)
 
-## Type aliases
+## Type Aliases
 
 ### DefinedKeys
 

@@ -1,8 +1,8 @@
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
 import * as assert from "./assertions";
 import * as is from "./guards";
-import * as o from "./object";
-import * as reflect from "./reflect";
+import * as as from "./inline-assertions";
 import * as _ from "@skylib/lodash-commonjs-es";
 /**
  * Creates array of pairs ([x, y, z] =\> [[x, y], [y, z]]).
@@ -30,7 +30,7 @@ export function clone(arr) {
  * @returns New array with one element removed.
  */
 export function drop(arr, index) {
-    assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
+    assert.toBeTrue(Object.prototype.hasOwnProperty.call(arr, index), "Invalid index");
     return [...arr.slice(0, index), ...arr.slice(index + 1)];
 }
 /**
@@ -97,7 +97,7 @@ export function fromString(str) {
  * @throws Error otherwise.
  */
 export function get(arr, index) {
-    assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
+    assert.toBeTrue(Object.prototype.hasOwnProperty.call(arr, index), "Invalid index");
     // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
     return arr[index];
 }
@@ -178,7 +178,7 @@ export function removeBy(arr, value, keyOrReduce) {
  * @returns New array with one element replaced.
  */
 export function replace(arr, index, value) {
-    assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
+    assert.toBeTrue(Object.prototype.hasOwnProperty.call(arr, index), "Invalid index");
     return [...arr.slice(0, index), value, ...arr.slice(index + 1)];
 }
 /**
@@ -206,6 +206,16 @@ export function reverse(arr) {
     return result;
 }
 /**
+ * Returns the second element from an array.
+ *
+ * @param arr - Array.
+ * @returns The second element if available.
+ * @throws Error otherwise.
+ */
+export function second(arr) {
+    return get(arr, 1);
+}
+/**
  * Sorts array.
  *
  * @param arr - Array.
@@ -216,6 +226,16 @@ export function sort(arr, compareFn) {
     const result = clone(arr);
     result.sort(compareFn);
     return result;
+}
+/**
+ * Returns the third element from an array.
+ *
+ * @param arr - Array.
+ * @returns The third element if available.
+ * @throws Error otherwise.
+ */
+export function third(arr) {
+    return get(arr, 2);
 }
 /**
  * Adds/removes value to/from an array.
@@ -288,6 +308,6 @@ export function unshiftOrReplaceBy(arr, value, keyOrReduce) {
 function toReduce(keyOrReduce) {
     return is.callable(keyOrReduce)
         ? keyOrReduce
-        : (obj) => reflect.get(obj, keyOrReduce);
+        : (obj) => as.indexedObject(obj)[keyOrReduce];
 }
 //# sourceMappingURL=array.js.map

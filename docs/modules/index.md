@@ -21,6 +21,7 @@
 - [DefinedKeys](index.md#definedkeys)
 - [Empty](index.md#empty)
 - [Entry](index.md#entry)
+- [ErrorArg](index.md#errorarg)
 - [Facade](index.md#facade)
 - [FacadeOwnMethods](index.md#facadeownmethods)
 - [IndexedObject](index.md#indexedobject)
@@ -82,6 +83,7 @@
 - [createValidationObject](index.md#createvalidationobject)
 - [defineFn](index.md#definefn)
 - [empty](index.md#empty-1)
+- [evaluate](index.md#evaluate)
 - [falseU](index.md#falseu)
 - [fn](index.md#fn)
 - [is](index.md#is)
@@ -97,7 +99,7 @@
 - [objectU](index.md#objectu)
 - [objects](index.md#objects)
 - [onDemand](index.md#ondemand)
-- [overloadedFn](index.md#overloadedfn)
+- [overload](index.md#overload)
 - [programFlow](index.md#programflow)
 - [reflect](index.md#reflect)
 - [regexp](index.md#regexp)
@@ -202,6 +204,12 @@ ___
 ### Entry
 
 Re-exports [Entry](types_core.md#entry)
+
+___
+
+### ErrorArg
+
+Re-exports [ErrorArg](errors_error_arg.md#errorarg)
 
 ___
 
@@ -435,7 +443,7 @@ ___
 
 ### ValidationObject
 
-Re-exports [ValidationObject](helpers.md#validationobject)
+Re-exports [ValidationObject](core.md#validationobject)
 
 ___
 
@@ -555,19 +563,25 @@ ___
 
 ### createValidationObject
 
-Re-exports [createValidationObject](helpers.md#createvalidationobject)
+Re-exports [createValidationObject](core.md#createvalidationobject)
 
 ___
 
 ### defineFn
 
-Re-exports [defineFn](module_definition.md#definefn)
+Re-exports [defineFn](core.md#definefn)
 
 ___
 
 ### empty
 
 Re-exports [empty](types_core.md#empty)
+
+___
+
+### evaluate
+
+Re-exports [evaluate](core.md#evaluate)
 
 ___
 
@@ -661,9 +675,9 @@ Re-exports [onDemand](helpers.md#ondemand)
 
 ___
 
-### overloadedFn
+### overload
 
-Re-exports [overloadedFn](module_definition.md#overloadedfn)
+Re-exports [overload](core.md#overload)
 
 ___
 
@@ -729,7 +743,7 @@ ___
 
 ### typedef
 
-Re-exports [typedef](helpers.md#typedef)
+Re-exports [typedef](core.md#typedef)
 
 ___
 

@@ -8,6 +8,7 @@ exports.a = tslib_1.__importStar(require("./array"));
 exports.assert = tslib_1.__importStar(require("./assertions"));
 // eslint-disable-next-line @skylib/export-all-name -- Ok
 exports.cast = tslib_1.__importStar(require("./converters"));
+tslib_1.__exportStar(require("./core"), exports);
 tslib_1.__exportStar(require("./errors"), exports);
 // eslint-disable-next-line @skylib/export-all-name -- Ok
 exports.fn = tslib_1.__importStar(require("./function"));
@@ -18,7 +19,6 @@ tslib_1.__exportStar(require("./helpers"), exports);
 exports.as = tslib_1.__importStar(require("./inline-assertions"));
 exports.json = tslib_1.__importStar(require("./json"));
 exports.map = tslib_1.__importStar(require("./map"));
-tslib_1.__exportStar(require("./module-definition"), exports);
 // eslint-disable-next-line @skylib/export-all-name -- Ok
 exports.num = tslib_1.__importStar(require("./number"));
 // eslint-disable-next-line @skylib/export-all-name -- Ok

@@ -6,10 +6,11 @@ declare global {
             /**
              * Checks that async function executes within expected time.
              *
-             * @param expected - Expected time.
+             * @param expected - Expected time (ms).
+             * @param precision - Precision (ms).
              * @returns Result.
              */
-            readonly executionTimeToBe: (expected: number) => Promise<R>;
+            readonly executionTimeToBe: (expected: number, precision?: number) => Promise<R>;
             /**
              * Checks that two objects are identical.
              *

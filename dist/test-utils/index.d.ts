@@ -1,6 +1,6 @@
 import "jest-extended";
+export * from "./fake-timers";
 export type { ExpectFromMatcher } from "./expect";
-export { clock, installFakeTimer, run, setRandomSystemTime } from "./fake-timers";
 /**
  * Jest reset.
  */

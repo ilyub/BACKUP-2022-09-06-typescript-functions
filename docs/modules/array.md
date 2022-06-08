@@ -8,7 +8,7 @@
 
 - [Reduce](../interfaces/array.Reduce.md)
 
-### Type aliases
+### Type Aliases
 
 - [KeyOrReduce](array.md#keyorreduce)
 
@@ -32,14 +32,16 @@
 - [replace](array.md#replace)
 - [replaceBy](array.md#replaceby)
 - [reverse](array.md#reverse)
+- [second](array.md#second)
 - [sort](array.md#sort)
+- [third](array.md#third)
 - [toggleBy](array.md#toggleby)
 - [truncate](array.md#truncate)
 - [uniqueBy](array.md#uniqueby)
 - [unshift](array.md#unshift)
 - [unshiftOrReplaceBy](array.md#unshiftorreplaceby)
 
-## Type aliases
+## Type Aliases
 
 ### KeyOrReduce
 
@@ -629,6 +631,34 @@ New array.
 
 ___
 
+### second
+
+▸ **second**<`T`\>(`arr`): `T`
+
+Returns the second element from an array.
+
+**`throws`** Error otherwise.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `arr` | readonly `T`[] | Array. |
+
+#### Returns
+
+`T`
+
+The second element if available.
+
+___
+
 ### sort
 
 ▸ **sort**<`T`\>(`arr`, `compareFn?`): `T`[]
@@ -653,6 +683,34 @@ Sorts array.
 `T`[]
 
 New array.
+
+___
+
+### third
+
+▸ **third**<`T`\>(`arr`): `T`
+
+Returns the third element from an array.
+
+**`throws`** Error otherwise.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `arr` | readonly `T`[] | Array. |
+
+#### Returns
+
+`T`
+
+The third element if available.
 
 ___
 

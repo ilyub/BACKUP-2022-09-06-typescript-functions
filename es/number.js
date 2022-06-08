@@ -1,5 +1,5 @@
 import * as assert from "./assertions";
-import { defineFn } from "./module-definition";
+import { defineFn } from "./core";
 export const ceil = defineFn(
 /**
  * Ceils number to a given precision.
@@ -20,9 +20,7 @@ export const ceil = defineFn(
      * @param from - From.
      * @returns Ceiled value.
      */
-    step(value, step, from = 0) {
-        return Math.ceil((value - from) / step) * step + from;
-    }
+    step: (value, step, from = 0) => Math.ceil((value - from) / step) * step + from
 });
 export const floor = defineFn(
 /**
@@ -39,15 +37,12 @@ export const floor = defineFn(
     /**
      * Floors number.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param step - Step.
      * @param from - From.
      * @returns Floored value.
      */
-    step(value, step, from = 0) {
-        return Math.floor((value - from) / step) * step + from;
-    }
+    step: (value, step, from = 0) => Math.floor((value - from) / step) * step + from
 });
 export const round = defineFn(
 /**
@@ -64,15 +59,12 @@ export const round = defineFn(
     /**
      * Rounds number.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param step - Step.
      * @param from - From.
      * @returns Rounded value.
      */
-    step(value, step, from = 0) {
-        return Math.round((value - from) / step) * step + from;
-    }
+    step: (value, step, from = 0) => Math.round((value - from) / step) * step + from
 });
 /**
  * Averages values.

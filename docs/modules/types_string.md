@@ -4,14 +4,14 @@
 
 ## Table of contents
 
-### Type aliases
+### Type Aliases
 
 - [AddPrefix](types_string.md#addprefix)
 - [LowercaseLetter](types_string.md#lowercaseletter)
 - [RemovePrefix](types_string.md#removeprefix)
 - [UppercaseLetter](types_string.md#uppercaseletter)
 
-## Type aliases
+## Type Aliases
 
 ### AddPrefix
 

@@ -4,7 +4,7 @@
 
 ## Table of contents
 
-### Type aliases
+### Type Aliases
 
 - [MetadataKey](reflect.md#metadatakey)
 
@@ -34,7 +34,7 @@
 - [set](reflect.md#set)
 - [setPrototypeOf](reflect.md#setprototypeof)
 
-## Type aliases
+## Type Aliases
 
 ### MetadataKey
 
@@ -137,7 +137,7 @@ ___
 | :------ | :------ |
 | `target` | `object` |
 | `propertyKey` | `PropertyKey` |
-| `attributes` | `PropertyDescriptor` |
+| `attributes` | `PropertyDescriptor` & `ThisType`<`any`\> |
 
 #### Returns
 
@@ -181,6 +181,33 @@ Typed version of Reflect.get.
 
 Property value.
 
+▸ **get**<`T`\>(`target`, `key`, `guard?`, `defVal?`): `T`
+
+Typed version of Reflect.get.
+
+**`throws`** AssertionError otherwise.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `object` | Target object. |
+| `key` | `PropertyKey` | Property key. |
+| `guard?` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
+| `defVal?` | `T` | Default value. |
+
+#### Returns
+
+`T`
+
+Property value if its type is T.
+
 ___
 
 ### getMetadata
@@ -201,6 +228,33 @@ Typed version of Reflect.getMetadata.
 `unknown`
 
 Metadata value.
+
+▸ **getMetadata**<`T`\>(`metadataKey`, `target`, `guard?`, `defVal?`): `T`
+
+Typed version of Reflect.getMetadata.
+
+**`throws`** AssertionError otherwise.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `metadataKey` | [`MetadataKey`](reflect.md#metadatakey) | Metadata key. |
+| `target` | `object` | Target object. |
+| `guard?` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
+| `defVal?` | `T` | Default value. |
+
+#### Returns
+
+`T`
+
+Metadata value if its type is T.
 
 ___
 
@@ -224,6 +278,34 @@ Typed version of Reflect.getMetadata.
 
 Metadata value.
 
+▸ **getMetadataKey**<`T`\>(`metadataKey`, `target`, `key`, `guard?`, `defVal?`): `T`
+
+Typed version of Reflect.getMetadata.
+
+**`throws`** AssertionError otherwise.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `metadataKey` | [`MetadataKey`](reflect.md#metadatakey) | Metadata key. |
+| `target` | `object` | Target object. |
+| `key` | [`MetadataKey`](reflect.md#metadatakey) | Property key. |
+| `guard?` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
+| `defVal?` | `T` | Default value. |
+
+#### Returns
+
+`T`
+
+Metadata value if its type is T.
+
 ___
 
 ### getOwnMetadata
@@ -244,6 +326,33 @@ Typed version of Reflect.getOwnMetadata.
 `unknown`
 
 Metadata value.
+
+▸ **getOwnMetadata**<`T`\>(`metadataKey`, `target`, `guard?`, `defVal?`): `T`
+
+Typed version of Reflect.getOwnMetadata.
+
+**`throws`** AssertionError otherwise.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `metadataKey` | [`MetadataKey`](reflect.md#metadatakey) | Metadata key. |
+| `target` | `object` | Target object. |
+| `guard?` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
+| `defVal?` | `T` | Default value. |
+
+#### Returns
+
+`T`
+
+Metadata value if its type is T.
 
 ___
 
@@ -266,6 +375,34 @@ Typed version of Reflect.getOwnMetadata.
 `unknown`
 
 Metadata value.
+
+▸ **getOwnMetadataKey**<`T`\>(`metadataKey`, `target`, `key`, `guard?`, `defVal?`): `T`
+
+Typed version of Reflect.getOwnMetadata.
+
+**`throws`** AssertionError otherwise.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `metadataKey` | [`MetadataKey`](reflect.md#metadatakey) | Metadata key. |
+| `target` | `object` | Target object. |
+| `key` | [`MetadataKey`](reflect.md#metadatakey) | Property key. |
+| `guard?` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
+| `defVal?` | `T` | Default value. |
+
+#### Returns
+
+`T`
+
+Metadata value if its type is T.
 
 ___
 

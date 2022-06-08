@@ -1,14 +1,13 @@
 import type * as types from "./types";
-export declare const not: (() => never) & {
+export declare const not: {
     /**
      * Converts value to not empty.
      *
-     * @param this - No this.
      * @param value - Value.
      * @param defVal - Default value.
      * @returns Value if it is not empty, defVal otherwise.
      */
-    empty<T>(this: void, value: T, defVal: Exclude<T, types.empty>): Exclude<T, types.empty>;
+    readonly empty: <T>(value: T, defVal: Exclude<T, types.empty>) => Exclude<T, types.empty>;
 };
 /**
  * Converts value to a number.

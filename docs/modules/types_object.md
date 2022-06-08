@@ -4,7 +4,7 @@
 
 ## Table of contents
 
-### Type aliases
+### Type Aliases
 
 - [Empty](types_object.md#empty)
 - [Join2](types_object.md#join2)
@@ -16,7 +16,7 @@
 - [StrictOmit](types_object.md#strictomit)
 - [UndefinedStyle](types_object.md#undefinedstyle)
 
-## Type aliases
+## Type Aliases
 
 ### Empty
 

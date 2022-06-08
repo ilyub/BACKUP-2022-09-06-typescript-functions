@@ -1,3 +1,4 @@
+import * as is from "./guards";
 import "reflect-metadata";
 /**
  * Typed version of Reflect.apply.
@@ -19,14 +20,6 @@ export declare const apply: (target: Function, thisArg: unknown, args: ArrayLike
 export declare const construct: (target: Function, args: ArrayLike<unknown>, newTarget?: Function) => unknown;
 export declare const defineProperty: typeof Reflect.defineProperty;
 export declare const deleteProperty: typeof Reflect.deleteProperty;
-/**
- * Typed version of Reflect.get.
- *
- * @param target - Target object.
- * @param key - Property key.
- * @returns Property value.
- */
-export declare const get: (target: object, key: PropertyKey) => unknown;
 export declare const getOwnPropertyDescriptor: typeof Reflect.getOwnPropertyDescriptor;
 export declare const getPrototypeOf: typeof Reflect.getPrototypeOf;
 export declare const has: typeof Reflect.has;
@@ -54,6 +47,25 @@ export declare function defineMetadata(metadataKey: MetadataKey, metadataValue: 
  */
 export declare function defineMetadataKey(metadataKey: MetadataKey, metadataValue: unknown, target: object, key: MetadataKey): void;
 /**
+ * Typed version of Reflect.get.
+ *
+ * @param target - Target object.
+ * @param key - Property key.
+ * @returns Property value.
+ */
+export declare function get(target: object, key: PropertyKey): unknown;
+/**
+ * Typed version of Reflect.get.
+ *
+ * @param target - Target object.
+ * @param key - Property key.
+ * @param guard - Guard for type T.
+ * @param defVal - Default value.
+ * @returns Property value if its type is T.
+ * @throws AssertionError otherwise.
+ */
+export declare function get<T>(target: object, key: PropertyKey, guard?: is.Guard<T>, defVal?: T): T;
+/**
  * Typed version of Reflect.getMetadata.
  *
  * @param metadataKey - Metadata key.
@@ -66,10 +78,33 @@ export declare function getMetadata(metadataKey: MetadataKey, target: object): u
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
+ * @param guard - Guard for type T.
+ * @param defVal - Default value.
+ * @returns Metadata value if its type is T.
+ * @throws AssertionError otherwise.
+ */
+export declare function getMetadata<T>(metadataKey: MetadataKey, target: object, guard?: is.Guard<T>, defVal?: T): T;
+/**
+ * Typed version of Reflect.getMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
  * @param key - Property key.
  * @returns Metadata value.
  */
 export declare function getMetadataKey(metadataKey: MetadataKey, target: object, key: MetadataKey): unknown;
+/**
+ * Typed version of Reflect.getMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @param key - Property key.
+ * @param guard - Guard for type T.
+ * @param defVal - Default value.
+ * @returns Metadata value if its type is T.
+ * @throws AssertionError otherwise.
+ */
+export declare function getMetadataKey<T>(metadataKey: MetadataKey, target: object, key: MetadataKey, guard?: is.Guard<T>, defVal?: T): T;
 /**
  * Typed version of Reflect.getOwnMetadata.
  *
@@ -83,10 +118,33 @@ export declare function getOwnMetadata(metadataKey: MetadataKey, target: object)
  *
  * @param metadataKey - Metadata key.
  * @param target - Target object.
+ * @param guard - Guard for type T.
+ * @param defVal - Default value.
+ * @returns Metadata value if its type is T.
+ * @throws AssertionError otherwise.
+ */
+export declare function getOwnMetadata<T>(metadataKey: MetadataKey, target: object, guard?: is.Guard<T>, defVal?: T): T;
+/**
+ * Typed version of Reflect.getOwnMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
  * @param key - Property key.
  * @returns Metadata value.
  */
 export declare function getOwnMetadataKey(metadataKey: MetadataKey, target: object, key: MetadataKey): unknown;
+/**
+ * Typed version of Reflect.getOwnMetadata.
+ *
+ * @param metadataKey - Metadata key.
+ * @param target - Target object.
+ * @param key - Property key.
+ * @param guard - Guard for type T.
+ * @param defVal - Default value.
+ * @returns Metadata value if its type is T.
+ * @throws AssertionError otherwise.
+ */
+export declare function getOwnMetadataKey<T>(metadataKey: MetadataKey, target: object, key: MetadataKey, guard?: is.Guard<T>, defVal?: T): T;
 /**
  * Typed version of Reflect.hasMetadata.
  *

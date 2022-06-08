@@ -1,12 +1,12 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unshiftOrReplaceBy = exports.unshift = exports.uniqueBy = exports.truncate = exports.toggleBy = exports.sort = exports.reverse = exports.replaceBy = exports.replace = exports.removeBy = exports.random = exports.pushOrReplaceBy = exports.push = exports.last = exports.includesBy = exports.get = exports.fromString = exports.fromRange = exports.fromIterable = exports.first = exports.findBy = exports.drop = exports.clone = exports.chain = void 0;
+exports.unshiftOrReplaceBy = exports.unshift = exports.uniqueBy = exports.truncate = exports.toggleBy = exports.third = exports.sort = exports.second = exports.reverse = exports.replaceBy = exports.replace = exports.removeBy = exports.random = exports.pushOrReplaceBy = exports.push = exports.last = exports.includesBy = exports.get = exports.fromString = exports.fromRange = exports.fromIterable = exports.first = exports.findBy = exports.drop = exports.clone = exports.chain = void 0;
 const tslib_1 = require("tslib");
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
 const assert = tslib_1.__importStar(require("./assertions"));
 const is = tslib_1.__importStar(require("./guards"));
-const o = tslib_1.__importStar(require("./object"));
-const reflect = tslib_1.__importStar(require("./reflect"));
+const as = tslib_1.__importStar(require("./inline-assertions"));
 const _ = tslib_1.__importStar(require("@skylib/lodash-commonjs-es"));
 /**
  * Creates array of pairs ([x, y, z] =\> [[x, y], [y, z]]).
@@ -36,7 +36,7 @@ exports.clone = clone;
  * @returns New array with one element removed.
  */
 function drop(arr, index) {
-    assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
+    assert.toBeTrue(Object.prototype.hasOwnProperty.call(arr, index), "Invalid index");
     return [...arr.slice(0, index), ...arr.slice(index + 1)];
 }
 exports.drop = drop;
@@ -109,7 +109,7 @@ exports.fromString = fromString;
  * @throws Error otherwise.
  */
 function get(arr, index) {
-    assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
+    assert.toBeTrue(Object.prototype.hasOwnProperty.call(arr, index), "Invalid index");
     // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
     return arr[index];
 }
@@ -197,7 +197,7 @@ exports.removeBy = removeBy;
  * @returns New array with one element replaced.
  */
 function replace(arr, index, value) {
-    assert.toBeTrue(o.hasOwnProp(index, arr), "Invalid index");
+    assert.toBeTrue(Object.prototype.hasOwnProperty.call(arr, index), "Invalid index");
     return [...arr.slice(0, index), value, ...arr.slice(index + 1)];
 }
 exports.replace = replace;
@@ -228,6 +228,17 @@ function reverse(arr) {
 }
 exports.reverse = reverse;
 /**
+ * Returns the second element from an array.
+ *
+ * @param arr - Array.
+ * @returns The second element if available.
+ * @throws Error otherwise.
+ */
+function second(arr) {
+    return get(arr, 1);
+}
+exports.second = second;
+/**
  * Sorts array.
  *
  * @param arr - Array.
@@ -240,6 +251,17 @@ function sort(arr, compareFn) {
     return result;
 }
 exports.sort = sort;
+/**
+ * Returns the third element from an array.
+ *
+ * @param arr - Array.
+ * @returns The third element if available.
+ * @throws Error otherwise.
+ */
+function third(arr) {
+    return get(arr, 2);
+}
+exports.third = third;
 /**
  * Adds/removes value to/from an array.
  *
@@ -316,6 +338,6 @@ exports.unshiftOrReplaceBy = unshiftOrReplaceBy;
 function toReduce(keyOrReduce) {
     return is.callable(keyOrReduce)
         ? keyOrReduce
-        : (obj) => reflect.get(obj, keyOrReduce);
+        : (obj) => as.indexedObject(obj)[keyOrReduce];
 }
 //# sourceMappingURL=array.js.map

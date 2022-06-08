@@ -7,6 +7,7 @@
 ### References
 
 - [ExpectFromMatcher](test_utils.md#expectfrommatcher)
+- [Options](test_utils.md#options)
 - [clock](test_utils.md#clock)
 - [installFakeTimer](test_utils.md#installfaketimer)
 - [run](test_utils.md#run)
@@ -22,6 +23,12 @@
 ### ExpectFromMatcher
 
 Re-exports [ExpectFromMatcher](../interfaces/test_utils_expect.ExpectFromMatcher.md)
+
+___
+
+### Options
+
+Re-exports [Options](../interfaces/test_utils_fake_timers.Options.md)
 
 ___
 

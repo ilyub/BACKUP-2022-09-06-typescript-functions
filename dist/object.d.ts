@@ -1,6 +1,5 @@
 import * as is from "./guards";
-import type { Entry, IndexedObject, NumStr, objectU, PartialRecord, Rec, Writable, OptionalStyle, StrictOmit, IndexedRecords } from "./types";
-export { _entries as entries };
+import type { Entry, NumStr, objectU, PartialRecord, Rec, Writable, WritablePartialRecord, OptionalStyle, StrictOmit } from "./types";
 /**
  * Typed version of Object.assign.
  *
@@ -17,6 +16,22 @@ export declare const assign: <T extends object>(mutableTarget: T, ...sources: Ar
  * @param descriptor - Descriptor.
  */
 export declare const defineProperty: <T, K extends keyof T = keyof T>(obj: T, key: K, descriptor: Descriptor<T, K>) => void;
+export declare const entries: {
+    /**
+     * Typed version of Object.entries.
+     *
+     * @param obj - Object.
+     * @returns Object entries.
+     */
+    <K extends string, V>(obj: PartialRecord<K, V>): Array<Entry<K, V>>;
+    /**
+     * Typed version of Object.entries.
+     *
+     * @param obj - Object.
+     * @returns Object entries.
+     */
+    <T extends object>(obj: T): Array<Entry<string & keyof T, T[NumStr & keyof T]>>;
+};
 export declare const extend: {
     /**
      * Typed version of Object.assign.
@@ -53,8 +68,8 @@ export declare const fromEntries: {
      * @param entries - Entries.
      * @returns Object.
      */
-    exhaustive<K extends PropertyKey, V>(entries: Iterable<Entry<K, V>>): Rec<K, V>;
-} & (<K_1 extends PropertyKey, V_1>(entries: Iterable<Entry<K_1, V_1>>) => PartialRecord<K_1, V_1>);
+    exhaustive: <K extends PropertyKey, V>(entries: Iterable<Entry<K, V>>) => Rec<K, V>;
+} & (<K_1 extends PropertyKey, V_1>(entries: Iterable<Entry<K_1, V_1>>) => WritablePartialRecord<K_1, V_1>);
 export declare const keys: {
     /**
      * Typed version of Object.keys.
@@ -163,11 +178,20 @@ export declare function freeze<T extends object>(obj: T): Readonly<T>;
  *
  * @param obj - Object.
  * @param key - Key.
+ * @returns Object property.
+ */
+export declare function get(obj: object, key: PropertyKey): unknown;
+/**
+ * Returns object property.
+ *
+ * @param obj - Object.
+ * @param key - Key.
  * @param guard - Guard for type T.
+ * @param defVal - Default value.
  * @returns Object property if its type is T.
  * @throws AssertionError otherwise.
  */
-export declare function get<T>(obj: object, key: PropertyKey, guard: is.Guard<T>): T;
+export declare function get<T>(obj: object, key: PropertyKey, guard?: is.Guard<T>, defVal?: T): T;
 /**
  * Returns object prototype.
  *
@@ -191,14 +215,6 @@ export declare function hasOwnProp(key: PropertyKey, obj: object): boolean;
  * @returns New object.
  */
 export declare function map<K extends string, V, R>(obj: Rec<K, V>, callback: (value: V, key: K) => R): Rec<K, R>;
-/**
- * Merges objects.
- * If more than one object has the same key, respective values are combined into array.
- *
- * @param objects - Objects.
- * @returns Merged object.
- */
-export declare function merge(...objects: IndexedRecords): IndexedObject;
 /**
  * Removes keys from object.
  *
@@ -252,20 +268,4 @@ export declare function sort<T extends object>(obj: T, compareFn?: CompareFn<T>)
  * @returns Object.
  */
 export declare function unfreeze<T extends object>(obj: T): Writable<T>;
-declare const _entries: {
-    /**
-     * Typed version of Object.entries.
-     *
-     * @param obj - Object.
-     * @returns Object entries.
-     */
-    <K extends string, V>(obj: PartialRecord<K, V>): Array<Entry<K, V>>;
-    /**
-     * Typed version of Object.entries.
-     *
-     * @param obj - Object.
-     * @returns Object entries.
-     */
-    <T extends object>(obj: T): Array<Entry<string & keyof T, T[NumStr & keyof T]>>;
-};
 //# sourceMappingURL=object.d.ts.map

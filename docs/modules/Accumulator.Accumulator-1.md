@@ -6,15 +6,29 @@
 
 ## Table of contents
 
-### Type aliases
+### Type Aliases
 
 - [Entry](Accumulator.Accumulator-1.md#entry)
+- [Locked](Accumulator.Accumulator-1.md#locked)
 
-## Type aliases
+## Type Aliases
 
 ### Entry
 
 Ƭ **Entry**<`K`, `T`\>: readonly [`K`, readonly `T`[]]
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `T` | `T` |
+
+___
+
+### Locked
+
+Ƭ **Locked**<`K`, `T`\>: `Omit`<`Readonly`<[`Accumulator`](../classes/Accumulator.Accumulator-2.md)<`K`, `T`\>\>, ``"push"`` \| ``"unshift"``\>
 
 #### Type parameters
 

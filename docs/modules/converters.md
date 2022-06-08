@@ -19,7 +19,13 @@
 
 ### not
 
-• `Const` **not**: () => `never` & { `empty`: <T\>(`this`: `void`, `value`: `T`, `defVal`: `Exclude`<`T`, [`empty`](types_core.md#empty)\>) => `Exclude`<`T`, [`empty`](types_core.md#empty)\>  }
+• `Const` **not**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `empty` | <T\>(`value`: `T`, `defVal`: `Exclude`<`T`, [`empty`](types_core.md#empty)\>) => `Exclude`<`T`, [`empty`](types_core.md#empty)\> |
 
 ## Functions
 

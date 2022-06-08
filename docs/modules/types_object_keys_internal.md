@@ -4,7 +4,7 @@
 
 ## Table of contents
 
-### Type aliases
+### Type Aliases
 
 - [ObjectKeysDefined](types_object_keys_internal.md#objectkeysdefined)
 - [ObjectKeysOption](types_object_keys_internal.md#objectkeysoption)
@@ -14,7 +14,7 @@
 - [ObjectKeysUndefined](types_object_keys_internal.md#objectkeysundefined)
 - [ObjectKeysWritable](types_object_keys_internal.md#objectkeyswritable)
 
-## Type aliases
+## Type Aliases
 
 ### ObjectKeysDefined
 

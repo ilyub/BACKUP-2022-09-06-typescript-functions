@@ -1,14 +1,51 @@
-import { AssertionError } from "./errors";
+import { defineFn } from "./core";
+import { ErrorArg } from "./errors";
 import * as is from "./guards";
-/**
- * Asserts that value is an array.
- *
- * @param value - Value.
- * @param error - Error.
- */
-export function array(value, error) {
+export const not = {
+    empty: (value, error) => {
+        byGuard(value, is.not.empty, error);
+    }
+};
+export const array = defineFn(
+// eslint-disable-next-line @skylib/require-jsdoc -- Ok
+(value, error) => {
     byGuard(value, is.array, error);
-}
+}, {
+    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
+    of: (value, guard, error) => {
+        byGuard(value, is.factory(is.array.of, guard), error);
+    }
+});
+export const indexedObject = defineFn(
+// eslint-disable-next-line @skylib/require-jsdoc -- Ok
+(value, error) => {
+    byGuard(value, is.indexedObject, error);
+}, {
+    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
+    of: (value, guard, error) => {
+        byGuard(value, is.factory(is.indexedObject.of, guard), error);
+    }
+});
+export const map = defineFn(
+// eslint-disable-next-line @skylib/require-jsdoc -- Ok
+(value, error) => {
+    byGuard(value, is.map, error);
+}, {
+    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
+    of: (value, keyGuard, valueGuard, error) => {
+        byGuard(value, is.factory(is.map.of, keyGuard, valueGuard), error);
+    }
+});
+export const set = defineFn(
+// eslint-disable-next-line @skylib/require-jsdoc -- Ok
+(value, error) => {
+    byGuard(value, is.set, error);
+}, {
+    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
+    of: (value, guard, error) => {
+        byGuard(value, is.factory(is.set.of, guard), error);
+    }
+});
 /**
  * Asserts that value is a boolean.
  *
@@ -30,13 +67,7 @@ export function byGuard(value, guard, error) {
         // Valid
     }
     else
-        switch (typeof error) {
-            case "function":
-                throw error();
-            case "string":
-            case "undefined":
-                throw new AssertionError(error);
-        }
+        throw ErrorArg.toError(error);
 }
 /**
  * Asserts that value type is T.
@@ -67,15 +98,6 @@ export function enumeration(value, vo, error) {
     byGuard(value, is.factory(is.enumeration, vo), error);
 }
 /**
- * Asserts that value type is IndexedObject.
- *
- * @param value - Value.
- * @param error - Error.
- */
-export function indexedObject(value, error) {
-    byGuard(value, is.indexedObject, error);
-}
-/**
  * Asserts that value type is T.
  *
  * @param value - Value.
@@ -94,21 +116,6 @@ export function instance(value, ctor, error) {
  */
 export function instances(value, ctor, error) {
     byGuard(value, is.factory(is.instances, ctor), error);
-}
-/**
- * Asserts that value type is Map.
- *
- * @param value - Value.
- * @param error - Error.
- */
-export function map(value, error) {
-    byGuard(value, is.map, error);
-}
-/**
- * Not implemented.
- */
-export function not() {
-    throw new Error("Not implemented");
 }
 /**
  * Asserts that value type is NumStr.
@@ -136,15 +143,6 @@ export function number(value, error) {
  */
 export function object(value, error) {
     byGuard(value, is.object, error);
-}
-/**
- * Asserts that value type is Set.
- *
- * @param value - Value.
- * @param error - Error.
- */
-export function set(value, error) {
-    byGuard(value, is.set, error);
 }
 /**
  * Asserts that value is a string.
@@ -196,58 +194,9 @@ export function toBeTrue(value, error) {
  *
  * @param e - Error.
  * @returns Wrapped error.
+ * @deprecated Use ErrorArg.wrapError instead.
  */
 export function wrapError(e) {
     return () => e;
 }
-/**
- * Asserts that value type is T[].
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @param error - Error.
- */
-array.of = (value, guard, error) => {
-    byGuard(value, is.factory(is.array.of, guard), error);
-};
-/**
- * Asserts that value type is not empty.
- *
- * @param value - Value.
- * @param error - Error.
- */
-not.empty = (value, error) => {
-    byGuard(value, is.not.empty, error);
-};
-/**
- * Asserts that value type is IndexedObject\<T\>.
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @param error - Error.
- */
-indexedObject.of = (value, guard, error) => {
-    byGuard(value, is.factory(is.indexedObject.of, guard), error);
-};
-/**
- * Asserts that value type is Map\<K, V\>.
- *
- * @param value - Value.
- * @param keyGuard - Key guard.
- * @param valueGuard - Value guard.
- * @param error - Error.
- */
-map.of = (value, keyGuard, valueGuard, error) => {
-    byGuard(value, is.factory(is.map.of, keyGuard, valueGuard), error);
-};
-/**
- * Asserts that value type is Set\<T\>.
- *
- * @param value - Value.
- * @param guard - Guard for type T.
- * @param error - Error.
- */
-set.of = (value, guard, error) => {
-    byGuard(value, is.factory(is.set.of, guard), error);
-};
 //# sourceMappingURL=assertions.js.map

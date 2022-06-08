@@ -1,10 +1,7 @@
+/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
-import { Accumulator } from "./Accumulator";
-import * as a from "./array";
-import * as assert from "./assertions";
 import * as is from "./guards";
-import * as reflect from "./reflect";
-export { _entries as entries };
+import * as as from "./inline-assertions";
 /**
  * Typed version of Object.assign.
  *
@@ -21,6 +18,7 @@ export const assign = Object.assign;
  * @param descriptor - Descriptor.
  */
 export const defineProperty = Object.defineProperty.bind(Object);
+export const entries = Object.entries;
 export const extend = Object.assign;
 export const fromEntries = extend(
 /**
@@ -29,6 +27,7 @@ export const fromEntries = extend(
  * @param entries - Entries.
  * @returns Object.
  */
+// eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
 (entries) => {
     const result = {};
     for (const entry of entries)
@@ -41,7 +40,8 @@ export const fromEntries = extend(
      * @param entries - Entries.
      * @returns Object.
      */
-    exhaustive(entries) {
+    // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
+    exhaustive: (entries) => {
         const result = {};
         for (const entry of entries)
             result[entry[0]] = entry[1];
@@ -68,7 +68,7 @@ export function clone(obj) {
  * @returns _True_ if every object property satisfies condition, _false_ otherwise.
  */
 export function every(obj, predicate) {
-    return _entries(obj).every(([key, value]) => predicate(value, key));
+    return entries(obj).every(([key, value]) => predicate(value, key));
 }
 /**
  * Filters object by predicate.
@@ -79,7 +79,7 @@ export function every(obj, predicate) {
  */
 export function filter(obj, predicate) {
     const result = {};
-    for (const [key, value] of _entries(obj))
+    for (const [key, value] of entries(obj))
         if (predicate(value, key))
             result[key] = value;
     return result;
@@ -93,19 +93,10 @@ export function filter(obj, predicate) {
 export function freeze(obj) {
     return obj;
 }
-/**
- * Returns object property.
- *
- * @param obj - Object.
- * @param key - Key.
- * @param guard - Guard for type T.
- * @returns Object property if its type is T.
- * @throws AssertionError otherwise.
- */
-export function get(obj, key, guard) {
-    const value = reflect.get(obj, key);
-    assert.byGuard(value, guard);
-    return value;
+export function get(obj, key, guard = is.unknown, defVal) {
+    var _a;
+    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+    return as.byGuard((_a = obj[key]) !== null && _a !== void 0 ? _a : defVal, guard);
 }
 /**
  * Returns object prototype.
@@ -135,23 +126,7 @@ export function hasOwnProp(key, obj) {
  * @returns New object.
  */
 export function map(obj, callback) {
-    return fromEntries.exhaustive(_entries(obj).map(([key, value]) => [key, callback(value, key)]));
-}
-/**
- * Merges objects.
- * If more than one object has the same key, respective values are combined into array.
- *
- * @param objects - Objects.
- * @returns Merged object.
- */
-export function merge(...objects) {
-    const result = new Accumulator();
-    for (const obj of objects)
-        for (const [key, value] of _entries(obj))
-            result.push(key, value);
-    return fromEntries(a
-        .fromIterable(result)
-        .map(([key, arr]) => [key, arr.length === 1 ? arr[0] : arr]));
+    return fromEntries.exhaustive(entries(obj).map(([key, value]) => [key, callback(value, key)]));
 }
 /**
  * Removes keys from object.
@@ -192,12 +167,14 @@ export function size(obj) {
  * @returns _True_ if some object property satisfies condition, _false_ otherwise.
  */
 export function some(obj, predicate) {
-    return _entries(obj).some(([key, value]) => predicate(value, key));
+    return entries(obj).some(([key, value]) => predicate(value, key));
 }
 export function sort(obj, compareFn) {
-    return fromEntries.exhaustive(a.sort(_entries(obj), compareFn
+    const arr = entries(obj);
+    arr.sort(compareFn
         ? (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
-        : undefined));
+        : undefined);
+    return fromEntries.exhaustive(arr);
 }
 /**
  * Marks object as writable.
@@ -208,5 +185,4 @@ export function sort(obj, compareFn) {
 export function unfreeze(obj) {
     return obj;
 }
-const _entries = Object.entries;
 //# sourceMappingURL=object.js.map

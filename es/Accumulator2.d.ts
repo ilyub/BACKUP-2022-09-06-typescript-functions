@@ -45,5 +45,6 @@ export declare class Accumulator2<K extends PropertyKey, L extends PropertyKey, 
 }
 export declare namespace Accumulator2 {
     type Entry<K extends PropertyKey, L extends PropertyKey, T> = readonly [K, L, readonly T[]];
+    type Locked<K extends PropertyKey, L extends PropertyKey, T> = Omit<Readonly<Accumulator2<K, L, T>>, "push" | "unshift">;
 }
 //# sourceMappingURL=Accumulator2.d.ts.map

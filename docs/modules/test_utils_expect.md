@@ -9,7 +9,7 @@
 - [ExpectFromMatcher](../interfaces/test_utils_expect.ExpectFromMatcher.md)
 - [ExpectReturnType](../interfaces/test_utils_expect.ExpectReturnType.md)
 
-### Type aliases
+### Type Aliases
 
 - [Matcher](test_utils_expect.md#matcher)
 - [MatcherParameters](test_utils_expect.md#matcherparameters)
@@ -25,7 +25,7 @@
 - [executionTimeToBe](test_utils_expect.md#executiontimetobe)
 - [toBeSameAs](test_utils_expect.md#tobesameas)
 
-## Type aliases
+## Type Aliases
 
 ### Matcher
 
@@ -91,7 +91,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `got` | `unknown` |
-| `...args` | [expected: number] |
+| `...args` | [expected: number, precision?: number] |
 
 #### Returns
 

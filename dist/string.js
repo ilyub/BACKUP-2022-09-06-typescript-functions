@@ -1,10 +1,78 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unpadMultiline = exports.ucFirst = exports.trimTrailingEmptyLines = exports.trimStart = exports.trimLeadingEmptyLines = exports.trimEnd = exports.trailingSpaces = exports.singleLine = exports.replaceAll = exports.multiline = exports.lines = exports.leadingSpaces = exports.lcFirst = exports.filter = exports.empty = exports.detectEol = exports.path = void 0;
+exports.unpadMultiline = exports.ucFirst = exports.trimTrailingEmptyLines = exports.trimStart = exports.trimLeadingEmptyLines = exports.trimEnd = exports.trailingSpaces = exports.singleLine = exports.replaceAll = exports.multiline = exports.lines = exports.leadingSpaces = exports.lcFirst = exports.escapeRegExpSpecialChars = exports.empty = exports.detectEol = exports.path = void 0;
 const tslib_1 = require("tslib");
-const a = tslib_1.__importStar(require("./array"));
-const module_definition_1 = require("./module-definition");
-const regexp = tslib_1.__importStar(require("./regexp"));
+const core_1 = require("./core");
+const as = tslib_1.__importStar(require("./inline-assertions"));
+exports.path = (0, core_1.evaluate)(() => {
+    return {
+        addLeadingSlash,
+        addTrailingSlash,
+        canonicalize,
+        join,
+        removeLeadingSlash,
+        removeTrailingSlash
+    };
+    /**
+     * Adds leading slash.
+     *
+     * @param path - Path.
+     * @returns New string with leading slash added.
+     */
+    // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
+    function addLeadingSlash(path) {
+        return `/${removeLeadingSlash(path)}`;
+    }
+    /**
+     * Adds trailing slash.
+     *
+     * @param path - Path.
+     * @returns New string with trailing slash added.
+     */
+    // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
+    function addTrailingSlash(path) {
+        return `${removeTrailingSlash(path)}/`;
+    }
+    /**
+     * Canonicalizes path.
+     *
+     * @param path - Path.
+     * @returns Canonical path.
+     */
+    // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
+    function canonicalize(path) {
+        return path.replace(/[/\\]+/gu, "/");
+    }
+    /**
+     * Creates path from parts.
+     *
+     * @param parts - Parts.
+     * @returns Path.
+     */
+    function join(...parts) {
+        return canonicalize(parts.join("/"));
+    }
+    /**
+     * Removes leading slash.
+     *
+     * @param path - Path.
+     * @returns New string with leading slash removed.
+     */
+    // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
+    function removeLeadingSlash(path) {
+        return canonicalize(path).replace(/^\//u, "");
+    }
+    /**
+     * Removes trailing slash.
+     *
+     * @param path - Path.
+     * @returns New string with trailing slash removed.
+     */
+    // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
+    function removeTrailingSlash(path) {
+        return canonicalize(path).replace(/\/$/u, "");
+    }
+});
 /**
  * Detects EOL sequence.
  *
@@ -26,16 +94,15 @@ function empty(str) {
 }
 exports.empty = empty;
 /**
- * Filters string.
+ * Escapes regular expression special characters.
  *
  * @param str - String.
- * @param predicate - Predicate.
- * @returns Filtered string.
+ * @returns Escaped string.
  */
-function filter(str, predicate) {
-    return a.fromString(str).filter(predicate).join("");
+function escapeRegExpSpecialChars(str) {
+    return str.replace(/[$()*+.?[\\\]^{|}]/gu, "\\$&").replace(/-/gu, "\\x2d");
 }
-exports.filter = filter;
+exports.escapeRegExpSpecialChars = escapeRegExpSpecialChars;
 /**
  * Converts first letter to lower case.
  *
@@ -85,8 +152,9 @@ exports.multiline = multiline;
  * @returns New string with replacements done.
  */
 function replaceAll(str, search, replace) {
+    return str.replace(
     // eslint-disable-next-line security/detect-non-literal-regexp -- Ok
-    return str.replace(new RegExp(regexp.escapeString(search), "gu"), replace);
+    new RegExp(escapeRegExpSpecialChars(search), "gu"), replace);
 }
 exports.replaceAll = replaceAll;
 /**
@@ -126,7 +194,9 @@ exports.trimEnd = trimEnd;
  * @returns Trimmed string.
  */
 function trimLeadingEmptyLines(str) {
-    return a.last(lines(leadingSpaces(str))) + trimStart(str);
+    const leadingLines = lines(leadingSpaces(str));
+    // eslint-disable-next-line unicorn/prefer-at -- Ok
+    return as.not.empty(leadingLines[leadingLines.length - 1]) + trimStart(str);
 }
 exports.trimLeadingEmptyLines = trimLeadingEmptyLines;
 /**
@@ -146,7 +216,8 @@ exports.trimStart = trimStart;
  * @returns Trimmed string.
  */
 function trimTrailingEmptyLines(str) {
-    return trimEnd(str) + a.first(lines(trailingSpaces(str)));
+    const trailingLines = lines(trailingSpaces(str));
+    return trimEnd(str) + as.not.empty(trailingLines[0]);
 }
 exports.trimTrailingEmptyLines = trimTrailingEmptyLines;
 /**
@@ -168,76 +239,8 @@ exports.ucFirst = ucFirst;
 function unpadMultiline(str) {
     const matches = /^(?:\n|\r\n)\s+/u.exec(str);
     return matches
-        ? replaceAll(str.trim(), a.first(matches), detectEol(str))
+        ? replaceAll(str.trim(), as.not.empty(matches[0]), detectEol(str))
         : str;
 }
 exports.unpadMultiline = unpadMultiline;
-const _path = (0, module_definition_1.defineFn)(
-/**
- * Not implemented.
- */
-() => {
-    throw new Error("Not implemented");
-}, {
-    /**
-     * Adds leading slash.
-     *
-     * @param this - No this.
-     * @param path - Path.
-     * @returns New string with leading slash added.
-     */
-    addLeadingSlash(path) {
-        return `/${_path.removeLeadingSlash(path)}`;
-    },
-    /**
-     * Adds trailing slash.
-     *
-     * @param this - No this.
-     * @param path - Path.
-     * @returns New string with trailing slash added.
-     */
-    addTrailingSlash(path) {
-        return `${_path.removeTrailingSlash(path)}/`;
-    },
-    /**
-     * Canonicalizes path.
-     *
-     * @param this - No this.
-     * @param path - Path.
-     * @returns Canonical path.
-     */
-    canonicalize(path) {
-        return path.replace(/[/\\]+/gu, "/");
-    },
-    /**
-     * Creates path from parts.
-     *
-     * @param parts - Parts.
-     * @returns Path.
-     */
-    join(...parts) {
-        return _path.canonicalize(parts.join("/"));
-    },
-    /**
-     * Removes leading slash.
-     *
-     * @param this - No this.
-     * @param path - Path.
-     * @returns New string with leading slash removed.
-     */
-    removeLeadingSlash(path) {
-        return _path.canonicalize(path).replace(/^\//u, "");
-    },
-    /**
-     * Removes trailing slash.
-     *
-     * @param this - No this.
-     * @param path - Path.
-     * @returns New string with trailing slash removed.
-     */
-    removeTrailingSlash(path) {
-        return _path.canonicalize(path).replace(/\/$/u, "");
-    }
-});
-exports.path = _path;
 //# sourceMappingURL=string.js.map

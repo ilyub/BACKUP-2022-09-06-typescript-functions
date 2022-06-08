@@ -21,19 +21,19 @@
 
 ### ceil
 
-• `Const` **ceil**: (`value`: `number`, `precision`: `number`) => `number` & { `step`: (`value`: `number`, `step`: `number`, `from`: `number`) => `number`  }
+• `Const` **ceil**: (`value`: `number`, `precision`: `number`) => `number` & `Readonly`<{ `step`: (`value`: `number`, `step`: `number`, `from`: `number`) => `number`  }\>
 
 ___
 
 ### floor
 
-• `Const` **floor**: (`value`: `number`, `precision`: `number`) => `number` & { `step`: (`this`: `void`, `value`: `number`, `step`: `number`, `from`: `number`) => `number`  }
+• `Const` **floor**: (`value`: `number`, `precision`: `number`) => `number` & `Readonly`<{ `step`: (`value`: `number`, `step`: `number`, `from`: `number`) => `number`  }\>
 
 ___
 
 ### round
 
-• `Const` **round**: (`value`: `number`, `precision`: `number`) => `number` & { `step`: (`this`: `void`, `value`: `number`, `step`: `number`, `from`: `number`) => `number`  }
+• `Const` **round**: (`value`: `number`, `precision`: `number`) => `number` & `Readonly`<{ `step`: (`value`: `number`, `step`: `number`, `from`: `number`) => `number`  }\>
 
 ## Functions
 

@@ -2,7 +2,7 @@ import { json } from "..";
 import { matchers as functionsMatchers } from "./expect";
 import "jest-extended";
 import matchers from "jest-extended/all";
-export { clock, installFakeTimer, run, setRandomSystemTime } from "./fake-timers";
+export * from "./fake-timers";
 /**
  * Jest reset.
  */

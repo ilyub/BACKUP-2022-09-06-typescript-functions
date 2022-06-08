@@ -41,6 +41,7 @@ export declare function pipe<V, A, B, R>(value: V, callback1: PipeCallback<V, A>
  *
  * @param callback - Callback.
  * @returns The result of callback execution.
+ * @deprecated Use "evaluate" instead.
  */
 export declare function run<T>(callback: Sync<T>): T;
 /**
@@ -48,6 +49,7 @@ export declare function run<T>(callback: Sync<T>): T;
  *
  * @param mixed - Promise or async function.
  * @returns The result of callback execution.
+ * @deprecated Use "evaluate" instead.
  */
 export declare function run<T>(mixed: AsyncPromise<T>): Promise<T>;
 //# sourceMappingURL=function.d.ts.map
