@@ -75,7 +75,7 @@ module.exports = {
     {
       message: "Unsafe function",
       selector:
-        "CallExpression[callee.object.name=/^o|reflect$/u][callee.property.name=get]"
+        "CallExpression[callee.object.name=/^(?:o|reflect)$/u][callee.property.name=get]"
     },
     {
       message: 'Use "a.first" instead',
