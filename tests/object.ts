@@ -59,12 +59,14 @@ test("fromEntries.exhaustive", () => {
 });
 
 test("get", () => {
-  // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/config update
+  // eslint-disable-next-line no-restricted-syntax -- Ok
+  expect(o.get({ a: 1 }, "a")).toBe(1);
+  // eslint-disable-next-line no-restricted-syntax -- Ok
   expect(o.get({ a: 1 }, "a", is.number)).toBe(1);
-  // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/config update
-  expect(o.get({}, "a", is.number, 2)).toBe(2);
-  // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/config update
-  expect(() => o.get({ a: 1 }, "a", is.string)).toThrow(AssertionError);
+  // eslint-disable-next-line no-restricted-syntax -- Ok
+  expect(o.get({}, "a", is.number, 1)).toBe(1);
+  // eslint-disable-next-line no-restricted-syntax -- Ok
+  expect(() => o.get({ a: "" }, "a", is.number)).toThrow(AssertionError);
 });
 
 test("getPrototypeOf", () => {

@@ -41,12 +41,14 @@ test("defineMetadataKey", () => {
 });
 
 test("get", () => {
-  // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/config update
+  // eslint-disable-next-line no-restricted-syntax -- Ok
+  expect(reflect.get({ a: 1 }, "a")).toBe(1);
+  // eslint-disable-next-line no-restricted-syntax -- Ok
   expect(reflect.get({ a: 1 }, "a", is.number)).toBe(1);
-  // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/config update
+  // eslint-disable-next-line no-restricted-syntax -- Ok
   expect(reflect.get({}, "a", is.number, 1)).toBe(1);
-  // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/config update
-  expect(() => reflect.get({ a: 1 }, "a", is.string)).toThrow(AssertionError);
+  // eslint-disable-next-line no-restricted-syntax -- Ok
+  expect(() => reflect.get({ a: "" }, "a", is.number)).toThrow(AssertionError);
 });
 
 test("getMetadata", () => {
