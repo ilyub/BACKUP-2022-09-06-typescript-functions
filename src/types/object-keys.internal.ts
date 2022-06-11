@@ -1,3 +1,4 @@
+import type { PickKeys } from "./object";
 import type { Extends } from "ts-toolbelt/out/Any/Extends";
 import type { If } from "ts-toolbelt/out/Any/If";
 import type { FilterKeys } from "ts-toolbelt/out/Object/FilterKeys";
@@ -42,11 +43,7 @@ export type ObjectKeysUndefined<
   T extends object,
   C extends ObjectKeysOption,
   D extends keyof T
-> = If<
-  Extends<"undefined", C>,
-  Exclude<keyof T, FilterKeys<T, undefined, "<-extends">>,
-  D
->;
+> = If<Extends<"undefined", C>, PickKeys<T, undefined, "<-extends">, D>;
 
 export type ObjectKeysWritable<
   T extends object,
