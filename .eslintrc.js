@@ -65,6 +65,8 @@ module.exports = {
     "boundaries/no-unknown-files": "warn"
   },
   settings: {
+    // eslint-disable-next-line no-warning-comments -- Wait for @skylib/config update
+    // fixme
     "boundaries/elements": [
       {
         mode: "file",
@@ -115,6 +117,8 @@ module.exports = {
   }
 };
 
+// eslint-disable-next-line no-warning-comments -- Wait for @skylib/config update
+// fixme
 function createRules(type, ...args) {
   const captures = {};
 

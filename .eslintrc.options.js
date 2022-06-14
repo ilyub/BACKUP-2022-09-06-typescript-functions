@@ -2,7 +2,7 @@ module.exports = {
   consistentImport: [
     { sourcePattern: "@sinonjs/fake-timers", type: "wildcard" },
     {
-      localName: "matchers",
+      localName: "jestExtendedMatchers",
       sourcePattern: "jest-extended/all",
       type: "default"
     },

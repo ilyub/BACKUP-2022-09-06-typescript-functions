@@ -1,7 +1,7 @@
-import { matchers as functionsMatchers } from "./expect";
+import { matchers } from "./expect";
 import { error, warn } from "./jest.internal";
 import "jest-extended";
-import matchers from "jest-extended/all";
+import jestExtendedMatchers from "jest-extended/all";
 import type { unknowns } from "..";
 
 /**
@@ -15,8 +15,8 @@ export function jestReset(): void {
  * Jest setup.
  */
 export function jestSetup(): void {
+  expect.extend(jestExtendedMatchers);
   expect.extend(matchers);
-  expect.extend(functionsMatchers);
   jest.spyOn(console, "error").mockImplementation(errorMock);
   jest.spyOn(console, "warn").mockImplementation(warnMock);
   jestReset();
