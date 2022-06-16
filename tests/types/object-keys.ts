@@ -1,11 +1,11 @@
 import type {
-  numberU,
   DefinedKeys,
   ReadonlyDefinedKeys,
   ReadonlyUndefinedKeys,
   UndefinedKeys,
   WritableDefindKeys,
-  WritableUndefindKeys
+  WritableUndefindKeys,
+  numberU
 } from "@";
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
 
@@ -14,9 +14,13 @@ interface TestInterface {
   readonly ro?: number;
   readonly rou?: numberU;
   readonly ru: numberU;
+  // eslint-disable-next-line no-restricted-syntax -- Ok
   w: number;
+  // eslint-disable-next-line no-restricted-syntax -- Ok
   wo?: number;
+  // eslint-disable-next-line no-restricted-syntax -- Ok
   wou?: numberU;
+  // eslint-disable-next-line no-restricted-syntax -- Ok
   wu: numberU;
 }
 

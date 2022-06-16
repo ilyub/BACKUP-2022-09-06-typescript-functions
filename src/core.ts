@@ -1,10 +1,10 @@
 /* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
 
 import type {
-  NumStr,
-  Rec,
   AsyncPromise,
   AsyncPromiseSync,
+  NumStr,
+  Rec,
   Sync
 } from "./types";
 

@@ -76,7 +76,7 @@ export const indexedObject: {
    * @param error - Error.
    * @returns Void.
    */
-  of: <T>(
+  readonly of: <T>(
     value: unknown,
     guard: is.Guard<T>,
     error?: ErrorArg

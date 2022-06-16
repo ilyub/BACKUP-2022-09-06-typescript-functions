@@ -209,7 +209,6 @@ export function trimEnd(str: string): string {
 export function trimLeadingEmptyLines(str: string): string {
   const leadingLines = lines(leadingSpaces(str));
 
-  // eslint-disable-next-line unicorn/prefer-at -- Ok
   return as.not.empty(leadingLines[leadingLines.length - 1]) + trimStart(str);
 }
 

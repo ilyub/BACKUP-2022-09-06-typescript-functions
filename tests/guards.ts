@@ -1,4 +1,4 @@
-import { fn, is, createValidationObject } from "@";
+import { createValidationObject, fn, is } from "@";
 
 test("and", () => {
   expect(is.and(undefined, is.booleanU, is.numberU)).toBeTrue();

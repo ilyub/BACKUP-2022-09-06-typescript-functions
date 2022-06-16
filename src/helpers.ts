@@ -6,7 +6,7 @@ import * as as from "./inline-assertions";
 import * as o from "./object";
 import * as programFlow from "./program-flow";
 import * as reflect from "./reflect";
-import type { unknowns, Join2 } from "./types";
+import type { Join2, unknowns } from "./types";
 
 export type Facade<I, E = unknown> = E & FacadeOwnMethods<I> & I;
 

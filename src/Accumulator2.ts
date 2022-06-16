@@ -34,9 +34,9 @@ export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
   public get(key1: K, key2: L): readonly T[];
 
   public get(key1: K, key2?: L): ReadonlyMap<L, readonly T[]> | readonly T[] {
-    return is.not.empty(key2)
-      ? this.map.get(key1)?.get(key2) ?? []
-      : this.map.get(key1) ?? new Map();
+    const map = this.map.get(key1) ?? new Map<L, T[]>();
+
+    return is.not.empty(key2) ? map.get(key2) ?? [] : map;
   }
 
   /**

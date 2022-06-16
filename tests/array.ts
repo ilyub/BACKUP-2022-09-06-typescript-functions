@@ -1,7 +1,7 @@
-import { a, AssertionError } from "@";
+import { AssertionError, a } from "@";
 
 interface Reducible {
-  id: unknown;
+  readonly id: unknown;
 }
 
 function reduce(obj: Reducible): unknown {

@@ -1,5 +1,5 @@
-import { AssertionError, fn, is, createValidationObject, as } from "@";
-import type { unknowns, Callable } from "@";
+import { AssertionError, as, createValidationObject, fn, is } from "@";
+import type { Callable, unknowns } from "@";
 
 function createSubtest(inlineAssertion: Callable, ...args: unknowns) {
   return (value: unknown) => (): void => {

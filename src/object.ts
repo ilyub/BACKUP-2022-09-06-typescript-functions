@@ -8,13 +8,13 @@ import type {
   Entry,
   IndexedObject,
   NumStr,
-  objectU,
+  OptionalStyle,
   PartialRecord,
   Rec,
+  StrictOmit,
   Writable,
   WritablePartialRecord,
-  OptionalStyle,
-  StrictOmit
+  objectU
 } from "./types";
 
 /**
@@ -183,7 +183,9 @@ export interface CompareFn<T extends object> {
 
 export interface Descriptor<T, K extends keyof T = keyof T>
   extends PropertyDescriptor {
+  // eslint-disable-next-line no-restricted-syntax -- Ok
   readonly configurable?: boolean;
+  // eslint-disable-next-line no-restricted-syntax -- Ok
   readonly enumerable?: boolean;
   /**
    * Property getter.
@@ -200,6 +202,7 @@ export interface Descriptor<T, K extends keyof T = keyof T>
    */
   readonly set?: (this: T, value: T[K]) => void;
   readonly value?: T[K];
+  // eslint-disable-next-line no-restricted-syntax -- Ok
   readonly writable?: boolean;
 }
 

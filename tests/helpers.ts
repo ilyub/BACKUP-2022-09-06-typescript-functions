@@ -1,23 +1,27 @@
 import {
-  fn,
-  is,
   createFacade,
   createValidationObject,
+  fn,
+  is,
+  o,
   onDemand,
+  reflect,
   safeAccess,
   wait,
-  wrapProxyHandler,
-  o,
-  reflect
+  wrapProxyHandler
 } from "@";
 import * as testUtils from "@/test-utils";
+import type { Writable } from "@";
 
 testUtils.installFakeTimer();
 
 test("createFacade: Extension", () => {
   const extension: Extension = { pow: x => x * x };
 
-  const facade = createFacade<object, Extension>("sample-facade", extension);
+  const facade = createFacade<object, Writable<Extension>>(
+    "sample-facade",
+    extension
+  );
 
   {
     expect(facade.pow(1)).toBe(1);
@@ -33,7 +37,7 @@ test("createFacade: Extension", () => {
   }
 
   interface Extension {
-    pow: (x: number) => number;
+    readonly pow: (x: number) => number;
   }
 });
 
@@ -77,7 +81,7 @@ test("createFacade: Object", () => {
   expect(reflect.set(facade, "value", 2)).toBeTrue();
 
   interface Facade {
-    value: number;
+    readonly value: number;
   }
 });
 

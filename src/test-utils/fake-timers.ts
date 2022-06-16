@@ -1,4 +1,4 @@
-import { onDemand, assert, a, as, evaluate } from "..";
+import { a, as, assert, evaluate, onDemand } from "..";
 import * as fakeTimers from "@sinonjs/fake-timers";
 import * as _ from "@skylib/lodash-commonjs-es";
 import type { Async } from "..";

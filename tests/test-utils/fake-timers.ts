@@ -1,4 +1,4 @@
-import { a, wait, num } from "@";
+import { a, num, wait } from "@";
 import * as testUtils from "@/test-utils";
 
 testUtils.installFakeTimer();

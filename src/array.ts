@@ -6,7 +6,7 @@ import * as assert from "./assertions";
 import * as is from "./guards";
 import * as as from "./inline-assertions";
 import * as _ from "@skylib/lodash-commonjs-es";
-import type { numbers, strings, unknowns, Writable } from "./types";
+import type { Writable, numbers, strings, unknowns } from "./types";
 
 export type KeyOrReduce<T extends object> = PropertyKey | Reduce<T>;
 

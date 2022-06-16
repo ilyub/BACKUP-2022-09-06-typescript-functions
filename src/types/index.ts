@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax -- Ok */
+
 export * from "./configurable";
 
 export * from "./core";
