@@ -8,7 +8,6 @@ export const clock = onDemand(() =>
 );
 
 export interface Options {
-  // eslint-disable-next-line no-restricted-syntax -- Ok
   readonly shouldAdvanceTime?: boolean;
 }
 

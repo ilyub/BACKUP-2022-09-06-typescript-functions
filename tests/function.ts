@@ -1,5 +1,9 @@
 import { fn } from "@";
 
+test("factoryFromValue", () => {
+  expect(fn.factoryFromValue(1)()).toBe(1);
+});
+
 test("identity", () => {
   expect(fn.identity(1)).toBe(1);
   expect(fn.identity(2)).toBe(2);
@@ -25,8 +29,4 @@ test("run", async () => {
   async function resolve(): Promise<void> {
     await Promise.resolve();
   }
-});
-
-test("factoryFromValue", () => {
-  expect(fn.factoryFromValue(1)()).toBe(1);
 });
