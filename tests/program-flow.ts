@@ -17,21 +17,21 @@ test("setInterval, clearInterval", async () => {
 
     {
       await wait(1000);
-      expect(callback1).not.toHaveBeenCalled();
-      expect(callback2).not.toHaveBeenCalled();
+      expect(callback1).mockCallsToBe();
+      expect(callback2).mockCallsToBe();
     }
 
     {
       await wait(1000);
-      expect(callback1).toHaveBeenCalledTimes(1);
-      expect(callback2).toHaveBeenCalledTimes(1);
+      expect(callback1).mockCallsToBe([]);
+      expect(callback2).mockCallsToBe([]);
     }
 
     {
       programFlow.clearInterval(handler1);
       await wait(2000);
-      expect(callback1).toHaveBeenCalledTimes(1);
-      expect(callback2).toHaveBeenCalledTimes(2);
+      expect(callback1).mockCallsToBe();
+      expect(callback2).mockCallsToBe([]);
     }
 
     programFlow.clearInterval(handler2);
@@ -53,21 +53,21 @@ test("setTimeout, clearTimeout", async () => {
 
     {
       await wait(1000);
-      expect(callback1).not.toHaveBeenCalled();
-      expect(callback2).not.toHaveBeenCalled();
+      expect(callback1).mockCallsToBe();
+      expect(callback2).mockCallsToBe();
     }
 
     {
       programFlow.clearTimeout(handlers1);
       await wait(1000);
-      expect(callback1).not.toHaveBeenCalled();
-      expect(callback2).toHaveBeenCalledTimes(1);
+      expect(callback1).mockCallsToBe();
+      expect(callback2).mockCallsToBe([]);
     }
 
     {
       await wait(1000);
-      expect(callback1).not.toHaveBeenCalled();
-      expect(callback2).toHaveBeenCalledTimes(1);
+      expect(callback1).mockCallsToBe();
+      expect(callback2).mockCallsToBe();
     }
 
     programFlow.clearTimeout(handlers2);

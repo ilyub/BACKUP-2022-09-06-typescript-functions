@@ -1,5 +1,4 @@
-import { matchers } from "./expect";
-import { error, warn } from "./jest.internal";
+import { error, matchers, warn } from "./jest.internal";
 import "jest-extended";
 import jestExtendedMatchers from "jest-extended/all";
 import type { unknowns } from "..";

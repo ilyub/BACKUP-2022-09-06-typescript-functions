@@ -13,8 +13,7 @@ test("jestSetup: error", () => {
     // eslint-disable-next-line no-console -- Ok
     console.error("Test error");
   }).toThrow(new Error("Console error"));
-  expect(error).toHaveBeenCalledTimes(1);
-  expect(error).toHaveBeenCalledWith("Test error");
+  expect(error).mockCallsToBe(["Test error"]);
 });
 
 test("jestSetup: warn", () => {
@@ -25,6 +24,5 @@ test("jestSetup: warn", () => {
     // eslint-disable-next-line no-console -- Ok
     console.warn("Test warning");
   }).toThrow(new Error("Console warn"));
-  expect(warn).toHaveBeenCalledTimes(1);
-  expect(warn).toHaveBeenCalledWith("Test warning");
+  expect(warn).mockCallsToBe(["Test warning"]);
 });

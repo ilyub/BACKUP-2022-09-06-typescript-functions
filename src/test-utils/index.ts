@@ -1,8 +1,10 @@
-// eslint-disable-next-line no-restricted-syntax -- Ok
+// eslint-disable-next-line no-warning-comments -- Wait for @skylib/eslint-plugin update
+// fixme - Disable individual restricted syntax
+
+/* eslint-disable no-restricted-syntax -- Ok*/
+
+export * from "./expect";
+
 export * from "./fake-timers";
 
-// eslint-disable-next-line no-restricted-syntax -- Ok
 export * from "./jest";
-
-// eslint-disable-next-line @skylib/only-export-name -- Ok
-export type { ExpectFromMatcher } from "./expect";

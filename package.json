@@ -42,10 +42,12 @@
     "@skylib/typescript-types": "^1.0.0"
   },
   "peerDependencies": {
+    "@jest/expect-utils": "*",
     "@sinonjs/fake-timers": ">=9",
     "@skylib/lodash-commonjs-es": ">=0",
     "@types/sinonjs__fake-timers": ">=8",
     "jest-extended": ">=2",
+    "jest-matcher-utils": "*",
     "reflect-metadata": ">=0",
     "ts-toolbelt": ">=9"
   },

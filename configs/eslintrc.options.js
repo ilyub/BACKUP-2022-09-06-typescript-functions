@@ -93,9 +93,9 @@ module.exports = {
         "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=2]"
     },
     {
-      message: 'Use "not.toHaveBeenCalled" instead',
+      message: 'Use "mockCallsToBe" instead',
       selector:
-        "CallExpression[callee.property.name=toHaveBeenCalledTimes] > Literal.arguments:first-child[value=0]"
+        "Identifier[name=/^(?:mockClear|toHaveBeenCalled|toHaveBeenCalledTimes|toHaveBeenCalledWith)$/u]"
     },
     {
       message: "Unsafe function",
