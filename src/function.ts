@@ -1,6 +1,12 @@
 import * as is from "./guards";
 import * as _ from "@skylib/lodash-commonjs-es";
-import type { AsyncPromise, AsyncPromiseSync, Callable, Sync } from "./types";
+import type {
+  AsyncPromise,
+  AsyncPromiseSync,
+  Callable,
+  Sync,
+  unknowns
+} from "./types";
 
 export const noop: Callable = _.noop.bind(_);
 
@@ -17,6 +23,16 @@ export interface PipeCallback<V = unknown, R = unknown> {
 export type PipeCallbacks = readonly PipeCallback[];
 
 /**
+ * Creates factory function from value.
+ *
+ * @param value - Value.
+ * @returns Factory function.
+ */
+export function factoryFromValue<T>(value: T): () => T {
+  return () => value;
+}
+
+/**
  * Identity function.
  *
  * @param value - Value.
@@ -24,6 +40,16 @@ export type PipeCallbacks = readonly PipeCallback[];
  */
 export function identity<T>(value: T): T {
   return value;
+}
+
+/**
+ * Noop function.
+ *
+ * @param _args - Arguments.
+ * @returns _True_.
+ */
+export function noopTrue(..._args: unknowns): true {
+  return true;
 }
 
 /**

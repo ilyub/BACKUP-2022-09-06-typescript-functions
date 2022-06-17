@@ -6,6 +6,10 @@ test("identity", () => {
   expect(fn.identity(3)).toBe(3);
 });
 
+test("noopTrue", () => {
+  expect(fn.noopTrue(1)).toBe(true);
+});
+
 test("pipe", () => {
   expect(fn.pipe(10_000, Math.log10, Math.sqrt)).toBe(2);
 });
@@ -21,4 +25,8 @@ test("run", async () => {
   async function resolve(): Promise<void> {
     await Promise.resolve();
   }
+});
+
+test("factoryFromValue", () => {
+  expect(fn.factoryFromValue(1)()).toBe(1);
 });
