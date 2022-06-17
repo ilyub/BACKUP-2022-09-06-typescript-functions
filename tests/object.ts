@@ -143,6 +143,14 @@ test("removeUndefinedKeys", () => {
   expect(o.removeUndefinedKeys(obj)).toStrictEqual(expected);
 });
 
+test("set", () => {
+  const obj = { a: 1 };
+
+  // eslint-disable-next-line no-restricted-syntax -- Ok
+  o.set(obj, "b", 2);
+  expect(obj).toStrictEqual({ a: 1, b: 2 });
+});
+
 test("size", () => {
   const symbol = Symbol("test-symbol");
 

@@ -13,6 +13,7 @@ import type {
   Rec,
   StrictOmit,
   Writable,
+  WritableIndexedObject,
   WritablePartialRecord,
   objectU
 } from "./types";
@@ -370,6 +371,18 @@ export function removeUndefinedKeys<T extends object>(
 ): OptionalStyle<T> {
   // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
   return filter(obj, is.not.empty) as OptionalStyle<T>;
+}
+
+/**
+ * Sets object property.
+ *
+ * @param obj - Object.
+ * @param key - Key.
+ * @param value - Value.
+ */
+export function set(obj: object, key: PropertyKey, value: unknown): void {
+  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
+  (obj as WritableIndexedObject)[key] = value;
 }
 
 /**
