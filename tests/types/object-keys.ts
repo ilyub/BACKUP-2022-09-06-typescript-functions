@@ -1,3 +1,5 @@
+/* skylib/eslint-plugin disable @skylib/no-restricted-syntax[prefer-readonly-property] */
+
 import type {
   DefinedKeys,
   ReadonlyDefinedKeys,
@@ -14,13 +16,9 @@ interface TestInterface {
   readonly ro?: number;
   readonly rou?: numberU;
   readonly ru: numberU;
-  // eslint-disable-next-line no-restricted-syntax -- Ok
   w: number;
-  // eslint-disable-next-line no-restricted-syntax -- Ok
   wo?: number;
-  // eslint-disable-next-line no-restricted-syntax -- Ok
   wou?: numberU;
-  // eslint-disable-next-line no-restricted-syntax -- Ok
   wu: numberU;
 }
 

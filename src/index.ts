@@ -1,6 +1,6 @@
 /* eslint-disable @skylib/export-all-name -- Ok */
 
-/* eslint-disable no-restricted-syntax -- Ok */
+/* skylib/eslint-plugin disable @skylib/no-restricted-syntax[no-export-polution] */
 
 export * as a from "./array";
 

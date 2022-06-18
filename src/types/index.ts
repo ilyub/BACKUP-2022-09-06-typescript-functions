@@ -1,7 +1,4 @@
-// eslint-disable-next-line no-warning-comments -- Wait for @skylib/eslint-plugin update
-// fixme - Disable individual restricted syntax
-
-/* eslint-disable no-restricted-syntax -- Ok */
+/* skylib/eslint-plugin disable @skylib/no-restricted-syntax[no-export-polution] */
 
 export * from "./configurable";
 

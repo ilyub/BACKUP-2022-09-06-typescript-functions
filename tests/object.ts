@@ -1,3 +1,5 @@
+/* skylib/eslint-plugin disable @skylib/no-restricted-syntax[prefer-readonly-property] */
+
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-o-get] */
 
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-o-set] */
@@ -43,7 +45,6 @@ test("freeze", () => {
 
   const obj2 = o.freeze(obj1);
 
-  // eslint-disable-next-line no-restricted-syntax -- Ok
   const typeCheck1: Equals<typeof obj1, { value: number }> = 1;
 
   const typeCheck2: Equals<typeof obj2, { readonly value: number }> = 1;
@@ -53,7 +54,6 @@ test("freeze", () => {
   expect(typeCheck2).toBe(1);
 
   interface TestInterface {
-    // eslint-disable-next-line no-restricted-syntax -- Ok
     value: number;
   }
 });
@@ -220,7 +220,6 @@ test("unfreeze", () => {
 
   const typeCheck1: Equals<typeof obj1, { readonly value: number }> = 1;
 
-  // eslint-disable-next-line no-restricted-syntax -- Ok
   const typeCheck2: Equals<typeof obj2, { value: number }> = 1;
 
   expect(obj1).toBeSameAs(obj2);
