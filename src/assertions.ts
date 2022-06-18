@@ -44,12 +44,10 @@ export const array: {
     error?: ErrorArg
   ) => asserts value is readonly T[];
 } = defineFn(
-  // eslint-disable-next-line @skylib/require-jsdoc -- Ok
   (value: unknown, error?: ErrorArg): asserts value is types.unknowns => {
     byGuard(value, is.array, error);
   },
   {
-    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
     of: <T>(
       value: unknown,
       guard: is.Guard<T>,
@@ -82,12 +80,10 @@ export const indexedObject: {
     error?: ErrorArg
   ) => asserts value is types.IndexedObject<T>;
 } = defineFn(
-  // eslint-disable-next-line @skylib/require-jsdoc -- Ok
   (value: unknown, error?: ErrorArg): asserts value is types.IndexedObject => {
     byGuard(value, is.indexedObject, error);
   },
   {
-    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
     of: <T>(
       value: unknown,
       guard: is.Guard<T>,
@@ -125,7 +121,6 @@ export const map: {
     error?: ErrorArg
   ) => asserts value is ReadonlyMap<K, V>;
 } = defineFn(
-  // eslint-disable-next-line @skylib/require-jsdoc -- Ok
   (
     value: unknown,
     error?: ErrorArg
@@ -133,7 +128,6 @@ export const map: {
     byGuard(value, is.map, error);
   },
   {
-    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
     of: <K, V>(
       value: unknown,
       keyGuard: is.Guard<K>,
@@ -167,12 +161,10 @@ export const set: {
     error?: ErrorArg
   ) => asserts value is ReadonlySet<T>;
 } = defineFn(
-  // eslint-disable-next-line @skylib/require-jsdoc -- Ok
   (value: unknown, error?: ErrorArg): asserts value is ReadonlySet<unknown> => {
     byGuard(value, is.set, error);
   },
   {
-    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
     of: <T>(
       value: unknown,
       guard: is.Guard<T>,

@@ -1,3 +1,9 @@
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-o-get] */
+
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-o-set] */
+
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-o-unfreeze] */
+
 import { AssertionError, is, o } from "@";
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
 
@@ -61,13 +67,9 @@ test("fromEntries.exhaustive", () => {
 });
 
 test("get", () => {
-  // eslint-disable-next-line no-restricted-syntax -- Ok
   expect(o.get({ a: 1 }, "a")).toBe(1);
-  // eslint-disable-next-line no-restricted-syntax -- Ok
   expect(o.get({ a: 1 }, "a", is.number)).toBe(1);
-  // eslint-disable-next-line no-restricted-syntax -- Ok
   expect(o.get({}, "a", is.number, 1)).toBe(1);
-  // eslint-disable-next-line no-restricted-syntax -- Ok
   expect(() => o.get({ a: "" }, "a", is.number)).toThrow(AssertionError);
 });
 
@@ -146,7 +148,6 @@ test("removeUndefinedKeys", () => {
 test("set", () => {
   const obj = { a: 1 };
 
-  // eslint-disable-next-line no-restricted-syntax -- Ok
   o.set(obj, "b", 2);
   expect(obj).toStrictEqual({ a: 1, b: 2 });
 });
@@ -215,7 +216,6 @@ test.each([
 test("unfreeze", () => {
   const obj1: TestInterface = { value: 1 };
 
-  // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/config update
   const obj2 = o.unfreeze(obj1);
 
   const typeCheck1: Equals<typeof obj1, { readonly value: number }> = 1;

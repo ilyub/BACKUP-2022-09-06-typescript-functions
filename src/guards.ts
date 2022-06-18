@@ -1,8 +1,12 @@
 /* eslint-disable @skylib/primary-export-only -- Wait for @skylib/eslint update */
 
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-a-fromIterable] */
 
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-entries] */
+
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
+
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-values] */
 
 import { defineFn, overload, typedef } from "./core";
 import type { ValidationObject } from "./core";

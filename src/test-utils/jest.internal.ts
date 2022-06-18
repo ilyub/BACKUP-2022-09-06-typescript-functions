@@ -1,3 +1,5 @@
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-mockCallsToBe] */
+
 import { assert } from "..";
 import { buildResult } from "./expect";
 import { isMock } from "./expect.internal";
@@ -78,7 +80,6 @@ export const matchers: {
       true
     );
 
-    // eslint-disable-next-line no-restricted-syntax -- Ok
     got.mockClear();
 
     return result;

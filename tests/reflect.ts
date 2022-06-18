@@ -1,3 +1,5 @@
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-reflect-get] */
+
 import { AssertionError, is, reflect } from "@";
 
 const mk1 = Symbol("test-metadata-key-1");
@@ -41,13 +43,9 @@ test("defineMetadataKey", () => {
 });
 
 test("get", () => {
-  // eslint-disable-next-line no-restricted-syntax -- Ok
   expect(reflect.get({ a: 1 }, "a")).toBe(1);
-  // eslint-disable-next-line no-restricted-syntax -- Ok
   expect(reflect.get({ a: 1 }, "a", is.number)).toBe(1);
-  // eslint-disable-next-line no-restricted-syntax -- Ok
   expect(reflect.get({}, "a", is.number, 1)).toBe(1);
-  // eslint-disable-next-line no-restricted-syntax -- Ok
   expect(() => reflect.get({ a: "" }, "a", is.number)).toThrow(AssertionError);
 });
 

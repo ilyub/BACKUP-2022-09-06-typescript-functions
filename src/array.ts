@@ -1,6 +1,6 @@
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-a-fromIterable] */
 
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
 
 import * as assert from "./assertions";
 import * as is from "./guards";

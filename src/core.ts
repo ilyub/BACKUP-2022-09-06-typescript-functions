@@ -1,4 +1,8 @@
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
+
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-entries] */
+
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-values] */
 
 import type {
   AsyncPromise,
@@ -29,7 +33,6 @@ export type ValidationObject<T extends PropertyKey> = ReadonlySet<T>;
 export function createValidationObject<T extends NumStr>(
   source: Rec<T, T>
 ): ValidationObject<T> {
-  // eslint-disable-next-line no-restricted-syntax -- Ok
   if (Object.entries(source).every(([key, value]) => key === String(value)))
     return new Set(Object.values(source));
 
