@@ -1,1 +1,8 @@
-module.exports = { extends: ["./.eslintrc.overrides"] };
+module.exports = {
+  extends: [
+    require.resolve("@skylib/config/src/eslintrc"),
+    "./configs/eslintrc",
+    "./.eslintrc.overrides",
+    "./.eslintrc.temp"
+  ]
+};

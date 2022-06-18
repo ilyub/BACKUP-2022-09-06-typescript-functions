@@ -4,10 +4,6 @@ const api = require("@skylib/config/src/api");
 const boundaries = require("@skylib/config/src/eslint/boundaries");
 
 module.exports = {
-  extends: [
-    require.resolve("@skylib/config/src/eslintrc"),
-    "./configs/eslintrc"
-  ],
   rules: {
     "@skylib/project/consistent-import": [
       "warn",
