@@ -63,6 +63,11 @@ test("fromIterable", () => {
   expect(arr2).not.toBeSameAs(arr1);
 });
 
+test("fromMixed", () => {
+  expect(a.fromMixed(1)).toStrictEqual([1]);
+  expect(a.fromMixed([1])).toStrictEqual([1]);
+});
+
 test("fromRange", () => {
   expect(a.fromRange(5, 7)).toStrictEqual([5, 6, 7]);
   expect(a.fromRange(5, 7, 2)).toStrictEqual([5, 7]);

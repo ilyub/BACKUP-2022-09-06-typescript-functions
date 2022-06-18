@@ -144,6 +144,16 @@ export function fromIterable<T>(iterable: Iterable<T>): T[] {
 }
 
 /**
+ * Creates array from mixed soure.
+ *
+ * @param value - Value.
+ * @returns Value if it is an array, tuple containing value otherwise.
+ */
+export function fromMixed<T>(value: T | readonly T[]): readonly T[] {
+  return is.array(value) ? value : [value];
+}
+
+/**
  * Creates array of numbers.
  *
  * @param from - Lower limit (inclusive).
