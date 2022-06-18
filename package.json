@@ -37,14 +37,14 @@
     "update-package-force": "ncu --dep dev,peer,prod --upgrade"
   },
   "devDependencies": {
-    "@skylib/config": "^1.17.0",
-    "@skylib/eslint-plugin": "^0.1.28",
+    "@skylib/config": "^1.18.0",
+    "@skylib/eslint-plugin": "^0.1.30",
     "@skylib/typescript-types": "^1.0.0"
   },
   "peerDependencies": {
     "@jest/expect-utils": "*",
     "@sinonjs/fake-timers": ">=9",
-    "@skylib/lodash-commonjs-es": ">=0",
+    "@skylib/lodash-commonjs-es": "^0.1.0",
     "@types/sinonjs__fake-timers": ">=8",
     "jest-extended": ">=2",
     "jest-matcher-utils": "*",
