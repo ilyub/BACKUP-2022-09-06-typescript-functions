@@ -48,7 +48,7 @@
     "lint-fast": "npm run lint --config .eslintrc.fast.js",
     "lint-no-fix": "set TIMING=1 & npm run lint --fix",
     "package-json-lint": "npmPkgJsonLint .",
-    "php-cs-fixer": "php-cs-fixer fix --verbose",
+    "php-cs-fixer": "echo Skip php-cs-fixer",
     "post-commit": "php node_modules/@skylib/config/src/utils/post-commit.php",
     "pre-commit": "php node_modules/@skylib/config/src/utils/pre-commit.php",
     "prepare": "husky install node_modules/@skylib/config/src/git-hooks",
