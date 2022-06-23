@@ -115,7 +115,7 @@ export function findBy<T extends object, V extends object>(
   value: V,
   keyOrReduce: KeyOrReduce<T | V>
 ): T | undefined {
-  const reduce = toReduce(keyOrReduce);
+  const reduce = mixedToReduce(keyOrReduce);
 
   const reduced = reduce(value);
 
@@ -193,7 +193,6 @@ export function get<T>(arr: readonly T[], index: number): T {
     "Invalid index"
   );
 
-  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
   return arr[index] as T;
 }
 
@@ -210,7 +209,7 @@ export function includesBy<T extends object, V extends object>(
   value: V,
   keyOrReduce: KeyOrReduce<T | V>
 ): boolean {
-  const reduce = toReduce(keyOrReduce);
+  const reduce = mixedToReduce(keyOrReduce);
 
   const reduced = reduce(value);
 
@@ -280,7 +279,7 @@ export function removeBy<T extends object, V extends object>(
   value: V,
   keyOrReduce: KeyOrReduce<T | V>
 ): T[] {
-  const reduce = toReduce(keyOrReduce);
+  const reduce = mixedToReduce(keyOrReduce);
 
   const reduced = reduce(value);
 
@@ -317,7 +316,7 @@ export function replaceBy<T extends object>(
   value: T,
   keyOrReduce: KeyOrReduce<T>
 ): T[] {
-  const reduce = toReduce(keyOrReduce);
+  const reduce = mixedToReduce(keyOrReduce);
 
   const reduced = reduce(value);
 
@@ -416,7 +415,7 @@ export function uniqueBy<T extends object>(
   arr: readonly T[],
   keyOrReduce: KeyOrReduce<T>
 ): T[] {
-  const reduce = toReduce(keyOrReduce);
+  const reduce = mixedToReduce(keyOrReduce);
 
   const seen = new Set();
 
@@ -466,10 +465,10 @@ export function unshiftOrReplaceBy<T extends object>(
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns Reduce function.
  */
-function toReduce<T extends object, V extends object = T>(
+function mixedToReduce<T extends object, V extends object = T>(
   keyOrReduce: KeyOrReduce<T | V>
 ): Reduce<T | V> {
-  return is.callable(keyOrReduce)
-    ? keyOrReduce
-    : (obj): unknown => as.indexedObject(obj)[keyOrReduce];
+  if (is.callable(keyOrReduce)) return keyOrReduce;
+
+  return (obj): unknown => as.indexedObject(obj)[keyOrReduce];
 }

@@ -127,7 +127,6 @@ export const fromEntries = extend(
 
       for (const entry of entries) result[entry[0]] = entry[1];
 
-      // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
       return result as Rec<K, V>;
     }
   }
@@ -302,7 +301,6 @@ export function get(
   guard: is.Guard = is.unknown,
   defVal?: unknown
 ): unknown {
-  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
   return as.byGuard((obj as IndexedObject)[key] ?? defVal, guard);
 }
 
@@ -358,7 +356,6 @@ export function omit<T extends object, K extends string & keyof T>(
 ): StrictOmit<T, K> {
   const excludeSet = new Set<keyof T>(exclude);
 
-  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
   return filter(obj, (_value, key) => !excludeSet.has(key)) as StrictOmit<T, K>;
 }
 
@@ -371,7 +368,6 @@ export function omit<T extends object, K extends string & keyof T>(
 export function removeUndefinedKeys<T extends object>(
   obj: T
 ): OptionalStyle<T> {
-  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
   return filter(obj, is.not.empty) as OptionalStyle<T>;
 }
 
@@ -383,7 +379,6 @@ export function removeUndefinedKeys<T extends object>(
  * @param value - Value.
  */
 export function set(obj: object, key: PropertyKey, value: unknown): void {
-  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
   (obj as WritableIndexedObject)[key] = value;
 }
 

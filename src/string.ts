@@ -2,81 +2,7 @@ import { evaluate } from "./core";
 import * as as from "./inline-assertions";
 import type { strings } from "./types";
 
-export const path = evaluate(() => {
-  return {
-    addLeadingSlash,
-    addTrailingSlash,
-    canonicalize,
-    join,
-    removeLeadingSlash,
-    removeTrailingSlash
-  } as const;
-
-  /**
-   * Adds leading slash.
-   *
-   * @param path - Path.
-   * @returns New string with leading slash added.
-   */
-  // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
-  function addLeadingSlash(path: string): string {
-    return `/${removeLeadingSlash(path)}`;
-  }
-
-  /**
-   * Adds trailing slash.
-   *
-   * @param path - Path.
-   * @returns New string with trailing slash added.
-   */
-  // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
-  function addTrailingSlash(path: string): string {
-    return `${removeTrailingSlash(path)}/`;
-  }
-
-  /**
-   * Canonicalizes path.
-   *
-   * @param path - Path.
-   * @returns Canonical path.
-   */
-  // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
-  function canonicalize(path: string): string {
-    return path.replace(/[/\\]+/gu, "/");
-  }
-
-  /**
-   * Creates path from parts.
-   *
-   * @param parts - Parts.
-   * @returns Path.
-   */
-  function join(...parts: strings): string {
-    return canonicalize(parts.join("/"));
-  }
-
-  /**
-   * Removes leading slash.
-   *
-   * @param path - Path.
-   * @returns New string with leading slash removed.
-   */
-  // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
-  function removeLeadingSlash(path: string): string {
-    return canonicalize(path).replace(/^\//u, "");
-  }
-
-  /**
-   * Removes trailing slash.
-   *
-   * @param path - Path.
-   * @returns New string with trailing slash removed.
-   */
-  // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
-  function removeTrailingSlash(path: string): string {
-    return canonicalize(path).replace(/\/$/u, "");
-  }
-});
+export { _path as path };
 
 export type Eol = "\n" | "\r\n";
 
@@ -257,3 +183,74 @@ export function unpadMultiline(str: string): string {
     ? replaceAll(str.trim(), as.not.empty(matches[0]), detectEol(str))
     : str;
 }
+
+const _path = evaluate(() => {
+  return {
+    addLeadingSlash,
+    addTrailingSlash,
+    canonicalize,
+    join,
+    removeLeadingSlash,
+    removeTrailingSlash
+  } as const;
+
+  /**
+   * Adds leading slash.
+   *
+   * @param path - Path.
+   * @returns New string with leading slash added.
+   */
+  function addLeadingSlash(path: string): string {
+    return `/${removeLeadingSlash(path)}`;
+  }
+
+  /**
+   * Adds trailing slash.
+   *
+   * @param path - Path.
+   * @returns New string with trailing slash added.
+   */
+  function addTrailingSlash(path: string): string {
+    return `${removeTrailingSlash(path)}/`;
+  }
+
+  /**
+   * Canonicalizes path.
+   *
+   * @param path - Path.
+   * @returns Canonical path.
+   */
+  function canonicalize(path: string): string {
+    return path.replace(/[/\\]+/gu, "/");
+  }
+
+  /**
+   * Creates path from parts.
+   *
+   * @param parts - Parts.
+   * @returns Path.
+   */
+  function join(...parts: strings): string {
+    return canonicalize(parts.join("/"));
+  }
+
+  /**
+   * Removes leading slash.
+   *
+   * @param path - Path.
+   * @returns New string with leading slash removed.
+   */
+  function removeLeadingSlash(path: string): string {
+    return canonicalize(path).replace(/^\//u, "");
+  }
+
+  /**
+   * Removes trailing slash.
+   *
+   * @param path - Path.
+   * @returns New string with trailing slash removed.
+   */
+  function removeTrailingSlash(path: string): string {
+    return canonicalize(path).replace(/\/$/u, "");
+  }
+});

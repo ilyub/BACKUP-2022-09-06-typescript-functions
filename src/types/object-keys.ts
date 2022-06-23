@@ -1,5 +1,3 @@
-/* eslint-disable @skylib/primary-export-only -- Ok */
-
 import type {
   ObjectKeysDefined,
   ObjectKeysOption,

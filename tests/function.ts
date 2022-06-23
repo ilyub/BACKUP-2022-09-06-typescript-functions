@@ -19,11 +19,11 @@ test("pipe", () => {
 });
 
 test("run", async () => {
-  // eslint-disable-next-line deprecation/deprecation -- Wait for major update
+  // eslint-disable-next-line deprecation/deprecation -- Wait for next major version
   expect(fn.run(() => true)).toBeTrue();
-  // eslint-disable-next-line deprecation/deprecation -- Wait for major update
+  // eslint-disable-next-line deprecation/deprecation -- Wait for next major version
   await expect(fn.run(resolve)).resolves.toBeUndefined();
-  // eslint-disable-next-line deprecation/deprecation -- Wait for major update
+  // eslint-disable-next-line deprecation/deprecation -- Wait for next major version
   await expect(fn.run(resolve())).resolves.toBeUndefined();
 
   async function resolve(): Promise<void> {

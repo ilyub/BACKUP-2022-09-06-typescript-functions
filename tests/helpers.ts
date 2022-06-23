@@ -20,7 +20,7 @@ import type { Writable } from "@";
 testUtils.installFakeTimer();
 
 test("createFacade: Extension", () => {
-  const extension: Extension = { pow: x => x * x };
+  const extension: Writable<Extension> = { pow: x => x * x };
 
   const facade = createFacade<object, Writable<Extension>>(
     "sample-facade",
@@ -62,7 +62,7 @@ test("createFacade: Object", () => {
   const facade = createFacade<Facade>("sample-facade", {});
 
   class Implementation {
-    public value = 1;
+    public readonly value = 1;
   }
 
   facade.setImplementation(new Implementation());
@@ -108,7 +108,7 @@ test("createValidationObject", () => {
 
 test("onDemand", () => {
   class TestClass {
-    public value = 1;
+    public readonly value = 1;
   }
 
   const obj = onDemand(() => new TestClass());
@@ -251,7 +251,7 @@ test("wait", async () => {
 
 test("wrapProxyHandler: doDefault", () => {
   class TestClass {
-    public x = 1;
+    public readonly x = 1;
   }
 
   const handler = wrapProxyHandler("test", "doDefault", {});
@@ -296,7 +296,7 @@ test("wrapProxyHandler: throw", () => {
   expect.hasAssertions();
 
   class TestClass {
-    public x = 1;
+    public readonly x = 1;
   }
 
   const handler = wrapProxyHandler("test", "throw", {});

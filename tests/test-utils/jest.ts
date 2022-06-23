@@ -1,6 +1,5 @@
 import { fn } from "@";
 import * as testUtils from "@/test-utils";
-// eslint-disable-next-line import/no-internal-modules -- Ok
 import * as internal from "@/test-utils/jest.internal";
 
 testUtils.installFakeTimer();

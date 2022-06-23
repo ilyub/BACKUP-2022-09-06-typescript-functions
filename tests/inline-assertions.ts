@@ -5,7 +5,7 @@ function createSubtest(inlineAssertion: Callable, ...args: unknowns) {
   return (value: unknown) => (): void => {
     if (inlineAssertion(value, ...args) === value) {
       // Passed
-    } else throw new Error();
+    } else throw new Error("Sample error");
   };
 }
 

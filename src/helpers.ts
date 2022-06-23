@@ -70,7 +70,6 @@ export function createFacade<I extends object, E = unknown>(
     })
   );
 
-  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
   return proxy as Facade<I, E>;
 
   function target(key?: PropertyKey): object {
@@ -113,7 +112,6 @@ export function onDemand<T extends object>(generator: () => T): T {
     })
   );
 
-  // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
   return proxy as T;
 
   function obj(): object {
@@ -186,6 +184,7 @@ export function safeAccess<
  * @param timeout - Timeout (ms).
  */
 export async function wait(timeout: number): Promise<void> {
+  // eslint-disable-next-line promise/avoid-new -- Ok
   await new Promise<void>(resolve => {
     programFlow.setTimeout(resolve, timeout);
   });

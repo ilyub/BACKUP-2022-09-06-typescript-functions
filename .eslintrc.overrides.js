@@ -1,9 +1,17 @@
-const api = require("@skylib/config/src/api");
-
-// eslint-disable-next-line import/no-internal-modules -- Ok
-const boundaries = require("@skylib/config/src/eslint/boundaries");
+const { eslint } = require("@skylib/config");
 
 module.exports = {
+  overrides: [
+    {
+      files: "./tests/types/{object,object-keys}.ts",
+      rules: {
+        // eslint-disable-next-line @skylib/no-restricted-syntax -- Ok
+        "@skylib/optional-property-style": "off",
+        // eslint-disable-next-line @skylib/no-restricted-syntax -- Ok
+        "@skylib/prefer-readonly": "off"
+      }
+    }
+  ],
   rules: {
     "@skylib/project/consistent-import": [
       "warn",
@@ -118,8 +126,8 @@ module.exports = {
       {
         default: "disallow",
         rules: [
-          ...boundaries.rules["boundaries/element-types"][1].rules,
-          ...api.eslint.boundaries.elementTypes.createRules(
+          ...eslint.boundaries.elementTypes.rules,
+          ...eslint.boundaries.elementTypes.createRules(
             filename => ["src1", { filename }],
             "core",
             "guards",
@@ -143,7 +151,7 @@ module.exports = {
             ],
             ["helpers"]
           ),
-          ...api.eslint.boundaries.elementTypes.createRules(
+          ...eslint.boundaries.elementTypes.createRules(
             filename => ["src2", { dir1: "errors", filename }],
             ["AssertionError", "ConversionError", "InternalError"],
             "error-arg"
