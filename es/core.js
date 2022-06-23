@@ -1,4 +1,4 @@
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
 /**
  * Defines function with properties.
  *
@@ -14,7 +14,6 @@ export const defineFn = Object.assign;
  * @returns Validation object.
  */
 export function createValidationObject(source) {
-    // eslint-disable-next-line no-restricted-syntax -- Ok
     if (Object.entries(source).every(([key, value]) => key === String(value)))
         return new Set(Object.values(source));
     throw new Error("Invalid source");

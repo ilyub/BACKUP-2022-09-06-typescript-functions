@@ -31,6 +31,7 @@
 - [map](object.md#map)
 - [omit](object.md#omit)
 - [removeUndefinedKeys](object.md#removeundefinedkeys)
+- [set](object.md#set)
 - [size](object.md#size)
 - [some](object.md#some)
 - [sort](object.md#sort)
@@ -526,6 +527,26 @@ Removes undefined keys.
 [`OptionalStyle`](types_object.md#optionalstyle)<`T`\>
 
 New object with undefined keys removed.
+
+___
+
+### set
+
+▸ **set**(`obj`, `key`, `value`): `void`
+
+Sets object property.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | `object` | Object. |
+| `key` | `PropertyKey` | Key. |
+| `value` | `unknown` | Value. |
+
+#### Returns
+
+`void`
 
 ___
 

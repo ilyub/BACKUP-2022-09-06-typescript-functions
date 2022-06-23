@@ -1,4 +1,4 @@
-import type { numbers, strings, unknowns, Writable } from "./types";
+import type { Writable, numbers, strings, unknowns } from "./types";
 export declare type KeyOrReduce<T extends object> = PropertyKey | Reduce<T>;
 export interface Reduce<T extends object> {
     /**
@@ -83,6 +83,13 @@ export declare function first<T>(arr: readonly T[]): T;
  * @returns Array.
  */
 export declare function fromIterable<T>(iterable: Iterable<T>): T[];
+/**
+ * Creates array from mixed soure.
+ *
+ * @param value - Value.
+ * @returns Value if it is an array, tuple containing value otherwise.
+ */
+export declare function fromMixed<T>(value: T | readonly T[]): readonly T[];
 /**
  * Creates array of numbers.
  *

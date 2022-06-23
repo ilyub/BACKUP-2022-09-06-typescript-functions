@@ -1,9 +1,9 @@
 "use strict";
-/* skylib/eslint-plugin disable @skylib/disallow-identifier[functions.json] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-a-fromIterable] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.neq = exports.eq = exports.encode = exports.decode = void 0;
 const tslib_1 = require("tslib");
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-json] */
 const core_1 = require("./core");
 const is = tslib_1.__importStar(require("./guards"));
 const as = tslib_1.__importStar(require("./inline-assertions"));

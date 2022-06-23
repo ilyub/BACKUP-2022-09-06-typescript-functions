@@ -1,3 +1,5 @@
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-cast-number] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
 import * as is from "./guards";
 export const not = {
     /**
@@ -29,14 +31,12 @@ export function number(value, defVal = 0) {
 export function numberU(value) {
     switch (typeof value) {
         case "boolean":
-            // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/eslint-plugin update
             return Number(value);
         case "number":
             return value;
         case "string": {
             if (value === "" || value === "\n" || value === "\r\n")
                 return undefined;
-            // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/eslint-plugin update
             const result = Number(value);
             return Number.isNaN(result) ? undefined : result;
         }
@@ -51,7 +51,6 @@ export function numberU(value) {
  * @returns Converted value.
  */
 export function string(value) {
-    // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/eslint-plugin update
     return is.not.empty(value) ? String(value) : "";
 }
 /**
@@ -61,7 +60,6 @@ export function string(value) {
  * @returns Converted value.
  */
 export function stringU(value) {
-    // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/eslint-plugin update
     const str = is.not.empty(value) ? String(value) : "";
     return str ? str : undefined;
 }

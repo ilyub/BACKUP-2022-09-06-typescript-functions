@@ -1,8 +1,9 @@
 "use strict";
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.program-flow] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-programFlow-clearInterval] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.setTimeout = exports.setInterval = exports.clearTimeout = exports.clearInterval = void 0;
 const tslib_1 = require("tslib");
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-programFlow-clearTimeout] */
 const is = tslib_1.__importStar(require("./guards"));
 /**
  * Clears interval.
@@ -32,9 +33,7 @@ exports.clearTimeout = _clearTimeout;
  * @returns Handler.
  */
 function _setInterval(callback, timeout) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
-    const windowSetInterval = setInterval;
-    return windowSetInterval(callback, timeout);
+    return setInterval(callback, timeout);
 }
 exports.setInterval = _setInterval;
 /**
@@ -45,9 +44,7 @@ exports.setInterval = _setInterval;
  * @returns Handler.
  */
 function _setTimeout(callback, timeout) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
-    const windowSetTimeout = setTimeout;
-    return windowSetTimeout(callback, timeout);
+    return setTimeout(callback, timeout);
 }
 exports.setTimeout = _setTimeout;
 //# sourceMappingURL=program-flow.js.map

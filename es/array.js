@@ -1,5 +1,5 @@
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-a-fromIterable] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
 import * as assert from "./assertions";
 import * as is from "./guards";
 import * as as from "./inline-assertions";
@@ -42,7 +42,7 @@ export function drop(arr, index) {
  * @returns The first element matching value if available, _undefined_ otherwise.
  */
 export function findBy(arr, value, keyOrReduce) {
-    const reduce = toReduce(keyOrReduce);
+    const reduce = mixedToReduce(keyOrReduce);
     const reduced = reduce(value);
     return arr.find(element => reduce(element) === reduced);
 }
@@ -64,6 +64,15 @@ export function first(arr) {
  */
 export function fromIterable(iterable) {
     return [...iterable];
+}
+/**
+ * Creates array from mixed soure.
+ *
+ * @param value - Value.
+ * @returns Value if it is an array, tuple containing value otherwise.
+ */
+export function fromMixed(value) {
+    return is.array(value) ? value : [value];
 }
 /**
  * Creates array of numbers.
@@ -98,7 +107,6 @@ export function fromString(str) {
  */
 export function get(arr, index) {
     assert.toBeTrue(Object.prototype.hasOwnProperty.call(arr, index), "Invalid index");
-    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
     return arr[index];
 }
 /**
@@ -110,7 +118,7 @@ export function get(arr, index) {
  * @returns _True_ if array contains element matching value, _false_ otherwise.
  */
 export function includesBy(arr, value, keyOrReduce) {
-    const reduce = toReduce(keyOrReduce);
+    const reduce = mixedToReduce(keyOrReduce);
     const reduced = reduce(value);
     return arr.some(element => reduce(element) === reduced);
 }
@@ -165,7 +173,7 @@ export function random(arr) {
  * @returns New array with matching elements removed.
  */
 export function removeBy(arr, value, keyOrReduce) {
-    const reduce = toReduce(keyOrReduce);
+    const reduce = mixedToReduce(keyOrReduce);
     const reduced = reduce(value);
     return arr.filter(element => reduce(element) !== reduced);
 }
@@ -190,7 +198,7 @@ export function replace(arr, index, value) {
  * @returns New array with matching elements replaced.
  */
 export function replaceBy(arr, value, keyOrReduce) {
-    const reduce = toReduce(keyOrReduce);
+    const reduce = mixedToReduce(keyOrReduce);
     const reduced = reduce(value);
     return arr.map(element => (reduce(element) === reduced ? value : element));
 }
@@ -266,7 +274,7 @@ export function truncate(mutableArray) {
  * @returns Unique array.
  */
 export function uniqueBy(arr, keyOrReduce) {
-    const reduce = toReduce(keyOrReduce);
+    const reduce = mixedToReduce(keyOrReduce);
     const seen = new Set();
     return arr.filter(element => {
         const reduced = reduce(element);
@@ -305,9 +313,9 @@ export function unshiftOrReplaceBy(arr, value, keyOrReduce) {
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns Reduce function.
  */
-function toReduce(keyOrReduce) {
-    return is.callable(keyOrReduce)
-        ? keyOrReduce
-        : (obj) => as.indexedObject(obj)[keyOrReduce];
+function mixedToReduce(keyOrReduce) {
+    if (is.callable(keyOrReduce))
+        return keyOrReduce;
+    return (obj) => as.indexedObject(obj)[keyOrReduce];
 }
 //# sourceMappingURL=array.js.map

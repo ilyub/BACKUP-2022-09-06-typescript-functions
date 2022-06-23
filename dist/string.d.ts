@@ -1,12 +1,5 @@
 import type { strings } from "./types";
-export declare const path: {
-    readonly addLeadingSlash: (path: string) => string;
-    readonly addTrailingSlash: (path: string) => string;
-    readonly canonicalize: (path: string) => string;
-    readonly join: (...parts: strings) => string;
-    readonly removeLeadingSlash: (path: string) => string;
-    readonly removeTrailingSlash: (path: string) => string;
-};
+export { _path as path };
 export declare type Eol = "\n" | "\r\n";
 /**
  * Detects EOL sequence.
@@ -122,4 +115,12 @@ export declare function ucFirst(str: string): string;
  * @returns Unpadded string.
  */
 export declare function unpadMultiline(str: string): string;
+declare const _path: {
+    readonly addLeadingSlash: (path: string) => string;
+    readonly addTrailingSlash: (path: string) => string;
+    readonly canonicalize: (path: string) => string;
+    readonly join: (...parts: strings) => string;
+    readonly removeLeadingSlash: (path: string) => string;
+    readonly removeTrailingSlash: (path: string) => string;
+};
 //# sourceMappingURL=string.d.ts.map

@@ -1,9 +1,10 @@
 "use strict";
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-clone] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unfreeze = exports.sort = exports.some = exports.size = exports.removeUndefinedKeys = exports.omit = exports.map = exports.hasOwnProp = exports.getPrototypeOf = exports.get = exports.freeze = exports.filter = exports.every = exports.clone = exports.values = exports.keys = exports.fromEntries = exports.extend = exports.entries = exports.defineProperty = exports.assign = void 0;
+exports.unfreeze = exports.sort = exports.some = exports.size = exports.set = exports.removeUndefinedKeys = exports.omit = exports.map = exports.hasOwnProp = exports.getPrototypeOf = exports.get = exports.freeze = exports.filter = exports.every = exports.clone = exports.values = exports.keys = exports.fromEntries = exports.extend = exports.entries = exports.defineProperty = exports.assign = void 0;
 const tslib_1 = require("tslib");
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-getPrototypeOf] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
 const is = tslib_1.__importStar(require("./guards"));
 const as = tslib_1.__importStar(require("./inline-assertions"));
 /**
@@ -49,7 +50,6 @@ exports.fromEntries = (0, exports.extend)(
         const result = {};
         for (const entry of entries)
             result[entry[0]] = entry[1];
-        // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
         return result;
     }
 });
@@ -103,7 +103,6 @@ function freeze(obj) {
 exports.freeze = freeze;
 function get(obj, key, guard = is.unknown, defVal) {
     var _a;
-    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
     return as.byGuard((_a = obj[key]) !== null && _a !== void 0 ? _a : defVal, guard);
 }
 exports.get = get;
@@ -149,7 +148,6 @@ exports.map = map;
  */
 function omit(obj, ...exclude) {
     const excludeSet = new Set(exclude);
-    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
     return filter(obj, (_value, key) => !excludeSet.has(key));
 }
 exports.omit = omit;
@@ -160,10 +158,20 @@ exports.omit = omit;
  * @returns New object with undefined keys removed.
  */
 function removeUndefinedKeys(obj) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
     return filter(obj, is.not.empty);
 }
 exports.removeUndefinedKeys = removeUndefinedKeys;
+/**
+ * Sets object property.
+ *
+ * @param obj - Object.
+ * @param key - Key.
+ * @param value - Value.
+ */
+function set(obj, key, value) {
+    obj[key] = value;
+}
+exports.set = set;
 /**
  * Returns the number of enumerable properties.
  *

@@ -1,6 +1,7 @@
-/* eslint-disable @skylib/primary-export-only -- Wait for @skylib/eslint update */
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-a-fromIterable] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-entries] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-values] */
 import { defineFn, overload, typedef } from "./core";
 export { _false as false, _null as null, _true as true, _undefined as undefined };
 export const and = defineFn(overload(() => {
@@ -117,12 +118,8 @@ export const object = defineFn(
         return result;
         function result(value, required, optional) {
             return (indexedObject(value) &&
-                Object.entries(required).every(([key, guard]) => 
-                // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
-                checkRequiredProp(value, key, guard)) &&
-                Object.entries(optional).every(([key, guard]) => 
-                // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
-                checkOptionalProp(value, key, guard)));
+                Object.entries(required).every(([key, guard]) => checkRequiredProp(value, key, guard)) &&
+                Object.entries(optional).every(([key, guard]) => checkOptionalProp(value, key, guard)));
         }
     })
 });

@@ -20,6 +20,7 @@
 - [findBy](array.md#findby)
 - [first](array.md#first)
 - [fromIterable](array.md#fromiterable)
+- [fromMixed](array.md#frommixed)
 - [fromRange](array.md#fromrange)
 - [fromString](array.md#fromstring)
 - [get](array.md#get)
@@ -308,6 +309,32 @@ Creates array from iterable.
 `T`[]
 
 Array.
+
+___
+
+### fromMixed
+
+▸ **fromMixed**<`T`\>(`value`): readonly `T`[]
+
+Creates array from mixed soure.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `T` \| readonly `T`[] | Value. |
+
+#### Returns
+
+readonly `T`[]
+
+Value if it is an array, tuple containing value otherwise.
 
 ___
 

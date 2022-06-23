@@ -1,10 +1,11 @@
 "use strict";
-/* eslint-disable @skylib/primary-export-only -- Wait for @skylib/eslint update */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-a-fromIterable] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.instance = exports.factory = exports.enumeration = exports.empty = exports.callable = exports.boolean = exports.not = exports.unknownsU = exports.unknowns = exports.tuple = exports.symbolsU = exports.symbols = exports.symbolU = exports.stringsU = exports.strings = exports.setsU = exports.sets = exports.setU = exports.set = exports.objectsU = exports.objects = exports.objectU = exports.object = exports.numbersU = exports.numbers = exports.numberU = exports.numStrsU = exports.numStrs = exports.numStrU = exports.mapsU = exports.maps = exports.mapU = exports.map = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObjectU = exports.indexedObject = exports.booleansU = exports.booleans = exports.booleanU = exports.arraysU = exports.arrays = exports.arrayU = exports.array = exports.or = exports.and = exports.undefined = exports.true = exports.null = exports.false = void 0;
 exports.unknown = exports.symbol = exports.stringU = exports.string = exports.number = exports.numStr = exports.never = exports.instances = void 0;
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-entries] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-values] */
 const core_1 = require("./core");
 exports.and = (0, core_1.defineFn)((0, core_1.overload)(() => {
     return result;
@@ -120,12 +121,8 @@ exports.object = (0, core_1.defineFn)(
         return result;
         function result(value, required, optional) {
             return ((0, exports.indexedObject)(value) &&
-                Object.entries(required).every(([key, guard]) => 
-                // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
-                checkRequiredProp(value, key, guard)) &&
-                Object.entries(optional).every(([key, guard]) => 
-                // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
-                checkOptionalProp(value, key, guard)));
+                Object.entries(required).every(([key, guard]) => checkRequiredProp(value, key, guard)) &&
+                Object.entries(optional).every(([key, guard]) => checkOptionalProp(value, key, guard)));
         }
     })
 });

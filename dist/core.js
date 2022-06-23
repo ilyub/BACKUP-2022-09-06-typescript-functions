@@ -1,5 +1,5 @@
 "use strict";
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.typedef = exports.overload = exports.evaluate = exports.createValidationObject = exports.defineFn = void 0;
 /**
@@ -17,7 +17,6 @@ exports.defineFn = Object.assign;
  * @returns Validation object.
  */
 function createValidationObject(source) {
-    // eslint-disable-next-line no-restricted-syntax -- Ok
     if (Object.entries(source).every(([key, value]) => key === String(value)))
         return new Set(Object.values(source));
     throw new Error("Invalid source");

@@ -1,4 +1,4 @@
-import type { AsyncPromise, Callable, Sync } from "./types";
+import type { AsyncPromise, Callable, Sync, unknowns } from "./types";
 export declare const noop: Callable;
 export interface PipeCallback<V = unknown, R = unknown> {
     /**
@@ -11,12 +11,26 @@ export interface PipeCallback<V = unknown, R = unknown> {
 }
 export declare type PipeCallbacks = readonly PipeCallback[];
 /**
+ * Creates factory function from value.
+ *
+ * @param value - Value.
+ * @returns Factory function.
+ */
+export declare function factoryFromValue<T>(value: T): () => T;
+/**
  * Identity function.
  *
  * @param value - Value.
  * @returns Value.
  */
 export declare function identity<T>(value: T): T;
+/**
+ * Noop function.
+ *
+ * @param _args - Arguments.
+ * @returns _True_.
+ */
+export declare function noopTrue(..._args: unknowns): true;
 /**
  * Applies callbacks to a value.
  *

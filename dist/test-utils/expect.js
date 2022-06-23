@@ -1,28 +1,29 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.matchers = exports.toBeSameAs = exports.executionTimeToBe = void 0;
+exports.buildResult = void 0;
 const __1 = require("..");
-const executionTimeToBe = async (got, expected, precision = 10) => {
-    const start = Date.now();
-    await __1.as.callable(got, "Expecting async function")();
-    const gotTime = Date.now() - start;
-    return Math.abs(gotTime - expected) <= precision
-        ? {
-            message: () => `Expected callback execution time not to be ${expected} ms`,
-            pass: true
-        }
-        : {
-            message: () => `Expected callback execution time (${gotTime} ms) to be ${expected} ms`,
-            pass: false
-        };
-};
-exports.executionTimeToBe = executionTimeToBe;
-const toBeSameAs = (got, expected) => got === expected
-    ? { message: () => "Expected not the same object", pass: true }
-    : { message: () => "Expected the same object", pass: false };
-exports.toBeSameAs = toBeSameAs;
-exports.matchers = {
-    executionTimeToBe: exports.executionTimeToBe,
-    toBeSameAs: exports.toBeSameAs
-};
+const jest_matcher_utils_1 = require("jest-matcher-utils");
+/**
+ * Builds result.
+ *
+ * @param pass - Pass.
+ * @param message - Message.
+ * @param got - Got.
+ * @param expected - Expected.
+ * @param immediate - Immediate.
+ * @returns Info.
+ */
+function buildResult(pass, message, got, expected, immediate = false) {
+    return {
+        message: immediate ? __1.fn.factoryFromValue(factory()) : factory,
+        pass
+    };
+    function factory() {
+        if (pass)
+            return (0, jest_matcher_utils_1.stringify)(expected);
+        const info = (0, jest_matcher_utils_1.printDiffOrStringify)(got, expected, "Got", "Expected", true);
+        return `${message}:\n${info}`;
+    }
+}
+exports.buildResult = buildResult;
 //# sourceMappingURL=expect.js.map

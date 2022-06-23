@@ -1,7 +1,9 @@
 "use strict";
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-cast-number] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.stringU = exports.string = exports.numberU = exports.number = exports.not = void 0;
 const tslib_1 = require("tslib");
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
 const is = tslib_1.__importStar(require("./guards"));
 exports.not = {
     /**
@@ -34,14 +36,12 @@ exports.number = number;
 function numberU(value) {
     switch (typeof value) {
         case "boolean":
-            // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/eslint-plugin update
             return Number(value);
         case "number":
             return value;
         case "string": {
             if (value === "" || value === "\n" || value === "\r\n")
                 return undefined;
-            // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/eslint-plugin update
             const result = Number(value);
             return Number.isNaN(result) ? undefined : result;
         }
@@ -57,7 +57,6 @@ exports.numberU = numberU;
  * @returns Converted value.
  */
 function string(value) {
-    // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/eslint-plugin update
     return is.not.empty(value) ? String(value) : "";
 }
 exports.string = string;
@@ -68,7 +67,6 @@ exports.string = string;
  * @returns Converted value.
  */
 function stringU(value) {
-    // eslint-disable-next-line no-restricted-syntax -- Wait for @skylib/eslint-plugin update
     const str = is.not.empty(value) ? String(value) : "";
     return str ? str : undefined;
 }

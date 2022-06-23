@@ -6,42 +6,30 @@ export const not = {
         byGuard(value, is.not.empty, error);
     }
 };
-export const array = defineFn(
-// eslint-disable-next-line @skylib/require-jsdoc -- Ok
-(value, error) => {
+export const array = defineFn((value, error) => {
     byGuard(value, is.array, error);
 }, {
-    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
     of: (value, guard, error) => {
         byGuard(value, is.factory(is.array.of, guard), error);
     }
 });
-export const indexedObject = defineFn(
-// eslint-disable-next-line @skylib/require-jsdoc -- Ok
-(value, error) => {
+export const indexedObject = defineFn((value, error) => {
     byGuard(value, is.indexedObject, error);
 }, {
-    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
     of: (value, guard, error) => {
         byGuard(value, is.factory(is.indexedObject.of, guard), error);
     }
 });
-export const map = defineFn(
-// eslint-disable-next-line @skylib/require-jsdoc -- Ok
-(value, error) => {
+export const map = defineFn((value, error) => {
     byGuard(value, is.map, error);
 }, {
-    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
     of: (value, keyGuard, valueGuard, error) => {
         byGuard(value, is.factory(is.map.of, keyGuard, valueGuard), error);
     }
 });
-export const set = defineFn(
-// eslint-disable-next-line @skylib/require-jsdoc -- Ok
-(value, error) => {
+export const set = defineFn((value, error) => {
     byGuard(value, is.set, error);
 }, {
-    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
     of: (value, guard, error) => {
         byGuard(value, is.factory(is.set.of, guard), error);
     }

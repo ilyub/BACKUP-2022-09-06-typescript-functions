@@ -1,5 +1,5 @@
 import * as is from "./guards";
-import type { Entry, NumStr, objectU, PartialRecord, Rec, Writable, WritablePartialRecord, OptionalStyle, StrictOmit } from "./types";
+import type { Entry, NumStr, OptionalStyle, PartialRecord, Rec, StrictOmit, Writable, WritablePartialRecord, objectU } from "./types";
 /**
  * Typed version of Object.assign.
  *
@@ -230,6 +230,14 @@ export declare function omit<T extends object, K extends string & keyof T>(obj: 
  * @returns New object with undefined keys removed.
  */
 export declare function removeUndefinedKeys<T extends object>(obj: T): OptionalStyle<T>;
+/**
+ * Sets object property.
+ *
+ * @param obj - Object.
+ * @param key - Key.
+ * @param value - Value.
+ */
+export declare function set(obj: object, key: PropertyKey, value: unknown): void;
 /**
  * Returns the number of enumerable properties.
  *

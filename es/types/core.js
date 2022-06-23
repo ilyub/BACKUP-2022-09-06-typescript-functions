@@ -1,3 +1,3 @@
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.types.core] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-IndexedObject] */
 export {};
 //# sourceMappingURL=core.js.map

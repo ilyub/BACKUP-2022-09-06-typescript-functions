@@ -1,5 +1,6 @@
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-clone] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-getPrototypeOf] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
 import * as is from "./guards";
 import * as as from "./inline-assertions";
 /**
@@ -45,7 +46,6 @@ export const fromEntries = extend(
         const result = {};
         for (const entry of entries)
             result[entry[0]] = entry[1];
-        // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
         return result;
     }
 });
@@ -95,7 +95,6 @@ export function freeze(obj) {
 }
 export function get(obj, key, guard = is.unknown, defVal) {
     var _a;
-    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
     return as.byGuard((_a = obj[key]) !== null && _a !== void 0 ? _a : defVal, guard);
 }
 /**
@@ -137,7 +136,6 @@ export function map(obj, callback) {
  */
 export function omit(obj, ...exclude) {
     const excludeSet = new Set(exclude);
-    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
     return filter(obj, (_value, key) => !excludeSet.has(key));
 }
 /**
@@ -147,8 +145,17 @@ export function omit(obj, ...exclude) {
  * @returns New object with undefined keys removed.
  */
 export function removeUndefinedKeys(obj) {
-    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
     return filter(obj, is.not.empty);
+}
+/**
+ * Sets object property.
+ *
+ * @param obj - Object.
+ * @param key - Key.
+ * @param value - Value.
+ */
+export function set(obj, key, value) {
+    obj[key] = value;
 }
 /**
  * Returns the number of enumerable properties.

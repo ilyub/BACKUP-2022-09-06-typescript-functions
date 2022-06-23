@@ -1,4 +1,4 @@
-import type { NumStr, Rec, AsyncPromise, Sync } from "./types";
+import type { AsyncPromise, NumStr, Rec, Sync } from "./types";
 /**
  * Defines function with properties.
  *

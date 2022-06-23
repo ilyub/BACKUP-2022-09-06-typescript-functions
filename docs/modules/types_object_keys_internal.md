@@ -80,7 +80,7 @@ ___
 
 ### ObjectKeysUndefined
 
-Ƭ **ObjectKeysUndefined**<`T`, `C`, `D`\>: `If`<`Extends`<``"undefined"``, `C`\>, `Exclude`<keyof `T`, `FilterKeys`<`T`, `undefined`, ``"<-extends"``\>\>, `D`\>
+Ƭ **ObjectKeysUndefined**<`T`, `C`, `D`\>: `If`<`Extends`<``"undefined"``, `C`\>, [`PickKeys`](types_object.md#pickkeys)<`T`, `undefined`, ``"<-extends"``\>, `D`\>
 
 #### Type parameters
 

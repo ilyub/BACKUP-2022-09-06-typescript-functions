@@ -14,8 +14,10 @@
 
 ### Functions
 
+- [factoryFromValue](function.md#factoryfromvalue)
 - [identity](function.md#identity)
 - [noop](function.md#noop)
+- [noopTrue](function.md#nooptrue)
 - [pipe](function.md#pipe)
 - [run](function.md#run)
 
@@ -26,6 +28,42 @@
 Ƭ **PipeCallbacks**: readonly [`PipeCallback`](../interfaces/function.PipeCallback.md)[]
 
 ## Functions
+
+### factoryFromValue
+
+▸ **factoryFromValue**<`T`\>(`value`): () => `T`
+
+Creates factory function from value.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `T` | Value. |
+
+#### Returns
+
+`fn`
+
+Factory function.
+
+▸ (): `T`
+
+Creates factory function from value.
+
+##### Returns
+
+`T`
+
+Factory function.
+
+___
 
 ### identity
 
@@ -66,6 +104,26 @@ ___
 #### Returns
 
 `any`
+
+___
+
+### noopTrue
+
+▸ **noopTrue**(...`_args`): ``true``
+
+Noop function.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `..._args` | [`unknowns`](types_core.md#unknowns) | Arguments. |
+
+#### Returns
+
+``true``
+
+_True_.
 
 ___
 

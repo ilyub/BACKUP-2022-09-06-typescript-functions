@@ -10,42 +10,30 @@ exports.not = {
         byGuard(value, is.not.empty, error);
     }
 };
-exports.array = (0, core_1.defineFn)(
-// eslint-disable-next-line @skylib/require-jsdoc -- Ok
-(value, error) => {
+exports.array = (0, core_1.defineFn)((value, error) => {
     byGuard(value, is.array, error);
 }, {
-    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
     of: (value, guard, error) => {
         byGuard(value, is.factory(is.array.of, guard), error);
     }
 });
-exports.indexedObject = (0, core_1.defineFn)(
-// eslint-disable-next-line @skylib/require-jsdoc -- Ok
-(value, error) => {
+exports.indexedObject = (0, core_1.defineFn)((value, error) => {
     byGuard(value, is.indexedObject, error);
 }, {
-    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
     of: (value, guard, error) => {
         byGuard(value, is.factory(is.indexedObject.of, guard), error);
     }
 });
-exports.map = (0, core_1.defineFn)(
-// eslint-disable-next-line @skylib/require-jsdoc -- Ok
-(value, error) => {
+exports.map = (0, core_1.defineFn)((value, error) => {
     byGuard(value, is.map, error);
 }, {
-    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
     of: (value, keyGuard, valueGuard, error) => {
         byGuard(value, is.factory(is.map.of, keyGuard, valueGuard), error);
     }
 });
-exports.set = (0, core_1.defineFn)(
-// eslint-disable-next-line @skylib/require-jsdoc -- Ok
-(value, error) => {
+exports.set = (0, core_1.defineFn)((value, error) => {
     byGuard(value, is.set, error);
 }, {
-    // eslint-disable-next-line @skylib/require-jsdoc -- Ok
     of: (value, guard, error) => {
         byGuard(value, is.factory(is.set.of, guard), error);
     }

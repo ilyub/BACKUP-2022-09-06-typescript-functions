@@ -8,13 +8,13 @@
 
 | Name | Type |
 | :------ | :------ |
-| `K` | extends keyof [`Matchers`](../modules/test_utils_expect.md#matchers) |
+| `K` | extends keyof [`Matchers`](../modules/test_utils_expect_internal.md#matchers) |
 
 ## Callable
 
 ### ExpectFromMatcher
 
-▸ **ExpectFromMatcher**(`got`, ...`args`): `If`<`Extends`<`ReturnType`<[`Matcher`](../modules/test_utils_expect.md#matcher)<`K`\>\>, `Promise`<`unknown`\>\>, `Promise`<[`ExpectReturnType`](test_utils_expect.ExpectReturnType.md)\>, [`ExpectReturnType`](test_utils_expect.ExpectReturnType.md)\>
+▸ **ExpectFromMatcher**(`got`, ...`args`): `If`<`Extends`<`ReturnType`<`Readonly`<`Matchers`<`unknown`, `unknown`\>\>[`K`]\>, `Promise`<`unknown`\>\>, `Promise`<[`Result`](test_utils_expect_internal.Result.md)\>, [`Result`](test_utils_expect_internal.Result.md)\>
 
 Expect function.
 
@@ -22,11 +22,11 @@ Expect function.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `got` | `unknown` | Got value. |
-| `...args` | `Parameters`<[`Matcher`](../modules/test_utils_expect.md#matcher)<`K`\>\> | Arguments. |
+| `got` | `unknown` | Got. |
+| `...args` | `Parameters`<`Readonly`<`Matchers`<`unknown`, `unknown`\>\>[`K`]\> | Arguments. |
 
 #### Returns
 
-`If`<`Extends`<`ReturnType`<[`Matcher`](../modules/test_utils_expect.md#matcher)<`K`\>\>, `Promise`<`unknown`\>\>, `Promise`<[`ExpectReturnType`](test_utils_expect.ExpectReturnType.md)\>, [`ExpectReturnType`](test_utils_expect.ExpectReturnType.md)\>
+`If`<`Extends`<`ReturnType`<`Readonly`<`Matchers`<`unknown`, `unknown`\>\>[`K`]\>, `Promise`<`unknown`\>\>, `Promise`<[`Result`](test_utils_expect_internal.Result.md)\>, [`Result`](test_utils_expect_internal.Result.md)\>
 
 Result.

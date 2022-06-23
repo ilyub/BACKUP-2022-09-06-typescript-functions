@@ -2,7 +2,7 @@ import * as fakeTimers from "@sinonjs/fake-timers";
 import type { Async } from "..";
 export declare const clock: fakeTimers.Clock;
 export interface Options {
-    readonly shouldAdvanceTime?: true;
+    readonly shouldAdvanceTime?: boolean;
 }
 /**
  * Installs fake timer.

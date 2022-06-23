@@ -7,109 +7,31 @@
 ### Interfaces
 
 - [ExpectFromMatcher](../interfaces/test_utils_expect.ExpectFromMatcher.md)
-- [ExpectReturnType](../interfaces/test_utils_expect.ExpectReturnType.md)
-
-### Type Aliases
-
-- [Matcher](test_utils_expect.md#matcher)
-- [MatcherParameters](test_utils_expect.md#matcherparameters)
-- [MatcherReturnType](test_utils_expect.md#matcherreturntype)
-- [Matchers](test_utils_expect.md#matchers)
-
-### Variables
-
-- [matchers](test_utils_expect.md#matchers-1)
 
 ### Functions
 
-- [executionTimeToBe](test_utils_expect.md#executiontimetobe)
-- [toBeSameAs](test_utils_expect.md#tobesameas)
-
-## Type Aliases
-
-### Matcher
-
-Ƭ **Matcher**<`K`\>: [`Matchers`](test_utils_expect.md#matchers)[`K`]
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `K` | extends keyof [`Matchers`](test_utils_expect.md#matchers) |
-
-___
-
-### MatcherParameters
-
-Ƭ **MatcherParameters**<`K`\>: `Parameters`<[`Matcher`](test_utils_expect.md#matcher)<`K`\>\>
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `K` | extends keyof [`Matchers`](test_utils_expect.md#matchers) |
-
-___
-
-### MatcherReturnType
-
-Ƭ **MatcherReturnType**<`K`\>: `ReturnType`<[`Matcher`](test_utils_expect.md#matcher)<`K`\>\>
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `K` | extends keyof [`Matchers`](test_utils_expect.md#matchers) |
-
-___
-
-### Matchers
-
-Ƭ **Matchers**: `Readonly`<`jest.Matchers`<`unknown`\>\>
-
-## Variables
-
-### matchers
-
-• `Const` **matchers**: `Object`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `executionTimeToBe` | [`ExpectFromMatcher`](../interfaces/test_utils_expect.ExpectFromMatcher.md)<``"executionTimeToBe"``\> |
-| `toBeSameAs` | [`ExpectFromMatcher`](../interfaces/test_utils_expect.ExpectFromMatcher.md)<``"toBeSameAs"``\> |
+- [buildResult](test_utils_expect.md#buildresult)
 
 ## Functions
 
-### executionTimeToBe
+### buildResult
 
-▸ **executionTimeToBe**(`got`, ...`args`): `Promise`<[`ExpectReturnType`](../interfaces/test_utils_expect.ExpectReturnType.md)\>
+▸ **buildResult**(`pass`, `message`, `got`, `expected`, `immediate?`): [`Result`](../interfaces/test_utils_expect_internal.Result.md)
 
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `got` | `unknown` |
-| `...args` | [expected: number, precision?: number] |
-
-#### Returns
-
-`Promise`<[`ExpectReturnType`](../interfaces/test_utils_expect.ExpectReturnType.md)\>
-
-___
-
-### toBeSameAs
-
-▸ **toBeSameAs**(`got`, ...`args`): [`ExpectReturnType`](../interfaces/test_utils_expect.ExpectReturnType.md)
+Builds result.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `got` | `unknown` |
-| `...args` | [expected: object] |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `pass` | `boolean` | `undefined` | Pass. |
+| `message` | `string` | `undefined` | Message. |
+| `got` | `unknown` | `undefined` | Got. |
+| `expected` | `unknown` | `undefined` | Expected. |
+| `immediate` | `boolean` | `false` | Immediate. |
 
 #### Returns
 
-[`ExpectReturnType`](../interfaces/test_utils_expect.ExpectReturnType.md)
+[`Result`](../interfaces/test_utils_expect_internal.Result.md)
+
+Info.

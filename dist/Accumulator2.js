@@ -26,10 +26,9 @@ class Accumulator2 {
                 yield [key1, key2, arr];
     }
     get(key1, key2) {
-        var _a, _b, _c;
-        return is.not.empty(key2)
-            ? (_b = (_a = this.map.get(key1)) === null || _a === void 0 ? void 0 : _a.get(key2)) !== null && _b !== void 0 ? _b : []
-            : (_c = this.map.get(key1)) !== null && _c !== void 0 ? _c : new Map();
+        var _a, _b;
+        const map = (_a = this.map.get(key1)) !== null && _a !== void 0 ? _a : new Map();
+        return is.not.empty(key2) ? (_b = map.get(key2)) !== null && _b !== void 0 ? _b : [] : map;
     }
     /**
      * Pushes value.

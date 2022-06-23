@@ -46,7 +46,7 @@ export declare const indexedObject: {
      * @param error - Error.
      * @returns Void.
      */
-    of: <T>(value: unknown, guard: is.Guard<T>, error?: ErrorArg) => asserts value is types.IndexedObject<T>;
+    readonly of: <T>(value: unknown, guard: is.Guard<T>, error?: ErrorArg) => asserts value is types.IndexedObject<T>;
 };
 export declare const map: {
     /**

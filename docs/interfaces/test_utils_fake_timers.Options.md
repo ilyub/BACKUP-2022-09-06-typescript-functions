@@ -14,4 +14,4 @@
 
 ### shouldAdvanceTime
 
-• `Optional` `Readonly` **shouldAdvanceTime**: ``true``
+• `Optional` `Readonly` **shouldAdvanceTime**: `boolean`

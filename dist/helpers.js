@@ -1,7 +1,9 @@
 "use strict";
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-reflect-get] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.wrapProxyHandler = exports.wait = exports.safeAccess = exports.onDemand = exports.createFacade = void 0;
 const tslib_1 = require("tslib");
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-reflect-set] */
 const cast = tslib_1.__importStar(require("./converters"));
 const core_1 = require("./core");
 const fn = tslib_1.__importStar(require("./function"));
@@ -24,7 +26,6 @@ function createFacade(name, extension) {
         } }, extension);
     const proxy = new Proxy(fn.noop, wrapProxyHandler("createFacade", "throw", {
         apply: (_target, thisArg, args) => reflect.apply(targetFn(), thisArg, args),
-        // eslint-disable-next-line no-restricted-syntax -- Ok
         get: (_target, key) => reflect.get(target(key), key),
         getOwnPropertyDescriptor: (_target, key) => reflect.getOwnPropertyDescriptor(target(key), key),
         has: (_target, key) => reflect.has(target(key), key),
@@ -32,7 +33,6 @@ function createFacade(name, extension) {
         ownKeys: () => reflect.ownKeys(target()),
         set: (_target, key, value) => reflect.set(target(key), key, value)
     }));
-    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
     return proxy;
     function target(key) {
         if (is.not.empty(key) && key in facadeOwn)
@@ -53,7 +53,6 @@ exports.createFacade = createFacade;
 function onDemand(generator) {
     let _obj;
     const proxy = new Proxy({}, wrapProxyHandler("onDemand", "throw", {
-        // eslint-disable-next-line no-restricted-syntax -- Ok
         get: (_target, key) => reflect.get(obj(), key),
         getOwnPropertyDescriptor: (_target, key) => reflect.getOwnPropertyDescriptor(obj(), key),
         has: (_target, key) => reflect.has(obj(), key),
@@ -64,7 +63,6 @@ function onDemand(generator) {
             return true;
         }
     }));
-    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
     return proxy;
     function obj() {
         _obj = _obj !== null && _obj !== void 0 ? _obj : generator();
@@ -87,7 +85,6 @@ function safeAccess(obj, guards, readonlyKeys = []) {
     const keysSet = new Set(keys);
     return new Proxy(obj, wrapProxyHandler("safeAccess", "throw", {
         get: (target, key) => {
-            // eslint-disable-next-line no-restricted-syntax -- Ok
             if (keysSet.has(key))
                 return reflect.get(target, key);
             throw new Error(`Read access denied: ${cast.string(key)}`);
@@ -118,6 +115,7 @@ exports.safeAccess = safeAccess;
  * @param timeout - Timeout (ms).
  */
 async function wait(timeout) {
+    // eslint-disable-next-line promise/avoid-new -- Ok
     await new Promise(resolve => {
         programFlow.setTimeout(resolve, timeout);
     });
@@ -134,9 +132,7 @@ exports.wait = wait;
 function wrapProxyHandler(id, action, handler) {
     switch (action) {
         case "doDefault":
-            return (0, core_1.typedef)(Object.assign({ apply: (target, thisArg, args) => reflect.apply(as.callable(target), thisArg, args), construct: (target, args, newTarget) => as.object(reflect.construct(as.callable(target), args, newTarget)), defineProperty: (target, key, attrs) => reflect.defineProperty(target, key, attrs), deleteProperty: (target, key) => reflect.deleteProperty(target, key), 
-                // eslint-disable-next-line no-restricted-syntax -- Ok
-                get: (target, key) => reflect.get(target, key), getOwnPropertyDescriptor: (target, key) => reflect.getOwnPropertyDescriptor(target, key), getPrototypeOf: target => reflect.getPrototypeOf(target), has: (target, key) => reflect.has(target, key), isExtensible: target => reflect.isExtensible(target), ownKeys: target => reflect.ownKeys(target), preventExtensions: target => reflect.preventExtensions(target), set: (target, key, value) => reflect.set(target, key, value), setPrototypeOf: (target, proto) => reflect.setPrototypeOf(target, proto) }, handler));
+            return (0, core_1.typedef)(Object.assign({ apply: (target, thisArg, args) => reflect.apply(as.callable(target), thisArg, args), construct: (target, args, newTarget) => as.object(reflect.construct(as.callable(target), args, newTarget)), defineProperty: (target, key, attrs) => reflect.defineProperty(target, key, attrs), deleteProperty: (target, key) => reflect.deleteProperty(target, key), get: (target, key) => reflect.get(target, key), getOwnPropertyDescriptor: (target, key) => reflect.getOwnPropertyDescriptor(target, key), getPrototypeOf: target => reflect.getPrototypeOf(target), has: (target, key) => reflect.has(target, key), isExtensible: target => reflect.isExtensible(target), ownKeys: target => reflect.ownKeys(target), preventExtensions: target => reflect.preventExtensions(target), set: (target, key, value) => reflect.set(target, key, value), setPrototypeOf: (target, proto) => reflect.setPrototypeOf(target, proto) }, handler));
         case "throw":
             return (0, core_1.typedef)(Object.assign({ apply: () => {
                     throw new Error(`Not implemented: ${id}.apply`);

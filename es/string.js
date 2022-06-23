@@ -1,74 +1,6 @@
 import { evaluate } from "./core";
 import * as as from "./inline-assertions";
-export const path = evaluate(() => {
-    return {
-        addLeadingSlash,
-        addTrailingSlash,
-        canonicalize,
-        join,
-        removeLeadingSlash,
-        removeTrailingSlash
-    };
-    /**
-     * Adds leading slash.
-     *
-     * @param path - Path.
-     * @returns New string with leading slash added.
-     */
-    // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
-    function addLeadingSlash(path) {
-        return `/${removeLeadingSlash(path)}`;
-    }
-    /**
-     * Adds trailing slash.
-     *
-     * @param path - Path.
-     * @returns New string with trailing slash added.
-     */
-    // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
-    function addTrailingSlash(path) {
-        return `${removeTrailingSlash(path)}/`;
-    }
-    /**
-     * Canonicalizes path.
-     *
-     * @param path - Path.
-     * @returns Canonical path.
-     */
-    // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
-    function canonicalize(path) {
-        return path.replace(/[/\\]+/gu, "/");
-    }
-    /**
-     * Creates path from parts.
-     *
-     * @param parts - Parts.
-     * @returns Path.
-     */
-    function join(...parts) {
-        return canonicalize(parts.join("/"));
-    }
-    /**
-     * Removes leading slash.
-     *
-     * @param path - Path.
-     * @returns New string with leading slash removed.
-     */
-    // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
-    function removeLeadingSlash(path) {
-        return canonicalize(path).replace(/^\//u, "");
-    }
-    /**
-     * Removes trailing slash.
-     *
-     * @param path - Path.
-     * @returns New string with trailing slash removed.
-     */
-    // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
-    function removeTrailingSlash(path) {
-        return canonicalize(path).replace(/\/$/u, "");
-    }
-});
+export { _path as path };
 /**
  * Detects EOL sequence.
  *
@@ -180,7 +112,6 @@ export function trimEnd(str) {
  */
 export function trimLeadingEmptyLines(str) {
     const leadingLines = lines(leadingSpaces(str));
-    // eslint-disable-next-line unicorn/prefer-at -- Ok
     return as.not.empty(leadingLines[leadingLines.length - 1]) + trimStart(str);
 }
 /**
@@ -223,4 +154,68 @@ export function unpadMultiline(str) {
         ? replaceAll(str.trim(), as.not.empty(matches[0]), detectEol(str))
         : str;
 }
+const _path = evaluate(() => {
+    return {
+        addLeadingSlash,
+        addTrailingSlash,
+        canonicalize,
+        join,
+        removeLeadingSlash,
+        removeTrailingSlash
+    };
+    /**
+     * Adds leading slash.
+     *
+     * @param path - Path.
+     * @returns New string with leading slash added.
+     */
+    function addLeadingSlash(path) {
+        return `/${removeLeadingSlash(path)}`;
+    }
+    /**
+     * Adds trailing slash.
+     *
+     * @param path - Path.
+     * @returns New string with trailing slash added.
+     */
+    function addTrailingSlash(path) {
+        return `${removeTrailingSlash(path)}/`;
+    }
+    /**
+     * Canonicalizes path.
+     *
+     * @param path - Path.
+     * @returns Canonical path.
+     */
+    function canonicalize(path) {
+        return path.replace(/[/\\]+/gu, "/");
+    }
+    /**
+     * Creates path from parts.
+     *
+     * @param parts - Parts.
+     * @returns Path.
+     */
+    function join(...parts) {
+        return canonicalize(parts.join("/"));
+    }
+    /**
+     * Removes leading slash.
+     *
+     * @param path - Path.
+     * @returns New string with leading slash removed.
+     */
+    function removeLeadingSlash(path) {
+        return canonicalize(path).replace(/^\//u, "");
+    }
+    /**
+     * Removes trailing slash.
+     *
+     * @param path - Path.
+     * @returns New string with trailing slash removed.
+     */
+    function removeTrailingSlash(path) {
+        return canonicalize(path).replace(/\/$/u, "");
+    }
+});
 //# sourceMappingURL=string.js.map

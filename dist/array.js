@@ -1,9 +1,9 @@
 "use strict";
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.array] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-a-fromIterable] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unshiftOrReplaceBy = exports.unshift = exports.uniqueBy = exports.truncate = exports.toggleBy = exports.third = exports.sort = exports.second = exports.reverse = exports.replaceBy = exports.replace = exports.removeBy = exports.random = exports.pushOrReplaceBy = exports.push = exports.last = exports.includesBy = exports.get = exports.fromString = exports.fromRange = exports.fromIterable = exports.first = exports.findBy = exports.drop = exports.clone = exports.chain = void 0;
+exports.unshiftOrReplaceBy = exports.unshift = exports.uniqueBy = exports.truncate = exports.toggleBy = exports.third = exports.sort = exports.second = exports.reverse = exports.replaceBy = exports.replace = exports.removeBy = exports.random = exports.pushOrReplaceBy = exports.push = exports.last = exports.includesBy = exports.get = exports.fromString = exports.fromRange = exports.fromMixed = exports.fromIterable = exports.first = exports.findBy = exports.drop = exports.clone = exports.chain = void 0;
 const tslib_1 = require("tslib");
-/* skylib/eslint-plugin disable @skylib/disallow-by-regexp[functions.object] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
 const assert = tslib_1.__importStar(require("./assertions"));
 const is = tslib_1.__importStar(require("./guards"));
 const as = tslib_1.__importStar(require("./inline-assertions"));
@@ -49,7 +49,7 @@ exports.drop = drop;
  * @returns The first element matching value if available, _undefined_ otherwise.
  */
 function findBy(arr, value, keyOrReduce) {
-    const reduce = toReduce(keyOrReduce);
+    const reduce = mixedToReduce(keyOrReduce);
     const reduced = reduce(value);
     return arr.find(element => reduce(element) === reduced);
 }
@@ -75,6 +75,16 @@ function fromIterable(iterable) {
     return [...iterable];
 }
 exports.fromIterable = fromIterable;
+/**
+ * Creates array from mixed soure.
+ *
+ * @param value - Value.
+ * @returns Value if it is an array, tuple containing value otherwise.
+ */
+function fromMixed(value) {
+    return is.array(value) ? value : [value];
+}
+exports.fromMixed = fromMixed;
 /**
  * Creates array of numbers.
  *
@@ -110,7 +120,6 @@ exports.fromString = fromString;
  */
 function get(arr, index) {
     assert.toBeTrue(Object.prototype.hasOwnProperty.call(arr, index), "Invalid index");
-    // eslint-disable-next-line no-type-assertion/no-type-assertion -- Ok
     return arr[index];
 }
 exports.get = get;
@@ -123,7 +132,7 @@ exports.get = get;
  * @returns _True_ if array contains element matching value, _false_ otherwise.
  */
 function includesBy(arr, value, keyOrReduce) {
-    const reduce = toReduce(keyOrReduce);
+    const reduce = mixedToReduce(keyOrReduce);
     const reduced = reduce(value);
     return arr.some(element => reduce(element) === reduced);
 }
@@ -183,7 +192,7 @@ exports.random = random;
  * @returns New array with matching elements removed.
  */
 function removeBy(arr, value, keyOrReduce) {
-    const reduce = toReduce(keyOrReduce);
+    const reduce = mixedToReduce(keyOrReduce);
     const reduced = reduce(value);
     return arr.filter(element => reduce(element) !== reduced);
 }
@@ -210,7 +219,7 @@ exports.replace = replace;
  * @returns New array with matching elements replaced.
  */
 function replaceBy(arr, value, keyOrReduce) {
-    const reduce = toReduce(keyOrReduce);
+    const reduce = mixedToReduce(keyOrReduce);
     const reduced = reduce(value);
     return arr.map(element => (reduce(element) === reduced ? value : element));
 }
@@ -293,7 +302,7 @@ exports.truncate = truncate;
  * @returns Unique array.
  */
 function uniqueBy(arr, keyOrReduce) {
-    const reduce = toReduce(keyOrReduce);
+    const reduce = mixedToReduce(keyOrReduce);
     const seen = new Set();
     return arr.filter(element => {
         const reduced = reduce(element);
@@ -335,9 +344,9 @@ exports.unshiftOrReplaceBy = unshiftOrReplaceBy;
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns Reduce function.
  */
-function toReduce(keyOrReduce) {
-    return is.callable(keyOrReduce)
-        ? keyOrReduce
-        : (obj) => as.indexedObject(obj)[keyOrReduce];
+function mixedToReduce(keyOrReduce) {
+    if (is.callable(keyOrReduce))
+        return keyOrReduce;
+    return (obj) => as.indexedObject(obj)[keyOrReduce];
 }
 //# sourceMappingURL=array.js.map

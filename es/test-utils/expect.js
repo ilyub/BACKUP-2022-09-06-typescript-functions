@@ -1,23 +1,25 @@
-import { as } from "..";
-export const executionTimeToBe = async (got, expected, precision = 10) => {
-    const start = Date.now();
-    await as.callable(got, "Expecting async function")();
-    const gotTime = Date.now() - start;
-    return Math.abs(gotTime - expected) <= precision
-        ? {
-            message: () => `Expected callback execution time not to be ${expected} ms`,
-            pass: true
-        }
-        : {
-            message: () => `Expected callback execution time (${gotTime} ms) to be ${expected} ms`,
-            pass: false
-        };
-};
-export const toBeSameAs = (got, expected) => got === expected
-    ? { message: () => "Expected not the same object", pass: true }
-    : { message: () => "Expected the same object", pass: false };
-export const matchers = {
-    executionTimeToBe,
-    toBeSameAs
-};
+import { fn } from "..";
+import { printDiffOrStringify, stringify } from "jest-matcher-utils";
+/**
+ * Builds result.
+ *
+ * @param pass - Pass.
+ * @param message - Message.
+ * @param got - Got.
+ * @param expected - Expected.
+ * @param immediate - Immediate.
+ * @returns Info.
+ */
+export function buildResult(pass, message, got, expected, immediate = false) {
+    return {
+        message: immediate ? fn.factoryFromValue(factory()) : factory,
+        pass
+    };
+    function factory() {
+        if (pass)
+            return stringify(expected);
+        const info = printDiffOrStringify(got, expected, "Got", "Expected", true);
+        return `${message}:\n${info}`;
+    }
+}
 //# sourceMappingURL=expect.js.map
