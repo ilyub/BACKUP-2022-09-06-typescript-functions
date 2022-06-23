@@ -4,41 +4,8 @@ import { assert } from "..";
 import { buildResult } from "./expect";
 import { isMock } from "./expect.internal";
 import { equals } from "@jest/expect-utils";
-import type { Async, Writable } from "..";
+import type { Async } from "..";
 import type { ExpectFromMatcher } from "./expect";
-import type { Calls } from "./expect.internal";
-
-declare global {
-  namespace jest {
-    interface Matchers<R> {
-      /**
-       * Checks that async function executes within expected time.
-       *
-       * @param expected - Expected time (ms).
-       * @param precision - Precision (ms).
-       * @returns Result.
-       */
-      readonly executionTimeToBe: (
-        expected: number,
-        precision?: number
-      ) => Promise<R>;
-      /**
-       * Checks that mock calls are equal to expected value.
-       *
-       * @param expected -- Calls.
-       * @returns Result.
-       */
-      readonly mockCallsToBe: (...expected: Writable<Calls>) => R;
-      /**
-       * Checks that two objects are identical.
-       *
-       * @param expected - Object.
-       * @returns Result.
-       */
-      readonly toBeSameAs: (expected: object) => R;
-    }
-  }
-}
 
 // eslint-disable-next-line no-console -- Ok
 export const error = console.error;
