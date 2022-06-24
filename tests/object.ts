@@ -1,9 +1,5 @@
 /* skylib/eslint-plugin disable @skylib/no-restricted-syntax[prefer-readonly-property] */
 
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-o-get] */
-
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-o-set] */
-
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-o-unfreeze] */
 
 import { AssertionError, is, o } from "@";

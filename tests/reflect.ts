@@ -1,5 +1,3 @@
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-reflect-get] */
-
 import { AssertionError, is, reflect } from "@";
 
 const mk1 = Symbol("test-metadata-key-1");

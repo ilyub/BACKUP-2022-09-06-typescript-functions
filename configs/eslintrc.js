@@ -18,34 +18,10 @@ module.exports = {
       {
         rules: [
           {
-            message: "Avoid unsafe function (o.get)",
-            selector:
-              "CallExpression > .callee[object.name=o][property.name=get]",
-            subOptionsId: "no-o-get"
-          },
-          {
-            message: "Avoid unsafe function (o.set)",
-            selector:
-              "CallExpression > .callee[object.name=o][property.name=set]",
-            subOptionsId: "no-o-set"
-          },
-          {
             message: "Avoid unsafe function (o.unfreeze)",
             selector:
               "CallExpression > .callee[object.name=o][property.name=unfreeze]",
             subOptionsId: "no-o-unfreeze"
-          },
-          {
-            message: "Avoid unsafe function (reflect.get)",
-            selector:
-              "CallExpression > .callee[object.name=reflect][property.name=get]",
-            subOptionsId: "no-reflect-get"
-          },
-          {
-            message: "Avoid unsafe function (reflect.set)",
-            selector:
-              "CallExpression > .callee[object.name=reflect][property.name=set]",
-            subOptionsId: "no-reflect-set"
           },
           {
             message: 'Prefer "IndexedObject" type',

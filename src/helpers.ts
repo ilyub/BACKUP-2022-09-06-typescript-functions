@@ -1,7 +1,3 @@
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-reflect-get] */
-
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-reflect-set] */
-
 import * as cast from "./converters";
 import { typedef } from "./core";
 import * as fn from "./function";
