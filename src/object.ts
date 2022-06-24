@@ -8,7 +8,6 @@ import * as is from "./guards";
 import * as as from "./inline-assertions";
 import type {
   Entry,
-  IndexedObject,
   NumStr,
   OptionalStyle,
   PartialRecord,
@@ -301,7 +300,7 @@ export function get(
   guard: is.Guard = is.unknown,
   defVal?: unknown
 ): unknown {
-  return as.byGuard((obj as IndexedObject)[key] ?? defVal, guard);
+  return as.byGuard(as.indexedObject(obj)[key] ?? defVal, guard);
 }
 
 /**
