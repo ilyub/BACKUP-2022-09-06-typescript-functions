@@ -251,12 +251,12 @@ export function enumeration<T extends PropertyKey>(
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
-export function instance<T>(
+export function instanceOf<T>(
   value: unknown,
   ctor: types.Constructor<T>,
   error?: ErrorArg
 ): T {
-  assert.instance(value, ctor, error);
+  assert.instanceOf(value, ctor, error);
 
   return value;
 }
@@ -270,12 +270,12 @@ export function instance<T>(
  * @returns Value if value type is T[].
  * @throws Error otherwise.
  */
-export function instances<T>(
+export function instancesOf<T>(
   value: unknown,
   ctor: types.Constructor<T>,
   error?: ErrorArg
 ): readonly T[] {
-  assert.instances(value, ctor, error);
+  assert.instancesOf(value, ctor, error);
 
   return value;
 }

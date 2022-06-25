@@ -97,20 +97,20 @@ test("indexedObject.of", () => {
   expect(subtest(null)).toThrow(AssertionError);
 });
 
-test("instance", () => {
+test("instanceOf", () => {
   class TestClass {}
 
-  const subtest = createSubtest(assert.instance, TestClass);
+  const subtest = createSubtest(assert.instanceOf, TestClass);
 
   expect(subtest(new TestClass())).not.toThrow();
   expect(subtest({})).toThrow(AssertionError);
   expect(subtest(undefined)).toThrow(AssertionError);
 });
 
-test("instances", () => {
+test("instancesOf", () => {
   class TestClass {}
 
-  const subtest = createSubtest(assert.instances, TestClass);
+  const subtest = createSubtest(assert.instancesOf, TestClass);
 
   expect(subtest([new TestClass()])).not.toThrow();
   expect(subtest([{}])).toThrow(AssertionError);

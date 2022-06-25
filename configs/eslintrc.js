@@ -30,6 +30,12 @@ module.exports = {
             subOptionsId: "prefer-IndexedObject"
           },
           {
+            message: 'Prefer "IndexedRecord" type',
+            selector:
+              "TSTypeReference[typeName.name=Rec] > .typeParameters > .params:first-child > .typeName[name=string]",
+            subOptionsId: "prefer-IndexedRecord"
+          },
+          {
             message: 'Prefer "json" module',
             selector: "Identifier[name=JSON]",
             subOptionsId: "prefer-json"

@@ -238,12 +238,12 @@ export function enumeration<T extends PropertyKey>(
  * @param ctor - Constructor.
  * @param error - Error.
  */
-export function instance<T>(
+export function instanceOf<T>(
   value: unknown,
   ctor: types.Constructor<T>,
   error?: ErrorArg
 ): asserts value is T {
-  byGuard(value, is.factory(is.instance, ctor), error);
+  byGuard(value, is.factory(is.instanceOf, ctor), error);
 }
 
 /**
@@ -253,12 +253,12 @@ export function instance<T>(
  * @param ctor - Constructor.
  * @param error - Error.
  */
-export function instances<T>(
+export function instancesOf<T>(
   value: unknown,
   ctor: types.Constructor<T>,
   error?: ErrorArg
 ): asserts value is readonly T[] {
-  byGuard(value, is.factory(is.instances, ctor), error);
+  byGuard(value, is.factory(is.instancesOf, ctor), error);
 }
 
 /**

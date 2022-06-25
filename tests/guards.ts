@@ -86,20 +86,20 @@ test("indexedObject.of", () => {
   expect(is.indexedObject.of(null, is.number)).toBeFalse();
 });
 
-test("instance", () => {
+test("instanceOf", () => {
   class TestClass {}
 
-  expect(is.instance(new TestClass(), TestClass)).toBeTrue();
-  expect(is.instance({}, TestClass)).toBeFalse();
-  expect(is.instance(undefined, TestClass)).toBeFalse();
+  expect(is.instanceOf(new TestClass(), TestClass)).toBeTrue();
+  expect(is.instanceOf({}, TestClass)).toBeFalse();
+  expect(is.instanceOf(undefined, TestClass)).toBeFalse();
 });
 
-test("instances", () => {
+test("instancesOf", () => {
   class TestClass {}
 
-  expect(is.instances([new TestClass()], TestClass)).toBeTrue();
-  expect(is.instances([{}], TestClass)).toBeFalse();
-  expect(is.instances([undefined], TestClass)).toBeFalse();
+  expect(is.instancesOf([new TestClass()], TestClass)).toBeTrue();
+  expect(is.instancesOf([{}], TestClass)).toBeFalse();
+  expect(is.instancesOf([undefined], TestClass)).toBeFalse();
 });
 
 test("map", () => {

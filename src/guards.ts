@@ -745,7 +745,7 @@ export function factory<T, A extends types.unknowns>(
  * @param ctor - Constructor.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-export function instance<T>(
+export function instanceOf<T>(
   value: unknown,
   ctor: types.Constructor<T>
 ): value is T {
@@ -759,7 +759,7 @@ export function instance<T>(
  * @param ctor - Constructor.
  * @returns _True_ if value type is T[], _false_ otherwise.
  */
-export function instances<T>(
+export function instancesOf<T>(
   value: unknown,
   ctor: types.Constructor<T>
 ): value is readonly T[] {
