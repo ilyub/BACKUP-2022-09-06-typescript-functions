@@ -2,8 +2,7 @@
 
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-o-unfreeze] */
 
-import { AssertionError, is, o } from "@";
-import type { Equals } from "ts-toolbelt/out/Any/Equals";
+import { AssertionError, fn, is, o } from "@";
 
 test("clone", () => {
   const obj1 = { a: 1 };
@@ -36,24 +35,6 @@ test("filter", () => {
   }
 });
 
-test("freeze", () => {
-  const obj1: TestInterface = { value: 1 };
-
-  const obj2 = o.freeze(obj1);
-
-  const typeCheck1: Equals<typeof obj1, { value: number }> = 1;
-
-  const typeCheck2: Equals<typeof obj2, { readonly value: number }> = 1;
-
-  expect(obj1).toBeSameAs(obj2);
-  expect(typeCheck1).toBe(1);
-  expect(typeCheck2).toBe(1);
-
-  interface TestInterface {
-    value: number;
-  }
-});
-
 test("fromEntries", () => {
   expect(o.fromEntries([["a", 1]])).toStrictEqual({ a: 1 });
 });
@@ -66,6 +47,7 @@ test("get", () => {
   expect(o.get({ a: 1 }, "a")).toBe(1);
   expect(o.get({ a: 1 }, "a", is.number)).toBe(1);
   expect(o.get({}, "a", is.number, 1)).toBe(1);
+  expect(o.get(fn.noop, "a")).toBeUndefined();
   expect(() => o.get({ a: "" }, "a", is.number)).toThrow(AssertionError);
 });
 
@@ -207,22 +189,4 @@ test.each([
   }
 ])("sort", ({ compareFn, expected, obj }) => {
   expect(o.sort(obj, compareFn)).toStrictEqual(expected);
-});
-
-test("unfreeze", () => {
-  const obj1: TestInterface = { value: 1 };
-
-  const obj2 = o.unfreeze(obj1);
-
-  const typeCheck1: Equals<typeof obj1, { readonly value: number }> = 1;
-
-  const typeCheck2: Equals<typeof obj2, { value: number }> = 1;
-
-  expect(obj1).toBeSameAs(obj2);
-  expect(typeCheck1).toBe(1);
-  expect(typeCheck2).toBe(1);
-
-  interface TestInterface {
-    readonly value: number;
-  }
 });

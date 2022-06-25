@@ -4,6 +4,7 @@
 
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
 
+import { indexed } from "./core";
 import * as is from "./guards";
 import * as as from "./inline-assertions";
 import type {
@@ -259,16 +260,6 @@ export function filter<T extends object>(
 }
 
 /**
- * Marks object as readonly.
- *
- * @param obj - Object.
- * @returns Object.
- */
-export function freeze<T extends object>(obj: T): Readonly<T> {
-  return obj;
-}
-
-/**
  * Returns object property.
  *
  * @param obj - Object.
@@ -300,7 +291,7 @@ export function get(
   guard: is.Guard = is.unknown,
   defVal?: unknown
 ): unknown {
-  return as.byGuard(as.indexedObject(obj)[key] ?? defVal, guard);
+  return as.byGuard(indexed(obj)[key] ?? defVal, guard);
 }
 
 /**
@@ -440,14 +431,4 @@ export function sort<K extends string, V>(
   );
 
   return fromEntries.exhaustive(arr);
-}
-
-/**
- * Marks object as writable.
- *
- * @param obj - Object.
- * @returns Object.
- */
-export function unfreeze<T extends object>(obj: T): Writable<T> {
-  return obj;
 }

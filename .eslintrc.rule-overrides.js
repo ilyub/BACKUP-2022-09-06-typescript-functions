@@ -131,8 +131,7 @@ module.exports = {
             filename => ["src1", { filename }],
             "core",
             "guards",
-            "assertions",
-            "inline-assertions",
+            ["assertions", "inline-assertions"],
             [
               "Accumulator",
               "Accumulator2",

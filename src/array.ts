@@ -3,8 +3,8 @@
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
 
 import * as assert from "./assertions";
+import { indexed } from "./core";
 import * as is from "./guards";
-import * as as from "./inline-assertions";
 import * as _ from "@skylib/lodash-commonjs-es";
 import type { Writable, numbers, strings, unknowns } from "./types";
 
@@ -470,5 +470,5 @@ function mixedToReduce<T extends object, V extends object = T>(
 ): Reduce<T | V> {
   if (is.callable(keyOrReduce)) return keyOrReduce;
 
-  return (obj): unknown => as.indexedObject(obj)[keyOrReduce];
+  return (obj): unknown => indexed(obj)[keyOrReduce];
 }

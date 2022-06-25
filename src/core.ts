@@ -7,9 +7,11 @@
 import type {
   AsyncPromise,
   AsyncPromiseSync,
+  IndexedObject,
   NumStr,
   Rec,
-  Sync
+  Sync,
+  Writable
 } from "./types";
 
 /**
@@ -60,6 +62,26 @@ export function evaluate<T>(mixed: AsyncPromiseSync<T>): Promise<T> | T {
 }
 
 /**
+ * Marks value as readonly.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+export function freeze<T>(value: T): Readonly<T> {
+  return value;
+}
+
+/**
+ * Marks value as indexed.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+export function indexed(value: object): IndexedObject {
+  return value as IndexedObject;
+}
+
+/**
  * Defines function with overloads.
  *
  * @param callback - Callback.
@@ -76,5 +98,15 @@ export function overload<T>(callback: () => T): T {
  * @returns Value.
  */
 export function typedef<T>(value: T): T {
+  return value;
+}
+
+/**
+ * Marks value as writable.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+export function unfreeze<T>(value: T): Writable<T> {
   return value;
 }
