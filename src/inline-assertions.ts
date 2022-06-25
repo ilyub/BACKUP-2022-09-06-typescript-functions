@@ -1,6 +1,5 @@
-import * as assert from "./assertions";
 import { defineFn } from "./core";
-import { ErrorArg } from "./errors";
+import { AssertionError } from "./errors";
 import * as is from "./guards";
 import type { ValidationObject } from "./core";
 import type * as types from "./types";
@@ -18,14 +17,13 @@ export const array = defineFn(factory(is.array), {
    *
    * @param value - Value.
    * @param guard - Guard for type T.
-   * @param error - Error.
    * @returns Value if value type is T[].
    * @throws Error otherwise.
    */
-  of: <T>(value: unknown, guard: is.Guard<T>, error?: ErrorArg) => {
-    assert.array.of(value, guard, error);
+  of: <T>(value: unknown, guard: is.Guard<T>) => {
+    if (is.array.of(value, guard)) return value;
 
-    return value;
+    throw new AssertionError();
   }
 });
 
@@ -51,14 +49,13 @@ export const indexedObject = defineFn(factory(is.indexedObject), {
    *
    * @param value - Value.
    * @param guard - Guard for type T.
-   * @param error - Error.
    * @returns Value if value type is IndexedObject\<T\>.
    * @throws Error otherwise.
    */
-  of: <T>(value: unknown, guard: is.Guard<T>, error?: ErrorArg) => {
-    assert.indexedObject.of(value, guard, error);
+  of: <T>(value: unknown, guard: is.Guard<T>) => {
+    if (is.indexedObject.of(value, guard)) return value;
 
-    return value;
+    throw new AssertionError();
   }
 });
 
@@ -75,19 +72,17 @@ export const map = defineFn(factory(is.map), {
    * @param value - Value.
    * @param keyGuard - Key guard.
    * @param valueGuard - Value guard.
-   * @param error - Error.
    * @returns Value if value type is Map\<K, V\>.
    * @throws Error otherwise.
    */
   of: <K, V>(
     value: unknown,
     keyGuard: is.Guard<K>,
-    valueGuard: is.Guard<V>,
-    error?: ErrorArg
+    valueGuard: is.Guard<V>
   ) => {
-    assert.map.of(value, keyGuard, valueGuard, error);
+    if (is.map.of(value, keyGuard, valueGuard)) return value;
 
-    return value;
+    throw new AssertionError();
   }
 });
 
@@ -129,14 +124,13 @@ export const set = defineFn(factory(is.set), {
    *
    * @param value - Value.
    * @param guard - Guard for type T.
-   * @param error - Error.
    * @returns Value if value type is Set\<T\>.
    * @throws Error otherwise.
    */
-  of: <T>(value: unknown, guard: is.Guard<T>, error?: ErrorArg) => {
-    assert.set.of(value, guard, error);
+  of: <T>(value: unknown, guard: is.Guard<T>) => {
+    if (is.set.of(value, guard)) return value;
 
-    return value;
+    throw new AssertionError();
   }
 });
 
@@ -192,35 +186,26 @@ export const not = {
  *
  * @param value - Value.
  * @param guard - Guard for type T.
- * @param error - Error.
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
-export function byGuard<T>(
-  value: unknown,
-  guard: is.Guard<T>,
-  error?: ErrorArg
-): T {
-  assert.byGuard(value, guard, error);
+export function byGuard<T>(value: unknown, guard: is.Guard<T>): T {
+  if (guard(value)) return value;
 
-  return value;
+  throw new AssertionError();
 }
 
 /**
  * Asserts that value type is T.
  *
  * @param value - Value.
- * @param error - Error.
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
-export function callable<T extends Function>(
-  value: unknown,
-  error?: ErrorArg
-): T {
-  assert.callable<T>(value, error);
+export function callable<T extends Function>(value: unknown): T {
+  if (is.callable<T>(value)) return value;
 
-  return value;
+  throw new AssertionError();
 }
 
 /**
@@ -228,18 +213,16 @@ export function callable<T extends Function>(
  *
  * @param value - Value.
  * @param vo - Validation object.
- * @param error - Error.
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
 export function enumeration<T extends PropertyKey>(
   value: unknown,
-  vo: ValidationObject<T>,
-  error?: ErrorArg
+  vo: ValidationObject<T>
 ): T {
-  assert.enumeration(value, vo, error);
+  if (is.enumeration(value, vo)) return value;
 
-  return value;
+  throw new AssertionError();
 }
 
 /**
@@ -247,18 +230,13 @@ export function enumeration<T extends PropertyKey>(
  *
  * @param value - Value.
  * @param ctor - Constructor.
- * @param error - Error.
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
-export function instanceOf<T>(
-  value: unknown,
-  ctor: types.Constructor<T>,
-  error?: ErrorArg
-): T {
-  assert.instanceOf(value, ctor, error);
+export function instanceOf<T>(value: unknown, ctor: types.Constructor<T>): T {
+  if (is.instanceOf(value, ctor)) return value;
 
-  return value;
+  throw new AssertionError();
 }
 
 /**
@@ -266,18 +244,16 @@ export function instanceOf<T>(
  *
  * @param value - Value.
  * @param ctor - Constructor.
- * @param error - Error.
  * @returns Value if value type is T[].
  * @throws Error otherwise.
  */
 export function instancesOf<T>(
   value: unknown,
-  ctor: types.Constructor<T>,
-  error?: ErrorArg
+  ctor: types.Constructor<T>
 ): readonly T[] {
-  assert.instancesOf(value, ctor, error);
+  if (is.instancesOf(value, ctor)) return value;
 
-  return value;
+  throw new AssertionError();
 }
 
 const _false = factory(is.false);
@@ -299,14 +275,13 @@ function factory<T>(guard: is.Guard<T>) {
    * Asserts that value has expected type.
    *
    * @param value - Value.
-   * @param error - Error.
    * @returns Value if value has expected type.
    * @throws Error otherwise.
    */
-  return (value: unknown, error?: ErrorArg): T => {
+  return (value: unknown): T => {
     if (guard(value)) return value;
 
-    throw ErrorArg.toError(error);
+    throw new AssertionError();
   };
 }
 
@@ -321,13 +296,12 @@ function notFactory<T>(guard: is.ExclusionGuard<T>) {
    * Asserts that value has expected type.
    *
    * @param value - Value.
-   * @param error - Error.
    * @returns Value if value has expected type.
    * @throws Error otherwise.
    */
-  return <V>(value: V, error?: ErrorArg): Exclude<V, T> => {
+  return <V>(value: V): Exclude<V, T> => {
     if (guard(value)) return value;
 
-    throw ErrorArg.toError(error);
+    throw new AssertionError();
   };
 }

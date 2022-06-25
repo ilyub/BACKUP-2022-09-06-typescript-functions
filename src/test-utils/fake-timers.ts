@@ -1,11 +1,13 @@
-import { a, as, assert, evaluate, onDemand } from "..";
+import { a, assert, evaluate, onDemand } from "..";
 import * as fakeTimers from "@sinonjs/fake-timers";
 import * as _ from "@skylib/lodash-commonjs-es";
 import type { Async } from "..";
 
-export const clock = onDemand(() =>
-  as.not.empty(_clock, "Fake timer is not installed")
-);
+export const clock = onDemand(() => {
+  assert.not.empty(_clock, "Fake timer is not installed");
+
+  return _clock;
+});
 
 export interface Options {
   readonly shouldAdvanceTime?: boolean;
@@ -17,7 +19,7 @@ export interface Options {
  * @param options - Options.
  */
 export function installFakeTimer(options: Options = {}): void {
-  assert.empty(_clock);
+  assert.empty(_clock, "Fake timer is already installed");
 
   _clock = fakeTimers.install({
     advanceTimeDelta: 10,

@@ -238,6 +238,5 @@ test("toBeTrue", () => {
 });
 
 test("wrapError", () => {
-  // eslint-disable-next-line deprecation/deprecation -- Ok
   expect(assert.wrapError(1)()).toBe(1);
 });

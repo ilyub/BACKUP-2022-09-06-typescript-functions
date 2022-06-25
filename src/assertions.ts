@@ -1,6 +1,7 @@
 import { defineFn } from "./core";
-import { ErrorArg } from "./errors";
+import { AssertionError } from "./errors";
 import * as is from "./guards";
+import type { ErrorArgFn } from "./assertions.internal";
 import type { ValidationObject } from "./core";
 import type * as types from "./types";
 
@@ -14,7 +15,7 @@ export const not: {
    */
   readonly empty: <T>(
     value: T,
-    error?: ErrorArg
+    error: ErrorArg
   ) => asserts value is Exclude<T, types.empty>;
 } = {
   empty: (value, error) => {
@@ -29,7 +30,7 @@ export const array: {
    * @param value - Value.
    * @param error - Error.
    */
-  (value: unknown, error?: ErrorArg): asserts value is types.unknowns;
+  (value: unknown, error: ErrorArg): asserts value is types.unknowns;
   /**
    * Asserts that value type is T[].
    *
@@ -41,14 +42,14 @@ export const array: {
   readonly of: <T>(
     value: unknown,
     guard: is.Guard<T>,
-    error?: ErrorArg
+    error: ErrorArg
   ) => asserts value is readonly T[];
 } = defineFn(
-  (value: unknown, error?: ErrorArg) => {
+  (value: unknown, error: ErrorArg) => {
     byGuard(value, is.array, error);
   },
   {
-    of: <T>(value: unknown, guard: is.Guard<T>, error?: ErrorArg) => {
+    of: <T>(value: unknown, guard: is.Guard<T>, error: ErrorArg) => {
       byGuard(value, is.factory(is.array.of, guard), error);
     }
   }
@@ -61,7 +62,7 @@ export const indexedObject: {
    * @param value - Value.
    * @param error - Error.
    */
-  (value: unknown, error?: ErrorArg): asserts value is types.IndexedObject;
+  (value: unknown, error: ErrorArg): asserts value is types.IndexedObject;
   /**
    * Asserts that value type is IndexedObject\<T\>.
    *
@@ -73,14 +74,14 @@ export const indexedObject: {
   readonly of: <T>(
     value: unknown,
     guard: is.Guard<T>,
-    error?: ErrorArg
+    error: ErrorArg
   ) => asserts value is types.IndexedObject<T>;
 } = defineFn(
-  (value: unknown, error?: ErrorArg) => {
+  (value: unknown, error: ErrorArg) => {
     byGuard(value, is.indexedObject, error);
   },
   {
-    of: <T>(value: unknown, guard: is.Guard<T>, error?: ErrorArg) => {
+    of: <T>(value: unknown, guard: is.Guard<T>, error: ErrorArg) => {
       byGuard(value, is.factory(is.indexedObject.of, guard), error);
     }
   }
@@ -93,7 +94,7 @@ export const map: {
    * @param value - Value.
    * @param error - Error.
    */
-  (value: unknown, error?: ErrorArg): asserts value is ReadonlyMap<
+  (value: unknown, error: ErrorArg): asserts value is ReadonlyMap<
     unknown,
     unknown
   >;
@@ -110,10 +111,10 @@ export const map: {
     value: unknown,
     keyGuard: is.Guard<K>,
     valueGuard: is.Guard<V>,
-    error?: ErrorArg
+    error: ErrorArg
   ) => asserts value is ReadonlyMap<K, V>;
 } = defineFn(
-  (value: unknown, error?: ErrorArg) => {
+  (value: unknown, error: ErrorArg) => {
     byGuard(value, is.map, error);
   },
   {
@@ -121,7 +122,7 @@ export const map: {
       value: unknown,
       keyGuard: is.Guard<K>,
       valueGuard: is.Guard<V>,
-      error?: ErrorArg
+      error: ErrorArg
     ) => {
       byGuard(value, is.factory(is.map.of, keyGuard, valueGuard), error);
     }
@@ -135,7 +136,7 @@ export const set: {
    * @param value - Value.
    * @param error - Error.
    */
-  (value: unknown, error?: ErrorArg): asserts value is ReadonlySet<unknown>;
+  (value: unknown, error: ErrorArg): asserts value is ReadonlySet<unknown>;
   /**
    * Asserts that value type is Set\<T\>.
    *
@@ -147,18 +148,20 @@ export const set: {
   readonly of: <T>(
     value: unknown,
     guard: is.Guard<T>,
-    error?: ErrorArg
+    error: ErrorArg
   ) => asserts value is ReadonlySet<T>;
 } = defineFn(
-  (value: unknown, error?: ErrorArg) => {
+  (value: unknown, error: ErrorArg) => {
     byGuard(value, is.set, error);
   },
   {
-    of: <T>(value: unknown, guard: is.Guard<T>, error?: ErrorArg) => {
+    of: <T>(value: unknown, guard: is.Guard<T>, error: ErrorArg) => {
       byGuard(value, is.factory(is.set.of, guard), error);
     }
   }
 );
+
+export type ErrorArg = ErrorArgFn | string;
 
 /**
  * Asserts that value is a boolean.
@@ -168,7 +171,7 @@ export const set: {
  */
 export function boolean(
   value: unknown,
-  error?: ErrorArg
+  error: ErrorArg
 ): asserts value is boolean {
   byGuard(value, is.boolean, error);
 }
@@ -183,11 +186,11 @@ export function boolean(
 export function byGuard<T>(
   value: unknown,
   guard: is.Guard<T>,
-  error?: ErrorArg
+  error: ErrorArg
 ): asserts value is T {
   if (guard(value)) {
     // Valid
-  } else throw ErrorArg.toError(error);
+  } else throw toError(error);
 }
 
 /**
@@ -198,7 +201,7 @@ export function byGuard<T>(
  */
 export function callable<T extends Function>(
   value: unknown,
-  error?: ErrorArg
+  error: ErrorArg
 ): asserts value is T {
   byGuard(value, is.callable, error);
 }
@@ -211,7 +214,7 @@ export function callable<T extends Function>(
  */
 export function empty(
   value: unknown,
-  error?: ErrorArg
+  error: ErrorArg
 ): asserts value is types.empty {
   byGuard(value, is.empty, error);
 }
@@ -226,7 +229,7 @@ export function empty(
 export function enumeration<T extends PropertyKey>(
   value: unknown,
   vo: ValidationObject<T>,
-  error?: ErrorArg
+  error: ErrorArg
 ): asserts value is T {
   byGuard(value, is.factory(is.enumeration, vo), error);
 }
@@ -241,7 +244,7 @@ export function enumeration<T extends PropertyKey>(
 export function instanceOf<T>(
   value: unknown,
   ctor: types.Constructor<T>,
-  error?: ErrorArg
+  error: ErrorArg
 ): asserts value is T {
   byGuard(value, is.factory(is.instanceOf, ctor), error);
 }
@@ -256,7 +259,7 @@ export function instanceOf<T>(
 export function instancesOf<T>(
   value: unknown,
   ctor: types.Constructor<T>,
-  error?: ErrorArg
+  error: ErrorArg
 ): asserts value is readonly T[] {
   byGuard(value, is.factory(is.instancesOf, ctor), error);
 }
@@ -269,7 +272,7 @@ export function instancesOf<T>(
  */
 export function numStr(
   value: unknown,
-  error?: ErrorArg
+  error: ErrorArg
 ): asserts value is types.NumStr {
   byGuard(value, is.numStr, error);
 }
@@ -282,7 +285,7 @@ export function numStr(
  */
 export function number(
   value: unknown,
-  error?: ErrorArg
+  error: ErrorArg
 ): asserts value is number {
   byGuard(value, is.number, error);
 }
@@ -295,7 +298,7 @@ export function number(
  */
 export function object(
   value: unknown,
-  error?: ErrorArg
+  error: ErrorArg
 ): asserts value is object {
   byGuard(value, is.object, error);
 }
@@ -308,7 +311,7 @@ export function object(
  */
 export function string(
   value: unknown,
-  error?: ErrorArg
+  error: ErrorArg
 ): asserts value is string {
   byGuard(value, is.string, error);
 }
@@ -321,7 +324,7 @@ export function string(
  */
 export function stringU(
   value: unknown,
-  error?: ErrorArg
+  error: ErrorArg
 ): asserts value is types.stringU {
   byGuard(value, is.stringU, error);
 }
@@ -334,7 +337,7 @@ export function stringU(
  */
 export function symbol(
   value: unknown,
-  error?: ErrorArg
+  error: ErrorArg
 ): asserts value is symbol {
   byGuard(value, is.symbol, error);
 }
@@ -347,7 +350,7 @@ export function symbol(
  */
 export function toBeFalse(
   value: unknown,
-  error?: ErrorArg
+  error: ErrorArg
 ): asserts value is false {
   byGuard(value, is.false, error);
 }
@@ -360,7 +363,7 @@ export function toBeFalse(
  */
 export function toBeTrue(
   value: unknown,
-  error?: ErrorArg
+  error: ErrorArg
 ): asserts value is true {
   byGuard(value, is.true, error);
 }
@@ -370,8 +373,24 @@ export function toBeTrue(
  *
  * @param e - Error.
  * @returns Wrapped error.
- * @deprecated Use ErrorArg.wrapError instead.
  */
 export function wrapError<T>(e: T): () => T {
   return () => e;
+}
+
+/**
+ * Builds error.
+ *
+ * @param error - Error.
+ * @returns Error.
+ */
+function toError(error?: ErrorArg): unknown {
+  switch (typeof error) {
+    case "function":
+      return error();
+
+    case "string":
+    case "undefined":
+      return new AssertionError(error);
+  }
 }
