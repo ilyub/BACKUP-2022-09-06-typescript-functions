@@ -13,8 +13,11 @@
 - [createValidationObject](core.md#createvalidationobject)
 - [defineFn](core.md#definefn)
 - [evaluate](core.md#evaluate)
+- [freeze](core.md#freeze)
+- [indexed](core.md#indexed)
 - [overload](core.md#overload)
 - [typedef](core.md#typedef)
+- [unfreeze](core.md#unfreeze)
 
 ## Type Aliases
 
@@ -132,6 +135,52 @@ The result of callback execution.
 
 ___
 
+### freeze
+
+▸ **freeze**<`T`\>(`value`): `Readonly`<`T`\>
+
+Marks value as readonly.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `T` | Value. |
+
+#### Returns
+
+`Readonly`<`T`\>
+
+Value.
+
+___
+
+### indexed
+
+▸ **indexed**(`value`): [`IndexedObject`](types_core.md#indexedobject)
+
+Marks value as indexed.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `object` | Value. |
+
+#### Returns
+
+[`IndexedObject`](types_core.md#indexedobject)
+
+Value.
+
+___
+
 ### overload
 
 ▸ **overload**<`T`\>(`callback`): `T`
@@ -179,5 +228,31 @@ Defines value type.
 #### Returns
 
 `T`
+
+Value.
+
+___
+
+### unfreeze
+
+▸ **unfreeze**<`T`\>(`value`): [`Writable`](types_core.md#writable)<`T`\>
+
+Marks value as writable.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `T` | Value. |
+
+#### Returns
+
+[`Writable`](types_core.md#writable)<`T`\>
 
 Value.

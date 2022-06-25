@@ -85,6 +85,8 @@
 - [evaluate](index.md#evaluate)
 - [falseU](index.md#falseu)
 - [fn](index.md#fn)
+- [freeze](index.md#freeze)
+- [indexed](index.md#indexed)
 - [is](index.md#is)
 - [json](index.md#json)
 - [map](index.md#map)
@@ -110,6 +112,7 @@
 - [strings](index.md#strings)
 - [trueU](index.md#trueu)
 - [typedef](index.md#typedef)
+- [unfreeze](index.md#unfreeze)
 - [unknowns](index.md#unknowns)
 - [wait](index.md#wait)
 - [wrapProxyHandler](index.md#wrapproxyhandler)
@@ -590,6 +593,18 @@ Renames and re-exports [function](function.md)
 
 ___
 
+### freeze
+
+Re-exports [freeze](core.md#freeze)
+
+___
+
+### indexed
+
+Re-exports [indexed](core.md#indexed)
+
+___
+
 ### is
 
 Renames and re-exports [guards](guards.md)
@@ -737,6 +752,12 @@ ___
 ### typedef
 
 Re-exports [typedef](core.md#typedef)
+
+___
+
+### unfreeze
+
+Re-exports [unfreeze](core.md#unfreeze)
 
 ___
 

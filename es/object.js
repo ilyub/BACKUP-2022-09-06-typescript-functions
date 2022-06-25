@@ -1,6 +1,7 @@
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-clone] */
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-getPrototypeOf] */
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
+import { indexed } from "./core";
 import * as is from "./guards";
 import * as as from "./inline-assertions";
 /**
@@ -84,18 +85,9 @@ export function filter(obj, predicate) {
             result[key] = value;
     return result;
 }
-/**
- * Marks object as readonly.
- *
- * @param obj - Object.
- * @returns Object.
- */
-export function freeze(obj) {
-    return obj;
-}
 export function get(obj, key, guard = is.unknown, defVal) {
     var _a;
-    return as.byGuard((_a = as.indexedObject(obj)[key]) !== null && _a !== void 0 ? _a : defVal, guard);
+    return as.byGuard((_a = indexed(obj)[key]) !== null && _a !== void 0 ? _a : defVal, guard);
 }
 /**
  * Returns object prototype.
@@ -182,14 +174,5 @@ export function sort(obj, compareFn) {
         ? (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
         : undefined);
     return fromEntries.exhaustive(arr);
-}
-/**
- * Marks object as writable.
- *
- * @param obj - Object.
- * @returns Object.
- */
-export function unfreeze(obj) {
-    return obj;
 }
 //# sourceMappingURL=object.js.map

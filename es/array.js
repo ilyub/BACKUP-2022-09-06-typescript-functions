@@ -1,8 +1,8 @@
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-a-fromIterable] */
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
 import * as assert from "./assertions";
+import { indexed } from "./core";
 import * as is from "./guards";
-import * as as from "./inline-assertions";
 import * as _ from "@skylib/lodash-commonjs-es";
 /**
  * Creates array of pairs ([x, y, z] =\> [[x, y], [y, z]]).
@@ -316,6 +316,6 @@ export function unshiftOrReplaceBy(arr, value, keyOrReduce) {
 function mixedToReduce(keyOrReduce) {
     if (is.callable(keyOrReduce))
         return keyOrReduce;
-    return (obj) => as.indexedObject(obj)[keyOrReduce];
+    return (obj) => indexed(obj)[keyOrReduce];
 }
 //# sourceMappingURL=array.js.map

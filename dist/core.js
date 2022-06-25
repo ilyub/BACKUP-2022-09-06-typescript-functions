@@ -1,7 +1,7 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.typedef = exports.overload = exports.evaluate = exports.createValidationObject = exports.defineFn = void 0;
+exports.unfreeze = exports.typedef = exports.overload = exports.indexed = exports.freeze = exports.evaluate = exports.createValidationObject = exports.defineFn = void 0;
 /**
  * Defines function with properties.
  *
@@ -27,6 +27,26 @@ function evaluate(mixed) {
 }
 exports.evaluate = evaluate;
 /**
+ * Marks value as readonly.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+function freeze(value) {
+    return value;
+}
+exports.freeze = freeze;
+/**
+ * Marks value as indexed.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+function indexed(value) {
+    return value;
+}
+exports.indexed = indexed;
+/**
  * Defines function with overloads.
  *
  * @param callback - Callback.
@@ -46,4 +66,14 @@ function typedef(value) {
     return value;
 }
 exports.typedef = typedef;
+/**
+ * Marks value as writable.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+function unfreeze(value) {
+    return value;
+}
+exports.unfreeze = unfreeze;
 //# sourceMappingURL=core.js.map

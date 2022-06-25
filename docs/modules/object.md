@@ -23,7 +23,6 @@
 - [every](object.md#every)
 - [extend](object.md#extend)
 - [filter](object.md#filter)
-- [freeze](object.md#freeze)
 - [get](object.md#get)
 - [getPrototypeOf](object.md#getprototypeof)
 - [hasOwnProp](object.md#hasownprop)
@@ -35,7 +34,6 @@
 - [size](object.md#size)
 - [some](object.md#some)
 - [sort](object.md#sort)
-- [unfreeze](object.md#unfreeze)
 - [values](object.md#values)
 
 ## Variables
@@ -288,32 +286,6 @@ Filters object by predicate.
 `Partial`<`T`\>
 
 New object.
-
-___
-
-### freeze
-
-▸ **freeze**<`T`\>(`obj`): `Readonly`<`T`\>
-
-Marks object as readonly.
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `obj` | `T` | Object. |
-
-#### Returns
-
-`Readonly`<`T`\>
-
-Object.
 
 ___
 
@@ -645,32 +617,6 @@ Sorts object.
 `T`
 
 New object.
-
-___
-
-### unfreeze
-
-▸ **unfreeze**<`T`\>(`obj`): [`Writable`](types_core.md#writable)<`T`\>
-
-Marks object as writable.
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `obj` | `T` | Object. |
-
-#### Returns
-
-[`Writable`](types_core.md#writable)<`T`\>
-
-Object.
 
 ___
 

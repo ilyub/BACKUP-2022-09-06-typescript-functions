@@ -1,10 +1,11 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-clone] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unfreeze = exports.sort = exports.some = exports.size = exports.set = exports.removeUndefinedKeys = exports.omit = exports.map = exports.hasOwnProp = exports.getPrototypeOf = exports.get = exports.freeze = exports.filter = exports.every = exports.clone = exports.values = exports.keys = exports.fromEntries = exports.extend = exports.entries = exports.defineProperty = exports.assign = void 0;
+exports.sort = exports.some = exports.size = exports.set = exports.removeUndefinedKeys = exports.omit = exports.map = exports.hasOwnProp = exports.getPrototypeOf = exports.get = exports.filter = exports.every = exports.clone = exports.values = exports.keys = exports.fromEntries = exports.extend = exports.entries = exports.defineProperty = exports.assign = void 0;
 const tslib_1 = require("tslib");
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-getPrototypeOf] */
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
+const core_1 = require("./core");
 const is = tslib_1.__importStar(require("./guards"));
 const as = tslib_1.__importStar(require("./inline-assertions"));
 /**
@@ -91,19 +92,9 @@ function filter(obj, predicate) {
     return result;
 }
 exports.filter = filter;
-/**
- * Marks object as readonly.
- *
- * @param obj - Object.
- * @returns Object.
- */
-function freeze(obj) {
-    return obj;
-}
-exports.freeze = freeze;
 function get(obj, key, guard = is.unknown, defVal) {
     var _a;
-    return as.byGuard((_a = as.indexedObject(obj)[key]) !== null && _a !== void 0 ? _a : defVal, guard);
+    return as.byGuard((_a = (0, core_1.indexed)(obj)[key]) !== null && _a !== void 0 ? _a : defVal, guard);
 }
 exports.get = get;
 /**
@@ -201,14 +192,4 @@ function sort(obj, compareFn) {
     return exports.fromEntries.exhaustive(arr);
 }
 exports.sort = sort;
-/**
- * Marks object as writable.
- *
- * @param obj - Object.
- * @returns Object.
- */
-function unfreeze(obj) {
-    return obj;
-}
-exports.unfreeze = unfreeze;
 //# sourceMappingURL=object.js.map

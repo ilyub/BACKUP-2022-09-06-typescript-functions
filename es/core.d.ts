@@ -1,4 +1,4 @@
-import type { AsyncPromise, NumStr, Rec, Sync } from "./types";
+import type { AsyncPromise, IndexedObject, NumStr, Rec, Sync, Writable } from "./types";
 /**
  * Defines function with properties.
  *
@@ -30,6 +30,20 @@ export declare function evaluate<T>(callback: Sync<T>): T;
  */
 export declare function evaluate<T>(mixed: AsyncPromise<T>): Promise<T>;
 /**
+ * Marks value as readonly.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+export declare function freeze<T>(value: T): Readonly<T>;
+/**
+ * Marks value as indexed.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+export declare function indexed(value: object): IndexedObject;
+/**
  * Defines function with overloads.
  *
  * @param callback - Callback.
@@ -43,4 +57,11 @@ export declare function overload<T>(callback: () => T): T;
  * @returns Value.
  */
 export declare function typedef<T>(value: T): T;
+/**
+ * Marks value as writable.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+export declare function unfreeze<T>(value: T): Writable<T>;
 //# sourceMappingURL=core.d.ts.map

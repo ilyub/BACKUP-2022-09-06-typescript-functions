@@ -167,13 +167,6 @@ export declare function every<T extends object>(obj: T, predicate: Predicate<T>)
  */
 export declare function filter<T extends object>(obj: T, predicate: Predicate<T>): Partial<T>;
 /**
- * Marks object as readonly.
- *
- * @param obj - Object.
- * @returns Object.
- */
-export declare function freeze<T extends object>(obj: T): Readonly<T>;
-/**
  * Returns object property.
  *
  * @param obj - Object.
@@ -269,11 +262,4 @@ export declare function sort<K extends string, V>(obj: Rec<K, V>, compareFn?: Co
  * @returns New object.
  */
 export declare function sort<T extends object>(obj: T, compareFn?: CompareFn<T>): T;
-/**
- * Marks object as writable.
- *
- * @param obj - Object.
- * @returns Object.
- */
-export declare function unfreeze<T extends object>(obj: T): Writable<T>;
 //# sourceMappingURL=object.d.ts.map

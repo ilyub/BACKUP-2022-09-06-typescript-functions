@@ -22,6 +22,24 @@ export function evaluate(mixed) {
     return typeof mixed === "function" ? mixed() : mixed;
 }
 /**
+ * Marks value as readonly.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+export function freeze(value) {
+    return value;
+}
+/**
+ * Marks value as indexed.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+export function indexed(value) {
+    return value;
+}
+/**
  * Defines function with overloads.
  *
  * @param callback - Callback.
@@ -37,6 +55,15 @@ export function overload(callback) {
  * @returns Value.
  */
 export function typedef(value) {
+    return value;
+}
+/**
+ * Marks value as writable.
+ *
+ * @param value - Value.
+ * @returns Value.
+ */
+export function unfreeze(value) {
     return value;
 }
 //# sourceMappingURL=core.js.map

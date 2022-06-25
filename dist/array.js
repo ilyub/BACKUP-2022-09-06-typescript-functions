@@ -5,8 +5,8 @@ exports.unshiftOrReplaceBy = exports.unshift = exports.uniqueBy = exports.trunca
 const tslib_1 = require("tslib");
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
 const assert = tslib_1.__importStar(require("./assertions"));
+const core_1 = require("./core");
 const is = tslib_1.__importStar(require("./guards"));
-const as = tslib_1.__importStar(require("./inline-assertions"));
 const _ = tslib_1.__importStar(require("@skylib/lodash-commonjs-es"));
 /**
  * Creates array of pairs ([x, y, z] =\> [[x, y], [y, z]]).
@@ -347,6 +347,6 @@ exports.unshiftOrReplaceBy = unshiftOrReplaceBy;
 function mixedToReduce(keyOrReduce) {
     if (is.callable(keyOrReduce))
         return keyOrReduce;
-    return (obj) => as.indexedObject(obj)[keyOrReduce];
+    return (obj) => (0, core_1.indexed)(obj)[keyOrReduce];
 }
 //# sourceMappingURL=array.js.map
