@@ -44,15 +44,11 @@ export const array: {
     error?: ErrorArg
   ) => asserts value is readonly T[];
 } = defineFn(
-  (value: unknown, error?: ErrorArg): asserts value is types.unknowns => {
+  (value: unknown, error?: ErrorArg) => {
     byGuard(value, is.array, error);
   },
   {
-    of: <T>(
-      value: unknown,
-      guard: is.Guard<T>,
-      error?: ErrorArg
-    ): asserts value is readonly T[] => {
+    of: <T>(value: unknown, guard: is.Guard<T>, error?: ErrorArg) => {
       byGuard(value, is.factory(is.array.of, guard), error);
     }
   }
@@ -80,15 +76,11 @@ export const indexedObject: {
     error?: ErrorArg
   ) => asserts value is types.IndexedObject<T>;
 } = defineFn(
-  (value: unknown, error?: ErrorArg): asserts value is types.IndexedObject => {
+  (value: unknown, error?: ErrorArg) => {
     byGuard(value, is.indexedObject, error);
   },
   {
-    of: <T>(
-      value: unknown,
-      guard: is.Guard<T>,
-      error?: ErrorArg
-    ): asserts value is types.IndexedObject<T> => {
+    of: <T>(value: unknown, guard: is.Guard<T>, error?: ErrorArg) => {
       byGuard(value, is.factory(is.indexedObject.of, guard), error);
     }
   }
@@ -121,10 +113,7 @@ export const map: {
     error?: ErrorArg
   ) => asserts value is ReadonlyMap<K, V>;
 } = defineFn(
-  (
-    value: unknown,
-    error?: ErrorArg
-  ): asserts value is ReadonlyMap<unknown, unknown> => {
+  (value: unknown, error?: ErrorArg) => {
     byGuard(value, is.map, error);
   },
   {
@@ -133,7 +122,7 @@ export const map: {
       keyGuard: is.Guard<K>,
       valueGuard: is.Guard<V>,
       error?: ErrorArg
-    ): asserts value is ReadonlyMap<K, V> => {
+    ) => {
       byGuard(value, is.factory(is.map.of, keyGuard, valueGuard), error);
     }
   }
@@ -161,15 +150,11 @@ export const set: {
     error?: ErrorArg
   ) => asserts value is ReadonlySet<T>;
 } = defineFn(
-  (value: unknown, error?: ErrorArg): asserts value is ReadonlySet<unknown> => {
+  (value: unknown, error?: ErrorArg) => {
     byGuard(value, is.set, error);
   },
   {
-    of: <T>(
-      value: unknown,
-      guard: is.Guard<T>,
-      error?: ErrorArg
-    ): asserts value is ReadonlySet<T> => {
+    of: <T>(value: unknown, guard: is.Guard<T>, error?: ErrorArg) => {
       byGuard(value, is.factory(is.set.of, guard), error);
     }
   }
