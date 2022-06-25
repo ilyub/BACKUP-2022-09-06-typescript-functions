@@ -14,12 +14,12 @@
 
 ### Functions
 
-- [factoryFromValue](function.md#factoryfromvalue)
 - [identity](function.md#identity)
 - [noop](function.md#noop)
 - [noopTrue](function.md#nooptrue)
 - [pipe](function.md#pipe)
 - [run](function.md#run)
+- [valueToGenerator](function.md#valuetogenerator)
 
 ## Type Aliases
 
@@ -28,42 +28,6 @@
 Ƭ **PipeCallbacks**: readonly [`PipeCallback`](../interfaces/function.PipeCallback.md)[]
 
 ## Functions
-
-### factoryFromValue
-
-▸ **factoryFromValue**<`T`\>(`value`): () => `T`
-
-Creates factory function from value.
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `T` | Value. |
-
-#### Returns
-
-`fn`
-
-Factory function.
-
-▸ (): `T`
-
-Creates factory function from value.
-
-##### Returns
-
-`T`
-
-Factory function.
-
-___
 
 ### identity
 
@@ -234,3 +198,39 @@ Executes promise or async function.
 `Promise`<`T`\>
 
 The result of callback execution.
+
+___
+
+### valueToGenerator
+
+▸ **valueToGenerator**<`T`\>(`value`): () => `T`
+
+Creates factory function from value.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `T` | Value. |
+
+#### Returns
+
+`fn`
+
+Factory function.
+
+▸ (): `T`
+
+Creates factory function from value.
+
+##### Returns
+
+`T`
+
+Factory function.

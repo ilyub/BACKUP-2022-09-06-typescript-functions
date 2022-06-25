@@ -10,15 +10,17 @@
 
 ### Functions
 
+- [buildEqualsMatcherResult](test_utils_expect.md#buildequalsmatcherresult)
+- [buildMatcherResult](test_utils_expect.md#buildmatcherresult)
 - [buildResult](test_utils_expect.md#buildresult)
 
 ## Functions
 
-### buildResult
+### buildEqualsMatcherResult
 
-▸ **buildResult**(`pass`, `message`, `got`, `expected`, `immediate?`): [`Result`](../interfaces/test_utils_expect_internal.Result.md)
+▸ **buildEqualsMatcherResult**(`pass`, `message`, `got`, `expected`, `immediate?`): [`Result`](../interfaces/test_utils_expect_internal.Result.md)
 
-Builds result.
+Builds matcher result.
 
 #### Parameters
 
@@ -34,4 +36,48 @@ Builds result.
 
 [`Result`](../interfaces/test_utils_expect_internal.Result.md)
 
-Info.
+Matcher result.
+
+___
+
+### buildMatcherResult
+
+▸ **buildMatcherResult**(`pass`, `expectSuccess`, `expectFailure`): [`Result`](../interfaces/test_utils_expect_internal.Result.md)
+
+Builds matcher result.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `pass` | `boolean` | Pass. |
+| `expectSuccess` | `string` | Expect success message. |
+| `expectFailure` | `string` | Expect failure message. |
+
+#### Returns
+
+[`Result`](../interfaces/test_utils_expect_internal.Result.md)
+
+Matcher result.
+
+___
+
+### buildResult
+
+▸ **buildResult**(`pass`, `message`, `got`, `expected`, `immediate?`): [`Result`](../interfaces/test_utils_expect_internal.Result.md)
+
+**`deprecated`** - Use "buildEqualsResult" function.
+
+#### Parameters
+
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `pass` | `boolean` | `undefined` |
+| `message` | `string` | `undefined` |
+| `got` | `unknown` | `undefined` |
+| `expected` | `unknown` | `undefined` |
+| `immediate` | `boolean` | `false` |
+
+#### Returns
+
+[`Result`](../interfaces/test_utils_expect_internal.Result.md)

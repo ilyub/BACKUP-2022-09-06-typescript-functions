@@ -103,7 +103,7 @@ function freeze(obj) {
 exports.freeze = freeze;
 function get(obj, key, guard = is.unknown, defVal) {
     var _a;
-    return as.byGuard((_a = obj[key]) !== null && _a !== void 0 ? _a : defVal, guard);
+    return as.byGuard((_a = as.indexedObject(obj)[key]) !== null && _a !== void 0 ? _a : defVal, guard);
 }
 exports.get = get;
 /**

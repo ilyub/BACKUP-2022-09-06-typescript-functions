@@ -95,7 +95,7 @@ export function freeze(obj) {
 }
 export function get(obj, key, guard = is.unknown, defVal) {
     var _a;
-    return as.byGuard((_a = obj[key]) !== null && _a !== void 0 ? _a : defVal, guard);
+    return as.byGuard((_a = as.indexedObject(obj)[key]) !== null && _a !== void 0 ? _a : defVal, guard);
 }
 /**
  * Returns object prototype.

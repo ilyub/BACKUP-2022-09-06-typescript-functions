@@ -8,6 +8,8 @@
 
 - [ExpectFromMatcher](test_utils.md#expectfrommatcher)
 - [Options](test_utils.md#options)
+- [buildEqualsMatcherResult](test_utils.md#buildequalsmatcherresult)
+- [buildMatcherResult](test_utils.md#buildmatcherresult)
 - [buildResult](test_utils.md#buildresult)
 - [clock](test_utils.md#clock)
 - [installFakeTimer](test_utils.md#installfaketimer)
@@ -27,6 +29,18 @@ ___
 ### Options
 
 Re-exports [Options](../interfaces/test_utils_fake_timers.Options.md)
+
+___
+
+### buildEqualsMatcherResult
+
+Re-exports [buildEqualsMatcherResult](test_utils_expect.md#buildequalsmatcherresult)
+
+___
+
+### buildMatcherResult
+
+Re-exports [buildMatcherResult](test_utils_expect.md#buildmatcherresult)
 
 ___
 

@@ -11,13 +11,6 @@ export interface PipeCallback<V = unknown, R = unknown> {
 }
 export declare type PipeCallbacks = readonly PipeCallback[];
 /**
- * Creates factory function from value.
- *
- * @param value - Value.
- * @returns Factory function.
- */
-export declare function factoryFromValue<T>(value: T): () => T;
-/**
  * Identity function.
  *
  * @param value - Value.
@@ -66,4 +59,11 @@ export declare function run<T>(callback: Sync<T>): T;
  * @deprecated Use "evaluate" instead.
  */
 export declare function run<T>(mixed: AsyncPromise<T>): Promise<T>;
+/**
+ * Creates factory function from value.
+ *
+ * @param value - Value.
+ * @returns Factory function.
+ */
+export declare function valueToGenerator<T>(value: T): () => T;
 //# sourceMappingURL=function.d.ts.map
