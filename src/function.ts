@@ -1,12 +1,5 @@
-import * as is from "./guards";
 import * as _ from "@skylib/lodash-commonjs-es";
-import type {
-  AsyncPromise,
-  AsyncPromiseSync,
-  Callable,
-  Sync,
-  unknowns
-} from "./types";
+import type { Callable, unknowns } from "./types";
 
 export const noop: Callable = _.noop.bind(_);
 
@@ -76,28 +69,6 @@ export function pipe(value: unknown, ...callbacks: PipeCallbacks): unknown {
   for (const callback of callbacks) value = callback(value);
 
   return value;
-}
-
-/**
- * Executes callback.
- *
- * @param callback - Callback.
- * @returns The result of callback execution.
- * @deprecated Use "evaluate" instead.
- */
-export function run<T>(callback: Sync<T>): T;
-
-/**
- * Executes promise or async function.
- *
- * @param mixed - Promise or async function.
- * @returns The result of callback execution.
- * @deprecated Use "evaluate" instead.
- */
-export async function run<T>(mixed: AsyncPromise<T>): Promise<T>;
-
-export function run<T>(mixed: AsyncPromiseSync<T>): Promise<T> | T {
-  return is.callable(mixed) ? mixed() : mixed;
 }
 
 /**

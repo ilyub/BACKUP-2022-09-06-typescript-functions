@@ -14,19 +14,6 @@ test("pipe", () => {
   expect(fn.pipe(10_000, Math.log10, Math.sqrt)).toBe(2);
 });
 
-test("run", async () => {
-  // eslint-disable-next-line deprecation/deprecation -- Wait for next major version
-  expect(fn.run(() => true)).toBeTrue();
-  // eslint-disable-next-line deprecation/deprecation -- Wait for next major version
-  await expect(fn.run(resolve)).resolves.toBeUndefined();
-  // eslint-disable-next-line deprecation/deprecation -- Wait for next major version
-  await expect(fn.run(resolve())).resolves.toBeUndefined();
-
-  async function resolve(): Promise<void> {
-    await Promise.resolve();
-  }
-});
-
 test("valueToGenerator", () => {
   expect(fn.valueToGenerator(1)()).toBe(1);
 });
