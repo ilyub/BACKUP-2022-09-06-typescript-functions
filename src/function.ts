@@ -23,16 +23,6 @@ export interface PipeCallback<V = unknown, R = unknown> {
 export type PipeCallbacks = readonly PipeCallback[];
 
 /**
- * Creates factory function from value.
- *
- * @param value - Value.
- * @returns Factory function.
- */
-export function factoryFromValue<T>(value: T): () => T {
-  return () => value;
-}
-
-/**
  * Identity function.
  *
  * @param value - Value.
@@ -108,4 +98,14 @@ export async function run<T>(mixed: AsyncPromise<T>): Promise<T>;
 
 export function run<T>(mixed: AsyncPromiseSync<T>): Promise<T> | T {
   return is.callable(mixed) ? mixed() : mixed;
+}
+
+/**
+ * Creates factory function from value.
+ *
+ * @param value - Value.
+ * @returns Factory function.
+ */
+export function valueToGenerator<T>(value: T): () => T {
+  return () => value;
 }
