@@ -24,6 +24,18 @@ module.exports = {
             subOptionsId: "no-o-unfreeze"
           },
           {
+            message: 'Prefer "o.get" function',
+            selector:
+              "CallExpression > .callee[object.name=reflect][property.name=get]",
+            subOptionsId: "no-reflect-get"
+          },
+          {
+            message: 'Prefer "o.set" function',
+            selector:
+              "CallExpression > .callee[object.name=reflect][property.name=set]",
+            subOptionsId: "no-reflect-set"
+          },
+          {
             message: 'Prefer "IndexedObject" type',
             selector:
               "TSTypeReference[typeName.name=Rec] > .typeParameters > .params:first-child > .typeName[name=PropertyKey]",
