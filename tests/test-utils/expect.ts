@@ -13,8 +13,8 @@ test.each([
     immediate: false,
     pass: false
   }
-])("buildEqualsMatcherResult", ({ expected, got, immediate, pass }) => {
-  const result = testUtils.buildEqualsMatcherResult(
+])("buildEqualsResult", ({ expected, got, immediate, pass }) => {
+  const result = testUtils.buildEqualsResult(
     got === expected,
     "Message",
     got,
@@ -29,8 +29,8 @@ test.each([
 test.each([
   { message: "Expect failure", pass: true },
   { message: "Expect success", pass: false }
-])("buildMatcherResult", ({ message, pass }) => {
-  const result = testUtils.buildMatcherResult(
+])("buildResult", ({ message, pass }) => {
+  const result = testUtils.buildResult(
     pass,
     "Expect success",
     "Expect failure"

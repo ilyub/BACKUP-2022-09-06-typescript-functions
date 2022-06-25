@@ -4,11 +4,6 @@ import type { Matchers, Result } from "./expect.internal";
 import type { Extends } from "ts-toolbelt/out/Any/Extends";
 import type { If } from "ts-toolbelt/out/Any/If";
 
-/**
- * @deprecated - Use "buildEqualsResult" function.
- */
-export const buildResult = buildEqualsMatcherResult;
-
 export interface ExpectFromMatcher<K extends keyof Matchers> {
   /**
    * Expect function.
@@ -34,7 +29,7 @@ export interface ExpectFromMatcher<K extends keyof Matchers> {
  * @param immediate - Immediate.
  * @returns Matcher result.
  */
-export function buildEqualsMatcherResult(
+export function buildEqualsResult(
   pass: boolean,
   message: string,
   got: unknown,
@@ -63,7 +58,7 @@ export function buildEqualsMatcherResult(
  * @param expectFailure - Expect failure message.
  * @returns Matcher result.
  */
-export function buildMatcherResult(
+export function buildResult(
   pass: boolean,
   expectSuccess: string,
   expectFailure: string
