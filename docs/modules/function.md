@@ -18,7 +18,6 @@
 - [noop](function.md#noop)
 - [noopTrue](function.md#nooptrue)
 - [pipe](function.md#pipe)
-- [run](function.md#run)
 - [valueToGenerator](function.md#valuetogenerator)
 
 ## Type Aliases
@@ -146,58 +145,6 @@ Applies callbacks to a value.
 `R`
 
 The value returned by callback sequence.
-
-___
-
-### run
-
-▸ **run**<`T`\>(`callback`): `T`
-
-Executes callback.
-
-**`deprecated`** Use "evaluate" instead.
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `callback` | [`Sync`](../interfaces/types_function.Sync.md)<`T`, [`nevers`](types_core.md#nevers)\> | Callback. |
-
-#### Returns
-
-`T`
-
-The result of callback execution.
-
-▸ **run**<`T`\>(`mixed`): `Promise`<`T`\>
-
-Executes promise or async function.
-
-**`deprecated`** Use "evaluate" instead.
-
-#### Type parameters
-
-| Name |
-| :------ |
-| `T` |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `mixed` | [`AsyncPromise`](types_function.md#asyncpromise)<`T`, [`nevers`](types_core.md#nevers)\> | Promise or async function. |
-
-#### Returns
-
-`Promise`<`T`\>
-
-The result of callback execution.
 
 ___
 

@@ -1,7 +1,10 @@
 "use strict";
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-reflect-get] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.wrapProxyHandler = exports.wait = exports.safeAccess = exports.onDemand = exports.createFacade = void 0;
 const tslib_1 = require("tslib");
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-reflect-set] */
+const assert = tslib_1.__importStar(require("./assertions"));
 const cast = tslib_1.__importStar(require("./converters"));
 const core_1 = require("./core");
 const fn = tslib_1.__importStar(require("./function"));
@@ -35,10 +38,12 @@ function createFacade(name, extension) {
     function target(key) {
         if (is.not.empty(key) && key in facadeOwn)
             return facadeOwn;
-        return as.not.empty(_implementation, `Missing facade implementation: ${name}`);
+        assert.not.empty(_implementation, `Missing facade implementation: ${name}`);
+        return _implementation;
     }
     function targetFn() {
-        return as.callable(_implementation, `Facade is not callable: ${name}`);
+        assert.callable(_implementation, `Facade is not callable: ${name}`);
+        return _implementation;
     }
 }
 exports.createFacade = createFacade;

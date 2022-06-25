@@ -10,15 +10,14 @@
 
 ### Functions
 
-- [buildEqualsMatcherResult](test_utils_expect.md#buildequalsmatcherresult)
-- [buildMatcherResult](test_utils_expect.md#buildmatcherresult)
+- [buildEqualsResult](test_utils_expect.md#buildequalsresult)
 - [buildResult](test_utils_expect.md#buildresult)
 
 ## Functions
 
-### buildEqualsMatcherResult
+### buildEqualsResult
 
-▸ **buildEqualsMatcherResult**(`pass`, `message`, `got`, `expected`, `immediate?`): [`Result`](../interfaces/test_utils_expect_internal.Result.md)
+▸ **buildEqualsResult**(`pass`, `message`, `got`, `expected`, `immediate?`): [`Result`](../interfaces/test_utils_expect_internal.Result.md)
 
 Builds matcher result.
 
@@ -40,9 +39,9 @@ Matcher result.
 
 ___
 
-### buildMatcherResult
+### buildResult
 
-▸ **buildMatcherResult**(`pass`, `expectSuccess`, `expectFailure`): [`Result`](../interfaces/test_utils_expect_internal.Result.md)
+▸ **buildResult**(`pass`, `expectSuccess`, `expectFailure`): [`Result`](../interfaces/test_utils_expect_internal.Result.md)
 
 Builds matcher result.
 
@@ -59,25 +58,3 @@ Builds matcher result.
 [`Result`](../interfaces/test_utils_expect_internal.Result.md)
 
 Matcher result.
-
-___
-
-### buildResult
-
-▸ **buildResult**(`pass`, `message`, `got`, `expected`, `immediate?`): [`Result`](../interfaces/test_utils_expect_internal.Result.md)
-
-**`deprecated`** - Use "buildEqualsResult" function.
-
-#### Parameters
-
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `pass` | `boolean` | `undefined` |
-| `message` | `string` | `undefined` |
-| `got` | `unknown` | `undefined` |
-| `expected` | `unknown` | `undefined` |
-| `immediate` | `boolean` | `false` |
-
-#### Returns
-
-[`Result`](../interfaces/test_utils_expect_internal.Result.md)

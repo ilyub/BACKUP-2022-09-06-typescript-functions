@@ -1,12 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.buildMatcherResult = exports.buildEqualsMatcherResult = exports.buildResult = void 0;
+exports.buildResult = exports.buildEqualsResult = void 0;
 const __1 = require("..");
 const jest_matcher_utils_1 = require("jest-matcher-utils");
-/**
- * @deprecated - Use "buildEqualsResult" function.
- */
-exports.buildResult = buildEqualsMatcherResult;
 /**
  * Builds matcher result.
  *
@@ -17,7 +13,7 @@ exports.buildResult = buildEqualsMatcherResult;
  * @param immediate - Immediate.
  * @returns Matcher result.
  */
-function buildEqualsMatcherResult(pass, message, got, expected, immediate = false) {
+function buildEqualsResult(pass, message, got, expected, immediate = false) {
     return {
         message: immediate ? __1.fn.valueToGenerator(factory()) : factory,
         pass
@@ -29,7 +25,7 @@ function buildEqualsMatcherResult(pass, message, got, expected, immediate = fals
         return `${message}:\n${info}`;
     }
 }
-exports.buildEqualsMatcherResult = buildEqualsMatcherResult;
+exports.buildEqualsResult = buildEqualsResult;
 /**
  * Builds matcher result.
  *
@@ -38,8 +34,8 @@ exports.buildEqualsMatcherResult = buildEqualsMatcherResult;
  * @param expectFailure - Expect failure message.
  * @returns Matcher result.
  */
-function buildMatcherResult(pass, expectSuccess, expectFailure) {
+function buildResult(pass, expectSuccess, expectFailure) {
     return { message: () => (pass ? expectFailure : expectSuccess), pass };
 }
-exports.buildMatcherResult = buildMatcherResult;
+exports.buildResult = buildResult;
 //# sourceMappingURL=expect.js.map

@@ -44,8 +44,8 @@
 - [indexedObjectU](guards.md#indexedobjectu)
 - [indexedObjects](guards.md#indexedobjects)
 - [indexedObjectsU](guards.md#indexedobjectsu)
-- [instance](guards.md#instance)
-- [instances](guards.md#instances)
+- [instanceOf](guards.md#instanceof)
+- [instancesOf](guards.md#instancesof)
 - [mapU](guards.md#mapu)
 - [maps](guards.md#maps)
 - [mapsU](guards.md#mapsu)
@@ -439,9 +439,9 @@ value is undefined \| readonly IndexedObject<unknown\>[]
 
 ___
 
-### instance
+### instanceOf
 
-▸ **instance**<`T`\>(`value`, `ctor`): value is T
+▸ **instanceOf**<`T`\>(`value`, `ctor`): value is T
 
 Checks if value type is T.
 
@@ -466,9 +466,9 @@ _True_ if value type is T, _false_ otherwise.
 
 ___
 
-### instances
+### instancesOf
 
-▸ **instances**<`T`\>(`value`, `ctor`): value is readonly T[]
+▸ **instancesOf**<`T`\>(`value`, `ctor`): value is readonly T[]
 
 Checks if value type is T[].
 

@@ -1,4 +1,4 @@
-import type { AsyncPromise, Callable, Sync, unknowns } from "./types";
+import type { Callable, unknowns } from "./types";
 export declare const noop: Callable;
 export interface PipeCallback<V = unknown, R = unknown> {
     /**
@@ -43,22 +43,6 @@ export declare function pipe<V, A, R>(value: V, callback1: PipeCallback<V, A>, c
  * @returns The value returned by callback sequence.
  */
 export declare function pipe<V, A, B, R>(value: V, callback1: PipeCallback<V, A>, callback2: PipeCallback<A, B>, callback3: PipeCallback<B, R>): R;
-/**
- * Executes callback.
- *
- * @param callback - Callback.
- * @returns The result of callback execution.
- * @deprecated Use "evaluate" instead.
- */
-export declare function run<T>(callback: Sync<T>): T;
-/**
- * Executes promise or async function.
- *
- * @param mixed - Promise or async function.
- * @returns The result of callback execution.
- * @deprecated Use "evaluate" instead.
- */
-export declare function run<T>(mixed: AsyncPromise<T>): Promise<T>;
 /**
  * Creates factory function from value.
  *

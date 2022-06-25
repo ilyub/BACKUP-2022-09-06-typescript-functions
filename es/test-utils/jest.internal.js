@@ -1,6 +1,6 @@
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-mockCallsToBe] */
 import { assert } from "..";
-import { buildEqualsMatcherResult } from "./expect";
+import { buildEqualsResult } from "./expect";
 import { isMock } from "./expect.internal";
 import { equals } from "@jest/expect-utils";
 // eslint-disable-next-line no-console -- Ok
@@ -14,11 +14,11 @@ export const matchers = {
         await got();
         const t2 = Date.now();
         const gotTime = t2 - t1;
-        return buildEqualsMatcherResult(Math.abs(gotTime - expected) <= precision, "Unexpected execution time", gotTime, expected);
+        return buildEqualsResult(Math.abs(gotTime - expected) <= precision, "Unexpected execution time", gotTime, expected);
     },
     mockCallsToBe: (got, ...expected) => {
         assert.byGuard(got, isMock, "Expecting mock function");
-        const result = buildEqualsMatcherResult(equals(got.mock.calls, expected), "Unexpected mock calls", got.mock.calls, expected, true);
+        const result = buildEqualsResult(equals(got.mock.calls, expected), "Unexpected mock calls", got.mock.calls, expected, true);
         got.mockClear();
         return result;
     },
@@ -26,7 +26,7 @@ export const matchers = {
         assert.object(got, "Expecting object");
         // eslint-disable-next-line no-warning-comments -- Postponed
         // fixme - Report that removing "return" does not produce error
-        return buildEqualsMatcherResult(got === expected, "Object are not identical", got, expected);
+        return buildEqualsResult(got === expected, "Object are not identical", got, expected);
     }
 };
 //# sourceMappingURL=jest.internal.js.map

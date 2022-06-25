@@ -8,7 +8,6 @@
 
 - [AssertionError](errors.md#assertionerror)
 - [ConversionError](errors.md#conversionerror)
-- [ErrorArg](errors.md#errorarg)
 - [InternalError](errors.md#internalerror)
 
 ## References
@@ -22,12 +21,6 @@ ___
 ### ConversionError
 
 Re-exports [ConversionError](../classes/errors_ConversionError.ConversionError.md)
-
-___
-
-### ErrorArg
-
-Re-exports [ErrorArg](errors_error_arg.md#errorarg)
 
 ___
 

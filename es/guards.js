@@ -247,7 +247,7 @@ export function factory(guard, ...args) {
  * @param ctor - Constructor.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-export function instance(value, ctor) {
+export function instanceOf(value, ctor) {
     return value instanceof ctor;
 }
 /**
@@ -257,7 +257,7 @@ export function instance(value, ctor) {
  * @param ctor - Constructor.
  * @returns _True_ if value type is T[], _false_ otherwise.
  */
-export function instances(value, ctor) {
+export function instancesOf(value, ctor) {
     return array(value) && value.every(v => v instanceof ctor);
 }
 /**

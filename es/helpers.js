@@ -1,3 +1,6 @@
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-reflect-get] */
+/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-reflect-set] */
+import * as assert from "./assertions";
 import * as cast from "./converters";
 import { typedef } from "./core";
 import * as fn from "./function";
@@ -31,10 +34,12 @@ export function createFacade(name, extension) {
     function target(key) {
         if (is.not.empty(key) && key in facadeOwn)
             return facadeOwn;
-        return as.not.empty(_implementation, `Missing facade implementation: ${name}`);
+        assert.not.empty(_implementation, `Missing facade implementation: ${name}`);
+        return _implementation;
     }
     function targetFn() {
-        return as.callable(_implementation, `Facade is not callable: ${name}`);
+        assert.callable(_implementation, `Facade is not callable: ${name}`);
+        return _implementation;
     }
 }
 /**

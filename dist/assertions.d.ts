@@ -1,5 +1,5 @@
-import { ErrorArg } from "./errors";
 import * as is from "./guards";
+import type { ErrorArgFn } from "./assertions.internal";
 import type { ValidationObject } from "./core";
 import type * as types from "./types";
 export declare const not: {
@@ -10,7 +10,7 @@ export declare const not: {
      * @param error - Error.
      * @returns Void.
      */
-    readonly empty: <T>(value: T, error?: ErrorArg) => asserts value is Exclude<T, types.empty>;
+    readonly empty: <T>(value: T, error: ErrorArg) => asserts value is Exclude<T, types.empty>;
 };
 export declare const array: {
     /**
@@ -19,7 +19,7 @@ export declare const array: {
      * @param value - Value.
      * @param error - Error.
      */
-    (value: unknown, error?: ErrorArg): asserts value is types.unknowns;
+    (value: unknown, error: ErrorArg): asserts value is types.unknowns;
     /**
      * Asserts that value type is T[].
      *
@@ -28,7 +28,7 @@ export declare const array: {
      * @param error - Error.
      * @returns Void.
      */
-    readonly of: <T>(value: unknown, guard: is.Guard<T>, error?: ErrorArg) => asserts value is readonly T[];
+    readonly of: <T>(value: unknown, guard: is.Guard<T>, error: ErrorArg) => asserts value is readonly T[];
 };
 export declare const indexedObject: {
     /**
@@ -37,7 +37,7 @@ export declare const indexedObject: {
      * @param value - Value.
      * @param error - Error.
      */
-    (value: unknown, error?: ErrorArg): asserts value is types.IndexedObject;
+    (value: unknown, error: ErrorArg): asserts value is types.IndexedObject;
     /**
      * Asserts that value type is IndexedObject\<T\>.
      *
@@ -46,7 +46,7 @@ export declare const indexedObject: {
      * @param error - Error.
      * @returns Void.
      */
-    readonly of: <T>(value: unknown, guard: is.Guard<T>, error?: ErrorArg) => asserts value is types.IndexedObject<T>;
+    readonly of: <T>(value: unknown, guard: is.Guard<T>, error: ErrorArg) => asserts value is types.IndexedObject<T>;
 };
 export declare const map: {
     /**
@@ -55,7 +55,7 @@ export declare const map: {
      * @param value - Value.
      * @param error - Error.
      */
-    (value: unknown, error?: ErrorArg): asserts value is ReadonlyMap<unknown, unknown>;
+    (value: unknown, error: ErrorArg): asserts value is ReadonlyMap<unknown, unknown>;
     /**
      * Asserts that value type is Map\<K, V\>.
      *
@@ -65,7 +65,7 @@ export declare const map: {
      * @param error - Error.
      * @returns Void.
      */
-    readonly of: <K, V>(value: unknown, keyGuard: is.Guard<K>, valueGuard: is.Guard<V>, error?: ErrorArg) => asserts value is ReadonlyMap<K, V>;
+    readonly of: <K, V>(value: unknown, keyGuard: is.Guard<K>, valueGuard: is.Guard<V>, error: ErrorArg) => asserts value is ReadonlyMap<K, V>;
 };
 export declare const set: {
     /**
@@ -74,7 +74,7 @@ export declare const set: {
      * @param value - Value.
      * @param error - Error.
      */
-    (value: unknown, error?: ErrorArg): asserts value is ReadonlySet<unknown>;
+    (value: unknown, error: ErrorArg): asserts value is ReadonlySet<unknown>;
     /**
      * Asserts that value type is Set\<T\>.
      *
@@ -83,15 +83,16 @@ export declare const set: {
      * @param error - Error.
      * @returns Void.
      */
-    readonly of: <T>(value: unknown, guard: is.Guard<T>, error?: ErrorArg) => asserts value is ReadonlySet<T>;
+    readonly of: <T>(value: unknown, guard: is.Guard<T>, error: ErrorArg) => asserts value is ReadonlySet<T>;
 };
+export declare type ErrorArg = ErrorArgFn | string;
 /**
  * Asserts that value is a boolean.
  *
  * @param value - Value.
  * @param error - Error.
  */
-export declare function boolean(value: unknown, error?: ErrorArg): asserts value is boolean;
+export declare function boolean(value: unknown, error: ErrorArg): asserts value is boolean;
 /**
  * Asserts that value type is T.
  *
@@ -99,21 +100,21 @@ export declare function boolean(value: unknown, error?: ErrorArg): asserts value
  * @param guard - Guard for type T.
  * @param error - Error.
  */
-export declare function byGuard<T>(value: unknown, guard: is.Guard<T>, error?: ErrorArg): asserts value is T;
+export declare function byGuard<T>(value: unknown, guard: is.Guard<T>, error: ErrorArg): asserts value is T;
 /**
  * Asserts that value type is T.
  *
  * @param value - Value.
  * @param error - Error.
  */
-export declare function callable<T extends Function>(value: unknown, error?: ErrorArg): asserts value is T;
+export declare function callable<T extends Function>(value: unknown, error: ErrorArg): asserts value is T;
 /**
  * Asserts that value type is empty.
  *
  * @param value - Value.
  * @param error - Error.
  */
-export declare function empty(value: unknown, error?: ErrorArg): asserts value is types.empty;
+export declare function empty(value: unknown, error: ErrorArg): asserts value is types.empty;
 /**
  * Asserts that value type is T.
  *
@@ -121,7 +122,7 @@ export declare function empty(value: unknown, error?: ErrorArg): asserts value i
  * @param vo - Validation object.
  * @param error - Error.
  */
-export declare function enumeration<T extends PropertyKey>(value: unknown, vo: ValidationObject<T>, error?: ErrorArg): asserts value is T;
+export declare function enumeration<T extends PropertyKey>(value: unknown, vo: ValidationObject<T>, error: ErrorArg): asserts value is T;
 /**
  * Asserts that value type is T.
  *
@@ -129,7 +130,7 @@ export declare function enumeration<T extends PropertyKey>(value: unknown, vo: V
  * @param ctor - Constructor.
  * @param error - Error.
  */
-export declare function instance<T>(value: unknown, ctor: types.Constructor<T>, error?: ErrorArg): asserts value is T;
+export declare function instanceOf<T>(value: unknown, ctor: types.Constructor<T>, error: ErrorArg): asserts value is T;
 /**
  * Asserts that value type is T[].
  *
@@ -137,69 +138,68 @@ export declare function instance<T>(value: unknown, ctor: types.Constructor<T>, 
  * @param ctor - Constructor.
  * @param error - Error.
  */
-export declare function instances<T>(value: unknown, ctor: types.Constructor<T>, error?: ErrorArg): asserts value is readonly T[];
+export declare function instancesOf<T>(value: unknown, ctor: types.Constructor<T>, error: ErrorArg): asserts value is readonly T[];
 /**
  * Asserts that value type is NumStr.
  *
  * @param value - Value.
  * @param error - Error.
  */
-export declare function numStr(value: unknown, error?: ErrorArg): asserts value is types.NumStr;
+export declare function numStr(value: unknown, error: ErrorArg): asserts value is types.NumStr;
 /**
  * Asserts that value is a number.
  *
  * @param value - Value.
  * @param error - Error.
  */
-export declare function number(value: unknown, error?: ErrorArg): asserts value is number;
+export declare function number(value: unknown, error: ErrorArg): asserts value is number;
 /**
  * Asserts that value is an object.
  *
  * @param value - Value.
  * @param error - Error.
  */
-export declare function object(value: unknown, error?: ErrorArg): asserts value is object;
+export declare function object(value: unknown, error: ErrorArg): asserts value is object;
 /**
  * Asserts that value is a string.
  *
  * @param value - Value.
  * @param error - Error.
  */
-export declare function string(value: unknown, error?: ErrorArg): asserts value is string;
+export declare function string(value: unknown, error: ErrorArg): asserts value is string;
 /**
  * Asserts that value is a string.
  *
  * @param value - Value.
  * @param error - Error.
  */
-export declare function stringU(value: unknown, error?: ErrorArg): asserts value is types.stringU;
+export declare function stringU(value: unknown, error: ErrorArg): asserts value is types.stringU;
 /**
  * Asserts that value is a symbol.
  *
  * @param value - Value.
  * @param error - Error.
  */
-export declare function symbol(value: unknown, error?: ErrorArg): asserts value is symbol;
+export declare function symbol(value: unknown, error: ErrorArg): asserts value is symbol;
 /**
  * Asserts value to be _false_.
  *
  * @param value - Value.
  * @param error - Error.
  */
-export declare function toBeFalse(value: unknown, error?: ErrorArg): asserts value is false;
+export declare function toBeFalse(value: unknown, error: ErrorArg): asserts value is false;
 /**
  * Asserts value to be _true_.
  *
  * @param value - Value.
  * @param error - Error.
  */
-export declare function toBeTrue(value: unknown, error?: ErrorArg): asserts value is true;
+export declare function toBeTrue(value: unknown, error: ErrorArg): asserts value is true;
 /**
  * Wraps error.
  *
  * @param e - Error.
  * @returns Wrapped error.
- * @deprecated Use ErrorArg.wrapError instead.
  */
 export declare function wrapError<T>(e: T): () => T;
 //# sourceMappingURL=assertions.d.ts.map

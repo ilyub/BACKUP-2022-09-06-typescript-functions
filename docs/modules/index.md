@@ -21,7 +21,6 @@
 - [DefinedKeys](index.md#definedkeys)
 - [Empty](index.md#empty)
 - [Entry](index.md#entry)
-- [ErrorArg](index.md#errorarg)
 - [Facade](index.md#facade)
 - [FacadeOwnMethods](index.md#facadeownmethods)
 - [IndexedObject](index.md#indexedobject)
@@ -204,12 +203,6 @@ ___
 ### Entry
 
 Re-exports [Entry](types_core.md#entry)
-
-___
-
-### ErrorArg
-
-Re-exports [ErrorArg](errors_error_arg.md#errorarg)
 
 ___
 

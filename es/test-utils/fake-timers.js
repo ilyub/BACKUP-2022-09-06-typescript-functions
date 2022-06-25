@@ -1,14 +1,17 @@
-import { a, as, assert, evaluate, onDemand } from "..";
+import { a, assert, evaluate, onDemand } from "..";
 import * as fakeTimers from "@sinonjs/fake-timers";
 import * as _ from "@skylib/lodash-commonjs-es";
-export const clock = onDemand(() => as.not.empty(_clock, "Fake timer is not installed"));
+export const clock = onDemand(() => {
+    assert.not.empty(_clock, "Fake timer is not installed");
+    return _clock;
+});
 /**
  * Installs fake timer.
  *
  * @param options - Options.
  */
 export function installFakeTimer(options = {}) {
-    assert.empty(_clock);
+    assert.empty(_clock, "Fake timer is already installed");
     _clock = fakeTimers.install(Object.assign({ advanceTimeDelta: 10, loopLimit: 1000, now: Date.now(), shouldAdvanceTime: false, toFake: [] }, options));
 }
 /**

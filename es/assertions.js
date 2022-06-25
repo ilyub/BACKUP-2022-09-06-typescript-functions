@@ -1,5 +1,5 @@
 import { defineFn } from "./core";
-import { ErrorArg } from "./errors";
+import { AssertionError } from "./errors";
 import * as is from "./guards";
 export const not = {
     empty: (value, error) => {
@@ -55,7 +55,7 @@ export function byGuard(value, guard, error) {
         // Valid
     }
     else
-        throw ErrorArg.toError(error);
+        throw toError(error);
 }
 /**
  * Asserts that value type is T.
@@ -92,8 +92,8 @@ export function enumeration(value, vo, error) {
  * @param ctor - Constructor.
  * @param error - Error.
  */
-export function instance(value, ctor, error) {
-    byGuard(value, is.factory(is.instance, ctor), error);
+export function instanceOf(value, ctor, error) {
+    byGuard(value, is.factory(is.instanceOf, ctor), error);
 }
 /**
  * Asserts that value type is T[].
@@ -102,8 +102,8 @@ export function instance(value, ctor, error) {
  * @param ctor - Constructor.
  * @param error - Error.
  */
-export function instances(value, ctor, error) {
-    byGuard(value, is.factory(is.instances, ctor), error);
+export function instancesOf(value, ctor, error) {
+    byGuard(value, is.factory(is.instancesOf, ctor), error);
 }
 /**
  * Asserts that value type is NumStr.
@@ -182,9 +182,23 @@ export function toBeTrue(value, error) {
  *
  * @param e - Error.
  * @returns Wrapped error.
- * @deprecated Use ErrorArg.wrapError instead.
  */
 export function wrapError(e) {
     return () => e;
+}
+/**
+ * Builds error.
+ *
+ * @param error - Error.
+ * @returns Error.
+ */
+function toError(error) {
+    switch (typeof error) {
+        case "function":
+            return error();
+        case "string":
+        case "undefined":
+            return new AssertionError(error);
+    }
 }
 //# sourceMappingURL=assertions.js.map

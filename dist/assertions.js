@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.wrapError = exports.toBeTrue = exports.toBeFalse = exports.symbol = exports.stringU = exports.string = exports.object = exports.number = exports.numStr = exports.instances = exports.instance = exports.enumeration = exports.empty = exports.callable = exports.byGuard = exports.boolean = exports.set = exports.map = exports.indexedObject = exports.array = exports.not = void 0;
+exports.wrapError = exports.toBeTrue = exports.toBeFalse = exports.symbol = exports.stringU = exports.string = exports.object = exports.number = exports.numStr = exports.instancesOf = exports.instanceOf = exports.enumeration = exports.empty = exports.callable = exports.byGuard = exports.boolean = exports.set = exports.map = exports.indexedObject = exports.array = exports.not = void 0;
 const tslib_1 = require("tslib");
 const core_1 = require("./core");
 const errors_1 = require("./errors");
@@ -60,7 +60,7 @@ function byGuard(value, guard, error) {
         // Valid
     }
     else
-        throw errors_1.ErrorArg.toError(error);
+        throw toError(error);
 }
 exports.byGuard = byGuard;
 /**
@@ -101,10 +101,10 @@ exports.enumeration = enumeration;
  * @param ctor - Constructor.
  * @param error - Error.
  */
-function instance(value, ctor, error) {
-    byGuard(value, is.factory(is.instance, ctor), error);
+function instanceOf(value, ctor, error) {
+    byGuard(value, is.factory(is.instanceOf, ctor), error);
 }
-exports.instance = instance;
+exports.instanceOf = instanceOf;
 /**
  * Asserts that value type is T[].
  *
@@ -112,10 +112,10 @@ exports.instance = instance;
  * @param ctor - Constructor.
  * @param error - Error.
  */
-function instances(value, ctor, error) {
-    byGuard(value, is.factory(is.instances, ctor), error);
+function instancesOf(value, ctor, error) {
+    byGuard(value, is.factory(is.instancesOf, ctor), error);
 }
-exports.instances = instances;
+exports.instancesOf = instancesOf;
 /**
  * Asserts that value type is NumStr.
  *
@@ -201,10 +201,24 @@ exports.toBeTrue = toBeTrue;
  *
  * @param e - Error.
  * @returns Wrapped error.
- * @deprecated Use ErrorArg.wrapError instead.
  */
 function wrapError(e) {
     return () => e;
 }
 exports.wrapError = wrapError;
+/**
+ * Builds error.
+ *
+ * @param error - Error.
+ * @returns Error.
+ */
+function toError(error) {
+    switch (typeof error) {
+        case "function":
+            return error();
+        case "string":
+        case "undefined":
+            return new errors_1.AssertionError(error);
+    }
+}
 //# sourceMappingURL=assertions.js.map

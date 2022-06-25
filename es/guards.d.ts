@@ -215,7 +215,7 @@ export declare function factory<T, A extends types.unknowns>(guard: MultiArgGuar
  * @param ctor - Constructor.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-export declare function instance<T>(value: unknown, ctor: types.Constructor<T>): value is T;
+export declare function instanceOf<T>(value: unknown, ctor: types.Constructor<T>): value is T;
 /**
  * Checks if value type is T[].
  *
@@ -223,7 +223,7 @@ export declare function instance<T>(value: unknown, ctor: types.Constructor<T>):
  * @param ctor - Constructor.
  * @returns _True_ if value type is T[], _false_ otherwise.
  */
-export declare function instances<T>(value: unknown, ctor: types.Constructor<T>): value is readonly T[];
+export declare function instancesOf<T>(value: unknown, ctor: types.Constructor<T>): value is readonly T[];
 /**
  * Checks if value is _never_.
  *

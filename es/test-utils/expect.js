@@ -1,10 +1,6 @@
 import { fn } from "..";
 import { printDiffOrStringify, stringify } from "jest-matcher-utils";
 /**
- * @deprecated - Use "buildEqualsResult" function.
- */
-export const buildResult = buildEqualsMatcherResult;
-/**
  * Builds matcher result.
  *
  * @param pass - Pass.
@@ -14,7 +10,7 @@ export const buildResult = buildEqualsMatcherResult;
  * @param immediate - Immediate.
  * @returns Matcher result.
  */
-export function buildEqualsMatcherResult(pass, message, got, expected, immediate = false) {
+export function buildEqualsResult(pass, message, got, expected, immediate = false) {
     return {
         message: immediate ? fn.valueToGenerator(factory()) : factory,
         pass
@@ -34,7 +30,7 @@ export function buildEqualsMatcherResult(pass, message, got, expected, immediate
  * @param expectFailure - Expect failure message.
  * @returns Matcher result.
  */
-export function buildMatcherResult(pass, expectSuccess, expectFailure) {
+export function buildResult(pass, expectSuccess, expectFailure) {
     return { message: () => (pass ? expectFailure : expectSuccess), pass };
 }
 //# sourceMappingURL=expect.js.map

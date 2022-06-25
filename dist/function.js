@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.valueToGenerator = exports.run = exports.pipe = exports.noopTrue = exports.identity = exports.noop = void 0;
+exports.valueToGenerator = exports.pipe = exports.noopTrue = exports.identity = exports.noop = void 0;
 const tslib_1 = require("tslib");
-const is = tslib_1.__importStar(require("./guards"));
 const _ = tslib_1.__importStar(require("@skylib/lodash-commonjs-es"));
 exports.noop = _.noop.bind(_);
 /**
@@ -31,10 +30,6 @@ function pipe(value, ...callbacks) {
     return value;
 }
 exports.pipe = pipe;
-function run(mixed) {
-    return is.callable(mixed) ? mixed() : mixed;
-}
-exports.run = run;
 /**
  * Creates factory function from value.
  *

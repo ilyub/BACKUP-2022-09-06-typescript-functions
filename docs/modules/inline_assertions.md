@@ -29,8 +29,8 @@
 - [indexedObjectU](inline_assertions.md#indexedobjectu)
 - [indexedObjects](inline_assertions.md#indexedobjects)
 - [indexedObjectsU](inline_assertions.md#indexedobjectsu)
-- [instance](inline_assertions.md#instance)
-- [instances](inline_assertions.md#instances)
+- [instanceOf](inline_assertions.md#instanceof)
+- [instancesOf](inline_assertions.md#instancesof)
 - [mapU](inline_assertions.md#mapu)
 - [maps](inline_assertions.md#maps)
 - [mapsU](inline_assertions.md#mapsu)
@@ -69,19 +69,19 @@
 
 ### array
 
-• `Const` **array**: (`value`: `unknown`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => [`unknowns`](types_core.md#unknowns) & `Readonly`<{ `of`: <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => readonly `T`[]  }\>
+• `Const` **array**: (`value`: `unknown`) => [`unknowns`](types_core.md#unknowns) & `Readonly`<{ `of`: <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => readonly `T`[]  }\>
 
 ___
 
 ### indexedObject
 
-• `Const` **indexedObject**: (`value`: `unknown`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => [`IndexedObject`](types_core.md#indexedobject)<`unknown`\> & `Readonly`<{ `of`: <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => [`IndexedObject`](types_core.md#indexedobject)<`T`\>  }\>
+• `Const` **indexedObject**: (`value`: `unknown`) => [`IndexedObject`](types_core.md#indexedobject)<`unknown`\> & `Readonly`<{ `of`: <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => [`IndexedObject`](types_core.md#indexedobject)<`T`\>  }\>
 
 ___
 
 ### map
 
-• `Const` **map**: (`value`: `unknown`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `ReadonlyMap`<`unknown`, `unknown`\> & `Readonly`<{ `of`: <K, V\>(`value`: `unknown`, `keyGuard`: [`Guard`](../interfaces/guards.Guard.md)<`K`\>, `valueGuard`: [`Guard`](../interfaces/guards.Guard.md)<`V`\>, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `ReadonlyMap`<`K`, `V`\>  }\>
+• `Const` **map**: (`value`: `unknown`) => `ReadonlyMap`<`unknown`, `unknown`\> & `Readonly`<{ `of`: <K, V\>(`value`: `unknown`, `keyGuard`: [`Guard`](../interfaces/guards.Guard.md)<`K`\>, `valueGuard`: [`Guard`](../interfaces/guards.Guard.md)<`V`\>) => `ReadonlyMap`<`K`, `V`\>  }\>
 
 ___
 
@@ -93,41 +93,40 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `array` | <V\>(`value`: `V`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `Exclude`<`V`, [`unknowns`](types_core.md#unknowns)\> |
-| `boolean` | <V\>(`value`: `V`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `Exclude`<`V`, `boolean`\> |
-| `empty` | <V\>(`value`: `V`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `Exclude`<`V`, [`empty`](types_core.md#empty)\> |
-| `false` | <V\>(`value`: `V`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `Exclude`<`V`, ``false``\> |
-| `indexedObject` | <V\>(`value`: `V`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `Exclude`<`V`, [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>\> |
-| `map` | <V\>(`value`: `V`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `Exclude`<`V`, `ReadonlyMap`<`unknown`, `unknown`\>\> |
-| `null` | <V\>(`value`: `V`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `Exclude`<`V`, ``null``\> |
-| `numStr` | <V\>(`value`: `V`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `Exclude`<`V`, [`NumStr`](types_core.md#numstr)\> |
-| `number` | <V\>(`value`: `V`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `Exclude`<`V`, `number`\> |
-| `object` | <V\>(`value`: `V`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `Exclude`<`V`, `object`\> |
-| `set` | <V\>(`value`: `V`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `Exclude`<`V`, `ReadonlySet`<`unknown`\>\> |
-| `string` | <V\>(`value`: `V`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `Exclude`<`V`, `string`\> |
-| `stringU` | <V\>(`value`: `V`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `Exclude`<`V`, [`stringU`](types_core.md#stringu)\> |
-| `symbol` | <V\>(`value`: `V`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `Exclude`<`V`, `symbol`\> |
-| `true` | <V\>(`value`: `V`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `Exclude`<`V`, ``true``\> |
-| `undefined` | <V\>(`value`: `V`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `Exclude`<`V`, `undefined`\> |
+| `array` | <V\>(`value`: `V`) => `Exclude`<`V`, [`unknowns`](types_core.md#unknowns)\> |
+| `boolean` | <V\>(`value`: `V`) => `Exclude`<`V`, `boolean`\> |
+| `empty` | <V\>(`value`: `V`) => `Exclude`<`V`, [`empty`](types_core.md#empty)\> |
+| `false` | <V\>(`value`: `V`) => `Exclude`<`V`, ``false``\> |
+| `indexedObject` | <V\>(`value`: `V`) => `Exclude`<`V`, [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>\> |
+| `map` | <V\>(`value`: `V`) => `Exclude`<`V`, `ReadonlyMap`<`unknown`, `unknown`\>\> |
+| `null` | <V\>(`value`: `V`) => `Exclude`<`V`, ``null``\> |
+| `numStr` | <V\>(`value`: `V`) => `Exclude`<`V`, [`NumStr`](types_core.md#numstr)\> |
+| `number` | <V\>(`value`: `V`) => `Exclude`<`V`, `number`\> |
+| `object` | <V\>(`value`: `V`) => `Exclude`<`V`, `object`\> |
+| `set` | <V\>(`value`: `V`) => `Exclude`<`V`, `ReadonlySet`<`unknown`\>\> |
+| `string` | <V\>(`value`: `V`) => `Exclude`<`V`, `string`\> |
+| `stringU` | <V\>(`value`: `V`) => `Exclude`<`V`, [`stringU`](types_core.md#stringu)\> |
+| `symbol` | <V\>(`value`: `V`) => `Exclude`<`V`, `symbol`\> |
+| `true` | <V\>(`value`: `V`) => `Exclude`<`V`, ``true``\> |
+| `undefined` | <V\>(`value`: `V`) => `Exclude`<`V`, `undefined`\> |
 
 ___
 
 ### set
 
-• `Const` **set**: (`value`: `unknown`, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `ReadonlySet`<`unknown`\> & `Readonly`<{ `of`: <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>, `error?`: [`ErrorArg`](errors_error_arg.md#errorarg)) => `ReadonlySet`<`T`\>  }\>
+• `Const` **set**: (`value`: `unknown`) => `ReadonlySet`<`unknown`\> & `Readonly`<{ `of`: <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => `ReadonlySet`<`T`\>  }\>
 
 ## Functions
 
 ### arrayU
 
-▸ **arrayU**(`value`, `error?`): `undefined` \| [`unknowns`](types_core.md#unknowns)
+▸ **arrayU**(`value`): `undefined` \| [`unknowns`](types_core.md#unknowns)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -137,14 +136,13 @@ ___
 
 ### arrays
 
-▸ **arrays**(`value`, `error?`): readonly [`unknowns`](types_core.md#unknowns)[]
+▸ **arrays**(`value`): readonly [`unknowns`](types_core.md#unknowns)[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -154,14 +152,13 @@ ___
 
 ### arraysU
 
-▸ **arraysU**(`value`, `error?`): `undefined` \| readonly [`unknowns`](types_core.md#unknowns)[]
+▸ **arraysU**(`value`): `undefined` \| readonly [`unknowns`](types_core.md#unknowns)[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -171,14 +168,13 @@ ___
 
 ### boolean
 
-▸ **boolean**(`value`, `error?`): `boolean`
+▸ **boolean**(`value`): `boolean`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -188,14 +184,13 @@ ___
 
 ### booleanU
 
-▸ **booleanU**(`value`, `error?`): `undefined` \| `boolean`
+▸ **booleanU**(`value`): `undefined` \| `boolean`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -205,14 +200,13 @@ ___
 
 ### booleans
 
-▸ **booleans**(`value`, `error?`): readonly `boolean`[]
+▸ **booleans**(`value`): readonly `boolean`[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -222,14 +216,13 @@ ___
 
 ### booleansU
 
-▸ **booleansU**(`value`, `error?`): `undefined` \| readonly `boolean`[]
+▸ **booleansU**(`value`): `undefined` \| readonly `boolean`[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -239,7 +232,7 @@ ___
 
 ### byGuard
 
-▸ **byGuard**<`T`\>(`value`, `guard`, `error?`): `T`
+▸ **byGuard**<`T`\>(`value`, `guard`): `T`
 
 Asserts that value type is T.
 
@@ -257,7 +250,6 @@ Asserts that value type is T.
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
 | `guard` | [`Guard`](../interfaces/guards.Guard.md)<`T`\> | Guard for type T. |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
@@ -269,7 +261,7 @@ ___
 
 ### callable
 
-▸ **callable**<`T`\>(`value`, `error?`): `T`
+▸ **callable**<`T`\>(`value`): `T`
 
 Asserts that value type is T.
 
@@ -286,7 +278,6 @@ Asserts that value type is T.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
@@ -298,14 +289,13 @@ ___
 
 ### empty
 
-▸ **empty**(`value`, `error?`): [`empty`](types_core.md#empty)
+▸ **empty**(`value`): [`empty`](types_core.md#empty)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -315,7 +305,7 @@ ___
 
 ### enumeration
 
-▸ **enumeration**<`T`\>(`value`, `vo`, `error?`): `T`
+▸ **enumeration**<`T`\>(`value`, `vo`): `T`
 
 Asserts that value type is T.
 
@@ -333,7 +323,6 @@ Asserts that value type is T.
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
 | `vo` | [`ValidationObject`](core.md#validationobject)<`T`\> | Validation object. |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
@@ -345,14 +334,13 @@ ___
 
 ### false
 
-▸ **false**(`value`, `error?`): ``false``
+▸ **false**(`value`): ``false``
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -362,14 +350,13 @@ ___
 
 ### indexedObjectU
 
-▸ **indexedObjectU**(`value`, `error?`): `undefined` \| [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>
+▸ **indexedObjectU**(`value`): `undefined` \| [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -379,14 +366,13 @@ ___
 
 ### indexedObjects
 
-▸ **indexedObjects**(`value`, `error?`): readonly [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>[]
+▸ **indexedObjects**(`value`): readonly [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -396,14 +382,13 @@ ___
 
 ### indexedObjectsU
 
-▸ **indexedObjectsU**(`value`, `error?`): `undefined` \| readonly [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>[]
+▸ **indexedObjectsU**(`value`): `undefined` \| readonly [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -411,9 +396,9 @@ ___
 
 ___
 
-### instance
+### instanceOf
 
-▸ **instance**<`T`\>(`value`, `ctor`, `error?`): `T`
+▸ **instanceOf**<`T`\>(`value`, `ctor`): `T`
 
 Asserts that value type is T.
 
@@ -431,7 +416,6 @@ Asserts that value type is T.
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
 | `ctor` | [`Constructor`](../interfaces/types_function.Constructor.md)<`T`\> | Constructor. |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
@@ -441,9 +425,9 @@ Value if value type is T.
 
 ___
 
-### instances
+### instancesOf
 
-▸ **instances**<`T`\>(`value`, `ctor`, `error?`): readonly `T`[]
+▸ **instancesOf**<`T`\>(`value`, `ctor`): readonly `T`[]
 
 Asserts that value type is T[].
 
@@ -461,7 +445,6 @@ Asserts that value type is T[].
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
 | `ctor` | [`Constructor`](../interfaces/types_function.Constructor.md)<`T`\> | Constructor. |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) | Error. |
 
 #### Returns
 
@@ -473,14 +456,13 @@ ___
 
 ### mapU
 
-▸ **mapU**(`value`, `error?`): `undefined` \| `ReadonlyMap`<`unknown`, `unknown`\>
+▸ **mapU**(`value`): `undefined` \| `ReadonlyMap`<`unknown`, `unknown`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -490,14 +472,13 @@ ___
 
 ### maps
 
-▸ **maps**(`value`, `error?`): readonly `ReadonlyMap`<`unknown`, `unknown`\>[]
+▸ **maps**(`value`): readonly `ReadonlyMap`<`unknown`, `unknown`\>[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -507,14 +488,13 @@ ___
 
 ### mapsU
 
-▸ **mapsU**(`value`, `error?`): `undefined` \| readonly `ReadonlyMap`<`unknown`, `unknown`\>[]
+▸ **mapsU**(`value`): `undefined` \| readonly `ReadonlyMap`<`unknown`, `unknown`\>[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -524,14 +504,13 @@ ___
 
 ### never
 
-▸ **never**(`value`, `error?`): `never`
+▸ **never**(`value`): `never`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -541,14 +520,13 @@ ___
 
 ### null
 
-▸ **null**(`value`, `error?`): ``null``
+▸ **null**(`value`): ``null``
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -558,14 +536,13 @@ ___
 
 ### numStr
 
-▸ **numStr**(`value`, `error?`): [`NumStr`](types_core.md#numstr)
+▸ **numStr**(`value`): [`NumStr`](types_core.md#numstr)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -575,14 +552,13 @@ ___
 
 ### numStrU
 
-▸ **numStrU**(`value`, `error?`): `undefined` \| [`NumStr`](types_core.md#numstr)
+▸ **numStrU**(`value`): `undefined` \| [`NumStr`](types_core.md#numstr)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -592,14 +568,13 @@ ___
 
 ### numStrs
 
-▸ **numStrs**(`value`, `error?`): readonly [`NumStr`](types_core.md#numstr)[]
+▸ **numStrs**(`value`): readonly [`NumStr`](types_core.md#numstr)[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -609,14 +584,13 @@ ___
 
 ### numStrsU
 
-▸ **numStrsU**(`value`, `error?`): `undefined` \| readonly [`NumStr`](types_core.md#numstr)[]
+▸ **numStrsU**(`value`): `undefined` \| readonly [`NumStr`](types_core.md#numstr)[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -626,14 +600,13 @@ ___
 
 ### number
 
-▸ **number**(`value`, `error?`): `number`
+▸ **number**(`value`): `number`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -643,14 +616,13 @@ ___
 
 ### numberU
 
-▸ **numberU**(`value`, `error?`): `undefined` \| `number`
+▸ **numberU**(`value`): `undefined` \| `number`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -660,14 +632,13 @@ ___
 
 ### numbers
 
-▸ **numbers**(`value`, `error?`): readonly `number`[]
+▸ **numbers**(`value`): readonly `number`[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -677,14 +648,13 @@ ___
 
 ### numbersU
 
-▸ **numbersU**(`value`, `error?`): `undefined` \| readonly `number`[]
+▸ **numbersU**(`value`): `undefined` \| readonly `number`[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -694,14 +664,13 @@ ___
 
 ### object
 
-▸ **object**(`value`, `error?`): `object`
+▸ **object**(`value`): `object`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -711,14 +680,13 @@ ___
 
 ### objectU
 
-▸ **objectU**(`value`, `error?`): `undefined` \| `object`
+▸ **objectU**(`value`): `undefined` \| `object`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -728,14 +696,13 @@ ___
 
 ### objects
 
-▸ **objects**(`value`, `error?`): readonly `object`[]
+▸ **objects**(`value`): readonly `object`[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -745,14 +712,13 @@ ___
 
 ### objectsU
 
-▸ **objectsU**(`value`, `error?`): `undefined` \| readonly `object`[]
+▸ **objectsU**(`value`): `undefined` \| readonly `object`[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -762,14 +728,13 @@ ___
 
 ### setU
 
-▸ **setU**(`value`, `error?`): `undefined` \| `ReadonlySet`<`unknown`\>
+▸ **setU**(`value`): `undefined` \| `ReadonlySet`<`unknown`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -779,14 +744,13 @@ ___
 
 ### sets
 
-▸ **sets**(`value`, `error?`): readonly `ReadonlySet`<`unknown`\>[]
+▸ **sets**(`value`): readonly `ReadonlySet`<`unknown`\>[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -796,14 +760,13 @@ ___
 
 ### setsU
 
-▸ **setsU**(`value`, `error?`): `undefined` \| readonly `ReadonlySet`<`unknown`\>[]
+▸ **setsU**(`value`): `undefined` \| readonly `ReadonlySet`<`unknown`\>[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -813,14 +776,13 @@ ___
 
 ### string
 
-▸ **string**(`value`, `error?`): `string`
+▸ **string**(`value`): `string`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -830,14 +792,13 @@ ___
 
 ### stringU
 
-▸ **stringU**(`value`, `error?`): [`stringU`](types_core.md#stringu)
+▸ **stringU**(`value`): [`stringU`](types_core.md#stringu)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -847,14 +808,13 @@ ___
 
 ### strings
 
-▸ **strings**(`value`, `error?`): readonly `string`[]
+▸ **strings**(`value`): readonly `string`[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -864,14 +824,13 @@ ___
 
 ### stringsU
 
-▸ **stringsU**(`value`, `error?`): `undefined` \| readonly `string`[]
+▸ **stringsU**(`value`): `undefined` \| readonly `string`[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -881,14 +840,13 @@ ___
 
 ### symbol
 
-▸ **symbol**(`value`, `error?`): `symbol`
+▸ **symbol**(`value`): `symbol`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -898,14 +856,13 @@ ___
 
 ### symbolU
 
-▸ **symbolU**(`value`, `error?`): `undefined` \| `symbol`
+▸ **symbolU**(`value`): `undefined` \| `symbol`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -915,14 +872,13 @@ ___
 
 ### symbols
 
-▸ **symbols**(`value`, `error?`): readonly `symbol`[]
+▸ **symbols**(`value`): readonly `symbol`[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -932,14 +888,13 @@ ___
 
 ### symbolsU
 
-▸ **symbolsU**(`value`, `error?`): `undefined` \| readonly `symbol`[]
+▸ **symbolsU**(`value`): `undefined` \| readonly `symbol`[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -949,14 +904,13 @@ ___
 
 ### true
 
-▸ **true**(`value`, `error?`): ``true``
+▸ **true**(`value`): ``true``
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -966,14 +920,13 @@ ___
 
 ### undefined
 
-▸ **undefined**(`value`, `error?`): `undefined`
+▸ **undefined**(`value`): `undefined`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -983,14 +936,13 @@ ___
 
 ### unknown
 
-▸ **unknown**(`value`, `error?`): `unknown`
+▸ **unknown**(`value`): `unknown`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -1000,14 +952,13 @@ ___
 
 ### unknowns
 
-▸ **unknowns**(`value`, `error?`): readonly `unknown`[]
+▸ **unknowns**(`value`): readonly `unknown`[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 
@@ -1017,14 +968,13 @@ ___
 
 ### unknownsU
 
-▸ **unknownsU**(`value`, `error?`): `undefined` \| readonly `unknown`[]
+▸ **unknownsU**(`value`): `undefined` \| readonly `unknown`[]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `value` | `unknown` |
-| `error?` | [`ErrorArg`](errors_error_arg.md#errorarg) |
 
 #### Returns
 

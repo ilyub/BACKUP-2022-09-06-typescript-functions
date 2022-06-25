@@ -17,11 +17,11 @@ exports.matchers = {
         await got();
         const t2 = Date.now();
         const gotTime = t2 - t1;
-        return (0, expect_1.buildEqualsMatcherResult)(Math.abs(gotTime - expected) <= precision, "Unexpected execution time", gotTime, expected);
+        return (0, expect_1.buildEqualsResult)(Math.abs(gotTime - expected) <= precision, "Unexpected execution time", gotTime, expected);
     },
     mockCallsToBe: (got, ...expected) => {
         __1.assert.byGuard(got, expect_internal_1.isMock, "Expecting mock function");
-        const result = (0, expect_1.buildEqualsMatcherResult)((0, expect_utils_1.equals)(got.mock.calls, expected), "Unexpected mock calls", got.mock.calls, expected, true);
+        const result = (0, expect_1.buildEqualsResult)((0, expect_utils_1.equals)(got.mock.calls, expected), "Unexpected mock calls", got.mock.calls, expected, true);
         got.mockClear();
         return result;
     },
@@ -29,7 +29,7 @@ exports.matchers = {
         __1.assert.object(got, "Expecting object");
         // eslint-disable-next-line no-warning-comments -- Postponed
         // fixme - Report that removing "return" does not produce error
-        return (0, expect_1.buildEqualsMatcherResult)(got === expected, "Object are not identical", got, expected);
+        return (0, expect_1.buildEqualsResult)(got === expected, "Object are not identical", got, expected);
     }
 };
 //# sourceMappingURL=jest.internal.js.map

@@ -5,14 +5,17 @@ const tslib_1 = require("tslib");
 const __1 = require("..");
 const fakeTimers = tslib_1.__importStar(require("@sinonjs/fake-timers"));
 const _ = tslib_1.__importStar(require("@skylib/lodash-commonjs-es"));
-exports.clock = (0, __1.onDemand)(() => __1.as.not.empty(_clock, "Fake timer is not installed"));
+exports.clock = (0, __1.onDemand)(() => {
+    __1.assert.not.empty(_clock, "Fake timer is not installed");
+    return _clock;
+});
 /**
  * Installs fake timer.
  *
  * @param options - Options.
  */
 function installFakeTimer(options = {}) {
-    __1.assert.empty(_clock);
+    __1.assert.empty(_clock, "Fake timer is already installed");
     _clock = fakeTimers.install(Object.assign({ advanceTimeDelta: 10, loopLimit: 1000, now: Date.now(), shouldAdvanceTime: false, toFake: [] }, options));
 }
 exports.installFakeTimer = installFakeTimer;

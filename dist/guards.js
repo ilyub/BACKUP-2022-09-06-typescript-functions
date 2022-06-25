@@ -1,8 +1,8 @@
 "use strict";
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-a-fromIterable] */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.instance = exports.factory = exports.enumeration = exports.empty = exports.callable = exports.boolean = exports.not = exports.unknownsU = exports.unknowns = exports.tuple = exports.symbolsU = exports.symbols = exports.symbolU = exports.stringsU = exports.strings = exports.setsU = exports.sets = exports.setU = exports.set = exports.objectsU = exports.objects = exports.objectU = exports.object = exports.numbersU = exports.numbers = exports.numberU = exports.numStrsU = exports.numStrs = exports.numStrU = exports.mapsU = exports.maps = exports.mapU = exports.map = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObjectU = exports.indexedObject = exports.booleansU = exports.booleans = exports.booleanU = exports.arraysU = exports.arrays = exports.arrayU = exports.array = exports.or = exports.and = exports.undefined = exports.true = exports.null = exports.false = void 0;
-exports.unknown = exports.symbol = exports.stringU = exports.string = exports.number = exports.numStr = exports.never = exports.instances = void 0;
+exports.instanceOf = exports.factory = exports.enumeration = exports.empty = exports.callable = exports.boolean = exports.not = exports.unknownsU = exports.unknowns = exports.tuple = exports.symbolsU = exports.symbols = exports.symbolU = exports.stringsU = exports.strings = exports.setsU = exports.sets = exports.setU = exports.set = exports.objectsU = exports.objects = exports.objectU = exports.object = exports.numbersU = exports.numbers = exports.numberU = exports.numStrsU = exports.numStrs = exports.numStrU = exports.mapsU = exports.maps = exports.mapU = exports.map = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObjectU = exports.indexedObject = exports.booleansU = exports.booleans = exports.booleanU = exports.arraysU = exports.arrays = exports.arrayU = exports.array = exports.or = exports.and = exports.undefined = exports.true = exports.null = exports.false = void 0;
+exports.unknown = exports.symbol = exports.stringU = exports.string = exports.number = exports.numStr = exports.never = exports.instancesOf = void 0;
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-entries] */
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
 /* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-values] */
@@ -255,10 +255,10 @@ exports.factory = factory;
  * @param ctor - Constructor.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-function instance(value, ctor) {
+function instanceOf(value, ctor) {
     return value instanceof ctor;
 }
-exports.instance = instance;
+exports.instanceOf = instanceOf;
 /**
  * Checks if value type is T[].
  *
@@ -266,10 +266,10 @@ exports.instance = instance;
  * @param ctor - Constructor.
  * @returns _True_ if value type is T[], _false_ otherwise.
  */
-function instances(value, ctor) {
+function instancesOf(value, ctor) {
     return (0, exports.array)(value) && value.every(v => v instanceof ctor);
 }
-exports.instances = instances;
+exports.instancesOf = instancesOf;
 /**
  * Checks if value is _never_.
  *

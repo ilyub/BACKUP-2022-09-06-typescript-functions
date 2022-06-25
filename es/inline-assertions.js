@@ -1,6 +1,5 @@
-import * as assert from "./assertions";
 import { defineFn } from "./core";
-import { ErrorArg } from "./errors";
+import { AssertionError } from "./errors";
 import * as is from "./guards";
 export { _false as false, _null as null, _true as true, _undefined as undefined };
 export const array = defineFn(factory(is.array), {
@@ -9,13 +8,13 @@ export const array = defineFn(factory(is.array), {
      *
      * @param value - Value.
      * @param guard - Guard for type T.
-     * @param error - Error.
      * @returns Value if value type is T[].
      * @throws Error otherwise.
      */
-    of: (value, guard, error) => {
-        assert.array.of(value, guard, error);
-        return value;
+    of: (value, guard) => {
+        if (is.array.of(value, guard))
+            return value;
+        throw new AssertionError();
     }
 });
 export const arrayU = factory(is.arrayU);
@@ -32,13 +31,13 @@ export const indexedObject = defineFn(factory(is.indexedObject), {
      *
      * @param value - Value.
      * @param guard - Guard for type T.
-     * @param error - Error.
      * @returns Value if value type is IndexedObject\<T\>.
      * @throws Error otherwise.
      */
-    of: (value, guard, error) => {
-        assert.indexedObject.of(value, guard, error);
-        return value;
+    of: (value, guard) => {
+        if (is.indexedObject.of(value, guard))
+            return value;
+        throw new AssertionError();
     }
 });
 export const indexedObjectU = factory(is.indexedObjectU);
@@ -51,13 +50,13 @@ export const map = defineFn(factory(is.map), {
      * @param value - Value.
      * @param keyGuard - Key guard.
      * @param valueGuard - Value guard.
-     * @param error - Error.
      * @returns Value if value type is Map\<K, V\>.
      * @throws Error otherwise.
      */
-    of: (value, keyGuard, valueGuard, error) => {
-        assert.map.of(value, keyGuard, valueGuard, error);
-        return value;
+    of: (value, keyGuard, valueGuard) => {
+        if (is.map.of(value, keyGuard, valueGuard))
+            return value;
+        throw new AssertionError();
     }
 });
 export const mapU = factory(is.mapU);
@@ -82,13 +81,13 @@ export const set = defineFn(factory(is.set), {
      *
      * @param value - Value.
      * @param guard - Guard for type T.
-     * @param error - Error.
      * @returns Value if value type is Set\<T\>.
      * @throws Error otherwise.
      */
-    of: (value, guard, error) => {
-        assert.set.of(value, guard, error);
-        return value;
+    of: (value, guard) => {
+        if (is.set.of(value, guard))
+            return value;
+        throw new AssertionError();
     }
 });
 export const setU = factory(is.setU);
@@ -128,64 +127,64 @@ export const not = {
  *
  * @param value - Value.
  * @param guard - Guard for type T.
- * @param error - Error.
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
-export function byGuard(value, guard, error) {
-    assert.byGuard(value, guard, error);
-    return value;
+export function byGuard(value, guard) {
+    if (guard(value))
+        return value;
+    throw new AssertionError();
 }
 /**
  * Asserts that value type is T.
  *
  * @param value - Value.
- * @param error - Error.
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
-export function callable(value, error) {
-    assert.callable(value, error);
-    return value;
+export function callable(value) {
+    if (is.callable(value))
+        return value;
+    throw new AssertionError();
 }
 /**
  * Asserts that value type is T.
  *
  * @param value - Value.
  * @param vo - Validation object.
- * @param error - Error.
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
-export function enumeration(value, vo, error) {
-    assert.enumeration(value, vo, error);
-    return value;
+export function enumeration(value, vo) {
+    if (is.enumeration(value, vo))
+        return value;
+    throw new AssertionError();
 }
 /**
  * Asserts that value type is T.
  *
  * @param value - Value.
  * @param ctor - Constructor.
- * @param error - Error.
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
-export function instance(value, ctor, error) {
-    assert.instance(value, ctor, error);
-    return value;
+export function instanceOf(value, ctor) {
+    if (is.instanceOf(value, ctor))
+        return value;
+    throw new AssertionError();
 }
 /**
  * Asserts that value type is T[].
  *
  * @param value - Value.
  * @param ctor - Constructor.
- * @param error - Error.
  * @returns Value if value type is T[].
  * @throws Error otherwise.
  */
-export function instances(value, ctor, error) {
-    assert.instances(value, ctor, error);
-    return value;
+export function instancesOf(value, ctor) {
+    if (is.instancesOf(value, ctor))
+        return value;
+    throw new AssertionError();
 }
 const _false = factory(is.false);
 const _null = factory(is.null);
@@ -202,14 +201,13 @@ function factory(guard) {
      * Asserts that value has expected type.
      *
      * @param value - Value.
-     * @param error - Error.
      * @returns Value if value has expected type.
      * @throws Error otherwise.
      */
-    return (value, error) => {
+    return (value) => {
         if (guard(value))
             return value;
-        throw ErrorArg.toError(error);
+        throw new AssertionError();
     };
 }
 /**
@@ -223,14 +221,13 @@ function notFactory(guard) {
      * Asserts that value has expected type.
      *
      * @param value - Value.
-     * @param error - Error.
      * @returns Value if value has expected type.
      * @throws Error otherwise.
      */
-    return (value, error) => {
+    return (value) => {
         if (guard(value))
             return value;
-        throw ErrorArg.toError(error);
+        throw new AssertionError();
     };
 }
 //# sourceMappingURL=inline-assertions.js.map
