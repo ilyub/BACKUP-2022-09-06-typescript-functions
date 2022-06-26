@@ -499,7 +499,6 @@ export const tuple = defineFn(
       value: unknown,
       guard1: Guard<A>,
       guard2: Guard<B>
-      // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
     ): value is readonly [A, B];
 
     /**
@@ -516,7 +515,6 @@ export const tuple = defineFn(
       guard1: Guard<A>,
       guard2: Guard<B>,
       guard3: Guard<C>
-      // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
     ): value is readonly [A, B, C];
 
     /**
@@ -535,7 +533,6 @@ export const tuple = defineFn(
       guard2: Guard<B>,
       guard3: Guard<C>,
       guard4: Guard<D>
-      // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
     ): value is readonly [A, B, C, D];
 
     function result(value: unknown, ...guards: Guards): value is unknown {
@@ -566,7 +563,6 @@ export const tuple = defineFn(
       function result<A, B>(
         guard1: Guard<A>,
         guard2: Guard<B>
-        // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
       ): Guard<readonly [A, B]>;
 
       /**
@@ -581,7 +577,6 @@ export const tuple = defineFn(
         guard1: Guard<A>,
         guard2: Guard<B>,
         guard3: Guard<C>
-        // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
       ): Guard<readonly [A, B, C]>;
 
       /**
@@ -598,7 +593,6 @@ export const tuple = defineFn(
         guard2: Guard<B>,
         guard3: Guard<C>,
         guard4: Guard<D>
-        // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
       ): Guard<readonly [A, B, C, D]>;
 
       function result(...guards: Guards): Guard {

@@ -17,11 +17,9 @@ export function decode(source: stringE): unknown {
   try {
     if (is.not.empty(source)) return JSON.parse(source, reviver);
   } catch {
-    // eslint-disable-next-line unicorn/no-null -- Ok
     return null;
   }
 
-  // eslint-disable-next-line unicorn/no-null -- Ok
   return null;
 }
 
@@ -80,7 +78,6 @@ type Type = "map-5702-3c89-3feb-75d4" | "set-41ef-10c9-ae1f-15e8";
  * @returns New value.
  */
 function replacer(_key: unknown, value: unknown): unknown {
-  // eslint-disable-next-line unicorn/no-null -- Ok
   if (is.empty(value)) return null;
 
   if (is.map(value))
@@ -100,7 +97,6 @@ function replacer(_key: unknown, value: unknown): unknown {
  * @returns New value.
  */
 function reviver(_key: unknown, value: unknown): unknown {
-  // eslint-disable-next-line unicorn/no-null -- Ok
   if (is.empty(value)) return null;
 
   if (isCustomData(value))

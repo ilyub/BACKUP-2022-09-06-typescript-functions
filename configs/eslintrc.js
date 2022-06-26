@@ -230,38 +230,35 @@ module.exports = {
             ],
             subOptionsId: "prefer-undefined-shorthand"
           },
-          //
-          //
-          //
-          // eslint-disable-next-line no-warning-comments -- Postponed
-          // fixme - Review what is below
-          //
-          //
-          //
-          {
-            message: 'Use "defineFn" instead',
-            selector:
-              ":matches(ExportNamedDeclaration, Program, TSModuleBlock) > VariableDeclaration > VariableDeclarator > CallExpression > :matches(.callee[name=assign], .callee[property.name=assign])"
-          },
-          {
-            message: 'Use "evaluate" instead',
-            selector:
-              "CallExpression[arguments.length=0] > ArrowFunctionExpression.callee"
-          },
           {
             message: 'Use "a.first" instead',
             selector:
-              "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=0]"
+              "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=0]",
+            subOptionsId: "prefer-a-first"
           },
           {
             message: 'Use "a.second" instead',
             selector:
-              "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=1]"
+              "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=1]",
+            subOptionsId: "prefer-a-second"
           },
           {
             message: 'Use "a.third" instead',
             selector:
-              "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=2]"
+              "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=2]",
+            subOptionsId: "prefer-a-third"
+          },
+          {
+            message: 'Use "defineFn" instead',
+            selector:
+              ":matches(ExportNamedDeclaration, Program, TSModuleBlock) > VariableDeclaration > VariableDeclarator > CallExpression > :matches(.callee[name=assign], .callee[property.name=assign])",
+            subOptionsId: "prefer-defineFn"
+          },
+          {
+            message: 'Use "evaluate" instead',
+            selector:
+              "CallExpression[arguments.length=0] > ArrowFunctionExpression.callee",
+            subOptionsId: "prefer-evaluate"
           }
         ]
       }

@@ -4,7 +4,7 @@ module.exports = {
       extends: require.resolve(
         "@skylib/config/src/eslintrc.skip-only-export-check"
       ),
-      files: "./src/types/object-keys.ts"
+      files: "./src/types/{configurable,object-keys}.ts"
     }
   ]
 };

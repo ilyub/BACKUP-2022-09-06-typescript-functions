@@ -106,7 +106,6 @@ export const fromEntries = extend(
    * @param entries - Entries.
    * @returns Object.
    */
-  // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
   <K extends PropertyKey, V>(entries: Iterable<Entry<K, V>>) => {
     const result: WritablePartialRecord<K, V> = {};
 
@@ -121,7 +120,6 @@ export const fromEntries = extend(
      * @param entries - Entries.
      * @returns Object.
      */
-    // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
     exhaustive: <K extends PropertyKey, V>(entries: Iterable<Entry<K, V>>) => {
       const result: WritablePartialRecord<K, V> = {};
 

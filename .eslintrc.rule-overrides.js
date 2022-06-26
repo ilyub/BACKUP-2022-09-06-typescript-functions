@@ -3,6 +3,64 @@ const { eslint } = require("@skylib/config");
 module.exports = {
   overrides: [
     {
+      files: "./src/index.ts",
+      rules: {
+        // eslint-disable-next-line @skylib/no-restricted-syntax -- Ok
+        "@skylib/export-all-name": "off"
+      }
+    },
+    {
+      files: "./src/{array,guards}.ts",
+      rules: {
+        // eslint-disable-next-line @skylib/no-restricted-syntax -- Ok
+        "@skylib/no-multi-type-tuples": "off"
+      }
+    },
+    {
+      files: "./src/json.ts",
+      rules: {
+        // eslint-disable-next-line @skylib/no-restricted-syntax -- Ok
+        "unicorn/no-null": "off"
+      }
+    },
+    {
+      files: "./src/object.ts",
+      rules: {
+        "@typescript-eslint/no-shadow": [
+          "warn",
+          {
+            allow: ["entries"],
+            builtinGlobals: true,
+            hoist: "all",
+            ignoreFunctionTypeParameterNameValueShadow: false,
+            ignoreTypeValueShadow: true
+          }
+        ]
+      }
+    },
+    {
+      files: "./src/string.ts",
+      rules: {
+        "@typescript-eslint/no-shadow": [
+          "warn",
+          {
+            allow: ["path"],
+            builtinGlobals: true,
+            hoist: "all",
+            ignoreFunctionTypeParameterNameValueShadow: false,
+            ignoreTypeValueShadow: true
+          }
+        ]
+      }
+    },
+    {
+      files: "./src/types/function.ts",
+      rules: {
+        // eslint-disable-next-line @skylib/no-restricted-syntax -- Ok
+        "@typescript-eslint/no-explicit-any": "off"
+      }
+    },
+    {
       files: "./tests/types/{object,object-keys}.ts",
       rules: {
         // eslint-disable-next-line @skylib/no-restricted-syntax -- Ok
