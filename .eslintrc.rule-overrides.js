@@ -150,11 +150,6 @@ module.exports = {
             ],
             ["helpers"]
           ),
-          ...eslint.boundaries.elementTypes.createRules(
-            filename => ["src2", { dir1: "errors", filename }],
-            ["AssertionError", "ConversionError", "InternalError"],
-            "error-arg"
-          ),
           {
             allow: [["src2", { dir1: "types" }]],
             from: [["src2", { dir1: "types" }]]
