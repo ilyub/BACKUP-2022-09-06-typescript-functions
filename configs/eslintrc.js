@@ -271,7 +271,7 @@ module.exports = {
           "ObjectExpression.arguments:nth-child(2) > Property.properties > :matches(ArrowFunctionExpression, FunctionExpression).value"
         ].map(
           selector =>
-            `:matches(ExportNamedDeclaration, Program, TSModuleBlock) > VariableDeclaration > VariableDeclarator.declarations[id.typeAnnotation=undefined] > CallExpression.init[callee.name=defineFn] > ${selector}`
+            `:matches(ExportNamedDeclaration, Program, TSModuleBlock) > VariableDeclaration > VariableDeclarator[id.typeAnnotation=undefined] > CallExpression[callee.name=defineFn] > ${selector}`
         ),
         noDefaultSelectors: true
       }
