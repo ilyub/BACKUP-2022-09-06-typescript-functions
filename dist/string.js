@@ -4,6 +4,70 @@ exports.unpadMultiline = exports.ucFirst = exports.trimTrailingEmptyLines = expo
 const tslib_1 = require("tslib");
 const core_1 = require("./core");
 const as = tslib_1.__importStar(require("./inline-assertions"));
+exports.path = (0, core_1.evaluate)(() => {
+    return {
+        addLeadingSlash,
+        addTrailingSlash,
+        canonicalize,
+        join,
+        removeLeadingSlash,
+        removeTrailingSlash
+    };
+    /**
+     * Adds leading slash.
+     *
+     * @param path - Path.
+     * @returns New string with leading slash added.
+     */
+    function addLeadingSlash(path) {
+        return `/${removeLeadingSlash(path)}`;
+    }
+    /**
+     * Adds trailing slash.
+     *
+     * @param path - Path.
+     * @returns New string with trailing slash added.
+     */
+    function addTrailingSlash(path) {
+        return `${removeTrailingSlash(path)}/`;
+    }
+    /**
+     * Canonicalizes path.
+     *
+     * @param path - Path.
+     * @returns Canonical path.
+     */
+    function canonicalize(path) {
+        return path.replace(/[/\\]+/gu, "/");
+    }
+    /**
+     * Creates path from parts.
+     *
+     * @param parts - Parts.
+     * @returns Path.
+     */
+    function join(...parts) {
+        return canonicalize(parts.join("/"));
+    }
+    /**
+     * Removes leading slash.
+     *
+     * @param path - Path.
+     * @returns New string with leading slash removed.
+     */
+    function removeLeadingSlash(path) {
+        return canonicalize(path).replace(/^\//u, "");
+    }
+    /**
+     * Removes trailing slash.
+     *
+     * @param path - Path.
+     * @returns New string with trailing slash removed.
+     */
+    function removeTrailingSlash(path) {
+        return canonicalize(path).replace(/\/$/u, "");
+    }
+});
 /**
  * Detects EOL sequence.
  *
@@ -173,69 +237,4 @@ function unpadMultiline(str) {
         : str;
 }
 exports.unpadMultiline = unpadMultiline;
-const _path = (0, core_1.evaluate)(() => {
-    return {
-        addLeadingSlash,
-        addTrailingSlash,
-        canonicalize,
-        join,
-        removeLeadingSlash,
-        removeTrailingSlash
-    };
-    /**
-     * Adds leading slash.
-     *
-     * @param path - Path.
-     * @returns New string with leading slash added.
-     */
-    function addLeadingSlash(path) {
-        return `/${removeLeadingSlash(path)}`;
-    }
-    /**
-     * Adds trailing slash.
-     *
-     * @param path - Path.
-     * @returns New string with trailing slash added.
-     */
-    function addTrailingSlash(path) {
-        return `${removeTrailingSlash(path)}/`;
-    }
-    /**
-     * Canonicalizes path.
-     *
-     * @param path - Path.
-     * @returns Canonical path.
-     */
-    function canonicalize(path) {
-        return path.replace(/[/\\]+/gu, "/");
-    }
-    /**
-     * Creates path from parts.
-     *
-     * @param parts - Parts.
-     * @returns Path.
-     */
-    function join(...parts) {
-        return canonicalize(parts.join("/"));
-    }
-    /**
-     * Removes leading slash.
-     *
-     * @param path - Path.
-     * @returns New string with leading slash removed.
-     */
-    function removeLeadingSlash(path) {
-        return canonicalize(path).replace(/^\//u, "");
-    }
-    /**
-     * Removes trailing slash.
-     *
-     * @param path - Path.
-     * @returns New string with trailing slash removed.
-     */
-    function removeTrailingSlash(path) {
-        return canonicalize(path).replace(/\/$/u, "");
-    }
-});
-exports.path = _path;
 //# sourceMappingURL=string.js.map

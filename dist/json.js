@@ -19,10 +19,8 @@ function decode(source) {
             return JSON.parse(source, reviver);
     }
     catch (_a) {
-        // eslint-disable-next-line unicorn/no-null -- Ok
         return null;
     }
-    // eslint-disable-next-line unicorn/no-null -- Ok
     return null;
 }
 exports.decode = decode;
@@ -74,7 +72,6 @@ const isCustomData = is.object.factory({ type: isType, value: is.unknown }, {});
  * @returns New value.
  */
 function replacer(_key, value) {
-    // eslint-disable-next-line unicorn/no-null -- Ok
     if (is.empty(value))
         return null;
     if (is.map(value))
@@ -91,7 +88,6 @@ function replacer(_key, value) {
  * @returns New value.
  */
 function reviver(_key, value) {
-    // eslint-disable-next-line unicorn/no-null -- Ok
     if (is.empty(value))
         return null;
     if (isCustomData(value))

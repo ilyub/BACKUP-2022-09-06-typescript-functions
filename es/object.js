@@ -29,7 +29,6 @@ export const fromEntries = extend(
  * @param entries - Entries.
  * @returns Object.
  */
-// eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
 (entries) => {
     const result = {};
     for (const entry of entries)
@@ -42,7 +41,6 @@ export const fromEntries = extend(
      * @param entries - Entries.
      * @returns Object.
      */
-    // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
     exhaustive: (entries) => {
         const result = {};
         for (const entry of entries)

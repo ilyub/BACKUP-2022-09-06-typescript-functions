@@ -24,8 +24,6 @@ export const matchers = {
     },
     toBeSameAs: (got, expected) => {
         assert.object(got, "Expecting object");
-        // eslint-disable-next-line no-warning-comments -- Postponed
-        // fixme - Report that removing "return" does not produce error
         return buildEqualsResult(got === expected, "Object are not identical", got, expected);
     }
 };
