@@ -39,6 +39,8 @@
     "config-lint": "node node_modules/@skylib/config/bin/config-lint.js",
     "delete-tags": "php node_modules/@skylib/config/bin/delete-tags.php",
     "full-check": "php node_modules/@skylib/config/bin/full-check.php",
+    "git:unix": "git config --replace-all core.ignorecase false",
+    "git:windows": "git config --replace-all core.ignorecase true",
     "husky:commit-msg": "npm run commitlint",
     "husky:post-commit": "php node_modules/@skylib/config/bin/post-commit.php",
     "husky:pre-commit": "php node_modules/@skylib/config/bin/pre-commit.php",
@@ -63,14 +65,14 @@
     "upgrade": "npm run update-package-force & npm run npm:install"
   },
   "devDependencies": {
-    "@skylib/config": "^3.12.0",
+    "@skylib/config": "^3.14.0",
     "@skylib/eslint-plugin": "^0.1.32",
     "@skylib/typescript-types": "^1.0.0"
   },
   "peerDependencies": {
     "@jest/expect-utils": "*",
     "@sinonjs/fake-timers": ">=9",
-    "@skylib/lodash-commonjs-es": "^0.1.1",
+    "@skylib/lodash-commonjs-es": "^1.0.0",
     "@types/sinonjs__fake-timers": ">=8",
     "jest-extended": ">=2",
     "jest-matcher-utils": "*",
