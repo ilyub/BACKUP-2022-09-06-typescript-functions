@@ -9,11 +9,11 @@ test("not.empty", () => {
 
 test("number", () => {
   expect(cast.number(123)).toBe(123);
-  expect(cast.number(-12.3)).toStrictEqual(-12.3);
+  expect(cast.number(-12.3)).toBe(-12.3);
   expect(cast.number(true)).toBe(1);
   expect(cast.number(false)).toBe(0);
   expect(cast.number(" 12 ")).toBe(12);
-  expect(cast.number(" -12.34 ")).toStrictEqual(-12.34);
+  expect(cast.number(" -12.34 ")).toBe(-12.34);
   expect(cast.number(" 12s ")).toBe(0);
   expect(cast.number("\n")).toBe(0);
   expect(cast.number("\r\n")).toBe(0);
@@ -26,11 +26,11 @@ test("number", () => {
 
 test("numberU", () => {
   expect(cast.numberU(123)).toBe(123);
-  expect(cast.numberU(-12.3)).toStrictEqual(-12.3);
+  expect(cast.numberU(-12.3)).toBe(-12.3);
   expect(cast.numberU(true)).toBe(1);
   expect(cast.numberU(false)).toBe(0);
   expect(cast.numberU(" 12 ")).toBe(12);
-  expect(cast.numberU(" -12.34 ")).toStrictEqual(-12.34);
+  expect(cast.numberU(" -12.34 ")).toBe(-12.34);
   expect(cast.numberU(" 12s ")).toBeUndefined();
   expect(cast.numberU("\n")).toBeUndefined();
   expect(cast.numberU("\r\n")).toBeUndefined();

@@ -1,8 +1,8 @@
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
 
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-entries] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-o-entries] */
 
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-values] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-o-values] */
 
 import type {
   AsyncPromise,

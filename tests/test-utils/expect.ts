@@ -22,7 +22,7 @@ test.each([
     immediate
   );
 
-  expect(result.pass).toStrictEqual(pass);
+  expect(result.pass).toBe(pass);
   expect(result.message()).toStartWith("Message:\n");
 });
 
@@ -36,6 +36,6 @@ test.each([
     "Expect failure"
   );
 
-  expect(result.pass).toStrictEqual(pass);
-  expect(result.message()).toStrictEqual(message);
+  expect(result.pass).toBe(pass);
+  expect(result.message()).toBe(message);
 });

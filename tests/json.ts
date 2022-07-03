@@ -50,7 +50,7 @@ test.each([
     source: new Set(["a", 1])
   }
 ])("encode", ({ expected, source }) => {
-  expect(json.encode(source)).toStrictEqual(expected);
+  expect(json.encode(source)).toBe(expected);
 });
 
 test("eq", () => {

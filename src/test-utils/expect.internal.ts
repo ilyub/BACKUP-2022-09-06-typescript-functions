@@ -3,7 +3,7 @@ import type { Writable, unknowns } from "..";
 
 export type Calls = readonly unknowns[];
 
-export type Matchers = Readonly<jest.Matchers<unknown, unknown>>;
+export type MatchersRecord = Readonly<jest.Matchers<unknown, unknown>>;
 
 export interface Result {
   /**

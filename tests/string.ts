@@ -130,5 +130,5 @@ test.each([
     str: "\r\n  {\r\n    console.log(1);\r\n  }\r\n    "
   }
 ])("unpadMultiline", ({ expected, str }) => {
-  expect(s.unpadMultiline(str)).toStrictEqual(expected);
+  expect(s.unpadMultiline(str)).toBe(expected);
 });

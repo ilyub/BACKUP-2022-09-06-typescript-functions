@@ -76,95 +76,112 @@ module.exports = {
       {
         sources: [
           {
+            _id: "array",
             autoImportSource: "./array",
             localName: "a",
-            sourcePattern: "@skylib/functions/src/array",
+            source: "@skylib/functions/src/array",
             type: "wildcard"
           },
           {
+            _id: "assertions",
             autoImportSource: "./assertions",
             localName: "assert",
-            sourcePattern: "@skylib/functions/src/assertions",
+            source: "@skylib/functions/src/assertions",
             type: "wildcard"
           },
           {
+            _id: "converters",
             autoImportSource: "./converters",
             localName: "cast",
-            sourcePattern: "@skylib/functions/src/converters",
+            source: "@skylib/functions/src/converters",
             type: "wildcard"
           },
           {
+            _id: "function",
             autoImportSource: "./function",
             localName: "fn",
-            sourcePattern: "@skylib/functions/src/function",
+            source: "@skylib/functions/src/function",
             type: "wildcard"
           },
           {
+            _id: "guards",
             autoImportSource: "./guards",
             localName: "is",
-            sourcePattern: "@skylib/functions/src/guards",
+            source: "@skylib/functions/src/guards",
             type: "wildcard"
           },
           {
+            _id: "inline-assertions",
             autoImportSource: "./inline-assertions",
             localName: "as",
-            sourcePattern: "@skylib/functions/src/inline-assertions",
+            source: "@skylib/functions/src/inline-assertions",
             type: "wildcard"
           },
           {
+            _id: "json",
             autoImportSource: "./json",
-            sourcePattern: "@skylib/functions/src/json",
+            source: "@skylib/functions/src/json",
             type: "wildcard"
           },
           {
+            _id: "map",
             autoImportSource: "./map",
-            sourcePattern: "@skylib/functions/src/map",
+            source: "@skylib/functions/src/map",
             type: "wildcard"
           },
           {
+            _id: "number",
             autoImportSource: "./number",
             localName: "num",
-            sourcePattern: "@skylib/functions/src/number",
+            source: "@skylib/functions/src/number",
             type: "wildcard"
           },
           {
+            _id: "object",
             autoImportSource: "./object",
             localName: "o",
-            sourcePattern: "@skylib/functions/src/object",
+            source: "@skylib/functions/src/object",
             type: "wildcard"
           },
           {
+            _id: "program-flow",
             autoImportSource: "./program-flow",
-            sourcePattern: "@skylib/functions/src/program-flow",
+            source: "@skylib/functions/src/program-flow",
             type: "wildcard"
           },
           {
+            _id: "reflect",
             autoImportSource: "./reflect",
-            sourcePattern: "@skylib/functions/src/reflect",
+            source: "@skylib/functions/src/reflect",
             type: "wildcard"
           },
           {
+            _id: "regexp",
             autoImportSource: "./regexp",
-            sourcePattern: "@skylib/functions/src/regexp",
+            source: "@skylib/functions/src/regexp",
             type: "wildcard"
           },
           {
+            _id: "set",
             autoImportSource: "./set",
-            sourcePattern: "@skylib/functions/src/set",
+            source: "@skylib/functions/src/set",
             type: "wildcard"
           },
           {
+            _id: "string",
             autoImportSource: "./string",
             localName: "s",
-            sourcePattern: "@skylib/functions/src/string",
+            source: "@skylib/functions/src/string",
             type: "wildcard"
           },
           {
+            _id: "test-utils",
             autoImportSource: "./test-utils",
-            sourcePattern: "@skylib/functions/src/test-utils",
+            source: "@skylib/functions/src/test-utils",
             type: "wildcard"
           },
           {
+            _id: "types",
             autoImportSource: "./types",
             filesToLint: [
               "./src/assertions.ts",
@@ -173,7 +190,7 @@ module.exports = {
               "./src/guards.ts"
             ],
             localName: "types",
-            sourcePattern: "@skylib/functions/src/types",
+            source: "@skylib/functions/src/types",
             type: "wildcard"
           }
         ]
@@ -211,12 +228,6 @@ module.exports = {
           {
             allow: [["src2", { dir1: "types" }]],
             from: [["src2", { dir1: "types" }]]
-          },
-          // eslint-disable-next-line no-warning-comments -- Wait for @skylib/config update
-          // fixme
-          {
-            allow: "{src1,src2,src3,src4,src5,src6,src7}",
-            from: "{mocks,tests}"
           }
         ]
       }

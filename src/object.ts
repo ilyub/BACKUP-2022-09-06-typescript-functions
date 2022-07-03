@@ -1,8 +1,8 @@
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-clone] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-o-clone] */
 
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-getPrototypeOf] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-o-getPrototypeOf] */
 
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
 
 import { indexed } from "./core";
 import * as is from "./guards";
@@ -137,7 +137,7 @@ export const keys: {
    * @param obj - Object.
    * @returns Object keys.
    */
-  <K extends string, V>(obj: PartialRecord<K, V>): K[];
+  <K extends string, V>(obj: PartialRecord<K, V>): readonly K[];
   /**
    * Typed version of Object.keys.
    *
@@ -154,7 +154,7 @@ export const values: {
    * @param obj - Object.
    * @returns Object values.
    */
-  <K extends string, V>(obj: PartialRecord<K, V>): V[];
+  <K extends string, V>(obj: PartialRecord<K, V>): readonly V[];
   /**
    * Typed version of Object.values.
    *
@@ -340,7 +340,7 @@ export function map<K extends string, V, R>(
  */
 export function omit<T extends object, K extends string & keyof T>(
   obj: T,
-  ...exclude: K[]
+  ...exclude: readonly K[]
 ): StrictOmit<T, K> {
   const excludeSet = new Set<keyof T>(exclude);
 

@@ -1,3 +1,5 @@
+import type { Writable } from "./types";
+
 export class Accumulator<K extends PropertyKey, T> {
   /**
    * Creates class instance.
@@ -56,7 +58,7 @@ export class Accumulator<K extends PropertyKey, T> {
     for (const arr of this.map.values()) yield arr;
   }
 
-  protected readonly map: Map<K, T[]> = new Map();
+  protected readonly map = new Map<K, Writable<readonly T[]>>();
 }
 
 export namespace Accumulator {

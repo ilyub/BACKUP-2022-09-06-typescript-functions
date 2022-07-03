@@ -1,6 +1,6 @@
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-reflect-get] */
+/* disable @skylib/functions/no-restricted-syntax[no-reflect-get] */
 
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-reflect-set] */
+/* disable @skylib/functions/no-restricted-syntax[no-reflect-set] */
 
 import * as assert from "./assertions";
 import * as cast from "./converters";
@@ -26,13 +26,14 @@ export interface FacadeOwnMethods<I> {
 
 export type ProxyHandlerAction = "doDefault" | "throw";
 
+// eslint-disable-next-line @skylib/no-restricted-syntax -- Wait for @skylib/config update
 export type SafeAccess<
   T extends object,
   W extends string & keyof T,
   R extends string & keyof T
 > = Join2<{ [K in W]: T[K] }, { readonly [K in R]: T[K] }>;
 
-export declare type SafeAccessGuards<T, W extends string & keyof T> = {
+export declare type SafeAccessGuardsRecord<T, W extends string & keyof T> = {
   readonly [K in W]: is.Guard<T[K]>;
 };
 
@@ -137,7 +138,7 @@ export function safeAccess<
   R extends string & keyof T
 >(
   obj: T,
-  guards: SafeAccessGuards<T, W>,
+  guards: SafeAccessGuardsRecord<T, W>,
   readonlyKeys: readonly R[] = []
 ): SafeAccess<T, W, R> {
   const guardsMap = new Map<PropertyKey, is.Guard>(o.entries(guards));

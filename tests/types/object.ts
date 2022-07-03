@@ -1,4 +1,4 @@
-/* skylib/eslint-plugin disable @skylib/no-restricted-syntax[prefer-readonly-property] */
+/* disable @skylib/no-restricted-syntax[prefer-readonly-property] */
 
 import type {
   Join2,

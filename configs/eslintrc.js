@@ -4,9 +4,15 @@ module.exports = {
       "warn",
       {
         sources: [
-          { sourcePattern: "@skylib/functions", type: "default" },
           {
+            _id: "main",
+            source: "@skylib/functions",
+            type: "default"
+          },
+          {
+            _id: "test-utils",
             altLocalNames: ["functionsTestUtils"],
+            source: "@skylib/functions/src/test-utils",
             sourcePattern: "@skylib/functions/{dist,es}/test-utils",
             type: "wildcard"
           }
@@ -18,46 +24,37 @@ module.exports = {
       {
         rules: [
           {
+            _id: "no-o-unfreeze",
             message: "Avoid unsafe function (o.unfreeze)",
             selector:
-              "CallExpression > .callee[object.name=o][property.name=unfreeze]",
-            _id: "no-o-unfreeze"
+              "CallExpression > .callee[object.name=o][property.name=unfreeze]"
           },
           {
+            _id: "no-reflect-get",
             message: 'Prefer "o.get" function',
             selector:
-              "CallExpression > .callee[object.name=reflect][property.name=get]",
-            _id: "no-reflect-get"
+              "CallExpression > .callee[object.name=reflect][property.name=get]"
           },
           {
+            _id: "no-reflect-set",
             message: 'Prefer "o.set" function',
             selector:
-              "CallExpression > .callee[object.name=reflect][property.name=set]",
-            _id: "no-reflect-set"
+              "CallExpression > .callee[object.name=reflect][property.name=set]"
           },
           {
+            _id: "prefer-IndexedObject",
             message: 'Prefer "IndexedObject" type',
             selector:
-              "TSTypeReference[typeName.name=Rec] > .typeParameters > .params:first-child > .typeName[name=PropertyKey]",
-            _id: "prefer-IndexedObject"
+              "TSTypeReference[typeName.name=Rec] > .typeParameters > .params:first-child > .typeName[name=PropertyKey]"
           },
           {
+            _id: "prefer-IndexedRecord",
             message: 'Prefer "IndexedRecord" type',
             selector:
-              "TSTypeReference[typeName.name=Rec] > .typeParameters > .params:first-child > .typeName[name=string]",
-            _id: "prefer-IndexedRecord"
+              "TSTypeReference[typeName.name=Rec] > .typeParameters > .params:first-child > .typeName[name=string]"
           },
           {
-            message: 'Prefer "json" module',
-            selector: "Identifier[name=JSON]",
-            _id: "prefer-json"
-          },
-          {
-            message: 'Prefer "reflect" module',
-            selector: "Identifier[name=Reflect]",
-            _id: "prefer-reflect"
-          },
-          {
+            _id: "prefer-NumStr",
             message: 'Prefer "NumStr" type',
             selector: [
               "TSUnionType[types.0.type=TSNumberKeyword][types.1.type=TSStringKeyword]",
@@ -66,129 +63,169 @@ module.exports = {
               "TSUnionType[types.1.type=TSNumberKeyword][types.2.type=TSStringKeyword]",
               "TSUnionType[types.2.type=TSNumberKeyword][types.0.type=TSStringKeyword]",
               "TSUnionType[types.2.type=TSNumberKeyword][types.1.type=TSStringKeyword]"
-            ],
-            _id: "prefer-NumStr"
+            ]
           },
           {
+            _id: "prefer-PartialRecord",
             message: 'Prefer "PartialRecord" type',
             selector:
-              "TSTypeReference[typeName.name=Partial] > .typeParameters > .params:first-child > .typeName[name=Rec]",
-            _id: "prefer-PartialRecord"
+              "TSTypeReference[typeName.name=Partial] > .typeParameters > .params:first-child > .typeName[name=Rec]"
           },
           {
+            _id: "prefer-Writable-shorthand",
             message: 'Prefer "Writable..." type',
             selector: [
               "TSTypeReference[typeName.name=Writable] > .typeParameters > .params:first-child > .typeName[name=IndexedObject]",
               "TSTypeReference[typeName.name=Writable] > .typeParameters > .params:first-child > .typeName[name=IndexedRecord]",
               "TSTypeReference[typeName.name=Writable] > .typeParameters > .params:first-child > .typeName[name=PartialRecord]",
               "TSTypeReference[typeName.name=Writable] > .typeParameters > .params:first-child > .typeName[name=Rec]"
-            ],
-            _id: "prefer-Writable-shorthand"
+            ]
           },
           {
+            _id: "prefer-WritableIndexedObject",
             message: 'Prefer "WritableIndexedObject" type',
             selector:
-              "TSTypeReference[typeName.name=WritableRecord] > .typeParameters > .params:first-child > .typeName[name=PropertyKey]",
-            _id: "prefer-WritableIndexedObject"
+              "TSTypeReference[typeName.name=WritableRecord] > .typeParameters > .params:first-child > .typeName[name=PropertyKey]"
           },
           {
+            _id: "prefer-WritableRecord",
             message: 'Prefer "WritableRecord" type',
-            selector: "Identifier[name=Record]",
-            _id: "prefer-WritableRecord"
+            selector: "Identifier[name=Record]"
           },
           {
+            _id: "prefer-a-first",
+            message: 'Use "a.first" instead',
+            selector:
+              "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=0]"
+          },
+          {
+            _id: "prefer-a-fromIterable",
             message: 'Prefer "a.fromIterable" function',
-            selector: "ArrayExpression[elements.length=1] > SpreadElement",
-            _id: "prefer-a-fromIterable"
+            selector: "ArrayExpression[elements.length=1] > SpreadElement"
           },
           {
+            _id: "prefer-a-second",
+            message: 'Use "a.second" instead',
+            selector:
+              "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=1]"
+          },
+          {
+            _id: "prefer-a-third",
+            message: 'Use "a.third" instead',
+            selector:
+              "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=2]"
+          },
+          {
+            _id: "prefer-cast-number",
             message: 'Prefer "cast.number" function',
-            selector: "CallExpression > .callee[name=Number]",
-            _id: "prefer-cast-number"
+            selector: "CallExpression > .callee[name=Number]"
           },
           {
+            _id: "prefer-cast-string",
             message: 'Prefer "cast.string" function',
-            selector: "CallExpression > .callee[name=String]",
-            _id: "prefer-cast-string"
+            selector: "CallExpression > .callee[name=String]"
           },
           {
+            _id: "prefer-defineFn",
+            message: 'Use "defineFn" instead',
+            selector:
+              ":matches(ExportNamedDeclaration, Program, TSModuleBlock) > VariableDeclaration > VariableDeclarator > CallExpression > :matches(.callee[name=assign], .callee[property.name=assign])"
+          },
+          {
+            _id: "prefer-evaluate",
+            message: 'Use "evaluate" instead',
+            selector:
+              "CallExpression[arguments.length=0] > ArrowFunctionExpression.callee"
+          },
+          {
+            _id: "prefer-json",
+            message: 'Prefer "json" module',
+            selector: "Identifier[name=JSON]"
+          },
+          {
+            _id: "prefer-mockCallsToBe",
             message: 'Prefer "mockCallsToBe" function',
             selector: [
               "Identifier[name=mockClear]",
               "Identifier[name=toHaveBeenCalled]",
               "Identifier[name=toHaveBeenCalledTimes]",
               "Identifier[name=toHaveBeenCalledWith]"
-            ],
-            _id: "prefer-mockCallsToBe"
+            ]
           },
           {
+            _id: "prefer-o-assign",
             message: 'Prefer "o.assign" function',
             selector:
-              "CallExpression > .callee[object.name=Object][property.name=assign]",
-            _id: "prefer-o-assign"
+              "CallExpression > .callee[object.name=Object][property.name=assign]"
           },
           {
+            _id: "prefer-o-clone",
             message: 'Prefer "o.clone" function',
-            selector: "ObjectExpression[properties.length=1] > SpreadElement",
-            _id: "prefer-o-clone"
+            selector: "ObjectExpression[properties.length=1] > SpreadElement"
           },
           {
+            _id: "prefer-o-defineProperty",
             message: 'Prefer "o.defineProperty" function',
             selector:
-              "CallExpression > .callee[object.name=Object][property.name=defineProperty]",
-            _id: "prefer-o-defineProperty"
+              "CallExpression > .callee[object.name=Object][property.name=defineProperty]"
           },
           {
+            _id: "prefer-o-entries",
             message: 'Prefer "o.entries" function',
             selector:
-              "CallExpression > .callee[object.name=Object][property.name=entries]",
-            _id: "prefer-o-entries"
+              "CallExpression > .callee[object.name=Object][property.name=entries]"
           },
           {
+            _id: "prefer-o-getPrototypeOf",
             message: 'Prefer "o.getPrototypeOf" function',
             selector:
-              "CallExpression > .callee[object.name=Object][property.name=getPrototypeOf]",
-            _id: "prefer-o-getPrototypeOf"
+              "CallExpression > .callee[object.name=Object][property.name=getPrototypeOf]"
           },
           {
+            _id: "prefer-o-hasOwnProp",
             message: 'Prefer "o.hasOwnProp" function',
             selector:
-              "CallExpression > .callee[object.object.object.name=Object][object.object.property.name=prototype][object.property.name=hasOwnProperty][property.name=call]",
-            _id: "prefer-o-hasOwnProp"
+              "CallExpression > .callee[object.object.object.name=Object][object.object.property.name=prototype][object.property.name=hasOwnProperty][property.name=call]"
           },
           {
+            _id: "prefer-o-keys",
             message: 'Prefer "o.keys" function',
             selector:
-              "CallExpression > .callee[object.name=Object][property.name=keys]",
-            _id: "prefer-o-keys"
+              "CallExpression > .callee[object.name=Object][property.name=keys]"
           },
           {
+            _id: "prefer-o-values",
             message: 'Prefer "o.values" function',
             selector:
-              "CallExpression > .callee[object.name=Object][property.name=values]",
-            _id: "prefer-o-values"
+              "CallExpression > .callee[object.name=Object][property.name=values]"
           },
           {
+            _id: "prefer-programFlow-clearInterval",
             message: 'Prefer "programFlow.clearInterval" function',
-            selector: "CallExpression > .callee[name=clearInterval]",
-            _id: "prefer-programFlow-clearInterval"
+            selector: "CallExpression > .callee[name=clearInterval]"
           },
           {
+            _id: "prefer-programFlow-clearTimeout",
             message: 'Prefer "programFlow.clearTimeout" function',
-            selector: "CallExpression > .callee[name=clearTimeout]",
-            _id: "prefer-programFlow-clearTimeout"
+            selector: "CallExpression > .callee[name=clearTimeout]"
           },
           {
+            _id: "prefer-programFlow-setInterval",
             message: 'Prefer "programFlow.setInterval" function',
-            selector: "CallExpression > .callee[name=setInterval]",
-            _id: "prefer-programFlow-setInterval"
+            selector: "CallExpression > .callee[name=setInterval]"
           },
           {
+            _id: "prefer-programFlow-setTimeout",
             message: 'Prefer "programFlow.setTimeout" function',
-            selector: "CallExpression > .callee[name=setTimeout]",
-            _id: "prefer-programFlow-setTimeout"
+            selector: "CallExpression > .callee[name=setTimeout]"
           },
           {
+            _id: "prefer-reflect",
+            message: 'Prefer "reflect" module',
+            selector: "Identifier[name=Reflect]"
+          },
+          {
+            _id: "prefer-undefined-shorthand",
             message: 'Prefer "...U" type',
             selector: [
               "TSUnionType[types.0.literal.raw=/(?:false|true)/u][types.1.type=TSUndefinedKeyword]",
@@ -227,38 +264,7 @@ module.exports = {
               "TSUnionType[types.1.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.2.typeName.name=empty]",
               "TSUnionType[types.2.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.0.typeName.name=empty]",
               "TSUnionType[types.2.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.1.typeName.name=empty]"
-            ],
-            _id: "prefer-undefined-shorthand"
-          },
-          {
-            message: 'Use "a.first" instead',
-            selector:
-              "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=0]",
-            _id: "prefer-a-first"
-          },
-          {
-            message: 'Use "a.second" instead',
-            selector:
-              "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=1]",
-            _id: "prefer-a-second"
-          },
-          {
-            message: 'Use "a.third" instead',
-            selector:
-              "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=2]",
-            _id: "prefer-a-third"
-          },
-          {
-            message: 'Use "defineFn" instead',
-            selector:
-              ":matches(ExportNamedDeclaration, Program, TSModuleBlock) > VariableDeclaration > VariableDeclarator > CallExpression > :matches(.callee[name=assign], .callee[property.name=assign])",
-            _id: "prefer-defineFn"
-          },
-          {
-            message: 'Use "evaluate" instead',
-            selector:
-              "CallExpression[arguments.length=0] > ArrowFunctionExpression.callee",
-            _id: "prefer-evaluate"
+            ]
           }
         ]
       }

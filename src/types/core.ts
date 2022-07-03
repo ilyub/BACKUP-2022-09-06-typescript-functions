@@ -1,10 +1,10 @@
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-IndexedObject] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-IndexedObject] */
 
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-NumStr] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-NumStr] */
 
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-WritableIndexedObject] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-WritableIndexedObject] */
 
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-undefined-shorthand] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-undefined-shorthand] */
 
 // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
 export type Entry<K extends PropertyKey, T> = readonly [K, T];

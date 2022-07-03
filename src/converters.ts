@@ -1,6 +1,6 @@
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-cast-number] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-cast-number] */
 
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
 
 import * as is from "./guards";
 import type * as types from "./types";
@@ -74,5 +74,5 @@ export function string(value: unknown): string {
 export function stringU(value: unknown): types.stringU {
   const str = is.not.empty(value) ? String(value) : "";
 
-  return str ? str : undefined;
+  return str || undefined;
 }

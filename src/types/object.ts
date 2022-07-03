@@ -44,6 +44,7 @@ export type OptionalUndefinedStyle<T extends object> = Join4<
   { readonly [K in ReadonlyUndefinedKeys<T>]?: T[K] | undefined }
 >;
 
+// eslint-disable-next-line @skylib/no-restricted-syntax -- Ok
 export type PickKeys<
   T extends object,
   E,

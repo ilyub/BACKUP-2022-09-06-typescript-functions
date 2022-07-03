@@ -1,3 +1,5 @@
+/* disable @skylib/no-restricted-syntax[consistent-non-array-type-name] */
+
 import type {
   ObjectKeysDefined,
   ObjectKeysOption,

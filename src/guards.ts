@@ -1,10 +1,10 @@
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-a-fromIterable] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-a-fromIterable] */
 
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-entries] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-o-entries] */
 
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
 
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-o-values] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-o-values] */
 
 import { defineFn, overload, typedef } from "./core";
 import type { ValidationObject } from "./core";
@@ -358,8 +358,8 @@ export const object = defineFn(
        * @returns Object guard.
        */
       function result<R extends object, O extends object>(
-        required: ObjectGuards<R, keyof R>,
-        optional: ObjectGuards<O, keyof O>
+        required: GuardsRecord<R, keyof R>,
+        optional: GuardsRecord<O, keyof O>
       ): Guard<types.OptionalStyle<Partial<O>> & types.UndefinedStyle<R>>;
 
       /**
@@ -370,13 +370,13 @@ export const object = defineFn(
        * @returns Object guard.
        */
       function result<T extends object>(
-        required: ObjectGuards<T, RequiredKeys<T>>,
-        optional: ObjectGuards<T, OptionalKeys<T>>
+        required: GuardsRecord<T, RequiredKeys<T>>,
+        optional: GuardsRecord<T, OptionalKeys<T>>
       ): Guard<T>;
 
       function result<T extends object>(
-        required: ObjectGuards<T, RequiredKeys<T>>,
-        optional: ObjectGuards<T, OptionalKeys<T>>
+        required: GuardsRecord<T, RequiredKeys<T>>,
+        optional: GuardsRecord<T, OptionalKeys<T>>
       ): Guard<T> {
         return (value): value is T => object.of(value, required, optional);
       }
@@ -394,8 +394,8 @@ export const object = defineFn(
        */
       function result<R extends object, O extends object>(
         value: unknown,
-        required: ObjectGuards<R, keyof R>,
-        optional: ObjectGuards<O, keyof O>
+        required: GuardsRecord<R, keyof R>,
+        optional: GuardsRecord<O, keyof O>
       ): value is types.OptionalStyle<Partial<O>> & types.UndefinedStyle<R>;
 
       /**
@@ -408,14 +408,14 @@ export const object = defineFn(
        */
       function result<T extends object>(
         value: unknown,
-        required: ObjectGuards<T, RequiredKeys<T>>,
-        optional: ObjectGuards<T, OptionalKeys<T>>
+        required: GuardsRecord<T, RequiredKeys<T>>,
+        optional: GuardsRecord<T, OptionalKeys<T>>
       ): value is T;
 
       function result<T extends object>(
         value: unknown,
-        required: ObjectGuards<T, RequiredKeys<T>>,
-        optional: ObjectGuards<T, OptionalKeys<T>>
+        required: GuardsRecord<T, RequiredKeys<T>>,
+        optional: GuardsRecord<T, OptionalKeys<T>>
       ): value is T {
         return (
           indexedObject(value) &&
@@ -659,6 +659,10 @@ export interface Guard<T = unknown> {
 
 export type Guards = readonly Guard[];
 
+export type GuardsRecord<T, K extends keyof T = keyof T> = {
+  readonly [L in K]-?: Guard<T[L]>;
+};
+
 export interface MultiArgGuard<T, A extends types.unknowns> {
   /**
    * Checks if value type is T.
@@ -669,10 +673,6 @@ export interface MultiArgGuard<T, A extends types.unknowns> {
    */
   (value: unknown, ...args: A): value is T;
 }
-
-export type ObjectGuards<T, K extends keyof T = keyof T> = {
-  readonly [L in K]-?: Guard<T[L]>;
-};
 
 /**
  * Checks if value is a boolean.
