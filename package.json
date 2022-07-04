@@ -66,7 +66,7 @@
   },
   "devDependencies": {
     "@skylib/config": "^3.15.0",
-    "@skylib/eslint-plugin": "^0.1.34",
+    "@skylib/eslint-plugin": "^0.1.36",
     "@skylib/typescript-types": "^1.0.0"
   },
   "peerDependencies": {
