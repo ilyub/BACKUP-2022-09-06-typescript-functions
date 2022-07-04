@@ -77,7 +77,7 @@ export declare const keys: {
      * @param obj - Object.
      * @returns Object keys.
      */
-    <K extends string, V>(obj: PartialRecord<K, V>): K[];
+    <K extends string, V>(obj: PartialRecord<K, V>): readonly K[];
     /**
      * Typed version of Object.keys.
      *
@@ -93,7 +93,7 @@ export declare const values: {
      * @param obj - Object.
      * @returns Object values.
      */
-    <K extends string, V>(obj: PartialRecord<K, V>): V[];
+    <K extends string, V>(obj: PartialRecord<K, V>): readonly V[];
     /**
      * Typed version of Object.values.
      *
@@ -215,7 +215,7 @@ export declare function map<K extends string, V, R>(obj: Rec<K, V>, callback: (v
  * @param exclude - Keys to omit.
  * @returns New object.
  */
-export declare function omit<T extends object, K extends string & keyof T>(obj: T, ...exclude: K[]): StrictOmit<T, K>;
+export declare function omit<T extends object, K extends string & keyof T>(obj: T, ...exclude: readonly K[]): StrictOmit<T, K>;
 /**
  * Removes undefined keys.
  *

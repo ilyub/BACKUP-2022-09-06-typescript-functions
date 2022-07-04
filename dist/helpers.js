@@ -1,9 +1,9 @@
 "use strict";
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-reflect-get] */
+/* disable @skylib/functions/no-restricted-syntax[no-reflect-get] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.wrapProxyHandler = exports.wait = exports.safeAccess = exports.onDemand = exports.createFacade = void 0;
 const tslib_1 = require("tslib");
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[no-reflect-set] */
+/* disable @skylib/functions/no-restricted-syntax[no-reflect-set] */
 const assert = tslib_1.__importStar(require("./assertions"));
 const cast = tslib_1.__importStar(require("./converters"));
 const core_1 = require("./core");

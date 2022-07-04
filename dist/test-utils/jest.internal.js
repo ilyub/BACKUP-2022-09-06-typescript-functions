@@ -1,5 +1,5 @@
 "use strict";
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-mockCallsToBe] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-mockCallsToBe] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.matchers = exports.warn = exports.error = void 0;
 const __1 = require("..");

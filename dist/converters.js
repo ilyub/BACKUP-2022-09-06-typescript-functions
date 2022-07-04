@@ -1,9 +1,9 @@
 "use strict";
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-cast-number] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-cast-number] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.stringU = exports.string = exports.numberU = exports.number = exports.not = void 0;
 const tslib_1 = require("tslib");
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
 const is = tslib_1.__importStar(require("./guards"));
 exports.not = {
     /**
@@ -68,7 +68,7 @@ exports.string = string;
  */
 function stringU(value) {
     const str = is.not.empty(value) ? String(value) : "";
-    return str ? str : undefined;
+    return str || undefined;
 }
 exports.stringU = stringU;
 //# sourceMappingURL=converters.js.map

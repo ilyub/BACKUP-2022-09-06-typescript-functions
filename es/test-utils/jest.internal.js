@@ -1,4 +1,4 @@
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-mockCallsToBe] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-mockCallsToBe] */
 import { assert } from "..";
 import { buildEqualsResult } from "./expect";
 import { isMock } from "./expect.internal";

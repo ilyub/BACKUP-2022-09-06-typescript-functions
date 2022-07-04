@@ -1,7 +1,7 @@
 /// <reference types="jest" />
 import type { Writable, unknowns } from "..";
 export declare type Calls = readonly unknowns[];
-export declare type Matchers = Readonly<jest.Matchers<unknown, unknown>>;
+export declare type MatchersRecord = Readonly<jest.Matchers<unknown, unknown>>;
 export interface Result {
     /**
      * Returns failure message.

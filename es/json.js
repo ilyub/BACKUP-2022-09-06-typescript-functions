@@ -1,5 +1,5 @@
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-a-fromIterable] */
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-json] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-a-fromIterable] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-json] */
 import { createValidationObject } from "./core";
 import * as is from "./guards";
 import * as as from "./inline-assertions";

@@ -1,5 +1,5 @@
 "use strict";
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.unfreeze = exports.typedef = exports.overload = exports.indexed = exports.freeze = exports.evaluate = exports.createValidationObject = exports.defineFn = void 0;
 /**

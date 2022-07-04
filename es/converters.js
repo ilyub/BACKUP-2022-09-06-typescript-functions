@@ -1,5 +1,5 @@
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-cast-number] */
-/* skylib/eslint-plugin disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-cast-number] */
+/* disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
 import * as is from "./guards";
 export const not = {
     /**
@@ -61,6 +61,6 @@ export function string(value) {
  */
 export function stringU(value) {
     const str = is.not.empty(value) ? String(value) : "";
-    return str ? str : undefined;
+    return str || undefined;
 }
 //# sourceMappingURL=converters.js.map
