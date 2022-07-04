@@ -1,3 +1,5 @@
+/* disable @skylib/functions/no-restricted-syntax[restrict-a-mixedFrom-arg-type] */
+
 import { AssertionError, a } from "@";
 
 interface Reducible {

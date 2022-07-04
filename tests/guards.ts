@@ -1,3 +1,43 @@
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-array] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-boolean] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-callable] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-empty] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-enumeration] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-false] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-indexedObject] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-instanceOf] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-map] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-empty] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-null] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-numStr] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-number] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-object] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-set] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-string] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-symbol] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-true] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-tuple] */
+
+/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-undefined] */
+
 import { createValidationObject, fn, is } from "@";
 
 test("and", () => {

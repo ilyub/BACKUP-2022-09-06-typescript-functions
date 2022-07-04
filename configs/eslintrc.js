@@ -265,6 +265,160 @@ module.exports = {
               "TSUnionType[types.2.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.0.typeName.name=empty]",
               "TSUnionType[types.2.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.1.typeName.name=empty]"
             ]
+          },
+          {
+            _id: "restrict-a-mixedFrom-arg-type",
+            message: "Expecting type to include array or unknown",
+            selector:
+              "CallExpression[callee.object.name=a][callee.property.name=fromMixed] > .arguments:first-child",
+            typeHasNoneOf: [
+              "boolean",
+              "function",
+              "number",
+              "object",
+              "string",
+              "symbol"
+            ]
+          },
+          {
+            _id: "restrict-guard-arg-array",
+            message: "Expecting type to include array or unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:array|arrayU)$/u] > .arguments:first-child",
+            typeHasNoneOf: ["array", "object", "unknown"]
+          },
+          {
+            _id: "restrict-guard-arg-boolean",
+            message: "Expecting type to include boolean or unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:boolean|booleanU)$/u] > .arguments:first-child",
+            typeHasNoneOf: ["boolean", "unknown"]
+          },
+          {
+            _id: "restrict-guard-arg-callable",
+            message: "Expecting type to include function or unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=callable] > .arguments:first-child",
+            typeHasNoneOf: ["function", "object", "unknown"]
+          },
+          {
+            _id: "restrict-guard-arg-empty",
+            message: "Expecting type to include null, undefined or unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=empty] > .arguments:first-child",
+            typeHasNoneOf: ["null", "undefined", "unknown"]
+          },
+          {
+            _id: "restrict-guard-arg-enumeration",
+            message: "Expecting type to include string, unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=enumeration] > .arguments:first-child",
+            typeHasNoneOf: ["string", "unknown"]
+          },
+          {
+            _id: "restrict-guard-arg-false",
+            message: "Expecting type to include boolean or unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=false] > .arguments:first-child",
+            typeHasNoneOf: ["boolean", "unknown"]
+          },
+          {
+            _id: "restrict-guard-arg-indexedObject",
+            message: "Expecting type to be unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:indexedObject|indexedObjectU)$/u] > .arguments:first-child",
+            typeIsNot: "unknown"
+          },
+          {
+            _id: "restrict-guard-arg-instanceOf",
+            message: "Expecting type to include object, unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=instanceOf] > .arguments:first-child",
+            typeHasNoneOf: ["object", "unknown"]
+          },
+          {
+            _id: "restrict-guard-arg-map",
+            message: "Expecting type to include object, unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=map] > .arguments:first-child",
+            typeHasNoneOf: ["object", "unknown"]
+          },
+          {
+            _id: "restrict-guard-arg-not-empty",
+            message: "Expecting type to include null, undefined or unknown",
+            selector:
+              "CallExpression[callee.object.object.name=/^(?:as|assert|is)$/u][callee.object.property.name=not][callee.property.name=empty] > .arguments:first-child",
+            typeHasNoneOf: ["null", "undefined", "unknown"]
+          },
+          {
+            _id: "restrict-guard-arg-null",
+            message: "Expecting type to include null or unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=null] > .arguments:first-child",
+            typeHasNoneOf: ["null", "unknown"]
+          },
+          {
+            _id: "restrict-guard-arg-numStr",
+            message: "Expecting type to include number, string or unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:numStr|numStrU)$/u] > .arguments:first-child",
+            typeHasNoneOf: ["number", "string", "unknown"]
+          },
+          {
+            _id: "restrict-guard-arg-number",
+            message: "Expecting type to include number, unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:number|numberU)$/u] > .arguments:first-child",
+            typeHasNoneOf: ["number", "unknown"]
+          },
+          {
+            _id: "restrict-guard-arg-object",
+            message: "Expecting type to include object, unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:object|objectU)$/u] > .arguments:first-child",
+            typeHasNoneOf: ["object", "unknown"]
+          },
+          {
+            _id: "restrict-guard-arg-set",
+            message: "Expecting type to include object, unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=set] > .arguments:first-child",
+            typeHasNoneOf: ["object", "unknown"]
+          },
+          {
+            _id: "restrict-guard-arg-string",
+            message: "Expecting type to include string, unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:string|stringU)$/u] > .arguments:first-child",
+            typeHasNoneOf: ["string", "unknown"]
+          },
+          {
+            _id: "restrict-guard-arg-symbol",
+            message: "Expecting type to include symbol, unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:symbol|symbolU)$/u] > .arguments:first-child",
+            typeHasNoneOf: ["symbol", "unknown"]
+          },
+          {
+            _id: "restrict-guard-arg-true",
+            message: "Expecting type to include boolean or unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=true] > .arguments:first-child",
+            typeHasNoneOf: ["boolean", "unknown"]
+          },
+          {
+            _id: "restrict-guard-arg-tuple",
+            message: "Expecting type to include array or unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=tuple] > .arguments:first-child",
+            typeHasNoneOf: ["array", "unknown"]
+          },
+          {
+            _id: "restrict-guard-arg-undefined",
+            message: "Expecting type to include undefined or unknown",
+            selector:
+              "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=undefined] > .arguments:first-child",
+            typeHasNoneOf: ["undefined", "unknown"]
           }
         ]
       }
