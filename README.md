@@ -7,7 +7,7 @@
 
 ## <a name="installation"></a>Installation
 
-    npm install @skylib/functions
+    npm install \@skylib/functions
 
 ## <a name="modules"></a>Modules
 
