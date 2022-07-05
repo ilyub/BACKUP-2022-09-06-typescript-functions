@@ -1,6 +1,8 @@
-/* disable @skylib/functions/no-restricted-syntax[prefer-a-fromIterable] */
+/* eslint-disable @skylib/no-multi-type-tuples -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-a-fromIterable -- Ok */
+
+/* eslint-disable @skylib/no-restricted-syntax/prefer-o-hasOwnProp -- Ok */
 
 import * as assert from "./assertions";
 import { indexed } from "./core";
@@ -26,8 +28,8 @@ export interface Reduce<T extends object> {
  * @param arr - Array.
  * @returns Array of pairs.
  */
-export function chain<T>(arr: readonly T[]): Array<[T, T]> {
-  const result: Array<[T, T]> = [];
+export function chain<T>(arr: readonly T[]): Array<readonly [T, T]> {
+  const result: Array<readonly [T, T]> = [];
 
   let prev = first(arr);
 

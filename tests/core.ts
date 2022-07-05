@@ -1,4 +1,4 @@
-/* disable @skylib/no-restricted-syntax[prefer-readonly-property] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-readonly-property -- Ok */
 
 import { evaluate, freeze, unfreeze } from "@";
 import type { Equals } from "ts-toolbelt/out/Any/Equals";

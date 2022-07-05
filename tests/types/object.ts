@@ -1,4 +1,8 @@
-/* disable @skylib/no-restricted-syntax[prefer-readonly-property] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-readonly-property -- Ok */
+
+/* eslint-disable @skylib/optional-property-style -- Ok */
+
+/* eslint-disable @skylib/prefer-readonly -- Ok */
 
 import type {
   Join2,

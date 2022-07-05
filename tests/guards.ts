@@ -1,42 +1,40 @@
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-array] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-array -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-boolean] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-boolean -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-callable] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-callable -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-empty] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-empty -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-enumeration] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-enumeration -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-false] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-false -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-indexedObject] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-indexedObject -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-instanceOf] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-instanceOf -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-map] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-map -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-empty] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-null -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-null] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-numStr -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-numStr] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-object -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-number] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-set -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-object] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-symbol -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-set] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-number -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-string] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-string -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-symbol] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-true -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-true] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-tuple -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-tuple] */
-
-/* disable @skylib/functions/no-restricted-syntax[restrict-guard-arg-undefined] */
+/* eslint-disable @skylib/no-restricted-syntax/guard-arg-undefined -- Ok */
 
 import { createValidationObject, fn, is } from "@";
 

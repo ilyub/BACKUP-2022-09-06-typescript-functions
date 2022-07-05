@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- Ok */
+
 import type { nevers, unknowns } from "./core";
 
 export interface Async<R, A extends unknowns = nevers> {

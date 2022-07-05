@@ -1,6 +1,6 @@
-/* disable @skylib/functions/no-restricted-syntax[no-reflect-get] */
+/* eslint-disable @skylib/no-restricted-syntax/no-reflect-get -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[no-reflect-set] */
+/* eslint-disable @skylib/no-restricted-syntax/no-reflect-set -- Ok */
 
 import * as assert from "./assertions";
 import * as cast from "./converters";
@@ -26,7 +26,6 @@ export interface FacadeOwnMethods<I> {
 
 export type ProxyHandlerAction = "doDefault" | "throw";
 
-// eslint-disable-next-line @skylib/no-restricted-syntax -- Wait for @skylib/config update
 export type SafeAccess<
   T extends object,
   W extends string & keyof T,

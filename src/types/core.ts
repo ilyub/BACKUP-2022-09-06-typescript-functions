@@ -1,12 +1,13 @@
-/* disable @skylib/functions/no-restricted-syntax[prefer-IndexedObject] */
+/* eslint-disable @skylib/no-multi-type-tuples -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[prefer-NumStr] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-IndexedObject -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[prefer-WritableIndexedObject] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-NumStr -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[prefer-undefined-shorthand] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-WritableIndexedObject -- Ok */
 
-// eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
+/* eslint-disable @skylib/no-restricted-syntax/prefer-undefined-shorthand -- Ok */
+
 export type Entry<K extends PropertyKey, T> = readonly [K, T];
 
 export type IndexedObject<T = unknown> = Rec<PropertyKey, T>;

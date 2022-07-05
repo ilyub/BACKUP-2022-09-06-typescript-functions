@@ -1,5 +1,3 @@
-/* disable @skylib/functions/no-restricted-syntax[prefer-mockCallsToBe] */
-
 import { assert } from "..";
 import { buildEqualsResult } from "./expect";
 import { isMock } from "./expect.internal";
@@ -47,6 +45,7 @@ export const matchers: {
       true
     );
 
+    // eslint-disable-next-line @skylib/no-restricted-syntax/prefer-mockCallsToBe -- Ok
     got.mockClear();
 
     return result;

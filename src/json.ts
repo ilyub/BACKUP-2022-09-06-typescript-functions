@@ -1,7 +1,8 @@
-/* disable @skylib/functions/no-restricted-syntax[prefer-a-fromIterable] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-json -- Ok */
 
-/* disable @skylib/functions/no-restricted-syntax[prefer-json] */
+/* eslint-disable unicorn/no-null -- Ok */
 
+import * as a from "./array";
 import { createValidationObject } from "./core";
 import * as is from "./guards";
 import * as as from "./inline-assertions";
@@ -81,10 +82,10 @@ function replacer(_key: unknown, value: unknown): unknown {
   if (is.empty(value)) return null;
 
   if (is.map(value))
-    return { type: "map-5702-3c89-3feb-75d4", value: [...value] };
+    return { type: "map-5702-3c89-3feb-75d4", value: a.fromIterable(value) };
 
   if (is.set(value))
-    return { type: "set-41ef-10c9-ae1f-15e8", value: [...value] };
+    return { type: "set-41ef-10c9-ae1f-15e8", value: a.fromIterable(value) };
 
   return value;
 }
