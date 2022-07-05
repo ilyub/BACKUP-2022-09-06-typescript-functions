@@ -1,9 +1,9 @@
 "use strict";
-/* disable @skylib/functions/no-restricted-syntax[prefer-programFlow-clearInterval] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-programFlow-clearInterval -- Ok */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.setTimeout = exports.setInterval = exports.clearTimeout = exports.clearInterval = void 0;
 const tslib_1 = require("tslib");
-/* disable @skylib/functions/no-restricted-syntax[prefer-programFlow-clearTimeout] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-programFlow-clearTimeout -- Ok */
 const is = tslib_1.__importStar(require("./guards"));
 /**
  * Clears interval.

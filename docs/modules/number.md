@@ -4,36 +4,15 @@
 
 ## Table of contents
 
-### Variables
-
-- [ceil](number.md#ceil)
-- [floor](number.md#floor)
-- [round](number.md#round)
-
 ### Functions
 
 - [average](number.md#average)
+- [ceil](number.md#ceil)
+- [floor](number.md#floor)
 - [limit](number.md#limit)
 - [rootMeanSquareDeviation](number.md#rootmeansquaredeviation)
+- [round](number.md#round)
 - [sum](number.md#sum)
-
-## Variables
-
-### ceil
-
-• `Const` **ceil**: (`value`: `number`, `precision`: `number`) => `number` & `Readonly`<{ `step`: (`value`: `number`, `step`: `number`, `from`: `number`) => `number`  }\>
-
-___
-
-### floor
-
-• `Const` **floor**: (`value`: `number`, `precision`: `number`) => `number` & `Readonly`<{ `step`: (`value`: `number`, `step`: `number`, `from`: `number`) => `number`  }\>
-
-___
-
-### round
-
-• `Const` **round**: (`value`: `number`, `precision`: `number`) => `number` & `Readonly`<{ `step`: (`value`: `number`, `step`: `number`, `from`: `number`) => `number`  }\>
 
 ## Functions
 
@@ -54,6 +33,48 @@ Averages values.
 `number`
 
 The average.
+
+___
+
+### ceil
+
+▸ **ceil**(`value`, `precision`): `number`
+
+Ceils number to a given precision.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `number` | Value. |
+| `precision` | `number` | The number of digits to keep. |
+
+#### Returns
+
+`number`
+
+Ceiled value.
+
+___
+
+### floor
+
+▸ **floor**(`value`, `precision`): `number`
+
+Floors number to a given precision.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `number` | Value. |
+| `precision` | `number` | The number of digits to keep. |
+
+#### Returns
+
+`number`
+
+Floored value.
 
 ___
 
@@ -96,6 +117,27 @@ Calculates root-mean-square deviation.
 `number`
 
 Root-mean-square deviation.
+
+___
+
+### round
+
+▸ **round**(`value`, `precision`): `number`
+
+Rounds number to a given precision.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `number` | Value. |
+| `precision` | `number` | The number of digits to keep. |
+
+#### Returns
+
+`number`
+
+Rounded value.
 
 ___
 

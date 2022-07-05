@@ -53,7 +53,7 @@
 - [Recs](index.md#recs)
 - [RemovePrefix](index.md#removeprefix)
 - [SafeAccess](index.md#safeaccess)
-- [SafeAccessGuards](index.md#safeaccessguards)
+- [SafeAccessGuardsRecord](index.md#safeaccessguardsrecord)
 - [StrictOmit](index.md#strictomit)
 - [Sync](index.md#sync)
 - [UndefinedKeys](index.md#undefinedkeys)
@@ -121,13 +121,13 @@
 
 ### Accumulator
 
-Re-exports [Accumulator](../classes/Accumulator.Accumulator-2.md)
+Re-exports [Accumulator](../classes/Accumulator.Accumulator-1.md)
 
 ___
 
 ### Accumulator2
 
-Re-exports [Accumulator2](../classes/Accumulator2.Accumulator2-2.md)
+Re-exports [Accumulator2](../classes/Accumulator2.Accumulator2-1.md)
 
 ___
 
@@ -401,9 +401,9 @@ Re-exports [SafeAccess](helpers.md#safeaccess)
 
 ___
 
-### SafeAccessGuards
+### SafeAccessGuardsRecord
 
-Re-exports [SafeAccessGuards](helpers.md#safeaccessguards)
+Re-exports [SafeAccessGuardsRecord](helpers.md#safeaccessguardsrecord)
 
 ___
 

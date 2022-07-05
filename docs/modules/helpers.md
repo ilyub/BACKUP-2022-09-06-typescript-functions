@@ -13,7 +13,7 @@
 - [Facade](helpers.md#facade)
 - [ProxyHandlerAction](helpers.md#proxyhandleraction)
 - [SafeAccess](helpers.md#safeaccess)
-- [SafeAccessGuards](helpers.md#safeaccessguards)
+- [SafeAccessGuardsRecord](helpers.md#safeaccessguardsrecord)
 
 ### Functions
 
@@ -58,9 +58,9 @@ ___
 
 ___
 
-### SafeAccessGuards
+### SafeAccessGuardsRecord
 
-Ƭ **SafeAccessGuards**<`T`, `W`\>: { readonly [K in W]: Guard<T[K]\> }
+Ƭ **SafeAccessGuardsRecord**<`T`, `W`\>: { readonly [K in W]: Guard<T[K]\> }
 
 #### Type parameters
 
@@ -144,7 +144,7 @@ Creates safe access interface for an object.
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
 | `obj` | `T` | `undefined` | Object. |
-| `guards` | [`SafeAccessGuards`](helpers.md#safeaccessguards)<`T`, `W`\> | `undefined` | Guards. |
+| `guards` | [`SafeAccessGuardsRecord`](helpers.md#safeaccessguardsrecord)<`T`, `W`\> | `undefined` | Guards. |
 | `readonlyKeys` | readonly `R`[] | `[]` | Readonly keys. |
 
 #### Returns

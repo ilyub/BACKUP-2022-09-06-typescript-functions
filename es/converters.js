@@ -1,5 +1,5 @@
-/* disable @skylib/functions/no-restricted-syntax[prefer-cast-number] */
-/* disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-cast-number -- Ok */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-cast-string -- Ok */
 import * as is from "./guards";
 export const not = {
     /**

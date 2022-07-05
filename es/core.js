@@ -1,4 +1,4 @@
-/* disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-cast-string -- Ok */
 /**
  * Defines function with properties.
  *

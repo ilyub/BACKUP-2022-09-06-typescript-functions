@@ -10,10 +10,6 @@
 - [Descriptor](../interfaces/object.Descriptor.md)
 - [Predicate](../interfaces/object.Predicate.md)
 
-### Variables
-
-- [fromEntries](object.md#fromentries)
-
 ### Functions
 
 - [assign](object.md#assign)
@@ -23,6 +19,7 @@
 - [every](object.md#every)
 - [extend](object.md#extend)
 - [filter](object.md#filter)
+- [fromEntries](object.md#fromentries)
 - [get](object.md#get)
 - [getPrototypeOf](object.md#getprototypeof)
 - [hasOwnProp](object.md#hasownprop)
@@ -35,12 +32,6 @@
 - [some](object.md#some)
 - [sort](object.md#sort)
 - [values](object.md#values)
-
-## Variables
-
-### fromEntries
-
-• `Const` **fromEntries**: { `exhaustive`: <K, V\>(`entries`: `Iterable`<[`Entry`](types_core.md#entry)<`K`, `V`\>\>) => [`Rec`](types_core.md#rec)<`K`, `V`\>  } & <K, V\>(`entries`: `Iterable`<[`Entry`](types_core.md#entry)<`K`, `V`\>\>) => [`WritablePartialRecord`](types_core.md#writablepartialrecord)<`K`, `V`\>
 
 ## Functions
 
@@ -128,6 +119,8 @@ ___
 
 ▸ **entries**<`K`, `V`\>(`obj`): [`Entry`](types_core.md#entry)<`K`, `V`\>[]
 
+Typed version of Object.entries.
+
 #### Type parameters
 
 | Name | Type |
@@ -137,15 +130,19 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `obj` | [`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | [`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\> | Object. |
 
 #### Returns
 
 [`Entry`](types_core.md#entry)<`K`, `V`\>[]
 
+Object entries.
+
 ▸ **entries**<`T`\>(`obj`): [`Entry`](types_core.md#entry)<`string` & keyof `T`, `T`[`string` & keyof `T` & `number` & keyof `T`]\>[]
+
+Typed version of Object.entries.
 
 #### Type parameters
 
@@ -155,13 +152,15 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `obj` | `T` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | `T` | Object. |
 
 #### Returns
 
 [`Entry`](types_core.md#entry)<`string` & keyof `T`, `T`[`string` & keyof `T` & `number` & keyof `T`]\>[]
+
+Object entries.
 
 ___
 
@@ -196,6 +195,8 @@ ___
 
 ▸ **extend**<`T`, `A`\>(`target`, `source`): `A` & `T`
 
+Typed version of Object.assign.
+
 #### Type parameters
 
 | Name | Type |
@@ -205,16 +206,20 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `target` | `T` |
-| `source` | `A` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `T` | Target object. |
+| `source` | `A` | Source. |
 
 #### Returns
 
 `A` & `T`
 
+Target.
+
 ▸ **extend**<`T`, `A`, `B`\>(`target`, `source1`, `source2`): `A` & `B` & `T`
+
+Typed version of Object.assign.
 
 #### Type parameters
 
@@ -226,17 +231,21 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `target` | `T` |
-| `source1` | `A` |
-| `source2` | `B` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `T` | Target object. |
+| `source1` | `A` | Source 1. |
+| `source2` | `B` | Source 2. |
 
 #### Returns
 
 `A` & `B` & `T`
 
+Target.
+
 ▸ **extend**<`T`, `A`, `B`, `C`\>(`target`, `source1`, `source2`, `source3`): `A` & `B` & `C` & `T`
+
+Typed version of Object.assign.
 
 #### Type parameters
 
@@ -249,16 +258,18 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `target` | `T` |
-| `source1` | `A` |
-| `source2` | `B` |
-| `source3` | `C` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `T` | Target object. |
+| `source1` | `A` | Source 1. |
+| `source2` | `B` | Source 2. |
+| `source3` | `C` | Source 3. |
 
 #### Returns
 
 `A` & `B` & `C` & `T`
+
+Target.
 
 ___
 
@@ -289,6 +300,33 @@ New object.
 
 ___
 
+### fromEntries
+
+▸ **fromEntries**<`K`, `V`\>(`entries`): [`WritablePartialRecord`](types_core.md#writablepartialrecord)<`K`, `V`\>
+
+Creates object from entries.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `K` | extends `PropertyKey` |
+| `V` | `V` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `entries` | `Iterable`<[`Entry`](types_core.md#entry)<`K`, `V`\>\> | Entries. |
+
+#### Returns
+
+[`WritablePartialRecord`](types_core.md#writablepartialrecord)<`K`, `V`\>
+
+Object.
+
+___
+
 ### get
 
 ▸ **get**(`obj`, `key`): `unknown`
@@ -312,7 +350,9 @@ Object property.
 
 Returns object property.
 
-**`throws`** AssertionError otherwise.
+**`Throws`**
+
+ AssertionError otherwise.
 
 #### Type parameters
 
@@ -380,7 +420,9 @@ ___
 
 ### keys
 
-▸ **keys**<`K`, `V`\>(`obj`): `K`[]
+▸ **keys**<`K`, `V`\>(`obj`): readonly `K`[]
+
+Typed version of Object.keys.
 
 #### Type parameters
 
@@ -391,15 +433,19 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `obj` | [`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | [`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\> | Object. |
 
 #### Returns
 
-`K`[]
+readonly `K`[]
+
+Object keys.
 
 ▸ **keys**<`T`\>(`obj`): `string` & keyof `T`[]
+
+Typed version of Object.keys.
 
 #### Type parameters
 
@@ -409,13 +455,15 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `obj` | `T` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | `T` | Object. |
 
 #### Returns
 
 `string` & keyof `T`[]
+
+Object keys.
 
 ___
 
@@ -466,7 +514,7 @@ Removes keys from object.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `obj` | `T` | Object. |
-| `...exclude` | `K`[] | Keys to omit. |
+| `...exclude` | readonly `K`[] | Keys to omit. |
 
 #### Returns
 
@@ -622,7 +670,9 @@ ___
 
 ### values
 
-▸ **values**<`K`, `V`\>(`obj`): `V`[]
+▸ **values**<`K`, `V`\>(`obj`): readonly `V`[]
+
+Typed version of Object.values.
 
 #### Type parameters
 
@@ -633,15 +683,19 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `obj` | [`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | [`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\> | Object. |
 
 #### Returns
 
-`V`[]
+readonly `V`[]
+
+Object values.
 
 ▸ **values**<`T`\>(`obj`): `T`[`string` & keyof `T` & `number` & keyof `T`][]
+
+Typed version of Object.values.
 
 #### Type parameters
 
@@ -651,10 +705,12 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `obj` | `T` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | `T` | Object. |
 
 #### Returns
 
 `T`[`string` & keyof `T` & `number` & keyof `T`][]
+
+Object values.

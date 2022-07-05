@@ -10,24 +10,24 @@
 
 ### Variables
 
-- [array](assertions.md#array)
-- [indexedObject](assertions.md#indexedobject)
-- [map](assertions.md#map)
 - [not](assertions.md#not)
-- [set](assertions.md#set)
 
 ### Functions
 
+- [array](assertions.md#array)
 - [boolean](assertions.md#boolean)
 - [byGuard](assertions.md#byguard)
 - [callable](assertions.md#callable)
 - [empty](assertions.md#empty)
 - [enumeration](assertions.md#enumeration)
+- [indexedObject](assertions.md#indexedobject)
 - [instanceOf](assertions.md#instanceof)
 - [instancesOf](assertions.md#instancesof)
+- [map](assertions.md#map)
 - [numStr](assertions.md#numstr)
 - [number](assertions.md#number)
 - [object](assertions.md#object)
+- [set](assertions.md#set)
 - [string](assertions.md#string)
 - [stringU](assertions.md#stringu)
 - [symbol](assertions.md#symbol)
@@ -43,93 +43,6 @@
 
 ## Variables
 
-### array
-
-• `Const` **array**: `Object`
-
-#### Call signature
-
-▸ (`value`, `error`): asserts value is unknowns
-
-Asserts that value is an array.
-
-##### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `unknown` | Value. |
-| `error` | [`ErrorArg`](assertions.md#errorarg) | Error. |
-
-##### Returns
-
-asserts value is unknowns
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `of` | <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>, `error`: [`ErrorArg`](assertions.md#errorarg)) => asserts value is readonly T[] |
-
-___
-
-### indexedObject
-
-• `Const` **indexedObject**: `Object`
-
-#### Call signature
-
-▸ (`value`, `error`): asserts value is IndexedObject<unknown\>
-
-Asserts that value type is IndexedObject.
-
-##### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `unknown` | Value. |
-| `error` | [`ErrorArg`](assertions.md#errorarg) | Error. |
-
-##### Returns
-
-asserts value is IndexedObject<unknown\>
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `of` | <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>, `error`: [`ErrorArg`](assertions.md#errorarg)) => asserts value is IndexedObject<T\> |
-
-___
-
-### map
-
-• `Const` **map**: `Object`
-
-#### Call signature
-
-▸ (`value`, `error`): asserts value is ReadonlyMap<unknown, unknown\>
-
-Asserts that value type is Map.
-
-##### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `unknown` | Value. |
-| `error` | [`ErrorArg`](assertions.md#errorarg) | Error. |
-
-##### Returns
-
-asserts value is ReadonlyMap<unknown, unknown\>
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `of` | <K, V\>(`value`: `unknown`, `keyGuard`: [`Guard`](../interfaces/guards.Guard.md)<`K`\>, `valueGuard`: [`Guard`](../interfaces/guards.Guard.md)<`V`\>, `error`: [`ErrorArg`](assertions.md#errorarg)) => asserts value is ReadonlyMap<K, V\> |
-
-___
-
 ### not
 
 • `Const` **not**: `Object`
@@ -140,36 +53,26 @@ ___
 | :------ | :------ |
 | `empty` | <T\>(`value`: `T`, `error`: [`ErrorArg`](assertions.md#errorarg)) => asserts value is Exclude<T, empty\> |
 
-___
+## Functions
 
-### set
+### array
 
-• `Const` **set**: `Object`
+▸ **array**(`value`, `error`): asserts value is unknowns
 
-#### Call signature
+Asserts that value is an array.
 
-▸ (`value`, `error`): asserts value is ReadonlySet<unknown\>
-
-Asserts that value type is Set.
-
-##### Parameters
+#### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
 | `error` | [`ErrorArg`](assertions.md#errorarg) | Error. |
 
-##### Returns
+#### Returns
 
-asserts value is ReadonlySet<unknown\>
+asserts value is unknowns
 
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `of` | <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>, `error`: [`ErrorArg`](assertions.md#errorarg)) => asserts value is ReadonlySet<T\> |
-
-## Functions
+___
 
 ### boolean
 
@@ -286,6 +189,25 @@ asserts value is T
 
 ___
 
+### indexedObject
+
+▸ **indexedObject**(`value`, `error`): asserts value is IndexedObject<unknown\>
+
+Asserts that value type is IndexedObject.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+| `error` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+
+#### Returns
+
+asserts value is IndexedObject<unknown\>
+
+___
+
 ### instanceOf
 
 ▸ **instanceOf**<`T`\>(`value`, `ctor`, `error`): asserts value is T
@@ -335,6 +257,25 @@ Asserts that value type is T[].
 #### Returns
 
 asserts value is readonly T[]
+
+___
+
+### map
+
+▸ **map**(`value`, `error`): asserts value is ReadonlyMap<unknown, unknown\>
+
+Asserts that value type is Map.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+| `error` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+
+#### Returns
+
+asserts value is ReadonlyMap<unknown, unknown\>
 
 ___
 
@@ -392,6 +333,25 @@ Asserts that value is an object.
 #### Returns
 
 asserts value is object
+
+___
+
+### set
+
+▸ **set**(`value`, `error`): asserts value is ReadonlySet<unknown\>
+
+Asserts that value type is Set.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+| `error` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+
+#### Returns
+
+asserts value is ReadonlySet<unknown\>
 
 ___
 
@@ -516,10 +476,6 @@ Wrapped error.
 
 ▸ (): `T`
 
-Wraps error.
-
 ##### Returns
 
 `T`
-
-Wrapped error.

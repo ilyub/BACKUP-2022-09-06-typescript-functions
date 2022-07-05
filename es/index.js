@@ -1,3 +1,4 @@
+/* eslint-disable @skylib/export-all-name -- Ok */
 import * as a_1 from "./array";
 export { a_1 as a };
 import * as assert_1 from "./assertions";

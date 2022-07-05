@@ -15,7 +15,7 @@ export interface Reduce<T extends object> {
  * @param arr - Array.
  * @returns Array of pairs.
  */
-export declare function chain<T>(arr: readonly T[]): Array<[T, T]>;
+export declare function chain<T>(arr: readonly T[]): Array<readonly [T, T]>;
 /**
  * Clones array.
  *

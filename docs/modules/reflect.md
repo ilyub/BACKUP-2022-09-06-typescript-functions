@@ -131,13 +131,15 @@ ___
 
 ▸ **defineProperty**(`target`, `propertyKey`, `attributes`): `boolean`
 
+Adds a property to an object, or modifies attributes of an existing property.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `target` | `object` |
-| `propertyKey` | `PropertyKey` |
-| `attributes` | `PropertyDescriptor` & `ThisType`<`any`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `object` | Object on which to add or modify the property. This can be a native JavaScript object         (that is, a user-defined object or a built in object) or a DOM object. |
+| `propertyKey` | `PropertyKey` | The property name. |
+| `attributes` | `PropertyDescriptor` & `ThisType`<`any`\> | Descriptor for the property. It can be for a data property or an accessor property. |
 
 #### Returns
 
@@ -149,12 +151,15 @@ ___
 
 ▸ **deleteProperty**(`target`, `propertyKey`): `boolean`
 
+Removes a property from an object, equivalent to `delete target[propertyKey]`,
+except it won't throw if `target[propertyKey]` is non-configurable.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `target` | `object` |
-| `propertyKey` | `PropertyKey` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `object` | Object from which to remove the own property. |
+| `propertyKey` | `PropertyKey` | The property name. |
 
 #### Returns
 
@@ -185,7 +190,9 @@ Property value.
 
 Typed version of Reflect.get.
 
-**`throws`** AssertionError otherwise.
+**`Throws`**
+
+ AssertionError otherwise.
 
 #### Type parameters
 
@@ -233,7 +240,9 @@ Metadata value.
 
 Typed version of Reflect.getMetadata.
 
-**`throws`** AssertionError otherwise.
+**`Throws`**
+
+ AssertionError otherwise.
 
 #### Type parameters
 
@@ -282,7 +291,9 @@ Metadata value.
 
 Typed version of Reflect.getMetadata.
 
-**`throws`** AssertionError otherwise.
+**`Throws`**
+
+ AssertionError otherwise.
 
 #### Type parameters
 
@@ -331,7 +342,9 @@ Metadata value.
 
 Typed version of Reflect.getOwnMetadata.
 
-**`throws`** AssertionError otherwise.
+**`Throws`**
+
+ AssertionError otherwise.
 
 #### Type parameters
 
@@ -380,7 +393,9 @@ Metadata value.
 
 Typed version of Reflect.getOwnMetadata.
 
-**`throws`** AssertionError otherwise.
+**`Throws`**
+
+ AssertionError otherwise.
 
 #### Type parameters
 
@@ -410,12 +425,15 @@ ___
 
 ▸ **getOwnPropertyDescriptor**(`target`, `propertyKey`): `PropertyDescriptor` \| `undefined`
 
+Gets the own property descriptor of the specified object.
+An own property descriptor is one that is defined directly on the object and is not inherited from the object's prototype.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `target` | `object` |
-| `propertyKey` | `PropertyKey` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `object` | Object that contains the property. |
+| `propertyKey` | `PropertyKey` | The property name. |
 
 #### Returns
 
@@ -427,11 +445,13 @@ ___
 
 ▸ **getPrototypeOf**(`target`): `object` \| ``null``
 
+Returns the prototype of an object.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `target` | `object` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `object` | The object that references the prototype. |
 
 #### Returns
 
@@ -443,12 +463,14 @@ ___
 
 ▸ **has**(`target`, `propertyKey`): `boolean`
 
+Equivalent to `propertyKey in target`.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `target` | `object` |
-| `propertyKey` | `PropertyKey` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `object` | Object that contains the property on itself or in its prototype chain. |
+| `propertyKey` | `PropertyKey` | Name of the property. |
 
 #### Returns
 
@@ -546,11 +568,13 @@ ___
 
 ▸ **isExtensible**(`target`): `boolean`
 
+Returns a value that indicates whether new properties can be added to an object.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `target` | `object` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `object` | Object to test. |
 
 #### Returns
 
@@ -562,11 +586,14 @@ ___
 
 ▸ **ownKeys**(`target`): (`string` \| `symbol`)[]
 
+Returns the string and symbol keys of the own properties of an object. The own properties of an object
+are those that are defined directly on that object, and are not inherited from the object's prototype.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `target` | `object` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `object` | Object that contains the own properties. |
 
 #### Returns
 
@@ -578,15 +605,19 @@ ___
 
 ▸ **preventExtensions**(`target`): `boolean`
 
+Prevents the addition of new properties to an object.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `target` | `object` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `object` | Object to make non-extensible. |
 
 #### Returns
 
 `boolean`
+
+Whether the object has been made non-extensible.
 
 ___
 
@@ -594,14 +625,16 @@ ___
 
 ▸ **set**(`target`, `propertyKey`, `value`, `receiver?`): `boolean`
 
+Sets the property of target, equivalent to `target[propertyKey] = value` when `receiver === target`.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `target` | `object` |
-| `propertyKey` | `PropertyKey` |
-| `value` | `any` |
-| `receiver?` | `any` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `object` | Object that contains the property on itself or in its prototype chain. |
+| `propertyKey` | `PropertyKey` | Name of the property. |
+| `value` | `any` | - |
+| `receiver?` | `any` | The reference to use as the `this` value in the setter function,         if `target[propertyKey]` is an accessor property. |
 
 #### Returns
 
@@ -613,13 +646,17 @@ ___
 
 ▸ **setPrototypeOf**(`target`, `proto`): `boolean`
 
+Sets the prototype of a specified object o to object proto or null.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `target` | `object` |
-| `proto` | ``null`` \| `object` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `target` | `object` | The object to change its prototype. |
+| `proto` | ``null`` \| `object` | The value of the new prototype or null. |
 
 #### Returns
 
 `boolean`
+
+Whether setting the prototype was successful.

@@ -1,5 +1,4 @@
 "use strict";
-/* disable @skylib/functions/no-restricted-syntax[prefer-mockCallsToBe] */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.matchers = exports.warn = exports.error = void 0;
 const __1 = require("..");
@@ -22,6 +21,7 @@ exports.matchers = {
     mockCallsToBe: (got, ...expected) => {
         __1.assert.byGuard(got, expect_internal_1.isMock, "Expecting mock function");
         const result = (0, expect_1.buildEqualsResult)((0, expect_utils_1.equals)(got.mock.calls, expected), "Unexpected mock calls", got.mock.calls, expected, true);
+        // eslint-disable-next-line @skylib/no-restricted-syntax/prefer-mockCallsToBe -- Ok
         got.mockClear();
         return result;
     },

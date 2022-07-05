@@ -1,4 +1,5 @@
 "use strict";
+/* eslint-disable @skylib/export-all-name -- Ok */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Accumulator2 = exports.Accumulator = exports.s = exports.set = exports.regexp = exports.reflect = exports.programFlow = exports.o = exports.num = exports.map = exports.json = exports.as = exports.is = exports.fn = exports.cast = exports.assert = exports.a = void 0;
 const tslib_1 = require("tslib");

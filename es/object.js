@@ -1,6 +1,6 @@
-/* disable @skylib/functions/no-restricted-syntax[prefer-o-clone] */
-/* disable @skylib/functions/no-restricted-syntax[prefer-o-getPrototypeOf] */
-/* disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-o-clone -- Ok */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-o-getPrototypeOf -- Ok */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-o-hasOwnProp -- Ok */
 import { indexed } from "./core";
 import * as is from "./guards";
 import * as as from "./inline-assertions";

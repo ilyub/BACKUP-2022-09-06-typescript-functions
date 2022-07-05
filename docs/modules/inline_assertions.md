@@ -6,14 +6,11 @@
 
 ### Variables
 
-- [array](inline_assertions.md#array)
-- [indexedObject](inline_assertions.md#indexedobject)
-- [map](inline_assertions.md#map)
 - [not](inline_assertions.md#not)
-- [set](inline_assertions.md#set)
 
 ### Functions
 
+- [array](inline_assertions.md#array)
 - [arrayU](inline_assertions.md#arrayu)
 - [arrays](inline_assertions.md#arrays)
 - [arraysU](inline_assertions.md#arraysu)
@@ -26,11 +23,13 @@
 - [empty](inline_assertions.md#empty)
 - [enumeration](inline_assertions.md#enumeration)
 - [false](inline_assertions.md#false)
+- [indexedObject](inline_assertions.md#indexedobject)
 - [indexedObjectU](inline_assertions.md#indexedobjectu)
 - [indexedObjects](inline_assertions.md#indexedobjects)
 - [indexedObjectsU](inline_assertions.md#indexedobjectsu)
 - [instanceOf](inline_assertions.md#instanceof)
 - [instancesOf](inline_assertions.md#instancesof)
+- [map](inline_assertions.md#map)
 - [mapU](inline_assertions.md#mapu)
 - [maps](inline_assertions.md#maps)
 - [mapsU](inline_assertions.md#mapsu)
@@ -48,6 +47,7 @@
 - [objectU](inline_assertions.md#objectu)
 - [objects](inline_assertions.md#objects)
 - [objectsU](inline_assertions.md#objectsu)
+- [set](inline_assertions.md#set)
 - [setU](inline_assertions.md#setu)
 - [sets](inline_assertions.md#sets)
 - [setsU](inline_assertions.md#setsu)
@@ -66,24 +66,6 @@
 - [unknownsU](inline_assertions.md#unknownsu)
 
 ## Variables
-
-### array
-
-• `Const` **array**: (`value`: `unknown`) => [`unknowns`](types_core.md#unknowns) & `Readonly`<{ `of`: <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => readonly `T`[]  }\>
-
-___
-
-### indexedObject
-
-• `Const` **indexedObject**: (`value`: `unknown`) => [`IndexedObject`](types_core.md#indexedobject)<`unknown`\> & `Readonly`<{ `of`: <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => [`IndexedObject`](types_core.md#indexedobject)<`T`\>  }\>
-
-___
-
-### map
-
-• `Const` **map**: (`value`: `unknown`) => `ReadonlyMap`<`unknown`, `unknown`\> & `Readonly`<{ `of`: <K, V\>(`value`: `unknown`, `keyGuard`: [`Guard`](../interfaces/guards.Guard.md)<`K`\>, `valueGuard`: [`Guard`](../interfaces/guards.Guard.md)<`V`\>) => `ReadonlyMap`<`K`, `V`\>  }\>
-
-___
 
 ### not
 
@@ -110,13 +92,23 @@ ___
 | `true` | <V\>(`value`: `V`) => `Exclude`<`V`, ``true``\> |
 | `undefined` | <V\>(`value`: `V`) => `Exclude`<`V`, `undefined`\> |
 
-___
-
-### set
-
-• `Const` **set**: (`value`: `unknown`) => `ReadonlySet`<`unknown`\> & `Readonly`<{ `of`: <T\>(`value`: `unknown`, `guard`: [`Guard`](../interfaces/guards.Guard.md)<`T`\>) => `ReadonlySet`<`T`\>  }\>
-
 ## Functions
+
+### array
+
+▸ **array**(`value`): [`unknowns`](types_core.md#unknowns)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
+
+#### Returns
+
+[`unknowns`](types_core.md#unknowns)
+
+___
 
 ### arrayU
 
@@ -236,7 +228,9 @@ ___
 
 Asserts that value type is T.
 
-**`throws`** Error otherwise.
+**`Throws`**
+
+ Error otherwise.
 
 #### Type parameters
 
@@ -265,7 +259,9 @@ ___
 
 Asserts that value type is T.
 
-**`throws`** Error otherwise.
+**`Throws`**
+
+ Error otherwise.
 
 #### Type parameters
 
@@ -309,7 +305,9 @@ ___
 
 Asserts that value type is T.
 
-**`throws`** Error otherwise.
+**`Throws`**
+
+ Error otherwise.
 
 #### Type parameters
 
@@ -345,6 +343,22 @@ ___
 #### Returns
 
 ``false``
+
+___
+
+### indexedObject
+
+▸ **indexedObject**(`value`): [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
+
+#### Returns
+
+[`IndexedObject`](types_core.md#indexedobject)<`unknown`\>
 
 ___
 
@@ -402,7 +416,9 @@ ___
 
 Asserts that value type is T.
 
-**`throws`** Error otherwise.
+**`Throws`**
+
+ Error otherwise.
 
 #### Type parameters
 
@@ -431,7 +447,9 @@ ___
 
 Asserts that value type is T[].
 
-**`throws`** Error otherwise.
+**`Throws`**
+
+ Error otherwise.
 
 #### Type parameters
 
@@ -451,6 +469,22 @@ Asserts that value type is T[].
 readonly `T`[]
 
 Value if value type is T[].
+
+___
+
+### map
+
+▸ **map**(`value`): `ReadonlyMap`<`unknown`, `unknown`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
+
+#### Returns
+
+`ReadonlyMap`<`unknown`, `unknown`\>
 
 ___
 
@@ -723,6 +757,22 @@ ___
 #### Returns
 
 `undefined` \| readonly `object`[]
+
+___
+
+### set
+
+▸ **set**(`value`): `ReadonlySet`<`unknown`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `unknown` |
+
+#### Returns
+
+`ReadonlySet`<`unknown`\>
 
 ___
 

@@ -1,9 +1,10 @@
 "use strict";
-/* disable @skylib/functions/no-restricted-syntax[prefer-a-fromIterable] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-json -- Ok */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.neq = exports.eq = exports.encode = exports.decode = void 0;
 const tslib_1 = require("tslib");
-/* disable @skylib/functions/no-restricted-syntax[prefer-json] */
+/* eslint-disable unicorn/no-null -- Ok */
+const a = tslib_1.__importStar(require("./array"));
 const core_1 = require("./core");
 const is = tslib_1.__importStar(require("./guards"));
 const as = tslib_1.__importStar(require("./inline-assertions"));
@@ -75,9 +76,9 @@ function replacer(_key, value) {
     if (is.empty(value))
         return null;
     if (is.map(value))
-        return { type: "map-5702-3c89-3feb-75d4", value: [...value] };
+        return { type: "map-5702-3c89-3feb-75d4", value: a.fromIterable(value) };
     if (is.set(value))
-        return { type: "set-41ef-10c9-ae1f-15e8", value: [...value] };
+        return { type: "set-41ef-10c9-ae1f-15e8", value: a.fromIterable(value) };
     return value;
 }
 /**

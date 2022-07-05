@@ -58,15 +58,19 @@ ___
 
 ▸ **noop**(...`args`): `any`
 
+Function.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `...args` | `any`[] |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `...args` | readonly `any`[] | Arguments. |
 
 #### Returns
 
 `any`
+
+Result.
 
 ___
 
@@ -174,10 +178,6 @@ Factory function.
 
 ▸ (): `T`
 
-Creates factory function from value.
-
 ##### Returns
 
 `T`
-
-Factory function.

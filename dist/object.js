@@ -1,10 +1,10 @@
 "use strict";
-/* disable @skylib/functions/no-restricted-syntax[prefer-o-clone] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-o-clone -- Ok */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sort = exports.some = exports.size = exports.set = exports.removeUndefinedKeys = exports.omit = exports.map = exports.hasOwnProp = exports.getPrototypeOf = exports.get = exports.filter = exports.every = exports.clone = exports.values = exports.keys = exports.fromEntries = exports.extend = exports.entries = exports.defineProperty = exports.assign = void 0;
 const tslib_1 = require("tslib");
-/* disable @skylib/functions/no-restricted-syntax[prefer-o-getPrototypeOf] */
-/* disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-o-getPrototypeOf -- Ok */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-o-hasOwnProp -- Ok */
 const core_1 = require("./core");
 const is = tslib_1.__importStar(require("./guards"));
 const as = tslib_1.__importStar(require("./inline-assertions"));

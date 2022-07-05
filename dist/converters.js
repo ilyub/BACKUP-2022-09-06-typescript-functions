@@ -1,9 +1,9 @@
 "use strict";
-/* disable @skylib/functions/no-restricted-syntax[prefer-cast-number] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-cast-number -- Ok */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.stringU = exports.string = exports.numberU = exports.number = exports.not = void 0;
 const tslib_1 = require("tslib");
-/* disable @skylib/functions/no-restricted-syntax[prefer-cast-string] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-cast-string -- Ok */
 const is = tslib_1.__importStar(require("./guards"));
 exports.not = {
     /**

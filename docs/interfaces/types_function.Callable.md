@@ -22,7 +22,7 @@ Function.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `...args` | `any`[] | Arguments. |
+| `...args` | readonly `any`[] | Arguments. |
 
 #### Returns
 

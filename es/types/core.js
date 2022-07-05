@@ -1,3 +1,3 @@
-/* disable @skylib/functions/no-restricted-syntax[prefer-IndexedObject] */
+/* eslint-disable @skylib/no-multi-type-tuples -- Ok */
 export {};
 //# sourceMappingURL=core.js.map

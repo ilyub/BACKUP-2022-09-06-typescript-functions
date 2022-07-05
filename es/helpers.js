@@ -1,5 +1,5 @@
-/* disable @skylib/functions/no-restricted-syntax[no-reflect-get] */
-/* disable @skylib/functions/no-restricted-syntax[no-reflect-set] */
+/* eslint-disable @skylib/no-restricted-syntax/no-reflect-get -- Ok */
+/* eslint-disable @skylib/no-restricted-syntax/no-reflect-set -- Ok */
 import * as assert from "./assertions";
 import * as cast from "./converters";
 import { typedef } from "./core";

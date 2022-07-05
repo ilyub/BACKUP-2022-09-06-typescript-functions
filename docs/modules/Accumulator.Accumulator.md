@@ -8,8 +8,8 @@
 
 ### Type Aliases
 
-- [Entry](Accumulator.Accumulator-1.md#entry)
-- [Locked](Accumulator.Accumulator-1.md#locked)
+- [Entry](Accumulator.Accumulator.md#entry)
+- [Locked](Accumulator.Accumulator.md#locked)
 
 ## Type Aliases
 
@@ -28,7 +28,7 @@ ___
 
 ### Locked
 
-Ƭ **Locked**<`K`, `T`\>: `Omit`<`Readonly`<[`Accumulator`](../classes/Accumulator.Accumulator-2.md)<`K`, `T`\>\>, ``"push"`` \| ``"unshift"``\>
+Ƭ **Locked**<`K`, `T`\>: `Omit`<`Readonly`<[`Accumulator`](../classes/Accumulator.Accumulator-1.md)<`K`, `T`\>\>, ``"push"`` \| ``"unshift"``\>
 
 #### Type parameters
 

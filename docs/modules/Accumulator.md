@@ -6,8 +6,8 @@
 
 ### Namespaces
 
-- [Accumulator](Accumulator.Accumulator-1.md)
+- [Accumulator](Accumulator.Accumulator.md)
 
 ### Classes
 
-- [Accumulator](../classes/Accumulator.Accumulator-2.md)
+- [Accumulator](../classes/Accumulator.Accumulator-1.md)

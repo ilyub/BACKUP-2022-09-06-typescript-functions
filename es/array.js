@@ -1,5 +1,6 @@
-/* disable @skylib/functions/no-restricted-syntax[prefer-a-fromIterable] */
-/* disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
+/* eslint-disable @skylib/no-multi-type-tuples -- Ok */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-a-fromIterable -- Ok */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-o-hasOwnProp -- Ok */
 import * as assert from "./assertions";
 import { indexed } from "./core";
 import * as is from "./guards";

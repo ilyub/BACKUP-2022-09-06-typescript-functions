@@ -1,5 +1,5 @@
-/* disable @skylib/functions/no-restricted-syntax[prefer-programFlow-clearInterval] */
-/* disable @skylib/functions/no-restricted-syntax[prefer-programFlow-clearTimeout] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-programFlow-clearInterval -- Ok */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-programFlow-clearTimeout -- Ok */
 import * as is from "./guards";
 export { _clearInterval as clearInterval };
 export { _clearTimeout as clearTimeout };

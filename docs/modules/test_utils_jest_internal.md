@@ -43,19 +43,6 @@
 
 `void`
 
-▸ **error**(`message?`, ...`optionalParams`): `void`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `message?` | `any` |
-| `...optionalParams` | `any`[] |
-
-#### Returns
-
-`void`
-
 ___
 
 ### warn
@@ -67,19 +54,6 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `...data` | `any`[] |
-
-#### Returns
-
-`void`
-
-▸ **warn**(`message?`, ...`optionalParams`): `void`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `message?` | `any` |
-| `...optionalParams` | `any`[] |
 
 #### Returns
 

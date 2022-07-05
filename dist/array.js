@@ -1,9 +1,10 @@
 "use strict";
-/* disable @skylib/functions/no-restricted-syntax[prefer-a-fromIterable] */
+/* eslint-disable @skylib/no-multi-type-tuples -- Ok */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.unshiftOrReplaceBy = exports.unshift = exports.uniqueBy = exports.truncate = exports.toggleBy = exports.third = exports.sort = exports.second = exports.reverse = exports.replaceBy = exports.replace = exports.removeBy = exports.random = exports.pushOrReplaceBy = exports.push = exports.last = exports.includesBy = exports.get = exports.fromString = exports.fromRange = exports.fromMixed = exports.fromIterable = exports.first = exports.findBy = exports.drop = exports.clone = exports.chain = void 0;
 const tslib_1 = require("tslib");
-/* disable @skylib/functions/no-restricted-syntax[prefer-o-hasOwnProp] */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-a-fromIterable -- Ok */
+/* eslint-disable @skylib/no-restricted-syntax/prefer-o-hasOwnProp -- Ok */
 const assert = tslib_1.__importStar(require("./assertions"));
 const core_1 = require("./core");
 const is = tslib_1.__importStar(require("./guards"));

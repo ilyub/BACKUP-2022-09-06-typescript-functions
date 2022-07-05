@@ -8,28 +8,29 @@
 
 ### Properties
 
-- [pass](test_utils_expect_internal.Result.md#pass)
-
-### Methods
-
 - [message](test_utils_expect_internal.Result.md#message)
+- [pass](test_utils_expect_internal.Result.md#pass)
 
 ## Properties
 
-### pass
-
-• `Readonly` **pass**: `boolean`
-
-## Methods
-
 ### message
 
-▸ `Readonly` **message**(): `string`
+• `Readonly` **message**: () => `string`
+
+#### Type declaration
+
+▸ (): `string`
 
 Returns failure message.
 
-#### Returns
+##### Returns
 
 `string`
 
 Failure message.
+
+___
+
+### pass
+
+• `Readonly` **pass**: `boolean`

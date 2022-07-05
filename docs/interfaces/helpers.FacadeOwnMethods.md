@@ -12,24 +12,28 @@
 
 ## Table of contents
 
-### Methods
+### Properties
 
 - [setImplementation](helpers.FacadeOwnMethods.md#setimplementation)
 
-## Methods
+## Properties
 
 ### setImplementation
 
-▸ `Readonly` **setImplementation**(`implementation`): `void`
+• `Readonly` **setImplementation**: (`implementation`: `I`) => `void`
+
+#### Type declaration
+
+▸ (`implementation`): `void`
 
 Sets implementation.
 
-#### Parameters
+##### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `implementation` | `I` | Implementation. |
 
-#### Returns
+##### Returns
 
 `void`

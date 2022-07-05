@@ -15,19 +15,19 @@
 
 ### Constructors
 
-- [constructor](Accumulator.Accumulator-2.md#constructor)
+- [constructor](Accumulator.Accumulator-1.md#constructor)
 
 ### Properties
 
-- [map](Accumulator.Accumulator-2.md#map)
+- [map](Accumulator.Accumulator-1.md#map)
 
 ### Methods
 
-- [[iterator]](Accumulator.Accumulator-2.md#[iterator])
-- [get](Accumulator.Accumulator-2.md#get)
-- [push](Accumulator.Accumulator-2.md#push)
-- [unshift](Accumulator.Accumulator-2.md#unshift)
-- [values](Accumulator.Accumulator-2.md#values)
+- [[iterator]](Accumulator.Accumulator-1.md#[iterator])
+- [get](Accumulator.Accumulator-1.md#get)
+- [push](Accumulator.Accumulator-1.md#push)
+- [unshift](Accumulator.Accumulator-1.md#unshift)
+- [values](Accumulator.Accumulator-1.md#values)
 
 ## Constructors
 
@@ -48,7 +48,7 @@ Creates class instance.
 
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
-| `source` | `Iterable`<[`Entry`](../modules/Accumulator.Accumulator-1.md#entry)<`K`, `T`\>\> | `[]` | Source. |
+| `source` | `Iterable`<[`Entry`](../modules/Accumulator.Accumulator.md#entry)<`K`, `T`\>\> | `[]` | Source. |
 
 ## Properties
 
@@ -60,11 +60,11 @@ Creates class instance.
 
 ### [iterator]
 
-▸ **[iterator]**(): `IterableIterator`<[`Entry`](../modules/Accumulator.Accumulator-1.md#entry)<`K`, `T`\>\>
+▸ **[iterator]**(): `IterableIterator`<[`Entry`](../modules/Accumulator.Accumulator.md#entry)<`K`, `T`\>\>
 
 #### Returns
 
-`IterableIterator`<[`Entry`](../modules/Accumulator.Accumulator-1.md#entry)<`K`, `T`\>\>
+`IterableIterator`<[`Entry`](../modules/Accumulator.Accumulator.md#entry)<`K`, `T`\>\>
 
 ___
 
