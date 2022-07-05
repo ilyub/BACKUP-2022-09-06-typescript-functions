@@ -20,7 +20,7 @@ module.exports = {
         message: "Expecting type to include array or unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:array|arrayU)$/u] > .arguments:first-child",
-        typeHasNoneOf: ["array", "object", "unknown"]
+        typeHasNoneOf: ["any", "array", "object", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-boolean": [
@@ -29,7 +29,7 @@ module.exports = {
         message: "Expecting type to include boolean or unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:boolean|booleanU)$/u] > .arguments:first-child",
-        typeHasNoneOf: ["boolean", "unknown"]
+        typeHasNoneOf: ["any", "boolean", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-callable": [
@@ -38,7 +38,7 @@ module.exports = {
         message: "Expecting type to include function or unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=callable] > .arguments:first-child",
-        typeHasNoneOf: ["function", "object", "unknown"]
+        typeHasNoneOf: ["any", "function", "object", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-empty": [
@@ -47,7 +47,7 @@ module.exports = {
         message: "Expecting type to include null, undefined or unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=empty] > .arguments:first-child",
-        typeHasNoneOf: ["null", "undefined", "unknown"]
+        typeHasNoneOf: ["any", "null", "undefined", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-enumeration": [
@@ -56,7 +56,7 @@ module.exports = {
         message: "Expecting type to include string, unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=enumeration] > .arguments:first-child",
-        typeHasNoneOf: ["string", "unknown"]
+        typeHasNoneOf: ["any", "string", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-false": [
@@ -65,7 +65,7 @@ module.exports = {
         message: "Expecting type to include boolean or unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=false] > .arguments:first-child",
-        typeHasNoneOf: ["boolean", "unknown"]
+        typeHasNoneOf: ["any", "boolean", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-indexedObject": [
@@ -74,7 +74,7 @@ module.exports = {
         message: "Expecting type to be unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:indexedObject|indexedObjectU)$/u] > .arguments:first-child",
-        typeIsNot: "unknown"
+        typeHasNoneOf: ["any", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-instanceOf": [
@@ -83,7 +83,7 @@ module.exports = {
         message: "Expecting type to include object, unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=instanceOf] > .arguments:first-child",
-        typeHasNoneOf: ["object", "unknown"]
+        typeHasNoneOf: ["any", "object", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-map": [
@@ -92,7 +92,7 @@ module.exports = {
         message: "Expecting type to include object, unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=map] > .arguments:first-child",
-        typeHasNoneOf: ["object", "unknown"]
+        typeHasNoneOf: ["any", "object", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-not-empty": [
@@ -101,7 +101,7 @@ module.exports = {
         message: "Expecting type to include null, undefined or unknown",
         selector:
           "CallExpression[callee.object.object.name=/^(?:as|assert|is)$/u][callee.object.property.name=not][callee.property.name=empty] > .arguments:first-child",
-        typeHasNoneOf: ["null", "undefined", "unknown"]
+        typeHasNoneOf: ["any", "null", "undefined", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-null": [
@@ -110,7 +110,7 @@ module.exports = {
         message: "Expecting type to include null or unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=null] > .arguments:first-child",
-        typeHasNoneOf: ["null", "unknown"]
+        typeHasNoneOf: ["any", "null", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-numStr": [
@@ -119,7 +119,7 @@ module.exports = {
         message: "Expecting type to include number, string or unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:numStr|numStrU)$/u] > .arguments:first-child",
-        typeHasNoneOf: ["number", "string", "unknown"]
+        typeHasNoneOf: ["any", "number", "string", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-number": [
@@ -128,7 +128,7 @@ module.exports = {
         message: "Expecting type to include number, unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:number|numberU)$/u] > .arguments:first-child",
-        typeHasNoneOf: ["number", "unknown"]
+        typeHasNoneOf: ["any", "number", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-object": [
@@ -137,7 +137,7 @@ module.exports = {
         message: "Expecting type to include object, unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:object|objectU)$/u] > .arguments:first-child",
-        typeHasNoneOf: ["object", "unknown"]
+        typeHasNoneOf: ["any", "object", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-set": [
@@ -146,7 +146,7 @@ module.exports = {
         message: "Expecting type to include object, unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=set] > .arguments:first-child",
-        typeHasNoneOf: ["object", "unknown"]
+        typeHasNoneOf: ["any", "object", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-string": [
@@ -155,7 +155,7 @@ module.exports = {
         message: "Expecting type to include string, unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:string|stringU)$/u] > .arguments:first-child",
-        typeHasNoneOf: ["string", "unknown"]
+        typeHasNoneOf: ["any", "string", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-symbol": [
@@ -164,7 +164,7 @@ module.exports = {
         message: "Expecting type to include symbol, unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:symbol|symbolU)$/u] > .arguments:first-child",
-        typeHasNoneOf: ["symbol", "unknown"]
+        typeHasNoneOf: ["any", "symbol", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-true": [
@@ -173,7 +173,7 @@ module.exports = {
         message: "Expecting type to include boolean or unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=true] > .arguments:first-child",
-        typeHasNoneOf: ["boolean", "unknown"]
+        typeHasNoneOf: ["any", "boolean", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-tuple": [
@@ -182,7 +182,7 @@ module.exports = {
         message: "Expecting type to include array or unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=tuple] > .arguments:first-child",
-        typeHasNoneOf: ["array", "unknown"]
+        typeHasNoneOf: ["any", "array", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/guard-arg-undefined": [
@@ -191,7 +191,7 @@ module.exports = {
         message: "Expecting type to include undefined or unknown",
         selector:
           "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=undefined] > .arguments:first-child",
-        typeHasNoneOf: ["undefined", "unknown"]
+        typeHasNoneOf: ["any", "undefined", "unknown"]
       }
     ],
     "@skylib/no-restricted-syntax/no-Writable": [
