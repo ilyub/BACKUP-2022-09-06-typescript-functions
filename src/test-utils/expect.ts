@@ -1,10 +1,10 @@
 import { fn } from "..";
 import { printDiffOrStringify, stringify } from "jest-matcher-utils";
-import type { MatchersRecord, Result } from "./expect.internal";
+import type { Matchers, Result } from "./expect.internal";
 import type { Extends } from "ts-toolbelt/out/Any/Extends";
 import type { If } from "ts-toolbelt/out/Any/If";
 
-export interface ExpectFromMatcher<K extends keyof MatchersRecord> {
+export interface ExpectFromMatcher<K extends keyof Matchers> {
   /**
    * Expect function.
    *
@@ -12,8 +12,8 @@ export interface ExpectFromMatcher<K extends keyof MatchersRecord> {
    * @param args - Arguments.
    * @returns Result.
    */
-  (got: unknown, ...args: Parameters<MatchersRecord[K]>): If<
-    Extends<ReturnType<MatchersRecord[K]>, Promise<unknown>>,
+  (got: unknown, ...args: Parameters<Matchers[K]>): If<
+    Extends<ReturnType<Matchers[K]>, Promise<unknown>>,
     Promise<Result>,
     Result
   >;

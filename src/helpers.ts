@@ -32,7 +32,7 @@ export type SafeAccess<
   R extends string & keyof T
 > = Join2<{ [K in W]: T[K] }, { readonly [K in R]: T[K] }>;
 
-export declare type SafeAccessGuardsRecord<T, W extends string & keyof T> = {
+export declare type SafeAccessGuards<T, W extends string & keyof T> = {
   readonly [K in W]: is.Guard<T[K]>;
 };
 
@@ -137,7 +137,7 @@ export function safeAccess<
   R extends string & keyof T
 >(
   obj: T,
-  guards: SafeAccessGuardsRecord<T, W>,
+  guards: SafeAccessGuards<T, W>,
   readonlyKeys: readonly R[] = []
 ): SafeAccess<T, W, R> {
   const guardsMap = new Map<PropertyKey, is.Guard>(o.entries(guards));
