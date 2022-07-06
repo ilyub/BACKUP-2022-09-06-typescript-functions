@@ -1,38 +1,6 @@
 const { eslint } = require("@skylib/config");
 
 module.exports = {
-  overrides: [
-    {
-      files: "./src/object.ts",
-      rules: {
-        "@typescript-eslint/no-shadow": [
-          "warn",
-          {
-            allow: ["entries"],
-            builtinGlobals: true,
-            hoist: "all",
-            ignoreFunctionTypeParameterNameValueShadow: false,
-            ignoreTypeValueShadow: true
-          }
-        ]
-      }
-    },
-    {
-      files: "./src/string.ts",
-      rules: {
-        "@typescript-eslint/no-shadow": [
-          "warn",
-          {
-            allow: ["path"],
-            builtinGlobals: true,
-            hoist: "all",
-            ignoreFunctionTypeParameterNameValueShadow: false,
-            ignoreTypeValueShadow: true
-          }
-        ]
-      }
-    }
-  ],
   rules: {
     "@skylib/consistent-import/project": [
       "warn",
@@ -165,9 +133,9 @@ module.exports = {
             autoImportSource: "./types",
             filesToLint: [
               "./src/assertions.ts",
-              "./src/inline-assertions.ts",
               "./src/converters.ts",
-              "./src/guards.ts"
+              "./src/guards.ts",
+              "./src/inline-assertions.ts"
             ],
             localName: "types",
             source: "@skylib/functions/src/types",
@@ -211,5 +179,37 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  overrides: [
+    {
+      files: "./src/object.ts",
+      rules: {
+        "@typescript-eslint/no-shadow": [
+          "warn",
+          {
+            allow: ["entries"],
+            builtinGlobals: true,
+            hoist: "all",
+            ignoreFunctionTypeParameterNameValueShadow: false,
+            ignoreTypeValueShadow: true
+          }
+        ]
+      }
+    },
+    {
+      files: "./src/string.ts",
+      rules: {
+        "@typescript-eslint/no-shadow": [
+          "warn",
+          {
+            allow: ["path"],
+            builtinGlobals: true,
+            hoist: "all",
+            ignoreFunctionTypeParameterNameValueShadow: false,
+            ignoreTypeValueShadow: true
+          }
+        ]
+      }
+    }
+  ]
 };

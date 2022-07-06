@@ -1,6 +1,6 @@
-/* eslint-disable @skylib/no-restricted-syntax/prefer-programFlow-clearInterval -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-programFlow-clearInterval -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/prefer-programFlow-clearTimeout -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-programFlow-clearTimeout -- Ok */
 
 import * as is from "./guards";
 import type { numberU } from "./types";

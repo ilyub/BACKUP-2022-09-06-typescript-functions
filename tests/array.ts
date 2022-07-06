@@ -1,4 +1,4 @@
-/* eslint-disable @skylib/no-restricted-syntax/a-mixedFrom-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/a-mixedFrom-arg-type -- Ok */
 
 import { AssertionError, a } from "@";
 

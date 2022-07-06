@@ -1,4 +1,4 @@
-/* eslint-disable @skylib/no-restricted-syntax/prefer-json -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-json -- Ok */
 
 /* eslint-disable unicorn/no-null -- Ok */
 

@@ -1,12 +1,12 @@
 /* eslint-disable @skylib/no-multi-type-tuples -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/prefer-a-fromIterable -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-a-fromIterable -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/prefer-o-entries -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-o-entries -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/prefer-o-hasOwnProp -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-o-hasOwnProp -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/prefer-o-values -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-o-values -- Ok */
 
 import { defineFn, overload, typedef } from "./core";
 import type { ValidationObject } from "./core";

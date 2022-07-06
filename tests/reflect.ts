@@ -1,4 +1,4 @@
-/* eslint-disable @skylib/no-restricted-syntax/no-reflect-get -- Ok */
+/* eslint-disable @skylib/custom/functions/no-reflect-get -- Ok */
 
 import { AssertionError, fn, is, reflect } from "@";
 

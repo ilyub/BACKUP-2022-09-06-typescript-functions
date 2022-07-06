@@ -1,40 +1,40 @@
-/* eslint-disable @skylib/no-restricted-syntax/is-array-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-array-arg-type -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/is-boolean-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-boolean-arg-type -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/is-callable-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-callable-arg-type -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/is-empty-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-empty-arg-type -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/is-enumeration-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-enumeration-arg-type -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/is-false-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-false-arg-type -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/is-indexedObject-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-indexedObject-arg-type -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/is-instanceOf-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-instanceOf-arg-type -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/is-map-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-map-arg-type -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/is-null-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-null-arg-type -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/is-numStr-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-numStr-arg-type -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/is-object-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-object-arg-type -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/is-set-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-set-arg-type -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/is-symbol-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-symbol-arg-type -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/is-number-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-number-arg-type -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/is-string-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-string-arg-type -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/is-true-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-true-arg-type -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/is-tuple-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-tuple-arg-type -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/is-undefined-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/is-undefined-arg-type -- Ok */
 
 import { createValidationObject, fn, is } from "@";
 

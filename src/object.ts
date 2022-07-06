@@ -1,8 +1,8 @@
-/* eslint-disable @skylib/no-restricted-syntax/prefer-o-clone -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-o-clone -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/prefer-o-getPrototypeOf -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-o-getPrototypeOf -- Ok */
 
-/* eslint-disable @skylib/no-restricted-syntax/prefer-o-hasOwnProp -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-o-hasOwnProp -- Ok */
 
 import { indexed } from "./core";
 import * as is from "./guards";

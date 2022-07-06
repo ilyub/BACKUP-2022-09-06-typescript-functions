@@ -14,7 +14,7 @@ module.exports = {
         ]
       }
     ],
-    "@skylib/no-restricted-syntax/a-mixedFrom-arg-type": [
+    "@skylib/custom/functions/a-mixedFrom-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -31,7 +31,7 @@ module.exports = {
         ]
       }
     ],
-    "@skylib/no-restricted-syntax/is-array-arg-type": [
+    "@skylib/custom/functions/is-array-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -41,7 +41,7 @@ module.exports = {
         typeHasNoneOf: ["any", "array", "object", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-boolean-arg-type": [
+    "@skylib/custom/functions/is-boolean-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -51,7 +51,7 @@ module.exports = {
         typeHasNoneOf: ["any", "boolean", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-callable-arg-type": [
+    "@skylib/custom/functions/is-callable-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -61,7 +61,7 @@ module.exports = {
         typeHasNoneOf: ["any", "function", "object", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-empty-arg-type": [
+    "@skylib/custom/functions/is-empty-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -71,7 +71,7 @@ module.exports = {
         typeHasNoneOf: ["any", "null", "undefined", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-enumeration-arg-type": [
+    "@skylib/custom/functions/is-enumeration-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -81,7 +81,7 @@ module.exports = {
         typeHasNoneOf: ["any", "string", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-false-arg-type": [
+    "@skylib/custom/functions/is-false-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -91,7 +91,7 @@ module.exports = {
         typeHasNoneOf: ["any", "boolean", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-indexedObject-arg-type": [
+    "@skylib/custom/functions/is-indexedObject-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -101,7 +101,7 @@ module.exports = {
         typeHasNoneOf: ["any", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-instanceOf-arg-type": [
+    "@skylib/custom/functions/is-instanceOf-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -111,7 +111,7 @@ module.exports = {
         typeHasNoneOf: ["any", "object", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-map-arg-type": [
+    "@skylib/custom/functions/is-map-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -121,7 +121,7 @@ module.exports = {
         typeHasNoneOf: ["any", "object", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-not-empty-arg-type": [
+    "@skylib/custom/functions/is-not-empty-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -131,7 +131,7 @@ module.exports = {
         typeHasNoneOf: ["any", "null", "undefined", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-null-arg-type": [
+    "@skylib/custom/functions/is-null-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -141,7 +141,7 @@ module.exports = {
         typeHasNoneOf: ["any", "null", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-numStr-arg-type": [
+    "@skylib/custom/functions/is-numStr-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -151,7 +151,7 @@ module.exports = {
         typeHasNoneOf: ["any", "number", "string", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-number-arg-type": [
+    "@skylib/custom/functions/is-number-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -161,7 +161,7 @@ module.exports = {
         typeHasNoneOf: ["any", "number", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-object-arg-type": [
+    "@skylib/custom/functions/is-object-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -171,7 +171,7 @@ module.exports = {
         typeHasNoneOf: ["any", "object", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-set-arg-type": [
+    "@skylib/custom/functions/is-set-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -181,7 +181,7 @@ module.exports = {
         typeHasNoneOf: ["any", "object", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-string-arg-type": [
+    "@skylib/custom/functions/is-string-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -191,7 +191,7 @@ module.exports = {
         typeHasNoneOf: ["any", "string", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-symbol-arg-type": [
+    "@skylib/custom/functions/is-symbol-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -201,7 +201,7 @@ module.exports = {
         typeHasNoneOf: ["any", "symbol", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-true-arg-type": [
+    "@skylib/custom/functions/is-true-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -211,7 +211,7 @@ module.exports = {
         typeHasNoneOf: ["any", "boolean", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-tuple-arg-type": [
+    "@skylib/custom/functions/is-tuple-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -221,7 +221,7 @@ module.exports = {
         typeHasNoneOf: ["any", "array", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/is-undefined-arg-type": [
+    "@skylib/custom/functions/is-undefined-arg-type": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -231,7 +231,7 @@ module.exports = {
         typeHasNoneOf: ["any", "undefined", "unknown"]
       }
     ],
-    "@skylib/no-restricted-syntax/no-Writable": [
+    "@skylib/custom/functions/no-Writable": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -244,7 +244,7 @@ module.exports = {
         ]
       }
     ],
-    "@skylib/no-restricted-syntax/no-o-unfreeze": [
+    "@skylib/custom/functions/no-o-unfreeze": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -253,7 +253,7 @@ module.exports = {
           "CallExpression > .callee[object.name=o][property.name=unfreeze]"
       }
     ],
-    "@skylib/no-restricted-syntax/no-reflect-get": [
+    "@skylib/custom/functions/no-reflect-get": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -262,7 +262,7 @@ module.exports = {
           "CallExpression > .callee[object.name=reflect][property.name=get]"
       }
     ],
-    "@skylib/no-restricted-syntax/no-reflect-set": [
+    "@skylib/custom/functions/no-reflect-set": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -271,7 +271,7 @@ module.exports = {
           "CallExpression > .callee[object.name=reflect][property.name=set]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-IndexedObject": [
+    "@skylib/custom/functions/prefer-IndexedObject": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -280,7 +280,7 @@ module.exports = {
           "TSTypeReference[typeName.name=Rec] > .typeParameters > .params:first-child > .typeName[name=PropertyKey]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-IndexedRecord": [
+    "@skylib/custom/functions/prefer-IndexedRecord": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -289,7 +289,7 @@ module.exports = {
           "TSTypeReference[typeName.name=Rec] > .typeParameters > .params:first-child > .typeName[name=string]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-NumStr": [
+    "@skylib/custom/functions/prefer-NumStr": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -304,7 +304,7 @@ module.exports = {
         ]
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-PartialRecord": [
+    "@skylib/custom/functions/prefer-PartialRecord": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -313,7 +313,7 @@ module.exports = {
           "TSTypeReference[typeName.name=Partial] > .typeParameters > .params:first-child > .typeName[name=Rec]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-WritableIndexedObject": [
+    "@skylib/custom/functions/prefer-WritableIndexedObject": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -322,7 +322,7 @@ module.exports = {
           "TSTypeReference[typeName.name=WritableRecord] > .typeParameters > .params:first-child > .typeName[name=PropertyKey]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-WritableRecord": [
+    "@skylib/custom/functions/prefer-WritableRecord": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -330,7 +330,7 @@ module.exports = {
         selector: "Identifier[name=Record]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-a-first": [
+    "@skylib/custom/functions/prefer-a-first": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -339,7 +339,7 @@ module.exports = {
           "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=0]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-a-fromIterable": [
+    "@skylib/custom/functions/prefer-a-fromIterable": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -347,7 +347,7 @@ module.exports = {
         selector: "ArrayExpression[elements.length=1] > SpreadElement"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-a-second": [
+    "@skylib/custom/functions/prefer-a-second": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -356,7 +356,7 @@ module.exports = {
           "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=1]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-a-third": [
+    "@skylib/custom/functions/prefer-a-third": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -365,7 +365,7 @@ module.exports = {
           "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=2]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-cast-number": [
+    "@skylib/custom/functions/prefer-cast-number": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -373,7 +373,7 @@ module.exports = {
         selector: "CallExpression > .callee[name=Number]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-cast-string": [
+    "@skylib/custom/functions/prefer-cast-string": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -381,7 +381,7 @@ module.exports = {
         selector: "CallExpression > .callee[name=String]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-defineFn": [
+    "@skylib/custom/functions/prefer-defineFn": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -390,7 +390,7 @@ module.exports = {
           ":matches(ExportNamedDeclaration, Program, TSModuleBlock) > VariableDeclaration > VariableDeclarator > CallExpression > :matches(.callee[name=assign], .callee[property.name=assign])"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-evaluate": [
+    "@skylib/custom/functions/prefer-evaluate": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -399,7 +399,7 @@ module.exports = {
           "CallExpression[arguments.length=0] > ArrowFunctionExpression.callee"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-json": [
+    "@skylib/custom/functions/prefer-json": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -407,7 +407,7 @@ module.exports = {
         selector: "Identifier[name=JSON]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-mockCallsToBe": [
+    "@skylib/custom/functions/prefer-mockCallsToBe": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -420,7 +420,7 @@ module.exports = {
         ]
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-o-assign": [
+    "@skylib/custom/functions/prefer-o-assign": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -429,7 +429,7 @@ module.exports = {
           "CallExpression > .callee[object.name=Object][property.name=assign]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-o-clone": [
+    "@skylib/custom/functions/prefer-o-clone": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -437,7 +437,7 @@ module.exports = {
         selector: "ObjectExpression[properties.length=1] > SpreadElement"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-o-defineProperty": [
+    "@skylib/custom/functions/prefer-o-defineProperty": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -446,7 +446,7 @@ module.exports = {
           "CallExpression > .callee[object.name=Object][property.name=defineProperty]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-o-entries": [
+    "@skylib/custom/functions/prefer-o-entries": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -455,7 +455,7 @@ module.exports = {
           "CallExpression > .callee[object.name=Object][property.name=entries]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-o-getPrototypeOf": [
+    "@skylib/custom/functions/prefer-o-getPrototypeOf": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -464,7 +464,7 @@ module.exports = {
           "CallExpression > .callee[object.name=Object][property.name=getPrototypeOf]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-o-hasOwnProp": [
+    "@skylib/custom/functions/prefer-o-hasOwnProp": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -473,7 +473,7 @@ module.exports = {
           "CallExpression > .callee[object.object.object.name=Object][object.object.property.name=prototype][object.property.name=hasOwnProperty][property.name=call]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-o-keys": [
+    "@skylib/custom/functions/prefer-o-keys": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -482,7 +482,7 @@ module.exports = {
           "CallExpression > .callee[object.name=Object][property.name=keys]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-o-values": [
+    "@skylib/custom/functions/prefer-o-values": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -491,7 +491,7 @@ module.exports = {
           "CallExpression > .callee[object.name=Object][property.name=values]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-programFlow-clearInterval": [
+    "@skylib/custom/functions/prefer-programFlow-clearInterval": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -499,7 +499,7 @@ module.exports = {
         selector: "CallExpression > .callee[name=clearInterval]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-programFlow-clearTimeout": [
+    "@skylib/custom/functions/prefer-programFlow-clearTimeout": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -507,7 +507,7 @@ module.exports = {
         selector: "CallExpression > .callee[name=clearTimeout]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-programFlow-setInterval": [
+    "@skylib/custom/functions/prefer-programFlow-setInterval": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -515,7 +515,7 @@ module.exports = {
         selector: "CallExpression > .callee[name=setInterval]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-programFlow-setTimeout": [
+    "@skylib/custom/functions/prefer-programFlow-setTimeout": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -523,7 +523,7 @@ module.exports = {
         selector: "CallExpression > .callee[name=setTimeout]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-reflect": [
+    "@skylib/custom/functions/prefer-reflect": [
       "warn",
       {
         filesToSkip: ["*.js"],
@@ -531,7 +531,7 @@ module.exports = {
         selector: "Identifier[name=Reflect]"
       }
     ],
-    "@skylib/no-restricted-syntax/prefer-undefined-shorthand": [
+    "@skylib/custom/functions/prefer-undefined-shorthand": [
       "warn",
       {
         filesToSkip: ["*.js"],
