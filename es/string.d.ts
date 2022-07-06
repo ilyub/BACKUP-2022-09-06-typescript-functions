@@ -1,12 +1,4 @@
 import type { strings } from "./types";
-export declare const path: {
-    readonly addLeadingSlash: (path: string) => string;
-    readonly addTrailingSlash: (path: string) => string;
-    readonly canonicalize: (path: string) => string;
-    readonly join: (...parts: strings) => string;
-    readonly removeLeadingSlash: (path: string) => string;
-    readonly removeTrailingSlash: (path: string) => string;
-};
 export declare type Eol = "\n" | "\r\n";
 /**
  * Detects EOL sequence.
@@ -122,4 +114,48 @@ export declare function ucFirst(str: string): string;
  * @returns Unpadded string.
  */
 export declare function unpadMultiline(str: string): string;
+export declare namespace path {
+    /**
+     * Adds leading slash.
+     *
+     * @param path - Path.
+     * @returns New string with leading slash added.
+     */
+    function addLeadingSlash(path: string): string;
+    /**
+     * Adds trailing slash.
+     *
+     * @param path - Path.
+     * @returns New string with trailing slash added.
+     */
+    function addTrailingSlash(path: string): string;
+    /**
+     * Canonicalizes path.
+     *
+     * @param path - Path.
+     * @returns Canonical path.
+     */
+    function canonicalize(path: string): string;
+    /**
+     * Creates path from parts.
+     *
+     * @param parts - Parts.
+     * @returns Path.
+     */
+    function join(...parts: strings): string;
+    /**
+     * Removes leading slash.
+     *
+     * @param path - Path.
+     * @returns New string with leading slash removed.
+     */
+    function removeLeadingSlash(path: string): string;
+    /**
+     * Removes trailing slash.
+     *
+     * @param path - Path.
+     * @returns New string with trailing slash removed.
+     */
+    function removeTrailingSlash(path: string): string;
+}
 //# sourceMappingURL=string.d.ts.map

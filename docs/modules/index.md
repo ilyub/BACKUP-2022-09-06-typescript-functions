@@ -53,7 +53,7 @@
 - [Recs](index.md#recs)
 - [RemovePrefix](index.md#removeprefix)
 - [SafeAccess](index.md#safeaccess)
-- [SafeAccessGuardsRecord](index.md#safeaccessguardsrecord)
+- [SafeAccessGuards](index.md#safeaccessguards)
 - [StrictOmit](index.md#strictomit)
 - [Sync](index.md#sync)
 - [UndefinedKeys](index.md#undefinedkeys)
@@ -401,9 +401,9 @@ Re-exports [SafeAccess](helpers.md#safeaccess)
 
 ___
 
-### SafeAccessGuardsRecord
+### SafeAccessGuards
 
-Re-exports [SafeAccessGuardsRecord](helpers.md#safeaccessguardsrecord)
+Re-exports [SafeAccessGuards](helpers.md#safeaccessguards)
 
 ___
 

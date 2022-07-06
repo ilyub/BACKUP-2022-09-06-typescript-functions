@@ -1,5 +1,5 @@
 "use strict";
-/* eslint-disable @skylib/no-restricted-syntax/prefer-json -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-json -- Ok */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.neq = exports.eq = exports.encode = exports.decode = void 0;
 const tslib_1 = require("tslib");

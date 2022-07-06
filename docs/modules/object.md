@@ -352,7 +352,7 @@ Returns object property.
 
 **`Throws`**
 
- AssertionError otherwise.
+AssertionError otherwise.
 
 #### Type parameters
 

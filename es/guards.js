@@ -1,8 +1,8 @@
 /* eslint-disable @skylib/no-multi-type-tuples -- Ok */
-/* eslint-disable @skylib/no-restricted-syntax/prefer-a-fromIterable -- Ok */
-/* eslint-disable @skylib/no-restricted-syntax/prefer-o-entries -- Ok */
-/* eslint-disable @skylib/no-restricted-syntax/prefer-o-hasOwnProp -- Ok */
-/* eslint-disable @skylib/no-restricted-syntax/prefer-o-values -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-a-fromIterable -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-o-entries -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-o-hasOwnProp -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-o-values -- Ok */
 import { defineFn, overload, typedef } from "./core";
 export { _false as false, _null as null, _true as true, _undefined as undefined };
 export const and = defineFn(overload(() => {

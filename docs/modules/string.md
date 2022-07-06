@@ -4,13 +4,13 @@
 
 ## Table of contents
 
+### Namespaces
+
+- [path](string.path.md)
+
 ### Type Aliases
 
 - [Eol](string.md#eol)
-
-### Variables
-
-- [path](string.md#path)
 
 ### Functions
 
@@ -36,23 +36,6 @@
 ### Eol
 
 Ƭ **Eol**: ``"\n"`` \| ``"\r\n"``
-
-## Variables
-
-### path
-
-• `Const` **path**: `Object`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `addLeadingSlash` | (`path`: `string`) => `string` |
-| `addTrailingSlash` | (`path`: `string`) => `string` |
-| `canonicalize` | (`path`: `string`) => `string` |
-| `join` | (...`parts`: [`strings`](types_core.md#strings)) => `string` |
-| `removeLeadingSlash` | (`path`: `string`) => `string` |
-| `removeTrailingSlash` | (`path`: `string`) => `string` |
 
 ## Functions
 

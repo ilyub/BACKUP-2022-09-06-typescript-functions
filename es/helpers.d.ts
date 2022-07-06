@@ -15,7 +15,7 @@ export declare type SafeAccess<T extends object, W extends string & keyof T, R e
 }, {
     readonly [K in R]: T[K];
 }>;
-export declare type SafeAccessGuardsRecord<T, W extends string & keyof T> = {
+export declare type SafeAccessGuards<T, W extends string & keyof T> = {
     readonly [K in W]: is.Guard<T[K]>;
 };
 /**
@@ -41,7 +41,7 @@ export declare function onDemand<T extends object>(generator: () => T): T;
  * @param readonlyKeys - Readonly keys.
  * @returns Safe access interface.
  */
-export declare function safeAccess<T extends object, W extends string & keyof T, R extends string & keyof T>(obj: T, guards: SafeAccessGuardsRecord<T, W>, readonlyKeys?: readonly R[]): SafeAccess<T, W, R>;
+export declare function safeAccess<T extends object, W extends string & keyof T, R extends string & keyof T>(obj: T, guards: SafeAccessGuards<T, W>, readonlyKeys?: readonly R[]): SafeAccess<T, W, R>;
 /**
  * Delays program execution.
  *

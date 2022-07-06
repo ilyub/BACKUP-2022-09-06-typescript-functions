@@ -266,7 +266,7 @@ Returns the first element from an array.
 
 **`Throws`**
 
- Error otherwise.
+Error otherwise.
 
 #### Type parameters
 
@@ -390,7 +390,7 @@ Returns element at given index.
 
 **`Throws`**
 
- Error otherwise.
+Error otherwise.
 
 #### Type parameters
 
@@ -450,7 +450,7 @@ Returns the last element from an array.
 
 **`Throws`**
 
- Error otherwise.
+Error otherwise.
 
 #### Type parameters
 
@@ -672,7 +672,7 @@ Returns the second element from an array.
 
 **`Throws`**
 
- Error otherwise.
+Error otherwise.
 
 #### Type parameters
 
@@ -729,7 +729,7 @@ Returns the third element from an array.
 
 **`Throws`**
 
- Error otherwise.
+Error otherwise.
 
 #### Type parameters
 

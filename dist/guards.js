@@ -3,10 +3,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.instanceOf = exports.factory = exports.enumeration = exports.empty = exports.callable = exports.boolean = exports.not = exports.unknownsU = exports.unknowns = exports.tuple = exports.symbolsU = exports.symbols = exports.symbolU = exports.stringsU = exports.strings = exports.setsU = exports.sets = exports.setU = exports.set = exports.objectsU = exports.objects = exports.objectU = exports.object = exports.numbersU = exports.numbers = exports.numberU = exports.numStrsU = exports.numStrs = exports.numStrU = exports.mapsU = exports.maps = exports.mapU = exports.map = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObjectU = exports.indexedObject = exports.booleansU = exports.booleans = exports.booleanU = exports.arraysU = exports.arrays = exports.arrayU = exports.array = exports.or = exports.and = exports.undefined = exports.true = exports.null = exports.false = void 0;
 exports.unknown = exports.symbol = exports.stringU = exports.string = exports.number = exports.numStr = exports.never = exports.instancesOf = void 0;
-/* eslint-disable @skylib/no-restricted-syntax/prefer-a-fromIterable -- Ok */
-/* eslint-disable @skylib/no-restricted-syntax/prefer-o-entries -- Ok */
-/* eslint-disable @skylib/no-restricted-syntax/prefer-o-hasOwnProp -- Ok */
-/* eslint-disable @skylib/no-restricted-syntax/prefer-o-values -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-a-fromIterable -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-o-entries -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-o-hasOwnProp -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-o-values -- Ok */
 const core_1 = require("./core");
 exports.and = (0, core_1.defineFn)((0, core_1.overload)(() => {
     return result;

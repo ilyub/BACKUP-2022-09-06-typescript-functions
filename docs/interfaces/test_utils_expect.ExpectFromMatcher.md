@@ -8,7 +8,7 @@
 
 | Name | Type |
 | :------ | :------ |
-| `K` | extends keyof [`MatchersRecord`](../modules/test_utils_expect_internal.md#matchersrecord) |
+| `K` | extends keyof [`Matchers`](../modules/test_utils_expect_internal.md#matchers) |
 
 ## Callable
 

@@ -11,7 +11,7 @@
 ### Type Aliases
 
 - [Calls](test_utils_expect_internal.md#calls)
-- [MatchersRecord](test_utils_expect_internal.md#matchersrecord)
+- [Matchers](test_utils_expect_internal.md#matchers)
 
 ### Functions
 
@@ -25,9 +25,9 @@
 
 ___
 
-### MatchersRecord
+### Matchers
 
-Ƭ **MatchersRecord**: `Readonly`<`jest.Matchers`<`unknown`, `unknown`\>\>
+Ƭ **Matchers**: `Readonly`<`jest.Matchers`<`unknown`, `unknown`\>\>
 
 ## Functions
 

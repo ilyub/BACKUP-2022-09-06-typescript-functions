@@ -21,7 +21,7 @@ exports.matchers = {
     mockCallsToBe: (got, ...expected) => {
         __1.assert.byGuard(got, expect_internal_1.isMock, "Expecting mock function");
         const result = (0, expect_1.buildEqualsResult)((0, expect_utils_1.equals)(got.mock.calls, expected), "Unexpected mock calls", got.mock.calls, expected, true);
-        // eslint-disable-next-line @skylib/no-restricted-syntax/prefer-mockCallsToBe -- Ok
+        // eslint-disable-next-line @skylib/custom/functions/prefer-mockCallsToBe -- Ok
         got.mockClear();
         return result;
     },

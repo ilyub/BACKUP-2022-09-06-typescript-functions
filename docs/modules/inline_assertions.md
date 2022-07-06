@@ -230,7 +230,7 @@ Asserts that value type is T.
 
 **`Throws`**
 
- Error otherwise.
+Error otherwise.
 
 #### Type parameters
 
@@ -261,7 +261,7 @@ Asserts that value type is T.
 
 **`Throws`**
 
- Error otherwise.
+Error otherwise.
 
 #### Type parameters
 
@@ -307,7 +307,7 @@ Asserts that value type is T.
 
 **`Throws`**
 
- Error otherwise.
+Error otherwise.
 
 #### Type parameters
 
@@ -418,7 +418,7 @@ Asserts that value type is T.
 
 **`Throws`**
 
- Error otherwise.
+Error otherwise.
 
 #### Type parameters
 
@@ -449,7 +449,7 @@ Asserts that value type is T[].
 
 **`Throws`**
 
- Error otherwise.
+Error otherwise.
 
 #### Type parameters
 

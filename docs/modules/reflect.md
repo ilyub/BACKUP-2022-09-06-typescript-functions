@@ -192,7 +192,7 @@ Typed version of Reflect.get.
 
 **`Throws`**
 
- AssertionError otherwise.
+AssertionError otherwise.
 
 #### Type parameters
 
@@ -242,7 +242,7 @@ Typed version of Reflect.getMetadata.
 
 **`Throws`**
 
- AssertionError otherwise.
+AssertionError otherwise.
 
 #### Type parameters
 
@@ -293,7 +293,7 @@ Typed version of Reflect.getMetadata.
 
 **`Throws`**
 
- AssertionError otherwise.
+AssertionError otherwise.
 
 #### Type parameters
 
@@ -344,7 +344,7 @@ Typed version of Reflect.getOwnMetadata.
 
 **`Throws`**
 
- AssertionError otherwise.
+AssertionError otherwise.
 
 #### Type parameters
 
@@ -395,7 +395,7 @@ Typed version of Reflect.getOwnMetadata.
 
 **`Throws`**
 
- AssertionError otherwise.
+AssertionError otherwise.
 
 #### Type parameters
 

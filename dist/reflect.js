@@ -1,5 +1,5 @@
 "use strict";
-/* eslint-disable @skylib/no-restricted-syntax/prefer-reflect -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-reflect -- Ok */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.hasOwnMetadataKey = exports.hasOwnMetadata = exports.hasMetadataKey = exports.hasMetadata = exports.getOwnMetadataKey = exports.getOwnMetadata = exports.getMetadataKey = exports.getMetadata = exports.get = exports.defineMetadataKey = exports.defineMetadata = exports.setPrototypeOf = exports.set = exports.preventExtensions = exports.ownKeys = exports.isExtensible = exports.has = exports.getPrototypeOf = exports.getOwnPropertyDescriptor = exports.deleteProperty = exports.defineProperty = exports.construct = exports.apply = void 0;
 const tslib_1 = require("tslib");
