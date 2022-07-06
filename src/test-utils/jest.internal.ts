@@ -2,14 +2,14 @@ import { assert } from "..";
 import { buildEqualsResult } from "./expect";
 import { isMock } from "./expect.internal";
 import { equals } from "@jest/expect-utils";
-import type { Async } from "..";
+import type { Async, Callable } from "..";
 import type { ExpectFromMatcher } from "./expect";
 
 // eslint-disable-next-line no-console -- Ok
-export const error = console.error;
+export const error = console.error as Callable;
 
 // eslint-disable-next-line no-console -- Ok
-export const warn = console.warn;
+export const warn = console.warn as Callable;
 
 export const matchers: {
   readonly executionTimeToBe: ExpectFromMatcher<"executionTimeToBe">;
