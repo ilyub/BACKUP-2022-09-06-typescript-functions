@@ -407,7 +407,7 @@ module.exports = {
         filesToSkip: ["*.js"],
         message: 'Use "defineFn" instead',
         selector:
-          ":matches(ExportNamedDeclaration, Program, TSModuleBlock) > VariableDeclaration > VariableDeclarator > CallExpression > :matches(.callee[name=assign], .callee[property.name=assign])"
+          ":matches(ExportNamedDeclaration, Program, TSModuleBlock) > VariableDeclaration > VariableDeclarator > CallExpression[callee.object.name=o][callee.property.name=/^(?:assign|extend)$/u]"
       }
     ],
     "@skylib/custom/functions/prefer-evaluate": [
