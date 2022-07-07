@@ -21,7 +21,7 @@ export const not: {
   empty: (value, error) => {
     byGuard(value, is.not.empty, error);
   }
-} as const;
+};
 
 export const array: {
   /**

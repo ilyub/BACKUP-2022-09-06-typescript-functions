@@ -60,4 +60,4 @@ export const matchers: {
       expected
     );
   }
-} as const;
+};

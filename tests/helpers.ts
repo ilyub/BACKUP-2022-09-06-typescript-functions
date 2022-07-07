@@ -72,7 +72,7 @@ test("createFacade: Object", () => {
     enumerable: true,
     value: 1,
     writable: true
-  };
+  } as const;
 
   expect(reflect.get(facade, "value")).toBe(1);
   expect(reflect.getOwnPropertyDescriptor(facade, "value")).toStrictEqual(
@@ -90,7 +90,7 @@ test("createFacade: Object", () => {
 
 test("createValidationObject", () => {
   {
-    const source = { 1: 1, a: "a" };
+    const source = { 1: 1, a: "a" } as const;
 
     const expected = new Set([1, "a"]);
 
@@ -98,7 +98,7 @@ test("createValidationObject", () => {
   }
 
   {
-    const source = { 1: "a", a: 1 };
+    const source = { 1: "a", a: 1 } as const;
 
     const error = new Error("Invalid source");
 
@@ -118,7 +118,7 @@ test("onDemand", () => {
     enumerable: true,
     value: 1,
     writable: true
-  };
+  } as const;
 
   expect(reflect.get(obj, "value")).toBe(1);
   expect(reflect.getOwnPropertyDescriptor(obj, "value")).toStrictEqual(
@@ -164,14 +164,14 @@ test("safeAccess: getOwnPropertyDescriptor", () => {
     enumerable: true,
     value: 1,
     writable: true
-  };
+  } as const;
 
   const expected2 = {
     configurable: true,
     enumerable: true,
     value: 2,
     writable: true
-  };
+  } as const;
 
   const error = new Error("Read access denied: c");
 
@@ -271,7 +271,7 @@ test("wrapProxyHandler: doDefault", () => {
     enumerable: true,
     value: 1,
     writable: true
-  };
+  } as const;
 
   expect(reflect.apply(proxyFunction, undefined, [])).toBeUndefined();
   expect(reflect.construct(proxyClass, [])).toBeInstanceOf(TestClass);
@@ -351,7 +351,7 @@ test("wrapProxyHandler: throw", () => {
     setPrototypeOf: (): void => {
       reflect.setPrototypeOf(proxyObject, null);
     }
-  };
+  } as const;
 
   for (const [name, subtest] of o.entries(subtests))
     expect(subtest).toThrow(new Error(`Not implemented: test.${name}`));

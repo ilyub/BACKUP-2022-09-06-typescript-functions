@@ -17,7 +17,7 @@ test("push", () => {
   const expected = [
     ["a", [1, 2]],
     ["b", [3]]
-  ];
+  ] as const;
 
   accumulator.push("a", 1);
   accumulator.push("a", 2);
@@ -31,7 +31,7 @@ test("unshift", () => {
   const expected = [
     ["a", [2, 1]],
     ["b", [3]]
-  ];
+  ] as const;
 
   accumulator.unshift("a", 1);
   accumulator.unshift("a", 2);

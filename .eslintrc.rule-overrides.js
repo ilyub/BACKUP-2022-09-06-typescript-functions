@@ -1,5 +1,3 @@
-const { eslint } = require("@skylib/config");
-
 module.exports = {
   rules: {
     "@skylib/consistent-import/project": [
@@ -140,41 +138,6 @@ module.exports = {
             localName: "types",
             source: "@skylib/functions/src/types",
             type: "wildcard"
-          }
-        ]
-      }
-    ],
-    "boundaries/element-types": [
-      "warn",
-      {
-        default: "disallow",
-        rules: [
-          ...eslint.boundaries.elementTypes.rules,
-          ...eslint.boundaries.elementTypes.createRules(
-            filename => ["src1", { filename }],
-            "core",
-            "guards",
-            ["assertions", "inline-assertions"],
-            [
-              "Accumulator",
-              "Accumulator2",
-              "array",
-              "converters",
-              "function",
-              "map",
-              "number",
-              "object",
-              "program-flow",
-              "reflect",
-              "regexp",
-              "set",
-              "string"
-            ],
-            ["helpers", "json"]
-          ),
-          {
-            allow: [["src2", { dir1: "types" }]],
-            from: [["src2", { dir1: "types" }]]
           }
         ]
       }

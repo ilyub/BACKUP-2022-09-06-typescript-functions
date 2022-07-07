@@ -1,7 +1,7 @@
 import { AssertionError, fn, is, o } from "@";
 
 test("clone", () => {
-  const obj1 = { a: 1 };
+  const obj1 = { a: 1 } as const;
 
   const obj2 = o.clone(obj1);
 
@@ -20,9 +20,9 @@ test("filter", () => {
     a: 1,
     b: 2,
     c: 3
-  };
+  } as const;
 
-  const expected = { a: 1, c: 3 };
+  const expected = { a: 1, c: 3 } as const;
 
   expect(o.filter(obj, callback)).toStrictEqual(expected);
 
@@ -83,13 +83,13 @@ test("map", () => {
     a: "1",
     b: "12",
     c: "123"
-  };
+  } as const;
 
   const expected = {
     a: 1,
     b: 2,
     c: 3
-  };
+  } as const;
 
   expect(o.map(obj, callback)).toStrictEqual(expected);
 
@@ -112,15 +112,15 @@ test("omit", () => {
 });
 
 test("removeUndefinedKeys", () => {
-  const obj = { a: 1, b: undefined };
+  const obj = { a: 1, b: undefined } as const;
 
-  const expected = { a: 1 };
+  const expected = { a: 1 } as const;
 
   expect(o.removeUndefinedKeys(obj)).toStrictEqual(expected);
 });
 
 test("set", () => {
-  const obj = { a: 1 };
+  const obj = { a: 1 } as const;
 
   o.set(obj, "b", 2);
   expect(obj).toStrictEqual({ a: 1, b: 2 });
@@ -134,7 +134,7 @@ test("size", () => {
     b: 2,
     c: 3,
     [symbol]: 4
-  };
+  } as const;
 
   expect(o.size(obj)).toBe(3);
 });

@@ -1,6 +1,9 @@
 /* eslint-disable @skylib/custom/functions/a-mixedFrom-arg-type -- Ok */
 
+/* eslint-disable @skylib/custom/no-complex-type-in-call-expression -- Wait for @skylib/config update */
+
 import { AssertionError, a } from "@";
+import type { Writable, numbers } from "@";
 
 interface Reducible {
   readonly id: unknown;
@@ -20,7 +23,7 @@ test("chain", () => {
 });
 
 test("clone", () => {
-  const arr1 = [1, 2, 3];
+  const arr1 = [1, 2, 3] as const;
 
   const arr2 = a.clone(arr1);
 
@@ -39,9 +42,9 @@ test("findBy", () => {
     { data: "b", id: 2 },
     { data: "c", id: 3 },
     { data: "d", id: 2 }
-  ];
+  ] as const;
 
-  const expected = { data: "b", id: 2 };
+  const expected = { data: "b", id: 2 } as const;
 
   expect(a.findBy(arr, { id: 2 }, "id")).toStrictEqual(expected);
   expect(a.findBy(arr, { id: 4 }, "id")).toBeUndefined();
@@ -56,7 +59,7 @@ test("first", () => {
 });
 
 test("fromIterable", () => {
-  const arr1 = [1, 2, 3];
+  const arr1 = [1, 2, 3] as const;
 
   const arr2 = a.fromIterable(arr1);
 
@@ -92,7 +95,7 @@ test("includesBy", () => {
     { data: "b", id: 2 },
     { data: "c", id: 3 },
     { data: "d", id: 2 }
-  ];
+  ] as const;
 
   expect(a.includesBy(arr, { id: 2 }, "id")).toBeTrue();
   expect(a.includesBy(arr, { id: 4 }, "id")).toBeFalse();
@@ -107,7 +110,7 @@ test("last", () => {
 });
 
 test("push", () => {
-  const arr = [1, 2, 3];
+  const arr = [1, 2, 3] as const;
 
   expect(a.push([1, 2, 3], 4)).toStrictEqual([1, 2, 3, 4]);
   expect(arr).toStrictEqual([1, 2, 3]);
@@ -156,12 +159,12 @@ test("removeBy", () => {
     { data: "b", id: 2 },
     { data: "c", id: 3 },
     { data: "d", id: 2 }
-  ];
+  ] as const;
 
   const expected = [
     { data: "a", id: 1 },
     { data: "c", id: 3 }
-  ];
+  ] as const;
 
   expect(a.removeBy(arr, { id: 2 }, "id")).toStrictEqual(expected);
   expect(a.removeBy(arr, { id: 2 }, reduce)).toStrictEqual(expected);
@@ -256,7 +259,7 @@ test.each([
 });
 
 test("truncate", () => {
-  const arr = [1, 2, 3];
+  const arr: Writable<numbers> = [1, 2, 3];
 
   a.truncate(arr);
   expect(arr).toStrictEqual([]);
@@ -268,20 +271,20 @@ test("uniqueBy", () => {
     { data: "b", id: 2 },
     { data: "c", id: 3 },
     { data: "d", id: 2 }
-  ];
+  ] as const;
 
   const expected = [
     { data: "a", id: 1 },
     { data: "b", id: 2 },
     { data: "c", id: 3 }
-  ];
+  ] as const;
 
   expect(a.uniqueBy(arr, "id")).toStrictEqual(expected);
   expect(a.uniqueBy(arr, reduce)).toStrictEqual(expected);
 });
 
 test("unshift", () => {
-  const arr = [1, 2, 3];
+  const arr = [1, 2, 3] as const;
 
   expect(a.unshift([1, 2, 3], 4)).toStrictEqual([4, 1, 2, 3]);
   expect(arr).toStrictEqual([1, 2, 3]);

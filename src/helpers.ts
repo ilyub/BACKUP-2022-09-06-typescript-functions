@@ -98,7 +98,7 @@ export function onDemand<T extends object>(generator: () => T): T {
   let _obj: T | undefined;
 
   const proxy = new Proxy(
-    {},
+    {} as T,
     wrapProxyHandler("onDemand", "throw", {
       get: (_target, key) => reflect.get(obj(), key),
       getOwnPropertyDescriptor: (_target, key) =>
@@ -114,7 +114,7 @@ export function onDemand<T extends object>(generator: () => T): T {
     })
   );
 
-  return proxy as T;
+  return proxy;
 
   function obj(): object {
     _obj = _obj ?? generator();
@@ -144,7 +144,7 @@ export function safeAccess<
 
   const writableKeys = o.keys(guards);
 
-  const keys = [...writableKeys, ...readonlyKeys];
+  const keys = [...writableKeys, ...readonlyKeys] as const;
 
   const keysSet = new Set<PropertyKey>(keys);
 

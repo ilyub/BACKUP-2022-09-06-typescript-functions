@@ -4,7 +4,7 @@
 
 /* eslint-disable @skylib/custom/functions/prefer-o-hasOwnProp -- Ok */
 
-import { indexed } from "./core";
+import { defineFn, indexed } from "./core";
 import * as is from "./guards";
 import * as as from "./inline-assertions";
 import type {
@@ -99,7 +99,7 @@ export const extend: {
   ): A & B & C & T;
 } = Object.assign;
 
-export const fromEntries = extend(
+export const fromEntries = defineFn(
   /**
    * Creates object from entries.
    *

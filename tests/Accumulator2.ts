@@ -21,7 +21,7 @@ test("push", () => {
     ["a", "x", [1, 2]],
     ["a", "y", [3]],
     ["b", "z", [4]]
-  ];
+  ] as const;
 
   accumulator.push("a", "x", 1);
   accumulator.push("a", "x", 2);
@@ -37,7 +37,7 @@ test("unshift", () => {
     ["a", "x", [2, 1]],
     ["a", "y", [3]],
     ["b", "z", [4]]
-  ];
+  ] as const;
 
   accumulator.unshift("a", "x", 1);
   accumulator.unshift("a", "x", 2);

@@ -11,7 +11,7 @@ const mk3 = Symbol("test-metadata-key-3");
 const pk1 = Symbol("test-metadata-key-4");
 
 test("defineMetadata", () => {
-  const obj = {};
+  const obj = {} as const;
 
   {
     reflect.defineMetadata("mk1", 1, obj);
@@ -27,7 +27,7 @@ test("defineMetadata", () => {
 });
 
 test("defineMetadataKey", () => {
-  const obj = {};
+  const obj = {} as const;
 
   {
     reflect.defineMetadataKey("mk1", 1, obj, pk1);
