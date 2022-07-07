@@ -596,12 +596,30 @@ module.exports = {
         ]
       }
     ],
+    "@skylib/custom/functions/require-return-in-defineFn": [
+      "warn",
+      {
+        filesToSkip: ["*.js"],
+        message: "Missing return type on function",
+        selector: [
+          "ArrowFunctionExpression[returnType=undefined]",
+          "FunctionExpression[returnType=undefined]",
+          "ObjectExpression > Property > ArrowFunctionExpression[returnType=undefined]",
+          "ObjectExpression > Property > FunctionExpression[returnType=undefined]"
+        ].map(
+          selector =>
+            `:matches(ExportNamedDeclaration, Program, TSModuleBlock) > VariableDeclaration > VariableDeclarator[id.typeAnnotation=undefined] > CallExpression[callee.name=defineFn] > ${selector}`
+        )
+      }
+    ],
     "@skylib/require-jsdoc/functions": [
       "warn",
       {
         includeSelectors: [
-          ":matches(ArrowFunctionExpression, FunctionExpression).arguments:first-child",
-          "ObjectExpression.arguments:nth-child(2) > Property.properties > :matches(ArrowFunctionExpression, FunctionExpression).value"
+          "ArrowFunctionExpression",
+          "FunctionExpression",
+          "ObjectExpression > Property > ArrowFunctionExpression",
+          "ObjectExpression > Property > FunctionExpression"
         ].map(
           selector =>
             `:matches(ExportNamedDeclaration, Program, TSModuleBlock) > VariableDeclaration > VariableDeclarator[id.typeAnnotation=undefined] > CallExpression[callee.name=defineFn] > ${selector}`

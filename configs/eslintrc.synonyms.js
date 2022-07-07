@@ -57,5 +57,6 @@ module.exports = [
   "@skylib/custom/functions/prefer-programFlow-setTimeout",
   "@skylib/custom/functions/prefer-reflect",
   "@skylib/custom/functions/prefer-undefined-shorthand",
+  "@skylib/custom/functions/require-return-in-defineFn",
   "@skylib/require-jsdoc/functions"
 ];
