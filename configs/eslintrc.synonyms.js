@@ -35,6 +35,7 @@ module.exports = [
   "@skylib/custom/functions/prefer-a-fromIterable",
   "@skylib/custom/functions/prefer-a-second",
   "@skylib/custom/functions/prefer-a-third",
+  "@skylib/custom/functions/prefer-a-truncate",
   "@skylib/custom/functions/prefer-cast-number",
   "@skylib/custom/functions/prefer-cast-string",
   "@skylib/custom/functions/prefer-defineFn",

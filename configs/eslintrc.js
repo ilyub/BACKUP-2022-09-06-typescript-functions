@@ -365,6 +365,16 @@ module.exports = {
           "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=2]"
       }
     ],
+    "@skylib/custom/functions/prefer-a-truncate": [
+      "warn",
+      {
+        filesToSkip: ["*.js"],
+        message: 'Use "a.truncate" instead',
+        selector:
+          "AssignmentExpression[right.value=0] > MemberExpression.left > .object",
+        typeIs: "array"
+      }
+    ],
     "@skylib/custom/functions/prefer-cast-number": [
       "warn",
       {
