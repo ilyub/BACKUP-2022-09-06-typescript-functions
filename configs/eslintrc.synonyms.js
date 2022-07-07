@@ -22,6 +22,7 @@ module.exports = [
   "@skylib/custom/functions/is-tuple-arg-type",
   "@skylib/custom/functions/is-undefined-arg-type",
   "@skylib/custom/functions/no-Writable",
+  "@skylib/custom/functions/no-o-assign-readonly",
   "@skylib/custom/functions/no-o-unfreeze",
   "@skylib/custom/functions/no-reflect-get",
   "@skylib/custom/functions/no-reflect-set",

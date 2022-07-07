@@ -244,6 +244,16 @@ module.exports = {
         ]
       }
     ],
+    "@skylib/custom/functions/no-o-assign-readonly": [
+      "warn",
+      {
+        filesToSkip: ["*.js"],
+        message: "Do not assign to readonly object",
+        selector:
+          "CallExpression[callee.object.name=o][callee.property.name=assign] > Identifier.arguments",
+        typeIs: "readonly"
+      }
+    ],
     "@skylib/custom/functions/no-o-unfreeze": [
       "warn",
       {
