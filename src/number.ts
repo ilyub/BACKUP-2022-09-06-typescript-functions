@@ -10,7 +10,7 @@ export const ceil = defineFn(
    * @param precision - The number of digits to keep.
    * @returns Ceiled value.
    */
-  (value: number, precision: number) => {
+  (value: number, precision: number): number => {
     const divider = 10 ** precision;
 
     return Math.ceil(value * divider) / divider;
@@ -24,7 +24,7 @@ export const ceil = defineFn(
      * @param from - From.
      * @returns Ceiled value.
      */
-    step: (value: number, step: number, from = 0) =>
+    step: (value: number, step: number, from = 0): number =>
       Math.ceil((value - from) / step) * step + from
   }
 );
@@ -37,7 +37,7 @@ export const floor = defineFn(
    * @param precision - The number of digits to keep.
    * @returns Floored value.
    */
-  (value: number, precision: number) => {
+  (value: number, precision: number): number => {
     const divider = 10 ** precision;
 
     return Math.floor(value * divider) / divider;
@@ -51,7 +51,7 @@ export const floor = defineFn(
      * @param from - From.
      * @returns Floored value.
      */
-    step: (value: number, step: number, from = 0) =>
+    step: (value: number, step: number, from = 0): number =>
       Math.floor((value - from) / step) * step + from
   }
 );
@@ -64,7 +64,7 @@ export const round = defineFn(
    * @param precision - The number of digits to keep.
    * @returns Rounded value.
    */
-  (value: number, precision: number) => {
+  (value: number, precision: number): number => {
     const divider = 10 ** precision;
 
     return Math.round(value * divider) / divider;
@@ -78,7 +78,7 @@ export const round = defineFn(
      * @param from - From.
      * @returns Rounded value.
      */
-    step: (value: number, step: number, from = 0) =>
+    step: (value: number, step: number, from = 0): number =>
       Math.round((value - from) / step) * step + from
   }
 );

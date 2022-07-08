@@ -1,6 +1,5 @@
 import { fn } from "..";
 import { printDiffOrStringify, stringify } from "jest-matcher-utils";
-import type { Matchers, Result } from "./expect.internal";
 import type { Extends } from "ts-toolbelt/out/Any/Extends";
 import type { If } from "ts-toolbelt/out/Any/If";
 
@@ -14,10 +13,22 @@ export interface ExpectFromMatcher<K extends keyof Matchers> {
    */
   (got: unknown, ...args: Parameters<Matchers[K]>): If<
     Extends<ReturnType<Matchers[K]>, Promise<unknown>>,
-    Promise<Result>,
-    Result
+    Promise<ExpectResult>,
+    ExpectResult
   >;
 }
+
+export interface ExpectResult {
+  /**
+   * Returns failure message.
+   *
+   * @returns Failure message.
+   */
+  readonly message: () => string;
+  readonly pass: boolean;
+}
+
+export type Matchers = Readonly<jest.Matchers<unknown, unknown>>;
 
 /**
  * Builds matcher result.
@@ -35,7 +46,7 @@ export function buildEqualsResult(
   got: unknown,
   expected: unknown,
   immediate = false
-): Result {
+): ExpectResult {
   return {
     message: immediate ? fn.valueToGenerator(factory()) : factory,
     pass
@@ -62,6 +73,6 @@ export function buildResult(
   pass: boolean,
   expectSuccess: string,
   expectFailure: string
-): Result {
+): ExpectResult {
   return { message: () => (pass ? expectFailure : expectSuccess), pass };
 }

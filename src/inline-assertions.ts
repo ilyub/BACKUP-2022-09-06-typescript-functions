@@ -20,7 +20,7 @@ export const array = defineFn(factory(is.array), {
    * @returns Value if value type is T[].
    * @throws Error otherwise.
    */
-  of: <T>(value: unknown, guard: is.Guard<T>) => {
+  of: <T>(value: unknown, guard: is.Guard<T>): readonly T[] => {
     if (is.array.of(value, guard)) return value;
 
     throw new AssertionError();
@@ -52,14 +52,12 @@ export const indexedObject = defineFn(factory(is.indexedObject), {
    * @returns Value if value type is IndexedObject\<T\>.
    * @throws Error otherwise.
    */
-  of: <T>(value: unknown, guard: is.Guard<T>) => {
+  of: <T>(value: unknown, guard: is.Guard<T>): types.IndexedObject<T> => {
     if (is.indexedObject.of(value, guard)) return value;
 
     throw new AssertionError();
   }
 });
-
-export const indexedObjectU = factory(is.indexedObjectU);
 
 export const indexedObjects = factory(is.indexedObjects);
 
@@ -79,7 +77,7 @@ export const map = defineFn(factory(is.map), {
     value: unknown,
     keyGuard: is.Guard<K>,
     valueGuard: is.Guard<V>
-  ) => {
+  ): ReadonlyMap<K, V> => {
     if (is.map.of(value, keyGuard, valueGuard)) return value;
 
     throw new AssertionError();
@@ -127,7 +125,7 @@ export const set = defineFn(factory(is.set), {
    * @returns Value if value type is Set\<T\>.
    * @throws Error otherwise.
    */
-  of: <T>(value: unknown, guard: is.Guard<T>) => {
+  of: <T>(value: unknown, guard: is.Guard<T>): ReadonlySet<T> => {
     if (is.set.of(value, guard)) return value;
 
     throw new AssertionError();

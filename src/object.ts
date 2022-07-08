@@ -1,9 +1,3 @@
-/* eslint-disable @skylib/custom/functions/prefer-o-clone -- Ok */
-
-/* eslint-disable @skylib/custom/functions/prefer-o-getPrototypeOf -- Ok */
-
-/* eslint-disable @skylib/custom/functions/prefer-o-hasOwnProp -- Ok */
-
 import { defineFn, indexed } from "./core";
 import * as is from "./guards";
 import * as as from "./inline-assertions";
@@ -106,7 +100,9 @@ export const fromEntries = defineFn(
    * @param entries - Entries.
    * @returns Object.
    */
-  <K extends PropertyKey, V>(entries: Iterable<Entry<K, V>>) => {
+  <K extends PropertyKey, V>(
+    entries: Iterable<Entry<K, V>>
+  ): PartialRecord<K, V> => {
     const result: WritablePartialRecord<K, V> = {};
 
     for (const entry of entries) result[entry[0]] = entry[1];
@@ -120,7 +116,9 @@ export const fromEntries = defineFn(
      * @param entries - Entries.
      * @returns Object.
      */
-    exhaustive: <K extends PropertyKey, V>(entries: Iterable<Entry<K, V>>) => {
+    exhaustive: <K extends PropertyKey, V>(
+      entries: Iterable<Entry<K, V>>
+    ): Rec<K, V> => {
       const result: WritablePartialRecord<K, V> = {};
 
       for (const entry of entries) result[entry[0]] = entry[1];
@@ -221,6 +219,7 @@ export interface Predicate<T extends object> {
  * @returns New object.
  */
 export function clone<T extends object>(obj: T): Writable<T> {
+  // eslint-disable-next-line @skylib/custom/functions/prefer-o-clone -- Ok
   return { ...obj };
 }
 
@@ -299,6 +298,7 @@ export function get(
  * @returns Object prototype if available, _undefined_ otherwise.
  */
 export function getPrototypeOf(obj: object): objectU {
+  // eslint-disable-next-line @skylib/custom/functions/prefer-o-getPrototypeOf -- Ok
   const prototype = Object.getPrototypeOf(obj);
 
   return is.object(prototype) ? prototype : undefined;
@@ -312,6 +312,7 @@ export function getPrototypeOf(obj: object): objectU {
  * @returns _True_ if object has property, _false_ otherwise.
  */
 export function hasOwnProp(key: PropertyKey, obj: object): boolean {
+  // eslint-disable-next-line @skylib/custom/functions/prefer-o-hasOwnProp -- Ok
   return Object.prototype.hasOwnProperty.call(obj, key);
 }
 

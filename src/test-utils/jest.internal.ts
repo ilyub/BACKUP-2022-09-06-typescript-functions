@@ -1,8 +1,7 @@
-import { assert } from "..";
+import { assert, is } from "..";
 import { buildEqualsResult } from "./expect";
-import { isMock } from "./expect.internal";
 import { equals } from "@jest/expect-utils";
-import type { Async, Callable } from "..";
+import type { Async, Callable, Writable, unknowns } from "..";
 import type { ExpectFromMatcher } from "./expect";
 
 // eslint-disable-next-line no-console -- Ok
@@ -61,3 +60,17 @@ export const matchers: {
     );
   }
 };
+
+export type Calls = readonly unknowns[];
+
+/**
+ * Checks that value type is Mock.
+ *
+ * @param value - Value.
+ * @returns _True_ if value type is Mock, _false_ otherwise.
+ */
+function isMock(
+  value: unknown
+): value is jest.Mock<unknown, Writable<unknowns>> {
+  return is.callable(value);
+}

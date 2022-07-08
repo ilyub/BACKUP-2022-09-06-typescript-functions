@@ -1,7 +1,3 @@
-/* eslint-disable @skylib/custom/functions/prefer-programFlow-clearInterval -- Ok */
-
-/* eslint-disable @skylib/custom/functions/prefer-programFlow-clearTimeout -- Ok */
-
 import * as is from "./guards";
 import type { numberU } from "./types";
 
@@ -19,6 +15,7 @@ export { _setTimeout as setTimeout };
  * @param id - ID.
  */
 function _clearInterval(id: numberU): void {
+  // eslint-disable-next-line @skylib/custom/functions/prefer-programFlow-clearInterval -- Ok
   if (is.not.empty(id)) clearInterval(id);
 }
 
@@ -28,6 +25,7 @@ function _clearInterval(id: numberU): void {
  * @param id - ID.
  */
 function _clearTimeout(id: numberU): void {
+  // eslint-disable-next-line @skylib/custom/functions/prefer-programFlow-clearTimeout -- Ok
   if (is.not.empty(id)) clearTimeout(id);
 }
 

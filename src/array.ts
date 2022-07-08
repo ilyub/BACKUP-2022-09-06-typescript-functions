@@ -408,6 +408,7 @@ export function toggleBy<T extends object>(
  * @param mutableArray - Array.
  */
 export function truncate(mutableArray: Writable<unknowns>): void {
+  // eslint-disable-next-line @skylib/custom/functions/prefer-a-truncate -- Ok
   mutableArray.length = 0;
 }
 
