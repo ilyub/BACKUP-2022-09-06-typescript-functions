@@ -1,9 +1,9 @@
-import { defineFn } from "./core";
-import { AssertionError } from "./errors";
 import * as is from "./guards";
+import type * as types from "./types";
+import { AssertionError } from "./errors";
 import type { ErrorArgFn } from "./assertions.internal";
 import type { ValidationObject } from "./core";
-import type * as types from "./types";
+import { defineFn } from "./core";
 
 export const not: {
   /**

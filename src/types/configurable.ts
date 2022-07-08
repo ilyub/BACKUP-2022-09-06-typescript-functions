@@ -1,3 +1,5 @@
+/* eslint-disable @skylib/only-export-name -- Ok */
+
 import type { PickKeys } from "./object";
 
 declare global {

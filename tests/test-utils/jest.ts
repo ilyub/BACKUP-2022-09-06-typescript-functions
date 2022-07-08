@@ -1,6 +1,10 @@
-import { fn } from "@";
-import * as testUtils from "@/test-utils";
+/* eslint-disable @skylib/consistent-import/project -- Ok */
+
+/* eslint-disable no-console -- Ok */
+
 import * as internal from "@/test-utils/jest.internal";
+import * as testUtils from "@/test-utils";
+import { fn } from "@";
 
 testUtils.installFakeTimer();
 
@@ -9,7 +13,6 @@ test("jestSetup: error", () => {
 
   error.mockImplementationOnce(fn.noop);
   expect(() => {
-    // eslint-disable-next-line no-console -- Ok
     console.error("Test error");
   }).toThrow(new Error("Console error"));
   expect(error).mockCallsToBe(["Test error"]);
@@ -20,7 +23,6 @@ test("jestSetup: warn", () => {
 
   warn.mockImplementationOnce(fn.noop);
   expect(() => {
-    // eslint-disable-next-line no-console -- Ok
     console.warn("Test warning");
   }).toThrow(new Error("Console warn"));
   expect(warn).mockCallsToBe(["Test warning"]);

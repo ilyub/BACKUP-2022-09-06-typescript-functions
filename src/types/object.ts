@@ -5,9 +5,9 @@ import type {
   WritableUndefindKeys
 } from "./object-keys";
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
+import type { FilterKeys } from "ts-toolbelt/out/Object/FilterKeys";
 import type { If } from "ts-toolbelt/out/Any/If";
 import type { Match } from "ts-toolbelt/out/Any/_Internal";
-import type { FilterKeys } from "ts-toolbelt/out/Object/FilterKeys";
 
 export type Empty<T extends object> = Equals<keyof T, never>;
 

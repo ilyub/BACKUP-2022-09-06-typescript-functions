@@ -1,8 +1,8 @@
+import type { Async, Callable, Writable, unknowns } from "..";
 import { assert, is } from "..";
+import type { ExpectFromMatcher } from "./expect";
 import { buildEqualsResult } from "./expect";
 import { equals } from "@jest/expect-utils";
-import type { Async, Callable, Writable, unknowns } from "..";
-import type { ExpectFromMatcher } from "./expect";
 
 // eslint-disable-next-line no-console -- Ok
 export const error = console.error as Callable;

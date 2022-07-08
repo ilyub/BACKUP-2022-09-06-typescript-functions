@@ -1,5 +1,3 @@
-/* eslint-disable @skylib/no-multi-type-tuples -- Ok */
-
 /* eslint-disable @skylib/custom/functions/prefer-a-fromIterable -- Ok */
 
 /* eslint-disable @skylib/custom/functions/prefer-o-entries -- Ok */
@@ -8,11 +6,15 @@
 
 /* eslint-disable @skylib/custom/functions/prefer-o-values -- Ok */
 
-import { defineFn, overload, typedef } from "./core";
-import type { ValidationObject } from "./core";
+/* eslint-disable @skylib/no-multi-type-tuples -- Ok */
+
+/* eslint-disable @skylib/primary-export-only -- Ok */
+
 import type * as types from "./types";
+import { defineFn, overload, typedef } from "./core";
 import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
 import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
+import type { ValidationObject } from "./core";
 
 export {
   _false as false,

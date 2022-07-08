@@ -1,6 +1,5 @@
-import { defineFn, indexed } from "./core";
-import * as is from "./guards";
 import * as as from "./inline-assertions";
+import * as is from "./guards";
 import type {
   Entry,
   NumStr,
@@ -13,6 +12,7 @@ import type {
   WritablePartialRecord,
   objectU
 } from "./types";
+import { defineFn, indexed } from "./core";
 
 /**
  * Typed version of Object.assign.

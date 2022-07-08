@@ -3,9 +3,9 @@
 /* eslint-disable unicorn/no-null -- Ok */
 
 import * as a from "./array";
-import { createValidationObject } from "./core";
-import * as is from "./guards";
 import * as as from "./inline-assertions";
+import * as is from "./guards";
+import { createValidationObject } from "./core";
 import type { stringE } from "./types";
 
 /**

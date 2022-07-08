@@ -1,7 +1,5 @@
 /* eslint-disable @skylib/custom/functions/a-mixedFrom-arg-type -- Ok */
 
-/* eslint-disable @skylib/custom/no-complex-type-in-call-expression -- Wait for @skylib/config update */
-
 import { AssertionError, a } from "@";
 import type { Writable, numbers } from "@";
 

@@ -1,6 +1,6 @@
-import { a, assert, evaluate, onDemand } from "..";
-import * as fakeTimers from "@sinonjs/fake-timers";
 import * as _ from "@skylib/lodash-commonjs-es";
+import * as fakeTimers from "@sinonjs/fake-timers";
+import { a, assert, evaluate, onDemand } from "..";
 import type { Async } from "..";
 
 export const clock = onDemand(() => {

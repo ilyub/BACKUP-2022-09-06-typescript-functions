@@ -2,6 +2,7 @@
 
 /* eslint-disable @skylib/custom/functions/no-reflect-set -- Ok */
 
+import * as testUtils from "@/test-utils";
 import {
   createFacade,
   createValidationObject,
@@ -14,7 +15,6 @@ import {
   wait,
   wrapProxyHandler
 } from "@";
-import * as testUtils from "@/test-utils";
 import type { Writable } from "@";
 
 testUtils.installFakeTimer();

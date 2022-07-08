@@ -1,8 +1,8 @@
-import { error, matchers, warn } from "./jest.internal";
 import "jest-extended";
-import jestExtendedMatchers from "jest-extended/all";
 import type { Writable, unknowns } from "..";
+import { error, matchers, warn } from "./jest.internal";
 import type { Calls } from "./jest.internal";
+import jestExtendedMatchers from "jest-extended/all";
 
 declare global {
   namespace jest {

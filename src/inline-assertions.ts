@@ -1,8 +1,8 @@
-import { defineFn } from "./core";
-import { AssertionError } from "./errors";
 import * as is from "./guards";
-import type { ValidationObject } from "./core";
 import type * as types from "./types";
+import { AssertionError } from "./errors";
+import type { ValidationObject } from "./core";
+import { defineFn } from "./core";
 
 export {
   _false as false,

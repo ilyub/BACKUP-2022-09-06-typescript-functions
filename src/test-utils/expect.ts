@@ -1,7 +1,7 @@
-import { fn } from "..";
 import { printDiffOrStringify, stringify } from "jest-matcher-utils";
 import type { Extends } from "ts-toolbelt/out/Any/Extends";
 import type { If } from "ts-toolbelt/out/Any/If";
+import { fn } from "..";
 
 export interface ExpectFromMatcher<K extends keyof Matchers> {
   /**

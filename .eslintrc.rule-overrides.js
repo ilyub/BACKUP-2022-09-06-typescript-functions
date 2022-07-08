@@ -1,3 +1,9 @@
+const { eslint } = require("@skylib/config/api");
+
+const consistentImport = eslint.rules["@skylib/consistent-import/project"];
+
+const noShadow = eslint.rules["@typescript-eslint/no-shadow"];
+
 module.exports = {
   rules: {
     "@skylib/consistent-import/project": [
@@ -119,13 +125,6 @@ module.exports = {
             type: "wildcard"
           },
           {
-            _id: "test-utils",
-            autoImport: true,
-            autoImportSource: "./test-utils",
-            source: "@skylib/functions/src/test-utils",
-            type: "wildcard"
-          },
-          {
             _id: "types",
             autoImport: true,
             autoImportSource: "./types",
@@ -135,10 +134,10 @@ module.exports = {
               "./src/guards.ts",
               "./src/inline-assertions.ts"
             ],
-            localName: "types",
             source: "@skylib/functions/src/types",
             type: "wildcard"
-          }
+          },
+          ...consistentImport.sources
         ]
       }
     ]
@@ -149,13 +148,7 @@ module.exports = {
       rules: {
         "@typescript-eslint/no-shadow": [
           "warn",
-          {
-            allow: ["entries"],
-            builtinGlobals: true,
-            hoist: "all",
-            ignoreFunctionTypeParameterNameValueShadow: false,
-            ignoreTypeValueShadow: true
-          }
+          { ...noShadow, allow: [...noShadow.allow, "entries"] }
         ]
       }
     },
@@ -164,13 +157,7 @@ module.exports = {
       rules: {
         "@typescript-eslint/no-shadow": [
           "warn",
-          {
-            allow: ["path"],
-            builtinGlobals: true,
-            hoist: "all",
-            ignoreFunctionTypeParameterNameValueShadow: false,
-            ignoreTypeValueShadow: true
-          }
+          { ...noShadow, allow: [...noShadow.allow, "path"] }
         ]
       }
     }

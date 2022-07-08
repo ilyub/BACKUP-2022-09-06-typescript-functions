@@ -1,5 +1,5 @@
-import { programFlow, wait } from "@";
 import * as testUtils from "@/test-utils";
+import { programFlow, wait } from "@";
 
 testUtils.installFakeTimer();
 

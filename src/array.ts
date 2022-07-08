@@ -4,11 +4,11 @@
 
 /* eslint-disable @skylib/custom/functions/prefer-o-hasOwnProp -- Ok */
 
-import * as assert from "./assertions";
-import { indexed } from "./core";
-import * as is from "./guards";
 import * as _ from "@skylib/lodash-commonjs-es";
+import * as assert from "./assertions";
+import * as is from "./guards";
 import type { Writable, numbers, strings, unknowns } from "./types";
+import { indexed } from "./core";
 
 export type KeyOrReduce<T extends object> = PropertyKey | Reduce<T>;
 
