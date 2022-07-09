@@ -281,6 +281,106 @@ module.exports = {
           "CallExpression > .callee[object.name=reflect][property.name=set]"
       }
     ],
+    "@skylib/custom/functions/no-unnecessary-is-array": [
+      "warn",
+      {
+        filesToSkip: ["*.js"],
+        message: "Unnecessary type guard",
+        selector:
+          "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:array|arrayU)$/u] > .arguments:first-child",
+        typeIs: "array"
+      }
+    ],
+    "@skylib/custom/functions/no-unnecessary-is-boolean": [
+      "warn",
+      {
+        filesToSkip: ["*.js"],
+        message: "Unnecessary type guard",
+        selector:
+          "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:boolean|booleanU)$/u] > .arguments:first-child",
+        typeIs: "boolean"
+      }
+    ],
+    "@skylib/custom/functions/no-unnecessary-is-empty": [
+      "warn",
+      {
+        filesToSkip: ["*.js"],
+        message: "Unnecessary type guard",
+        selector:
+          "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=empty] > .arguments:first-child",
+        typeIsOneOf: ["null", "undefined"]
+      }
+    ],
+    "@skylib/custom/functions/no-unnecessary-is-null": [
+      "warn",
+      {
+        filesToSkip: ["*.js"],
+        message: "Unnecessary type guard",
+        selector:
+          "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=null] > .arguments:first-child",
+        typeIs: "null"
+      }
+    ],
+    "@skylib/custom/functions/no-unnecessary-is-numStr": [
+      "warn",
+      {
+        filesToSkip: ["*.js"],
+        message: "Unnecessary type guard",
+        selector:
+          "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:numStr|numStrU)$/u] > .arguments:first-child",
+        typeIsOneOf: ["number", "string"]
+      }
+    ],
+    "@skylib/custom/functions/no-unnecessary-is-number": [
+      "warn",
+      {
+        filesToSkip: ["*.js"],
+        message: "Unnecessary type guard",
+        selector:
+          "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:number|numberU)$/u] > .arguments:first-child",
+        typeIs: "number"
+      }
+    ],
+    "@skylib/custom/functions/no-unnecessary-is-object": [
+      "warn",
+      {
+        filesToSkip: ["*.js"],
+        message: "Unnecessary type guard",
+        selector:
+          "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:object|objectU)$/u] > .arguments:first-child",
+        typeIs: "object"
+      }
+    ],
+    "@skylib/custom/functions/no-unnecessary-is-string": [
+      "warn",
+      {
+        filesToSkip: ["*.js"],
+        message: "Unnecessary type guard",
+        selector:
+          "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:string|stringU)$/u] > .arguments:first-child",
+        typeIs: "string"
+      }
+    ],
+    "@skylib/custom/functions/no-unnecessary-is-symbol": [
+      "warn",
+      {
+        filesToSkip: ["*.js"],
+        message: "Unnecessary type guard",
+        selector:
+          "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=/^(?:symbol|symbolU)$/u] > .arguments:first-child",
+        typeIs: "symbol"
+      }
+    ],
+    "@skylib/custom/functions/no-unnecessary-is-undefined": [
+      "warn",
+      {
+        filesToSkip: ["*.js"],
+        message: "Unnecessary type guard",
+        selector:
+          "CallExpression[callee.object.name=/^(?:as|assert|is)$/u][callee.property.name=undefined] > .arguments:first-child",
+        typeIs: "undefined"
+      }
+    ],
     "@skylib/custom/functions/prefer-IndexedObject": [
       "warn",
       {

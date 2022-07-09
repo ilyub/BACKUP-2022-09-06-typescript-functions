@@ -20,21 +20,41 @@
 
 /* eslint-disable @skylib/custom/functions/is-numStr-arg-type -- Ok */
 
+/* eslint-disable @skylib/custom/functions/is-number-arg-type -- Ok */
+
 /* eslint-disable @skylib/custom/functions/is-object-arg-type -- Ok */
 
 /* eslint-disable @skylib/custom/functions/is-set-arg-type -- Ok */
 
-/* eslint-disable @skylib/custom/functions/is-symbol-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/is-number-arg-type -- Ok */
-
 /* eslint-disable @skylib/custom/functions/is-string-arg-type -- Ok */
+
+/* eslint-disable @skylib/custom/functions/is-symbol-arg-type -- Ok */
 
 /* eslint-disable @skylib/custom/functions/is-true-arg-type -- Ok */
 
 /* eslint-disable @skylib/custom/functions/is-tuple-arg-type -- Ok */
 
 /* eslint-disable @skylib/custom/functions/is-undefined-arg-type -- Ok */
+
+/* eslint-disable @skylib/custom/functions/no-unnecessary-is-array -- Ok */
+
+/* eslint-disable @skylib/custom/functions/no-unnecessary-is-boolean -- Ok */
+
+/* eslint-disable @skylib/custom/functions/no-unnecessary-is-empty -- Ok */
+
+/* eslint-disable @skylib/custom/functions/no-unnecessary-is-null -- Ok */
+
+/* eslint-disable @skylib/custom/functions/no-unnecessary-is-numStr -- Ok */
+
+/* eslint-disable @skylib/custom/functions/no-unnecessary-is-number -- Ok */
+
+/* eslint-disable @skylib/custom/functions/no-unnecessary-is-object -- Ok */
+
+/* eslint-disable @skylib/custom/functions/no-unnecessary-is-string -- Ok */
+
+/* eslint-disable @skylib/custom/functions/no-unnecessary-is-symbol -- Ok */
+
+/* eslint-disable @skylib/custom/functions/no-unnecessary-is-undefined -- Ok */
 
 import { createValidationObject, fn, is } from "@";
 
