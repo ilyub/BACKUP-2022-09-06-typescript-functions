@@ -29,7 +29,7 @@ export interface Reduce<T extends object> {
  * @returns Array of pairs.
  */
 export function chain<T>(arr: readonly T[]): Array<readonly [T, T]> {
-  const result: Array<readonly [T, T]> = [];
+  const result: Writable<Pairs> = [];
 
   let prev = first(arr);
 
@@ -39,6 +39,8 @@ export function chain<T>(arr: readonly T[]): Array<readonly [T, T]> {
   }
 
   return result;
+
+  type Pairs = ReadonlyArray<readonly [T, T]>;
 }
 
 /**
@@ -47,7 +49,7 @@ export function chain<T>(arr: readonly T[]): Array<readonly [T, T]> {
  * @param arr - Array.
  * @returns New array.
  */
-export function clone<A>(arr: readonly [A]): Writable<readonly [A]>;
+export function clone<A>(arr: readonly [A]): [A];
 
 /**
  * Clones array.
@@ -55,7 +57,7 @@ export function clone<A>(arr: readonly [A]): Writable<readonly [A]>;
  * @param arr - Array.
  * @returns New array.
  */
-export function clone<A, B>(arr: readonly [A, B]): Writable<readonly [A, B]>;
+export function clone<A, B>(arr: readonly [A, B]): [A, B];
 
 /**
  * Clones array.
@@ -63,9 +65,7 @@ export function clone<A, B>(arr: readonly [A, B]): Writable<readonly [A, B]>;
  * @param arr - Array.
  * @returns New array.
  */
-export function clone<A, B, C>(
-  arr: readonly [A, B, C]
-): Writable<readonly [A, B, C]>;
+export function clone<A, B, C>(arr: readonly [A, B, C]): [A, B, C];
 
 /**
  * Clones array.
@@ -73,9 +73,7 @@ export function clone<A, B, C>(
  * @param arr - Array.
  * @returns New array.
  */
-export function clone<A, B, C, D>(
-  arr: readonly [A, B, C, D]
-): Writable<readonly [A, B, C, D]>;
+export function clone<A, B, C, D>(arr: readonly [A, B, C, D]): [A, B, C, D];
 
 /**
  * Clones array.
@@ -83,9 +81,9 @@ export function clone<A, B, C, D>(
  * @param arr - Array.
  * @returns New array.
  */
-export function clone<T>(arr: readonly T[]): Writable<readonly T[]>;
+export function clone<T>(arr: readonly T[]): T[];
 
-export function clone<T>(arr: readonly T[]): Writable<readonly T[]> {
+export function clone<T>(arr: readonly T[]): T[] {
   return [...arr];
 }
 
@@ -96,7 +94,7 @@ export function clone<T>(arr: readonly T[]): Writable<readonly T[]> {
  * @param index - Index to be removed.
  * @returns New array with one element removed.
  */
-export function drop<T>(arr: readonly T[], index: number): readonly T[] {
+export function drop<T>(arr: readonly T[], index: number): T[] {
   assert.toBeTrue(
     Object.prototype.hasOwnProperty.call(arr, index),
     "Invalid index"
@@ -142,7 +140,7 @@ export function first<T>(arr: readonly T[]): T {
  * @param iterable - Iterable.
  * @returns Array.
  */
-export function fromIterable<T>(iterable: Iterable<T>): Writable<readonly T[]> {
+export function fromIterable<T>(iterable: Iterable<T>): T[] {
   return [...iterable];
 }
 
@@ -237,7 +235,7 @@ export function last<T>(arr: readonly T[]): T {
  * @param value - Value.
  * @returns New array with one element added.
  */
-export function push<T>(arr: readonly T[], value: T): readonly T[] {
+export function push<T>(arr: readonly T[], value: T): T[] {
   return [...arr, value];
 }
 
@@ -253,7 +251,7 @@ export function pushOrReplaceBy<T extends object>(
   arr: readonly T[],
   value: T,
   keyOrReduce: KeyOrReduce<T>
-): readonly T[] {
+): T[] {
   return includesBy(arr, value, keyOrReduce)
     ? replaceBy(arr, value, keyOrReduce)
     : push(arr, value);
@@ -281,7 +279,7 @@ export function removeBy<T extends object, V extends object>(
   arr: readonly T[],
   value: V,
   keyOrReduce: KeyOrReduce<T | V>
-): readonly T[] {
+): T[] {
   const reduce = mixedToReduce(keyOrReduce);
 
   const reduced = reduce(value);
@@ -297,11 +295,7 @@ export function removeBy<T extends object, V extends object>(
  * @param value - Value.
  * @returns New array with one element replaced.
  */
-export function replace<T>(
-  arr: readonly T[],
-  index: number,
-  value: T
-): readonly T[] {
+export function replace<T>(arr: readonly T[], index: number, value: T): T[] {
   assert.toBeTrue(
     Object.prototype.hasOwnProperty.call(arr, index),
     "Invalid index"
@@ -322,7 +316,7 @@ export function replaceBy<T extends object>(
   arr: readonly T[],
   value: T,
   keyOrReduce: KeyOrReduce<T>
-): readonly T[] {
+): T[] {
   const reduce = mixedToReduce(keyOrReduce);
 
   const reduced = reduce(value);
@@ -336,7 +330,7 @@ export function replaceBy<T extends object>(
  * @param arr - Array.
  * @returns New array.
  */
-export function reverse<T>(arr: readonly T[]): readonly T[] {
+export function reverse<T>(arr: readonly T[]): T[] {
   const result = clone(arr);
 
   result.reverse();
@@ -365,7 +359,7 @@ export function second<T>(arr: readonly T[]): T {
 export function sort<T>(
   arr: readonly T[],
   compareFn?: (x: T, y: T) => number
-): readonly T[] {
+): T[] {
   const result = clone(arr);
 
   result.sort(compareFn);
@@ -396,7 +390,7 @@ export function toggleBy<T extends object>(
   arr: readonly T[],
   value: T,
   keyOrReduce: KeyOrReduce<T>
-): readonly T[] {
+): T[] {
   return includesBy(arr, value, keyOrReduce)
     ? removeBy(arr, value, keyOrReduce)
     : push(arr, value);
@@ -422,7 +416,7 @@ export function truncate(mutableArray: Writable<unknowns>): void {
 export function uniqueBy<T extends object>(
   arr: readonly T[],
   keyOrReduce: KeyOrReduce<T>
-): readonly T[] {
+): T[] {
   const reduce = mixedToReduce(keyOrReduce);
 
   const seen = new Set();
@@ -445,7 +439,7 @@ export function uniqueBy<T extends object>(
  * @param value - Value.
  * @returns New array with one element added.
  */
-export function unshift<T>(arr: readonly T[], value: T): readonly T[] {
+export function unshift<T>(arr: readonly T[], value: T): T[] {
   return [value, ...arr];
 }
 
@@ -461,7 +455,7 @@ export function unshiftOrReplaceBy<T extends object>(
   arr: readonly T[],
   value: T,
   keyOrReduce: KeyOrReduce<T>
-): readonly T[] {
+): T[] {
   return includesBy(arr, value, keyOrReduce)
     ? replaceBy(arr, value, keyOrReduce)
     : unshift(arr, value);

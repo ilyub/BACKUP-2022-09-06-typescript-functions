@@ -1,5 +1,3 @@
-import type { Writable } from "./types";
-
 export class Accumulator<K extends PropertyKey, T> {
   /**
    * Creates class instance.
@@ -58,7 +56,8 @@ export class Accumulator<K extends PropertyKey, T> {
     for (const arr of this.map.values()) yield arr;
   }
 
-  protected readonly map = new Map<K, Writable<readonly T[]>>();
+  // eslint-disable-next-line @skylib/custom/prefer-readonly-array -- Ok
+  protected readonly map = new Map<K, T[]>();
 }
 
 export namespace Accumulator {

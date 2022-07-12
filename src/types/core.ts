@@ -8,6 +8,10 @@
 
 /* eslint-disable @skylib/custom/functions/prefer-undefined-shorthand -- Ok */
 
+export type { Optional as PartialOptional } from "ts-toolbelt/out/Object/Optional";
+
+export type { Required as PartialRequired } from "ts-toolbelt/out/Object/Required";
+
 export type Entry<K extends PropertyKey, T> = readonly [K, T];
 
 export type IndexedObject<T = unknown> = Rec<PropertyKey, T>;
@@ -25,6 +29,8 @@ export type NumStrE = empty | NumStr;
 export type NumStrU = NumStr | undefined;
 
 export type NumStrs = readonly NumStr[];
+
+export type Optional<T> = { [P in keyof T]?: T[P] };
 
 export type PartialRecord<K extends PropertyKey, V> = {
   readonly [L in K]?: V;

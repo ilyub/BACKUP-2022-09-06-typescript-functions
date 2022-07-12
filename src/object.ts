@@ -23,7 +23,7 @@ import { defineFn, indexed } from "./core";
  */
 export const assign: <T extends object>(
   mutableTarget: T,
-  ...sources: Array<Partial<T>>
+  ...sources: ReadonlyArray<Partial<T>>
 ) => T = Object.assign;
 
 /**
@@ -135,7 +135,7 @@ export const keys: {
    * @param obj - Object.
    * @returns Object keys.
    */
-  <K extends string, V>(obj: PartialRecord<K, V>): readonly K[];
+  <K extends string, V>(obj: PartialRecord<K, V>): K[];
   /**
    * Typed version of Object.keys.
    *
@@ -152,7 +152,7 @@ export const values: {
    * @param obj - Object.
    * @returns Object values.
    */
-  <K extends string, V>(obj: PartialRecord<K, V>): readonly V[];
+  <K extends string, V>(obj: PartialRecord<K, V>): V[];
   /**
    * Typed version of Object.values.
    *

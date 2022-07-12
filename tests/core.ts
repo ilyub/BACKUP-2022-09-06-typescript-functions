@@ -3,6 +3,26 @@
 import { evaluate, freeze, unfreeze } from "@";
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
 
+test("ReadonlyMap", async () => {
+  expect(evaluate(() => true)).toBeTrue();
+  await expect(evaluate(resolve)).resolves.toBeUndefined();
+  await expect(evaluate(resolve())).resolves.toBeUndefined();
+
+  async function resolve(): Promise<void> {
+    await Promise.resolve();
+  }
+});
+
+test("ReadonlySet", async () => {
+  expect(evaluate(() => true)).toBeTrue();
+  await expect(evaluate(resolve)).resolves.toBeUndefined();
+  await expect(evaluate(resolve())).resolves.toBeUndefined();
+
+  async function resolve(): Promise<void> {
+    await Promise.resolve();
+  }
+});
+
 test("evaluate", async () => {
   expect(evaluate(() => true)).toBeTrue();
   await expect(evaluate(resolve)).resolves.toBeUndefined();

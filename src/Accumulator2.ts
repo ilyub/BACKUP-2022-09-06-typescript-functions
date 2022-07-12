@@ -1,5 +1,4 @@
 import * as is from "./guards";
-import type { Writable } from "./types";
 
 export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
   /**
@@ -35,7 +34,8 @@ export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
   public get(key1: K, key2: L): readonly T[];
 
   public get(key1: K, key2?: L): ReadonlyMap<L, readonly T[]> | readonly T[] {
-    const map = this.map.get(key1) ?? new Map<L, Writable<readonly T[]>>();
+    // eslint-disable-next-line @skylib/custom/prefer-readonly-array -- Ok
+    const map = this.map.get(key1) ?? new Map<L, T[]>();
 
     return is.not.empty(key2) ? map.get(key2) ?? [] : map;
   }
@@ -84,7 +84,8 @@ export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
       for (const arr of map.values()) yield arr;
   }
 
-  protected readonly map: Map<K, Map<L, Writable<readonly T[]>>> = new Map();
+  // eslint-disable-next-line @skylib/custom/prefer-readonly-array, @skylib/custom/prefer-readonly-map -- Ok
+  protected readonly map: Map<K, Map<L, T[]>> = new Map();
 }
 
 export namespace Accumulator2 {
