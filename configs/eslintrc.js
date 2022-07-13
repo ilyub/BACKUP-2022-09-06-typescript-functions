@@ -18,7 +18,7 @@ module.exports = {
       "warn",
       {
         filesToSkip: ["*.js"],
-        message: "Expecting type to include array or unknown",
+        message: "Expecting type to include array",
         selector:
           "CallExpression[callee.object.name=a][callee.property.name=fromMixed] > .arguments:first-child",
         typeHasNot: "array"
@@ -28,7 +28,7 @@ module.exports = {
       "warn",
       {
         filesToSkip: ["*.js"],
-        message: "Expecting type to include array or unknown",
+        message: "Expecting type to include non-array",
         selector:
           "CallExpression[callee.object.name=a][callee.property.name=fromMixed] > .arguments:first-child",
         typeHasNoneOf: [
@@ -254,6 +254,15 @@ module.exports = {
         ]
       }
     ],
+    "@skylib/custom/functions/no-evaluate-type-param": [
+      "warn",
+      {
+        filesToSkip: ["*.js"],
+        message: "Move type definition to function",
+        selector:
+          "CallExpression[callee.name=evaluate] > TSTypeParameterInstantiation"
+      }
+    ],
     "@skylib/custom/functions/no-o-assign-readonly": [
       "warn",
       {
@@ -424,6 +433,14 @@ module.exports = {
         ]
       }
     ],
+    "@skylib/custom/functions/prefer-PartialOptional": [
+      "warn",
+      {
+        filesToSkip: ["*.js"],
+        message: 'Prefer "PartialOptional" type',
+        selector: "Literal.source[value=ts-toolbelt/out/Object/Optional]"
+      }
+    ],
     "@skylib/custom/functions/prefer-PartialRecord": [
       "warn",
       {
@@ -431,6 +448,14 @@ module.exports = {
         message: 'Prefer "PartialRecord" type',
         selector:
           "TSTypeReference[typeName.name=Partial] > .typeParameters > .params:first-child > .typeName[name=Rec]"
+      }
+    ],
+    "@skylib/custom/functions/prefer-PartialRequired": [
+      "warn",
+      {
+        filesToSkip: ["*.js"],
+        message: 'Prefer "PartialRequired" type',
+        selector: "Literal.source[value=ts-toolbelt/out/Object/Required]"
       }
     ],
     "@skylib/custom/functions/prefer-WritableIndexedObject": [

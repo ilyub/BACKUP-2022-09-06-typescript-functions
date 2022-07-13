@@ -1,12 +1,16 @@
-/* eslint-disable @skylib/no-multi-type-tuples -- Ok */
-
 /* eslint-disable @skylib/custom/functions/prefer-IndexedObject -- Ok */
 
 /* eslint-disable @skylib/custom/functions/prefer-NumStr -- Ok */
 
+/* eslint-disable @skylib/custom/functions/prefer-PartialRequired -- Ok */
+
+/* eslint-disable @skylib/custom/functions/prefer-PartialOptional -- Ok */
+
 /* eslint-disable @skylib/custom/functions/prefer-WritableIndexedObject -- Ok */
 
 /* eslint-disable @skylib/custom/functions/prefer-undefined-shorthand -- Ok */
+
+/* eslint-disable @skylib/no-multi-type-tuples -- Ok */
 
 export type { Optional as PartialOptional } from "ts-toolbelt/out/Object/Optional";
 
