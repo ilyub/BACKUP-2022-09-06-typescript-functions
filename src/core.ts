@@ -16,12 +16,13 @@ import type {
 
 // eslint-disable-next-line @typescript-eslint/no-shadow -- Wait for @skylib/config update
 export const ReadonlyMap: {
-  new <K, V>(): ReadonlyMap<K, V>;
+  // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
+  new <K, V>(entries?: ReadonlyArray<readonly [K, V]>): ReadonlyMap<K, V>;
 } = Map;
 
 // eslint-disable-next-line @typescript-eslint/no-shadow -- Wait for @skylib/config update
 export const ReadonlySet: {
-  new <T>(): ReadonlySet<T>;
+  new <T>(values?: readonly T[]): ReadonlySet<T>;
 } = Set;
 
 /**
