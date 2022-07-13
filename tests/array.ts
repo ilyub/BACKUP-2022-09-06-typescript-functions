@@ -1,4 +1,6 @@
-/* eslint-disable @skylib/custom/functions/a-mixedFrom-arg-type -- Ok */
+/* eslint-disable @skylib/custom/functions/a-mixedFrom-arg-type-include-array -- Ok */
+
+/* eslint-disable @skylib/custom/functions/a-mixedFrom-arg-type-include-non-array -- Ok */
 
 import { AssertionError, a } from "@";
 import type { Writable, numbers } from "@";

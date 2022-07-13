@@ -1,4 +1,4 @@
-import { AssertionError, assert, createValidationObject, fn, is } from "@";
+import { AssertionError, assert, fn, is } from "@";
 import type { Callable, unknowns } from "@";
 
 function createSubtest(assertion: Callable, ...args: unknowns) {
@@ -68,9 +68,12 @@ test("empty", () => {
 });
 
 test("enumeration", () => {
-  const TestEnumVO = createValidationObject({ 1: 1, a: "a" });
+  enum TestEnum {
+    a = 1,
+    b = "a"
+  }
 
-  const subtest = createSubtest(assert.enumeration, TestEnumVO);
+  const subtest = createSubtest(assert.enumeration, TestEnum);
 
   expect(subtest(1)).not.toThrow();
   expect(subtest("a")).not.toThrow();

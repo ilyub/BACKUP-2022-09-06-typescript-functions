@@ -11,10 +11,9 @@
 /* eslint-disable @skylib/primary-export-only -- Ok */
 
 import type * as types from "./types";
-import { defineFn, overload, typedef } from "./core";
+import { defineFn, overload } from "./core";
 import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
 import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
-import type { ValidationObject } from "./core";
 
 export {
   _false as false,
@@ -717,9 +716,9 @@ export function empty(value: unknown): value is types.empty {
  */
 export function enumeration<T extends PropertyKey>(
   value: unknown,
-  vo: ValidationObject<T>
+  vo: types.IndexedObject<T>
 ): value is T {
-  return typedef<ReadonlySet<unknown>>(vo).has(value);
+  return Object.values<unknown>(vo).includes(value);
 }
 
 /**

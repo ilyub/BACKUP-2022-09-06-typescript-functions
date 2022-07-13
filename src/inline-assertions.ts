@@ -1,7 +1,6 @@
 import * as is from "./guards";
 import type * as types from "./types";
 import { AssertionError } from "./errors";
-import type { ValidationObject } from "./core";
 import { defineFn } from "./core";
 
 export {
@@ -216,7 +215,7 @@ export function callable<T extends Function>(value: unknown): T {
  */
 export function enumeration<T extends PropertyKey>(
   value: unknown,
-  vo: ValidationObject<T>
+  vo: types.IndexedObject<T>
 ): T {
   if (is.enumeration(value, vo)) return value;
 

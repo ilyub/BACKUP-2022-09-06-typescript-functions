@@ -14,7 +14,17 @@ module.exports = {
         ]
       }
     ],
-    "@skylib/custom/functions/a-mixedFrom-arg-type": [
+    "@skylib/custom/functions/a-mixedFrom-arg-type-include-array": [
+      "warn",
+      {
+        filesToSkip: ["*.js"],
+        message: "Expecting type to include array or unknown",
+        selector:
+          "CallExpression[callee.object.name=a][callee.property.name=fromMixed] > .arguments:first-child",
+        typeHasNot: "array"
+      }
+    ],
+    "@skylib/custom/functions/a-mixedFrom-arg-type-include-non-array": [
       "warn",
       {
         filesToSkip: ["*.js"],

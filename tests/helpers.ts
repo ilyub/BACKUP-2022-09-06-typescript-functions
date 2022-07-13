@@ -2,6 +2,8 @@
 
 /* eslint-disable @skylib/custom/functions/no-reflect-set -- Ok */
 
+/* eslint-disable deprecation/deprecation -- Ok */
+
 import * as testUtils from "@/test-utils";
 import {
   createFacade,
@@ -89,21 +91,9 @@ test("createFacade: Object", () => {
 });
 
 test("createValidationObject", () => {
-  {
-    const source = { 1: 1, a: "a" } as const;
+  const source = { 1: 1, a: "a" } as const;
 
-    const expected = new Set([1, "a"]);
-
-    expect(createValidationObject(source)).toStrictEqual(expected);
-  }
-
-  {
-    const source = { 1: "a", a: 1 } as const;
-
-    const error = new Error("Invalid source");
-
-    expect(() => createValidationObject(source)).toThrow(error);
-  }
+  expect(createValidationObject(source)).toBeSameAs(source);
 });
 
 test("onDemand", () => {

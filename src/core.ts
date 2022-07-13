@@ -1,9 +1,3 @@
-/* eslint-disable @skylib/custom/functions/prefer-cast-string -- Ok */
-
-/* eslint-disable @skylib/custom/functions/prefer-o-entries -- Ok */
-
-/* eslint-disable @skylib/custom/functions/prefer-o-values -- Ok */
-
 import type {
   AsyncPromise,
   AsyncPromiseSync,
@@ -35,21 +29,22 @@ export const ReadonlySet: {
 export const defineFn: <F, P>(fn: F, props: P) => F & Readonly<P> =
   Object.assign;
 
-export type ValidationObject<T extends PropertyKey> = ReadonlySet<T>;
+/**
+ * @deprecated -- Use enum.
+ */
+export type ValidationObject<T extends PropertyKey> = IndexedObject<T>;
 
 /**
  * Creates validation object.
  *
  * @param source - Source.
  * @returns Validation object.
+ * @deprecated -- Use enum.
  */
 export function createValidationObject<T extends NumStr>(
   source: Rec<T, T>
-): ValidationObject<T> {
-  if (Object.entries(source).every(([key, value]) => key === String(value)))
-    return new Set(Object.values(source));
-
-  throw new Error("Invalid source");
+): IndexedObject<T> {
+  return source;
 }
 
 /**

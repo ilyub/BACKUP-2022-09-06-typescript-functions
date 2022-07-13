@@ -2,7 +2,6 @@ import * as is from "./guards";
 import type * as types from "./types";
 import { AssertionError } from "./errors";
 import type { ErrorArgFn } from "./assertions.internal";
-import type { ValidationObject } from "./core";
 import { defineFn } from "./core";
 
 export const not: {
@@ -228,7 +227,7 @@ export function empty(
  */
 export function enumeration<T extends PropertyKey>(
   value: unknown,
-  vo: ValidationObject<T>,
+  vo: types.IndexedObject<T>,
   error: ErrorArg
 ): asserts value is T {
   byGuard(value, is.factory(is.enumeration, vo), error);

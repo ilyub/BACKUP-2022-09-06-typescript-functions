@@ -56,7 +56,7 @@
 
 /* eslint-disable @skylib/custom/functions/no-unnecessary-is-undefined -- Ok */
 
-import { createValidationObject, fn, is } from "@";
+import { fn, is } from "@";
 
 test("and", () => {
   expect(is.and(undefined, is.booleanU, is.numberU)).toBeTrue();
@@ -107,13 +107,16 @@ test("empty", () => {
 });
 
 test("enumeration", () => {
-  const TestEnumVO = createValidationObject({ 1: 1, a: "a" });
+  enum TestEnum {
+    a = 1,
+    b = "a"
+  }
 
-  expect(is.enumeration(1, TestEnumVO)).toBeTrue();
-  expect(is.enumeration("a", TestEnumVO)).toBeTrue();
-  expect(is.enumeration("1", TestEnumVO)).toBeFalse();
-  expect(is.enumeration("b", TestEnumVO)).toBeFalse();
-  expect(is.enumeration(undefined, TestEnumVO)).toBeFalse();
+  expect(is.enumeration(1, TestEnum)).toBeTrue();
+  expect(is.enumeration("a", TestEnum)).toBeTrue();
+  expect(is.enumeration("1", TestEnum)).toBeFalse();
+  expect(is.enumeration("b", TestEnum)).toBeFalse();
+  expect(is.enumeration(undefined, TestEnum)).toBeFalse();
 });
 
 test("factory", () => {
