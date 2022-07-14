@@ -1,7 +1,5 @@
 /* eslint-disable @skylib/custom/prefer-readonly-property -- Ok */
 
-/* eslint-disable @typescript-eslint/no-shadow -- Ok */
-
 import { ReadonlyMap, ReadonlySet, a, evaluate, freeze, unfreeze } from "@";
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
 

@@ -1,7 +1,6 @@
 import * as is from "./guards";
-import type { ErrorArgFn } from "./assertions.internal";
-import type { ValidationObject } from "./core";
 import type * as types from "./types";
+import type { ErrorArgFn } from "./assertions.internal";
 export declare const not: {
     /**
      * Asserts that value type is not empty.
@@ -122,7 +121,7 @@ export declare function empty(value: unknown, error: ErrorArg): asserts value is
  * @param vo - Validation object.
  * @param error - Error.
  */
-export declare function enumeration<T extends PropertyKey>(value: unknown, vo: ValidationObject<T>, error: ErrorArg): asserts value is T;
+export declare function enumeration<T extends PropertyKey>(value: unknown, vo: types.IndexedObject<T>, error: ErrorArg): asserts value is T;
 /**
  * Asserts that value type is T.
  *

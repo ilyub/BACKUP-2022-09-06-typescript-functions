@@ -1,4 +1,3 @@
-import type { ValidationObject } from "./core";
 import type * as types from "./types";
 import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
 import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
@@ -199,7 +198,7 @@ export declare function empty(value: unknown): value is types.empty;
  * @param vo - Validation object.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-export declare function enumeration<T extends PropertyKey>(value: unknown, vo: ValidationObject<T>): value is T;
+export declare function enumeration<T extends PropertyKey>(value: unknown, vo: types.IndexedObject<T>): value is T;
 /**
  * Creates single-arg guard.
  *

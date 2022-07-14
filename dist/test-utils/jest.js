@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.jestSetup = exports.jestReset = void 0;
 const tslib_1 = require("tslib");
-const jest_internal_1 = require("./jest.internal");
 require("jest-extended");
+const jest_internal_1 = require("./jest.internal");
 const all_1 = tslib_1.__importDefault(require("jest-extended/all"));
 /**
  * Jest reset.

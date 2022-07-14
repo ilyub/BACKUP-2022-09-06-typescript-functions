@@ -1,6 +1,6 @@
-import { defineFn } from "./core";
-import { AssertionError } from "./errors";
 import * as is from "./guards";
+import { AssertionError } from "./errors";
+import { defineFn } from "./core";
 export { _false as false, _null as null, _true as true, _undefined as undefined };
 export const array = defineFn(factory(is.array), {
     /**
@@ -40,7 +40,6 @@ export const indexedObject = defineFn(factory(is.indexedObject), {
         throw new AssertionError();
     }
 });
-export const indexedObjectU = factory(is.indexedObjectU);
 export const indexedObjects = factory(is.indexedObjects);
 export const indexedObjectsU = factory(is.indexedObjectsU);
 export const map = defineFn(factory(is.map), {

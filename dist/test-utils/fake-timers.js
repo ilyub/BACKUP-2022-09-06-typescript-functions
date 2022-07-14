@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.setRandomSystemTime = exports.run = exports.installFakeTimer = exports.clock = void 0;
 const tslib_1 = require("tslib");
-const __1 = require("..");
-const fakeTimers = tslib_1.__importStar(require("@sinonjs/fake-timers"));
 const _ = tslib_1.__importStar(require("@skylib/lodash-commonjs-es"));
+const fakeTimers = tslib_1.__importStar(require("@sinonjs/fake-timers"));
+const __1 = require("..");
 exports.clock = (0, __1.onDemand)(() => {
     __1.assert.not.empty(_clock, "Fake timer is not installed");
     return _clock;

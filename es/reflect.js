@@ -1,7 +1,7 @@
 /* eslint-disable @skylib/custom/functions/prefer-reflect -- Ok */
-import * as is from "./guards";
-import * as as from "./inline-assertions";
 import "reflect-metadata";
+import * as as from "./inline-assertions";
+import * as is from "./guards";
 /**
  * Typed version of Reflect.apply.
  *

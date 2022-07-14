@@ -4,15 +4,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.wrapProxyHandler = exports.wait = exports.safeAccess = exports.onDemand = exports.createFacade = void 0;
 const tslib_1 = require("tslib");
 /* eslint-disable @skylib/custom/functions/no-reflect-set -- Ok */
+const as = tslib_1.__importStar(require("./inline-assertions"));
 const assert = tslib_1.__importStar(require("./assertions"));
 const cast = tslib_1.__importStar(require("./converters"));
-const core_1 = require("./core");
 const fn = tslib_1.__importStar(require("./function"));
 const is = tslib_1.__importStar(require("./guards"));
-const as = tslib_1.__importStar(require("./inline-assertions"));
 const o = tslib_1.__importStar(require("./object"));
 const programFlow = tslib_1.__importStar(require("./program-flow"));
 const reflect = tslib_1.__importStar(require("./reflect"));
+const core_1 = require("./core");
 /**
  * Creates facade.
  *

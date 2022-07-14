@@ -5,10 +5,10 @@ exports.unshiftOrReplaceBy = exports.unshift = exports.uniqueBy = exports.trunca
 const tslib_1 = require("tslib");
 /* eslint-disable @skylib/custom/functions/prefer-a-fromIterable -- Ok */
 /* eslint-disable @skylib/custom/functions/prefer-o-hasOwnProp -- Ok */
-const assert = tslib_1.__importStar(require("./assertions"));
-const core_1 = require("./core");
-const is = tslib_1.__importStar(require("./guards"));
 const _ = tslib_1.__importStar(require("@skylib/lodash-commonjs-es"));
+const assert = tslib_1.__importStar(require("./assertions"));
+const is = tslib_1.__importStar(require("./guards"));
+const core_1 = require("./core");
 /**
  * Creates array of pairs ([x, y, z] =\> [[x, y], [y, z]]).
  *
@@ -292,6 +292,7 @@ exports.toggleBy = toggleBy;
  * @param mutableArray - Array.
  */
 function truncate(mutableArray) {
+    // eslint-disable-next-line @skylib/custom/functions/prefer-a-truncate -- Ok
     mutableArray.length = 0;
 }
 exports.truncate = truncate;

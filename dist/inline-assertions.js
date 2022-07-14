@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.not = exports.unknownsU = exports.unknowns = exports.unknown = exports.symbolsU = exports.symbols = exports.symbolU = exports.symbol = exports.stringsU = exports.strings = exports.stringU = exports.string = exports.setsU = exports.sets = exports.setU = exports.set = exports.objectsU = exports.objects = exports.objectU = exports.object = exports.numbersU = exports.numbers = exports.numberU = exports.number = exports.numStrsU = exports.numStrs = exports.numStrU = exports.numStr = exports.never = exports.mapsU = exports.maps = exports.mapU = exports.map = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObjectU = exports.indexedObject = exports.empty = exports.booleansU = exports.booleans = exports.booleanU = exports.boolean = exports.arraysU = exports.arrays = exports.arrayU = exports.array = exports.undefined = exports.true = exports.null = exports.false = void 0;
-exports.instancesOf = exports.instanceOf = exports.enumeration = exports.callable = exports.byGuard = void 0;
+exports.byGuard = exports.not = exports.unknownsU = exports.unknowns = exports.unknown = exports.symbolsU = exports.symbols = exports.symbolU = exports.symbol = exports.stringsU = exports.strings = exports.stringU = exports.string = exports.setsU = exports.sets = exports.setU = exports.set = exports.objectsU = exports.objects = exports.objectU = exports.object = exports.numbersU = exports.numbers = exports.numberU = exports.number = exports.numStrsU = exports.numStrs = exports.numStrU = exports.numStr = exports.never = exports.mapsU = exports.maps = exports.mapU = exports.map = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObject = exports.empty = exports.booleansU = exports.booleans = exports.booleanU = exports.boolean = exports.arraysU = exports.arrays = exports.arrayU = exports.array = exports.undefined = exports.true = exports.null = exports.false = void 0;
+exports.instancesOf = exports.instanceOf = exports.enumeration = exports.callable = void 0;
 const tslib_1 = require("tslib");
-const core_1 = require("./core");
-const errors_1 = require("./errors");
 const is = tslib_1.__importStar(require("./guards"));
+const errors_1 = require("./errors");
+const core_1 = require("./core");
 exports.array = (0, core_1.defineFn)(factory(is.array), {
     /**
      * Asserts that value type is T[].
@@ -44,7 +44,6 @@ exports.indexedObject = (0, core_1.defineFn)(factory(is.indexedObject), {
         throw new errors_1.AssertionError();
     }
 });
-exports.indexedObjectU = factory(is.indexedObjectU);
 exports.indexedObjects = factory(is.indexedObjects);
 exports.indexedObjectsU = factory(is.indexedObjectsU);
 exports.map = (0, core_1.defineFn)(factory(is.map), {

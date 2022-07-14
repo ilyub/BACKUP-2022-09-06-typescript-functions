@@ -1,3 +1,5 @@
+export type { Optional as PartialOptional } from "ts-toolbelt/out/Object/Optional";
+export type { Required as PartialRequired } from "ts-toolbelt/out/Object/Required";
 export declare type Entry<K extends PropertyKey, T> = readonly [K, T];
 export declare type IndexedObject<T = unknown> = Rec<PropertyKey, T>;
 export declare type IndexedObjects<T = unknown> = ReadonlyArray<IndexedObject<T>>;
@@ -7,6 +9,9 @@ export declare type NumStr = number | string;
 export declare type NumStrE = empty | NumStr;
 export declare type NumStrU = NumStr | undefined;
 export declare type NumStrs = readonly NumStr[];
+export declare type Optional<T> = {
+    [P in keyof T]?: T[P];
+};
 export declare type PartialRecord<K extends PropertyKey, V> = {
     readonly [L in K]?: V;
 };

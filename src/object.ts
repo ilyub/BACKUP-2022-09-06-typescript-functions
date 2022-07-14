@@ -17,13 +17,13 @@ import { defineFn, indexed } from "./core";
 /**
  * Typed version of Object.assign.
  *
- * @param mutableTarget - Target.
+ * @param target - Target.
  * @param sources - Sources.
  * @returns Target.
  */
 export const assign: <T extends object>(
-  mutableTarget: T,
-  ...sources: ReadonlyArray<Partial<T>>
+  target: Writable<T>,
+  ...sources: ReadonlyArray<Readonly<Partial<T>>>
 ) => T = Object.assign;
 
 /**

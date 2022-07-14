@@ -1,9 +1,5 @@
-/* eslint-disable @skylib/no-multi-type-tuples -- Ok */
 /* eslint-disable @skylib/custom/functions/prefer-a-fromIterable -- Ok */
-/* eslint-disable @skylib/custom/functions/prefer-o-entries -- Ok */
-/* eslint-disable @skylib/custom/functions/prefer-o-hasOwnProp -- Ok */
-/* eslint-disable @skylib/custom/functions/prefer-o-values -- Ok */
-import { defineFn, overload, typedef } from "./core";
+import { defineFn, overload } from "./core";
 export { _false as false, _null as null, _true as true, _undefined as undefined };
 export const and = defineFn(overload(() => {
     return result;
@@ -229,7 +225,7 @@ export function empty(value) {
  * @returns _True_ if value type is T, _false_ otherwise.
  */
 export function enumeration(value, vo) {
-    return typedef(vo).has(value);
+    return Object.values(vo).includes(value);
 }
 /**
  * Creates single-arg guard.

@@ -1,4 +1,3 @@
-import type { Matchers, Result } from "./expect.internal";
 import type { Extends } from "ts-toolbelt/out/Any/Extends";
 import type { If } from "ts-toolbelt/out/Any/If";
 export interface ExpectFromMatcher<K extends keyof Matchers> {
@@ -9,8 +8,18 @@ export interface ExpectFromMatcher<K extends keyof Matchers> {
      * @param args - Arguments.
      * @returns Result.
      */
-    (got: unknown, ...args: Parameters<Matchers[K]>): If<Extends<ReturnType<Matchers[K]>, Promise<unknown>>, Promise<Result>, Result>;
+    (got: unknown, ...args: Parameters<Matchers[K]>): If<Extends<ReturnType<Matchers[K]>, Promise<unknown>>, Promise<ExpectResult>, ExpectResult>;
 }
+export interface ExpectResult {
+    /**
+     * Returns failure message.
+     *
+     * @returns Failure message.
+     */
+    readonly message: () => string;
+    readonly pass: boolean;
+}
+export declare type Matchers = Readonly<jest.Matchers<unknown, unknown>>;
 /**
  * Builds matcher result.
  *
@@ -21,7 +30,7 @@ export interface ExpectFromMatcher<K extends keyof Matchers> {
  * @param immediate - Immediate.
  * @returns Matcher result.
  */
-export declare function buildEqualsResult(pass: boolean, message: string, got: unknown, expected: unknown, immediate?: boolean): Result;
+export declare function buildEqualsResult(pass: boolean, message: string, got: unknown, expected: unknown, immediate?: boolean): ExpectResult;
 /**
  * Builds matcher result.
  *
@@ -30,5 +39,5 @@ export declare function buildEqualsResult(pass: boolean, message: string, got: u
  * @param expectFailure - Expect failure message.
  * @returns Matcher result.
  */
-export declare function buildResult(pass: boolean, expectSuccess: string, expectFailure: string): Result;
+export declare function buildResult(pass: boolean, expectSuccess: string, expectFailure: string): ExpectResult;
 //# sourceMappingURL=expect.d.ts.map

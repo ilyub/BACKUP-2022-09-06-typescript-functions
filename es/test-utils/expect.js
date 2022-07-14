@@ -1,5 +1,5 @@
-import { fn } from "..";
 import { printDiffOrStringify, stringify } from "jest-matcher-utils";
+import { fn } from "..";
 /**
  * Builds matcher result.
  *

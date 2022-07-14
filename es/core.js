@@ -1,4 +1,5 @@
-/* eslint-disable @skylib/custom/functions/prefer-cast-string -- Ok */
+export const ReadonlyMap = Map;
+export const ReadonlySet = Set;
 /**
  * Defines function with properties.
  *
@@ -12,11 +13,10 @@ export const defineFn = Object.assign;
  *
  * @param source - Source.
  * @returns Validation object.
+ * @deprecated -- Use enum.
  */
 export function createValidationObject(source) {
-    if (Object.entries(source).every(([key, value]) => key === String(value)))
-        return new Set(Object.values(source));
-    throw new Error("Invalid source");
+    return source;
 }
 export function evaluate(mixed) {
     return typeof mixed === "function" ? mixed() : mixed;

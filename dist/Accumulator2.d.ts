@@ -1,4 +1,3 @@
-import type { Writable } from "./types";
 export declare class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
     /**
      * Creates class instance.
@@ -42,7 +41,7 @@ export declare class Accumulator2<K extends PropertyKey, L extends PropertyKey, 
      * Returns values.
      */
     values(): IterableIterator<readonly T[]>;
-    protected readonly map: Map<K, Map<L, Writable<readonly T[]>>>;
+    protected readonly map: Map<K, Map<L, T[]>>;
 }
 export declare namespace Accumulator2 {
     type Entry<K extends PropertyKey, L extends PropertyKey, T> = readonly [K, L, readonly T[]];

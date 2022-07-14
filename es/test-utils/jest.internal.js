@@ -1,6 +1,5 @@
-import { assert } from "..";
+import { assert, is } from "..";
 import { buildEqualsResult } from "./expect";
-import { isMock } from "./expect.internal";
 import { equals } from "@jest/expect-utils";
 // eslint-disable-next-line no-console -- Ok
 export const error = console.error;
@@ -27,4 +26,13 @@ export const matchers = {
         return buildEqualsResult(got === expected, "Object are not identical", got, expected);
     }
 };
+/**
+ * Checks that value type is Mock.
+ *
+ * @param value - Value.
+ * @returns _True_ if value type is Mock, _false_ otherwise.
+ */
+function isMock(value) {
+    return is.callable(value);
+}
 //# sourceMappingURL=jest.internal.js.map

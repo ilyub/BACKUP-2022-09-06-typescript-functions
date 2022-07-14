@@ -1,5 +1,5 @@
-import * as is from "./guards";
 import "reflect-metadata";
+import * as is from "./guards";
 /**
  * Typed version of Reflect.apply.
  *

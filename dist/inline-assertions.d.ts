@@ -1,5 +1,4 @@
 import * as is from "./guards";
-import type { ValidationObject } from "./core";
 import type * as types from "./types";
 export { _false as false, _null as null, _true as true, _undefined as undefined };
 export declare const array: ((value: unknown) => types.unknowns) & Readonly<{
@@ -32,7 +31,6 @@ export declare const indexedObject: ((value: unknown) => types.IndexedObject<unk
      */
     of: <T>(value: unknown, guard: is.Guard<T>) => types.IndexedObject<T>;
 }>;
-export declare const indexedObjectU: (value: unknown) => types.IndexedObject<unknown> | undefined;
 export declare const indexedObjects: (value: unknown) => readonly types.IndexedObject<unknown>[];
 export declare const indexedObjectsU: (value: unknown) => readonly types.IndexedObject<unknown>[] | undefined;
 export declare const map: ((value: unknown) => ReadonlyMap<unknown, unknown>) & Readonly<{
@@ -131,7 +129,7 @@ export declare function callable<T extends Function>(value: unknown): T;
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
-export declare function enumeration<T extends PropertyKey>(value: unknown, vo: ValidationObject<T>): T;
+export declare function enumeration<T extends PropertyKey>(value: unknown, vo: types.IndexedObject<T>): T;
 /**
  * Asserts that value type is T.
  *

@@ -1,5 +1,5 @@
-import { error, matchers, warn } from "./jest.internal";
 import "jest-extended";
+import { error, matchers, warn } from "./jest.internal";
 import jestExtendedMatchers from "jest-extended/all";
 /**
  * Jest reset.

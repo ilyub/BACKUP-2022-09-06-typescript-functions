@@ -1,13 +1,10 @@
-/* eslint-disable @skylib/custom/functions/prefer-o-clone -- Ok */
-/* eslint-disable @skylib/custom/functions/prefer-o-getPrototypeOf -- Ok */
-/* eslint-disable @skylib/custom/functions/prefer-o-hasOwnProp -- Ok */
-import { indexed } from "./core";
-import * as is from "./guards";
 import * as as from "./inline-assertions";
+import * as is from "./guards";
+import { defineFn, indexed } from "./core";
 /**
  * Typed version of Object.assign.
  *
- * @param mutableTarget - Target.
+ * @param target - Target.
  * @param sources - Sources.
  * @returns Target.
  */
@@ -22,7 +19,7 @@ export const assign = Object.assign;
 export const defineProperty = Object.defineProperty.bind(Object);
 export const entries = Object.entries;
 export const extend = Object.assign;
-export const fromEntries = extend(
+export const fromEntries = defineFn(
 /**
  * Creates object from entries.
  *
@@ -57,6 +54,7 @@ export const values = Object.values;
  * @returns New object.
  */
 export function clone(obj) {
+    // eslint-disable-next-line @skylib/custom/functions/prefer-o-clone -- Ok
     return Object.assign({}, obj);
 }
 /**
@@ -94,6 +92,7 @@ export function get(obj, key, guard = is.unknown, defVal) {
  * @returns Object prototype if available, _undefined_ otherwise.
  */
 export function getPrototypeOf(obj) {
+    // eslint-disable-next-line @skylib/custom/functions/prefer-o-getPrototypeOf -- Ok
     const prototype = Object.getPrototypeOf(obj);
     return is.object(prototype) ? prototype : undefined;
 }
@@ -105,6 +104,7 @@ export function getPrototypeOf(obj) {
  * @returns _True_ if object has property, _false_ otherwise.
  */
 export function hasOwnProp(key, obj) {
+    // eslint-disable-next-line @skylib/custom/functions/prefer-o-hasOwnProp -- Ok
     return Object.prototype.hasOwnProperty.call(obj, key);
 }
 /**

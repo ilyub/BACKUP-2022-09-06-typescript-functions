@@ -1,7 +1,8 @@
 "use strict";
-/* eslint-disable @skylib/custom/functions/prefer-cast-string -- Ok */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unfreeze = exports.typedef = exports.overload = exports.indexed = exports.freeze = exports.evaluate = exports.createValidationObject = exports.defineFn = void 0;
+exports.unfreeze = exports.typedef = exports.overload = exports.indexed = exports.freeze = exports.evaluate = exports.createValidationObject = exports.defineFn = exports.ReadonlySet = exports.ReadonlyMap = void 0;
+exports.ReadonlyMap = Map;
+exports.ReadonlySet = Set;
 /**
  * Defines function with properties.
  *
@@ -15,11 +16,10 @@ exports.defineFn = Object.assign;
  *
  * @param source - Source.
  * @returns Validation object.
+ * @deprecated -- Use enum.
  */
 function createValidationObject(source) {
-    if (Object.entries(source).every(([key, value]) => key === String(value)))
-        return new Set(Object.values(source));
-    throw new Error("Invalid source");
+    return source;
 }
 exports.createValidationObject = createValidationObject;
 function evaluate(mixed) {

@@ -1,9 +1,8 @@
 /* eslint-disable @skylib/custom/functions/prefer-json -- Ok */
 /* eslint-disable unicorn/no-null -- Ok */
 import * as a from "./array";
-import { createValidationObject } from "./core";
-import * as is from "./guards";
 import * as as from "./inline-assertions";
+import * as is from "./guards";
 /**
  * Decodes JSON string.
  *
@@ -49,13 +48,14 @@ export function eq(x, y) {
 export function neq(x, y) {
     return encode(x) !== encode(y);
 }
-const TypeVO = createValidationObject({
-    "map-5702-3c89-3feb-75d4": "map-5702-3c89-3feb-75d4",
-    "set-41ef-10c9-ae1f-15e8": "set-41ef-10c9-ae1f-15e8"
-});
+var Type;
+(function (Type) {
+    Type["map"] = "map-5702-3c89-3feb-75d4";
+    Type["set"] = "set-41ef-10c9-ae1f-15e8";
+})(Type || (Type = {}));
 const isEntry = is.tuple.factory(is.unknown, is.unknown);
 const isEntries = is.factory(is.array.of, isEntry);
-const isType = is.factory(is.enumeration, TypeVO);
+const isType = is.factory(is.enumeration, Type);
 const isCustomData = is.object.factory({ type: isType, value: is.unknown }, {});
 /**
  * JSON replacer.
@@ -85,9 +85,9 @@ function reviver(_key, value) {
         return null;
     if (isCustomData(value))
         switch (value.type) {
-            case "map-5702-3c89-3feb-75d4":
+            case Type.map:
                 return new Map(as.byGuard(value.value, isEntries));
-            case "set-41ef-10c9-ae1f-15e8":
+            case Type.set:
                 return new Set(as.byGuard(value.value, is.array));
         }
     return value;

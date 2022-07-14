@@ -8,13 +8,11 @@ import type {
   Writable
 } from "./types";
 
-// eslint-disable-next-line @typescript-eslint/no-shadow -- Wait for @skylib/config update
 export const ReadonlyMap: {
   // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
   new <K, V>(entries?: ReadonlyArray<readonly [K, V]>): ReadonlyMap<K, V>;
 } = Map;
 
-// eslint-disable-next-line @typescript-eslint/no-shadow -- Wait for @skylib/config update
 export const ReadonlySet: {
   new <T>(values?: readonly T[]): ReadonlySet<T>;
 } = Set;

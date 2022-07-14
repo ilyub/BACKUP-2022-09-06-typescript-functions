@@ -1,13 +1,13 @@
 import * as is from "./guards";
-import type { Entry, NumStr, OptionalStyle, PartialRecord, Rec, StrictOmit, Writable, WritablePartialRecord, objectU } from "./types";
+import type { Entry, NumStr, OptionalStyle, PartialRecord, Rec, StrictOmit, Writable, objectU } from "./types";
 /**
  * Typed version of Object.assign.
  *
- * @param mutableTarget - Target.
+ * @param target - Target.
  * @param sources - Sources.
  * @returns Target.
  */
-export declare const assign: <T extends object>(mutableTarget: T, ...sources: Array<Partial<T>>) => T;
+export declare const assign: <T extends object>(target: Writable<T>, ...sources: ReadonlyArray<Readonly<Partial<T>>>) => T;
 /**
  * Typed version of Object.defineProperty.
  *
@@ -61,15 +61,15 @@ export declare const extend: {
      */
     <T extends object, A, B, C>(target: T, source1: A, source2: B, source3: C): A & B & C & T;
 };
-export declare const fromEntries: {
+export declare const fromEntries: (<K extends PropertyKey, V>(entries: Iterable<Entry<K, V>>) => PartialRecord<K, V>) & Readonly<{
     /**
      * Creates object from entries.
      *
      * @param entries - Entries.
      * @returns Object.
      */
-    exhaustive: <K extends PropertyKey, V>(entries: Iterable<Entry<K, V>>) => Rec<K, V>;
-} & (<K_1 extends PropertyKey, V_1>(entries: Iterable<Entry<K_1, V_1>>) => WritablePartialRecord<K_1, V_1>);
+    exhaustive: <K_1 extends PropertyKey, V_1>(entries: Iterable<Entry<K_1, V_1>>) => Rec<K_1, V_1>;
+}>;
 export declare const keys: {
     /**
      * Typed version of Object.keys.
@@ -77,7 +77,7 @@ export declare const keys: {
      * @param obj - Object.
      * @returns Object keys.
      */
-    <K extends string, V>(obj: PartialRecord<K, V>): readonly K[];
+    <K extends string, V>(obj: PartialRecord<K, V>): K[];
     /**
      * Typed version of Object.keys.
      *
@@ -93,7 +93,7 @@ export declare const values: {
      * @param obj - Object.
      * @returns Object values.
      */
-    <K extends string, V>(obj: PartialRecord<K, V>): readonly V[];
+    <K extends string, V>(obj: PartialRecord<K, V>): V[];
     /**
      * Typed version of Object.values.
      *

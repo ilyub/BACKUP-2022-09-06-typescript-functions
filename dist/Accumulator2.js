@@ -10,6 +10,7 @@ class Accumulator2 {
      * @param source - Source.
      */
     constructor(source = []) {
+        // eslint-disable-next-line @skylib/custom/prefer-readonly-array, @skylib/custom/prefer-readonly-map -- Ok
         Object.defineProperty(this, "map", {
             enumerable: true,
             configurable: true,
@@ -27,6 +28,7 @@ class Accumulator2 {
     }
     get(key1, key2) {
         var _a, _b;
+        // eslint-disable-next-line @skylib/custom/prefer-readonly-array -- Ok
         const map = (_a = this.map.get(key1)) !== null && _a !== void 0 ? _a : new Map();
         return is.not.empty(key2) ? (_b = map.get(key2)) !== null && _b !== void 0 ? _b : [] : map;
     }

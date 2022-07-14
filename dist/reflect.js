@@ -3,9 +3,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.hasOwnMetadataKey = exports.hasOwnMetadata = exports.hasMetadataKey = exports.hasMetadata = exports.getOwnMetadataKey = exports.getOwnMetadata = exports.getMetadataKey = exports.getMetadata = exports.get = exports.defineMetadataKey = exports.defineMetadata = exports.setPrototypeOf = exports.set = exports.preventExtensions = exports.ownKeys = exports.isExtensible = exports.has = exports.getPrototypeOf = exports.getOwnPropertyDescriptor = exports.deleteProperty = exports.defineProperty = exports.construct = exports.apply = void 0;
 const tslib_1 = require("tslib");
-const is = tslib_1.__importStar(require("./guards"));
-const as = tslib_1.__importStar(require("./inline-assertions"));
 require("reflect-metadata");
+const as = tslib_1.__importStar(require("./inline-assertions"));
+const is = tslib_1.__importStar(require("./guards"));
 /**
  * Typed version of Reflect.apply.
  *

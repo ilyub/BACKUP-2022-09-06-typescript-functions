@@ -1,6 +1,6 @@
-import { defineFn } from "./core";
-import { AssertionError } from "./errors";
 import * as is from "./guards";
+import { AssertionError } from "./errors";
+import { defineFn } from "./core";
 export const not = {
     empty: (value, error) => {
         byGuard(value, is.not.empty, error);

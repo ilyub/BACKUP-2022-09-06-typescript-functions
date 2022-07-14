@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.buildResult = exports.buildEqualsResult = void 0;
-const __1 = require("..");
 const jest_matcher_utils_1 = require("jest-matcher-utils");
+const __1 = require("..");
 /**
  * Builds matcher result.
  *

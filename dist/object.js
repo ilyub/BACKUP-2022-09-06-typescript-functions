@@ -1,17 +1,14 @@
 "use strict";
-/* eslint-disable @skylib/custom/functions/prefer-o-clone -- Ok */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sort = exports.some = exports.size = exports.set = exports.removeUndefinedKeys = exports.omit = exports.map = exports.hasOwnProp = exports.getPrototypeOf = exports.get = exports.filter = exports.every = exports.clone = exports.values = exports.keys = exports.fromEntries = exports.extend = exports.entries = exports.defineProperty = exports.assign = void 0;
 const tslib_1 = require("tslib");
-/* eslint-disable @skylib/custom/functions/prefer-o-getPrototypeOf -- Ok */
-/* eslint-disable @skylib/custom/functions/prefer-o-hasOwnProp -- Ok */
-const core_1 = require("./core");
-const is = tslib_1.__importStar(require("./guards"));
 const as = tslib_1.__importStar(require("./inline-assertions"));
+const is = tslib_1.__importStar(require("./guards"));
+const core_1 = require("./core");
 /**
  * Typed version of Object.assign.
  *
- * @param mutableTarget - Target.
+ * @param target - Target.
  * @param sources - Sources.
  * @returns Target.
  */
@@ -26,7 +23,7 @@ exports.assign = Object.assign;
 exports.defineProperty = Object.defineProperty.bind(Object);
 exports.entries = Object.entries;
 exports.extend = Object.assign;
-exports.fromEntries = (0, exports.extend)(
+exports.fromEntries = (0, core_1.defineFn)(
 /**
  * Creates object from entries.
  *
@@ -61,6 +58,7 @@ exports.values = Object.values;
  * @returns New object.
  */
 function clone(obj) {
+    // eslint-disable-next-line @skylib/custom/functions/prefer-o-clone -- Ok
     return Object.assign({}, obj);
 }
 exports.clone = clone;
@@ -102,6 +100,7 @@ exports.get = get;
  * @returns Object prototype if available, _undefined_ otherwise.
  */
 function getPrototypeOf(obj) {
+    // eslint-disable-next-line @skylib/custom/functions/prefer-o-getPrototypeOf -- Ok
     const prototype = Object.getPrototypeOf(obj);
     return is.object(prototype) ? prototype : undefined;
 }
@@ -114,6 +113,7 @@ exports.getPrototypeOf = getPrototypeOf;
  * @returns _True_ if object has property, _false_ otherwise.
  */
 function hasOwnProp(key, obj) {
+    // eslint-disable-next-line @skylib/custom/functions/prefer-o-hasOwnProp -- Ok
     return Object.prototype.hasOwnProperty.call(obj, key);
 }
 exports.hasOwnProp = hasOwnProp;

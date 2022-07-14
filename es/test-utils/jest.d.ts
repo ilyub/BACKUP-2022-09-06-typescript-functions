@@ -1,6 +1,6 @@
 import "jest-extended";
 import type { Writable } from "..";
-import type { Calls } from "./expect.internal";
+import type { Calls } from "./jest.internal";
 declare global {
     namespace jest {
         interface Matchers<R> {

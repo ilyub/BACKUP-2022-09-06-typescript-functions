@@ -1,10 +1,10 @@
 /* eslint-disable @skylib/no-multi-type-tuples -- Ok */
 /* eslint-disable @skylib/custom/functions/prefer-a-fromIterable -- Ok */
 /* eslint-disable @skylib/custom/functions/prefer-o-hasOwnProp -- Ok */
-import * as assert from "./assertions";
-import { indexed } from "./core";
-import * as is from "./guards";
 import * as _ from "@skylib/lodash-commonjs-es";
+import * as assert from "./assertions";
+import * as is from "./guards";
+import { indexed } from "./core";
 /**
  * Creates array of pairs ([x, y, z] =\> [[x, y], [y, z]]).
  *
@@ -265,6 +265,7 @@ export function toggleBy(arr, value, keyOrReduce) {
  * @param mutableArray - Array.
  */
 export function truncate(mutableArray) {
+    // eslint-disable-next-line @skylib/custom/functions/prefer-a-truncate -- Ok
     mutableArray.length = 0;
 }
 /**

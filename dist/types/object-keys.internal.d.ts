@@ -1,8 +1,8 @@
-import type { PickKeys } from "./object";
 import type { Extends } from "ts-toolbelt/out/Any/Extends";
-import type { If } from "ts-toolbelt/out/Any/If";
 import type { FilterKeys } from "ts-toolbelt/out/Object/FilterKeys";
+import type { If } from "ts-toolbelt/out/Any/If";
 import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
+import type { PickKeys } from "./object";
 import type { ReadonlyKeys } from "ts-toolbelt/out/Object/ReadonlyKeys";
 import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 import type { WritableKeys } from "ts-toolbelt/out/Object/WritableKeys";
