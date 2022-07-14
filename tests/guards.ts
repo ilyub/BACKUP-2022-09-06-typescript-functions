@@ -56,7 +56,7 @@
 
 /* eslint-disable @skylib/custom/functions/no-unnecessary-is-undefined -- Ok */
 
-import { fn, is } from "@";
+import { ReadonlyMap, ReadonlySet, fn, is } from "@";
 
 test("and", () => {
   expect(is.and(undefined, is.booleanU, is.numberU)).toBeTrue();
@@ -164,17 +164,23 @@ test("instancesOf", () => {
 });
 
 test("map", () => {
-  expect(is.map(new Map([["a", 1]]))).toBeTrue();
-  expect(is.map(new Map([[1, 1]]))).toBeTrue();
-  expect(is.map(new Map([["a", "a"]]))).toBeTrue();
+  expect(is.map(new ReadonlyMap([["a", 1]]))).toBeTrue();
+  expect(is.map(new ReadonlyMap([[1, 1]]))).toBeTrue();
+  expect(is.map(new ReadonlyMap([["a", "a"]]))).toBeTrue();
   expect(is.map({})).toBeFalse();
   expect(is.map(undefined)).toBeFalse();
 });
 
 test("map.of", () => {
-  expect(is.map.of(new Map([["a", 1]]), is.string, is.number)).toBeTrue();
-  expect(is.map.of(new Map([[1, 1]]), is.string, is.number)).toBeFalse();
-  expect(is.map.of(new Map([["a", "a"]]), is.string, is.number)).toBeFalse();
+  expect(
+    is.map.of(new ReadonlyMap([["a", 1]]), is.string, is.number)
+  ).toBeTrue();
+  expect(
+    is.map.of(new ReadonlyMap([[1, 1]]), is.string, is.number)
+  ).toBeFalse();
+  expect(
+    is.map.of(new ReadonlyMap([["a", "a"]]), is.string, is.number)
+  ).toBeFalse();
   expect(is.map.of({}, is.string, is.number)).toBeFalse();
   expect(is.map.of(undefined, is.string, is.number)).toBeFalse();
 });
@@ -275,15 +281,15 @@ test("or.factory", () => {
 });
 
 test("set", () => {
-  expect(is.set(new Set(["a"]))).toBeTrue();
-  expect(is.set(new Set([1]))).toBeTrue();
+  expect(is.set(new ReadonlySet(["a"]))).toBeTrue();
+  expect(is.set(new ReadonlySet([1]))).toBeTrue();
   expect(is.set({})).toBeFalse();
   expect(is.set(undefined)).toBeFalse();
 });
 
 test("set.of", () => {
-  expect(is.set.of(new Set(["a"]), is.string)).toBeTrue();
-  expect(is.set.of(new Set([1]), is.string)).toBeFalse();
+  expect(is.set.of(new ReadonlySet(["a"]), is.string)).toBeTrue();
+  expect(is.set.of(new ReadonlySet([1]), is.string)).toBeFalse();
   expect(is.set.of({}, is.string)).toBeFalse();
   expect(is.set.of(undefined, is.string)).toBeFalse();
 });

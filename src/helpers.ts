@@ -11,7 +11,7 @@ import * as o from "./object";
 import * as programFlow from "./program-flow";
 import * as reflect from "./reflect";
 import type { Join2, unknowns } from "./types";
-import { typedef } from "./core";
+import { ReadonlyMap, ReadonlySet, typedef } from "./core";
 
 export type Facade<I, E = unknown> = E & FacadeOwnMethods<I> & I;
 
@@ -140,13 +140,13 @@ export function safeAccess<
   guards: SafeAccessGuards<T, W>,
   readonlyKeys: readonly R[] = []
 ): SafeAccess<T, W, R> {
-  const guardsMap = new Map<PropertyKey, is.Guard>(o.entries(guards));
+  const guardsMap = new ReadonlyMap<PropertyKey, is.Guard>(o.entries(guards));
 
   const writableKeys = o.keys(guards);
 
   const keys = [...writableKeys, ...readonlyKeys] as const;
 
-  const keysSet = new Set<PropertyKey>(keys);
+  const keysSet = new ReadonlySet<PropertyKey>(keys);
 
   return new Proxy(
     obj,

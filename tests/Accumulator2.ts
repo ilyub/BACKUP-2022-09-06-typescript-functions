@@ -1,4 +1,4 @@
-import { Accumulator2, a } from "@";
+import { Accumulator2, ReadonlyMap, a } from "@";
 
 test("get", () => {
   const accumulator = new Accumulator2<string, string, unknown>([
@@ -6,9 +6,9 @@ test("get", () => {
     ["b", "y", [3]]
   ]);
 
-  expect(accumulator.get("a")).toStrictEqual(new Map([["x", [1, 2]]]));
-  expect(accumulator.get("b")).toStrictEqual(new Map([["y", [3]]]));
-  expect(accumulator.get("c")).toStrictEqual(new Map());
+  expect(accumulator.get("a")).toStrictEqual(new ReadonlyMap([["x", [1, 2]]]));
+  expect(accumulator.get("b")).toStrictEqual(new ReadonlyMap([["y", [3]]]));
+  expect(accumulator.get("c")).toStrictEqual(new ReadonlyMap());
   expect(accumulator.get("a", "x")).toStrictEqual([1, 2]);
   expect(accumulator.get("b", "y")).toStrictEqual([3]);
   expect(accumulator.get("c", "z")).toStrictEqual([]);

@@ -1,3 +1,4 @@
+import * as a from "./array";
 import * as as from "./inline-assertions";
 import * as is from "./guards";
 import type {
@@ -12,7 +13,7 @@ import type {
   WritablePartialRecord,
   objectU
 } from "./types";
-import { defineFn, indexed } from "./core";
+import { ReadonlySet, defineFn, indexed } from "./core";
 
 /**
  * Typed version of Object.assign.
@@ -25,6 +26,44 @@ export const assign: <T extends object>(
   target: Writable<T>,
   ...sources: ReadonlyArray<Readonly<Partial<T>>>
 ) => T = Object.assign;
+
+export const extend: {
+  /**
+   * Typed version of Object.assign.
+   *
+   * @param target - Target object.
+   * @param source - Source.
+   * @returns Target.
+   * @deprecated - Unsafe.
+   */
+  <T extends object, A>(target: T, source: A): A & T;
+  /**
+   * Typed version of Object.assign.
+   *
+   * @param target - Target object.
+   * @param source1 - Source 1.
+   * @param source2 - Source 2.
+   * @returns Target.
+   * @deprecated - Unsafe.
+   */
+  <T extends object, A, B>(target: T, source1: A, source2: B): A & B & T;
+  /**
+   * Typed version of Object.assign.
+   *
+   * @param target - Target object.
+   * @param source1 - Source 1.
+   * @param source2 - Source 2.
+   * @param source3 - Source 3.
+   * @returns Target.
+   * @deprecated - Unsafe.
+   */
+  <T extends object, A, B, C>(
+    target: T,
+    source1: A,
+    source2: B,
+    source3: C
+  ): A & B & C & T;
+} = Object.assign;
 
 /**
  * Typed version of Object.defineProperty.
@@ -46,52 +85,17 @@ export const entries: {
    * @param obj - Object.
    * @returns Object entries.
    */
-  <K extends string, V>(obj: PartialRecord<K, V>): Array<Entry<K, V>>;
+  <K extends string, V>(obj: PartialRecord<K, V>): ReadonlyArray<Entry<K, V>>;
   /**
    * Typed version of Object.entries.
    *
    * @param obj - Object.
    * @returns Object entries.
    */
-  <T extends object>(obj: T): Array<
+  <T extends object>(obj: T): ReadonlyArray<
     Entry<string & keyof T, T[NumStr & keyof T]>
   >;
 } = Object.entries;
-
-export const extend: {
-  /**
-   * Typed version of Object.assign.
-   *
-   * @param target - Target object.
-   * @param source - Source.
-   * @returns Target.
-   */
-  <T extends object, A>(target: T, source: A): A & T;
-  /**
-   * Typed version of Object.assign.
-   *
-   * @param target - Target object.
-   * @param source1 - Source 1.
-   * @param source2 - Source 2.
-   * @returns Target.
-   */
-  <T extends object, A, B>(target: T, source1: A, source2: B): A & B & T;
-  /**
-   * Typed version of Object.assign.
-   *
-   * @param target - Target object.
-   * @param source1 - Source 1.
-   * @param source2 - Source 2.
-   * @param source3 - Source 3.
-   * @returns Target.
-   */
-  <T extends object, A, B, C>(
-    target: T,
-    source1: A,
-    source2: B,
-    source3: C
-  ): A & B & C & T;
-} = Object.assign;
 
 export const fromEntries = defineFn(
   /**
@@ -135,14 +139,14 @@ export const keys: {
    * @param obj - Object.
    * @returns Object keys.
    */
-  <K extends string, V>(obj: PartialRecord<K, V>): K[];
+  <K extends string, V>(obj: PartialRecord<K, V>): readonly K[];
   /**
    * Typed version of Object.keys.
    *
    * @param obj - Object.
    * @returns Object keys.
    */
-  <T extends object>(obj: T): Array<string & keyof T>;
+  <T extends object>(obj: T): ReadonlyArray<string & keyof T>;
 } = Object.keys;
 
 export const values: {
@@ -152,14 +156,14 @@ export const values: {
    * @param obj - Object.
    * @returns Object values.
    */
-  <K extends string, V>(obj: PartialRecord<K, V>): V[];
+  <K extends string, V>(obj: PartialRecord<K, V>): readonly V[];
   /**
    * Typed version of Object.values.
    *
    * @param obj - Object.
    * @returns Object values.
    */
-  <T extends object>(obj: T): Array<T[NumStr & keyof T]>;
+  <T extends object>(obj: T): ReadonlyArray<T[NumStr & keyof T]>;
 } = Object.values;
 
 export interface CompareFn<T extends object> {
@@ -343,7 +347,7 @@ export function omit<T extends object, K extends string & keyof T>(
   obj: T,
   ...exclude: readonly K[]
 ): StrictOmit<T, K> {
-  const excludeSet = new Set<keyof T>(exclude);
+  const excludeSet = new ReadonlySet<keyof T>(exclude);
 
   return filter(obj, (_value, key) => !excludeSet.has(key)) as StrictOmit<T, K>;
 }
@@ -420,7 +424,7 @@ export function sort<K extends string, V>(
   obj: Rec<K, V>,
   compareFn?: CompareFn<Rec<K, V>>
 ): Rec<K, V> {
-  const arr = entries(obj);
+  const arr = a.clone(entries(obj));
 
   arr.sort(
     compareFn

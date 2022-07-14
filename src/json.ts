@@ -5,6 +5,7 @@
 import * as a from "./array";
 import * as as from "./inline-assertions";
 import * as is from "./guards";
+import { ReadonlyMap, ReadonlySet } from "./core";
 import type { stringE } from "./types";
 
 /**
@@ -100,10 +101,10 @@ function reviver(_key: unknown, value: unknown): unknown {
   if (isCustomData(value))
     switch (value.type) {
       case Type.map:
-        return new Map(as.byGuard(value.value, isEntries));
+        return new ReadonlyMap(as.byGuard(value.value, isEntries));
 
       case Type.set:
-        return new Set(as.byGuard(value.value, is.array));
+        return new ReadonlySet(as.byGuard(value.value, is.array));
     }
 
   return value;

@@ -1,4 +1,5 @@
 import * as is from "./guards";
+import { ReadonlyMap } from "./core";
 
 export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
   /**
@@ -34,8 +35,7 @@ export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
   public get(key1: K, key2: L): readonly T[];
 
   public get(key1: K, key2?: L): ReadonlyMap<L, readonly T[]> | readonly T[] {
-    // eslint-disable-next-line @skylib/custom/prefer-readonly-array -- Ok
-    const map = this.map.get(key1) ?? new Map<L, T[]>();
+    const map = this.map.get(key1) ?? new ReadonlyMap<L, readonly T[]>();
 
     return is.not.empty(key2) ? map.get(key2) ?? [] : map;
   }
@@ -55,7 +55,9 @@ export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
 
       if (arr) arr.push(value);
       else map.set(key2, [value]);
-    } else this.map.set(key1, new Map([[key2, [value]]]));
+    }
+    // eslint-disable-next-line @skylib/custom/functions/prefer-ReadonlyMap -- Ok
+    else this.map.set(key1, new Map([[key2, [value]]]));
   }
 
   /**
@@ -73,7 +75,9 @@ export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
 
       if (arr) arr.unshift(value);
       else map.set(key2, [value]);
-    } else this.map.set(key1, new Map([[key2, [value]]]));
+    }
+    // eslint-disable-next-line @skylib/custom/functions/prefer-ReadonlyMap -- Ok
+    else this.map.set(key1, new Map([[key2, [value]]]));
   }
 
   /**
@@ -85,7 +89,7 @@ export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
   }
 
   // eslint-disable-next-line @skylib/custom/prefer-readonly-array, @skylib/custom/prefer-readonly-map -- Ok
-  protected readonly map: Map<K, Map<L, T[]>> = new Map();
+  protected readonly map = new Map<K, Map<L, T[]>>();
 }
 
 export namespace Accumulator2 {

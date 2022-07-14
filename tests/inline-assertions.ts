@@ -1,4 +1,4 @@
-import { AssertionError, as, fn, is } from "@";
+import { AssertionError, ReadonlyMap, ReadonlySet, as, fn, is } from "@";
 import type { Callable, unknowns } from "@";
 
 function createSubtest(inlineAssertion: Callable, ...args: unknowns) {
@@ -101,9 +101,9 @@ test("instancesOf", () => {
 test("map", () => {
   const subtest = createSubtest(as.map);
 
-  expect(subtest(new Map([["a", 1]]))).not.toThrow();
-  expect(subtest(new Map([[1, 1]]))).not.toThrow();
-  expect(subtest(new Map([["a", "a"]]))).not.toThrow();
+  expect(subtest(new ReadonlyMap([["a", 1]]))).not.toThrow();
+  expect(subtest(new ReadonlyMap([[1, 1]]))).not.toThrow();
+  expect(subtest(new ReadonlyMap([["a", "a"]]))).not.toThrow();
   expect(subtest({})).toThrow(AssertionError);
   expect(subtest(undefined)).toThrow(AssertionError);
 });
@@ -111,9 +111,9 @@ test("map", () => {
 test("map.of", () => {
   const subtest = createSubtest(as.map.of, is.string, is.number);
 
-  expect(subtest(new Map([["a", 1]]))).not.toThrow();
-  expect(subtest(new Map([[1, 1]]))).toThrow(AssertionError);
-  expect(subtest(new Map([["a", "a"]]))).toThrow(AssertionError);
+  expect(subtest(new ReadonlyMap([["a", 1]]))).not.toThrow();
+  expect(subtest(new ReadonlyMap([[1, 1]]))).toThrow(AssertionError);
+  expect(subtest(new ReadonlyMap([["a", "a"]]))).toThrow(AssertionError);
   expect(subtest({})).toThrow(AssertionError);
   expect(subtest(undefined)).toThrow(AssertionError);
 });
@@ -129,8 +129,8 @@ test("not.empty", () => {
 test("set", () => {
   const subtest = createSubtest(as.set);
 
-  expect(subtest(new Set(["a"]))).not.toThrow();
-  expect(subtest(new Set([1]))).not.toThrow();
+  expect(subtest(new ReadonlySet(["a"]))).not.toThrow();
+  expect(subtest(new ReadonlySet([1]))).not.toThrow();
   expect(subtest({})).toThrow(AssertionError);
   expect(subtest(undefined)).toThrow(AssertionError);
 });
@@ -138,8 +138,8 @@ test("set", () => {
 test("set.of", () => {
   const subtest = createSubtest(as.set.of, is.string);
 
-  expect(subtest(new Set(["a"]))).not.toThrow();
-  expect(subtest(new Set([1]))).toThrow(AssertionError);
+  expect(subtest(new ReadonlySet(["a"]))).not.toThrow();
+  expect(subtest(new ReadonlySet([1]))).toThrow(AssertionError);
   expect(subtest({})).toThrow(AssertionError);
   expect(subtest(undefined)).toThrow(AssertionError);
 });

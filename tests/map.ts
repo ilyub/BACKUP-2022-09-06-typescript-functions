@@ -1,14 +1,14 @@
-import { map } from "@";
+import { ReadonlyMap, map } from "@";
 
 test("delete", () => {
-  const source = new Map([
+  const source = new ReadonlyMap([
     ["a", 1],
     ["b", 2]
   ]);
 
-  const expected1 = new Map([["a", 1]]);
+  const expected1 = new ReadonlyMap([["a", 1]]);
 
-  const expected2 = new Map([
+  const expected2 = new ReadonlyMap([
     ["a", 1],
     ["b", 2]
   ]);
@@ -18,14 +18,14 @@ test("delete", () => {
 });
 
 test("set", () => {
-  const source = new Map([["a", 1]]);
+  const source = new ReadonlyMap([["a", 1]]);
 
-  const expected1 = new Map([
+  const expected1 = new ReadonlyMap([
     ["a", 1],
     ["b", 2]
   ]);
 
-  const expected2 = new Map([["a", 1]]);
+  const expected2 = new ReadonlyMap([["a", 1]]);
 
   expect(map.set(source, "b", 2)).toStrictEqual(expected1);
   expect(source).toStrictEqual(expected2);
