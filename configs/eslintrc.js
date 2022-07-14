@@ -408,6 +408,22 @@ module.exports = {
             selector: "Literal.source[value=ts-toolbelt/out/Object/Required]"
           }
         ],
+        "@skylib/custom/functions/prefer-ReadonlyMap": [
+          "warn",
+          {
+            message: 'Prefer "ReadonlyMap"',
+            selector:
+              "NewExpression[arguments.length>0] > Identifier.callee[name=Map]"
+          }
+        ],
+        "@skylib/custom/functions/prefer-ReadonlySet": [
+          "warn",
+          {
+            message: 'Prefer "ReadonlySet"',
+            selector:
+              "NewExpression[arguments.length>0]  > Identifier.callee[name=Set]"
+          }
+        ],
         "@skylib/custom/functions/prefer-WritableIndexedObject": [
           "warn",
           {

@@ -43,6 +43,8 @@ module.exports = [
   "@skylib/custom/functions/prefer-PartialOptional",
   "@skylib/custom/functions/prefer-PartialRecord",
   "@skylib/custom/functions/prefer-PartialRequired",
+  "@skylib/custom/functions/prefer-ReadonlyMap",
+  "@skylib/custom/functions/prefer-ReadonlySet",
   "@skylib/custom/functions/prefer-WritableIndexedObject",
   "@skylib/custom/functions/prefer-WritableRecord",
   "@skylib/custom/functions/prefer-a-first",
