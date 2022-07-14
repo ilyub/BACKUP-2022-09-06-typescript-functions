@@ -242,15 +242,6 @@ module.exports = {
               "CallExpression[callee.name=evaluate] > TSTypeParameterInstantiation"
           }
         ],
-        "@skylib/custom/functions/no-o-assign-readonly": [
-          "warn",
-          {
-            message: "Do not assign to readonly object",
-            selector:
-              "CallExpression[callee.object.name=o][callee.property.name=assign] > Identifier.arguments:first-child",
-            typeIs: "readonly"
-          }
-        ],
         "@skylib/custom/functions/no-o-unfreeze": [
           "warn",
           {
