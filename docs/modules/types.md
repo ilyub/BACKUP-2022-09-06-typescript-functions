@@ -31,6 +31,7 @@
 - [NumStrU](types.md#numstru)
 - [NumStrs](types.md#numstrs)
 - [ObjectKeys](types.md#objectkeys)
+- [Optional](types.md#optional)
 - [OptionalStyle](types.md#optionalstyle)
 - [OptionalUndefinedStyle](types.md#optionalundefinedstyle)
 - [PartialRecord](types.md#partialrecord)
@@ -227,6 +228,12 @@ ___
 ### ObjectKeys
 
 Re-exports [ObjectKeys](types_object_keys.md#objectkeys)
+
+___
+
+### Optional
+
+Re-exports [Optional](types_core.md#optional)
 
 ___
 

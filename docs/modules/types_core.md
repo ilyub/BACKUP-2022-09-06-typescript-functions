@@ -15,6 +15,7 @@
 - [NumStrE](types_core.md#numstre)
 - [NumStrU](types_core.md#numstru)
 - [NumStrs](types_core.md#numstrs)
+- [Optional](types_core.md#optional)
 - [PartialRecord](types_core.md#partialrecord)
 - [PartialRecords](types_core.md#partialrecords)
 - [PropertyKeyE](types_core.md#propertykeye)
@@ -133,6 +134,18 @@ ___
 ### NumStrs
 
 Ƭ **NumStrs**: readonly [`NumStr`](types_core.md#numstr)[]
+
+___
+
+### Optional
+
+Ƭ **Optional**<`T`\>: { [P in keyof T]?: T[P] }
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
 
 ___
 

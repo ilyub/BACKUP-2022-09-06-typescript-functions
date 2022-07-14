@@ -7,6 +7,8 @@
 ### References
 
 - [ExpectFromMatcher](test_utils.md#expectfrommatcher)
+- [ExpectResult](test_utils.md#expectresult)
+- [Matchers](test_utils.md#matchers)
 - [Options](test_utils.md#options)
 - [buildEqualsResult](test_utils.md#buildequalsresult)
 - [buildResult](test_utils.md#buildresult)
@@ -22,6 +24,18 @@
 ### ExpectFromMatcher
 
 Re-exports [ExpectFromMatcher](../interfaces/test_utils_expect.ExpectFromMatcher.md)
+
+___
+
+### ExpectResult
+
+Re-exports [ExpectResult](../interfaces/test_utils_expect.ExpectResult.md)
+
+___
+
+### Matchers
+
+Re-exports [Matchers](test_utils_expect.md#matchers)
 
 ___
 

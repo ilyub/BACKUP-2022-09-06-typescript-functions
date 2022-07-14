@@ -180,7 +180,7 @@ Asserts that value type is T.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `vo` | [`ValidationObject`](core.md#validationobject)<`T`\> | Validation object. |
+| `vo` | [`IndexedObject`](types_core.md#indexedobject)<`T`\> | Validation object. |
 | `error` | [`ErrorArg`](assertions.md#errorarg) | Error. |
 
 #### Returns

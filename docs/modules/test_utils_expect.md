@@ -7,17 +7,28 @@
 ### Interfaces
 
 - [ExpectFromMatcher](../interfaces/test_utils_expect.ExpectFromMatcher.md)
+- [ExpectResult](../interfaces/test_utils_expect.ExpectResult.md)
+
+### Type Aliases
+
+- [Matchers](test_utils_expect.md#matchers)
 
 ### Functions
 
 - [buildEqualsResult](test_utils_expect.md#buildequalsresult)
 - [buildResult](test_utils_expect.md#buildresult)
 
+## Type Aliases
+
+### Matchers
+
+Ƭ **Matchers**: `Readonly`<`jest.Matchers`<`unknown`, `unknown`\>\>
+
 ## Functions
 
 ### buildEqualsResult
 
-▸ **buildEqualsResult**(`pass`, `message`, `got`, `expected`, `immediate?`): [`Result`](../interfaces/test_utils_expect_internal.Result.md)
+▸ **buildEqualsResult**(`pass`, `message`, `got`, `expected`, `immediate?`): [`ExpectResult`](../interfaces/test_utils_expect.ExpectResult.md)
 
 Builds matcher result.
 
@@ -33,7 +44,7 @@ Builds matcher result.
 
 #### Returns
 
-[`Result`](../interfaces/test_utils_expect_internal.Result.md)
+[`ExpectResult`](../interfaces/test_utils_expect.ExpectResult.md)
 
 Matcher result.
 
@@ -41,7 +52,7 @@ ___
 
 ### buildResult
 
-▸ **buildResult**(`pass`, `expectSuccess`, `expectFailure`): [`Result`](../interfaces/test_utils_expect_internal.Result.md)
+▸ **buildResult**(`pass`, `expectSuccess`, `expectFailure`): [`ExpectResult`](../interfaces/test_utils_expect.ExpectResult.md)
 
 Builds matcher result.
 
@@ -55,6 +66,6 @@ Builds matcher result.
 
 #### Returns
 
-[`Result`](../interfaces/test_utils_expect_internal.Result.md)
+[`ExpectResult`](../interfaces/test_utils_expect.ExpectResult.md)
 
 Matcher result.

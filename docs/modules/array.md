@@ -84,7 +84,7 @@ ___
 
 ### clone
 
-▸ **clone**<`A`\>(`arr`): [`Writable`](types_core.md#writable)<readonly [`A`]\>
+▸ **clone**<`A`\>(`arr`): [`A`]
 
 Clones array.
 
@@ -102,11 +102,11 @@ Clones array.
 
 #### Returns
 
-[`Writable`](types_core.md#writable)<readonly [`A`]\>
+[`A`]
 
 New array.
 
-▸ **clone**<`A`, `B`\>(`arr`): [`Writable`](types_core.md#writable)<readonly [`A`, `B`]\>
+▸ **clone**<`A`, `B`\>(`arr`): [`A`, `B`]
 
 Clones array.
 
@@ -125,11 +125,11 @@ Clones array.
 
 #### Returns
 
-[`Writable`](types_core.md#writable)<readonly [`A`, `B`]\>
+[`A`, `B`]
 
 New array.
 
-▸ **clone**<`A`, `B`, `C`\>(`arr`): [`Writable`](types_core.md#writable)<readonly [`A`, `B`, `C`]\>
+▸ **clone**<`A`, `B`, `C`\>(`arr`): [`A`, `B`, `C`]
 
 Clones array.
 
@@ -149,11 +149,11 @@ Clones array.
 
 #### Returns
 
-[`Writable`](types_core.md#writable)<readonly [`A`, `B`, `C`]\>
+[`A`, `B`, `C`]
 
 New array.
 
-▸ **clone**<`A`, `B`, `C`, `D`\>(`arr`): [`Writable`](types_core.md#writable)<readonly [`A`, `B`, `C`, `D`]\>
+▸ **clone**<`A`, `B`, `C`, `D`\>(`arr`): [`A`, `B`, `C`, `D`]
 
 Clones array.
 
@@ -174,11 +174,11 @@ Clones array.
 
 #### Returns
 
-[`Writable`](types_core.md#writable)<readonly [`A`, `B`, `C`, `D`]\>
+[`A`, `B`, `C`, `D`]
 
 New array.
 
-▸ **clone**<`T`\>(`arr`): [`Writable`](types_core.md#writable)<readonly `T`[]\>
+▸ **clone**<`T`\>(`arr`): `T`[]
 
 Clones array.
 
@@ -196,7 +196,7 @@ Clones array.
 
 #### Returns
 
-[`Writable`](types_core.md#writable)<readonly `T`[]\>
+`T`[]
 
 New array.
 
@@ -204,7 +204,7 @@ ___
 
 ### drop
 
-▸ **drop**<`T`\>(`arr`, `index`): readonly `T`[]
+▸ **drop**<`T`\>(`arr`, `index`): `T`[]
 
 Removes element at given index.
 
@@ -223,7 +223,7 @@ Removes element at given index.
 
 #### Returns
 
-readonly `T`[]
+`T`[]
 
 New array with one element removed.
 
@@ -290,7 +290,7 @@ ___
 
 ### fromIterable
 
-▸ **fromIterable**<`T`\>(`iterable`): [`Writable`](types_core.md#writable)<readonly `T`[]\>
+▸ **fromIterable**<`T`\>(`iterable`): `T`[]
 
 Creates array from iterable.
 
@@ -308,7 +308,7 @@ Creates array from iterable.
 
 #### Returns
 
-[`Writable`](types_core.md#writable)<readonly `T`[]\>
+`T`[]
 
 Array.
 
@@ -474,7 +474,7 @@ ___
 
 ### push
 
-▸ **push**<`T`\>(`arr`, `value`): readonly `T`[]
+▸ **push**<`T`\>(`arr`, `value`): `T`[]
 
 Adds element to the end of an array.
 
@@ -493,7 +493,7 @@ Adds element to the end of an array.
 
 #### Returns
 
-readonly `T`[]
+`T`[]
 
 New array with one element added.
 
@@ -501,7 +501,7 @@ ___
 
 ### pushOrReplaceBy
 
-▸ **pushOrReplaceBy**<`T`\>(`arr`, `value`, `keyOrReduce`): readonly `T`[]
+▸ **pushOrReplaceBy**<`T`\>(`arr`, `value`, `keyOrReduce`): `T`[]
 
 Replaces elements matching value if found, pushes value otherwise.
 
@@ -521,7 +521,7 @@ Replaces elements matching value if found, pushes value otherwise.
 
 #### Returns
 
-readonly `T`[]
+`T`[]
 
 New array.
 
@@ -555,7 +555,7 @@ ___
 
 ### removeBy
 
-▸ **removeBy**<`T`, `V`\>(`arr`, `value`, `keyOrReduce`): readonly `T`[]
+▸ **removeBy**<`T`, `V`\>(`arr`, `value`, `keyOrReduce`): `T`[]
 
 Removes elements matching value.
 
@@ -576,7 +576,7 @@ Removes elements matching value.
 
 #### Returns
 
-readonly `T`[]
+`T`[]
 
 New array with matching elements removed.
 
@@ -584,7 +584,7 @@ ___
 
 ### replace
 
-▸ **replace**<`T`\>(`arr`, `index`, `value`): readonly `T`[]
+▸ **replace**<`T`\>(`arr`, `index`, `value`): `T`[]
 
 Replaces element at given index.
 
@@ -604,7 +604,7 @@ Replaces element at given index.
 
 #### Returns
 
-readonly `T`[]
+`T`[]
 
 New array with one element replaced.
 
@@ -612,7 +612,7 @@ ___
 
 ### replaceBy
 
-▸ **replaceBy**<`T`\>(`arr`, `value`, `keyOrReduce`): readonly `T`[]
+▸ **replaceBy**<`T`\>(`arr`, `value`, `keyOrReduce`): `T`[]
 
 Replaces elements matching value.
 
@@ -632,7 +632,7 @@ Replaces elements matching value.
 
 #### Returns
 
-readonly `T`[]
+`T`[]
 
 New array with matching elements replaced.
 
@@ -640,7 +640,7 @@ ___
 
 ### reverse
 
-▸ **reverse**<`T`\>(`arr`): readonly `T`[]
+▸ **reverse**<`T`\>(`arr`): `T`[]
 
 Reverses array.
 
@@ -658,7 +658,7 @@ Reverses array.
 
 #### Returns
 
-readonly `T`[]
+`T`[]
 
 New array.
 
@@ -696,7 +696,7 @@ ___
 
 ### sort
 
-▸ **sort**<`T`\>(`arr`, `compareFn?`): readonly `T`[]
+▸ **sort**<`T`\>(`arr`, `compareFn?`): `T`[]
 
 Sorts array.
 
@@ -715,7 +715,7 @@ Sorts array.
 
 #### Returns
 
-readonly `T`[]
+`T`[]
 
 New array.
 
@@ -753,7 +753,7 @@ ___
 
 ### toggleBy
 
-▸ **toggleBy**<`T`\>(`arr`, `value`, `keyOrReduce`): readonly `T`[]
+▸ **toggleBy**<`T`\>(`arr`, `value`, `keyOrReduce`): `T`[]
 
 Adds/removes value to/from an array.
 
@@ -773,7 +773,7 @@ Adds/removes value to/from an array.
 
 #### Returns
 
-readonly `T`[]
+`T`[]
 
 New array.
 
@@ -799,7 +799,7 @@ ___
 
 ### uniqueBy
 
-▸ **uniqueBy**<`T`\>(`arr`, `keyOrReduce`): readonly `T`[]
+▸ **uniqueBy**<`T`\>(`arr`, `keyOrReduce`): `T`[]
 
 Creates unique array.
 
@@ -818,7 +818,7 @@ Creates unique array.
 
 #### Returns
 
-readonly `T`[]
+`T`[]
 
 Unique array.
 
@@ -826,7 +826,7 @@ ___
 
 ### unshift
 
-▸ **unshift**<`T`\>(`arr`, `value`): readonly `T`[]
+▸ **unshift**<`T`\>(`arr`, `value`): `T`[]
 
 Adds element to the beginning of an array.
 
@@ -845,7 +845,7 @@ Adds element to the beginning of an array.
 
 #### Returns
 
-readonly `T`[]
+`T`[]
 
 New array with one element added.
 
@@ -853,7 +853,7 @@ ___
 
 ### unshiftOrReplaceBy
 
-▸ **unshiftOrReplaceBy**<`T`\>(`arr`, `value`, `keyOrReduce`): readonly `T`[]
+▸ **unshiftOrReplaceBy**<`T`\>(`arr`, `value`, `keyOrReduce`): `T`[]
 
 Replaces elements matching value if found, unshifts value otherwise.
 
@@ -873,6 +873,6 @@ Replaces elements matching value if found, unshifts value otherwise.
 
 #### Returns
 
-readonly `T`[]
+`T`[]
 
 New array.

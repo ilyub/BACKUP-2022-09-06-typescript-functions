@@ -38,6 +38,7 @@
 - [NumStrU](index.md#numstru)
 - [NumStrs](index.md#numstrs)
 - [ObjectKeys](index.md#objectkeys)
+- [Optional](index.md#optional)
 - [OptionalStyle](index.md#optionalstyle)
 - [OptionalUndefinedStyle](index.md#optionalundefinedstyle)
 - [PartialRecord](index.md#partialrecord)
@@ -48,6 +49,8 @@
 - [PropertyKeys](index.md#propertykeys)
 - [ProxyHandlerAction](index.md#proxyhandleraction)
 - [ReadonlyDefinedKeys](index.md#readonlydefinedkeys)
+- [ReadonlyMap](index.md#readonlymap)
+- [ReadonlySet](index.md#readonlyset)
 - [ReadonlyUndefinedKeys](index.md#readonlyundefinedkeys)
 - [Rec](index.md#rec)
 - [Recs](index.md#recs)
@@ -311,6 +314,12 @@ Re-exports [ObjectKeys](types_object_keys.md#objectkeys)
 
 ___
 
+### Optional
+
+Re-exports [Optional](types_core.md#optional)
+
+___
+
 ### OptionalStyle
 
 Re-exports [OptionalStyle](types_object.md#optionalstyle)
@@ -368,6 +377,18 @@ ___
 ### ReadonlyDefinedKeys
 
 Re-exports [ReadonlyDefinedKeys](types_object_keys.md#readonlydefinedkeys)
+
+___
+
+### ReadonlyMap
+
+Re-exports [ReadonlyMap](core.md#readonlymap)
+
+___
+
+### ReadonlySet
+
+Re-exports [ReadonlySet](core.md#readonlyset)
 
 ___
 

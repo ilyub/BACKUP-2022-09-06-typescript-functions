@@ -8,13 +8,13 @@
 
 | Name | Type |
 | :------ | :------ |
-| `K` | extends keyof [`Matchers`](../modules/test_utils_expect_internal.md#matchers) |
+| `K` | extends keyof [`Matchers`](../modules/test_utils_expect.md#matchers) |
 
 ## Callable
 
 ### ExpectFromMatcher
 
-▸ **ExpectFromMatcher**(`got`, ...`args`): `If`<`Extends`<`ReturnType`<`Readonly`<`Matchers`<`unknown`, `unknown`\>\>[`K`]\>, `Promise`<`unknown`\>\>, `Promise`<[`Result`](test_utils_expect_internal.Result.md)\>, [`Result`](test_utils_expect_internal.Result.md)\>
+▸ **ExpectFromMatcher**(`got`, ...`args`): `If`<`Extends`<`ReturnType`<`Readonly`<`Matchers`<`unknown`, `unknown`\>\>[`K`]\>, `Promise`<`unknown`\>\>, `Promise`<[`ExpectResult`](test_utils_expect.ExpectResult.md)\>, [`ExpectResult`](test_utils_expect.ExpectResult.md)\>
 
 Expect function.
 
@@ -27,6 +27,6 @@ Expect function.
 
 #### Returns
 
-`If`<`Extends`<`ReturnType`<`Readonly`<`Matchers`<`unknown`, `unknown`\>\>[`K`]\>, `Promise`<`unknown`\>\>, `Promise`<[`Result`](test_utils_expect_internal.Result.md)\>, [`Result`](test_utils_expect_internal.Result.md)\>
+`If`<`Extends`<`ReturnType`<`Readonly`<`Matchers`<`unknown`, `unknown`\>\>[`K`]\>, `Promise`<`unknown`\>\>, `Promise`<[`ExpectResult`](test_utils_expect.ExpectResult.md)\>, [`ExpectResult`](test_utils_expect.ExpectResult.md)\>
 
 Result.

@@ -24,7 +24,6 @@
 - [enumeration](inline_assertions.md#enumeration)
 - [false](inline_assertions.md#false)
 - [indexedObject](inline_assertions.md#indexedobject)
-- [indexedObjectU](inline_assertions.md#indexedobjectu)
 - [indexedObjects](inline_assertions.md#indexedobjects)
 - [indexedObjectsU](inline_assertions.md#indexedobjectsu)
 - [instanceOf](inline_assertions.md#instanceof)
@@ -320,7 +319,7 @@ Error otherwise.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `vo` | [`ValidationObject`](core.md#validationobject)<`T`\> | Validation object. |
+| `vo` | [`IndexedObject`](types_core.md#indexedobject)<`T`\> | Validation object. |
 
 #### Returns
 
@@ -359,22 +358,6 @@ ___
 #### Returns
 
 [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>
-
-___
-
-### indexedObjectU
-
-▸ **indexedObjectU**(`value`): `undefined` \| [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
-
-#### Returns
-
-`undefined` \| [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>
 
 ___
 

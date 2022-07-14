@@ -34,7 +34,6 @@
 - [string](modules/string.md)
 - [test-utils](modules/test_utils.md)
 - [test-utils/expect](modules/test_utils_expect.md)
-- [test-utils/expect.internal](modules/test_utils_expect_internal.md)
 - [test-utils/fake-timers](modules/test_utils_fake_timers.md)
 - [test-utils/jest](modules/test_utils_jest.md)
 - [test-utils/jest.internal](modules/test_utils_jest_internal.md)

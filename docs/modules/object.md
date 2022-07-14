@@ -37,7 +37,7 @@
 
 ### assign
 
-▸ **assign**<`T`\>(`mutableTarget`, ...`sources`): `T`
+▸ **assign**<`T`\>(`target`, ...`sources`): `T`
 
 Typed version of Object.assign.
 
@@ -51,8 +51,8 @@ Typed version of Object.assign.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `mutableTarget` | `T` | Target. |
-| `...sources` | `Partial`<`T`\>[] | Sources. |
+| `target` | [`Writable`](types_core.md#writable)<`T`\> | Target. |
+| `...sources` | readonly `Readonly`<`Partial`<`T`\>\>[] | Sources. |
 
 #### Returns
 
@@ -302,7 +302,7 @@ ___
 
 ### fromEntries
 
-▸ **fromEntries**<`K`, `V`\>(`entries`): [`WritablePartialRecord`](types_core.md#writablepartialrecord)<`K`, `V`\>
+▸ **fromEntries**<`K`, `V`\>(`entries`): [`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\>
 
 Creates object from entries.
 
@@ -321,7 +321,7 @@ Creates object from entries.
 
 #### Returns
 
-[`WritablePartialRecord`](types_core.md#writablepartialrecord)<`K`, `V`\>
+[`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\>
 
 Object.
 
@@ -420,7 +420,7 @@ ___
 
 ### keys
 
-▸ **keys**<`K`, `V`\>(`obj`): readonly `K`[]
+▸ **keys**<`K`, `V`\>(`obj`): `K`[]
 
 Typed version of Object.keys.
 
@@ -439,7 +439,7 @@ Typed version of Object.keys.
 
 #### Returns
 
-readonly `K`[]
+`K`[]
 
 Object keys.
 
@@ -670,7 +670,7 @@ ___
 
 ### values
 
-▸ **values**<`K`, `V`\>(`obj`): readonly `V`[]
+▸ **values**<`K`, `V`\>(`obj`): `V`[]
 
 Typed version of Object.values.
 
@@ -689,7 +689,7 @@ Typed version of Object.values.
 
 #### Returns
 
-readonly `V`[]
+`V`[]
 
 Object values.
 

@@ -8,6 +8,11 @@
 
 - [ValidationObject](core.md#validationobject)
 
+### Variables
+
+- [ReadonlyMap](core.md#readonlymap)
+- [ReadonlySet](core.md#readonlyset)
+
 ### Functions
 
 - [createValidationObject](core.md#createvalidationobject)
@@ -23,7 +28,11 @@
 
 ### ValidationObject
 
-Ƭ **ValidationObject**<`T`\>: `ReadonlySet`<`T`\>
+Ƭ **ValidationObject**<`T`\>: [`IndexedObject`](types_core.md#indexedobject)<`T`\>
+
+**`Deprecated`**
+
+-- Use enum.
 
 #### Type parameters
 
@@ -31,13 +40,29 @@
 | :------ | :------ |
 | `T` | extends `PropertyKey` |
 
+## Variables
+
+### ReadonlyMap
+
+• `Const` **ReadonlyMap**: `Object` = `Map`
+
+___
+
+### ReadonlySet
+
+• `Const` **ReadonlySet**: `Object` = `Set`
+
 ## Functions
 
 ### createValidationObject
 
-▸ **createValidationObject**<`T`\>(`source`): [`ValidationObject`](core.md#validationobject)<`T`\>
+▸ **createValidationObject**<`T`\>(`source`): [`IndexedObject`](types_core.md#indexedobject)<`T`\>
 
 Creates validation object.
+
+**`Deprecated`**
+
+-- Use enum.
 
 #### Type parameters
 
@@ -53,7 +78,7 @@ Creates validation object.
 
 #### Returns
 
-[`ValidationObject`](core.md#validationobject)<`T`\>
+[`IndexedObject`](types_core.md#indexedobject)<`T`\>
 
 Validation object.
 

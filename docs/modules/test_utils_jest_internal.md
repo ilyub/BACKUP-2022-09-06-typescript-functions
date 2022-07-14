@@ -4,6 +4,10 @@
 
 ## Table of contents
 
+### Type Aliases
+
+- [Calls](test_utils_jest_internal.md#calls)
+
 ### Variables
 
 - [matchers](test_utils_jest_internal.md#matchers)
@@ -12,6 +16,12 @@
 
 - [error](test_utils_jest_internal.md#error)
 - [warn](test_utils_jest_internal.md#warn)
+
+## Type Aliases
+
+### Calls
+
+Ƭ **Calls**: readonly [`unknowns`](types_core.md#unknowns)[]
 
 ## Variables
 
@@ -31,30 +41,38 @@
 
 ### error
 
-▸ **error**(...`data`): `void`
+▸ **error**(...`args`): `any`
+
+Function.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `...data` | `any`[] |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `...args` | readonly `any`[] | Arguments. |
 
 #### Returns
 
-`void`
+`any`
+
+Result.
 
 ___
 
 ### warn
 
-▸ **warn**(...`data`): `void`
+▸ **warn**(...`args`): `any`
+
+Function.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `...data` | `any`[] |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `...args` | readonly `any`[] | Arguments. |
 
 #### Returns
 
-`void`
+`any`
+
+Result.
