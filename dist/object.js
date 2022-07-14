@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sort = exports.some = exports.size = exports.set = exports.removeUndefinedKeys = exports.omit = exports.map = exports.hasOwnProp = exports.getPrototypeOf = exports.get = exports.filter = exports.every = exports.clone = exports.values = exports.keys = exports.fromEntries = exports.extend = exports.entries = exports.defineProperty = exports.assign = void 0;
+exports.sort = exports.some = exports.size = exports.set = exports.removeUndefinedKeys = exports.omit = exports.map = exports.hasOwnProp = exports.getPrototypeOf = exports.get = exports.filter = exports.every = exports.clone = exports.values = exports.keys = exports.fromEntries = exports.entries = exports.defineProperty = exports.extend = exports.assign = void 0;
 const tslib_1 = require("tslib");
+const a = tslib_1.__importStar(require("./array"));
 const as = tslib_1.__importStar(require("./inline-assertions"));
 const is = tslib_1.__importStar(require("./guards"));
 const core_1 = require("./core");
@@ -13,6 +14,7 @@ const core_1 = require("./core");
  * @returns Target.
  */
 exports.assign = Object.assign;
+exports.extend = Object.assign;
 /**
  * Typed version of Object.defineProperty.
  *
@@ -22,7 +24,6 @@ exports.assign = Object.assign;
  */
 exports.defineProperty = Object.defineProperty.bind(Object);
 exports.entries = Object.entries;
-exports.extend = Object.assign;
 exports.fromEntries = (0, core_1.defineFn)(
 /**
  * Creates object from entries.
@@ -136,7 +137,7 @@ exports.map = map;
  * @returns New object.
  */
 function omit(obj, ...exclude) {
-    const excludeSet = new Set(exclude);
+    const excludeSet = new core_1.ReadonlySet(exclude);
     return filter(obj, (_value, key) => !excludeSet.has(key));
 }
 exports.omit = omit;
@@ -183,7 +184,7 @@ function some(obj, predicate) {
 }
 exports.some = some;
 function sort(obj, compareFn) {
-    const arr = (0, exports.entries)(obj);
+    const arr = a.clone((0, exports.entries)(obj));
     arr.sort(compareFn
         ? (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
         : undefined);

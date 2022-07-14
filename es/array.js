@@ -1,4 +1,3 @@
-/* eslint-disable @skylib/no-multi-type-tuples -- Ok */
 /* eslint-disable @skylib/custom/functions/prefer-a-fromIterable -- Ok */
 /* eslint-disable @skylib/custom/functions/prefer-o-hasOwnProp -- Ok */
 import * as _ from "@skylib/lodash-commonjs-es";
@@ -20,6 +19,7 @@ export function chain(arr) {
     }
     return result;
 }
+// eslint-disable-next-line @skylib/custom/prefer-readonly-array -- Ok
 export function clone(arr) {
     return [...arr];
 }

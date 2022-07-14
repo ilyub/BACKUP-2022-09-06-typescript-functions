@@ -82,10 +82,10 @@ exports.onDemand = onDemand;
  * @returns Safe access interface.
  */
 function safeAccess(obj, guards, readonlyKeys = []) {
-    const guardsMap = new Map(o.entries(guards));
+    const guardsMap = new core_1.ReadonlyMap(o.entries(guards));
     const writableKeys = o.keys(guards);
     const keys = [...writableKeys, ...readonlyKeys];
-    const keysSet = new Set(keys);
+    const keysSet = new core_1.ReadonlySet(keys);
     return new Proxy(obj, wrapProxyHandler("safeAccess", "throw", {
         get: (target, key) => {
             if (keysSet.has(key))

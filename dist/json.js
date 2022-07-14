@@ -7,6 +7,7 @@ const tslib_1 = require("tslib");
 const a = tslib_1.__importStar(require("./array"));
 const as = tslib_1.__importStar(require("./inline-assertions"));
 const is = tslib_1.__importStar(require("./guards"));
+const core_1 = require("./core");
 /**
  * Decodes JSON string.
  *
@@ -94,9 +95,9 @@ function reviver(_key, value) {
     if (isCustomData(value))
         switch (value.type) {
             case Type.map:
-                return new Map(as.byGuard(value.value, isEntries));
+                return new core_1.ReadonlyMap(as.byGuard(value.value, isEntries));
             case Type.set:
-                return new Set(as.byGuard(value.value, is.array));
+                return new core_1.ReadonlySet(as.byGuard(value.value, is.array));
         }
     return value;
 }

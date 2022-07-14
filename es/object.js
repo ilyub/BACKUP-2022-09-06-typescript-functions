@@ -1,6 +1,7 @@
+import * as a from "./array";
 import * as as from "./inline-assertions";
 import * as is from "./guards";
-import { defineFn, indexed } from "./core";
+import { ReadonlySet, defineFn, indexed } from "./core";
 /**
  * Typed version of Object.assign.
  *
@@ -9,6 +10,7 @@ import { defineFn, indexed } from "./core";
  * @returns Target.
  */
 export const assign = Object.assign;
+export const extend = Object.assign;
 /**
  * Typed version of Object.defineProperty.
  *
@@ -18,7 +20,6 @@ export const assign = Object.assign;
  */
 export const defineProperty = Object.defineProperty.bind(Object);
 export const entries = Object.entries;
-export const extend = Object.assign;
 export const fromEntries = defineFn(
 /**
  * Creates object from entries.
@@ -125,7 +126,7 @@ export function map(obj, callback) {
  * @returns New object.
  */
 export function omit(obj, ...exclude) {
-    const excludeSet = new Set(exclude);
+    const excludeSet = new ReadonlySet(exclude);
     return filter(obj, (_value, key) => !excludeSet.has(key));
 }
 /**
@@ -167,7 +168,7 @@ export function some(obj, predicate) {
     return entries(obj).some(([key, value]) => predicate(value, key));
 }
 export function sort(obj, compareFn) {
-    const arr = entries(obj);
+    const arr = a.clone(entries(obj));
     arr.sort(compareFn
         ? (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
         : undefined);

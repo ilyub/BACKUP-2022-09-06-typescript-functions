@@ -8,6 +8,38 @@ import type { Entry, NumStr, OptionalStyle, PartialRecord, Rec, StrictOmit, Writ
  * @returns Target.
  */
 export declare const assign: <T extends object>(target: Writable<T>, ...sources: ReadonlyArray<Readonly<Partial<T>>>) => T;
+export declare const extend: {
+    /**
+     * Typed version of Object.assign.
+     *
+     * @param target - Target object.
+     * @param source - Source.
+     * @returns Target.
+     * @deprecated - Unsafe.
+     */
+    <T extends object, A>(target: T, source: A): A & T;
+    /**
+     * Typed version of Object.assign.
+     *
+     * @param target - Target object.
+     * @param source1 - Source 1.
+     * @param source2 - Source 2.
+     * @returns Target.
+     * @deprecated - Unsafe.
+     */
+    <T extends object, A, B>(target: T, source1: A, source2: B): A & B & T;
+    /**
+     * Typed version of Object.assign.
+     *
+     * @param target - Target object.
+     * @param source1 - Source 1.
+     * @param source2 - Source 2.
+     * @param source3 - Source 3.
+     * @returns Target.
+     * @deprecated - Unsafe.
+     */
+    <T extends object, A, B, C>(target: T, source1: A, source2: B, source3: C): A & B & C & T;
+};
 /**
  * Typed version of Object.defineProperty.
  *
@@ -23,43 +55,14 @@ export declare const entries: {
      * @param obj - Object.
      * @returns Object entries.
      */
-    <K extends string, V>(obj: PartialRecord<K, V>): Array<Entry<K, V>>;
+    <K extends string, V>(obj: PartialRecord<K, V>): ReadonlyArray<Entry<K, V>>;
     /**
      * Typed version of Object.entries.
      *
      * @param obj - Object.
      * @returns Object entries.
      */
-    <T extends object>(obj: T): Array<Entry<string & keyof T, T[NumStr & keyof T]>>;
-};
-export declare const extend: {
-    /**
-     * Typed version of Object.assign.
-     *
-     * @param target - Target object.
-     * @param source - Source.
-     * @returns Target.
-     */
-    <T extends object, A>(target: T, source: A): A & T;
-    /**
-     * Typed version of Object.assign.
-     *
-     * @param target - Target object.
-     * @param source1 - Source 1.
-     * @param source2 - Source 2.
-     * @returns Target.
-     */
-    <T extends object, A, B>(target: T, source1: A, source2: B): A & B & T;
-    /**
-     * Typed version of Object.assign.
-     *
-     * @param target - Target object.
-     * @param source1 - Source 1.
-     * @param source2 - Source 2.
-     * @param source3 - Source 3.
-     * @returns Target.
-     */
-    <T extends object, A, B, C>(target: T, source1: A, source2: B, source3: C): A & B & C & T;
+    <T extends object>(obj: T): ReadonlyArray<Entry<string & keyof T, T[NumStr & keyof T]>>;
 };
 export declare const fromEntries: (<K extends PropertyKey, V>(entries: Iterable<Entry<K, V>>) => PartialRecord<K, V>) & Readonly<{
     /**
@@ -77,14 +80,14 @@ export declare const keys: {
      * @param obj - Object.
      * @returns Object keys.
      */
-    <K extends string, V>(obj: PartialRecord<K, V>): K[];
+    <K extends string, V>(obj: PartialRecord<K, V>): readonly K[];
     /**
      * Typed version of Object.keys.
      *
      * @param obj - Object.
      * @returns Object keys.
      */
-    <T extends object>(obj: T): Array<string & keyof T>;
+    <T extends object>(obj: T): ReadonlyArray<string & keyof T>;
 };
 export declare const values: {
     /**
@@ -93,14 +96,14 @@ export declare const values: {
      * @param obj - Object.
      * @returns Object values.
      */
-    <K extends string, V>(obj: PartialRecord<K, V>): V[];
+    <K extends string, V>(obj: PartialRecord<K, V>): readonly V[];
     /**
      * Typed version of Object.values.
      *
      * @param obj - Object.
      * @returns Object values.
      */
-    <T extends object>(obj: T): Array<T[NumStr & keyof T]>;
+    <T extends object>(obj: T): ReadonlyArray<T[NumStr & keyof T]>;
 };
 export interface CompareFn<T extends object> {
     /**

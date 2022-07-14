@@ -8,7 +8,7 @@ import * as is from "./guards";
 import * as o from "./object";
 import * as programFlow from "./program-flow";
 import * as reflect from "./reflect";
-import { typedef } from "./core";
+import { ReadonlyMap, ReadonlySet, typedef } from "./core";
 /**
  * Creates facade.
  *
@@ -76,10 +76,10 @@ export function onDemand(generator) {
  * @returns Safe access interface.
  */
 export function safeAccess(obj, guards, readonlyKeys = []) {
-    const guardsMap = new Map(o.entries(guards));
+    const guardsMap = new ReadonlyMap(o.entries(guards));
     const writableKeys = o.keys(guards);
     const keys = [...writableKeys, ...readonlyKeys];
-    const keysSet = new Set(keys);
+    const keysSet = new ReadonlySet(keys);
     return new Proxy(obj, wrapProxyHandler("safeAccess", "throw", {
         get: (target, key) => {
             if (keysSet.has(key))

@@ -15,7 +15,7 @@ export interface Reduce<T extends object> {
  * @param arr - Array.
  * @returns Array of pairs.
  */
-export declare function chain<T>(arr: readonly T[]): Array<readonly [T, T]>;
+export declare function chain<T>(arr: readonly T[]): ReadonlyArray<readonly [T, T]>;
 /**
  * Clones array.
  *
@@ -58,7 +58,7 @@ export declare function clone<T>(arr: readonly T[]): T[];
  * @param index - Index to be removed.
  * @returns New array with one element removed.
  */
-export declare function drop<T>(arr: readonly T[], index: number): T[];
+export declare function drop<T>(arr: readonly T[], index: number): readonly T[];
 /**
  * Finds element matching value.
  *
@@ -82,7 +82,7 @@ export declare function first<T>(arr: readonly T[]): T;
  * @param iterable - Iterable.
  * @returns Array.
  */
-export declare function fromIterable<T>(iterable: Iterable<T>): T[];
+export declare function fromIterable<T>(iterable: Iterable<T>): readonly T[];
 /**
  * Creates array from mixed soure.
  *
@@ -139,7 +139,7 @@ export declare function last<T>(arr: readonly T[]): T;
  * @param value - Value.
  * @returns New array with one element added.
  */
-export declare function push<T>(arr: readonly T[], value: T): T[];
+export declare function push<T>(arr: readonly T[], value: T): readonly T[];
 /**
  * Replaces elements matching value if found, pushes value otherwise.
  *
@@ -148,7 +148,7 @@ export declare function push<T>(arr: readonly T[], value: T): T[];
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns New array.
  */
-export declare function pushOrReplaceBy<T extends object>(arr: readonly T[], value: T, keyOrReduce: KeyOrReduce<T>): T[];
+export declare function pushOrReplaceBy<T extends object>(arr: readonly T[], value: T, keyOrReduce: KeyOrReduce<T>): readonly T[];
 /**
  * Picks random element from an array.
  *
@@ -164,7 +164,7 @@ export declare function random<T>(arr: readonly T[]): T;
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns New array with matching elements removed.
  */
-export declare function removeBy<T extends object, V extends object>(arr: readonly T[], value: V, keyOrReduce: KeyOrReduce<T | V>): T[];
+export declare function removeBy<T extends object, V extends object>(arr: readonly T[], value: V, keyOrReduce: KeyOrReduce<T | V>): readonly T[];
 /**
  * Replaces element at given index.
  *
@@ -173,7 +173,7 @@ export declare function removeBy<T extends object, V extends object>(arr: readon
  * @param value - Value.
  * @returns New array with one element replaced.
  */
-export declare function replace<T>(arr: readonly T[], index: number, value: T): T[];
+export declare function replace<T>(arr: readonly T[], index: number, value: T): readonly T[];
 /**
  * Replaces elements matching value.
  *
@@ -182,14 +182,14 @@ export declare function replace<T>(arr: readonly T[], index: number, value: T): 
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns New array with matching elements replaced.
  */
-export declare function replaceBy<T extends object>(arr: readonly T[], value: T, keyOrReduce: KeyOrReduce<T>): T[];
+export declare function replaceBy<T extends object>(arr: readonly T[], value: T, keyOrReduce: KeyOrReduce<T>): readonly T[];
 /**
  * Reverses array.
  *
  * @param arr - Array.
  * @returns New array.
  */
-export declare function reverse<T>(arr: readonly T[]): T[];
+export declare function reverse<T>(arr: readonly T[]): readonly T[];
 /**
  * Returns the second element from an array.
  *
@@ -205,7 +205,7 @@ export declare function second<T>(arr: readonly T[]): T;
  * @param compareFn - Comparison function.
  * @returns New array.
  */
-export declare function sort<T>(arr: readonly T[], compareFn?: (x: T, y: T) => number): T[];
+export declare function sort<T>(arr: readonly T[], compareFn?: (x: T, y: T) => number): readonly T[];
 /**
  * Returns the third element from an array.
  *
@@ -222,7 +222,7 @@ export declare function third<T>(arr: readonly T[]): T;
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns New array.
  */
-export declare function toggleBy<T extends object>(arr: readonly T[], value: T, keyOrReduce: KeyOrReduce<T>): T[];
+export declare function toggleBy<T extends object>(arr: readonly T[], value: T, keyOrReduce: KeyOrReduce<T>): readonly T[];
 /**
  * Truncates array.
  *
@@ -236,7 +236,7 @@ export declare function truncate(mutableArray: Writable<unknowns>): void;
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns Unique array.
  */
-export declare function uniqueBy<T extends object>(arr: readonly T[], keyOrReduce: KeyOrReduce<T>): T[];
+export declare function uniqueBy<T extends object>(arr: readonly T[], keyOrReduce: KeyOrReduce<T>): readonly T[];
 /**
  * Adds element to the beginning of an array.
  *
@@ -244,7 +244,7 @@ export declare function uniqueBy<T extends object>(arr: readonly T[], keyOrReduc
  * @param value - Value.
  * @returns New array with one element added.
  */
-export declare function unshift<T>(arr: readonly T[], value: T): T[];
+export declare function unshift<T>(arr: readonly T[], value: T): readonly T[];
 /**
  * Replaces elements matching value if found, unshifts value otherwise.
  *
@@ -253,5 +253,5 @@ export declare function unshift<T>(arr: readonly T[], value: T): T[];
  * @param keyOrReduce - Comparison key or reduce function.
  * @returns New array.
  */
-export declare function unshiftOrReplaceBy<T extends object>(arr: readonly T[], value: T, keyOrReduce: KeyOrReduce<T>): T[];
+export declare function unshiftOrReplaceBy<T extends object>(arr: readonly T[], value: T, keyOrReduce: KeyOrReduce<T>): readonly T[];
 //# sourceMappingURL=array.d.ts.map

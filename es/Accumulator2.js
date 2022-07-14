@@ -1,4 +1,5 @@
 import * as is from "./guards";
+import { ReadonlyMap } from "./core";
 export class Accumulator2 {
     /**
      * Creates class instance.
@@ -24,8 +25,7 @@ export class Accumulator2 {
     }
     get(key1, key2) {
         var _a, _b;
-        // eslint-disable-next-line @skylib/custom/prefer-readonly-array -- Ok
-        const map = (_a = this.map.get(key1)) !== null && _a !== void 0 ? _a : new Map();
+        const map = (_a = this.map.get(key1)) !== null && _a !== void 0 ? _a : new ReadonlyMap();
         return is.not.empty(key2) ? (_b = map.get(key2)) !== null && _b !== void 0 ? _b : [] : map;
     }
     /**
@@ -44,6 +44,7 @@ export class Accumulator2 {
             else
                 map.set(key2, [value]);
         }
+        // eslint-disable-next-line @skylib/custom/functions/prefer-ReadonlyMap -- Ok
         else
             this.map.set(key1, new Map([[key2, [value]]]));
     }
@@ -63,6 +64,7 @@ export class Accumulator2 {
             else
                 map.set(key2, [value]);
         }
+        // eslint-disable-next-line @skylib/custom/functions/prefer-ReadonlyMap -- Ok
         else
             this.map.set(key1, new Map([[key2, [value]]]));
     }

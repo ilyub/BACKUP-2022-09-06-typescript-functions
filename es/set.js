@@ -7,6 +7,7 @@ export { _delete as delete };
  * @returns Set with value added.
  */
 export function add(set, value) {
+    // eslint-disable-next-line @skylib/custom/functions/prefer-ReadonlySet -- Ok
     const result = new Set(set);
     result.add(value);
     return result;
@@ -19,6 +20,7 @@ export function add(set, value) {
  * @returns Set with value removed.
  */
 function _delete(set, value) {
+    // eslint-disable-next-line @skylib/custom/functions/prefer-ReadonlySet -- Ok
     const result = new Set(set);
     result.delete(value);
     return result;

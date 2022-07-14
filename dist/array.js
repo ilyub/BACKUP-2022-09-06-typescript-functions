@@ -1,9 +1,8 @@
 "use strict";
-/* eslint-disable @skylib/no-multi-type-tuples -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-a-fromIterable -- Ok */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.unshiftOrReplaceBy = exports.unshift = exports.uniqueBy = exports.truncate = exports.toggleBy = exports.third = exports.sort = exports.second = exports.reverse = exports.replaceBy = exports.replace = exports.removeBy = exports.random = exports.pushOrReplaceBy = exports.push = exports.last = exports.includesBy = exports.get = exports.fromString = exports.fromRange = exports.fromMixed = exports.fromIterable = exports.first = exports.findBy = exports.drop = exports.clone = exports.chain = void 0;
 const tslib_1 = require("tslib");
-/* eslint-disable @skylib/custom/functions/prefer-a-fromIterable -- Ok */
 /* eslint-disable @skylib/custom/functions/prefer-o-hasOwnProp -- Ok */
 const _ = tslib_1.__importStar(require("@skylib/lodash-commonjs-es"));
 const assert = tslib_1.__importStar(require("./assertions"));
@@ -25,6 +24,7 @@ function chain(arr) {
     return result;
 }
 exports.chain = chain;
+// eslint-disable-next-line @skylib/custom/prefer-readonly-array -- Ok
 function clone(arr) {
     return [...arr];
 }

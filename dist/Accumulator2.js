@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Accumulator2 = void 0;
 const tslib_1 = require("tslib");
 const is = tslib_1.__importStar(require("./guards"));
+const core_1 = require("./core");
 class Accumulator2 {
     /**
      * Creates class instance.
@@ -28,8 +29,7 @@ class Accumulator2 {
     }
     get(key1, key2) {
         var _a, _b;
-        // eslint-disable-next-line @skylib/custom/prefer-readonly-array -- Ok
-        const map = (_a = this.map.get(key1)) !== null && _a !== void 0 ? _a : new Map();
+        const map = (_a = this.map.get(key1)) !== null && _a !== void 0 ? _a : new core_1.ReadonlyMap();
         return is.not.empty(key2) ? (_b = map.get(key2)) !== null && _b !== void 0 ? _b : [] : map;
     }
     /**
@@ -48,6 +48,7 @@ class Accumulator2 {
             else
                 map.set(key2, [value]);
         }
+        // eslint-disable-next-line @skylib/custom/functions/prefer-ReadonlyMap -- Ok
         else
             this.map.set(key1, new Map([[key2, [value]]]));
     }
@@ -67,6 +68,7 @@ class Accumulator2 {
             else
                 map.set(key2, [value]);
         }
+        // eslint-disable-next-line @skylib/custom/functions/prefer-ReadonlyMap -- Ok
         else
             this.map.set(key1, new Map([[key2, [value]]]));
     }

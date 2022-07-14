@@ -117,7 +117,7 @@ ___
 
 ### entries
 
-▸ **entries**<`K`, `V`\>(`obj`): [`Entry`](types_core.md#entry)<`K`, `V`\>[]
+▸ **entries**<`K`, `V`\>(`obj`): readonly [`Entry`](types_core.md#entry)<`K`, `V`\>[]
 
 Typed version of Object.entries.
 
@@ -136,11 +136,11 @@ Typed version of Object.entries.
 
 #### Returns
 
-[`Entry`](types_core.md#entry)<`K`, `V`\>[]
+readonly [`Entry`](types_core.md#entry)<`K`, `V`\>[]
 
 Object entries.
 
-▸ **entries**<`T`\>(`obj`): [`Entry`](types_core.md#entry)<`string` & keyof `T`, `T`[`string` & keyof `T` & `number` & keyof `T`]\>[]
+▸ **entries**<`T`\>(`obj`): readonly [`Entry`](types_core.md#entry)<`string` & keyof `T`, `T`[`string` & keyof `T` & `number` & keyof `T`]\>[]
 
 Typed version of Object.entries.
 
@@ -158,7 +158,7 @@ Typed version of Object.entries.
 
 #### Returns
 
-[`Entry`](types_core.md#entry)<`string` & keyof `T`, `T`[`string` & keyof `T` & `number` & keyof `T`]\>[]
+readonly [`Entry`](types_core.md#entry)<`string` & keyof `T`, `T`[`string` & keyof `T` & `number` & keyof `T`]\>[]
 
 Object entries.
 
@@ -197,6 +197,10 @@ ___
 
 Typed version of Object.assign.
 
+**`Deprecated`**
+
+- Unsafe.
+
 #### Type parameters
 
 | Name | Type |
@@ -220,6 +224,10 @@ Target.
 ▸ **extend**<`T`, `A`, `B`\>(`target`, `source1`, `source2`): `A` & `B` & `T`
 
 Typed version of Object.assign.
+
+**`Deprecated`**
+
+- Unsafe.
 
 #### Type parameters
 
@@ -246,6 +254,10 @@ Target.
 ▸ **extend**<`T`, `A`, `B`, `C`\>(`target`, `source1`, `source2`, `source3`): `A` & `B` & `C` & `T`
 
 Typed version of Object.assign.
+
+**`Deprecated`**
+
+- Unsafe.
 
 #### Type parameters
 
@@ -420,7 +432,7 @@ ___
 
 ### keys
 
-▸ **keys**<`K`, `V`\>(`obj`): `K`[]
+▸ **keys**<`K`, `V`\>(`obj`): readonly `K`[]
 
 Typed version of Object.keys.
 
@@ -439,11 +451,11 @@ Typed version of Object.keys.
 
 #### Returns
 
-`K`[]
+readonly `K`[]
 
 Object keys.
 
-▸ **keys**<`T`\>(`obj`): `string` & keyof `T`[]
+▸ **keys**<`T`\>(`obj`): readonly `string` & keyof `T`[]
 
 Typed version of Object.keys.
 
@@ -461,7 +473,7 @@ Typed version of Object.keys.
 
 #### Returns
 
-`string` & keyof `T`[]
+readonly `string` & keyof `T`[]
 
 Object keys.
 
@@ -670,7 +682,7 @@ ___
 
 ### values
 
-▸ **values**<`K`, `V`\>(`obj`): `V`[]
+▸ **values**<`K`, `V`\>(`obj`): readonly `V`[]
 
 Typed version of Object.values.
 
@@ -689,11 +701,11 @@ Typed version of Object.values.
 
 #### Returns
 
-`V`[]
+readonly `V`[]
 
 Object values.
 
-▸ **values**<`T`\>(`obj`): `T`[`string` & keyof `T` & `number` & keyof `T`][]
+▸ **values**<`T`\>(`obj`): readonly `T`[`string` & keyof `T` & `number` & keyof `T`][]
 
 Typed version of Object.values.
 
@@ -711,6 +723,6 @@ Typed version of Object.values.
 
 #### Returns
 
-`T`[`string` & keyof `T` & `number` & keyof `T`][]
+readonly `T`[`string` & keyof `T` & `number` & keyof `T`][]
 
 Object values.
