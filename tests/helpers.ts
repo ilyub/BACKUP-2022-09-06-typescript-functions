@@ -2,12 +2,10 @@
 
 /* eslint-disable @skylib/custom/functions/no-reflect-set -- Ok */
 
-/* eslint-disable deprecation/deprecation -- Ok */
-
 import * as testUtils from "@/test-utils";
 import {
+  ProxyHandlerAction,
   createFacade,
-  createValidationObject,
   fn,
   is,
   o,
@@ -88,12 +86,6 @@ test("createFacade: Object", () => {
   interface Facade {
     readonly value: number;
   }
-});
-
-test("createValidationObject", () => {
-  const source = { 1: 1, a: "a" } as const;
-
-  expect(createValidationObject(source)).toBeSameAs(source);
 });
 
 test("onDemand", () => {
@@ -244,7 +236,7 @@ test("wrapProxyHandler: doDefault", () => {
     public readonly x = 1;
   }
 
-  const handler = wrapProxyHandler("test", "doDefault", {});
+  const handler = wrapProxyHandler("test", ProxyHandlerAction.doDefault, {});
 
   const proxyClass = new Proxy<typeof TestClass>(TestClass, handler);
 
@@ -289,7 +281,7 @@ test("wrapProxyHandler: throw", () => {
     public readonly x = 1;
   }
 
-  const handler = wrapProxyHandler("test", "throw", {});
+  const handler = wrapProxyHandler("test", ProxyHandlerAction.throw, {});
 
   const proxyClass = new Proxy<typeof TestClass>(TestClass, handler);
 

@@ -13,6 +13,11 @@ import * as reflect from "./reflect";
 import type { Join2, unknowns } from "./types";
 import { ReadonlyMap, ReadonlySet, typedef } from "./core";
 
+export enum ProxyHandlerAction {
+  doDefault = "doDefault",
+  throw = "throw"
+}
+
 export type Facade<I, E = unknown> = E & FacadeOwnMethods<I> & I;
 
 export interface FacadeOwnMethods<I> {
@@ -23,8 +28,6 @@ export interface FacadeOwnMethods<I> {
    */
   readonly setImplementation: (implementation: I) => void;
 }
-
-export type ProxyHandlerAction = "doDefault" | "throw";
 
 export type SafeAccess<
   T extends object,
@@ -58,7 +61,7 @@ export function createFacade<I extends object, E = unknown>(
 
   const proxy = new Proxy(
     fn.noop,
-    wrapProxyHandler("createFacade", "throw", {
+    wrapProxyHandler("createFacade", ProxyHandlerAction.throw, {
       apply: (_target, thisArg, args: unknowns) =>
         reflect.apply(targetFn(), thisArg, args),
       get: (_target, key) => reflect.get(target(key), key),
@@ -99,7 +102,7 @@ export function onDemand<T extends object>(generator: () => T): T {
 
   const proxy = new Proxy(
     {} as T,
-    wrapProxyHandler("onDemand", "throw", {
+    wrapProxyHandler("onDemand", ProxyHandlerAction.throw, {
       get: (_target, key) => reflect.get(obj(), key),
       getOwnPropertyDescriptor: (_target, key) =>
         reflect.getOwnPropertyDescriptor(obj(), key),
@@ -150,7 +153,7 @@ export function safeAccess<
 
   return new Proxy(
     obj,
-    wrapProxyHandler("safeAccess", "throw", {
+    wrapProxyHandler("safeAccess", ProxyHandlerAction.throw, {
       get: (target, key) => {
         if (keysSet.has(key)) return reflect.get(target, key);
 
@@ -206,7 +209,7 @@ export function wrapProxyHandler<T extends object>(
   handler: Readonly<ProxyHandler<T>>
 ): ProxyHandler<T> {
   switch (action) {
-    case "doDefault":
+    case ProxyHandlerAction.doDefault:
       return typedef<ProxyHandler<T>>({
         apply: (target, thisArg, args: unknowns) =>
           reflect.apply(as.callable(target), thisArg, args),
@@ -229,7 +232,7 @@ export function wrapProxyHandler<T extends object>(
         ...handler
       });
 
-    case "throw":
+    case ProxyHandlerAction.throw:
       return typedef<ProxyHandler<T>>({
         apply: () => {
           throw new Error(`Not implemented: ${id}.apply`);

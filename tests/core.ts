@@ -1,6 +1,16 @@
 /* eslint-disable @skylib/custom/prefer-readonly-property -- Ok */
 
-import { ReadonlyMap, ReadonlySet, a, evaluate, freeze, unfreeze } from "@";
+/* eslint-disable deprecation/deprecation -- Ok */
+
+import {
+  ReadonlyMap,
+  ReadonlySet,
+  a,
+  createValidationObject,
+  evaluate,
+  freeze,
+  unfreeze
+} from "@";
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
 
 test("ReadonlyMap", () => {
@@ -13,6 +23,12 @@ test("ReadonlySet", () => {
   const values = [["a", 1]] as const;
 
   expect(a.fromIterable(new ReadonlySet(values))).toStrictEqual(values);
+});
+
+test("createValidationObject", () => {
+  const source = { 1: 1, a: "a" } as const;
+
+  expect(createValidationObject(source)).toBeSameAs(source);
 });
 
 test("evaluate", async () => {

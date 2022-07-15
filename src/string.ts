@@ -1,6 +1,7 @@
 import * as as from "./inline-assertions";
 import type { strings } from "./types";
 
+// eslint-disable-next-line @skylib/custom/no-literal-union-type -- Ok
 export type Eol = "\n" | "\r\n";
 
 /**

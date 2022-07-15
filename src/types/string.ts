@@ -1,3 +1,5 @@
+/* eslint-disable @skylib/custom/no-literal-union-type -- Ok */
+
 export type AddPrefix<T extends string, P extends string> = `${P}${T}`;
 
 export type LowercaseLetter =

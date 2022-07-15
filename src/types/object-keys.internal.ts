@@ -1,3 +1,5 @@
+/* eslint-disable @skylib/custom/no-literal-union-type -- Ok */
+
 import type { Extends } from "ts-toolbelt/out/Any/Extends";
 import type { FilterKeys } from "ts-toolbelt/out/Object/FilterKeys";
 import type { If } from "ts-toolbelt/out/Any/If";

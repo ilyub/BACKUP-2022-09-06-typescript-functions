@@ -1,3 +1,5 @@
+/* eslint-disable @skylib/custom/no-literal-union-type -- Ok */
+
 /* eslint-disable @skylib/custom/prefer-readonly-property -- Ok */
 
 /* eslint-disable @skylib/optional-property-style -- Ok */
