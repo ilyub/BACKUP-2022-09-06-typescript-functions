@@ -4,6 +4,10 @@
 
 ## Table of contents
 
+### Enumerations
+
+- [ProxyHandlerAction](../enums/helpers.ProxyHandlerAction.md)
+
 ### Interfaces
 
 - [FacadeOwnMethods](../interfaces/helpers.FacadeOwnMethods.md)
@@ -11,7 +15,6 @@
 ### Type Aliases
 
 - [Facade](helpers.md#facade)
-- [ProxyHandlerAction](helpers.md#proxyhandleraction)
 - [SafeAccess](helpers.md#safeaccess)
 - [SafeAccessGuards](helpers.md#safeaccessguards)
 
@@ -35,12 +38,6 @@
 | :------ | :------ |
 | `I` | `I` |
 | `E` | `unknown` |
-
-___
-
-### ProxyHandlerAction
-
-Ƭ **ProxyHandlerAction**: ``"doDefault"`` \| ``"throw"``
 
 ___
 
@@ -190,7 +187,7 @@ Adds missing methods to proxy handler.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `id` | `string` | ID. |
-| `action` | [`ProxyHandlerAction`](helpers.md#proxyhandleraction) | Action for missing methods. |
+| `action` | [`ProxyHandlerAction`](../enums/helpers.ProxyHandlerAction.md) | Action for missing methods. |
 | `handler` | `Readonly`<`ProxyHandler`<`T`\>\> | Handler. |
 
 #### Returns

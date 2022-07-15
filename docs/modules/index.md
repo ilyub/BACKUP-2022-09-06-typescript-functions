@@ -370,7 +370,7 @@ ___
 
 ### ProxyHandlerAction
 
-Re-exports [ProxyHandlerAction](helpers.md#proxyhandleraction)
+Re-exports [ProxyHandlerAction](../enums/helpers.ProxyHandlerAction.md)
 
 ___
 

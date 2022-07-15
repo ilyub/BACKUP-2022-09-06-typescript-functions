@@ -9,6 +9,11 @@ import * as o from "./object";
 import * as programFlow from "./program-flow";
 import * as reflect from "./reflect";
 import { ReadonlyMap, ReadonlySet, typedef } from "./core";
+export var ProxyHandlerAction;
+(function (ProxyHandlerAction) {
+    ProxyHandlerAction["doDefault"] = "doDefault";
+    ProxyHandlerAction["throw"] = "throw";
+})(ProxyHandlerAction || (ProxyHandlerAction = {}));
 /**
  * Creates facade.
  *
@@ -21,7 +26,7 @@ export function createFacade(name, extension) {
     const facadeOwn = Object.assign({ setImplementation: value => {
             _implementation = value;
         } }, extension);
-    const proxy = new Proxy(fn.noop, wrapProxyHandler("createFacade", "throw", {
+    const proxy = new Proxy(fn.noop, wrapProxyHandler("createFacade", ProxyHandlerAction.throw, {
         apply: (_target, thisArg, args) => reflect.apply(targetFn(), thisArg, args),
         get: (_target, key) => reflect.get(target(key), key),
         getOwnPropertyDescriptor: (_target, key) => reflect.getOwnPropertyDescriptor(target(key), key),
@@ -50,7 +55,7 @@ export function createFacade(name, extension) {
  */
 export function onDemand(generator) {
     let _obj;
-    const proxy = new Proxy({}, wrapProxyHandler("onDemand", "throw", {
+    const proxy = new Proxy({}, wrapProxyHandler("onDemand", ProxyHandlerAction.throw, {
         get: (_target, key) => reflect.get(obj(), key),
         getOwnPropertyDescriptor: (_target, key) => reflect.getOwnPropertyDescriptor(obj(), key),
         has: (_target, key) => reflect.has(obj(), key),
@@ -80,7 +85,7 @@ export function safeAccess(obj, guards, readonlyKeys = []) {
     const writableKeys = o.keys(guards);
     const keys = [...writableKeys, ...readonlyKeys];
     const keysSet = new ReadonlySet(keys);
-    return new Proxy(obj, wrapProxyHandler("safeAccess", "throw", {
+    return new Proxy(obj, wrapProxyHandler("safeAccess", ProxyHandlerAction.throw, {
         get: (target, key) => {
             if (keysSet.has(key))
                 return reflect.get(target, key);
@@ -126,9 +131,9 @@ export async function wait(timeout) {
  */
 export function wrapProxyHandler(id, action, handler) {
     switch (action) {
-        case "doDefault":
+        case ProxyHandlerAction.doDefault:
             return typedef(Object.assign({ apply: (target, thisArg, args) => reflect.apply(as.callable(target), thisArg, args), construct: (target, args, newTarget) => as.object(reflect.construct(as.callable(target), args, newTarget)), defineProperty: (target, key, attrs) => reflect.defineProperty(target, key, attrs), deleteProperty: (target, key) => reflect.deleteProperty(target, key), get: (target, key) => reflect.get(target, key), getOwnPropertyDescriptor: (target, key) => reflect.getOwnPropertyDescriptor(target, key), getPrototypeOf: target => reflect.getPrototypeOf(target), has: (target, key) => reflect.has(target, key), isExtensible: target => reflect.isExtensible(target), ownKeys: target => reflect.ownKeys(target), preventExtensions: target => reflect.preventExtensions(target), set: (target, key, value) => reflect.set(target, key, value), setPrototypeOf: (target, proto) => reflect.setPrototypeOf(target, proto) }, handler));
-        case "throw":
+        case ProxyHandlerAction.throw:
             return typedef(Object.assign({ apply: () => {
                     throw new Error(`Not implemented: ${id}.apply`);
                 }, construct: () => {

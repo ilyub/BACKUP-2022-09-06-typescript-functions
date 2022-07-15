@@ -1,5 +1,9 @@
 import * as is from "./guards";
 import type { Join2 } from "./types";
+export declare enum ProxyHandlerAction {
+    doDefault = "doDefault",
+    throw = "throw"
+}
 export declare type Facade<I, E = unknown> = E & FacadeOwnMethods<I> & I;
 export interface FacadeOwnMethods<I> {
     /**
@@ -9,7 +13,6 @@ export interface FacadeOwnMethods<I> {
      */
     readonly setImplementation: (implementation: I) => void;
 }
-export declare type ProxyHandlerAction = "doDefault" | "throw";
 export declare type SafeAccess<T extends object, W extends string & keyof T, R extends string & keyof T> = Join2<{
     [K in W]: T[K];
 }, {
