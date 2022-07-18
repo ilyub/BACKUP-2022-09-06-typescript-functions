@@ -1,50 +1,25 @@
-[Typescript functions](../index.md) / [Exports](../modules.md) / types/object-keys
+[Typescript functions](../index.md) / [Exports](../modules.md) / types/object.keys
 
-# Module: types/object-keys
+# Module: types/object.keys
 
 ## Table of contents
 
 ### Type Aliases
 
-- [DefinedKeys](types_object_keys.md#definedkeys)
-- [ObjectKeys](types_object_keys.md#objectkeys)
-- [ReadonlyDefinedKeys](types_object_keys.md#readonlydefinedkeys)
-- [ReadonlyUndefinedKeys](types_object_keys.md#readonlyundefinedkeys)
-- [UndefinedKeys](types_object_keys.md#undefinedkeys)
-- [WritableDefindKeys](types_object_keys.md#writabledefindkeys)
-- [WritableUndefindKeys](types_object_keys.md#writableundefindkeys)
+- [Defined](types_object_keys.md#defined)
+- [Pick](types_object_keys.md#pick)
+- [PickGroups](types_object_keys.md#pickgroups)
+- [ReadonlyDefined](types_object_keys.md#readonlydefined)
+- [ReadonlyUndefined](types_object_keys.md#readonlyundefined)
+- [Undefined](types_object_keys.md#undefined)
+- [WritableDefined](types_object_keys.md#writabledefined)
+- [WritableUndefined](types_object_keys.md#writableundefined)
 
 ## Type Aliases
 
-### DefinedKeys
+### Defined
 
-Ƭ **DefinedKeys**<`T`\>: [`ObjectKeys`](types_object_keys.md#objectkeys)<`T`, ``"defined"``, `never`\>
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
-
-___
-
-### ObjectKeys
-
-Ƭ **ObjectKeys**<`T`, `I`, `E`\>: `Exclude`<[`ObjectKeysDefined`](types_object_keys_internal.md#objectkeysdefined)<`T`, `I`, keyof `T`\> & [`ObjectKeysOptional`](types_object_keys_internal.md#objectkeysoptional)<`T`, `I`, keyof `T`\> & [`ObjectKeysReadonly`](types_object_keys_internal.md#objectkeysreadonly)<`T`, `I`, keyof `T`\> & [`ObjectKeysRequired`](types_object_keys_internal.md#objectkeysrequired)<`T`, `I`, keyof `T`\> & [`ObjectKeysUndefined`](types_object_keys_internal.md#objectkeysundefined)<`T`, `I`, keyof `T`\> & [`ObjectKeysWritable`](types_object_keys_internal.md#objectkeyswritable)<`T`, `I`, keyof `T`\> & `PropertyKey` & keyof `T`, [`ObjectKeysDefined`](types_object_keys_internal.md#objectkeysdefined)<`T`, `E`, `never`\> \| [`ObjectKeysOptional`](types_object_keys_internal.md#objectkeysoptional)<`T`, `E`, `never`\> \| [`ObjectKeysReadonly`](types_object_keys_internal.md#objectkeysreadonly)<`T`, `E`, `never`\> \| [`ObjectKeysRequired`](types_object_keys_internal.md#objectkeysrequired)<`T`, `E`, `never`\> \| [`ObjectKeysUndefined`](types_object_keys_internal.md#objectkeysundefined)<`T`, `E`, `never`\> \| [`ObjectKeysWritable`](types_object_keys_internal.md#objectkeyswritable)<`T`, `E`, `never`\>\>
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
-| `I` | extends [`ObjectKeysOption`](types_object_keys_internal.md#objectkeysoption) |
-| `E` | extends [`ObjectKeysOption`](types_object_keys_internal.md#objectkeysoption) |
-
-___
-
-### ReadonlyDefinedKeys
-
-Ƭ **ReadonlyDefinedKeys**<`T`\>: [`ObjectKeys`](types_object_keys.md#objectkeys)<`T`, ``"defined"`` \| ``"readonly"``, `never`\>
+Ƭ **Defined**<`T`\>: `Filter`<`T`, `undefined`, ``"<-extends"``\>
 
 #### Type parameters
 
@@ -54,9 +29,36 @@ ___
 
 ___
 
-### ReadonlyUndefinedKeys
+### Pick
 
-Ƭ **ReadonlyUndefinedKeys**<`T`\>: [`ObjectKeys`](types_object_keys.md#objectkeys)<`T`, ``"readonly"`` \| ``"undefined"``, `never`\>
+Ƭ **Pick**<`T`, `S`, `M`\>: `Exclude`<keyof `T`, `Filter`<`T`, `S`, `M`\>\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+| `S` | `S` |
+| `M` | extends `Match` = ``"default"`` |
+
+___
+
+### PickGroups
+
+Ƭ **PickGroups**<`T`, `O`\>: [`And`](types_core.md#and)<`If`<`Extends`<``"defined"``, `O`\>, [`Defined`](types_object_keys.md#defined)<`T`\>, keyof `T`\>, `If`<`Extends`<``"optional"``, `O`\>, `Optional`<`T`\>, keyof `T`\>, `If`<`Extends`<``"readonly"``, `O`\>, `Readonly`<`T`\>, keyof `T`\>, `If`<`Extends`<``"required"``, `O`\>, `Required`<`T`\>, keyof `T`\>, `If`<`Extends`<``"undefined"``, `O`\>, [`Undefined`](types_object_keys.md#undefined)<`T`\>, keyof `T`\>, `If`<`Extends`<``"writable"``, `O`\>, `Writable`<`T`\>, keyof `T`\>\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+| `O` | extends [`PickGroupsOption`](types_keys_internal.md#pickgroupsoption) |
+
+___
+
+### ReadonlyDefined
+
+Ƭ **ReadonlyDefined**<`T`\>: [`PickGroups`](types_object_keys.md#pickgroups)<`T`, ``"defined"`` \| ``"readonly"``\>
 
 #### Type parameters
 
@@ -66,21 +68,9 @@ ___
 
 ___
 
-### UndefinedKeys
+### ReadonlyUndefined
 
-Ƭ **UndefinedKeys**<`T`\>: [`ObjectKeys`](types_object_keys.md#objectkeys)<`T`, ``"undefined"``, `never`\>
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
-
-___
-
-### WritableDefindKeys
-
-Ƭ **WritableDefindKeys**<`T`\>: [`ObjectKeys`](types_object_keys.md#objectkeys)<`T`, ``"defined"`` \| ``"writable"``, `never`\>
+Ƭ **ReadonlyUndefined**<`T`\>: [`PickGroups`](types_object_keys.md#pickgroups)<`T`, ``"readonly"`` \| ``"undefined"``\>
 
 #### Type parameters
 
@@ -90,9 +80,33 @@ ___
 
 ___
 
-### WritableUndefindKeys
+### Undefined
 
-Ƭ **WritableUndefindKeys**<`T`\>: [`ObjectKeys`](types_object_keys.md#objectkeys)<`T`, ``"undefined"`` \| ``"writable"``, `never`\>
+Ƭ **Undefined**<`T`\>: [`Pick`](types_object_keys.md#pick)<`T`, `undefined`, ``"<-extends"``\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+___
+
+### WritableDefined
+
+Ƭ **WritableDefined**<`T`\>: [`PickGroups`](types_object_keys.md#pickgroups)<`T`, ``"defined"`` \| ``"writable"``\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+___
+
+### WritableUndefined
+
+Ƭ **WritableUndefined**<`T`\>: [`PickGroups`](types_object_keys.md#pickgroups)<`T`, ``"undefined"`` \| ``"writable"``\>
 
 #### Type parameters
 

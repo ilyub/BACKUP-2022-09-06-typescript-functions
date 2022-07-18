@@ -1,5 +1,5 @@
 import * as is from "./guards";
-import type { Join2 } from "./types";
+import type { And } from "./types";
 export declare enum ProxyHandlerAction {
     doDefault = "doDefault",
     throw = "throw"
@@ -13,7 +13,7 @@ export interface FacadeOwnMethods<I> {
      */
     readonly setImplementation: (implementation: I) => void;
 }
-export declare type SafeAccess<T extends object, W extends string & keyof T, R extends string & keyof T> = Join2<{
+export declare type SafeAccess<T extends object, W extends string & keyof T, R extends string & keyof T> = And<{
     [K in W]: T[K];
 }, {
     readonly [K in R]: T[K];

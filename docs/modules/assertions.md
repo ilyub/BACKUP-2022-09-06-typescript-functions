@@ -165,7 +165,7 @@ ___
 
 ### enumeration
 
-▸ **enumeration**<`T`\>(`value`, `vo`, `error`): asserts value is T
+▸ **enumeration**<`T`\>(`value`, `en`, `error`): asserts value is T
 
 Asserts that value type is T.
 
@@ -180,7 +180,7 @@ Asserts that value type is T.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `vo` | [`IndexedObject`](types_core.md#indexedobject)<`T`\> | Validation object. |
+| `en` | [`IndexedObject`](types_core.md#indexedobject)<`T`\> | Validation object. |
 | `error` | [`ErrorArg`](assertions.md#errorarg) | Error. |
 
 #### Returns

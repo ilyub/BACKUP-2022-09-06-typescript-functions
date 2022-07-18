@@ -73,7 +73,7 @@ export const round = defineFn(
  * @returns The average.
  */
 export function average(...values) {
-    assert.toBeTrue(values.length > 0, "Average is undetermined for no args");
+    assert.toBeTrue(values.length > 0, "Average is not defined for no args");
     return sum(...values) / values.length;
 }
 /**

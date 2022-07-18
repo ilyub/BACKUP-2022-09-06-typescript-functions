@@ -1,4 +1,4 @@
-import type * as types from "./types";
+import type { numberU as baseNumberU, stringU as baseStringU, empty } from "./types";
 export declare const not: {
     /**
      * Converts value to not empty.
@@ -7,7 +7,7 @@ export declare const not: {
      * @param defVal - Default value.
      * @returns Value if it is not empty, defVal otherwise.
      */
-    readonly empty: <T>(value: T, defVal: Exclude<T, types.empty>) => Exclude<T, types.empty>;
+    readonly empty: <T>(value: T, defVal: Exclude<T, empty>) => Exclude<T, empty>;
 };
 /**
  * Converts value to a number.
@@ -23,7 +23,7 @@ export declare function number(value: unknown, defVal?: number): number;
  * @param value - Value.
  * @returns Converted value, _undefined_ on failure.
  */
-export declare function numberU(value: unknown): types.numberU;
+export declare function numberU(value: unknown): baseNumberU;
 /**
  * Converts value to a string.
  *
@@ -37,5 +37,5 @@ export declare function string(value: unknown): string;
  * @param value - Value.
  * @returns Converted value.
  */
-export declare function stringU(value: unknown): types.stringU;
+export declare function stringU(value: unknown): baseStringU;
 //# sourceMappingURL=converters.d.ts.map

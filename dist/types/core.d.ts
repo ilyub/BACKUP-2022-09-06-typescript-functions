@@ -1,5 +1,4 @@
-export type { Optional as PartialOptional } from "ts-toolbelt/out/Object/Optional";
-export type { Required as PartialRequired } from "ts-toolbelt/out/Object/Required";
+export declare type And<A, B, C = unknown, D = unknown, E = unknown, F = unknown> = A & B & C & D & E & F;
 export declare type Entry<K extends PropertyKey, T> = readonly [K, T];
 export declare type IndexedObject<T = unknown> = Rec<PropertyKey, T>;
 export declare type IndexedObjects<T = unknown> = ReadonlyArray<IndexedObject<T>>;
@@ -10,12 +9,13 @@ export declare type NumStrE = empty | NumStr;
 export declare type NumStrU = NumStr | undefined;
 export declare type NumStrs = readonly NumStr[];
 export declare type Optional<T> = {
-    [P in keyof T]?: T[P];
+    [K in keyof T]?: T[K];
 };
+export declare type Or<A, B, C = never, D = never, E = never, F = never> = A | B | C | D | E | F;
 export declare type PartialRecord<K extends PropertyKey, V> = {
     readonly [L in K]?: V;
 };
-export declare type PartialRecords<K extends PropertyKey, V> = ReadonlyArray<PartialRecords<K, V>>;
+export declare type PartialRecords<K extends PropertyKey, V> = ReadonlyArray<PartialRecord<K, V>>;
 export declare type PropertyKeyE = empty | PropertyKey;
 export declare type PropertyKeyU = PropertyKey | undefined;
 export declare type PropertyKeys = readonly PropertyKey[];
@@ -24,7 +24,7 @@ export declare type Rec<K extends PropertyKey, V> = {
 };
 export declare type Recs<K extends PropertyKey, V> = ReadonlyArray<Rec<K, V>>;
 export declare type Writable<T> = {
-    -readonly [P in keyof T]: T[P];
+    -readonly [K in keyof T]: T[K];
 };
 export declare type WritableIndexedObject<T = unknown> = WritableRecord<PropertyKey, T>;
 export declare type WritableIndexedObjects<T = unknown> = ReadonlyArray<WritableIndexedObject<T>>;

@@ -1,10 +1,9 @@
-import type { PickKeys } from "./object";
+import type { Pick } from "./object.keys";
 declare global {
     namespace configurable {
         interface LocaleName {
-            readonly _placeholder?: never;
         }
     }
 }
-export declare type LocaleName = PickKeys<configurable.LocaleName, true, "extends->">;
+export declare type LocaleName = Pick<configurable.LocaleName, true, "extends->">;
 //# sourceMappingURL=configurable.d.ts.map

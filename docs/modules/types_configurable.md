@@ -12,4 +12,4 @@
 
 ### LocaleName
 
-Ƭ **LocaleName**: [`PickKeys`](types_object.md#pickkeys)<`configurable.LocaleName`, ``true``, ``"extends->"``\>
+Ƭ **LocaleName**: [`Pick`](types_object_keys.md#pick)<`configurable.LocaleName`, ``true``, ``"extends->"``\>

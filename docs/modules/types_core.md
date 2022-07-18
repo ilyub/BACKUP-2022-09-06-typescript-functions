@@ -6,6 +6,7 @@
 
 ### Type Aliases
 
+- [And](types_core.md#and)
 - [Entry](types_core.md#entry)
 - [IndexedObject](types_core.md#indexedobject)
 - [IndexedObjects](types_core.md#indexedobjects)
@@ -16,6 +17,7 @@
 - [NumStrU](types_core.md#numstru)
 - [NumStrs](types_core.md#numstrs)
 - [Optional](types_core.md#optional)
+- [Or](types_core.md#or)
 - [PartialRecord](types_core.md#partialrecord)
 - [PartialRecords](types_core.md#partialrecords)
 - [PropertyKeyE](types_core.md#propertykeye)
@@ -51,6 +53,23 @@
 - [unknowns](types_core.md#unknowns)
 
 ## Type Aliases
+
+### And
+
+Ƭ **And**<`A`, `B`, `C`, `D`, `E`, `F`\>: `A` & `B` & `C` & `D` & `E` & `F`
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `A` | `A` |
+| `B` | `B` |
+| `C` | `unknown` |
+| `D` | `unknown` |
+| `E` | `unknown` |
+| `F` | `unknown` |
+
+___
 
 ### Entry
 
@@ -139,13 +158,30 @@ ___
 
 ### Optional
 
-Ƭ **Optional**<`T`\>: { [P in keyof T]?: T[P] }
+Ƭ **Optional**<`T`\>: { [K in keyof T]?: T[K] }
 
 #### Type parameters
 
 | Name |
 | :------ |
 | `T` |
+
+___
+
+### Or
+
+Ƭ **Or**<`A`, `B`, `C`, `D`, `E`, `F`\>: `A` \| `B` \| `C` \| `D` \| `E` \| `F`
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `A` | `A` |
+| `B` | `B` |
+| `C` | `never` |
+| `D` | `never` |
+| `E` | `never` |
+| `F` | `never` |
 
 ___
 
@@ -164,7 +200,7 @@ ___
 
 ### PartialRecords
 
-Ƭ **PartialRecords**<`K`, `V`\>: `ReadonlyArray`<[`PartialRecords`](types_core.md#partialrecords)<`K`, `V`\>\>
+Ƭ **PartialRecords**<`K`, `V`\>: `ReadonlyArray`<[`PartialRecord`](types_core.md#partialrecord)<`K`, `V`\>\>
 
 #### Type parameters
 
@@ -221,7 +257,7 @@ ___
 
 ### Writable
 
-Ƭ **Writable**<`T`\>: { -readonly [P in keyof T]: T[P] }
+Ƭ **Writable**<`T`\>: { -readonly [K in keyof T]: T[K] }
 
 #### Type parameters
 

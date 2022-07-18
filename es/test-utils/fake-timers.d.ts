@@ -1,5 +1,5 @@
 import * as fakeTimers from "@sinonjs/fake-timers";
-import type { Async } from "..";
+import type { types } from "..";
 export declare const clock: fakeTimers.Clock;
 export interface Options {
     readonly shouldAdvanceTime?: boolean;
@@ -16,7 +16,7 @@ export declare function installFakeTimer(options?: Options): void;
  * @param mixed - Promise or async function.
  * @returns The result of callback execution.
  */
-export declare function run<T>(mixed: Async<T>): Promise<T>;
+export declare function run<T>(mixed: types.fn.Async<T>): Promise<T>;
 /**
  * Sets random system time.
  */

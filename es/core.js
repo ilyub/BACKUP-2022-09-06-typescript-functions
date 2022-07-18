@@ -8,16 +8,6 @@ export const ReadonlySet = Set;
  * @returns Function with properties.
  */
 export const defineFn = Object.assign;
-/**
- * Creates validation object.
- *
- * @param source - Source.
- * @returns Validation object.
- * @deprecated -- Use enum.
- */
-export function createValidationObject(source) {
-    return source;
-}
 export function evaluate(mixed) {
     return typeof mixed === "function" ? mixed() : mixed;
 }

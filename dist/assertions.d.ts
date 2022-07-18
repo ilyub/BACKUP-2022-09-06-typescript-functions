@@ -1,5 +1,5 @@
 import * as is from "./guards";
-import type * as types from "./types";
+import type { IndexedObject, NumStr, empty as baseEmpty, stringU as baseStringU, types, unknowns } from "./types";
 import type { ErrorArgFn } from "./assertions.internal";
 export declare const not: {
     /**
@@ -9,7 +9,7 @@ export declare const not: {
      * @param error - Error.
      * @returns Void.
      */
-    readonly empty: <T>(value: T, error: ErrorArg) => asserts value is Exclude<T, types.empty>;
+    readonly empty: <T>(value: T, error: ErrorArg) => asserts value is Exclude<T, baseEmpty>;
 };
 export declare const array: {
     /**
@@ -18,7 +18,7 @@ export declare const array: {
      * @param value - Value.
      * @param error - Error.
      */
-    (value: unknown, error: ErrorArg): asserts value is types.unknowns;
+    (value: unknown, error: ErrorArg): asserts value is unknowns;
     /**
      * Asserts that value type is T[].
      *
@@ -36,7 +36,7 @@ export declare const indexedObject: {
      * @param value - Value.
      * @param error - Error.
      */
-    (value: unknown, error: ErrorArg): asserts value is types.IndexedObject;
+    (value: unknown, error: ErrorArg): asserts value is IndexedObject;
     /**
      * Asserts that value type is IndexedObject\<T\>.
      *
@@ -45,7 +45,7 @@ export declare const indexedObject: {
      * @param error - Error.
      * @returns Void.
      */
-    readonly of: <T>(value: unknown, guard: is.Guard<T>, error: ErrorArg) => asserts value is types.IndexedObject<T>;
+    readonly of: <T>(value: unknown, guard: is.Guard<T>, error: ErrorArg) => asserts value is IndexedObject<T>;
 };
 export declare const map: {
     /**
@@ -113,15 +113,15 @@ export declare function callable<T extends Function>(value: unknown, error: Erro
  * @param value - Value.
  * @param error - Error.
  */
-export declare function empty(value: unknown, error: ErrorArg): asserts value is types.empty;
+export declare function empty(value: unknown, error: ErrorArg): asserts value is baseEmpty;
 /**
  * Asserts that value type is T.
  *
  * @param value - Value.
- * @param vo - Validation object.
+ * @param en - Validation object.
  * @param error - Error.
  */
-export declare function enumeration<T extends PropertyKey>(value: unknown, vo: types.IndexedObject<T>, error: ErrorArg): asserts value is T;
+export declare function enumeration<T extends PropertyKey>(value: unknown, en: IndexedObject<T>, error: ErrorArg): asserts value is T;
 /**
  * Asserts that value type is T.
  *
@@ -129,7 +129,7 @@ export declare function enumeration<T extends PropertyKey>(value: unknown, vo: t
  * @param ctor - Constructor.
  * @param error - Error.
  */
-export declare function instanceOf<T>(value: unknown, ctor: types.Constructor<T>, error: ErrorArg): asserts value is T;
+export declare function instanceOf<T>(value: unknown, ctor: types.fn.Constructor<T>, error: ErrorArg): asserts value is T;
 /**
  * Asserts that value type is T[].
  *
@@ -137,14 +137,14 @@ export declare function instanceOf<T>(value: unknown, ctor: types.Constructor<T>
  * @param ctor - Constructor.
  * @param error - Error.
  */
-export declare function instancesOf<T>(value: unknown, ctor: types.Constructor<T>, error: ErrorArg): asserts value is readonly T[];
+export declare function instancesOf<T>(value: unknown, ctor: types.fn.Constructor<T>, error: ErrorArg): asserts value is readonly T[];
 /**
  * Asserts that value type is NumStr.
  *
  * @param value - Value.
  * @param error - Error.
  */
-export declare function numStr(value: unknown, error: ErrorArg): asserts value is types.NumStr;
+export declare function numStr(value: unknown, error: ErrorArg): asserts value is NumStr;
 /**
  * Asserts that value is a number.
  *
@@ -172,7 +172,7 @@ export declare function string(value: unknown, error: ErrorArg): asserts value i
  * @param value - Value.
  * @param error - Error.
  */
-export declare function stringU(value: unknown, error: ErrorArg): asserts value is types.stringU;
+export declare function stringU(value: unknown, error: ErrorArg): asserts value is baseStringU;
 /**
  * Asserts that value is a symbol.
  *

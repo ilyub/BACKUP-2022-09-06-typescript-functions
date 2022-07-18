@@ -221,11 +221,11 @@ export function empty(value) {
  * Checks if value type is T.
  *
  * @param value - Value.
- * @param vo - Validation object.
+ * @param en - Validation object.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-export function enumeration(value, vo) {
-    return Object.values(vo).includes(value);
+export function enumeration(value, en) {
+    return Object.values(en).includes(value);
 }
 /**
  * Creates single-arg guard.

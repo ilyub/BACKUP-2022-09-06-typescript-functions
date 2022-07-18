@@ -1,4 +1,4 @@
-import type { AsyncPromise, IndexedObject, NumStr, Rec, Sync, Writable } from "./types";
+import type { IndexedObject, Writable, types } from "./types";
 export declare const ReadonlyMap: {
     new <K, V>(entries?: ReadonlyArray<readonly [K, V]>): ReadonlyMap<K, V>;
 };
@@ -18,27 +18,19 @@ export declare const defineFn: <F, P>(fn: F, props: P) => F & Readonly<P>;
  */
 export declare type ValidationObject<T extends PropertyKey> = IndexedObject<T>;
 /**
- * Creates validation object.
- *
- * @param source - Source.
- * @returns Validation object.
- * @deprecated -- Use enum.
- */
-export declare function createValidationObject<T extends NumStr>(source: Rec<T, T>): IndexedObject<T>;
-/**
  * Executes callback.
  *
  * @param callback - Callback.
  * @returns The result of callback execution.
  */
-export declare function evaluate<T>(callback: Sync<T>): T;
+export declare function evaluate<T>(callback: types.fn.Sync<T>): T;
 /**
  * Executes promise or async function.
  *
  * @param mixed - Promise or async function.
  * @returns The result of callback execution.
  */
-export declare function evaluate<T>(mixed: AsyncPromise<T>): Promise<T>;
+export declare function evaluate<T>(mixed: types.fn.AsyncPromise<T>): Promise<T>;
 /**
  * Marks value as readonly.
  *

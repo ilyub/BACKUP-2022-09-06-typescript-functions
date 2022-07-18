@@ -9,6 +9,18 @@ exports.error = console.error;
 // eslint-disable-next-line no-console -- Ok
 exports.warn = console.warn;
 exports.matchers = {
+    executionResultToBe: (got, expected, expectedToThrow = false) => {
+        __1.assert.callable(got, "Expecting function");
+        try {
+            const result = got();
+            __1.assert.toBeFalse(expectedToThrow, "Expecting function not to throw");
+            return (0, expect_1.buildEqualsResult)((0, expect_utils_1.equals)(result, expected), "Unexpected function execution result", result, expected, true);
+        }
+        catch (e) {
+            __1.assert.toBeTrue(expectedToThrow, "Expecting function to throw");
+            return (0, expect_1.buildEqualsResult)((0, expect_utils_1.equals)(e, expected), "Unexpected function execution result", e, expected, true);
+        }
+    },
     executionTimeToBe: async (got, expected, precision = 10) => {
         __1.assert.callable(got, "Expecting async function");
         const t1 = Date.now();

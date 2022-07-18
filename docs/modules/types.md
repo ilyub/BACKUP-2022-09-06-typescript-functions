@@ -6,52 +6,27 @@
 
 ### References
 
-- [AddPrefix](types.md#addprefix)
-- [Async](types.md#async)
-- [AsyncPromise](types.md#asyncpromise)
-- [AsyncPromiseSync](types.md#asyncpromisesync)
-- [CallSignature](types.md#callsignature)
-- [Callable](types.md#callable)
-- [ConstructSignature](types.md#constructsignature)
-- [Constructor](types.md#constructor)
-- [DefinedKeys](types.md#definedkeys)
-- [Empty](types.md#empty)
+- [And](types.md#and)
 - [Entry](types.md#entry)
 - [IndexedObject](types.md#indexedobject)
 - [IndexedObjects](types.md#indexedobjects)
 - [IndexedRecord](types.md#indexedrecord)
 - [IndexedRecords](types.md#indexedrecords)
-- [Join2](types.md#join2)
-- [Join3](types.md#join3)
-- [Join4](types.md#join4)
 - [LocaleName](types.md#localename)
-- [LowercaseLetter](types.md#lowercaseletter)
 - [NumStr](types.md#numstr)
 - [NumStrE](types.md#numstre)
 - [NumStrU](types.md#numstru)
 - [NumStrs](types.md#numstrs)
-- [ObjectKeys](types.md#objectkeys)
 - [Optional](types.md#optional)
-- [OptionalStyle](types.md#optionalstyle)
-- [OptionalUndefinedStyle](types.md#optionalundefinedstyle)
+- [Or](types.md#or)
 - [PartialRecord](types.md#partialrecord)
 - [PartialRecords](types.md#partialrecords)
-- [PickKeys](types.md#pickkeys)
 - [PropertyKeyE](types.md#propertykeye)
 - [PropertyKeyU](types.md#propertykeyu)
 - [PropertyKeys](types.md#propertykeys)
-- [ReadonlyDefinedKeys](types.md#readonlydefinedkeys)
-- [ReadonlyUndefinedKeys](types.md#readonlyundefinedkeys)
 - [Rec](types.md#rec)
 - [Recs](types.md#recs)
-- [RemovePrefix](types.md#removeprefix)
-- [StrictOmit](types.md#strictomit)
-- [Sync](types.md#sync)
-- [UndefinedKeys](types.md#undefinedkeys)
-- [UndefinedStyle](types.md#undefinedstyle)
-- [UppercaseLetter](types.md#uppercaseletter)
 - [Writable](types.md#writable)
-- [WritableDefindKeys](types.md#writabledefindkeys)
 - [WritableIndexedObject](types.md#writableindexedobject)
 - [WritableIndexedObjects](types.md#writableindexedobjects)
 - [WritableIndexedRecord](types.md#writableindexedrecord)
@@ -60,11 +35,10 @@
 - [WritablePartialRecords](types.md#writablepartialrecords)
 - [WritableRecord](types.md#writablerecord)
 - [WritableRecords](types.md#writablerecords)
-- [WritableUndefindKeys](types.md#writableundefindkeys)
 - [booleanE](types.md#booleane)
 - [booleanU](types.md#booleanu)
 - [booleans](types.md#booleans)
-- [empty](types.md#empty-1)
+- [empty](types.md#empty)
 - [falseU](types.md#falseu)
 - [nevers](types.md#nevers)
 - [numberE](types.md#numbere)
@@ -77,67 +51,14 @@
 - [stringU](types.md#stringu)
 - [strings](types.md#strings)
 - [trueU](types.md#trueu)
+- [types](types.md#types)
 - [unknowns](types.md#unknowns)
 
 ## References
 
-### AddPrefix
+### And
 
-Re-exports [AddPrefix](types_string.md#addprefix)
-
-___
-
-### Async
-
-Re-exports [Async](../interfaces/types_function.Async.md)
-
-___
-
-### AsyncPromise
-
-Re-exports [AsyncPromise](types_function.md#asyncpromise)
-
-___
-
-### AsyncPromiseSync
-
-Re-exports [AsyncPromiseSync](types_function.md#asyncpromisesync)
-
-___
-
-### CallSignature
-
-Re-exports [CallSignature](../interfaces/types_function.CallSignature.md)
-
-___
-
-### Callable
-
-Re-exports [Callable](../interfaces/types_function.Callable.md)
-
-___
-
-### ConstructSignature
-
-Re-exports [ConstructSignature](../interfaces/types_function.ConstructSignature.md)
-
-___
-
-### Constructor
-
-Re-exports [Constructor](../interfaces/types_function.Constructor.md)
-
-___
-
-### DefinedKeys
-
-Re-exports [DefinedKeys](types_object_keys.md#definedkeys)
-
-___
-
-### Empty
-
-Re-exports [Empty](types_object.md#empty)
+Re-exports [And](types_core.md#and)
 
 ___
 
@@ -171,33 +92,9 @@ Re-exports [IndexedRecords](types_core.md#indexedrecords)
 
 ___
 
-### Join2
-
-Re-exports [Join2](types_object.md#join2)
-
-___
-
-### Join3
-
-Re-exports [Join3](types_object.md#join3)
-
-___
-
-### Join4
-
-Re-exports [Join4](types_object.md#join4)
-
-___
-
 ### LocaleName
 
 Re-exports [LocaleName](types_configurable.md#localename)
-
-___
-
-### LowercaseLetter
-
-Re-exports [LowercaseLetter](types_string.md#lowercaseletter)
 
 ___
 
@@ -225,27 +122,15 @@ Re-exports [NumStrs](types_core.md#numstrs)
 
 ___
 
-### ObjectKeys
-
-Re-exports [ObjectKeys](types_object_keys.md#objectkeys)
-
-___
-
 ### Optional
 
 Re-exports [Optional](types_core.md#optional)
 
 ___
 
-### OptionalStyle
+### Or
 
-Re-exports [OptionalStyle](types_object.md#optionalstyle)
-
-___
-
-### OptionalUndefinedStyle
-
-Re-exports [OptionalUndefinedStyle](types_object.md#optionalundefinedstyle)
+Re-exports [Or](types_core.md#or)
 
 ___
 
@@ -258,12 +143,6 @@ ___
 ### PartialRecords
 
 Re-exports [PartialRecords](types_core.md#partialrecords)
-
-___
-
-### PickKeys
-
-Re-exports [PickKeys](types_object.md#pickkeys)
 
 ___
 
@@ -285,18 +164,6 @@ Re-exports [PropertyKeys](types_core.md#propertykeys)
 
 ___
 
-### ReadonlyDefinedKeys
-
-Re-exports [ReadonlyDefinedKeys](types_object_keys.md#readonlydefinedkeys)
-
-___
-
-### ReadonlyUndefinedKeys
-
-Re-exports [ReadonlyUndefinedKeys](types_object_keys.md#readonlyundefinedkeys)
-
-___
-
 ### Rec
 
 Re-exports [Rec](types_core.md#rec)
@@ -309,51 +176,9 @@ Re-exports [Recs](types_core.md#recs)
 
 ___
 
-### RemovePrefix
-
-Re-exports [RemovePrefix](types_string.md#removeprefix)
-
-___
-
-### StrictOmit
-
-Re-exports [StrictOmit](types_object.md#strictomit)
-
-___
-
-### Sync
-
-Re-exports [Sync](../interfaces/types_function.Sync.md)
-
-___
-
-### UndefinedKeys
-
-Re-exports [UndefinedKeys](types_object_keys.md#undefinedkeys)
-
-___
-
-### UndefinedStyle
-
-Re-exports [UndefinedStyle](types_object.md#undefinedstyle)
-
-___
-
-### UppercaseLetter
-
-Re-exports [UppercaseLetter](types_string.md#uppercaseletter)
-
-___
-
 ### Writable
 
 Re-exports [Writable](types_core.md#writable)
-
-___
-
-### WritableDefindKeys
-
-Re-exports [WritableDefindKeys](types_object_keys.md#writabledefindkeys)
 
 ___
 
@@ -402,12 +227,6 @@ ___
 ### WritableRecords
 
 Re-exports [WritableRecords](types_core.md#writablerecords)
-
-___
-
-### WritableUndefindKeys
-
-Re-exports [WritableUndefindKeys](types_object_keys.md#writableundefindkeys)
 
 ___
 
@@ -504,6 +323,12 @@ ___
 ### trueU
 
 Re-exports [trueU](types_core.md#trueu)
+
+___
+
+### types
+
+Renames and re-exports [types/index.types](types_index_types.md)
 
 ___
 

@@ -1,5 +1,5 @@
-import type { Callable, unknowns } from "./types";
-export declare const noop: Callable;
+import type { unknowns } from "./types";
+export declare const noop: (...args: any[]) => void;
 export interface PipeCallback<V = unknown, R = unknown> {
     /**
      * Pipe callback.

@@ -5,6 +5,14 @@ declare global {
     namespace jest {
         interface Matchers<R> {
             /**
+             * Checks function execution result.
+             *
+             * @param expected - Execution result.
+             * @param expectedToThrow - Whether function is expected to throw error.
+             * @returns Result.
+             */
+            readonly executionResultToBe: (expected: unknown, expectedToThrow?: boolean) => R;
+            /**
              * Checks that async function executes within expected time.
              *
              * @param expected - Expected time (ms).

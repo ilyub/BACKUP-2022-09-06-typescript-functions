@@ -227,11 +227,11 @@ exports.empty = empty;
  * Checks if value type is T.
  *
  * @param value - Value.
- * @param vo - Validation object.
+ * @param en - Validation object.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-function enumeration(value, vo) {
-    return Object.values(vo).includes(value);
+function enumeration(value, en) {
+    return Object.values(en).includes(value);
 }
 exports.enumeration = enumeration;
 /**

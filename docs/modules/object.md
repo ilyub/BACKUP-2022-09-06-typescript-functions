@@ -510,7 +510,7 @@ ___
 
 ### omit
 
-▸ **omit**<`T`, `K`\>(`obj`, ...`exclude`): [`StrictOmit`](types_object.md#strictomit)<`T`, `K`\>
+▸ **omit**<`T`, `K`\>(`obj`, ...`exclude`): [`Omit`](types_object.md#omit)<`T`, `K`\>
 
 Removes keys from object.
 
@@ -530,7 +530,7 @@ Removes keys from object.
 
 #### Returns
 
-[`StrictOmit`](types_object.md#strictomit)<`T`, `K`\>
+[`Omit`](types_object.md#omit)<`T`, `K`\>
 
 New object.
 
@@ -538,7 +538,7 @@ ___
 
 ### removeUndefinedKeys
 
-▸ **removeUndefinedKeys**<`T`\>(`obj`): [`OptionalStyle`](types_object.md#optionalstyle)<`T`\>
+▸ **removeUndefinedKeys**<`T`\>(`obj`): [`Optional`](types_object_style.md#optional)<`T`\>
 
 Removes undefined keys.
 
@@ -556,7 +556,7 @@ Removes undefined keys.
 
 #### Returns
 
-[`OptionalStyle`](types_object.md#optionalstyle)<`T`\>
+[`Optional`](types_object_style.md#optional)<`T`\>
 
 New object with undefined keys removed.
 

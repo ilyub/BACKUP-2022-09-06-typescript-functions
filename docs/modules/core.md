@@ -15,7 +15,6 @@
 
 ### Functions
 
-- [createValidationObject](core.md#createvalidationobject)
 - [defineFn](core.md#definefn)
 - [evaluate](core.md#evaluate)
 - [freeze](core.md#freeze)
@@ -53,36 +52,6 @@ ___
 • `Const` **ReadonlySet**: `Object` = `Set`
 
 ## Functions
-
-### createValidationObject
-
-▸ **createValidationObject**<`T`\>(`source`): [`IndexedObject`](types_core.md#indexedobject)<`T`\>
-
-Creates validation object.
-
-**`Deprecated`**
-
--- Use enum.
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends [`NumStr`](types_core.md#numstr) |
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `source` | [`Rec`](types_core.md#rec)<`T`, `T`\> | Source. |
-
-#### Returns
-
-[`IndexedObject`](types_core.md#indexedobject)<`T`\>
-
-Validation object.
-
-___
 
 ### defineFn
 

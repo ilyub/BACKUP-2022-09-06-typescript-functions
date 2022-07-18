@@ -43,7 +43,7 @@ ___
 
 ### SafeAccess
 
-Ƭ **SafeAccess**<`T`, `W`, `R`\>: [`Join2`](types_object.md#join2)<{ [K in W]: T[K] }, { readonly [K in R]: T[K] }\>
+Ƭ **SafeAccess**<`T`, `W`, `R`\>: [`And`](types_core.md#and)<{ [K in W]: T[K] }, { readonly [K in R]: T[K] }\>
 
 #### Type parameters
 

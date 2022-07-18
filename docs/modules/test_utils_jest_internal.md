@@ -4,6 +4,10 @@
 
 ## Table of contents
 
+### Interfaces
+
+- [ExecutionResult](../interfaces/test_utils_jest_internal.ExecutionResult.md)
+
 ### Type Aliases
 
 - [Calls](test_utils_jest_internal.md#calls)
@@ -33,6 +37,7 @@
 
 | Name | Type |
 | :------ | :------ |
+| `executionResultToBe` | [`ExpectFromMatcher`](../interfaces/test_utils_expect.ExpectFromMatcher.md)<``"executionResultToBe"``\> |
 | `executionTimeToBe` | [`ExpectFromMatcher`](../interfaces/test_utils_expect.ExpectFromMatcher.md)<``"executionTimeToBe"``\> |
 | `mockCallsToBe` | [`ExpectFromMatcher`](../interfaces/test_utils_expect.ExpectFromMatcher.md)<``"mockCallsToBe"``\> |
 | `toBeSameAs` | [`ExpectFromMatcher`](../interfaces/test_utils_expect.ExpectFromMatcher.md)<``"toBeSameAs"``\> |
@@ -41,38 +46,30 @@
 
 ### error
 
-▸ **error**(...`args`): `any`
-
-Function.
+▸ **error**(...`data`): `void`
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `...args` | readonly `any`[] | Arguments. |
+| Name | Type |
+| :------ | :------ |
+| `...data` | `any`[] |
 
 #### Returns
 
-`any`
-
-Result.
+`void`
 
 ___
 
 ### warn
 
-▸ **warn**(...`args`): `any`
-
-Function.
+▸ **warn**(...`data`): `void`
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `...args` | readonly `any`[] | Arguments. |
+| Name | Type |
+| :------ | :------ |
+| `...data` | `any`[] |
 
 #### Returns
 
-`any`
-
-Result.
+`void`

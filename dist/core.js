@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unfreeze = exports.typedef = exports.overload = exports.indexed = exports.freeze = exports.evaluate = exports.createValidationObject = exports.defineFn = exports.ReadonlySet = exports.ReadonlyMap = void 0;
+exports.unfreeze = exports.typedef = exports.overload = exports.indexed = exports.freeze = exports.evaluate = exports.defineFn = exports.ReadonlySet = exports.ReadonlyMap = void 0;
 exports.ReadonlyMap = Map;
 exports.ReadonlySet = Set;
 /**
@@ -11,17 +11,6 @@ exports.ReadonlySet = Set;
  * @returns Function with properties.
  */
 exports.defineFn = Object.assign;
-/**
- * Creates validation object.
- *
- * @param source - Source.
- * @returns Validation object.
- * @deprecated -- Use enum.
- */
-function createValidationObject(source) {
-    return source;
-}
-exports.createValidationObject = createValidationObject;
 function evaluate(mixed) {
     return typeof mixed === "function" ? mixed() : mixed;
 }

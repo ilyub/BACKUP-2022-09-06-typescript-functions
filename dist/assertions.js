@@ -87,11 +87,11 @@ exports.empty = empty;
  * Asserts that value type is T.
  *
  * @param value - Value.
- * @param vo - Validation object.
+ * @param en - Validation object.
  * @param error - Error.
  */
-function enumeration(value, vo, error) {
-    byGuard(value, is.factory(is.enumeration, vo), error);
+function enumeration(value, en, error) {
+    byGuard(value, is.factory(is.enumeration, en), error);
 }
 exports.enumeration = enumeration;
 /**

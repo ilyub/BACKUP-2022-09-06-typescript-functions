@@ -156,12 +156,12 @@ exports.callable = callable;
  * Asserts that value type is T.
  *
  * @param value - Value.
- * @param vo - Validation object.
+ * @param en - Validation object.
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
-function enumeration(value, vo) {
-    if (is.enumeration(value, vo))
+function enumeration(value, en) {
+    if (is.enumeration(value, en))
         return value;
     throw new errors_1.AssertionError();
 }

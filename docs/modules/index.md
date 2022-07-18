@@ -8,18 +8,9 @@
 
 - [Accumulator](index.md#accumulator)
 - [Accumulator2](index.md#accumulator2)
-- [AddPrefix](index.md#addprefix)
+- [And](index.md#and)
 - [AssertionError](index.md#assertionerror)
-- [Async](index.md#async)
-- [AsyncPromise](index.md#asyncpromise)
-- [AsyncPromiseSync](index.md#asyncpromisesync)
-- [CallSignature](index.md#callsignature)
-- [Callable](index.md#callable)
-- [ConstructSignature](index.md#constructsignature)
-- [Constructor](index.md#constructor)
 - [ConversionError](index.md#conversionerror)
-- [DefinedKeys](index.md#definedkeys)
-- [Empty](index.md#empty)
 - [Entry](index.md#entry)
 - [Facade](index.md#facade)
 - [FacadeOwnMethods](index.md#facadeownmethods)
@@ -28,43 +19,27 @@
 - [IndexedRecord](index.md#indexedrecord)
 - [IndexedRecords](index.md#indexedrecords)
 - [InternalError](index.md#internalerror)
-- [Join2](index.md#join2)
-- [Join3](index.md#join3)
-- [Join4](index.md#join4)
 - [LocaleName](index.md#localename)
-- [LowercaseLetter](index.md#lowercaseletter)
 - [NumStr](index.md#numstr)
 - [NumStrE](index.md#numstre)
 - [NumStrU](index.md#numstru)
 - [NumStrs](index.md#numstrs)
-- [ObjectKeys](index.md#objectkeys)
 - [Optional](index.md#optional)
-- [OptionalStyle](index.md#optionalstyle)
-- [OptionalUndefinedStyle](index.md#optionalundefinedstyle)
+- [Or](index.md#or)
 - [PartialRecord](index.md#partialrecord)
 - [PartialRecords](index.md#partialrecords)
-- [PickKeys](index.md#pickkeys)
 - [PropertyKeyE](index.md#propertykeye)
 - [PropertyKeyU](index.md#propertykeyu)
 - [PropertyKeys](index.md#propertykeys)
 - [ProxyHandlerAction](index.md#proxyhandleraction)
-- [ReadonlyDefinedKeys](index.md#readonlydefinedkeys)
 - [ReadonlyMap](index.md#readonlymap)
 - [ReadonlySet](index.md#readonlyset)
-- [ReadonlyUndefinedKeys](index.md#readonlyundefinedkeys)
 - [Rec](index.md#rec)
 - [Recs](index.md#recs)
-- [RemovePrefix](index.md#removeprefix)
 - [SafeAccess](index.md#safeaccess)
 - [SafeAccessGuards](index.md#safeaccessguards)
-- [StrictOmit](index.md#strictomit)
-- [Sync](index.md#sync)
-- [UndefinedKeys](index.md#undefinedkeys)
-- [UndefinedStyle](index.md#undefinedstyle)
-- [UppercaseLetter](index.md#uppercaseletter)
 - [ValidationObject](index.md#validationobject)
 - [Writable](index.md#writable)
-- [WritableDefindKeys](index.md#writabledefindkeys)
 - [WritableIndexedObject](index.md#writableindexedobject)
 - [WritableIndexedObjects](index.md#writableindexedobjects)
 - [WritableIndexedRecord](index.md#writableindexedrecord)
@@ -73,7 +48,6 @@
 - [WritablePartialRecords](index.md#writablepartialrecords)
 - [WritableRecord](index.md#writablerecord)
 - [WritableRecords](index.md#writablerecords)
-- [WritableUndefindKeys](index.md#writableundefindkeys)
 - [a](index.md#a)
 - [as](index.md#as)
 - [assert](index.md#assert)
@@ -82,9 +56,8 @@
 - [booleans](index.md#booleans)
 - [cast](index.md#cast)
 - [createFacade](index.md#createfacade)
-- [createValidationObject](index.md#createvalidationobject)
 - [defineFn](index.md#definefn)
-- [empty](index.md#empty-1)
+- [empty](index.md#empty)
 - [evaluate](index.md#evaluate)
 - [falseU](index.md#falseu)
 - [fn](index.md#fn)
@@ -115,6 +88,7 @@
 - [strings](index.md#strings)
 - [trueU](index.md#trueu)
 - [typedef](index.md#typedef)
+- [types](index.md#types)
 - [unfreeze](index.md#unfreeze)
 - [unknowns](index.md#unknowns)
 - [wait](index.md#wait)
@@ -134,9 +108,9 @@ Re-exports [Accumulator2](../classes/Accumulator2.Accumulator2-1.md)
 
 ___
 
-### AddPrefix
+### And
 
-Re-exports [AddPrefix](types_string.md#addprefix)
+Re-exports [And](types_core.md#and)
 
 ___
 
@@ -146,63 +120,9 @@ Re-exports [AssertionError](../classes/errors_AssertionError.AssertionError.md)
 
 ___
 
-### Async
-
-Re-exports [Async](../interfaces/types_function.Async.md)
-
-___
-
-### AsyncPromise
-
-Re-exports [AsyncPromise](types_function.md#asyncpromise)
-
-___
-
-### AsyncPromiseSync
-
-Re-exports [AsyncPromiseSync](types_function.md#asyncpromisesync)
-
-___
-
-### CallSignature
-
-Re-exports [CallSignature](../interfaces/types_function.CallSignature.md)
-
-___
-
-### Callable
-
-Re-exports [Callable](../interfaces/types_function.Callable.md)
-
-___
-
-### ConstructSignature
-
-Re-exports [ConstructSignature](../interfaces/types_function.ConstructSignature.md)
-
-___
-
-### Constructor
-
-Re-exports [Constructor](../interfaces/types_function.Constructor.md)
-
-___
-
 ### ConversionError
 
 Re-exports [ConversionError](../classes/errors_ConversionError.ConversionError.md)
-
-___
-
-### DefinedKeys
-
-Re-exports [DefinedKeys](types_object_keys.md#definedkeys)
-
-___
-
-### Empty
-
-Re-exports [Empty](types_object.md#empty)
 
 ___
 
@@ -254,33 +174,9 @@ Re-exports [InternalError](../classes/errors_InternalError.InternalError.md)
 
 ___
 
-### Join2
-
-Re-exports [Join2](types_object.md#join2)
-
-___
-
-### Join3
-
-Re-exports [Join3](types_object.md#join3)
-
-___
-
-### Join4
-
-Re-exports [Join4](types_object.md#join4)
-
-___
-
 ### LocaleName
 
 Re-exports [LocaleName](types_configurable.md#localename)
-
-___
-
-### LowercaseLetter
-
-Re-exports [LowercaseLetter](types_string.md#lowercaseletter)
 
 ___
 
@@ -308,27 +204,15 @@ Re-exports [NumStrs](types_core.md#numstrs)
 
 ___
 
-### ObjectKeys
-
-Re-exports [ObjectKeys](types_object_keys.md#objectkeys)
-
-___
-
 ### Optional
 
 Re-exports [Optional](types_core.md#optional)
 
 ___
 
-### OptionalStyle
+### Or
 
-Re-exports [OptionalStyle](types_object.md#optionalstyle)
-
-___
-
-### OptionalUndefinedStyle
-
-Re-exports [OptionalUndefinedStyle](types_object.md#optionalundefinedstyle)
+Re-exports [Or](types_core.md#or)
 
 ___
 
@@ -341,12 +225,6 @@ ___
 ### PartialRecords
 
 Re-exports [PartialRecords](types_core.md#partialrecords)
-
-___
-
-### PickKeys
-
-Re-exports [PickKeys](types_object.md#pickkeys)
 
 ___
 
@@ -374,12 +252,6 @@ Re-exports [ProxyHandlerAction](../enums/helpers.ProxyHandlerAction.md)
 
 ___
 
-### ReadonlyDefinedKeys
-
-Re-exports [ReadonlyDefinedKeys](types_object_keys.md#readonlydefinedkeys)
-
-___
-
 ### ReadonlyMap
 
 Re-exports [ReadonlyMap](core.md#readonlymap)
@@ -389,12 +261,6 @@ ___
 ### ReadonlySet
 
 Re-exports [ReadonlySet](core.md#readonlyset)
-
-___
-
-### ReadonlyUndefinedKeys
-
-Re-exports [ReadonlyUndefinedKeys](types_object_keys.md#readonlyundefinedkeys)
 
 ___
 
@@ -410,12 +276,6 @@ Re-exports [Recs](types_core.md#recs)
 
 ___
 
-### RemovePrefix
-
-Re-exports [RemovePrefix](types_string.md#removeprefix)
-
-___
-
 ### SafeAccess
 
 Re-exports [SafeAccess](helpers.md#safeaccess)
@@ -428,36 +288,6 @@ Re-exports [SafeAccessGuards](helpers.md#safeaccessguards)
 
 ___
 
-### StrictOmit
-
-Re-exports [StrictOmit](types_object.md#strictomit)
-
-___
-
-### Sync
-
-Re-exports [Sync](../interfaces/types_function.Sync.md)
-
-___
-
-### UndefinedKeys
-
-Re-exports [UndefinedKeys](types_object_keys.md#undefinedkeys)
-
-___
-
-### UndefinedStyle
-
-Re-exports [UndefinedStyle](types_object.md#undefinedstyle)
-
-___
-
-### UppercaseLetter
-
-Re-exports [UppercaseLetter](types_string.md#uppercaseletter)
-
-___
-
 ### ValidationObject
 
 Re-exports [ValidationObject](core.md#validationobject)
@@ -467,12 +297,6 @@ ___
 ### Writable
 
 Re-exports [Writable](types_core.md#writable)
-
-___
-
-### WritableDefindKeys
-
-Re-exports [WritableDefindKeys](types_object_keys.md#writabledefindkeys)
 
 ___
 
@@ -524,12 +348,6 @@ Re-exports [WritableRecords](types_core.md#writablerecords)
 
 ___
 
-### WritableUndefindKeys
-
-Re-exports [WritableUndefindKeys](types_object_keys.md#writableundefindkeys)
-
-___
-
 ### a
 
 Renames and re-exports [array](array.md)
@@ -575,12 +393,6 @@ ___
 ### createFacade
 
 Re-exports [createFacade](helpers.md#createfacade)
-
-___
-
-### createValidationObject
-
-Re-exports [createValidationObject](core.md#createvalidationobject)
 
 ___
 
@@ -773,6 +585,12 @@ ___
 ### typedef
 
 Re-exports [typedef](core.md#typedef)
+
+___
+
+### types
+
+Renames and re-exports [types/index.types](types_index_types.md)
 
 ___
 

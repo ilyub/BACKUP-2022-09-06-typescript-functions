@@ -300,7 +300,7 @@ ___
 
 ### enumeration
 
-▸ **enumeration**<`T`\>(`value`, `vo`): `T`
+▸ **enumeration**<`T`\>(`value`, `en`): `T`
 
 Asserts that value type is T.
 
@@ -319,7 +319,7 @@ Error otherwise.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `unknown` | Value. |
-| `vo` | [`IndexedObject`](types_core.md#indexedobject)<`T`\> | Validation object. |
+| `en` | [`IndexedObject`](types_core.md#indexedobject)<`T`\> | Validation object. |
 
 #### Returns
 

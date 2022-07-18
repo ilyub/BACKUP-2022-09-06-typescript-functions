@@ -138,7 +138,8 @@ exports.map = map;
  */
 function omit(obj, ...exclude) {
     const excludeSet = new core_1.ReadonlySet(exclude);
-    return filter(obj, (_value, key) => !excludeSet.has(key));
+    const result = filter(obj, (_value, key) => !excludeSet.has(key));
+    return result;
 }
 exports.omit = omit;
 /**

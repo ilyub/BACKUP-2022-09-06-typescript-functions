@@ -1,5 +1,5 @@
 import * as is from "./guards";
-import type { Entry, NumStr, OptionalStyle, PartialRecord, Rec, StrictOmit, Writable, objectU } from "./types";
+import type { Entry, NumStr, PartialRecord, Rec, Writable, objectU, types } from "./types";
 /**
  * Typed version of Object.assign.
  *
@@ -218,14 +218,14 @@ export declare function map<K extends string, V, R>(obj: Rec<K, V>, callback: (v
  * @param exclude - Keys to omit.
  * @returns New object.
  */
-export declare function omit<T extends object, K extends string & keyof T>(obj: T, ...exclude: readonly K[]): StrictOmit<T, K>;
+export declare function omit<T extends object, K extends string & keyof T>(obj: T, ...exclude: readonly K[]): types.object.Omit<T, K>;
 /**
  * Removes undefined keys.
  *
  * @param obj - Object.
  * @returns New object with undefined keys removed.
  */
-export declare function removeUndefinedKeys<T extends object>(obj: T): OptionalStyle<T>;
+export declare function removeUndefinedKeys<T extends object>(obj: T): types.object.style.Optional<T>;
 /**
  * Sets object property.
  *

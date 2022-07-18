@@ -77,7 +77,7 @@ exports.round = (0, core_1.defineFn)(
  * @returns The average.
  */
 function average(...values) {
-    assert.toBeTrue(values.length > 0, "Average is undetermined for no args");
+    assert.toBeTrue(values.length > 0, "Average is not defined for no args");
     return sum(...values) / values.length;
 }
 exports.average = average;

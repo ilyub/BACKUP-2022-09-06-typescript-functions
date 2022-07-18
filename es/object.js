@@ -127,7 +127,8 @@ export function map(obj, callback) {
  */
 export function omit(obj, ...exclude) {
     const excludeSet = new ReadonlySet(exclude);
-    return filter(obj, (_value, key) => !excludeSet.has(key));
+    const result = filter(obj, (_value, key) => !excludeSet.has(key));
+    return result;
 }
 /**
  * Removes undefined keys.
