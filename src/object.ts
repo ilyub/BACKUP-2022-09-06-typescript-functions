@@ -26,44 +26,6 @@ export const assign: <T extends object>(
   ...sources: ReadonlyArray<Readonly<Partial<T>>>
 ) => T = Object.assign;
 
-export const extend: {
-  /**
-   * Typed version of Object.assign.
-   *
-   * @param target - Target object.
-   * @param source - Source.
-   * @returns Target.
-   * @deprecated - Unsafe.
-   */
-  <T extends object, A>(target: T, source: A): A & T;
-  /**
-   * Typed version of Object.assign.
-   *
-   * @param target - Target object.
-   * @param source1 - Source 1.
-   * @param source2 - Source 2.
-   * @returns Target.
-   * @deprecated - Unsafe.
-   */
-  <T extends object, A, B>(target: T, source1: A, source2: B): A & B & T;
-  /**
-   * Typed version of Object.assign.
-   *
-   * @param target - Target object.
-   * @param source1 - Source 1.
-   * @param source2 - Source 2.
-   * @param source3 - Source 3.
-   * @returns Target.
-   * @deprecated - Unsafe.
-   */
-  <T extends object, A, B, C>(
-    target: T,
-    source1: A,
-    source2: B,
-    source3: C
-  ): A & B & C & T;
-} = Object.assign;
-
 /**
  * Typed version of Object.defineProperty.
  *

@@ -20,11 +20,6 @@ export const defineFn: <F, P>(fn: F, props: P) => F & Readonly<P> =
   Object.assign;
 
 /**
- * @deprecated -- Use enum.
- */
-export type ValidationObject<T extends PropertyKey> = IndexedObject<T>;
-
-/**
  * Executes callback.
  *
  * @param callback - Callback.
