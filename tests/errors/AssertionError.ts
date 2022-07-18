@@ -4,12 +4,13 @@ const error1 = new AssertionError();
 
 const error2 = new AssertionError("Custom message");
 
-test("message", () => {
-  expect(error1.message).toBe("Assertion failed");
-  expect(error2.message).toBe("Custom message");
+test.each([
+  { err: error1, expected: "Assertion failed" },
+  { err: error2, expected: "Custom message" }
+])("message", ({ err, expected }) => {
+  expect(err.message).toBe(expected);
 });
 
-test("name", () => {
-  expect(error1.name).toBe("AssertionError");
-  expect(error2.name).toBe("AssertionError");
+test.each([error1, error2])("name", err => {
+  expect(err.name).toBe("AssertionError");
 });

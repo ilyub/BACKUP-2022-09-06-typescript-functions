@@ -1,17 +1,41 @@
 import { Accumulator2, ReadonlyMap, a } from "@";
 
-test("get", () => {
-  const accumulator = new Accumulator2<string, string, unknown>([
+test.each([
+  {
+    expected: [1, 2],
+    key1: "a",
+    key2: "x"
+  },
+  {
+    expected: [3],
+    key1: "b",
+    key2: "y"
+  },
+  {
+    expected: [],
+    key1: "c",
+    key2: "z"
+  }
+])("get: array", ({ expected, key1, key2 }) => {
+  const accumulator = new Accumulator2<string, string, number>([
     ["a", "x", [1, 2]],
     ["b", "y", [3]]
   ]);
 
-  expect(accumulator.get("a")).toStrictEqual(new ReadonlyMap([["x", [1, 2]]]));
-  expect(accumulator.get("b")).toStrictEqual(new ReadonlyMap([["y", [3]]]));
-  expect(accumulator.get("c")).toStrictEqual(new ReadonlyMap());
-  expect(accumulator.get("a", "x")).toStrictEqual([1, 2]);
-  expect(accumulator.get("b", "y")).toStrictEqual([3]);
-  expect(accumulator.get("c", "z")).toStrictEqual([]);
+  expect(accumulator.get(key1, key2)).toStrictEqual(expected);
+});
+
+test.each([
+  { expected: new ReadonlyMap([["x", [1, 2]]]), key: "a" },
+  { expected: new ReadonlyMap([["y", [3]]]), key: "b" },
+  { expected: new ReadonlyMap(), key: "c" }
+])("get: map", ({ expected, key }) => {
+  const accumulator = new Accumulator2<string, string, number>([
+    ["a", "x", [1, 2]],
+    ["b", "y", [3]]
+  ]);
+
+  expect(accumulator.get(key)).toStrictEqual(expected);
 });
 
 test("push", () => {
@@ -47,7 +71,7 @@ test("unshift", () => {
 });
 
 test("values", () => {
-  const accumulator = new Accumulator2<string, string, unknown>([
+  const accumulator = new Accumulator2<string, string, number>([
     ["a", "x", [1, 2]],
     ["b", "y", [3]]
   ]);

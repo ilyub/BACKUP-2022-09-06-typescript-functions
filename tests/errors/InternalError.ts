@@ -4,12 +4,13 @@ const error1 = new InternalError();
 
 const error2 = new InternalError("Custom message");
 
-test("message", () => {
-  expect(error1.message).toBe("Internal error");
-  expect(error2.message).toBe("Custom message");
+test.each([
+  { err: error1, expected: "Internal error" },
+  { err: error2, expected: "Custom message" }
+])("message", ({ err, expected }) => {
+  expect(err.message).toBe(expected);
 });
 
-test("name", () => {
-  expect(error1.name).toBe("InternalError");
-  expect(error2.name).toBe("InternalError");
+test.each([error1, error2])("name", err => {
+  expect(err.name).toBe("InternalError");
 });

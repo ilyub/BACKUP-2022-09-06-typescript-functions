@@ -1,7 +1,7 @@
 import * as _ from "@skylib/lodash-commonjs-es";
-import type { Callable, unknowns } from "./types";
+import type { unknowns } from "./types";
 
-export const noop: Callable = _.noop.bind(_);
+export const noop = _.noop.bind(_);
 
 export interface PipeCallback<V = unknown, R = unknown> {
   /**

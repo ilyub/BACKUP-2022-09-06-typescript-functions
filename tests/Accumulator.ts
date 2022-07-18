@@ -1,14 +1,16 @@
 import { Accumulator, a } from "@";
 
-test("get", () => {
-  const accumulator = new Accumulator<string, unknown>([
+test.each([
+  { expected: [1, 2], key: "a" },
+  { expected: [3], key: "b" },
+  { expected: [], key: "c" }
+])("get", ({ expected, key }) => {
+  const accumulator = new Accumulator<string, number>([
     ["a", [1, 2]],
     ["b", [3]]
   ]);
 
-  expect(accumulator.get("a")).toStrictEqual([1, 2]);
-  expect(accumulator.get("b")).toStrictEqual([3]);
-  expect(accumulator.get("c")).toStrictEqual([]);
+  expect(accumulator.get(key)).toStrictEqual(expected);
 });
 
 test("push", () => {
@@ -40,7 +42,7 @@ test("unshift", () => {
 });
 
 test("values", () => {
-  const accumulator = new Accumulator<string, unknown>([
+  const accumulator = new Accumulator<string, number>([
     ["a", [1, 2]],
     ["b", [3]]
   ]);

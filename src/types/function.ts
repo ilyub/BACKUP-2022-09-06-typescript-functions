@@ -13,13 +13,12 @@ export interface Async<R, A extends unknowns = nevers> {
 }
 
 export type AsyncPromise<R, A extends unknowns = nevers> =
-  | Async<R, A>
-  | Promise<R>;
+  // prettier-break
+  Async<R, A> | Promise<R>;
 
 export type AsyncPromiseSync<R, A extends unknowns = nevers> =
-  | Async<R, A>
-  | Promise<R>
-  | Sync<R, A>;
+  // prettier-break
+  Async<R, A> | Promise<R> | Sync<R, A>;
 
 export interface CallSignature<T extends Callable> {
   /**

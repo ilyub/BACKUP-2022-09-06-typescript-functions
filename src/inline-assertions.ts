@@ -1,5 +1,12 @@
 import * as is from "./guards";
-import type * as types from "./types";
+import type {
+  IndexedObject,
+  NumStr,
+  empty as baseEmpty,
+  stringU as baseStringU,
+  unknowns as baseUnknowns,
+  types
+} from "./types";
 import { AssertionError } from "./errors";
 import { defineFn } from "./core";
 
@@ -51,7 +58,7 @@ export const indexedObject = defineFn(factory(is.indexedObject), {
    * @returns Value if value type is IndexedObject\<T\>.
    * @throws Error otherwise.
    */
-  of: <T>(value: unknown, guard: is.Guard<T>): types.IndexedObject<T> => {
+  of: <T>(value: unknown, guard: is.Guard<T>): IndexedObject<T> => {
     if (is.indexedObject.of(value, guard)) return value;
 
     throw new AssertionError();
@@ -160,19 +167,19 @@ export const unknowns = factory(is.unknowns);
 export const unknownsU = factory(is.unknownsU);
 
 export const not = {
-  array: notFactory<types.unknowns>(is.not.array),
+  array: notFactory<baseUnknowns>(is.not.array),
   boolean: notFactory<boolean>(is.not.boolean),
-  empty: notFactory<types.empty>(is.not.empty),
+  empty: notFactory<baseEmpty>(is.not.empty),
   false: notFactory<false>(is.not.false),
-  indexedObject: notFactory<types.IndexedObject>(is.not.indexedObject),
+  indexedObject: notFactory<IndexedObject>(is.not.indexedObject),
   map: notFactory<ReadonlyMap<unknown, unknown>>(is.not.map),
   null: notFactory<null>(is.not.null),
-  numStr: notFactory<types.NumStr>(is.not.numStr),
+  numStr: notFactory<NumStr>(is.not.numStr),
   number: notFactory<number>(is.not.number),
   object: notFactory<object>(is.not.object),
   set: notFactory<ReadonlySet<unknown>>(is.not.set),
   string: notFactory<string>(is.not.string),
-  stringU: notFactory<types.stringU>(is.not.stringU),
+  stringU: notFactory<baseStringU>(is.not.stringU),
   symbol: notFactory<symbol>(is.not.symbol),
   true: notFactory<true>(is.not.true),
   undefined: notFactory<undefined>(is.not.undefined)
@@ -209,15 +216,15 @@ export function callable<T extends Function>(value: unknown): T {
  * Asserts that value type is T.
  *
  * @param value - Value.
- * @param vo - Validation object.
+ * @param en - Validation object.
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
 export function enumeration<T extends PropertyKey>(
   value: unknown,
-  vo: types.IndexedObject<T>
+  en: IndexedObject<T>
 ): T {
-  if (is.enumeration(value, vo)) return value;
+  if (is.enumeration(value, en)) return value;
 
   throw new AssertionError();
 }
@@ -230,7 +237,10 @@ export function enumeration<T extends PropertyKey>(
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
-export function instanceOf<T>(value: unknown, ctor: types.Constructor<T>): T {
+export function instanceOf<T>(
+  value: unknown,
+  ctor: types.fn.Constructor<T>
+): T {
   if (is.instanceOf(value, ctor)) return value;
 
   throw new AssertionError();
@@ -246,7 +256,7 @@ export function instanceOf<T>(value: unknown, ctor: types.Constructor<T>): T {
  */
 export function instancesOf<T>(
   value: unknown,
-  ctor: types.Constructor<T>
+  ctor: types.fn.Constructor<T>
 ): readonly T[] {
   if (is.instancesOf(value, ctor)) return value;
 

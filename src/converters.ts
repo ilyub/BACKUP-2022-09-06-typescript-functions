@@ -3,7 +3,11 @@
 /* eslint-disable @skylib/custom/functions/prefer-cast-string -- Ok */
 
 import * as is from "./guards";
-import type * as types from "./types";
+import type {
+  numberU as baseNumberU,
+  stringU as baseStringU,
+  empty
+} from "./types";
 
 export const not = {
   /**
@@ -13,7 +17,7 @@ export const not = {
    * @param defVal - Default value.
    * @returns Value if it is not empty, defVal otherwise.
    */
-  empty: <T>(value: T, defVal: Exclude<T, types.empty>) =>
+  empty: <T>(value: T, defVal: Exclude<T, empty>) =>
     is.not.empty(value) ? value : defVal
 } as const;
 
@@ -34,7 +38,7 @@ export function number(value: unknown, defVal = 0): number {
  * @param value - Value.
  * @returns Converted value, _undefined_ on failure.
  */
-export function numberU(value: unknown): types.numberU {
+export function numberU(value: unknown): baseNumberU {
   switch (typeof value) {
     case "boolean":
       return Number(value);
@@ -71,7 +75,7 @@ export function string(value: unknown): string {
  * @param value - Value.
  * @returns Converted value.
  */
-export function stringU(value: unknown): types.stringU {
+export function stringU(value: unknown): baseStringU {
   const str = is.not.empty(value) ? String(value) : "";
 
   return str || undefined;

@@ -1,22 +1,25 @@
 import { a, regexp } from "@";
 
-test("addFlags", () => {
-  expect(regexp.addFlags(/.*/gu, "gu").flags).toBe("gu");
-  expect(regexp.addFlags(/.*/gu, "iu").flags).toBe("giu");
+test.each([
+  { expected: "gu", flags: "gu" },
+  { expected: "giu", flags: "iu" }
+])("addFlags", ({ expected, flags }) => {
+  expect(regexp.addFlags(/.*/gu, flags).flags).toBe(expected);
 });
 
 test.each([/\w(\w)\w/u, /\w(\w)\w/gu])("matchAll", re => {
   const matches = regexp.matchAll("abc xyz", re);
 
-  const match0 = a.first(matches);
+  const expected = [
+    ["abc", "b"],
+    ["xyz", "y"]
+  ] as const;
 
-  const match1 = a.second(matches);
+  const expectedIndex = [0, 4] as const;
 
-  expect(matches).toHaveLength(2);
-  expect(a.clone(match0)).toStrictEqual(["abc", "b"]);
-  expect(a.clone(match1)).toStrictEqual(["xyz", "y"]);
-  expect(match0.index).toBe(0);
-  expect(match1.index).toBe(4);
-  expect(match0.input).toBe("abc xyz");
-  expect(match1.input).toBe("abc xyz");
+  const expectedInput = ["abc xyz", "abc xyz"] as const;
+
+  expect(matches.map(match => a.clone(match))).toStrictEqual(expected);
+  expect(matches.map(match => match.index)).toStrictEqual(expectedIndex);
+  expect(matches.map(match => match.input)).toStrictEqual(expectedInput);
 });

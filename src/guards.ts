@@ -6,14 +6,17 @@
 
 /* eslint-disable @skylib/custom/functions/prefer-o-values -- Ok */
 
-/* eslint-disable @skylib/no-multi-type-tuples -- Ok */
-
 /* eslint-disable @skylib/primary-export-only -- Ok */
 
-import type * as types from "./types";
+import type {
+  IndexedObject,
+  NumStr,
+  empty as baseEmpty,
+  stringU as baseStringU,
+  unknowns as baseUnknowns,
+  types
+} from "./types";
 import { defineFn, overload } from "./core";
-import type { OptionalKeys } from "ts-toolbelt/out/Object/OptionalKeys";
-import type { RequiredKeys } from "ts-toolbelt/out/Object/RequiredKeys";
 
 export {
   _false as false,
@@ -241,7 +244,7 @@ export const array = defineFn(
    * @param value - Value.
    * @returns _True_ if value is an array, _false_ otherwise.
    */
-  (value: unknown): value is types.unknowns => Array.isArray(value),
+  (value: unknown): value is baseUnknowns => Array.isArray(value),
   {
     /**
      * Checks if value type is T[].
@@ -274,7 +277,7 @@ export const indexedObject = defineFn(
    * @param value - Value.
    * @returns _True_ if value type is IndexedObject, _false_ otherwise.
    */
-  (value: unknown): value is types.IndexedObject =>
+  (value: unknown): value is IndexedObject =>
     typeof value === "object" && value !== null,
   {
     /**
@@ -284,7 +287,7 @@ export const indexedObject = defineFn(
      * @param guard - Guard for type T.
      * @returns _True_ if value type is IndexedObject\<T\>, _false_ otherwise.
      */
-    of: <T>(value: unknown, guard: Guard<T>): value is types.IndexedObject<T> =>
+    of: <T>(value: unknown, guard: Guard<T>): value is IndexedObject<T> =>
       object(value) && Object.values(value).every(guard)
   }
 );
@@ -363,7 +366,10 @@ export const object = defineFn(
       function result<R extends object, O extends object>(
         required: GuardsRecord<R, keyof R>,
         optional: GuardsRecord<O, keyof O>
-      ): Guard<types.OptionalStyle<Partial<O>> & types.UndefinedStyle<R>>;
+      ): Guard<
+        types.object.style.Optional<Partial<O>> &
+          types.object.style.Undefined<R>
+      >;
 
       /**
        * Creates object guard.
@@ -373,13 +379,13 @@ export const object = defineFn(
        * @returns Object guard.
        */
       function result<T extends object>(
-        required: GuardsRecord<T, RequiredKeys<T>>,
-        optional: GuardsRecord<T, OptionalKeys<T>>
+        required: GuardsRecord<T, types.object.keys.Required<T>>,
+        optional: GuardsRecord<T, types.object.keys.Optional<T>>
       ): Guard<T>;
 
       function result<T extends object>(
-        required: GuardsRecord<T, RequiredKeys<T>>,
-        optional: GuardsRecord<T, OptionalKeys<T>>
+        required: GuardsRecord<T, types.object.keys.Required<T>>,
+        optional: GuardsRecord<T, types.object.keys.Optional<T>>
       ): Guard<T> {
         return (value): value is T => object.of(value, required, optional);
       }
@@ -399,7 +405,8 @@ export const object = defineFn(
         value: unknown,
         required: GuardsRecord<R, keyof R>,
         optional: GuardsRecord<O, keyof O>
-      ): value is types.OptionalStyle<Partial<O>> & types.UndefinedStyle<R>;
+      ): value is types.object.style.Optional<Partial<O>> &
+        types.object.style.Undefined<R>;
 
       /**
        * Checks if value is an object.
@@ -411,14 +418,14 @@ export const object = defineFn(
        */
       function result<T extends object>(
         value: unknown,
-        required: GuardsRecord<T, RequiredKeys<T>>,
-        optional: GuardsRecord<T, OptionalKeys<T>>
+        required: GuardsRecord<T, types.object.keys.Required<T>>,
+        optional: GuardsRecord<T, types.object.keys.Optional<T>>
       ): value is T;
 
       function result<T extends object>(
         value: unknown,
-        required: GuardsRecord<T, RequiredKeys<T>>,
-        optional: GuardsRecord<T, OptionalKeys<T>>
+        required: GuardsRecord<T, types.object.keys.Required<T>>,
+        optional: GuardsRecord<T, types.object.keys.Optional<T>>
       ): value is T {
         return (
           indexedObject(value) &&
@@ -502,6 +509,7 @@ export const tuple = defineFn(
       value: unknown,
       guard1: Guard<A>,
       guard2: Guard<B>
+      // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
     ): value is readonly [A, B];
 
     /**
@@ -518,6 +526,7 @@ export const tuple = defineFn(
       guard1: Guard<A>,
       guard2: Guard<B>,
       guard3: Guard<C>
+      // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
     ): value is readonly [A, B, C];
 
     /**
@@ -536,6 +545,7 @@ export const tuple = defineFn(
       guard2: Guard<B>,
       guard3: Guard<C>,
       guard4: Guard<D>
+      // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
     ): value is readonly [A, B, C, D];
 
     function result(value: unknown, ...guards: Guards): value is unknown {
@@ -566,6 +576,7 @@ export const tuple = defineFn(
       function result<A, B>(
         guard1: Guard<A>,
         guard2: Guard<B>
+        // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
       ): Guard<readonly [A, B]>;
 
       /**
@@ -580,6 +591,7 @@ export const tuple = defineFn(
         guard1: Guard<A>,
         guard2: Guard<B>,
         guard3: Guard<C>
+        // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
       ): Guard<readonly [A, B, C]>;
 
       /**
@@ -596,6 +608,7 @@ export const tuple = defineFn(
         guard2: Guard<B>,
         guard3: Guard<C>,
         guard4: Guard<D>
+        // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
       ): Guard<readonly [A, B, C, D]>;
 
       function result(...guards: Guards): Guard {
@@ -666,7 +679,7 @@ export type GuardsRecord<T, K extends keyof T = keyof T> = {
   readonly [L in K]-?: Guard<T[L]>;
 };
 
-export interface MultiArgGuard<T, A extends types.unknowns> {
+export interface MultiArgGuard<T, A extends baseUnknowns> {
   /**
    * Checks if value type is T.
    *
@@ -703,7 +716,7 @@ export function callable<T extends Function>(value: unknown): value is T {
  * @param value - Value.
  * @returns _True_ if value type is empty, _false_ otherwise.
  */
-export function empty(value: unknown): value is types.empty {
+export function empty(value: unknown): value is baseEmpty {
   return value === null || value === undefined;
 }
 
@@ -711,14 +724,14 @@ export function empty(value: unknown): value is types.empty {
  * Checks if value type is T.
  *
  * @param value - Value.
- * @param vo - Validation object.
+ * @param en - Validation object.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
 export function enumeration<T extends PropertyKey>(
   value: unknown,
-  vo: types.IndexedObject<T>
+  en: IndexedObject<T>
 ): value is T {
-  return Object.values<unknown>(vo).includes(value);
+  return Object.values<unknown>(en).includes(value);
 }
 
 /**
@@ -728,7 +741,7 @@ export function enumeration<T extends PropertyKey>(
  * @param args - Arguments.
  * @returns Single-arg guard.
  */
-export function factory<T, A extends types.unknowns>(
+export function factory<T, A extends baseUnknowns>(
   guard: MultiArgGuard<T, A>,
   ...args: A
 ): Guard<T> {
@@ -744,7 +757,7 @@ export function factory<T, A extends types.unknowns>(
  */
 export function instanceOf<T>(
   value: unknown,
-  ctor: types.Constructor<T>
+  ctor: types.fn.Constructor<T>
 ): value is T {
   return value instanceof ctor;
 }
@@ -758,7 +771,7 @@ export function instanceOf<T>(
  */
 export function instancesOf<T>(
   value: unknown,
-  ctor: types.Constructor<T>
+  ctor: types.fn.Constructor<T>
 ): value is readonly T[] {
   return array(value) && value.every(v => v instanceof ctor);
 }
@@ -779,7 +792,7 @@ export function never(_value: unknown): _value is never {
  * @param value - Value.
  * @returns _True_ if value type is NumStr, _false_ otherwise.
  */
-export function numStr(value: unknown): value is types.NumStr {
+export function numStr(value: unknown): value is NumStr {
   switch (typeof value) {
     case "number":
       return !Number.isNaN(value);
@@ -818,7 +831,7 @@ export function string(value: unknown): value is string {
  * @param value - Value.
  * @returns _True_ if value is a string, _false_ otherwise.
  */
-export function stringU(value: unknown): value is types.stringU {
+export function stringU(value: unknown): value is baseStringU {
   switch (typeof value) {
     case "string":
       return value !== "";
@@ -910,7 +923,7 @@ function _undefined(value: unknown): value is undefined {
  * @returns _True_ if object has optional property, _false_ otherwise.
  */
 function checkOptionalProp(
-  obj: types.IndexedObject,
+  obj: IndexedObject,
   key: PropertyKey,
   guard: Guard
 ): boolean {
@@ -928,7 +941,7 @@ function checkOptionalProp(
  * @returns _True_ if object has required property, _false_ otherwise.
  */
 function checkRequiredProp(
-  obj: types.IndexedObject,
+  obj: IndexedObject,
   key: PropertyKey,
   guard: Guard
 ): boolean {

@@ -3,222 +3,244 @@
 /* eslint-disable @skylib/custom/functions/no-reflect-set -- Ok */
 
 import * as testUtils from "@/test-utils";
+import type { Facade, Writable } from "@";
 import {
   ProxyHandlerAction,
   createFacade,
   fn,
   is,
-  o,
   onDemand,
   reflect,
   safeAccess,
   wait,
   wrapProxyHandler
 } from "@";
-import type { Writable } from "@";
 
 testUtils.installFakeTimer();
 
-test("createFacade: Extension", () => {
-  const extension: Writable<Extension> = { pow: x => x * x };
+const descriptor = {
+  configurable: true,
+  enumerable: true,
+  value: 1,
+  writable: true
+} as const;
 
-  const facade = createFacade<object, Writable<Extension>>(
-    "sample-facade",
-    extension
+class TestClass {
+  public readonly value = 1;
+}
+
+function pow2(x: number): number {
+  return x * x;
+}
+
+function pow3(x: number): number {
+  return x * x * x;
+}
+
+function safeObj1(): object {
+  return safeAccess(
+    {
+      a: 1,
+      b: 2,
+      c: 3
+    },
+    { a: is.number },
+    ["b"]
   );
+}
 
-  {
-    expect(facade.pow(1)).toBe(1);
-    expect(facade.pow(2)).toBe(4);
-    expect(facade.pow(3)).toBe(9);
-  }
+function safeObj2(): object {
+  return safeAccess(
+    {
+      a: 1,
+      b: 2,
+      c: 3
+    },
+    { a: is.number }
+  );
+}
 
-  {
-    facade.pow = (x): number => x * x * x;
-    expect(facade.pow(1)).toBe(1);
-    expect(facade.pow(2)).toBe(8);
-    expect(facade.pow(3)).toBe(27);
-  }
+test.each([1, 2, 3])("createFacade: Extension", value => {
+  const extension: Writable<Extension> = { pow: pow2 };
+
+  const facade = createFacade<object, Writable<Extension>>("facade", extension);
+
+  expect(facade.pow(value)).toBe(pow2(value));
+  facade.pow = pow3;
+  expect(facade.pow(value)).toBe(pow3(value));
 
   interface Extension {
     readonly pow: (x: number) => number;
   }
 });
 
-test("createFacade: Function", () => {
-  const facade = createFacade<Facade>("sample-facade", {});
+test.each([1, 2, 3])("createFacade: Function", value => {
+  const facade = createFacade<Function>("facade", {});
 
-  facade.setImplementation(x => x * x);
-  expect(facade(1)).toBe(1);
-  expect(facade(2)).toBe(4);
-  expect(facade(3)).toBe(9);
-
-  interface Facade {
-    (x: number): number;
-  }
+  facade.setImplementation(pow2);
+  expect(facade(value)).toBe(pow2(value));
 });
 
-test("createFacade: Object", () => {
-  const facade = createFacade<Facade>("sample-facade", {});
+test.each([
+  {
+    expected: 1,
+    subtest: (facade: Facade<object>): unknown => reflect.get(facade, "value")
+  },
+  {
+    expected: descriptor,
+    subtest: (facade: Facade<object>): unknown =>
+      reflect.getOwnPropertyDescriptor(facade, "value")
+  },
+  {
+    expected: true,
+    subtest: (facade: Facade<object>): unknown => reflect.has(facade, "value")
+  },
+  {
+    expected: true,
+    subtest: (facade: Facade<object>): unknown => reflect.isExtensible(facade)
+  },
+  {
+    expected: ["value"],
+    subtest: (facade: Facade<object>): unknown => reflect.ownKeys(facade)
+  },
+  {
+    expected: true,
+    subtest: (facade: Facade<object>): unknown =>
+      reflect.set(facade, "value", 2)
+  }
+])("createFacade: Object", ({ expected, subtest }) => {
+  const facade = createFacade<object>("facade", {});
 
   class Implementation {
     public readonly value = 1;
   }
 
   facade.setImplementation(new Implementation());
-
-  const descriptor = {
-    configurable: true,
-    enumerable: true,
-    value: 1,
-    writable: true
-  } as const;
-
-  expect(reflect.get(facade, "value")).toBe(1);
-  expect(reflect.getOwnPropertyDescriptor(facade, "value")).toStrictEqual(
-    descriptor
-  );
-  expect(reflect.has(facade, "value")).toBeTrue();
-  expect(reflect.isExtensible(facade)).toBeTrue();
-  expect(reflect.ownKeys(facade)).toStrictEqual(["value"]);
-  expect(reflect.set(facade, "value", 2)).toBeTrue();
-
-  interface Facade {
-    readonly value: number;
-  }
+  expect(subtest(facade)).toStrictEqual(expected);
 });
 
-test("onDemand", () => {
-  class TestClass {
-    public readonly value = 1;
+test.each([
+  { expected: 1, subtest: (obj: object): unknown => reflect.get(obj, "value") },
+  {
+    expected: descriptor,
+    subtest: (obj: object): unknown =>
+      reflect.getOwnPropertyDescriptor(obj, "value")
+  },
+  {
+    expected: true,
+    subtest: (obj: object): unknown => reflect.has(obj, "value")
+  },
+  {
+    expected: true,
+    subtest: (obj: object): unknown => reflect.isExtensible(obj)
+  },
+  {
+    expected: ["value"],
+    subtest: (obj: object): unknown => reflect.ownKeys(obj)
+  },
+  {
+    expected: true,
+    subtest: (obj: object): unknown => reflect.set(obj, "value", 2)
   }
-
+])("onDemand", ({ expected, subtest }) => {
   const obj = onDemand(() => new TestClass());
 
-  const descriptor = {
-    configurable: true,
-    enumerable: true,
-    value: 1,
-    writable: true
-  } as const;
-
-  expect(reflect.get(obj, "value")).toBe(1);
-  expect(reflect.getOwnPropertyDescriptor(obj, "value")).toStrictEqual(
-    descriptor
-  );
-  expect(reflect.has(obj, "value")).toBeTrue();
-  expect(reflect.isExtensible(obj)).toBeTrue();
-  expect(reflect.ownKeys(obj)).toStrictEqual(["value"]);
-  expect(reflect.set(obj, "value", 2)).toBeTrue();
+  expect(subtest(obj)).toStrictEqual(expected);
 });
 
-test("safeAccess: get", () => {
-  const obj = safeAccess(
-    {
-      a: 1,
-      b: 2,
-      c: 3
-    },
-    { a: is.number },
-    ["b"]
+test.each([
+  { expected: 1, key: "a" },
+  { expected: 2, key: "b" },
+  {
+    expected: new Error("Read access denied: c"),
+    expectedToThrow: true,
+    key: "c"
+  }
+])("safeAccess: get", ({ expected, expectedToThrow, key }) => {
+  expect(() => reflect.get(safeObj1(), key)).executionResultToBe(
+    expected,
+    expectedToThrow
   );
-
-  const error = new Error("Read access denied: c");
-
-  expect(reflect.get(obj, "a")).toBe(1);
-  expect(reflect.get(obj, "b")).toBe(2);
-  expect(() => reflect.get(obj, "c")).toThrow(error);
 });
 
-test("safeAccess: getOwnPropertyDescriptor", () => {
-  const obj = safeAccess(
-    {
-      a: 1,
-      b: 2,
-      c: 3
+test.each([
+  {
+    expected: {
+      configurable: true,
+      enumerable: true,
+      value: 1,
+      writable: true
     },
-    { a: is.number },
-    ["b"]
-  );
-
-  const expected1 = {
-    configurable: true,
-    enumerable: true,
-    value: 1,
-    writable: true
-  } as const;
-
-  const expected2 = {
-    configurable: true,
-    enumerable: true,
-    value: 2,
-    writable: true
-  } as const;
-
-  const error = new Error("Read access denied: c");
-
-  expect(reflect.getOwnPropertyDescriptor(obj, "a")).toStrictEqual(expected1);
-  expect(reflect.getOwnPropertyDescriptor(obj, "b")).toStrictEqual(expected2);
-  expect(() => reflect.getOwnPropertyDescriptor(obj, "c")).toThrow(error);
-});
-
-test("safeAccess: has", () => {
-  const obj = safeAccess(
-    {
-      a: 1,
-      b: 2,
-      c: 3
+    propertyKey: "a"
+  },
+  {
+    expected: {
+      configurable: true,
+      enumerable: true,
+      value: 2,
+      writable: true
     },
-    { a: is.number },
-    ["b"]
-  );
+    propertyKey: "b"
+  },
+  {
+    expected: new Error("Read access denied: c"),
+    expectedToThrow: true,
+    propertyKey: "c"
+  }
+])(
+  "safeAccess: getOwnPropertyDescriptor",
+  ({ expected, expectedToThrow, propertyKey }) => {
+    expect(() =>
+      reflect.getOwnPropertyDescriptor(safeObj1(), propertyKey)
+    ).executionResultToBe(expected, expectedToThrow);
+  }
+);
 
-  expect(reflect.has(obj, "a")).toBeTrue();
-  expect(reflect.has(obj, "b")).toBeTrue();
-  expect(reflect.has(obj, "c")).toBeFalse();
+test.each([
+  { expected: true, propertyKey: "a" },
+  { expected: true, propertyKey: "b" },
+  { expected: false, propertyKey: "c" }
+])("safeAccess: has", ({ expected, propertyKey }) => {
+  expect(reflect.has(safeObj1(), propertyKey)).toBe(expected);
 });
 
 test("safeAccess: isExtensible", () => {
-  const obj = safeAccess({}, {});
-
-  expect(reflect.isExtensible(obj)).toBeTrue();
+  expect(reflect.isExtensible(safeObj2())).toBeTrue();
 });
 
 test("safeAccess: ownKeys", () => {
-  const obj = safeAccess(
-    {
-      a: 1,
-      b: 2,
-      c: 3
-    },
-    { a: is.number },
-    ["b"]
-  );
-
-  expect(reflect.ownKeys(obj)).toStrictEqual(["a", "b"]);
+  expect(reflect.ownKeys(safeObj1())).toStrictEqual(["a", "b"]);
 });
 
-test("safeAccess: set", () => {
-  const obj = safeAccess(
-    {
-      a: 1,
-      b: 2,
-      c: 3
-    },
-    { a: is.number },
-    ["b"]
+test.each([
+  {
+    expected: true,
+    propertyKey: "a",
+    value: 2
+  },
+  {
+    expected: new Error("Type check failed: a"),
+    expectedToThrow: true,
+    propertyKey: "a",
+    value: false
+  },
+  {
+    expected: new Error("Write access denied: b"),
+    expectedToThrow: true,
+    propertyKey: "b",
+    value: 3
+  },
+  {
+    expected: new Error("Write access denied: c"),
+    expectedToThrow: true,
+    propertyKey: "c",
+    value: 4
+  }
+])("safeAccess: set", ({ expected, expectedToThrow, propertyKey, value }) => {
+  expect(() => reflect.set(safeObj1(), propertyKey, value)).executionResultToBe(
+    expected,
+    expectedToThrow
   );
-
-  const error1 = new Error("Type check failed: a");
-
-  const error2 = new Error("Write access denied: b");
-
-  const error3 = new Error("Write access denied: c");
-
-  expect(reflect.set(obj, "a", 2)).toBeTrue();
-  expect(() => reflect.set(obj, "a", false)).toThrow(error1);
-  expect(() => reflect.set(obj, "b", 3)).toThrow(error2);
-  expect(() => reflect.set(obj, "c", 4)).toThrow(error3);
 });
 
 test("wait", async () => {
@@ -231,110 +253,167 @@ test("wait", async () => {
   });
 });
 
-test("wrapProxyHandler: doDefault", () => {
-  class TestClass {
-    public readonly x = 1;
+test.each([
+  {
+    expected: undefined,
+    subtest: (handler: ProxyHandler<object>) =>
+      reflect.apply(new Proxy<() => void>(fn.noop, handler), undefined, [])
+  },
+  {
+    expected: new TestClass(),
+    subtest: (handler: ProxyHandler<object>) =>
+      reflect.construct(new Proxy<typeof TestClass>(TestClass, handler), [])
+  },
+  {
+    expected: true,
+    subtest: (handler: ProxyHandler<object>) =>
+      reflect.defineProperty(new Proxy(new TestClass(), handler), "value", {})
+  },
+  {
+    expected: true,
+    subtest: (handler: ProxyHandler<object>) =>
+      reflect.deleteProperty(new Proxy(new TestClass(), handler), "value")
+  },
+  {
+    expected: 1,
+    subtest: (handler: ProxyHandler<object>) =>
+      reflect.get(new Proxy(new TestClass(), handler), "value")
+  },
+  {
+    expected: descriptor,
+    subtest: (handler: ProxyHandler<object>) =>
+      reflect.getOwnPropertyDescriptor(
+        new Proxy(new TestClass(), handler),
+        "value"
+      )
+  },
+  {
+    expected: TestClass.prototype,
+    subtest: (handler: ProxyHandler<object>) =>
+      reflect.getPrototypeOf(new Proxy(new TestClass(), handler))
+  },
+  {
+    expected: true,
+    subtest: (handler: ProxyHandler<object>) =>
+      reflect.has(new Proxy(new TestClass(), handler), "value")
+  },
+  {
+    expected: true,
+    subtest: (handler: ProxyHandler<object>) =>
+      reflect.isExtensible(new Proxy(new TestClass(), handler))
+  },
+  {
+    expected: ["value"],
+    subtest: (handler: ProxyHandler<object>) =>
+      reflect.ownKeys(new Proxy(new TestClass(), handler))
+  },
+  {
+    expected: true,
+    subtest: (handler: ProxyHandler<object>) =>
+      reflect.preventExtensions(new Proxy(new TestClass(), handler))
+  },
+  {
+    expected: true,
+    subtest: (handler: ProxyHandler<object>) =>
+      reflect.set(new Proxy(new TestClass(), handler), "value", 1)
+  },
+  {
+    expected: true,
+    subtest: (handler: ProxyHandler<object>) =>
+      reflect.setPrototypeOf(new Proxy(new TestClass(), handler), null)
   }
-
+])("wrapProxyHandler: doDefault", ({ expected, subtest }) => {
   const handler = wrapProxyHandler("test", ProxyHandlerAction.doDefault, {});
 
-  const proxyClass = new Proxy<typeof TestClass>(TestClass, handler);
-
-  const proxyFunction = new Proxy<() => void>(fn.noop, handler);
-
-  const proxyObject = new Proxy(new TestClass(), handler);
-
-  const proxyObjectDelete = new Proxy(new TestClass(), handler);
-
-  const proxyObjectFreeze = new Proxy(new TestClass(), handler);
-
-  const descriptor = {
-    configurable: true,
-    enumerable: true,
-    value: 1,
-    writable: true
-  } as const;
-
-  expect(reflect.apply(proxyFunction, undefined, [])).toBeUndefined();
-  expect(reflect.construct(proxyClass, [])).toBeInstanceOf(TestClass);
-  expect(reflect.defineProperty(proxyObject, "x", {})).toBe(true);
-  expect(reflect.deleteProperty(proxyObjectDelete, "x")).toBe(true);
-  expect(reflect.get(proxyObject, "x")).toBe(1);
-  expect(reflect.getOwnPropertyDescriptor(proxyObject, "x")).toStrictEqual(
-    descriptor
-  );
-  expect(reflect.getPrototypeOf(proxyObject)).toStrictEqual(
-    TestClass.prototype
-  );
-  expect(reflect.has(proxyObject, "x")).toBe(true);
-  expect(reflect.isExtensible(proxyObject)).toBe(true);
-  expect(reflect.ownKeys(proxyObject)).toStrictEqual(["x"]);
-  expect(reflect.preventExtensions(proxyObjectFreeze)).toBe(true);
-  expect(reflect.set(proxyObject, "x", 1)).toBe(true);
-  expect(reflect.setPrototypeOf(proxyObject, null)).toBe(true);
+  expect(subtest(handler)).toStrictEqual(expected);
 });
 
-test("wrapProxyHandler: throw", () => {
-  expect.hasAssertions();
-
-  class TestClass {
-    public readonly x = 1;
+test.each([
+  {
+    error: new Error("Not implemented: test.apply"),
+    subtest: (handler: ProxyHandler<object>): void => {
+      reflect.apply(new Proxy<() => void>(fn.noop, handler), undefined, []);
+    }
+  },
+  {
+    error: new Error("Not implemented: test.construct"),
+    subtest: (handler: ProxyHandler<object>): void => {
+      reflect.construct(new Proxy<typeof TestClass>(TestClass, handler), []);
+    }
+  },
+  {
+    error: new Error("Not implemented: test.defineProperty"),
+    subtest: (handler: ProxyHandler<object>): void => {
+      reflect.defineProperty(new Proxy(new TestClass(), handler), "value", {});
+    }
+  },
+  {
+    error: new Error("Not implemented: test.deleteProperty"),
+    subtest: (handler: ProxyHandler<object>): void => {
+      reflect.deleteProperty(new Proxy(new TestClass(), handler), "value");
+    }
+  },
+  {
+    error: new Error("Not implemented: test.get"),
+    subtest: (handler: ProxyHandler<object>): void => {
+      reflect.get(new Proxy(new TestClass(), handler), "value");
+    }
+  },
+  {
+    error: new Error("Not implemented: test.getOwnPropertyDescriptor"),
+    subtest: (handler: ProxyHandler<object>): void => {
+      reflect.getOwnPropertyDescriptor(
+        new Proxy(new TestClass(), handler),
+        "value"
+      );
+    }
+  },
+  {
+    error: new Error("Not implemented: test.getPrototypeOf"),
+    subtest: (handler: ProxyHandler<object>): void => {
+      reflect.getPrototypeOf(new Proxy(new TestClass(), handler));
+    }
+  },
+  {
+    error: new Error("Not implemented: test.has"),
+    subtest: (handler: ProxyHandler<object>): void => {
+      reflect.has(new Proxy(new TestClass(), handler), "value");
+    }
+  },
+  {
+    error: new Error("Not implemented: test.isExtensible"),
+    subtest: (handler: ProxyHandler<object>): void => {
+      reflect.isExtensible(new Proxy(new TestClass(), handler));
+    }
+  },
+  {
+    error: new Error("Not implemented: test.ownKeys"),
+    subtest: (handler: ProxyHandler<object>): void => {
+      reflect.ownKeys(new Proxy(new TestClass(), handler));
+    }
+  },
+  {
+    error: new Error("Not implemented: test.preventExtensions"),
+    subtest: (handler: ProxyHandler<object>): void => {
+      reflect.preventExtensions(new Proxy(new TestClass(), handler));
+    }
+  },
+  {
+    error: new Error("Not implemented: test.set"),
+    subtest: (handler: ProxyHandler<object>): void => {
+      reflect.set(new Proxy(new TestClass(), handler), "value", 1);
+    }
+  },
+  {
+    error: new Error("Not implemented: test.setPrototypeOf"),
+    subtest: (handler: ProxyHandler<object>): void => {
+      reflect.setPrototypeOf(new Proxy(new TestClass(), handler), null);
+    }
   }
-
+])("wrapProxyHandler: throw", ({ error, subtest }) => {
   const handler = wrapProxyHandler("test", ProxyHandlerAction.throw, {});
 
-  const proxyClass = new Proxy<typeof TestClass>(TestClass, handler);
-
-  const proxyFunction = new Proxy<() => void>(fn.noop, handler);
-
-  const proxyObject = new Proxy(new TestClass(), handler);
-
-  const proxyObjectDelete = new Proxy(new TestClass(), handler);
-
-  const proxyObjectFreeze = new Proxy(new TestClass(), handler);
-
-  const subtests = {
-    apply: (): void => {
-      reflect.apply(proxyFunction, undefined, []);
-    },
-    construct: (): void => {
-      reflect.construct(proxyClass, []);
-    },
-    defineProperty: (): void => {
-      reflect.defineProperty(proxyObject, "x", {});
-    },
-    deleteProperty: (): void => {
-      reflect.deleteProperty(proxyObjectDelete, "x");
-    },
-    get: (): void => {
-      reflect.get(proxyObject, "x");
-    },
-    getOwnPropertyDescriptor: (): void => {
-      reflect.getOwnPropertyDescriptor(proxyObject, "x");
-    },
-    getPrototypeOf: (): void => {
-      reflect.getPrototypeOf(proxyObject);
-    },
-    has: (): void => {
-      reflect.has(proxyObject, "x");
-    },
-    isExtensible: (): void => {
-      reflect.isExtensible(proxyObject);
-    },
-    ownKeys: (): void => {
-      reflect.ownKeys(proxyObject);
-    },
-    preventExtensions: (): void => {
-      reflect.preventExtensions(proxyObjectFreeze);
-    },
-    set: (): void => {
-      reflect.set(proxyObject, "x", 1);
-    },
-    setPrototypeOf: (): void => {
-      reflect.setPrototypeOf(proxyObject, null);
-    }
-  } as const;
-
-  for (const [name, subtest] of o.entries(subtests))
-    expect(subtest).toThrow(new Error(`Not implemented: test.${name}`));
+  expect(() => {
+    subtest(handler);
+  }).toThrow(error);
 });

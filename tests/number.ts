@@ -1,65 +1,149 @@
 import { AssertionError, num } from "@";
 
-test("average", () => {
-  expect(num.average(10, 20, 30)).toBe(20);
-  expect(num.average(10, 20)).toBe(15);
-  expect(num.average(10)).toBe(10);
-  expect(() => num.average()).toThrow(AssertionError);
+test.each([
+  { args: [10, 20, 30], expected: 20 },
+  { args: [10, 20], expected: 15 },
+  { args: [10], expected: 10 },
+  {
+    args: [],
+    expected: new AssertionError("Average is not defined for no args"),
+    expectedToThrow: true
+  }
+])("average", ({ args, expected, expectedToThrow }) => {
+  expect(() => num.average(...args)).executionResultToBe(
+    expected,
+    expectedToThrow
+  );
 });
 
-test("ceil", () => {
-  expect(num.ceil(1.111, 1)).toBe(1.2);
-  expect(num.ceil(1.199, 1)).toBe(1.2);
-  expect(num.ceil(1.111, 2)).toBe(1.12);
-  expect(num.ceil(1.119, 2)).toBe(1.12);
+test.each([
+  {
+    expected: 1.2,
+    precision: 1,
+    value: 1.111
+  },
+  {
+    expected: 1.2,
+    precision: 1,
+    value: 1.199
+  },
+  {
+    expected: 1.12,
+    precision: 2,
+    value: 1.111
+  },
+  {
+    expected: 1.12,
+    precision: 2,
+    value: 1.119
+  }
+])("ceil", ({ expected, precision, value }) => {
+  expect(num.ceil(value, precision)).toBe(expected);
 });
 
-test("ceil.step", () => {
-  expect(num.ceil.step(11, 10)).toBe(20);
-  expect(num.ceil.step(19, 10)).toBe(20);
+test.each([
+  { expected: 20, value: 11 },
+  { expected: 20, value: 19 }
+])("ceil.step", ({ expected, value }) => {
+  expect(num.ceil.step(value, 10)).toBe(expected);
 });
 
-test("floor", () => {
-  expect(num.floor(1.111, 1)).toBe(1.1);
-  expect(num.floor(1.199, 1)).toBe(1.1);
-  expect(num.floor(1.111, 2)).toBe(1.11);
-  expect(num.floor(1.119, 2)).toBe(1.11);
+test.each([
+  {
+    expected: 1.1,
+    precision: 1,
+    value: 1.111
+  },
+  {
+    expected: 1.1,
+    precision: 1,
+    value: 1.199
+  },
+  {
+    expected: 1.11,
+    precision: 2,
+    value: 1.111
+  },
+  {
+    expected: 1.11,
+    precision: 2,
+    value: 1.119
+  }
+])("floor", ({ expected, precision, value }) => {
+  expect(num.floor(value, precision)).toBe(expected);
 });
 
-test("floor.step", () => {
-  expect(num.floor.step(11, 10)).toBe(10);
-  expect(num.floor.step(19, 10)).toBe(10);
+test.each([
+  { expected: 10, value: 11 },
+  { expected: 10, value: 19 }
+])("floor.step", ({ expected, value }) => {
+  expect(num.floor.step(value, 10)).toBe(expected);
 });
 
-test("limit", () => {
-  expect(num.limit(0, 1, 3)).toBe(1);
-  expect(num.limit(1, 1, 3)).toBe(1);
-  expect(num.limit(2, 1, 3)).toBe(2);
-  expect(num.limit(3, 1, 3)).toBe(3);
-  expect(num.limit(4, 1, 3)).toBe(3);
+test.each([
+  { expected: 1, value: 0 },
+  { expected: 1, value: 1 },
+  { expected: 2, value: 2 },
+  { expected: 3, value: 3 },
+  { expected: 3, value: 4 }
+])("limit", ({ expected, value }) => {
+  expect(num.limit(value, 1, 3)).toBe(expected);
 });
 
-test("rootMeanSquareDeviation", () => {
-  expect(num.rootMeanSquareDeviation(0, 4)).toBe(2);
-  expect(num.rootMeanSquareDeviation(1, 5)).toBe(2);
-  expect(() => num.rootMeanSquareDeviation()).toThrow(AssertionError);
+test.each([
+  { args: [0, 4], expected: 2 },
+  { args: [1, 5], expected: 2 },
+  { args: [0], expected: 0 },
+  { args: [1], expected: 0 },
+  {
+    args: [],
+    expected: new AssertionError("Average is not defined for no args"),
+    expectedToThrow: true
+  }
+])("rootMeanSquareDeviation", ({ args, expected, expectedToThrow }) => {
+  expect(() => num.rootMeanSquareDeviation(...args)).executionResultToBe(
+    expected,
+    expectedToThrow
+  );
 });
 
-test("round", () => {
-  expect(num.round(1.111, 1)).toBe(1.1);
-  expect(num.round(1.199, 1)).toBe(1.2);
-  expect(num.round(1.111, 2)).toBe(1.11);
-  expect(num.round(1.119, 2)).toBe(1.12);
+test.each([
+  {
+    expected: 1.1,
+    precision: 1,
+    value: 1.111
+  },
+  {
+    expected: 1.2,
+    precision: 1,
+    value: 1.199
+  },
+  {
+    expected: 1.11,
+    precision: 2,
+    value: 1.111
+  },
+  {
+    expected: 1.12,
+    precision: 2,
+    value: 1.119
+  }
+])("round", ({ expected, precision, value }) => {
+  expect(num.round(value, precision)).toBe(expected);
 });
 
-test("round.step", () => {
-  expect(num.round.step(11, 10)).toBe(10);
-  expect(num.round.step(19, 10)).toBe(20);
+test.each([
+  { expected: 10, value: 11 },
+  { expected: 20, value: 19 }
+])("round.step", ({ expected, value }) => {
+  expect(num.round.step(value, 10)).toBe(expected);
 });
 
-test("sum", () => {
-  expect(num.sum(10, 20, 30)).toBe(60);
-  expect(num.sum(10, 20)).toBe(30);
-  expect(num.sum(10)).toBe(10);
-  expect(num.sum()).toBe(0);
+test.each([
+  { args: [10, 20, 30], expected: 60 },
+  { args: [10, 20], expected: 30 },
+  { args: [10], expected: 10 },
+  { args: [], expected: 0 }
+])("sum", ({ args, expected }) => {
+  expect(num.sum(...args)).toBe(expected);
 });

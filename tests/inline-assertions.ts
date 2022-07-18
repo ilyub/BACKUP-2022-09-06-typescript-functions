@@ -1,7 +1,9 @@
 import { AssertionError, ReadonlyMap, ReadonlySet, as, fn, is } from "@";
-import type { Callable, unknowns } from "@";
+import type { unknowns } from "@";
 
-function createSubtest(inlineAssertion: Callable, ...args: unknowns) {
+class TestClass {}
+
+function createSubtest(inlineAssertion: Function, ...args: unknowns) {
   return (value: unknown) => (): void => {
     if (inlineAssertion(value, ...args) === value) {
       // Passed
@@ -9,43 +11,95 @@ function createSubtest(inlineAssertion: Callable, ...args: unknowns) {
   };
 }
 
-test("array", () => {
+test.each([
+  { value: [1] },
+  { value: ["a"] },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: 1
+  }
+])("array", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.array);
 
-  expect(subtest([1])).not.toThrow();
-  expect(subtest(["a"])).not.toThrow();
-  expect(subtest(1)).toThrow(AssertionError);
+  expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
 });
 
-test("array.of", () => {
+test.each([
+  { value: [1] },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: ["a"]
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: 1
+  }
+])("array.of", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.array.of, is.number);
 
-  expect(subtest([1])).not.toThrow();
-  expect(subtest(["a"])).toThrow(AssertionError);
-  expect(subtest(1)).toThrow(AssertionError);
+  expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
 });
 
-test("byGuard", () => {
+test.each([
+  { value: "a" },
+  { value: "" },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: undefined
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: 1
+  }
+])("byGuard", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.byGuard, is.string);
 
-  expect(subtest("a")).not.toThrow();
-  expect(subtest("")).not.toThrow();
-  expect(subtest(undefined)).toThrow(AssertionError);
-  expect(subtest(1)).toThrow(AssertionError);
+  expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
 });
 
-test("callable", () => {
+test.each([
+  { value: TestClass },
+  { value: fn.noop },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: 1
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: undefined
+  }
+])("callable", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.callable);
 
-  class TestClass {}
-
-  expect(subtest(TestClass)).not.toThrow();
-  expect(subtest(fn.noop)).not.toThrow();
-  expect(subtest(1)).toThrow(AssertionError);
-  expect(subtest(undefined)).toThrow(AssertionError);
+  expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
 });
 
-test("enumeration", () => {
+test.each([
+  { value: 1 },
+  { value: "a" },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: "1"
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: "b"
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: undefined
+  }
+])("enumeration", ({ expected, expectedToThrow, value }) => {
   enum TestEnum {
     a = 1,
     b = "a"
@@ -53,93 +107,191 @@ test("enumeration", () => {
 
   const subtest = createSubtest(as.enumeration, TestEnum);
 
-  expect(subtest(1)).not.toThrow();
-  expect(subtest("a")).not.toThrow();
-  expect(subtest("1")).toThrow(AssertionError);
-  expect(subtest("b")).toThrow(AssertionError);
-  expect(subtest(undefined)).toThrow(AssertionError);
+  expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
 });
 
-test("indexedObject", () => {
+test.each([
+  { value: { a: 1 } },
+  { value: { a: "a" } },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: 1
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: null
+  }
+])("indexedObject", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.indexedObject);
 
-  expect(subtest({ a: 1 })).not.toThrow();
-  expect(subtest({ a: "a" })).not.toThrow();
-  expect(subtest(1)).toThrow(AssertionError);
-  expect(subtest(null)).toThrow(AssertionError);
+  expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
 });
 
-test("indexedObject.of", () => {
+test.each([
+  { value: { a: 1 } },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: { a: "a" }
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: 1
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: null
+  }
+])("indexedObject.of", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.indexedObject.of, is.number);
 
-  expect(subtest({ a: 1 })).not.toThrow();
-  expect(subtest({ a: "a" })).toThrow(AssertionError);
-  expect(subtest(1)).toThrow(AssertionError);
-  expect(subtest(null)).toThrow(AssertionError);
+  expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
 });
 
-test("instanceOf", () => {
-  class TestClass {}
-
+test.each([
+  { value: new TestClass() },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: {}
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: undefined
+  }
+])("instanceOf", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.instanceOf, TestClass);
 
-  expect(subtest(new TestClass())).not.toThrow();
-  expect(subtest({})).toThrow(AssertionError);
-  expect(subtest(undefined)).toThrow(AssertionError);
+  expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
 });
 
-test("instancesOf", () => {
-  class TestClass {}
-
+test.each([
+  { value: [new TestClass()] },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: [{}]
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: [undefined]
+  }
+])("instancesOf", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.instancesOf, TestClass);
 
-  expect(subtest([new TestClass()])).not.toThrow();
-  expect(subtest([{}])).toThrow(AssertionError);
-  expect(subtest([undefined])).toThrow(AssertionError);
+  expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
 });
 
-test("map", () => {
+test.each([
+  { value: new ReadonlyMap([["a", 1]]) },
+  { value: new ReadonlyMap([[1, 1]]) },
+  { value: new ReadonlyMap([["a", "a"]]) },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: {}
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: undefined
+  }
+])("map", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.map);
 
-  expect(subtest(new ReadonlyMap([["a", 1]]))).not.toThrow();
-  expect(subtest(new ReadonlyMap([[1, 1]]))).not.toThrow();
-  expect(subtest(new ReadonlyMap([["a", "a"]]))).not.toThrow();
-  expect(subtest({})).toThrow(AssertionError);
-  expect(subtest(undefined)).toThrow(AssertionError);
+  expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
 });
 
-test("map.of", () => {
+test.each([
+  { value: new ReadonlyMap([["a", 1]]) },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: new ReadonlyMap([[1, 1]])
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: new ReadonlyMap([["a", "a"]])
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: {}
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: undefined
+  }
+])("map.of", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.map.of, is.string, is.number);
 
-  expect(subtest(new ReadonlyMap([["a", 1]]))).not.toThrow();
-  expect(subtest(new ReadonlyMap([[1, 1]]))).toThrow(AssertionError);
-  expect(subtest(new ReadonlyMap([["a", "a"]]))).toThrow(AssertionError);
-  expect(subtest({})).toThrow(AssertionError);
-  expect(subtest(undefined)).toThrow(AssertionError);
+  expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
 });
 
-test("not.empty", () => {
+test.each([
+  { value: 1 },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: null
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: undefined
+  }
+])("not.empty", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.not.empty);
 
-  expect(subtest(1)).not.toThrow();
-  expect(subtest(null)).toThrow(AssertionError);
-  expect(subtest(undefined)).toThrow(AssertionError);
+  expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
 });
 
-test("set", () => {
+test.each([
+  { value: new ReadonlySet(["a"]) },
+  { value: new ReadonlySet([1]) },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: {}
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: undefined
+  }
+])("set", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.set);
 
-  expect(subtest(new ReadonlySet(["a"]))).not.toThrow();
-  expect(subtest(new ReadonlySet([1]))).not.toThrow();
-  expect(subtest({})).toThrow(AssertionError);
-  expect(subtest(undefined)).toThrow(AssertionError);
+  expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
 });
 
-test("set.of", () => {
+test.each([
+  { value: new ReadonlySet(["a"]) },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: new ReadonlySet([1])
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: {}
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    value: undefined
+  }
+])("set.of", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.set.of, is.string);
 
-  expect(subtest(new ReadonlySet(["a"]))).not.toThrow();
-  expect(subtest(new ReadonlySet([1]))).toThrow(AssertionError);
-  expect(subtest({})).toThrow(AssertionError);
-  expect(subtest(undefined)).toThrow(AssertionError);
+  expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
 });

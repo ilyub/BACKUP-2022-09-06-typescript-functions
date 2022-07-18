@@ -1,5 +1,12 @@
 import * as is from "./guards";
-import type * as types from "./types";
+import type {
+  IndexedObject,
+  NumStr,
+  empty as baseEmpty,
+  stringU as baseStringU,
+  types,
+  unknowns
+} from "./types";
 import { AssertionError } from "./errors";
 import type { ErrorArgFn } from "./assertions.internal";
 import { defineFn } from "./core";
@@ -15,7 +22,7 @@ export const not: {
   readonly empty: <T>(
     value: T,
     error: ErrorArg
-  ) => asserts value is Exclude<T, types.empty>;
+  ) => asserts value is Exclude<T, baseEmpty>;
 } = {
   empty: (value, error) => {
     byGuard(value, is.not.empty, error);
@@ -29,7 +36,7 @@ export const array: {
    * @param value - Value.
    * @param error - Error.
    */
-  (value: unknown, error: ErrorArg): asserts value is types.unknowns;
+  (value: unknown, error: ErrorArg): asserts value is unknowns;
   /**
    * Asserts that value type is T[].
    *
@@ -61,7 +68,7 @@ export const indexedObject: {
    * @param value - Value.
    * @param error - Error.
    */
-  (value: unknown, error: ErrorArg): asserts value is types.IndexedObject;
+  (value: unknown, error: ErrorArg): asserts value is IndexedObject;
   /**
    * Asserts that value type is IndexedObject\<T\>.
    *
@@ -74,7 +81,7 @@ export const indexedObject: {
     value: unknown,
     guard: is.Guard<T>,
     error: ErrorArg
-  ) => asserts value is types.IndexedObject<T>;
+  ) => asserts value is IndexedObject<T>;
 } = defineFn(
   (value: unknown, error: ErrorArg) => {
     byGuard(value, is.indexedObject, error);
@@ -214,7 +221,7 @@ export function callable<T extends Function>(
 export function empty(
   value: unknown,
   error: ErrorArg
-): asserts value is types.empty {
+): asserts value is baseEmpty {
   byGuard(value, is.empty, error);
 }
 
@@ -222,15 +229,15 @@ export function empty(
  * Asserts that value type is T.
  *
  * @param value - Value.
- * @param vo - Validation object.
+ * @param en - Validation object.
  * @param error - Error.
  */
 export function enumeration<T extends PropertyKey>(
   value: unknown,
-  vo: types.IndexedObject<T>,
+  en: IndexedObject<T>,
   error: ErrorArg
 ): asserts value is T {
-  byGuard(value, is.factory(is.enumeration, vo), error);
+  byGuard(value, is.factory(is.enumeration, en), error);
 }
 
 /**
@@ -242,7 +249,7 @@ export function enumeration<T extends PropertyKey>(
  */
 export function instanceOf<T>(
   value: unknown,
-  ctor: types.Constructor<T>,
+  ctor: types.fn.Constructor<T>,
   error: ErrorArg
 ): asserts value is T {
   byGuard(value, is.factory(is.instanceOf, ctor), error);
@@ -257,7 +264,7 @@ export function instanceOf<T>(
  */
 export function instancesOf<T>(
   value: unknown,
-  ctor: types.Constructor<T>,
+  ctor: types.fn.Constructor<T>,
   error: ErrorArg
 ): asserts value is readonly T[] {
   byGuard(value, is.factory(is.instancesOf, ctor), error);
@@ -272,7 +279,7 @@ export function instancesOf<T>(
 export function numStr(
   value: unknown,
   error: ErrorArg
-): asserts value is types.NumStr {
+): asserts value is NumStr {
   byGuard(value, is.numStr, error);
 }
 
@@ -324,7 +331,7 @@ export function string(
 export function stringU(
   value: unknown,
   error: ErrorArg
-): asserts value is types.stringU {
+): asserts value is baseStringU {
   byGuard(value, is.stringU, error);
 }
 

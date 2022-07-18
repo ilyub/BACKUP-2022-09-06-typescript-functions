@@ -53,12 +53,32 @@ test.each([
   expect(json.encode(source)).toBe(expected);
 });
 
-test("eq", () => {
-  expect(json.eq({ value: 1 }, { value: 1 })).toBeTrue();
-  expect(json.eq({ value: 1 }, { value: 2 })).toBeFalse();
+test.each([
+  {
+    expected: true,
+    obj1: { value: 1 },
+    obj2: { value: 1 }
+  },
+  {
+    expected: false,
+    obj1: { value: 1 },
+    obj2: { value: 2 }
+  }
+])("eq", ({ expected, obj1, obj2 }) => {
+  expect(json.eq(obj1, obj2)).toBe(expected);
 });
 
-test("neq", () => {
-  expect(json.neq({ value: 1 }, { value: 2 })).toBeTrue();
-  expect(json.neq({ value: 1 }, { value: 1 })).toBeFalse();
+test.each([
+  {
+    expected: true,
+    obj1: { value: 1 },
+    obj2: { value: 2 }
+  },
+  {
+    expected: false,
+    obj1: { value: 1 },
+    obj2: { value: 1 }
+  }
+])("neq", ({ expected, obj1, obj2 }) => {
+  expect(json.neq(obj1, obj2)).toBe(expected);
 });

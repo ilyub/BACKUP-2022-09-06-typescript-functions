@@ -1,7 +1,7 @@
 /* eslint-disable @skylib/custom/no-literal-union-type -- Ok */
 
-import type { AddPrefix, RemovePrefix } from "@";
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
+import type { types } from "@";
 
 test("AddPrefix", () => {
   const typeCheck: Equals<To, Expected> = 1;
@@ -10,7 +10,7 @@ test("AddPrefix", () => {
 
   type Expected = "xa" | "xb";
 
-  type To = AddPrefix<"a" | "b", "x">;
+  type To = types.string.AddPrefix<"a" | "b", "x">;
 });
 
 test("RemovePrefix", () => {
@@ -20,5 +20,5 @@ test("RemovePrefix", () => {
 
   type Expected = "a" | "b";
 
-  type To = RemovePrefix<"xa" | "xb", "x">;
+  type To = types.string.RemovePrefix<"xa" | "xb", "x">;
 });

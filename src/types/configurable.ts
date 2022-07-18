@@ -1,13 +1,15 @@
 /* eslint-disable @skylib/only-export-name -- Ok */
 
-import type { PickKeys } from "./object";
+import type {
+  // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
+  Pick
+} from "./object.keys";
 
 declare global {
   namespace configurable {
-    interface LocaleName {
-      readonly _placeholder?: never;
-    }
+    // eslint-disable-next-line @skylib/custom/no-empty-interface -- Ok
+    interface LocaleName {}
   }
 }
 
-export type LocaleName = PickKeys<configurable.LocaleName, true, "extends->">;
+export type LocaleName = Pick<configurable.LocaleName, true, "extends->">;

@@ -39,5 +39,4 @@ export * as s from "./string";
 export * from "./types";
 
 export { Accumulator } from "./Accumulator";
-
 export { Accumulator2 } from "./Accumulator2";

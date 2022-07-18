@@ -1,25 +1,33 @@
 import { s } from "@";
 
-test("detectEol", () => {
-  expect(s.detectEol("a\nb\nc")).toBe("\n");
-  expect(s.detectEol("a\nb\r\nc")).toBe("\r\n");
-  expect(s.detectEol("a\r\nb\nc")).toBe("\r\n");
+test.each([
+  { expected: "\n", str: "a\nb\nc" },
+  { expected: "\r\n", str: "a\nb\r\nc" },
+  { expected: "\r\n", str: "a\r\nb\nc" }
+])("detectEol", ({ expected, str }) => {
+  expect(s.detectEol(str)).toBe(expected);
 });
 
-test("empty", () => {
-  expect(s.empty(" \n\r\t ")).toBeTrue();
-  expect(s.empty(" \n\r\t - \n\r\t ")).toBeFalse();
+test.each([
+  { expected: true, str: " \n\r\t " },
+  { expected: false, str: " \n\r\t - \n\r\t " }
+])("empty", ({ expected, str }) => {
+  expect(s.empty(str)).toBe(expected);
 });
 
 test("escapeRegExpSpecialChars", () => {
-  expect(s.escapeRegExpSpecialChars("$()*+.?[\\]^{|}-")).toBe(
-    "\\$\\(\\)\\*\\+\\.\\?\\[\\\\\\]\\^\\{\\|\\}\\x2d"
-  );
+  const str = "$()*+.?[\\]^{|}-";
+
+  const expected = "\\$\\(\\)\\*\\+\\.\\?\\[\\\\\\]\\^\\{\\|\\}\\x2d";
+
+  expect(s.escapeRegExpSpecialChars(str)).toBe(expected);
 });
 
-test("lcFirst", () => {
-  expect(s.lcFirst("ABC")).toBe("aBC");
-  expect(s.lcFirst("")).toBe("");
+test.each([
+  { expected: "aBC", str: "ABC" },
+  { expected: "", str: "" }
+])("lcFirst", ({ expected, str }) => {
+  expect(s.lcFirst(str)).toBe(expected);
 });
 
 test("leadingSpaces", () => {
@@ -30,9 +38,11 @@ test("lines", () => {
   expect(s.lines("a\nb\r\nc")).toStrictEqual(["a", "b", "c"]);
 });
 
-test("multiline", () => {
-  expect(s.multiline("a\nb")).toBeTrue();
-  expect(s.multiline("ab")).toBeFalse();
+test.each([
+  { expected: true, str: "a\nb" },
+  { expected: false, str: "ab" }
+])("multiline", ({ expected, str }) => {
+  expect(s.multiline(str)).toBe(expected);
 });
 
 test.each(["a", "/a", "\\a", "//a", "\\\\a"])("path.addLeadingSlash", path => {
@@ -43,9 +53,11 @@ test.each(["a", "a/", "a\\", "a//", "a\\\\"])("path.addTrailingSlash", path => {
   expect(s.path.addTrailingSlash(path)).toBe("a/");
 });
 
-test("path.canonicalize", () => {
-  expect(s.path.canonicalize("a//b\\\\c")).toBe("a/b/c");
-  expect(s.path.canonicalize("//a//b\\\\c\\\\")).toBe("/a/b/c/");
+test.each([
+  { expected: "a/b/c", str: "a//b\\\\c" },
+  { expected: "/a/b/c/", str: "//a//b\\\\c\\\\" }
+])("path.canonicalize", ({ expected, str }) => {
+  expect(s.path.canonicalize(str)).toBe(expected);
 });
 
 test.each([
@@ -75,60 +87,66 @@ test("replaceAll", () => {
   expect(s.replaceAll("a1b1c", "1", "2")).toBe("a2b2c");
 });
 
-test("singleLine", () => {
-  expect(s.singleLine("ab")).toBeTrue();
-  expect(s.singleLine("a\nb")).toBeFalse();
+test.each([
+  { expected: true, str: "ab" },
+  { expected: false, str: "a\nb" }
+])("singleLine", ({ expected, str }) => {
+  expect(s.singleLine(str)).toBe(expected);
 });
 
 test("trailingSpaces", () => {
   expect(s.trailingSpaces("abc \n\r\t ")).toBe(" \n\r\t ");
 });
 
-test("trimEnd", () => {
-  expect(s.trimEnd("abc \n\r\t ")).toBe("abc");
-  expect(s.trimEnd(" \n\r\t ")).toBe("");
-});
-
-test("trimLeadingEmptyLines", () => {
-  expect(s.trimLeadingEmptyLines(" ")).toBe(" ");
-  expect(s.trimLeadingEmptyLines(" \n ")).toBe(" ");
-  expect(s.trimLeadingEmptyLines(" \r\n ")).toBe(" ");
-  expect(s.trimLeadingEmptyLines(" \n \r\n ")).toBe(" ");
-  expect(s.trimLeadingEmptyLines(" \r\n \n ")).toBe(" ");
-  expect(s.trimLeadingEmptyLines(" \n - \r\n ")).toBe(" - \r\n ");
-  expect(s.trimLeadingEmptyLines(" \r\n - \n ")).toBe(" - \n ");
-});
-
-test("trimStart", () => {
-  expect(s.trimStart(" \n\r\t abc")).toBe("abc");
-  expect(s.trimStart(" \n\r\t ")).toBe("");
-});
-
-test("trimTrailingEmptyLines", () => {
-  expect(s.trimTrailingEmptyLines(" ")).toBe(" ");
-  expect(s.trimTrailingEmptyLines(" \n ")).toBe(" ");
-  expect(s.trimTrailingEmptyLines(" \r\n ")).toBe(" ");
-  expect(s.trimTrailingEmptyLines(" \n \r\n ")).toBe(" ");
-  expect(s.trimTrailingEmptyLines(" \r\n \n ")).toBe(" ");
-  expect(s.trimTrailingEmptyLines(" \n - \r\n ")).toBe(" \n - ");
-  expect(s.trimTrailingEmptyLines(" \r\n - \n ")).toBe(" \r\n - ");
-});
-
-test("ucFirst", () => {
-  expect(s.ucFirst("abc")).toBe("Abc");
-  expect(s.ucFirst("")).toBe("");
+test.each([
+  { expected: "abc", str: "abc \n\r\t " },
+  { expected: "", str: " \n\r\t " }
+])("trimEnd", ({ expected, str }) => {
+  expect(s.trimEnd(str)).toBe(expected);
 });
 
 test.each([
-  { expected: "console.log(1);", str: "console.log(1);" },
-  {
-    expected: "{\n  console.log(1);\n}",
-    str: "\n  {\n    console.log(1);\n  }\n    "
-  },
-  {
-    expected: "{\r\n  console.log(1);\r\n}",
-    str: "\r\n  {\r\n    console.log(1);\r\n  }\r\n    "
-  }
+  { expected: " ", str: " " },
+  { expected: " ", str: " \n " },
+  { expected: " ", str: " \r\n " },
+  { expected: " ", str: " \n \r\n " },
+  { expected: " ", str: " \r\n \n " },
+  { expected: " - \r\n ", str: " \n - \r\n " },
+  { expected: " - \n ", str: " \r\n - \n " }
+])("trimLeadingEmptyLines", ({ expected, str }) => {
+  expect(s.trimLeadingEmptyLines(str)).toBe(expected);
+});
+
+test.each([
+  { expected: "abc", str: " \n\r\t abc" },
+  { expected: "", str: " \n\r\t " }
+])("trimStart", ({ expected, str }) => {
+  expect(s.trimStart(str)).toBe(expected);
+});
+
+test.each([
+  { expected: " ", str: " " },
+  { expected: " ", str: " \n " },
+  { expected: " ", str: " \r\n " },
+  { expected: " ", str: " \n \r\n " },
+  { expected: " ", str: " \r\n \n " },
+  { expected: " \n - ", str: " \n - \r\n " },
+  { expected: " \r\n - ", str: " \r\n - \n " }
+])("trimTrailingEmptyLines", ({ expected, str }) => {
+  expect(s.trimTrailingEmptyLines(str)).toBe(expected);
+});
+
+test.each([
+  { expected: "Abc", str: "abc" },
+  { expected: "", str: "" }
+])("ucFirst", ({ expected, str }) => {
+  expect(s.ucFirst(str)).toBe(expected);
+});
+
+test.each([
+  { expected: "1;", str: "1;" },
+  { expected: "{\n  1;\n}", str: "\n  {\n    1;\n  }\n    " },
+  { expected: "{\r\n  1;\r\n}", str: "\r\n  {\r\n    1;\r\n  }\r\n    " }
 ])("unpadMultiline", ({ expected, str }) => {
   expect(s.unpadMultiline(str)).toBe(expected);
 });

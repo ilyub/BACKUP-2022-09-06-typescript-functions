@@ -1,43 +1,33 @@
+/* eslint-disable @skylib/custom/functions/prefer-ReadonlyMap -- Ok */
+
+/* eslint-disable @skylib/custom/functions/prefer-ReadonlySet -- Ok */
+
 /* eslint-disable @skylib/custom/prefer-readonly-property -- Ok */
 
-/* eslint-disable deprecation/deprecation -- Ok */
-
-import {
-  ReadonlyMap,
-  ReadonlySet,
-  a,
-  createValidationObject,
-  evaluate,
-  freeze,
-  unfreeze
-} from "@";
+import { ReadonlyMap, ReadonlySet, evaluate, freeze, unfreeze } from "@";
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
 
 test("ReadonlyMap", () => {
   const entries = [["a", 1]] as const;
 
-  expect(a.fromIterable(new ReadonlyMap(entries))).toStrictEqual(entries);
+  expect(new ReadonlyMap(entries)).toStrictEqual(new Map(entries));
 });
 
 test("ReadonlySet", () => {
   const values = [["a", 1]] as const;
 
-  expect(a.fromIterable(new ReadonlySet(values))).toStrictEqual(values);
-});
-
-test("createValidationObject", () => {
-  const source = { 1: 1, a: "a" } as const;
-
-  expect(createValidationObject(source)).toBeSameAs(source);
+  expect(new ReadonlySet(values)).toStrictEqual(new Set(values));
 });
 
 test("evaluate", async () => {
   expect(evaluate(() => true)).toBeTrue();
-  await expect(evaluate(resolve)).resolves.toBeUndefined();
-  await expect(evaluate(resolve())).resolves.toBeUndefined();
+  await expect(evaluate(resolve)).resolves.toBeTrue();
+  await expect(evaluate(resolve())).resolves.toBeTrue();
 
-  async function resolve(): Promise<void> {
+  async function resolve(): Promise<boolean> {
     await Promise.resolve();
+
+    return true;
   }
 });
 

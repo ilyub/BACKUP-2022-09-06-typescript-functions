@@ -27,6 +27,7 @@ module.exports = [
   "@skylib/custom/functions/no-o-unfreeze",
   "@skylib/custom/functions/no-reflect-get",
   "@skylib/custom/functions/no-reflect-set",
+  "@skylib/custom/functions/no-ts-toolbelt",
   "@skylib/custom/functions/no-unnecessary-is-array",
   "@skylib/custom/functions/no-unnecessary-is-boolean",
   "@skylib/custom/functions/no-unnecessary-is-empty",
@@ -40,9 +41,7 @@ module.exports = [
   "@skylib/custom/functions/prefer-IndexedObject",
   "@skylib/custom/functions/prefer-IndexedRecord",
   "@skylib/custom/functions/prefer-NumStr",
-  "@skylib/custom/functions/prefer-PartialOptional",
   "@skylib/custom/functions/prefer-PartialRecord",
-  "@skylib/custom/functions/prefer-PartialRequired",
   "@skylib/custom/functions/prefer-ReadonlyMap",
   "@skylib/custom/functions/prefer-ReadonlySet",
   "@skylib/custom/functions/prefer-WritableIndexedObject",
@@ -71,7 +70,9 @@ module.exports = [
   "@skylib/custom/functions/prefer-programFlow-setInterval",
   "@skylib/custom/functions/prefer-programFlow-setTimeout",
   "@skylib/custom/functions/prefer-reflect",
-  "@skylib/custom/functions/prefer-undefined-shorthand",
+  "@skylib/custom/functions/prefer-undefined-shorthand-literal",
+  "@skylib/custom/functions/prefer-undefined-shorthand-type",
+  "@skylib/custom/functions/prefer-undefined-shorthand-typeName",
   "@skylib/custom/functions/require-return-in-defineFn",
   "@skylib/require-jsdoc/functions"
 ];

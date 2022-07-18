@@ -1,23 +1,17 @@
-/* eslint-disable @skylib/custom/functions/prefer-IndexedObject -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-undefined-shorthand-literal -- Ok */
 
-/* eslint-disable @skylib/custom/functions/prefer-NumStr -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-undefined-shorthand-type -- Ok */
 
-/* eslint-disable @skylib/custom/functions/prefer-PartialRequired -- Ok */
+/* eslint-disable @skylib/custom/functions/prefer-undefined-shorthand-typeName -- Ok */
 
-/* eslint-disable @skylib/custom/functions/prefer-PartialOptional -- Ok */
+export type And<A, B, C = unknown, D = unknown, E = unknown, F = unknown> =
+  // prettier-break
+  A & B & C & D & E & F;
 
-/* eslint-disable @skylib/custom/functions/prefer-WritableIndexedObject -- Ok */
-
-/* eslint-disable @skylib/custom/functions/prefer-undefined-shorthand -- Ok */
-
-/* eslint-disable @skylib/no-multi-type-tuples -- Ok */
-
-export type { Optional as PartialOptional } from "ts-toolbelt/out/Object/Optional";
-
-export type { Required as PartialRequired } from "ts-toolbelt/out/Object/Required";
-
+// eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
 export type Entry<K extends PropertyKey, T> = readonly [K, T];
 
+// eslint-disable-next-line @skylib/custom/functions/prefer-IndexedObject -- Ok
 export type IndexedObject<T = unknown> = Rec<PropertyKey, T>;
 
 export type IndexedObjects<T = unknown> = ReadonlyArray<IndexedObject<T>>;
@@ -26,6 +20,7 @@ export type IndexedRecord<T = unknown> = Rec<string, T>;
 
 export type IndexedRecords<T = unknown> = ReadonlyArray<IndexedRecord<T>>;
 
+// eslint-disable-next-line @skylib/custom/functions/prefer-NumStr -- Ok
 export type NumStr = number | string;
 
 export type NumStrE = empty | NumStr;
@@ -34,15 +29,17 @@ export type NumStrU = NumStr | undefined;
 
 export type NumStrs = readonly NumStr[];
 
-export type Optional<T> = { [P in keyof T]?: T[P] };
+export type Optional<T> = { [K in keyof T]?: T[K] };
 
-export type PartialRecord<K extends PropertyKey, V> = {
-  readonly [L in K]?: V;
-};
+export type Or<A, B, C = never, D = never, E = never, F = never> =
+  // prettier-break
+  A | B | C | D | E | F;
 
-export type PartialRecords<K extends PropertyKey, V> = ReadonlyArray<
-  PartialRecords<K, V>
->;
+export type PartialRecord<K extends PropertyKey, V> = { readonly [L in K]?: V };
+
+export type PartialRecords<K extends PropertyKey, V> =
+  // prettier-break
+  ReadonlyArray<PartialRecord<K, V>>;
 
 export type PropertyKeyE = empty | PropertyKey;
 
@@ -50,43 +47,36 @@ export type PropertyKeyU = PropertyKey | undefined;
 
 export type PropertyKeys = readonly PropertyKey[];
 
-export type Rec<K extends PropertyKey, V> = {
-  readonly [L in K]: V;
-};
+export type Rec<K extends PropertyKey, V> = { readonly [L in K]: V };
 
 export type Recs<K extends PropertyKey, V> = ReadonlyArray<Rec<K, V>>;
 
-export type Writable<T> = {
-  -readonly [P in keyof T]: T[P];
-};
+export type Writable<T> = { -readonly [K in keyof T]: T[K] };
 
+// eslint-disable-next-line @skylib/custom/functions/prefer-WritableIndexedObject -- Ok
 export type WritableIndexedObject<T = unknown> = WritableRecord<PropertyKey, T>;
 
-export type WritableIndexedObjects<T = unknown> = ReadonlyArray<
-  WritableIndexedObject<T>
->;
+export type WritableIndexedObjects<T = unknown> =
+  // prettier-break
+  ReadonlyArray<WritableIndexedObject<T>>;
 
 export type WritableIndexedRecord<T = unknown> = WritableRecord<string, T>;
 
-export type WritableIndexedRecords<T = unknown> = ReadonlyArray<
-  WritableIndexedRecord<T>
->;
+export type WritableIndexedRecords<T = unknown> =
+  // prettier-break
+  ReadonlyArray<WritableIndexedRecord<T>>;
 
-export type WritablePartialRecord<K extends PropertyKey, V> = {
-  [L in K]?: V;
-};
+export type WritablePartialRecord<K extends PropertyKey, V> = { [L in K]?: V };
 
-export type WritablePartialRecords<K extends PropertyKey, V> = ReadonlyArray<
-  WritablePartialRecord<K, V>
->;
+export type WritablePartialRecords<K extends PropertyKey, V> =
+  // prettier-break
+  ReadonlyArray<WritablePartialRecord<K, V>>;
 
-export type WritableRecord<K extends PropertyKey, V> = {
-  [L in K]: V;
-};
+export type WritableRecord<K extends PropertyKey, V> = { [L in K]: V };
 
-export type WritableRecords<K extends PropertyKey, V> = ReadonlyArray<
-  WritableRecord<K, V>
->;
+export type WritableRecords<K extends PropertyKey, V> =
+  // prettier-break
+  ReadonlyArray<WritableRecord<K, V>>;
 
 export type booleanE = empty | boolean;
 

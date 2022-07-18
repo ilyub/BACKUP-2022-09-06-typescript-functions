@@ -1,7 +1,7 @@
 import * as _ from "@skylib/lodash-commonjs-es";
 import * as fakeTimers from "@sinonjs/fake-timers";
 import { a, assert, evaluate, onDemand } from "..";
-import type { Async } from "..";
+import type { types } from "..";
 
 export const clock = onDemand(() => {
   assert.not.empty(_clock, "Fake timer is not installed");
@@ -37,7 +37,7 @@ export function installFakeTimer(options: Options = {}): void {
  * @param mixed - Promise or async function.
  * @returns The result of callback execution.
  */
-export async function run<T>(mixed: Async<T>): Promise<T> {
+export async function run<T>(mixed: types.fn.Async<T>): Promise<T> {
   const result = await Promise.all([evaluate(mixed), clock.runAllAsync()]);
 
   return result[0];

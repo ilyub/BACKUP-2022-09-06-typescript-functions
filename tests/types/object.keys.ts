@@ -4,15 +4,7 @@
 
 /* eslint-disable @skylib/optional-property-style -- Ok */
 
-import type {
-  DefinedKeys,
-  ReadonlyDefinedKeys,
-  ReadonlyUndefinedKeys,
-  UndefinedKeys,
-  WritableDefindKeys,
-  WritableUndefindKeys,
-  numberU
-} from "@";
+import type { numberU, types } from "@";
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
 
 interface TestInterface {
@@ -26,62 +18,62 @@ interface TestInterface {
   wu: numberU;
 }
 
-test("DefinedKeys", () => {
+test("Defined", () => {
   const value: Equals<To, Expected> = 1;
 
   expect(value).toBe(1);
 
   type Expected = "r" | "w";
 
-  type To = DefinedKeys<TestInterface>;
+  type To = types.object.keys.Defined<TestInterface>;
 });
 
-test("ReadonlyDefinedKeys", () => {
+test("ReadonlyDefined", () => {
   const value: Equals<To, Expected> = 1;
 
   expect(value).toBe(1);
 
   type Expected = "r";
 
-  type To = ReadonlyDefinedKeys<TestInterface>;
+  type To = types.object.keys.ReadonlyDefined<TestInterface>;
 });
 
-test("ReadonlyUndefinedKeys", () => {
+test("ReadonlyUndefined", () => {
   const value: Equals<To, Expected> = 1;
 
   expect(value).toBe(1);
 
   type Expected = "ro" | "rou" | "ru";
 
-  type To = ReadonlyUndefinedKeys<TestInterface>;
+  type To = types.object.keys.ReadonlyUndefined<TestInterface>;
 });
 
-test("UndefinedKeys", () => {
+test("Undefined", () => {
   const value: Equals<To, Expected> = 1;
 
   expect(value).toBe(1);
 
   type Expected = "ro" | "rou" | "ru" | "wo" | "wou" | "wu";
 
-  type To = UndefinedKeys<TestInterface>;
+  type To = types.object.keys.Undefined<TestInterface>;
 });
 
-test("WritableDefindKeys", () => {
+test("WritableDefined", () => {
   const value: Equals<To, Expected> = 1;
 
   expect(value).toBe(1);
 
   type Expected = "w";
 
-  type To = WritableDefindKeys<TestInterface>;
+  type To = types.object.keys.WritableDefined<TestInterface>;
 });
 
-test("WritableUndefindKeys", () => {
+test("WritableUndefined", () => {
   const value: Equals<To, Expected> = 1;
 
   expect(value).toBe(1);
 
   type Expected = "wo" | "wou" | "wu";
 
-  type To = WritableUndefindKeys<TestInterface>;
+  type To = types.object.keys.WritableUndefined<TestInterface>;
 });

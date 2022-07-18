@@ -1,105 +1,9 @@
 /* eslint-disable @skylib/custom/prefer-readonly-property -- Ok */
 
-/* eslint-disable @skylib/optional-property-style -- Ok */
-
-import type {
-  Join2,
-  Join3,
-  Join4,
-  OptionalStyle,
-  OptionalUndefinedStyle,
-  StrictOmit,
-  UndefinedStyle,
-  numberU
-} from "@";
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
+import type { types } from "@";
 
-interface TestInterface {
-  readonly r: number;
-  readonly ro?: number;
-  readonly rou?: numberU;
-  readonly ru: numberU;
-  w: number;
-  wo?: number;
-  wou?: numberU;
-  wu: numberU;
-}
-
-test("Join2", () => {
-  const typeCheck: Equals<To, Expected> = 1;
-
-  expect(typeCheck).toBe(1);
-
-  type Expected = { a: 1 } & { b: 2 };
-
-  type To = Join2<{ a: 1 }, { b: 2 }>;
-});
-
-test("Join3", () => {
-  const typeCheck: Equals<To, Expected> = 1;
-
-  expect(typeCheck).toBe(1);
-
-  type Expected = { a: 1 } & { b: 2 } & { c: 3 };
-
-  type To = Join3<{ a: 1 }, { b: 2 }, { c: 3 }>;
-});
-
-test("Join4", () => {
-  const typeCheck: Equals<To, Expected> = 1;
-
-  expect(typeCheck).toBe(1);
-
-  type Expected = { a: 1 } & { b: 2 } & { c: 3 } & { d: 4 };
-
-  type To = Join4<{ a: 1 }, { b: 2 }, { c: 3 }, { d: 4 }>;
-});
-
-test("OptionalStyle", () => {
-  const value: Equals<To, Expected> = 1;
-
-  expect(value).toBe(1);
-
-  type Expected = {
-    readonly r: number;
-  } & {
-    readonly ro?: number;
-    readonly rou?: number;
-    readonly ru?: number;
-  } & {
-    w: number;
-  } & {
-    wo?: number;
-    wou?: number;
-    wu?: number;
-  };
-
-  type To = OptionalStyle<TestInterface>;
-});
-
-test("OptionalUndefinedStyle", () => {
-  const value: Equals<To, Expected> = 1;
-
-  expect(value).toBe(1);
-
-  type Expected = {
-    readonly r: number;
-  } & {
-    readonly ro?: numberU;
-    readonly rou?: numberU;
-    readonly ru?: numberU;
-  } & {
-    w: number;
-  } & {
-    wo?: numberU;
-    wou?: numberU;
-    wu?: numberU;
-  };
-
-  type To = OptionalUndefinedStyle<TestInterface>;
-});
-
-test("StrictOmit", () => {
+test("Omit", () => {
   const value: Equals<To, Expected> = 1;
 
   expect(value).toBe(1);
@@ -127,27 +31,5 @@ test("StrictOmit", () => {
     readonly h?: string;
   }
 
-  type To = StrictOmit<From, "e" | "f" | "g" | "h">;
-});
-
-test("UndefinedStyle", () => {
-  const value: Equals<To, Expected> = 1;
-
-  expect(value).toBe(1);
-
-  type Expected = {
-    readonly r: number;
-  } & {
-    readonly ro: numberU;
-    readonly rou: numberU;
-    readonly ru: numberU;
-  } & {
-    w: number;
-  } & {
-    wo: numberU;
-    wou: numberU;
-    wu: numberU;
-  };
-
-  type To = UndefinedStyle<TestInterface>;
+  type To = types.object.Omit<From, "e" | "f" | "g" | "h">;
 });

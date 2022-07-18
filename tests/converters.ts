@@ -1,62 +1,80 @@
 import { cast } from "@";
 import type { stringE } from "@";
 
-test("not.empty", () => {
-  expect(cast.not.empty<stringE>("a", "b")).toBe("a");
-  expect(cast.not.empty<stringE>(null, "b")).toBe("b");
-  expect(cast.not.empty<stringE>(undefined, "b")).toBe("b");
+test.each([
+  { expected: "a", value: "a" },
+  { expected: "b", value: null },
+  { expected: "b", value: undefined }
+])("not.empty", ({ expected, value }) => {
+  expect(cast.not.empty<stringE>(value, "b")).toBe(expected);
 });
 
-test("number", () => {
-  expect(cast.number(123)).toBe(123);
-  expect(cast.number(-12.3)).toBe(-12.3);
-  expect(cast.number(true)).toBe(1);
-  expect(cast.number(false)).toBe(0);
-  expect(cast.number(" 12 ")).toBe(12);
-  expect(cast.number(" -12.34 ")).toBe(-12.34);
-  expect(cast.number(" 12s ")).toBe(0);
-  expect(cast.number("\n")).toBe(0);
-  expect(cast.number("\r\n")).toBe(0);
-  expect(cast.number([])).toBe(0);
-  expect(cast.number(null)).toBe(0);
-  expect(cast.number(null, 1)).toBe(1);
-  expect(cast.number(undefined)).toBe(0);
-  expect(cast.number(undefined, 1)).toBe(1);
+test.each([
+  { expected: 123, value: 123 },
+  { expected: -12.3, value: -12.3 },
+  { expected: 1, value: true },
+  { expected: 0, value: false },
+  { expected: 12, value: " 12 " },
+  { expected: -12.34, value: " -12.34 " },
+  { expected: 0, value: " 12s " },
+  { expected: 0, value: "\n" },
+  { expected: 0, value: "\r\n" },
+  { expected: 0, value: [] },
+  { expected: 0, value: null },
+  {
+    defVal: 1,
+    expected: 1,
+    value: null
+  },
+  { expected: 0, value: undefined },
+  {
+    defVal: 1,
+    expected: 1,
+    value: undefined
+  }
+])("number", ({ defVal, expected, value }) => {
+  expect(cast.number(value, defVal)).toBe(expected);
 });
 
-test("numberU", () => {
-  expect(cast.numberU(123)).toBe(123);
-  expect(cast.numberU(-12.3)).toBe(-12.3);
-  expect(cast.numberU(true)).toBe(1);
-  expect(cast.numberU(false)).toBe(0);
-  expect(cast.numberU(" 12 ")).toBe(12);
-  expect(cast.numberU(" -12.34 ")).toBe(-12.34);
-  expect(cast.numberU(" 12s ")).toBeUndefined();
-  expect(cast.numberU("\n")).toBeUndefined();
-  expect(cast.numberU("\r\n")).toBeUndefined();
-  expect(cast.numberU([])).toBeUndefined();
-  expect(cast.numberU(null)).toBeUndefined();
-  expect(cast.numberU(undefined)).toBeUndefined();
+test.each([
+  { expected: 123, value: 123 },
+  { expected: -12.3, value: -12.3 },
+  { expected: 1, value: true },
+  { expected: 0, value: false },
+  { expected: 12, value: " 12 " },
+  { expected: -12.34, value: " -12.34 " },
+  { expected: undefined, value: " 12s " },
+  { expected: undefined, value: "\n" },
+  { expected: undefined, value: "\r\n" },
+  { expected: undefined, value: [] },
+  { expected: undefined, value: null },
+  { expected: undefined, value: undefined }
+])("numberU", ({ expected, value }) => {
+  expect(cast.numberU(value)).toStrictEqual(expected);
 });
 
-test("string", () => {
-  expect(cast.string(123)).toBe("123");
-  expect(cast.string(-12.3)).toBe("-12.3");
-  expect(cast.string(true)).toBe("true");
-  expect(cast.string(false)).toBe("false");
-  expect(cast.string("")).toBe("");
-  expect(cast.string([])).toBe("");
-  expect(cast.string(null)).toBe("");
-  expect(cast.string(undefined)).toBe("");
+test.each([
+  { expected: "123", value: 123 },
+  { expected: "-12.3", value: -12.3 },
+  { expected: "true", value: true },
+  { expected: "false", value: false },
+  { expected: "", value: "" },
+  { expected: "", value: [] },
+  { expected: "", value: null },
+  { expected: "", value: undefined }
+])("string", ({ expected, value }) => {
+  expect(cast.string(value)).toBe(expected);
 });
 
-test("stringU", () => {
-  expect(cast.stringU(123)).toBe("123");
-  expect(cast.stringU(-12.3)).toBe("-12.3");
-  expect(cast.stringU(true)).toBe("true");
-  expect(cast.stringU(false)).toBe("false");
-  expect(cast.stringU("")).toBeUndefined();
-  expect(cast.stringU([])).toBeUndefined();
-  expect(cast.stringU(null)).toBeUndefined();
-  expect(cast.stringU(undefined)).toBeUndefined();
+test.each([
+  { expected: "123", value: 123 },
+  { expected: "-12.3", value: -12.3 },
+  { expected: "true", value: true },
+  { expected: "false", value: false },
+  { expected: undefined, value: "" },
+  { expected: undefined, value: [] },
+  { expected: undefined, value: null },
+  { expected: undefined, value: undefined }
+])("stringU", ({ expected, value }) => {
+  expect(cast.stringU(value)).toStrictEqual(expected);
 });

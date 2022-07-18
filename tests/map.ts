@@ -6,27 +6,18 @@ test("delete", () => {
     ["b", 2]
   ]);
 
-  const expected1 = new ReadonlyMap([["a", 1]]);
+  const expected = new ReadonlyMap([["a", 1]]);
 
-  const expected2 = new ReadonlyMap([
-    ["a", 1],
-    ["b", 2]
-  ]);
-
-  expect(map.delete(source, "b")).toStrictEqual(expected1);
-  expect(source).toStrictEqual(expected2);
+  expect(map.delete(source, "b")).toStrictEqual(expected);
 });
 
 test("set", () => {
   const source = new ReadonlyMap([["a", 1]]);
 
-  const expected1 = new ReadonlyMap([
+  const expected = new ReadonlyMap([
     ["a", 1],
     ["b", 2]
   ]);
 
-  const expected2 = new ReadonlyMap([["a", 1]]);
-
-  expect(map.set(source, "b", 2)).toStrictEqual(expected1);
-  expect(source).toStrictEqual(expected2);
+  expect(map.set(source, "b", 2)).toStrictEqual(expected);
 });

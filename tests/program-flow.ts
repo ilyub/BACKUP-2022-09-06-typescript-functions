@@ -3,74 +3,72 @@ import { programFlow, wait } from "@";
 
 testUtils.installFakeTimer();
 
-test("setInterval, clearInterval", async () => {
+test("clearInterval", async () => {
   expect.hasAssertions();
 
   await testUtils.run(async () => {
-    const callback1 = jest.fn();
+    const callback = jest.fn();
 
-    const callback2 = jest.fn();
+    const handler = programFlow.setInterval(callback, 2000);
 
-    const handler1 = programFlow.setInterval(callback1, 2000);
-
-    const handler2 = programFlow.setInterval(callback2, 2000);
-
-    {
-      await wait(1000);
-      expect(callback1).mockCallsToBe();
-      expect(callback2).mockCallsToBe();
-    }
-
-    {
-      await wait(1000);
-      expect(callback1).mockCallsToBe([]);
-      expect(callback2).mockCallsToBe([]);
-    }
-
-    {
-      programFlow.clearInterval(handler1);
-      await wait(2000);
-      expect(callback1).mockCallsToBe();
-      expect(callback2).mockCallsToBe([]);
-    }
-
-    programFlow.clearInterval(handler2);
-    programFlow.clearInterval(undefined);
+    await wait(1000);
+    programFlow.clearInterval(handler);
+    await wait(2000);
+    expect(callback).mockCallsToBe();
   });
 });
 
-test("setTimeout, clearTimeout", async () => {
+test("clearTimeout", async () => {
   expect.hasAssertions();
 
   await testUtils.run(async () => {
-    const callback1 = jest.fn();
+    const callback = jest.fn();
 
-    const callback2 = jest.fn();
+    const handlers = programFlow.setTimeout(callback, 2000);
 
-    const handlers1 = programFlow.setTimeout(callback1, 2000);
+    await wait(1000);
+    programFlow.clearTimeout(handlers);
+    await wait(2000);
+    expect(callback).mockCallsToBe();
+  });
+});
 
-    const handlers2 = programFlow.setTimeout(callback2, 2000);
+test("setInterval", async () => {
+  expect.hasAssertions();
 
-    {
-      await wait(1000);
-      expect(callback1).mockCallsToBe();
-      expect(callback2).mockCallsToBe();
-    }
+  await testUtils.run(async () => {
+    const callback = jest.fn();
 
-    {
-      programFlow.clearTimeout(handlers1);
-      await wait(1000);
-      expect(callback1).mockCallsToBe();
-      expect(callback2).mockCallsToBe([]);
-    }
+    const handler = programFlow.setInterval(callback, 2000);
 
-    {
-      await wait(1000);
-      expect(callback1).mockCallsToBe();
-      expect(callback2).mockCallsToBe();
-    }
+    await wait(1000);
+    expect(callback).mockCallsToBe();
+    await wait(1000);
+    expect(callback).mockCallsToBe([]);
+    await wait(2000);
+    expect(callback).mockCallsToBe([]);
+    programFlow.clearInterval(handler);
+    await wait(2000);
+    expect(callback).mockCallsToBe();
+  });
+});
 
-    programFlow.clearTimeout(handlers2);
-    programFlow.clearTimeout(undefined);
+test("setTimeout", async () => {
+  expect.hasAssertions();
+
+  await testUtils.run(async () => {
+    const callback = jest.fn();
+
+    const handlers = programFlow.setTimeout(callback, 2000);
+
+    await wait(1000);
+    expect(callback).mockCallsToBe();
+    await wait(1000);
+    expect(callback).mockCallsToBe([]);
+    await wait(2000);
+    expect(callback).mockCallsToBe();
+    programFlow.clearTimeout(handlers);
+    await wait(2000);
+    expect(callback).mockCallsToBe();
   });
 });

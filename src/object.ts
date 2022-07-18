@@ -4,14 +4,13 @@ import * as is from "./guards";
 import type {
   Entry,
   NumStr,
-  OptionalStyle,
   PartialRecord,
   Rec,
-  StrictOmit,
   Writable,
   WritableIndexedObject,
   WritablePartialRecord,
-  objectU
+  objectU,
+  types
 } from "./types";
 import { ReadonlySet, defineFn, indexed } from "./core";
 
@@ -346,10 +345,12 @@ export function map<K extends string, V, R>(
 export function omit<T extends object, K extends string & keyof T>(
   obj: T,
   ...exclude: readonly K[]
-): StrictOmit<T, K> {
+): types.object.Omit<T, K> {
   const excludeSet = new ReadonlySet<keyof T>(exclude);
 
-  return filter(obj, (_value, key) => !excludeSet.has(key)) as StrictOmit<T, K>;
+  const result = filter(obj, (_value, key) => !excludeSet.has(key));
+
+  return result as types.object.Omit<T, K>;
 }
 
 /**
@@ -360,8 +361,8 @@ export function omit<T extends object, K extends string & keyof T>(
  */
 export function removeUndefinedKeys<T extends object>(
   obj: T
-): OptionalStyle<T> {
-  return filter(obj, is.not.empty) as OptionalStyle<T>;
+): types.object.style.Optional<T> {
+  return filter(obj, is.not.empty) as types.object.style.Optional<T>;
 }
 
 /**

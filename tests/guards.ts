@@ -1,346 +1,340 @@
-/* eslint-disable @skylib/custom/functions/is-array-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/is-boolean-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/is-callable-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/is-empty-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/is-enumeration-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/is-false-arg-type -- Ok */
-
 /* eslint-disable @skylib/custom/functions/is-indexedObject-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/is-instanceOf-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/is-map-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/is-null-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/is-numStr-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/is-number-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/is-object-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/is-set-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/is-string-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/is-symbol-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/is-true-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/is-tuple-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/is-undefined-arg-type -- Ok */
-
-/* eslint-disable @skylib/custom/functions/no-unnecessary-is-array -- Ok */
-
-/* eslint-disable @skylib/custom/functions/no-unnecessary-is-boolean -- Ok */
-
-/* eslint-disable @skylib/custom/functions/no-unnecessary-is-empty -- Ok */
-
-/* eslint-disable @skylib/custom/functions/no-unnecessary-is-null -- Ok */
-
-/* eslint-disable @skylib/custom/functions/no-unnecessary-is-numStr -- Ok */
-
-/* eslint-disable @skylib/custom/functions/no-unnecessary-is-number -- Ok */
-
-/* eslint-disable @skylib/custom/functions/no-unnecessary-is-object -- Ok */
-
-/* eslint-disable @skylib/custom/functions/no-unnecessary-is-string -- Ok */
-
-/* eslint-disable @skylib/custom/functions/no-unnecessary-is-symbol -- Ok */
-
-/* eslint-disable @skylib/custom/functions/no-unnecessary-is-undefined -- Ok */
 
 import { ReadonlyMap, ReadonlySet, fn, is } from "@";
 
-test("and", () => {
-  expect(is.and(undefined, is.booleanU, is.numberU)).toBeTrue();
-  expect(is.and(true, is.booleanU, is.numberU)).toBeFalse();
-  expect(is.and(1, is.booleanU, is.numberU)).toBeFalse();
+class TestClass {}
+
+test.each([
+  { expected: true, value: undefined },
+  { expected: false, value: true },
+  { expected: false, value: 1 }
+])("and", ({ expected, value }) => {
+  expect(is.and(value, is.booleanU, is.numberU)).toBe(expected);
 });
 
-test("and.factory", () => {
+test.each([
+  { expected: true, value: undefined },
+  { expected: false, value: true },
+  { expected: false, value: 1 }
+])("and.factory", ({ expected, value }) => {
   const guard = is.and.factory(is.booleanU, is.numberU, is.stringU);
 
-  expect(guard(undefined)).toBeTrue();
-  expect(guard(true)).toBeFalse();
-  expect(guard(1)).toBeFalse();
+  expect(guard(value)).toBe(expected);
 });
 
-test("array", () => {
-  expect(is.array([1])).toBeTrue();
-  expect(is.array(["a"])).toBeTrue();
-  expect(is.array(1)).toBeFalse();
+test.each([
+  { expected: true, value: [1] },
+  { expected: true, value: ["a"] },
+  { expected: false, value: 1 }
+])("array", ({ expected, value }) => {
+  expect(is.array(value)).toBe(expected);
 });
 
-test("array.of", () => {
-  expect(is.array.of([1], is.number)).toBeTrue();
-  expect(is.array.of(["a"], is.number)).toBeFalse();
-  expect(is.array.of(1, is.number)).toBeFalse();
+test.each([
+  { expected: true, value: [1] },
+  { expected: false, value: ["a"] },
+  { expected: false, value: 1 }
+])("array.of", ({ expected, value }) => {
+  expect(is.array.of(value, is.number)).toBe(expected);
 });
 
-test("boolean", () => {
-  expect(is.boolean(true)).toBeTrue();
-  expect(is.boolean(false)).toBeTrue();
-  expect(is.boolean(1)).toBeFalse();
-  expect(is.boolean(undefined)).toBeFalse();
+test.each([
+  { expected: true, value: true },
+  { expected: true, value: false },
+  { expected: false, value: 1 },
+  { expected: false, value: undefined }
+])("boolean", ({ expected, value }) => {
+  expect(is.boolean(value)).toBe(expected);
 });
 
-test("callable", () => {
-  class TestClass {}
-
-  expect(is.callable(TestClass)).toBeTrue();
-  expect(is.callable(fn.noop)).toBeTrue();
-  expect(is.callable(1)).toBeFalse();
-  expect(is.callable(undefined)).toBeFalse();
+test.each([
+  { expected: true, value: TestClass },
+  { expected: true, value: fn.noop },
+  { expected: false, value: 1 },
+  { expected: false, value: undefined }
+])("callable", ({ expected, value }) => {
+  expect(is.callable(value)).toBe(expected);
 });
 
-test("empty", () => {
-  expect(is.empty(null)).toBeTrue();
-  expect(is.empty(undefined)).toBeTrue();
-  expect(is.empty(1)).toBeFalse();
+test.each([
+  { expected: true, value: null },
+  { expected: true, value: undefined },
+  { expected: false, value: 1 }
+])("empty", ({ expected, value }) => {
+  expect(is.empty(value)).toBe(expected);
 });
 
-test("enumeration", () => {
+test.each([
+  { expected: true, value: 1 },
+  { expected: true, value: "a" },
+  { expected: false, value: "1" },
+  { expected: false, value: "b" },
+  { expected: false, value: undefined }
+])("enumeration", ({ expected, value }) => {
   enum TestEnum {
     a = 1,
     b = "a"
   }
 
-  expect(is.enumeration(1, TestEnum)).toBeTrue();
-  expect(is.enumeration("a", TestEnum)).toBeTrue();
-  expect(is.enumeration("1", TestEnum)).toBeFalse();
-  expect(is.enumeration("b", TestEnum)).toBeFalse();
-  expect(is.enumeration(undefined, TestEnum)).toBeFalse();
+  expect(is.enumeration(value, TestEnum)).toBe(expected);
 });
 
-test("factory", () => {
-  const guard = is.factory(is.array.of, is.number);
-
-  expect(guard([1])).toBeTrue();
-  expect(guard(["a"])).toBeFalse();
-  expect(guard(1)).toBeFalse();
+test.each([
+  { expected: true, value: [1] },
+  { expected: false, value: ["a"] },
+  { expected: false, value: 1 }
+])("factory", ({ expected, value }) => {
+  expect(is.array.of(value, is.number)).toBe(expected);
 });
 
-test("false", () => {
-  expect(is.false(false)).toBeTrue();
-  expect(is.false(true)).toBeFalse();
-  expect(is.false(undefined)).toBeFalse();
+test.each([
+  { expected: true, value: false },
+  { expected: false, value: true },
+  { expected: false, value: undefined }
+])("false", ({ expected, value }) => {
+  expect(is.false(value)).toBe(expected);
 });
 
-test("indexedObject", () => {
-  expect(is.indexedObject({ a: 1 })).toBeTrue();
-  expect(is.indexedObject({ a: "a" })).toBeTrue();
-  expect(is.indexedObject(1)).toBeFalse();
-  expect(is.indexedObject(null)).toBeFalse();
+test.each([
+  { expected: true, value: { a: 1 } },
+  { expected: true, value: { a: "a" } },
+  { expected: false, value: 1 },
+  { expected: false, value: null }
+])("indexedObject", ({ expected, value }) => {
+  expect(is.indexedObject(value)).toBe(expected);
 });
 
-test("indexedObject.of", () => {
-  expect(is.indexedObject.of({ a: 1 }, is.number)).toBeTrue();
-  expect(is.indexedObject.of({ a: "a" }, is.number)).toBeFalse();
-  expect(is.indexedObject.of(1, is.number)).toBeFalse();
-  expect(is.indexedObject.of(null, is.number)).toBeFalse();
+test.each([
+  { expected: true, value: { a: 1 } },
+  { expected: false, value: { a: "a" } },
+  { expected: false, value: 1 },
+  { expected: false, value: null }
+])("indexedObject.of", ({ expected, value }) => {
+  expect(is.indexedObject.of(value, is.number)).toBe(expected);
 });
 
-test("instanceOf", () => {
-  class TestClass {}
-
-  expect(is.instanceOf(new TestClass(), TestClass)).toBeTrue();
-  expect(is.instanceOf({}, TestClass)).toBeFalse();
-  expect(is.instanceOf(undefined, TestClass)).toBeFalse();
+test.each([
+  { expected: true, value: new TestClass() },
+  { expected: false, value: {} },
+  { expected: false, value: undefined }
+])("instanceOf", ({ expected, value }) => {
+  expect(is.instanceOf(value, TestClass)).toBe(expected);
 });
 
-test("instancesOf", () => {
-  class TestClass {}
-
-  expect(is.instancesOf([new TestClass()], TestClass)).toBeTrue();
-  expect(is.instancesOf([{}], TestClass)).toBeFalse();
-  expect(is.instancesOf([undefined], TestClass)).toBeFalse();
+test.each([
+  { expected: true, value: [new TestClass()] },
+  { expected: false, value: [{}] },
+  { expected: false, value: [undefined] }
+])("instancesOf", ({ expected, value }) => {
+  expect(is.instancesOf(value, TestClass)).toBe(expected);
 });
 
-test("map", () => {
-  expect(is.map(new ReadonlyMap([["a", 1]]))).toBeTrue();
-  expect(is.map(new ReadonlyMap([[1, 1]]))).toBeTrue();
-  expect(is.map(new ReadonlyMap([["a", "a"]]))).toBeTrue();
-  expect(is.map({})).toBeFalse();
-  expect(is.map(undefined)).toBeFalse();
+test.each([
+  { expected: true, value: new ReadonlyMap([["a", 1]]) },
+  { expected: true, value: new ReadonlyMap([[1, 1]]) },
+  { expected: true, value: new ReadonlyMap([["a", "a"]]) },
+  { expected: false, value: {} },
+  { expected: false, value: undefined }
+])("map", ({ expected, value }) => {
+  expect(is.map(value)).toBe(expected);
 });
 
-test("map.of", () => {
-  expect(
-    is.map.of(new ReadonlyMap([["a", 1]]), is.string, is.number)
-  ).toBeTrue();
-  expect(
-    is.map.of(new ReadonlyMap([[1, 1]]), is.string, is.number)
-  ).toBeFalse();
-  expect(
-    is.map.of(new ReadonlyMap([["a", "a"]]), is.string, is.number)
-  ).toBeFalse();
-  expect(is.map.of({}, is.string, is.number)).toBeFalse();
-  expect(is.map.of(undefined, is.string, is.number)).toBeFalse();
+test.each([
+  { expected: true, value: new ReadonlyMap([["a", 1]]) },
+  { expected: false, value: new ReadonlyMap([[1, 1]]) },
+  { expected: false, value: new ReadonlyMap([["a", "a"]]) },
+  { expected: false, value: {} },
+  { expected: false, value: undefined }
+])("map.of", ({ expected, value }) => {
+  expect(is.map.of(value, is.string, is.number)).toBe(expected);
 });
 
-test("never", () => {
-  expect(is.never(1)).toBeFalse();
-  expect(is.never(null)).toBeFalse();
-  expect(is.never(undefined)).toBeFalse();
+test.each([1, null, undefined])("never", value => {
+  expect(is.never(value)).toBeFalse();
 });
 
-test("not", () => {
-  expect(is.not(true, is.number)).toBeTrue();
-  expect(is.not(1, is.number)).toBeFalse();
+test.each([
+  { expected: true, value: true },
+  { expected: false, value: 1 }
+])("not", ({ expected, value }) => {
+  expect(is.not(value, is.number)).toBe(expected);
 });
 
-test("not.factory", () => {
+test.each([
+  { expected: true, value: true },
+  { expected: false, value: 1 }
+])("not.factory", ({ expected, value }) => {
   const guard = is.not.factory(is.number);
 
-  expect(guard(true)).toBeTrue();
-  expect(guard(1)).toBeFalse();
+  expect(guard(value)).toBe(expected);
 });
 
-test("null", () => {
-  expect(is.null(null)).toBeTrue();
-  expect(is.null(undefined)).toBeFalse();
-  expect(is.null(1)).toBeFalse();
+test.each([
+  { expected: true, value: null },
+  { expected: false, value: undefined },
+  { expected: false, value: 1 }
+])("null", ({ expected, value }) => {
+  expect(is.null(value)).toBe(expected);
 });
 
-test("numStr", () => {
-  expect(is.numStr(1)).toBeTrue();
-  expect(is.numStr("a")).toBeTrue();
-  expect(is.numStr(Number.NaN)).toBeFalse();
-  expect(is.numStr(true)).toBeFalse();
-  expect(is.numStr(undefined)).toBeFalse();
+test.each([
+  { expected: true, value: 1 },
+  { expected: true, value: "a" },
+  { expected: false, value: Number.NaN },
+  { expected: false, value: true },
+  { expected: false, value: undefined }
+])("numStr", ({ expected, value }) => {
+  expect(is.numStr(value)).toBe(expected);
 });
 
-test("number", () => {
-  expect(is.number(1)).toBeTrue();
-  expect(is.number("a")).toBeFalse();
-  expect(is.number(Number.NaN)).toBeFalse();
-  expect(is.number(true)).toBeFalse();
-  expect(is.number(undefined)).toBeFalse();
+test.each([
+  { expected: true, value: 1 },
+  { expected: false, value: "a" },
+  { expected: false, value: Number.NaN },
+  { expected: false, value: true },
+  { expected: false, value: undefined }
+])("number", ({ expected, value }) => {
+  expect(is.number(value)).toBe(expected);
 });
 
-test("object", () => {
-  expect(is.object({ num: 1, str: "a" })).toBeTrue();
-  expect(is.object({ num: 1 })).toBeTrue();
-  expect(is.object({ num: 1, str: true })).toBeTrue();
-  expect(is.object({ num: true, str: "a" })).toBeTrue();
-  expect(is.object({ str: "a" })).toBeTrue();
-  expect(is.object(1)).toBeFalse();
-  expect(is.object(null)).toBeFalse();
-  expect(is.object(undefined)).toBeFalse();
+test.each([
+  { expected: true, value: { num: 1, str: "a" } },
+  { expected: true, value: { num: 1 } },
+  { expected: true, value: { num: 1, str: true } },
+  { expected: true, value: { num: true, str: "a" } },
+  { expected: true, value: { str: "a" } },
+  { expected: false, value: 1 },
+  { expected: false, value: null },
+  { expected: false, value: undefined }
+])("object", ({ expected, value }) => {
+  expect(is.object(value)).toBe(expected);
 });
 
-test("object.factory", () => {
+test.each([
+  { expected: true, value: { num: 1, str: "a" } },
+  { expected: true, value: { num: 1 } },
+  { expected: false, value: { num: 1, str: true } },
+  { expected: false, value: { num: true, str: "a" } },
+  { expected: false, value: { str: "a" } },
+  { expected: false, value: 1 },
+  { expected: false, value: null },
+  { expected: false, value: undefined }
+])("object.factory", ({ expected, value }) => {
   const guard = is.object.factory({ num: is.number }, { str: is.string });
 
-  expect(guard({ num: 1, str: "a" })).toBeTrue();
-  expect(guard({ num: 1 })).toBeTrue();
-  expect(guard({ num: 1, str: true })).toBeFalse();
-  expect(guard({ num: true, str: "a" })).toBeFalse();
-  expect(guard({ str: "a" })).toBeFalse();
-  expect(guard(1)).toBeFalse();
-  expect(guard(null)).toBeFalse();
-  expect(guard(undefined)).toBeFalse();
+  expect(guard(value)).toBe(expected);
 });
 
-test("object.of", () => {
-  const guard = is.factory(
-    is.object.of,
-    { num: is.number },
-    { str: is.string }
+test.each([
+  { expected: true, value: { num: 1, str: "a" } },
+  { expected: true, value: { num: 1 } },
+  { expected: false, value: { num: 1, str: true } },
+  { expected: false, value: { num: true, str: "a" } },
+  { expected: false, value: { str: "a" } },
+  { expected: false, value: 1 },
+  { expected: false, value: null },
+  { expected: false, value: undefined }
+])("object.of", ({ expected, value }) => {
+  expect(is.object.of(value, { num: is.number }, { str: is.string })).toBe(
+    expected
   );
-
-  expect(guard({ num: 1, str: "a" })).toBeTrue();
-  expect(guard({ num: 1 })).toBeTrue();
-  expect(guard({ num: 1, str: true })).toBeFalse();
-  expect(guard({ num: true, str: "a" })).toBeFalse();
-  expect(guard({ str: "a" })).toBeFalse();
-  expect(guard(1)).toBeFalse();
-  expect(guard(null)).toBeFalse();
-  expect(guard(undefined)).toBeFalse();
 });
 
-test("or", () => {
-  expect(is.or(1, is.boolean, is.number)).toBeTrue();
-  expect(is.or(true, is.boolean, is.number)).toBeTrue();
-  expect(is.or(undefined, is.boolean, is.number)).toBeFalse();
+test.each([
+  { expected: true, value: 1 },
+  { expected: true, value: true },
+  { expected: false, value: undefined }
+])("or", ({ expected, value }) => {
+  expect(is.or(value, is.boolean, is.number)).toBe(expected);
 });
 
-test("or.factory", () => {
+test.each([
+  { expected: true, value: 1 },
+  { expected: true, value: true },
+  { expected: false, value: undefined }
+])("or.factory", ({ expected, value }) => {
   const guard = is.or.factory(is.boolean, is.number, is.string);
 
-  expect(guard(1)).toBeTrue();
-  expect(guard(true)).toBeTrue();
-  expect(guard(undefined)).toBeFalse();
+  expect(guard(value)).toBe(expected);
 });
 
-test("set", () => {
-  expect(is.set(new ReadonlySet(["a"]))).toBeTrue();
-  expect(is.set(new ReadonlySet([1]))).toBeTrue();
-  expect(is.set({})).toBeFalse();
-  expect(is.set(undefined)).toBeFalse();
+test.each([
+  { expected: true, value: new ReadonlySet(["a"]) },
+  { expected: true, value: new ReadonlySet([1]) },
+  { expected: false, value: {} },
+  { expected: false, value: undefined }
+])("set", ({ expected, value }) => {
+  expect(is.set(value)).toBe(expected);
 });
 
-test("set.of", () => {
-  expect(is.set.of(new ReadonlySet(["a"]), is.string)).toBeTrue();
-  expect(is.set.of(new ReadonlySet([1]), is.string)).toBeFalse();
-  expect(is.set.of({}, is.string)).toBeFalse();
-  expect(is.set.of(undefined, is.string)).toBeFalse();
+test.each([
+  { expected: true, value: new ReadonlySet(["a"]) },
+  { expected: false, value: new ReadonlySet([1]) },
+  { expected: false, value: {} },
+  { expected: false, value: undefined }
+])("set.of", ({ expected, value }) => {
+  expect(is.set.of(value, is.string)).toBe(expected);
 });
 
-test("string", () => {
-  expect(is.string("a")).toBeTrue();
-  expect(is.string("")).toBeTrue();
-  expect(is.string(undefined)).toBeFalse();
-  expect(is.string(1)).toBeFalse();
+test.each([
+  { expected: true, value: "a" },
+  { expected: true, value: "" },
+  { expected: false, value: undefined },
+  { expected: false, value: 1 }
+])("string", ({ expected, value }) => {
+  expect(is.string(value)).toBe(expected);
 });
 
-test("stringU", () => {
-  expect(is.stringU("a")).toBeTrue();
-  expect(is.stringU(undefined)).toBeTrue();
-  expect(is.stringU("")).toBeFalse();
-  expect(is.stringU(1)).toBeFalse();
+test.each([
+  { expected: true, value: "a" },
+  { expected: true, value: undefined },
+  { expected: false, value: "" },
+  { expected: false, value: 1 }
+])("stringU", ({ expected, value }) => {
+  expect(is.stringU(value)).toBe(expected);
 });
 
-test("symbol", () => {
-  expect(is.symbol(Symbol("test-symbol"))).toBeTrue();
-  expect(is.symbol(1)).toBeFalse();
+test.each([
+  { expected: true, value: Symbol("sample") },
+  { expected: false, value: 1 }
+])("symbol", ({ expected, value }) => {
+  expect(is.symbol(value)).toBe(expected);
 });
 
-test("true", () => {
-  expect(is.true(true)).toBeTrue();
-  expect(is.true(false)).toBeFalse();
-  expect(is.true(undefined)).toBeFalse();
+test.each([
+  { expected: true, value: true },
+  { expected: false, value: false },
+  { expected: false, value: undefined }
+])("true", ({ expected, value }) => {
+  expect(is.true(value)).toBe(expected);
 });
 
-test("tuple", () => {
-  expect(is.tuple([true, 1], is.boolean, is.number)).toBeTrue();
-  expect(is.tuple([undefined, 1], is.boolean, is.number)).toBeFalse();
-  expect(is.tuple({}, is.boolean, is.number)).toBeFalse();
+test.each([
+  { expected: true, value: [true, 1] },
+  { expected: false, value: [undefined, 1] },
+  { expected: false, value: {} }
+])("tuple", ({ expected, value }) => {
+  expect(is.tuple(value, is.boolean, is.number)).toBe(expected);
 });
 
-test("tuple.factory", () => {
+test.each([
+  { expected: true, value: [true, 1, "a"] },
+  { expected: false, value: [undefined, 1, "a"] },
+  { expected: false, value: {} }
+])("tuple.factory", ({ expected, value }) => {
   const guard = is.tuple.factory(is.boolean, is.number, is.string);
 
-  expect(guard([true, 1, "a"])).toBeTrue();
-  expect(guard([undefined, 1, "a"])).toBeFalse();
-  expect(guard({})).toBeFalse();
+  expect(guard(value)).toBe(expected);
 });
 
-test("undefined", () => {
-  expect(is.undefined(1)).toBeFalse();
-  expect(is.undefined(null)).toBeFalse();
-  expect(is.undefined(undefined)).toBeTrue();
+test.each([
+  { expected: false, value: 1 },
+  { expected: false, value: null },
+  { expected: true, value: undefined }
+])("undefined", ({ expected, value }) => {
+  expect(is.undefined(value)).toBe(expected);
 });
 
-test("unknown", () => {
-  expect(is.unknown(1)).toBeTrue();
-  expect(is.unknown(null)).toBeTrue();
-  expect(is.unknown(undefined)).toBeTrue();
+test.each([1, null, undefined])("unknown", value => {
+  expect(is.unknown(value)).toBeTrue();
 });

@@ -4,12 +4,13 @@ const error1 = new ConversionError();
 
 const error2 = new ConversionError("Custom message");
 
-test("message", () => {
-  expect(error1.message).toBe("Conversion error");
-  expect(error2.message).toBe("Custom message");
+test.each([
+  { err: error1, expected: "Conversion error" },
+  { err: error2, expected: "Custom message" }
+])("message", ({ err, expected }) => {
+  expect(err.message).toBe(expected);
 });
 
-test("name", () => {
-  expect(error1.name).toBe("ConversionError");
-  expect(error2.name).toBe("ConversionError");
+test.each([error1, error2])("name", err => {
+  expect(err.name).toBe("ConversionError");
 });

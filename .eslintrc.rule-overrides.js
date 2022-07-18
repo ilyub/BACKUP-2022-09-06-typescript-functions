@@ -124,19 +124,6 @@ module.exports = {
             source: "@skylib/functions/src/string",
             type: "wildcard"
           },
-          {
-            _id: "types",
-            autoImport: true,
-            autoImportSource: "./types",
-            filesToLint: [
-              "./src/assertions.ts",
-              "./src/converters.ts",
-              "./src/guards.ts",
-              "./src/inline-assertions.ts"
-            ],
-            source: "@skylib/functions/src/types",
-            type: "wildcard"
-          },
           ...consistentImport.sources
         ]
       }

@@ -1,12 +1,4 @@
-import type {
-  AsyncPromise,
-  AsyncPromiseSync,
-  IndexedObject,
-  NumStr,
-  Rec,
-  Sync,
-  Writable
-} from "./types";
+import type { IndexedObject, Writable, types } from "./types";
 
 export const ReadonlyMap: {
   // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
@@ -33,25 +25,12 @@ export const defineFn: <F, P>(fn: F, props: P) => F & Readonly<P> =
 export type ValidationObject<T extends PropertyKey> = IndexedObject<T>;
 
 /**
- * Creates validation object.
- *
- * @param source - Source.
- * @returns Validation object.
- * @deprecated -- Use enum.
- */
-export function createValidationObject<T extends NumStr>(
-  source: Rec<T, T>
-): IndexedObject<T> {
-  return source;
-}
-
-/**
  * Executes callback.
  *
  * @param callback - Callback.
  * @returns The result of callback execution.
  */
-export function evaluate<T>(callback: Sync<T>): T;
+export function evaluate<T>(callback: types.fn.Sync<T>): T;
 
 /**
  * Executes promise or async function.
@@ -59,9 +38,11 @@ export function evaluate<T>(callback: Sync<T>): T;
  * @param mixed - Promise or async function.
  * @returns The result of callback execution.
  */
-export async function evaluate<T>(mixed: AsyncPromise<T>): Promise<T>;
+export async function evaluate<T>(mixed: types.fn.AsyncPromise<T>): Promise<T>;
 
-export function evaluate<T>(mixed: AsyncPromiseSync<T>): Promise<T> | T {
+export function evaluate<T>(
+  mixed: types.fn.AsyncPromiseSync<T>
+): Promise<T> | T {
   return typeof mixed === "function" ? mixed() : mixed;
 }
 

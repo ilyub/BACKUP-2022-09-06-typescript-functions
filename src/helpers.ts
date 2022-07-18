@@ -10,7 +10,7 @@ import * as is from "./guards";
 import * as o from "./object";
 import * as programFlow from "./program-flow";
 import * as reflect from "./reflect";
-import type { Join2, unknowns } from "./types";
+import type { And, unknowns } from "./types";
 import { ReadonlyMap, ReadonlySet, typedef } from "./core";
 
 export enum ProxyHandlerAction {
@@ -33,7 +33,7 @@ export type SafeAccess<
   T extends object,
   W extends string & keyof T,
   R extends string & keyof T
-> = Join2<{ [K in W]: T[K] }, { readonly [K in R]: T[K] }>;
+> = And<{ [K in W]: T[K] }, { readonly [K in R]: T[K] }>;
 
 export declare type SafeAccessGuards<T, W extends string & keyof T> = {
   readonly [K in W]: is.Guard<T[K]>;

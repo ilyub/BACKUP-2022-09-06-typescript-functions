@@ -1,251 +1,292 @@
 /* eslint-disable @skylib/custom/functions/no-reflect-get -- Ok */
 
-import { AssertionError, fn, is, reflect } from "@";
+import { AssertionError, is, reflect } from "@";
 
-const mk1 = Symbol("test-metadata-key-1");
+const key1 = "key-1";
 
-const mk2 = Symbol("test-metadata-key-2");
+const key2 = Symbol("key-2");
 
-const mk3 = Symbol("test-metadata-key-3");
+const key3 = "key-3";
 
-const pk1 = Symbol("test-metadata-key-4");
+const metadataKey1 = "metadata-key-1";
 
-test("defineMetadata", () => {
-  const obj = {} as const;
+const metadataKey2 = Symbol("metadata-key-2");
 
+const metadataKey3 = "metadata-key-3";
+
+test.each([
   {
-    reflect.defineMetadata("mk1", 1, obj);
-    expect(reflect.getOwnMetadata("mk1", obj)).toBe(1);
-    expect(reflect.getOwnMetadata("mk2", obj)).toBeUndefined();
-  }
-
+    expected: 1,
+    metadataKey: metadataKey1,
+    metadataValue: 1
+  },
   {
-    reflect.defineMetadata(mk1, 1, obj);
-    expect(reflect.getOwnMetadata(mk1, obj)).toBe(1);
-    expect(reflect.getOwnMetadata(mk2, obj)).toBeUndefined();
+    expected: undefined,
+    metadataKey: metadataKey2,
+    metadataValue: undefined
   }
+])("defineMetadata", ({ expected, metadataKey, metadataValue }) => {
+  const target = {} as const;
+
+  reflect.defineMetadata(metadataKey, metadataValue, target);
+  expect(reflect.getOwnMetadata(metadataKey, target)).toStrictEqual(expected);
 });
 
-test("defineMetadataKey", () => {
-  const obj = {} as const;
-
+test.each([
+  { expected: 1, key: "a" },
   {
-    reflect.defineMetadataKey("mk1", 1, obj, pk1);
-    expect(reflect.getOwnMetadataKey("mk1", obj, pk1)).toBe(1);
-    expect(reflect.getOwnMetadataKey("mk2", obj, pk1)).toBeUndefined();
-  }
-
+    expected: 1,
+    guard: is.number,
+    key: "a"
+  },
   {
-    reflect.defineMetadataKey(mk1, 1, obj, "pk1");
-    expect(reflect.getOwnMetadataKey(mk1, obj, "pk1")).toBe(1);
-    expect(reflect.getOwnMetadataKey(mk2, obj, "pk1")).toBeUndefined();
-  }
+    defVal: 2,
+    expected: 2,
+    guard: is.number,
+    key: "b"
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    guard: is.number,
+    key: "b"
+  },
+  { expected: undefined, key: "b" }
+])("get", ({ defVal, expected, expectedToThrow, guard, key }) => {
+  const target = { a: 1 } as const;
+
+  expect(() => reflect.get(target, key, guard, defVal)).executionResultToBe(
+    expected,
+    expectedToThrow
+  );
 });
 
-test("get", () => {
-  expect(reflect.get({ a: 1 }, "a")).toBe(1);
-  expect(reflect.get({ a: 1 }, "a", is.number)).toBe(1);
-  expect(reflect.get({}, "a", is.number, 1)).toBe(1);
-  expect(reflect.get(fn.noop, "a")).toBeUndefined();
-  expect(() => reflect.get({ a: "" }, "a", is.number)).toThrow(AssertionError);
-});
+test.each([
+  { expected: 1, metadataKey: metadataKey1 },
+  { expected: 2, metadataKey: metadataKey2 },
+  {
+    defVal: 3,
+    expected: 3,
+    guard: is.number,
+    metadataKey: metadataKey3
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    guard: is.number,
+    metadataKey: metadataKey3
+  }
+])(
+  "getMetadata",
+  ({ defVal, expected, expectedToThrow, guard, metadataKey }) => {
+    class TestClass {}
 
-test("getMetadata", () => {
+    const target = new TestClass();
+
+    reflect.defineMetadata(metadataKey1, 1, target);
+    reflect.defineMetadata(metadataKey2, 2, TestClass.prototype);
+    expect(() =>
+      reflect.getMetadata(metadataKey, target, guard, defVal)
+    ).executionResultToBe(expected, expectedToThrow);
+  }
+);
+
+test.each([
+  {
+    expected: 1,
+    key: key1,
+    metadataKey: metadataKey1
+  },
+  {
+    expected: 2,
+    key: key2,
+    metadataKey: metadataKey2
+  },
+  {
+    defVal: 3,
+    expected: 3,
+    guard: is.number,
+    key: key3,
+    metadataKey: metadataKey2
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    guard: is.number,
+    key: key2,
+    metadataKey: metadataKey3
+  }
+])(
+  "getMetadataKey",
+  ({ defVal, expected, expectedToThrow, guard, key, metadataKey }) => {
+    class TestClass {}
+
+    const target = new TestClass();
+
+    reflect.defineMetadataKey(metadataKey1, 1, target, key1);
+    reflect.defineMetadataKey(metadataKey2, 2, TestClass.prototype, key2);
+    expect(() =>
+      reflect.getMetadataKey(metadataKey, target, key, guard, defVal)
+    ).executionResultToBe(expected, expectedToThrow);
+  }
+);
+
+test.each([
+  { expected: 1, metadataKey: metadataKey1 },
+  { expected: undefined, metadataKey: metadataKey2 },
+  {
+    defVal: 3,
+    expected: 3,
+    guard: is.number,
+    metadataKey: metadataKey3
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    guard: is.number,
+    metadataKey: metadataKey3
+  }
+])(
+  "getOwnMetadata",
+  ({ defVal, expected, expectedToThrow, guard, metadataKey }) => {
+    class TestClass {}
+
+    const target = new TestClass();
+
+    reflect.defineMetadata(metadataKey1, 1, target);
+    reflect.defineMetadata(metadataKey2, 2, TestClass.prototype);
+    expect(() =>
+      reflect.getOwnMetadata(metadataKey, target, guard, defVal)
+    ).executionResultToBe(expected, expectedToThrow);
+  }
+);
+
+test.each([
+  {
+    expected: 1,
+    key: key1,
+    metadataKey: metadataKey1
+  },
+  {
+    expected: undefined,
+    key: key2,
+    metadataKey: metadataKey2
+  },
+  {
+    defVal: 3,
+    expected: 3,
+    guard: is.number,
+    key: key3,
+    metadataKey: metadataKey2
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    guard: is.number,
+    key: key2,
+    metadataKey: metadataKey3
+  }
+])(
+  "getOwnMetadataKey",
+  ({ defVal, expected, expectedToThrow, guard, key, metadataKey }) => {
+    class TestClass {}
+
+    const target = new TestClass();
+
+    reflect.defineMetadataKey(metadataKey1, 1, target, key1);
+    reflect.defineMetadataKey(metadataKey2, 2, TestClass.prototype, key2);
+    expect(() =>
+      reflect.getOwnMetadataKey(metadataKey, target, key, guard, defVal)
+    ).executionResultToBe(expected, expectedToThrow);
+  }
+);
+
+test.each([
+  { expected: true, metadataKey: metadataKey1 },
+  { expected: true, metadataKey: metadataKey2 },
+  { expected: false, metadataKey: metadataKey3 }
+])("hasMetadata", ({ expected, metadataKey }) => {
   class TestClass {}
 
-  const obj = new TestClass();
+  const target = new TestClass();
 
-  {
-    reflect.defineMetadata("mk1", 1, TestClass.prototype);
-    reflect.defineMetadata("mk2", 2, obj);
-    expect(reflect.getMetadata("mk1", obj)).toBe(1);
-    expect(reflect.getMetadata("mk2", obj)).toBe(2);
-    expect(reflect.getMetadata("mk3", obj, is.number, 2)).toBe(2);
-    expect(() => reflect.getMetadata("mk2", obj, is.string)).toThrow(
-      AssertionError
-    );
-  }
-
-  {
-    reflect.defineMetadata(mk1, 1, TestClass.prototype);
-    reflect.defineMetadata(mk2, 2, obj);
-    expect(reflect.getMetadata(mk1, obj)).toBe(1);
-    expect(reflect.getMetadata(mk2, obj)).toBe(2);
-    expect(reflect.getMetadata(mk3, obj, is.number, 2)).toBe(2);
-    expect(() => reflect.getMetadata(mk2, obj, is.string)).toThrow(
-      AssertionError
-    );
-  }
+  reflect.defineMetadata(metadataKey1, 1, target);
+  reflect.defineMetadata(metadataKey2, 2, TestClass.prototype);
+  expect(reflect.hasMetadata(metadataKey, target)).toBe(expected);
 });
 
-test("getMetadataKey", () => {
+test.each([
+  {
+    expected: true,
+    key: key1,
+    metadataKey: metadataKey1
+  },
+  {
+    expected: true,
+    key: key2,
+    metadataKey: metadataKey2
+  },
+  {
+    expected: false,
+    key: key3,
+    metadataKey: metadataKey2
+  },
+  {
+    expected: false,
+    key: key2,
+    metadataKey: metadataKey3
+  }
+])("hasMetadataKey", ({ expected, key, metadataKey }) => {
   class TestClass {}
 
-  const obj = new TestClass();
+  const target = new TestClass();
 
-  {
-    reflect.defineMetadataKey("mk1", 1, TestClass.prototype, pk1);
-    reflect.defineMetadataKey("mk2", 2, obj, pk1);
-    expect(reflect.getMetadataKey("mk1", obj, pk1)).toBe(1);
-    expect(reflect.getMetadataKey("mk2", obj, pk1)).toBe(2);
-    expect(reflect.getMetadataKey("mk3", obj, pk1, is.number, 2)).toBe(2);
-    expect(() => reflect.getMetadataKey("mk2", obj, pk1, is.string)).toThrow(
-      AssertionError
-    );
-  }
-
-  {
-    reflect.defineMetadataKey(mk1, 1, TestClass.prototype, "pk1");
-    reflect.defineMetadataKey(mk2, 2, obj, "pk1");
-    expect(reflect.getMetadataKey(mk1, obj, "pk1")).toBe(1);
-    expect(reflect.getMetadataKey(mk2, obj, "pk1")).toBe(2);
-    expect(reflect.getMetadataKey(mk3, obj, "pk1", is.number, 2)).toBe(2);
-    expect(() => reflect.getMetadataKey(mk2, obj, "pk1", is.string)).toThrow(
-      AssertionError
-    );
-  }
+  reflect.defineMetadataKey(metadataKey1, 1, target, key1);
+  reflect.defineMetadataKey(metadataKey2, 2, TestClass.prototype, key2);
+  expect(reflect.hasMetadataKey(metadataKey, target, key)).toBe(expected);
 });
 
-test("getOwnMetadata", () => {
+test.each([
+  { expected: true, metadataKey: metadataKey1 },
+  { expected: false, metadataKey: metadataKey2 },
+  { expected: false, metadataKey: metadataKey3 }
+])("hasOwnMetadata", ({ expected, metadataKey }) => {
   class TestClass {}
 
-  const obj = new TestClass();
+  const target = new TestClass();
 
-  {
-    reflect.defineMetadata("mk1", 1, TestClass.prototype);
-    reflect.defineMetadata("mk2", 2, obj);
-    expect(reflect.getOwnMetadata("mk1", obj)).toBeUndefined();
-    expect(reflect.getOwnMetadata("mk2", obj)).toBe(2);
-    expect(reflect.getOwnMetadata("mk3", obj, is.number, 2)).toBe(2);
-    expect(() => reflect.getOwnMetadata("mk2", obj, is.string)).toThrow(
-      AssertionError
-    );
-  }
-
-  {
-    reflect.defineMetadata(mk1, 1, TestClass.prototype);
-    reflect.defineMetadata(mk2, 2, obj);
-    expect(reflect.getOwnMetadata(mk1, obj)).toBeUndefined();
-    expect(reflect.getOwnMetadata(mk2, obj)).toBe(2);
-    expect(reflect.getOwnMetadata(mk3, obj, is.number, 2)).toBe(2);
-    expect(() => reflect.getOwnMetadata(mk2, obj, is.string)).toThrow(
-      AssertionError
-    );
-  }
+  reflect.defineMetadata(metadataKey1, 1, target);
+  reflect.defineMetadata(metadataKey2, 2, TestClass.prototype);
+  expect(reflect.hasOwnMetadata(metadataKey, target)).toBe(expected);
 });
 
-test("getOwnMetadataKey", () => {
+test.each([
+  {
+    expected: true,
+    key: key1,
+    metadataKey: metadataKey1
+  },
+  {
+    expected: false,
+    key: key2,
+    metadataKey: metadataKey2
+  },
+  {
+    expected: false,
+    key: key3,
+    metadataKey: metadataKey2
+  },
+  {
+    expected: false,
+    key: key2,
+    metadataKey: metadataKey3
+  }
+])("hasOwnMetadataKey", ({ expected, key, metadataKey }) => {
   class TestClass {}
 
-  const obj = new TestClass();
+  const target = new TestClass();
 
-  {
-    reflect.defineMetadataKey("mk1", 1, TestClass.prototype, pk1);
-    reflect.defineMetadataKey("mk2", 2, obj, pk1);
-    expect(reflect.getOwnMetadataKey("mk1", obj, pk1)).toBeUndefined();
-    expect(reflect.getOwnMetadataKey("mk2", obj, pk1)).toBe(2);
-    expect(reflect.getOwnMetadataKey("mk3", obj, pk1, is.number, 2)).toBe(2);
-    expect(() => reflect.getMetadataKey("mk2", obj, pk1, is.string)).toThrow(
-      AssertionError
-    );
-  }
-
-  {
-    reflect.defineMetadataKey(mk1, 1, TestClass.prototype, "pk1");
-    reflect.defineMetadataKey(mk2, 2, obj, "pk1");
-    expect(reflect.getOwnMetadataKey(mk1, obj, "pk1")).toBeUndefined();
-    expect(reflect.getOwnMetadataKey(mk2, obj, "pk1")).toBe(2);
-    expect(reflect.getOwnMetadataKey(mk3, obj, "pk1", is.number, 2)).toBe(2);
-    expect(() => reflect.getMetadataKey(mk2, obj, "pk1", is.string)).toThrow(
-      AssertionError
-    );
-  }
-});
-
-test("hasMetadata", () => {
-  class TestClass {}
-
-  const obj = new TestClass();
-
-  {
-    reflect.defineMetadata("mk1", 1, TestClass.prototype);
-    reflect.defineMetadata("mk2", 2, obj);
-    expect(reflect.hasMetadata("mk1", obj)).toBeTrue();
-    expect(reflect.hasMetadata("mk2", obj)).toBeTrue();
-    expect(reflect.hasMetadata("mk3", obj)).toBeFalse();
-  }
-
-  {
-    reflect.defineMetadata(mk1, 1, TestClass.prototype);
-    reflect.defineMetadata(mk2, 2, obj);
-    expect(reflect.hasMetadata(mk1, obj)).toBeTrue();
-    expect(reflect.hasMetadata(mk2, obj)).toBeTrue();
-    expect(reflect.hasMetadata(mk3, obj)).toBeFalse();
-  }
-});
-
-test("hasMetadataKey", () => {
-  class TestClass {}
-
-  const obj = new TestClass();
-
-  {
-    reflect.defineMetadataKey("mk1", 1, TestClass.prototype, pk1);
-    reflect.defineMetadataKey("mk2", 2, obj, pk1);
-    expect(reflect.hasMetadataKey("mk1", obj, pk1)).toBeTrue();
-    expect(reflect.hasMetadataKey("mk2", obj, pk1)).toBeTrue();
-    expect(reflect.hasMetadataKey("mk3", obj, pk1)).toBeFalse();
-  }
-
-  {
-    reflect.defineMetadataKey(mk1, 1, TestClass.prototype, "pk1");
-    reflect.defineMetadataKey(mk2, 2, obj, "pk1");
-    expect(reflect.hasMetadataKey(mk1, obj, "pk1")).toBeTrue();
-    expect(reflect.hasMetadataKey(mk2, obj, "pk1")).toBeTrue();
-    expect(reflect.hasMetadataKey(mk3, obj, "pk1")).toBeFalse();
-  }
-});
-
-test("hasOwnMetadata", () => {
-  class TestClass {}
-
-  const obj = new TestClass();
-
-  {
-    reflect.defineMetadata("mk1", 1, TestClass.prototype);
-    reflect.defineMetadata("mk2", 2, obj);
-    expect(reflect.hasOwnMetadata("mk1", obj)).toBeFalse();
-    expect(reflect.hasOwnMetadata("mk2", obj)).toBeTrue();
-    expect(reflect.hasOwnMetadata("mk3", obj)).toBeFalse();
-  }
-
-  {
-    reflect.defineMetadata(mk1, 1, TestClass.prototype);
-    reflect.defineMetadata(mk2, 2, obj);
-    expect(reflect.hasOwnMetadata(mk1, obj)).toBeFalse();
-    expect(reflect.hasOwnMetadata(mk2, obj)).toBeTrue();
-    expect(reflect.hasOwnMetadata(mk3, obj)).toBeFalse();
-  }
-});
-
-test("hasOwnMetadataKey", () => {
-  class TestClass {}
-
-  const obj = new TestClass();
-
-  {
-    reflect.defineMetadataKey("mk1", 1, TestClass.prototype, pk1);
-    reflect.defineMetadataKey("mk2", 2, obj, pk1);
-    expect(reflect.hasOwnMetadataKey("mk1", obj, pk1)).toBeFalse();
-    expect(reflect.hasOwnMetadataKey("mk2", obj, pk1)).toBeTrue();
-    expect(reflect.hasOwnMetadataKey("mk3", obj, pk1)).toBeFalse();
-  }
-
-  {
-    reflect.defineMetadataKey(mk1, 1, TestClass.prototype, "pk1");
-    reflect.defineMetadataKey(mk2, 2, obj, "pk1");
-    expect(reflect.hasOwnMetadataKey(mk1, obj, "pk1")).toBeFalse();
-    expect(reflect.hasOwnMetadataKey(mk2, obj, "pk1")).toBeTrue();
-    expect(reflect.hasOwnMetadataKey(mk3, obj, "pk1")).toBeFalse();
-  }
+  reflect.defineMetadataKey(metadataKey1, 1, target, key1);
+  reflect.defineMetadataKey(metadataKey2, 2, TestClass.prototype, key2);
+  expect(reflect.hasOwnMetadataKey(metadataKey, target, key)).toBe(expected);
 });

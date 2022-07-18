@@ -1,18 +1,21 @@
 import { AssertionError, fn, is, o } from "@";
 
+class TestClass {}
+
 test("clone", () => {
   const obj1 = { a: 1 } as const;
 
   const obj2 = o.clone(obj1);
 
-  expect(obj1).toStrictEqual({ a: 1 });
-  expect(obj2).toStrictEqual({ a: 1 });
+  expect(obj2).toStrictEqual(obj1);
   expect(obj2).not.toBeSameAs(obj1);
 });
 
-test("every", () => {
-  expect(o.every({ a: 1, b: 2 }, is.number)).toBeTrue();
-  expect(o.every({ a: 1, b: "a" }, is.number)).toBeFalse();
+test.each([
+  { expected: true, obj: { a: 1, b: 2 } },
+  { expected: false, obj: { a: 1, b: "a" } }
+])("every", ({ expected, obj }) => {
+  expect(o.every(obj, is.number)).toBe(expected);
 });
 
 test("filter", () => {
@@ -39,43 +42,58 @@ test("fromEntries.exhaustive", () => {
   expect(o.fromEntries.exhaustive([["a", 1]])).toStrictEqual({ a: 1 });
 });
 
-test("get", () => {
-  expect(o.get({ a: 1 }, "a")).toBe(1);
-  expect(o.get({ a: 1 }, "a", is.number)).toBe(1);
-  expect(o.get({}, "a", is.number, 1)).toBe(1);
-  expect(o.get(fn.noop, "a")).toBeUndefined();
-  expect(() => o.get({ a: "" }, "a", is.number)).toThrow(AssertionError);
+test.each([
+  { target: {} },
+  { target: fn.noop },
+  {
+    expected: 1,
+    guard: is.number,
+    target: { a: 1 }
+  },
+  {
+    defVal: 2,
+    expected: 2,
+    guard: is.number,
+    target: {}
+  },
+  {
+    expected: new AssertionError(),
+    expectedToThrow: true,
+    guard: is.number,
+    target: {}
+  }
+])("get", ({ defVal, expected, expectedToThrow, guard, target }) => {
+  expect(() => o.get(target, "a", guard, defVal)).executionResultToBe(
+    expected,
+    expectedToThrow
+  );
 });
 
-test("getPrototypeOf", () => {
-  class TestClass {}
-
-  expect(o.getPrototypeOf(new TestClass())).toBeSameAs(TestClass.prototype);
-  expect(o.getPrototypeOf(TestClass)).toBeUndefined();
+test.each([
+  { expected: undefined, obj: TestClass },
+  { expected: TestClass.prototype, obj: new TestClass() }
+])("getPrototypeOf", ({ expected, obj }) => {
+  expect(o.getPrototypeOf(obj)).toStrictEqual(expected);
 });
 
-test("hasOwnProp", () => {
+test.each([
   {
-    expect(o.hasOwnProp("a", { a: 1 })).toBeTrue();
-    expect(o.hasOwnProp("a", { a: undefined })).toBeTrue();
-    expect(o.hasOwnProp("b", { a: 1 })).toBeFalse();
-  }
-
+    expected: true,
+    key: "a",
+    obj: { a: 1 }
+  },
   {
-    expect(o.hasOwnProp(0, { 0: 1 })).toBeTrue();
-    expect(o.hasOwnProp(0, { 0: undefined })).toBeTrue();
-    expect(o.hasOwnProp(1, { 0: 1 })).toBeFalse();
-  }
-
+    expected: true,
+    key: "a",
+    obj: { a: undefined }
+  },
   {
-    const symbol1 = Symbol("test-symbol-1");
-
-    const symbol2 = Symbol("test-symbol-2");
-
-    expect(o.hasOwnProp(symbol1, { [symbol1]: 1 })).toBeTrue();
-    expect(o.hasOwnProp(symbol1, { [symbol1]: undefined })).toBeTrue();
-    expect(o.hasOwnProp(symbol2, { [symbol1]: 1 })).toBeFalse();
+    expected: false,
+    key: "b",
+    obj: { a: 1 }
   }
+])("hasOwnProp", ({ expected, key, obj }) => {
+  expect(o.hasOwnProp(key, obj)).toBe(expected);
 });
 
 test("map", () => {
@@ -127,7 +145,7 @@ test("set", () => {
 });
 
 test("size", () => {
-  const symbol = Symbol("test-symbol");
+  const symbol = Symbol("sample");
 
   const obj = {
     a: 1,
@@ -139,9 +157,11 @@ test("size", () => {
   expect(o.size(obj)).toBe(3);
 });
 
-test("some", () => {
-  expect(o.some({ a: 1, b: "a" }, is.string)).toBeTrue();
-  expect(o.some({ a: 1, b: 2 }, is.string)).toBeFalse();
+test.each([
+  { expected: true, obj: { a: 1, b: "a" } },
+  { expected: false, obj: { a: 1, b: 2 } }
+])("some", ({ expected, obj }) => {
+  expect(o.some(obj, is.string)).toBe(expected);
 });
 
 test.each([

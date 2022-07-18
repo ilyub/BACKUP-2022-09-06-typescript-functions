@@ -266,6 +266,23 @@ module.exports = {
               "CallExpression > .callee[object.name=reflect][property.name=set]"
           }
         ],
+        "@skylib/custom/functions/no-ts-toolbelt": [
+          "warn",
+          {
+            message: 'Prefer "@skylib/functions" type',
+            selector: [
+              "ImportDeclaration > Literal.source[value=ts-toolbelt/out/Object/FilterKeys]",
+              "ImportDeclaration > Literal.source[value=ts-toolbelt/out/Object/Optional]",
+              "ImportDeclaration > Literal.source[value=ts-toolbelt/out/Object/OptionalKeys]",
+              "ImportDeclaration > Literal.source[value=ts-toolbelt/out/Object/Readonly]",
+              "ImportDeclaration > Literal.source[value=ts-toolbelt/out/Object/ReadonlyKeys]",
+              "ImportDeclaration > Literal.source[value=ts-toolbelt/out/Object/Required]",
+              "ImportDeclaration > Literal.source[value=ts-toolbelt/out/Object/RequiredKeys]",
+              "ImportDeclaration > Literal.source[value=ts-toolbelt/out/Object/Writable]",
+              "ImportDeclaration > Literal.source[value=ts-toolbelt/out/Object/WritableKeys]"
+            ]
+          }
+        ],
         "@skylib/custom/functions/no-unnecessary-is-array": [
           "warn",
           {
@@ -386,26 +403,12 @@ module.exports = {
             ]
           }
         ],
-        "@skylib/custom/functions/prefer-PartialOptional": [
-          "warn",
-          {
-            message: 'Prefer "PartialOptional" type',
-            selector: "Literal.source[value=ts-toolbelt/out/Object/Optional]"
-          }
-        ],
         "@skylib/custom/functions/prefer-PartialRecord": [
           "warn",
           {
             message: 'Prefer "PartialRecord" type',
             selector:
               "TSTypeReference[typeName.name=Partial] > .typeParameters > .params:first-child > .typeName[name=Rec]"
-          }
-        ],
-        "@skylib/custom/functions/prefer-PartialRequired": [
-          "warn",
-          {
-            message: 'Prefer "PartialRequired" type',
-            selector: "Literal.source[value=ts-toolbelt/out/Object/Required]"
           }
         ],
         "@skylib/custom/functions/prefer-ReadonlyMap": [
@@ -626,46 +629,61 @@ module.exports = {
             selector: "Identifier[name=Reflect]"
           }
         ],
-        "@skylib/custom/functions/prefer-undefined-shorthand": [
+        "@skylib/custom/functions/prefer-undefined-shorthand-literal": [
           "warn",
           {
             message: 'Prefer "...U" type',
             selector: [
               "TSUnionType[types.0.literal.raw=/(?:false|true)/u][types.1.type=TSUndefinedKeyword]",
-              "TSUnionType[types.0.literal.raw=/(?:false|true)/u][types.2.type=TSUndefinedKeyword]",
-              "TSUnionType[types.1.literal.raw=/(?:false|true)/u][types.0.type=TSUndefinedKeyword]",
-              "TSUnionType[types.1.literal.raw=/(?:false|true)/u][types.2.type=TSUndefinedKeyword]",
-              "TSUnionType[types.2.literal.raw=/(?:false|true)/u][types.0.type=TSUndefinedKeyword]",
-              "TSUnionType[types.2.literal.raw=/(?:false|true)/u][types.1.type=TSUndefinedKeyword]",
               "TSUnionType[types.0.literal.raw=/(?:false|true)/u][types.1.typeName.name=empty]",
+              "TSUnionType[types.0.literal.raw=/(?:false|true)/u][types.2.type=TSUndefinedKeyword]",
               "TSUnionType[types.0.literal.raw=/(?:false|true)/u][types.2.typeName.name=empty]",
+              "TSUnionType[types.1.literal.raw=/(?:false|true)/u][types.0.type=TSUndefinedKeyword]",
               "TSUnionType[types.1.literal.raw=/(?:false|true)/u][types.0.typeName.name=empty]",
+              "TSUnionType[types.1.literal.raw=/(?:false|true)/u][types.2.type=TSUndefinedKeyword]",
               "TSUnionType[types.1.literal.raw=/(?:false|true)/u][types.2.typeName.name=empty]",
+              "TSUnionType[types.2.literal.raw=/(?:false|true)/u][types.0.type=TSUndefinedKeyword]",
               "TSUnionType[types.2.literal.raw=/(?:false|true)/u][types.0.typeName.name=empty]",
-              "TSUnionType[types.2.literal.raw=/(?:false|true)/u][types.1.typeName.name=empty]",
+              "TSUnionType[types.2.literal.raw=/(?:false|true)/u][types.1.type=TSUndefinedKeyword]",
+              "TSUnionType[types.2.literal.raw=/(?:false|true)/u][types.1.typeName.name=empty]"
+            ]
+          }
+        ],
+        "@skylib/custom/functions/prefer-undefined-shorthand-type": [
+          "warn",
+          {
+            message: 'Prefer "...U" type',
+            selector: [
               "TSUnionType[types.0.type=/^(?:TSBooleanKeyword|TSNullKeyword|TSNumberKeyword|TSObjectKeyword|TSStringKeyword)$/u][types.1.type=TSUndefinedKeyword]",
+              "TSUnionType[types.0.type=/^(?:TSBooleanKeyword|TSNullKeyword|TSNumberKeyword|TSObjectKeyword|TSStringKeyword)$/u][types.1.typeName.name=empty]",
               "TSUnionType[types.0.type=/^(?:TSBooleanKeyword|TSNullKeyword|TSNumberKeyword|TSObjectKeyword|TSStringKeyword)$/u][types.2.type=TSUndefinedKeyword]",
               "TSUnionType[types.1.type=/^(?:TSBooleanKeyword|TSNullKeyword|TSNumberKeyword|TSObjectKeyword|TSStringKeyword)$/u][types.0.type=TSUndefinedKeyword]",
-              "TSUnionType[types.1.type=/^(?:TSBooleanKeyword|TSNullKeyword|TSNumberKeyword|TSObjectKeyword|TSStringKeyword)$/u][types.2.type=TSUndefinedKeyword]",
-              "TSUnionType[types.2.type=/^(?:TSBooleanKeyword|TSNullKeyword|TSNumberKeyword|TSObjectKeyword|TSStringKeyword)$/u][types.0.type=TSUndefinedKeyword]",
-              "TSUnionType[types.2.type=/^(?:TSBooleanKeyword|TSNullKeyword|TSNumberKeyword|TSObjectKeyword|TSStringKeyword)$/u][types.1.type=TSUndefinedKeyword]",
-              "TSUnionType[types.0.type=/^(?:TSBooleanKeyword|TSNullKeyword|TSNumberKeyword|TSObjectKeyword|TSStringKeyword)$/u][types.1.typeName.name=empty]",
-              "TSUnionType[types.0.type=/^(?:TSBooleanKeyword|TSNullKeyword|TSNumberKeyword|TSObjectKeyword|TSStringKeyword)$/u][types.2.typeName.name=empty]",
               "TSUnionType[types.1.type=/^(?:TSBooleanKeyword|TSNullKeyword|TSNumberKeyword|TSObjectKeyword|TSStringKeyword)$/u][types.0.typeName.name=empty]",
+              "TSUnionType[types.1.type=/^(?:TSBooleanKeyword|TSNullKeyword|TSNumberKeyword|TSObjectKeyword|TSStringKeyword)$/u][types.2.type=TSUndefinedKeyword]",
               "TSUnionType[types.1.type=/^(?:TSBooleanKeyword|TSNullKeyword|TSNumberKeyword|TSObjectKeyword|TSStringKeyword)$/u][types.2.typeName.name=empty]",
+              "TSUnionType[types.2.type=/^(?:TSBooleanKeyword|TSNullKeyword|TSNumberKeyword|TSObjectKeyword|TSStringKeyword)$/u][types.0.type=TSUndefinedKeyword]",
               "TSUnionType[types.2.type=/^(?:TSBooleanKeyword|TSNullKeyword|TSNumberKeyword|TSObjectKeyword|TSStringKeyword)$/u][types.0.typeName.name=empty]",
-              "TSUnionType[types.2.type=/^(?:TSBooleanKeyword|TSNullKeyword|TSNumberKeyword|TSObjectKeyword|TSStringKeyword)$/u][types.1.typeName.name=empty]",
+              "TSUnionType[types.2.type=/^(?:TSBooleanKeyword|TSNullKeyword|TSNumberKeyword|TSObjectKeyword|TSStringKeyword)$/u][types.1.type=TSUndefinedKeyword]",
+              "TSUnionType[types.2.type=/^(?:TSBooleanKeyword|TSNullKeyword|TSNumberKeyword|TSObjectKeyword|TSStringKeyword)$/u][types.1.typeName.name=empty]"
+            ]
+          }
+        ],
+        "@skylib/custom/functions/prefer-undefined-shorthand-typeName": [
+          "warn",
+          {
+            message: 'Prefer "...U" type',
+            selector: [
               "TSUnionType[types.0.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.1.type=TSUndefinedKeyword]",
-              "TSUnionType[types.0.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.2.type=TSUndefinedKeyword]",
-              "TSUnionType[types.1.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.0.type=TSUndefinedKeyword]",
-              "TSUnionType[types.1.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.2.type=TSUndefinedKeyword]",
-              "TSUnionType[types.2.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.0.type=TSUndefinedKeyword]",
-              "TSUnionType[types.2.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.1.type=TSUndefinedKeyword]",
               "TSUnionType[types.0.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.1.typeName.name=empty]",
+              "TSUnionType[types.0.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.2.type=TSUndefinedKeyword]",
               "TSUnionType[types.0.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.2.typeName.name=empty]",
+              "TSUnionType[types.1.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.0.type=TSUndefinedKeyword]",
               "TSUnionType[types.1.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.0.typeName.name=empty]",
+              "TSUnionType[types.1.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.2.type=TSUndefinedKeyword]",
               "TSUnionType[types.1.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.2.typeName.name=empty]",
+              "TSUnionType[types.2.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.0.type=TSUndefinedKeyword]",
               "TSUnionType[types.2.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.0.typeName.name=empty]",
+              "TSUnionType[types.2.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.1.type=TSUndefinedKeyword]",
               "TSUnionType[types.2.typeName.name=/^(?:NumStr|PropertyKey)$/u][types.1.typeName.name=empty]"
             ]
           }

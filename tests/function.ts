@@ -1,9 +1,7 @@
 import { fn } from "@";
 
-test("identity", () => {
-  expect(fn.identity(1)).toBe(1);
-  expect(fn.identity(2)).toBe(2);
-  expect(fn.identity(3)).toBe(3);
+test.each([1, 2, 3])("identity", value => {
+  expect(fn.identity(value)).toBe(value);
 });
 
 test("noopTrue", () => {
