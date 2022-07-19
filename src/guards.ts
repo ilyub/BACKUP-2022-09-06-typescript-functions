@@ -6,8 +6,6 @@
 
 /* eslint-disable @skylib/custom/functions/prefer-o-values -- Ok */
 
-/* eslint-disable @skylib/primary-export-only -- Ok */
-
 import type {
   IndexedObject,
   NumStr,

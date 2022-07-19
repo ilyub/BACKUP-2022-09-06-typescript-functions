@@ -1,3 +1,5 @@
+/* eslint jest/max-expects: [warn, { max: 2 }] -- Ok */
+
 import * as testUtils from "@/test-utils";
 
 test.each([

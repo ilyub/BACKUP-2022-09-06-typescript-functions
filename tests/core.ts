@@ -1,3 +1,5 @@
+/* eslint jest/max-expects: [warn, { max: 3 }] -- Ok */
+
 /* eslint-disable @skylib/custom/functions/prefer-ReadonlyMap -- Ok */
 
 /* eslint-disable @skylib/custom/functions/prefer-ReadonlySet -- Ok */

@@ -17,26 +17,10 @@ test.each([
 });
 
 test.each([
-  {
-    expected: 1.2,
-    precision: 1,
-    value: 1.111
-  },
-  {
-    expected: 1.2,
-    precision: 1,
-    value: 1.199
-  },
-  {
-    expected: 1.12,
-    precision: 2,
-    value: 1.111
-  },
-  {
-    expected: 1.12,
-    precision: 2,
-    value: 1.119
-  }
+  { expected: 1.2, precision: 1, value: 1.111 },
+  { expected: 1.2, precision: 1, value: 1.199 },
+  { expected: 1.12, precision: 2, value: 1.111 },
+  { expected: 1.12, precision: 2, value: 1.119 }
 ])("ceil", ({ expected, precision, value }) => {
   expect(num.ceil(value, precision)).toBe(expected);
 });
@@ -49,26 +33,10 @@ test.each([
 });
 
 test.each([
-  {
-    expected: 1.1,
-    precision: 1,
-    value: 1.111
-  },
-  {
-    expected: 1.1,
-    precision: 1,
-    value: 1.199
-  },
-  {
-    expected: 1.11,
-    precision: 2,
-    value: 1.111
-  },
-  {
-    expected: 1.11,
-    precision: 2,
-    value: 1.119
-  }
+  { expected: 1.1, precision: 1, value: 1.111 },
+  { expected: 1.1, precision: 1, value: 1.199 },
+  { expected: 1.11, precision: 2, value: 1.111 },
+  { expected: 1.11, precision: 2, value: 1.119 }
 ])("floor", ({ expected, precision, value }) => {
   expect(num.floor(value, precision)).toBe(expected);
 });
@@ -108,26 +76,10 @@ test.each([
 });
 
 test.each([
-  {
-    expected: 1.1,
-    precision: 1,
-    value: 1.111
-  },
-  {
-    expected: 1.2,
-    precision: 1,
-    value: 1.199
-  },
-  {
-    expected: 1.11,
-    precision: 2,
-    value: 1.111
-  },
-  {
-    expected: 1.12,
-    precision: 2,
-    value: 1.119
-  }
+  { expected: 1.1, precision: 1, value: 1.111 },
+  { expected: 1.2, precision: 1, value: 1.199 },
+  { expected: 1.11, precision: 2, value: 1.111 },
+  { expected: 1.12, precision: 2, value: 1.119 }
 ])("round", ({ expected, precision, value }) => {
   expect(num.round(value, precision)).toBe(expected);
 });

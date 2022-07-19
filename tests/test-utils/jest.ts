@@ -1,3 +1,5 @@
+/* eslint jest/max-expects: [warn, { max: 2 }] -- Ok */
+
 /* eslint-disable @skylib/consistent-import/project -- Ok */
 
 /* eslint-disable no-console -- Ok */

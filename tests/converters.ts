@@ -21,17 +21,9 @@ test.each([
   { expected: 0, value: "\r\n" },
   { expected: 0, value: [] },
   { expected: 0, value: null },
-  {
-    defVal: 1,
-    expected: 1,
-    value: null
-  },
+  { defVal: 1, expected: 1, value: null },
   { expected: 0, value: undefined },
-  {
-    defVal: 1,
-    expected: 1,
-    value: undefined
-  }
+  { defVal: 1, expected: 1, value: undefined }
 ])("number", ({ defVal, expected, value }) => {
   expect(cast.number(value, defVal)).toBe(expected);
 });

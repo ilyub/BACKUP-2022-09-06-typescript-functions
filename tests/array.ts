@@ -1,3 +1,5 @@
+/* eslint jest/max-expects: [warn, { max: 2 }] -- Ok */
+
 import { AssertionError, ReadonlySet, a } from "@";
 import type { Writable, numbers } from "@";
 
@@ -32,26 +34,10 @@ test("drop", () => {
 });
 
 test.each([
-  {
-    expected: { data: "b", id: 2 },
-    keyOrReduce: "id",
-    value: { id: 2 }
-  },
-  {
-    expected: undefined,
-    keyOrReduce: "id",
-    value: { id: 4 }
-  },
-  {
-    expected: { data: "b", id: 2 },
-    keyOrReduce: reduce,
-    value: { id: 2 }
-  },
-  {
-    expected: undefined,
-    keyOrReduce: reduce,
-    value: { id: 4 }
-  }
+  { expected: { data: "b", id: 2 }, keyOrReduce: "id", value: { id: 2 } },
+  { expected: undefined, keyOrReduce: "id", value: { id: 4 } },
+  { expected: { data: "b", id: 2 }, keyOrReduce: reduce, value: { id: 2 } },
+  { expected: undefined, keyOrReduce: reduce, value: { id: 4 } }
 ])("findBy", ({ expected, keyOrReduce, value }) => {
   const arr = [
     { data: "a", id: 1 },
@@ -85,11 +71,7 @@ test.each([
 });
 
 test.each([
-  {
-    expected: [5, 6, 7],
-    from: 5,
-    to: 7
-  },
+  { expected: [5, 6, 7], from: 5, to: 7 },
   {
     expected: [5, 7],
     from: 5,
@@ -119,26 +101,10 @@ test.each([
 });
 
 test.each([
-  {
-    expected: true,
-    keyOrReduce: "id",
-    value: { id: 2 }
-  },
-  {
-    expected: false,
-    keyOrReduce: "id",
-    value: { id: 4 }
-  },
-  {
-    expected: true,
-    keyOrReduce: reduce,
-    value: { id: 2 }
-  },
-  {
-    expected: false,
-    keyOrReduce: reduce,
-    value: { id: 4 }
-  }
+  { expected: true, keyOrReduce: "id", value: { id: 2 } },
+  { expected: false, keyOrReduce: "id", value: { id: 4 } },
+  { expected: true, keyOrReduce: reduce, value: { id: 2 } },
+  { expected: false, keyOrReduce: reduce, value: { id: 4 } }
 ])("includesBy", ({ expected, keyOrReduce, value }) => {
   const arr = [
     { data: "a", id: 1 },

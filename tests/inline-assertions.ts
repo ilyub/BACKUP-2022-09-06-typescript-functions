@@ -1,8 +1,6 @@
 import { AssertionError, ReadonlyMap, ReadonlySet, as, fn, is } from "@";
 import type { unknowns } from "@";
 
-class TestClass {}
-
 function createSubtest(inlineAssertion: Function, ...args: unknowns) {
   return (value: unknown) => (): void => {
     if (inlineAssertion(value, ...args) === value) {
@@ -11,14 +9,12 @@ function createSubtest(inlineAssertion: Function, ...args: unknowns) {
   };
 }
 
+class TestClass {}
+
 test.each([
   { value: [1] },
   { value: ["a"] },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: 1
-  }
+  { expected: new AssertionError(), expectedToThrow: true, value: 1 }
 ])("array", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.array);
 
@@ -27,16 +23,8 @@ test.each([
 
 test.each([
   { value: [1] },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: ["a"]
-  },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: 1
-  }
+  { expected: new AssertionError(), expectedToThrow: true, value: ["a"] },
+  { expected: new AssertionError(), expectedToThrow: true, value: 1 }
 ])("array.of", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.array.of, is.number);
 
@@ -46,16 +34,8 @@ test.each([
 test.each([
   { value: "a" },
   { value: "" },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: undefined
-  },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: 1
-  }
+  { expected: new AssertionError(), expectedToThrow: true, value: undefined },
+  { expected: new AssertionError(), expectedToThrow: true, value: 1 }
 ])("byGuard", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.byGuard, is.string);
 
@@ -65,16 +45,8 @@ test.each([
 test.each([
   { value: TestClass },
   { value: fn.noop },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: 1
-  },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: undefined
-  }
+  { expected: new AssertionError(), expectedToThrow: true, value: 1 },
+  { expected: new AssertionError(), expectedToThrow: true, value: undefined }
 ])("callable", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.callable);
 
@@ -84,21 +56,9 @@ test.each([
 test.each([
   { value: 1 },
   { value: "a" },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: "1"
-  },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: "b"
-  },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: undefined
-  }
+  { expected: new AssertionError(), expectedToThrow: true, value: "1" },
+  { expected: new AssertionError(), expectedToThrow: true, value: "b" },
+  { expected: new AssertionError(), expectedToThrow: true, value: undefined }
 ])("enumeration", ({ expected, expectedToThrow, value }) => {
   enum TestEnum {
     a = 1,
@@ -113,16 +73,8 @@ test.each([
 test.each([
   { value: { a: 1 } },
   { value: { a: "a" } },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: 1
-  },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: null
-  }
+  { expected: new AssertionError(), expectedToThrow: true, value: 1 },
+  { expected: new AssertionError(), expectedToThrow: true, value: null }
 ])("indexedObject", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.indexedObject);
 
@@ -131,21 +83,9 @@ test.each([
 
 test.each([
   { value: { a: 1 } },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: { a: "a" }
-  },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: 1
-  },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: null
-  }
+  { expected: new AssertionError(), expectedToThrow: true, value: { a: "a" } },
+  { expected: new AssertionError(), expectedToThrow: true, value: 1 },
+  { expected: new AssertionError(), expectedToThrow: true, value: null }
 ])("indexedObject.of", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.indexedObject.of, is.number);
 
@@ -154,16 +94,8 @@ test.each([
 
 test.each([
   { value: new TestClass() },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: {}
-  },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: undefined
-  }
+  { expected: new AssertionError(), expectedToThrow: true, value: {} },
+  { expected: new AssertionError(), expectedToThrow: true, value: undefined }
 ])("instanceOf", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.instanceOf, TestClass);
 
@@ -172,16 +104,8 @@ test.each([
 
 test.each([
   { value: [new TestClass()] },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: [{}]
-  },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: [undefined]
-  }
+  { expected: new AssertionError(), expectedToThrow: true, value: [{}] },
+  { expected: new AssertionError(), expectedToThrow: true, value: [undefined] }
 ])("instancesOf", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.instancesOf, TestClass);
 
@@ -192,16 +116,8 @@ test.each([
   { value: new ReadonlyMap([["a", 1]]) },
   { value: new ReadonlyMap([[1, 1]]) },
   { value: new ReadonlyMap([["a", "a"]]) },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: {}
-  },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: undefined
-  }
+  { expected: new AssertionError(), expectedToThrow: true, value: {} },
+  { expected: new AssertionError(), expectedToThrow: true, value: undefined }
 ])("map", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.map);
 
@@ -220,16 +136,8 @@ test.each([
     expectedToThrow: true,
     value: new ReadonlyMap([["a", "a"]])
   },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: {}
-  },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: undefined
-  }
+  { expected: new AssertionError(), expectedToThrow: true, value: {} },
+  { expected: new AssertionError(), expectedToThrow: true, value: undefined }
 ])("map.of", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.map.of, is.string, is.number);
 
@@ -238,16 +146,8 @@ test.each([
 
 test.each([
   { value: 1 },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: null
-  },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: undefined
-  }
+  { expected: new AssertionError(), expectedToThrow: true, value: null },
+  { expected: new AssertionError(), expectedToThrow: true, value: undefined }
 ])("not.empty", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.not.empty);
 
@@ -257,16 +157,8 @@ test.each([
 test.each([
   { value: new ReadonlySet(["a"]) },
   { value: new ReadonlySet([1]) },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: {}
-  },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: undefined
-  }
+  { expected: new AssertionError(), expectedToThrow: true, value: {} },
+  { expected: new AssertionError(), expectedToThrow: true, value: undefined }
 ])("set", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.set);
 
@@ -280,16 +172,8 @@ test.each([
     expectedToThrow: true,
     value: new ReadonlySet([1])
   },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: {}
-  },
-  {
-    expected: new AssertionError(),
-    expectedToThrow: true,
-    value: undefined
-  }
+  { expected: new AssertionError(), expectedToThrow: true, value: {} },
+  { expected: new AssertionError(), expectedToThrow: true, value: undefined }
 ])("set.of", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.set.of, is.string);
 

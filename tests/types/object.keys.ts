@@ -1,8 +1,8 @@
+/* eslint-disable @skylib/consistent-optional-props -- Ok */
+
 /* eslint-disable @skylib/custom/no-literal-union-type -- Ok */
 
 /* eslint-disable @skylib/custom/prefer-readonly-property -- Ok */
-
-/* eslint-disable @skylib/optional-property-style -- Ok */
 
 import type { numberU, types } from "@";
 import type { Equals } from "ts-toolbelt/out/Any/Equals";

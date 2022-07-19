@@ -1,3 +1,5 @@
+/* eslint jest/max-expects: [warn, { max: 4 }] -- Ok */
+
 import * as testUtils from "@/test-utils";
 import { programFlow, wait } from "@";
 

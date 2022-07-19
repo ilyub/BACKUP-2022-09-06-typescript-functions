@@ -1,21 +1,9 @@
 import { Accumulator2, ReadonlyMap, a } from "@";
 
 test.each([
-  {
-    expected: [1, 2],
-    key1: "a",
-    key2: "x"
-  },
-  {
-    expected: [3],
-    key1: "b",
-    key2: "y"
-  },
-  {
-    expected: [],
-    key1: "c",
-    key2: "z"
-  }
+  { expected: [1, 2], key1: "a", key2: "x" },
+  { expected: [3], key1: "b", key2: "y" },
+  { expected: [], key1: "c", key2: "z" }
 ])("get: array", ({ expected, key1, key2 }) => {
   const accumulator = new Accumulator2<string, string, number>([
     ["a", "x", [1, 2]],

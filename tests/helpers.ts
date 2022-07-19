@@ -1,3 +1,5 @@
+/* eslint jest/max-expects: [warn, { max: 2 }] -- Ok */
+
 /* eslint-disable @skylib/custom/functions/no-reflect-get -- Ok */
 
 /* eslint-disable @skylib/custom/functions/no-reflect-set -- Ok */
@@ -16,6 +18,22 @@ import {
   wrapProxyHandler
 } from "@";
 
+function pow2(x: number): number {
+  return x * x;
+}
+
+function pow3(x: number): number {
+  return x * x * x;
+}
+
+function safeObj1(): object {
+  return safeAccess({ a: 1, b: 2, c: 3 }, { a: is.number }, ["b"]);
+}
+
+function safeObj2(): object {
+  return safeAccess({ a: 1, b: 2, c: 3 }, { a: is.number });
+}
+
 testUtils.installFakeTimer();
 
 const descriptor = {
@@ -27,37 +45,6 @@ const descriptor = {
 
 class TestClass {
   public readonly value = 1;
-}
-
-function pow2(x: number): number {
-  return x * x;
-}
-
-function pow3(x: number): number {
-  return x * x * x;
-}
-
-function safeObj1(): object {
-  return safeAccess(
-    {
-      a: 1,
-      b: 2,
-      c: 3
-    },
-    { a: is.number },
-    ["b"]
-  );
-}
-
-function safeObj2(): object {
-  return safeAccess(
-    {
-      a: 1,
-      b: 2,
-      c: 3
-    },
-    { a: is.number }
-  );
 }
 
 test.each([1, 2, 3])("createFacade: Extension", value => {
@@ -213,11 +200,7 @@ test("safeAccess: ownKeys", () => {
 });
 
 test.each([
-  {
-    expected: true,
-    propertyKey: "a",
-    value: 2
-  },
+  { expected: true, propertyKey: "a", value: 2 },
   {
     expected: new Error("Type check failed: a"),
     expectedToThrow: true,

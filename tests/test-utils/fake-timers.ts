@@ -18,11 +18,7 @@ test("run", async () => {
 });
 
 test.each([
-  {
-    max: 1000,
-    min: 0,
-    now: (): number => Date.now()
-  },
+  { max: 1000, min: 0, now: (): number => Date.now() },
   {
     max: Number.MAX_VALUE,
     min: 24 * 3600 * 1000,

@@ -1,3 +1,5 @@
+/* eslint jest/max-expects: [warn, { max: 2 }] -- Ok */
+
 import { AssertionError, fn, is, o } from "@";
 
 class TestClass {}
@@ -45,11 +47,7 @@ test("fromEntries.exhaustive", () => {
 test.each([
   { target: {} },
   { target: fn.noop },
-  {
-    expected: 1,
-    guard: is.number,
-    target: { a: 1 }
-  },
+  { expected: 1, guard: is.number, target: { a: 1 } },
   {
     defVal: 2,
     expected: 2,
@@ -77,21 +75,9 @@ test.each([
 });
 
 test.each([
-  {
-    expected: true,
-    key: "a",
-    obj: { a: 1 }
-  },
-  {
-    expected: true,
-    key: "a",
-    obj: { a: undefined }
-  },
-  {
-    expected: false,
-    key: "b",
-    obj: { a: 1 }
-  }
+  { expected: true, key: "a", obj: { a: 1 } },
+  { expected: true, key: "a", obj: { a: undefined } },
+  { expected: false, key: "b", obj: { a: 1 } }
 ])("hasOwnProp", ({ expected, key, obj }) => {
   expect(o.hasOwnProp(key, obj)).toBe(expected);
 });
@@ -117,16 +103,7 @@ test("map", () => {
 });
 
 test("omit", () => {
-  expect(
-    o.omit(
-      {
-        a: 1,
-        b: 2,
-        c: 3
-      },
-      "b"
-    )
-  ).toStrictEqual({ a: 1, c: 3 });
+  expect(o.omit({ a: 1, b: 2, c: 3 }, "b")).toStrictEqual({ a: 1, c: 3 });
 });
 
 test("removeUndefinedKeys", () => {
@@ -166,11 +143,7 @@ test.each([
 
 test.each([
   {
-    expected: {
-      a: 1,
-      b: 2,
-      c: 3
-    },
+    expected: { a: 1, b: 2, c: 3 },
     obj: o.fromEntries.exhaustive([
       ["a", 1],
       ["c", 3],
@@ -179,11 +152,7 @@ test.each([
   },
   {
     compareFn: (x: number, y: number): number => x - y,
-    expected: {
-      a: 1,
-      b: 2,
-      c: 3
-    },
+    expected: { a: 1, b: 2, c: 3 },
     obj: o.fromEntries.exhaustive([
       ["a", 1],
       ["c", 3],
@@ -192,11 +161,7 @@ test.each([
   },
   {
     compareFn: (x: number, y: number): number => y - x,
-    expected: {
-      a: 3,
-      b: 2,
-      c: 1
-    },
+    expected: { a: 3, b: 2, c: 1 },
     obj: o.fromEntries.exhaustive([
       ["a", 3],
       ["c", 1],

@@ -54,31 +54,15 @@ test.each([
 });
 
 test.each([
-  {
-    expected: true,
-    obj1: { value: 1 },
-    obj2: { value: 1 }
-  },
-  {
-    expected: false,
-    obj1: { value: 1 },
-    obj2: { value: 2 }
-  }
+  { expected: true, obj1: { value: 1 }, obj2: { value: 1 } },
+  { expected: false, obj1: { value: 1 }, obj2: { value: 2 } }
 ])("eq", ({ expected, obj1, obj2 }) => {
   expect(json.eq(obj1, obj2)).toBe(expected);
 });
 
 test.each([
-  {
-    expected: true,
-    obj1: { value: 1 },
-    obj2: { value: 2 }
-  },
-  {
-    expected: false,
-    obj1: { value: 1 },
-    obj2: { value: 1 }
-  }
+  { expected: true, obj1: { value: 1 }, obj2: { value: 2 } },
+  { expected: false, obj1: { value: 1 }, obj2: { value: 1 } }
 ])("neq", ({ expected, obj1, obj2 }) => {
   expect(json.neq(obj1, obj2)).toBe(expected);
 });

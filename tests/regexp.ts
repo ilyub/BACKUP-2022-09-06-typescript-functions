@@ -1,3 +1,5 @@
+/* eslint jest/max-expects: [warn, { max: 3 }] -- Ok */
+
 import { a, regexp } from "@";
 
 test.each([

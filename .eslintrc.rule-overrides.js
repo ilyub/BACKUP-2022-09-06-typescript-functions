@@ -1,3 +1,4 @@
+// eslint-disable-next-line @skylib/disallow-import/no-internal-modules -- Wait for @skylib/config update
 const { eslint } = require("@skylib/config/api");
 
 const consistentImport = eslint.rules["@skylib/consistent-import/project"];

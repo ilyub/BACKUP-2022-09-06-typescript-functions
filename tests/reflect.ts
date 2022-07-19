@@ -15,16 +15,8 @@ const metadataKey2 = Symbol("metadata-key-2");
 const metadataKey3 = "metadata-key-3";
 
 test.each([
-  {
-    expected: 1,
-    metadataKey: metadataKey1,
-    metadataValue: 1
-  },
-  {
-    expected: undefined,
-    metadataKey: metadataKey2,
-    metadataValue: undefined
-  }
+  { expected: 1, metadataKey: metadataKey1, metadataValue: 1 },
+  { expected: undefined, metadataKey: metadataKey2, metadataValue: undefined }
 ])("defineMetadata", ({ expected, metadataKey, metadataValue }) => {
   const target = {} as const;
 
@@ -34,11 +26,7 @@ test.each([
 
 test.each([
   { expected: 1, key: "a" },
-  {
-    expected: 1,
-    guard: is.number,
-    key: "a"
-  },
+  { expected: 1, guard: is.number, key: "a" },
   {
     defVal: 2,
     expected: 2,
@@ -92,16 +80,8 @@ test.each([
 );
 
 test.each([
-  {
-    expected: 1,
-    key: key1,
-    metadataKey: metadataKey1
-  },
-  {
-    expected: 2,
-    key: key2,
-    metadataKey: metadataKey2
-  },
+  { expected: 1, key: key1, metadataKey: metadataKey1 },
+  { expected: 2, key: key2, metadataKey: metadataKey2 },
   {
     defVal: 3,
     expected: 3,
@@ -162,16 +142,8 @@ test.each([
 );
 
 test.each([
-  {
-    expected: 1,
-    key: key1,
-    metadataKey: metadataKey1
-  },
-  {
-    expected: undefined,
-    key: key2,
-    metadataKey: metadataKey2
-  },
+  { expected: 1, key: key1, metadataKey: metadataKey1 },
+  { expected: undefined, key: key2, metadataKey: metadataKey2 },
   {
     defVal: 3,
     expected: 3,
@@ -216,26 +188,10 @@ test.each([
 });
 
 test.each([
-  {
-    expected: true,
-    key: key1,
-    metadataKey: metadataKey1
-  },
-  {
-    expected: true,
-    key: key2,
-    metadataKey: metadataKey2
-  },
-  {
-    expected: false,
-    key: key3,
-    metadataKey: metadataKey2
-  },
-  {
-    expected: false,
-    key: key2,
-    metadataKey: metadataKey3
-  }
+  { expected: true, key: key1, metadataKey: metadataKey1 },
+  { expected: true, key: key2, metadataKey: metadataKey2 },
+  { expected: false, key: key3, metadataKey: metadataKey2 },
+  { expected: false, key: key2, metadataKey: metadataKey3 }
 ])("hasMetadataKey", ({ expected, key, metadataKey }) => {
   class TestClass {}
 
@@ -261,26 +217,10 @@ test.each([
 });
 
 test.each([
-  {
-    expected: true,
-    key: key1,
-    metadataKey: metadataKey1
-  },
-  {
-    expected: false,
-    key: key2,
-    metadataKey: metadataKey2
-  },
-  {
-    expected: false,
-    key: key3,
-    metadataKey: metadataKey2
-  },
-  {
-    expected: false,
-    key: key2,
-    metadataKey: metadataKey3
-  }
+  { expected: true, key: key1, metadataKey: metadataKey1 },
+  { expected: false, key: key2, metadataKey: metadataKey2 },
+  { expected: false, key: key3, metadataKey: metadataKey2 },
+  { expected: false, key: key2, metadataKey: metadataKey3 }
 ])("hasOwnMetadataKey", ({ expected, key, metadataKey }) => {
   class TestClass {}
 
