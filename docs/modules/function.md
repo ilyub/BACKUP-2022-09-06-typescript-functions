@@ -56,21 +56,21 @@ ___
 
 ### noop
 
-▸ **noop**(...`args`): `void`
+▸ **noop**(...`args`): `any`
 
-A no-operation function that returns undefined regardless of the arguments it receives.
+Function.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `...args` | `any`[] |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `...args` | readonly `any`[] | Arguments. |
 
 #### Returns
 
-`void`
+`any`
 
-undefined
+Result.
 
 ___
 

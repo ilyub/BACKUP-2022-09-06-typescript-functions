@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sort = exports.some = exports.size = exports.set = exports.removeUndefinedKeys = exports.omit = exports.map = exports.hasOwnProp = exports.getPrototypeOf = exports.get = exports.filter = exports.every = exports.clone = exports.values = exports.keys = exports.fromEntries = exports.entries = exports.defineProperty = exports.extend = exports.assign = void 0;
+exports.sort = exports.some = exports.size = exports.set = exports.removeUndefinedKeys = exports.omit = exports.map = exports.hasOwnProp = exports.getPrototypeOf = exports.get = exports.filter = exports.every = exports.clone = exports.values = exports.keys = exports.fromEntries = exports.entries = exports.defineProperty = exports.assign = void 0;
 const tslib_1 = require("tslib");
 const a = tslib_1.__importStar(require("./array"));
 const as = tslib_1.__importStar(require("./inline-assertions"));
@@ -14,7 +14,6 @@ const core_1 = require("./core");
  * @returns Target.
  */
 exports.assign = Object.assign;
-exports.extend = Object.assign;
 /**
  * Typed version of Object.defineProperty.
  *

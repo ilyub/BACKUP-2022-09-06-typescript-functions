@@ -10,7 +10,6 @@ import { ReadonlySet, defineFn, indexed } from "./core";
  * @returns Target.
  */
 export const assign = Object.assign;
-export const extend = Object.assign;
 /**
  * Typed version of Object.defineProperty.
  *

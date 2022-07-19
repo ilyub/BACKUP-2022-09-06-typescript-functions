@@ -38,7 +38,6 @@
 - [Recs](index.md#recs)
 - [SafeAccess](index.md#safeaccess)
 - [SafeAccessGuards](index.md#safeaccessguards)
-- [ValidationObject](index.md#validationobject)
 - [Writable](index.md#writable)
 - [WritableIndexedObject](index.md#writableindexedobject)
 - [WritableIndexedObjects](index.md#writableindexedobjects)
@@ -285,12 +284,6 @@ ___
 ### SafeAccessGuards
 
 Re-exports [SafeAccessGuards](helpers.md#safeaccessguards)
-
-___
-
-### ValidationObject
-
-Re-exports [ValidationObject](core.md#validationobject)
 
 ___
 

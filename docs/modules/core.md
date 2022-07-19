@@ -4,10 +4,6 @@
 
 ## Table of contents
 
-### Type Aliases
-
-- [ValidationObject](core.md#validationobject)
-
 ### Variables
 
 - [ReadonlyMap](core.md#readonlymap)
@@ -22,22 +18,6 @@
 - [overload](core.md#overload)
 - [typedef](core.md#typedef)
 - [unfreeze](core.md#unfreeze)
-
-## Type Aliases
-
-### ValidationObject
-
-Ƭ **ValidationObject**<`T`\>: [`IndexedObject`](types_core.md#indexedobject)<`T`\>
-
-**`Deprecated`**
-
--- Use enum.
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `PropertyKey` |
 
 ## Variables
 

@@ -14,10 +14,6 @@ export declare const ReadonlySet: {
  */
 export declare const defineFn: <F, P>(fn: F, props: P) => F & Readonly<P>;
 /**
- * @deprecated -- Use enum.
- */
-export declare type ValidationObject<T extends PropertyKey> = IndexedObject<T>;
-/**
  * Executes callback.
  *
  * @param callback - Callback.
