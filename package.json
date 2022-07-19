@@ -64,8 +64,8 @@
     "upgrade": "npm run update-package-force && npm run npm:install"
   },
   "devDependencies": {
-    "@skylib/config": "^3.28.0",
-    "@skylib/eslint-plugin": "^0.1.42",
+    "@skylib/config": "^3.29.0",
+    "@skylib/eslint-plugin": "^0.1.44",
     "@skylib/typescript-types": "^1.0.0"
   },
   "peerDependencies": {
