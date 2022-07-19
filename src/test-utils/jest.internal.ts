@@ -28,8 +28,7 @@ export const matchers: {
         equals(result, expected),
         "Unexpected function execution result",
         result,
-        expected,
-        true
+        expected
       );
     } catch (e) {
       assert.toBeTrue(expectedToThrow, "Expecting function to throw");
@@ -38,8 +37,7 @@ export const matchers: {
         equals(e, expected),
         "Unexpected function execution result",
         e,
-        expected,
-        true
+        expected
       );
     }
   },
