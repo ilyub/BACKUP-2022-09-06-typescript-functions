@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any -- Ok */
 
-import type { nevers, unknowns } from "./core";
+import type { unknowns } from "./core";
 
-export interface Async<R, A extends unknowns = nevers> {
+export interface Async<R, A extends unknowns = readonly []> {
   /**
    * Async function.
    *
@@ -12,11 +12,11 @@ export interface Async<R, A extends unknowns = nevers> {
   (...args: A): Promise<R>;
 }
 
-export type AsyncPromise<R, A extends unknowns = nevers> =
+export type AsyncPromise<R, A extends unknowns = readonly []> =
   // prettier-break
   Async<R, A> | Promise<R>;
 
-export type AsyncPromiseSync<R, A extends unknowns = nevers> =
+export type AsyncPromiseSync<R, A extends unknowns = readonly []> =
   // prettier-break
   Async<R, A> | Promise<R> | Sync<R, A>;
 
@@ -61,7 +61,7 @@ export interface Constructor<T = any> {
   new (...args: readonly any[]): T;
 }
 
-export interface Sync<R, A extends unknowns = nevers> {
+export interface Sync<R, A extends unknowns = readonly []> {
   /**
    * Function.
    *
