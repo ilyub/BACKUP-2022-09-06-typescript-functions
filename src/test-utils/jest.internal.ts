@@ -5,10 +5,10 @@ import { buildEqualsResult } from "./expect";
 import { equals } from "@jest/expect-utils";
 
 // eslint-disable-next-line no-console -- Ok
-export const error = console.error;
+export const error = console.error as types.fn.Callable;
 
 // eslint-disable-next-line no-console -- Ok
-export const warn = console.warn;
+export const warn = console.warn as types.fn.Callable;
 
 export const matchers: {
   readonly executionResultToBe: ExpectFromMatcher<"executionResultToBe">;
