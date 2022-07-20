@@ -341,6 +341,7 @@ export function replaceBy<T extends object>(
 export function reverse<T>(arr: readonly T[]): readonly T[] {
   const result = clone(arr);
 
+  // eslint-disable-next-line @skylib/custom/functions/prefer-a-reverse -- Ok
   result.reverse();
 
   return result;
@@ -370,6 +371,7 @@ export function sort<T>(
 ): readonly T[] {
   const result = clone(arr);
 
+  // eslint-disable-next-line @skylib/custom/functions/prefer-a-sort -- Ok
   result.sort(compareFn);
 
   return result;

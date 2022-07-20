@@ -457,12 +457,28 @@ module.exports = {
             selector: "ArrayExpression[elements.length=1] > SpreadElement"
           }
         ],
+        "@skylib/custom/functions/prefer-a-reverse": [
+          "warn",
+          {
+            message: 'No mutation side-effect, use "a.reverse" instead',
+            selector: ".callee[property.name=reverse] > .object",
+            typeHas: "array"
+          }
+        ],
         "@skylib/custom/functions/prefer-a-second": [
           "warn",
           {
             message: 'Use "a.second" instead',
             selector:
               "CallExpression[callee.object.name=a][callee.property.name=get] > Literal.arguments:nth-child(2)[value=1]"
+          }
+        ],
+        "@skylib/custom/functions/prefer-a-sort": [
+          "warn",
+          {
+            message: 'No mutation side-effect, use "a.sort" instead',
+            selector: ".callee[property.name=sort] > .object",
+            typeHas: "array"
           }
         ],
         "@skylib/custom/functions/prefer-a-third": [
