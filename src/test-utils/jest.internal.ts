@@ -14,6 +14,7 @@ export const matchers: {
   readonly executionResultToBe: ExpectFromMatcher<"executionResultToBe">;
   readonly executionTimeToBe: ExpectFromMatcher<"executionTimeToBe">;
   readonly mockCallsToBe: ExpectFromMatcher<"mockCallsToBe">;
+  readonly promiseResultToBe: ExpectFromMatcher<"promiseResultToBe">;
   readonly toBeSameAs: ExpectFromMatcher<"toBeSameAs">;
 } = {
   executionResultToBe: (got, expected, expectedToThrow = false) => {
@@ -74,6 +75,31 @@ export const matchers: {
     got.mockClear();
 
     return result;
+  },
+  promiseResultToBe: async (got, expected, expectedToThrow = false) => {
+    assert.instanceOf(got, Promise, "Expecting promise");
+
+    try {
+      const result = await got;
+
+      assert.toBeFalse(expectedToThrow, "Expecting promise not to throw");
+
+      return buildEqualsResult(
+        equals(result, expected),
+        "Unexpected promise execution result",
+        result,
+        expected
+      );
+    } catch (e) {
+      assert.toBeTrue(expectedToThrow, "Expecting promise to throw");
+
+      return buildEqualsResult(
+        equals(e, expected),
+        "Unexpected promise execution result",
+        e,
+        expected
+      );
+    }
   },
   toBeSameAs: (got, expected) => {
     assert.object(got, "Expecting object");

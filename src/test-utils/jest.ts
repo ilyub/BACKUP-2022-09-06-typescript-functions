@@ -10,7 +10,7 @@ declare global {
       /**
        * Checks function execution result.
        *
-       * @param expected - Execution result.
+       * @param expected - Function execution result.
        * @param expectedToThrow - Whether function is expected to throw error.
        * @returns Result.
        */
@@ -36,6 +36,17 @@ declare global {
        * @returns Result.
        */
       readonly mockCallsToBe: (...expected: Writable<Calls>) => R;
+      /**
+       * Checks promise execution result.
+       *
+       * @param expected - Promise execution result.
+       * @param expectedToThrow - Whether promise is expected to throw error.
+       * @returns Result.
+       */
+      readonly promiseResultToBe: (
+        expected: unknown,
+        expectedToThrow?: boolean
+      ) => Promise<R>;
       /**
        * Checks that two objects are identical.
        *
