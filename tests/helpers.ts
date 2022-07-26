@@ -4,6 +4,8 @@
 
 /* eslint-disable @skylib/custom/functions/no-reflect-set -- Ok */
 
+/* eslint-disable @typescript-eslint/unbound-method -- Ok */
+
 import * as testUtils from "@/test-utils";
 import type { Facade, Writable } from "@";
 import {
@@ -14,6 +16,7 @@ import {
   onDemand,
   reflect,
   safeAccess,
+  selfBind,
   wait,
   wrapProxyHandler
 } from "@";
@@ -45,6 +48,10 @@ const descriptor = {
 
 class TestClass {
   public readonly value = 1;
+
+  public f(): number {
+    return this.value;
+  }
 }
 
 test.each([1, 2, 3])("createFacade: extension", value => {
@@ -224,6 +231,19 @@ test.each([
     expected,
     expectedToThrow
   );
+});
+
+test.each([
+  { expected: 1, method: selfBind(new TestClass()).f },
+  {
+    expected: new Error(
+      "Cannot read properties of undefined (reading 'value')"
+    ),
+    expectedToThrow: true,
+    method: new TestClass().f
+  }
+])("selfBind", ({ expected, expectedToThrow, method }) => {
+  expect(method).executionResultToBe(expected, expectedToThrow);
 });
 
 test("wait", async () => {
