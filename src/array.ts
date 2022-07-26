@@ -480,7 +480,7 @@ export function unshiftOrReplaceBy<T extends object>(
 function mixedToReduce<T extends object, V extends object = T>(
   keyOrReduce: KeyOrReduce<T | V>
 ): Reduce<T | V> {
-  if (is.object(keyOrReduce)) return keyOrReduce;
-
-  return (obj): unknown => indexed(obj)[keyOrReduce];
+  return is.propertyKey(keyOrReduce)
+    ? (obj): unknown => indexed(obj)[keyOrReduce]
+    : keyOrReduce;
 }
