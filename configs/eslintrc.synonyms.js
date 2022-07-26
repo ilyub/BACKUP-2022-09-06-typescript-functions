@@ -1,5 +1,4 @@
 module.exports = [
-  "@skylib/consistent-import/functions",
   "@skylib/custom/functions/a-mixedFrom-arg-type-include-array",
   "@skylib/custom/functions/a-mixedFrom-arg-type-include-non-array",
   "@skylib/custom/functions/is-array-arg-type",

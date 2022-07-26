@@ -3,20 +3,6 @@ module.exports = {
     {
       files: "!*.js",
       rules: {
-        "@skylib/consistent-import/functions": [
-          "warn",
-          {
-            sources: [
-              {
-                _id: "test-utils",
-                altLocalNames: ["functionsTestUtils"],
-                source: "@skylib/functions/src/test-utils",
-                sourcePattern: "@skylib/functions/{dist,es}/test-utils",
-                type: "wildcard"
-              }
-            ]
-          }
-        ],
         "@skylib/custom/functions/a-mixedFrom-arg-type-include-array": [
           "warn",
           {
