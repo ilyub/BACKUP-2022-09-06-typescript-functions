@@ -1,7 +1,7 @@
 import { AssertionError, ReadonlyMap, ReadonlySet, as, fn, is } from "@";
-import type { unknowns } from "@";
+import type { types, unknowns } from "@";
 
-function createSubtest(inlineAssertion: Function, ...args: unknowns) {
+function createSubtest(inlineAssertion: types.fn.Callable, ...args: unknowns) {
   return (value: unknown) => (): void => {
     if (inlineAssertion(value, ...args) === value) {
       // Passed
@@ -49,6 +49,17 @@ test.each([
   { expected: new AssertionError(), expectedToThrow: true, value: undefined }
 ])("callable", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(as.callable);
+
+  expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
+});
+
+test.each([
+  { value: TestClass },
+  { value: fn.noop },
+  { expected: new AssertionError(), expectedToThrow: true, value: 1 },
+  { expected: new AssertionError(), expectedToThrow: true, value: undefined }
+])("constructor", ({ expected, expectedToThrow, value }) => {
+  const subtest = createSubtest(as.constructor);
 
   expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
 });

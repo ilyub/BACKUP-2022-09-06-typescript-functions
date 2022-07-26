@@ -205,11 +205,25 @@ export function byGuard<T>(
  * @param value - Value.
  * @param error - Error.
  */
-export function callable<T extends Function>(
+export function callable<T extends types.fn.Callable>(
   value: unknown,
   error: ErrorArg
 ): asserts value is T {
   byGuard(value, is.callable, error);
+}
+
+/**
+ * Asserts that value type is T.
+ *
+ * @param value - Value.
+ * @param error - Error.
+ */
+// eslint-disable-next-line @typescript-eslint/no-shadow -- Wait for @skylib/config
+export function constructor<T extends types.fn.Constructor>(
+  value: unknown,
+  error: ErrorArg
+): asserts value is T {
+  byGuard(value, is.constructor, error);
 }
 
 /**
@@ -307,6 +321,19 @@ export function object(
   error: ErrorArg
 ): asserts value is object {
   byGuard(value, is.object, error);
+}
+
+/**
+ * Asserts that value type is PropertyKey.
+ *
+ * @param value - Value.
+ * @param error - Error.
+ */
+export function propertyKey(
+  value: unknown,
+  error: ErrorArg
+): asserts value is NumStr {
+  byGuard(value, is.propertyKey, error);
 }
 
 /**

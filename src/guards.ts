@@ -445,6 +445,12 @@ export const objects = factory(array.of, object);
 
 export const objectsU = or.factory(objects, _undefined);
 
+export const propertyKeyU = or.factory(propertyKey, _undefined);
+
+export const propertyKeys = factory(array.of, propertyKey);
+
+export const propertyKeysU = or.factory(propertyKeys, _undefined);
+
 export const set = defineFn(
   /**
    * Checks if value type is Set.
@@ -642,6 +648,7 @@ export const not = defineFn(
     numStr: _notFactory(numStr),
     number: _notFactory(number),
     object: _notFactory(object),
+    propertyKey: _notFactory(propertyKey),
     set: _notFactory(set),
     string: _notFactory(string),
     stringU: _notFactory(stringU),
@@ -704,7 +711,22 @@ export function boolean(value: unknown): value is boolean {
  * @param value - Value.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-export function callable<T extends Function>(value: unknown): value is T {
+export function callable<T extends types.fn.Callable>(
+  value: unknown
+): value is T {
+  return typeof value === "function";
+}
+
+/**
+ * Checks if value type is T.
+ *
+ * @param value - Value.
+ * @returns _True_ if value type is T, _false_ otherwise.
+ */
+// eslint-disable-next-line @typescript-eslint/no-shadow -- Wait for @skylib/config
+export function constructor<T extends types.fn.Constructor>(
+  value: unknown
+): value is T {
   return typeof value === "function";
 }
 
@@ -811,6 +833,28 @@ export function numStr(value: unknown): value is NumStr {
  */
 export function number(value: unknown): value is number {
   return typeof value === "number" && !Number.isNaN(value);
+}
+
+/**
+ * Checks if value type is PropertyKey.
+ *
+ * @param value - Value.
+ * @returns _True_ if value type is PropertyKey, _false_ otherwise.
+ */
+export function propertyKey(value: unknown): value is NumStr {
+  switch (typeof value) {
+    case "number":
+      return !Number.isNaN(value);
+
+    case "string":
+      return true;
+
+    case "symbol":
+      return true;
+
+    default:
+      return false;
+  }
 }
 
 /**

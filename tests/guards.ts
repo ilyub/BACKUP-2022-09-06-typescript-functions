@@ -57,6 +57,15 @@ test.each([
 });
 
 test.each([
+  { expected: true, value: TestClass },
+  { expected: true, value: fn.noop },
+  { expected: false, value: 1 },
+  { expected: false, value: undefined }
+])("constructor", ({ expected, value }) => {
+  expect(is.constructor(value)).toBe(expected);
+});
+
+test.each([
   { expected: true, value: null },
   { expected: true, value: undefined },
   { expected: false, value: 1 }
@@ -256,6 +265,17 @@ test.each([
   const guard = is.or.factory(is.boolean, is.number, is.string);
 
   expect(guard(value)).toBe(expected);
+});
+
+test.each([
+  { expected: true, value: 1 },
+  { expected: true, value: "a" },
+  { expected: true, value: Symbol("test-symbol") },
+  { expected: false, value: Number.NaN },
+  { expected: false, value: true },
+  { expected: false, value: undefined }
+])("propertyKey", ({ expected, value }) => {
+  expect(is.propertyKey(value)).toBe(expected);
 });
 
 test.each([

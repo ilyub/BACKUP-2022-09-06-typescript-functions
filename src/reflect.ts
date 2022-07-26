@@ -3,6 +3,7 @@
 import "reflect-metadata";
 import * as as from "./inline-assertions";
 import * as is from "./guards";
+import type { types } from "./types";
 
 /**
  * Typed version of Reflect.apply.
@@ -13,7 +14,7 @@ import * as is from "./guards";
  * @returns Function execution result.
  */
 export const apply: (
-  target: Function,
+  target: types.fn.Callable,
   thisArg: unknown,
   args: ArrayLike<unknown>
 ) => unknown = Reflect.apply;
@@ -27,9 +28,9 @@ export const apply: (
  * @returns Constructed object.
  */
 export const construct: (
-  target: Function,
+  target: types.fn.Constructor,
   args: ArrayLike<unknown>,
-  newTarget?: Function
+  newTarget?: types.fn.Constructor
 ) => unknown = Reflect.construct;
 
 export const defineProperty = Reflect.defineProperty;

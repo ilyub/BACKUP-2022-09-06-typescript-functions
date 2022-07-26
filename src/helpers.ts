@@ -63,7 +63,7 @@ export function createFacade<I extends object, E = unknown>(
     fn.noop,
     wrapProxyHandler("createFacade", ProxyHandlerAction.throw, {
       apply: (_target, thisArg, args: unknowns) =>
-        reflect.apply(targetFn(), thisArg, args),
+        reflect.apply(as.callable(target()), thisArg, args),
       get: (_target, key) => reflect.get(target(key), key),
       getOwnPropertyDescriptor: (_target, key) =>
         reflect.getOwnPropertyDescriptor(target(key), key),
@@ -80,12 +80,6 @@ export function createFacade<I extends object, E = unknown>(
     if (is.not.empty(key) && key in facadeOwn) return facadeOwn;
 
     assert.not.empty(_implementation, `Missing facade implementation: ${name}`);
-
-    return _implementation;
-  }
-
-  function targetFn(): Function {
-    assert.callable(_implementation, `Facade is not callable: ${name}`);
 
     return _implementation;
   }
@@ -214,7 +208,13 @@ export function wrapProxyHandler<T extends object>(
         apply: (target, thisArg, args: unknowns) =>
           reflect.apply(as.callable(target), thisArg, args),
         construct: (target, args: unknowns, newTarget) =>
-          as.object(reflect.construct(as.callable(target), args, newTarget)),
+          as.object(
+            reflect.construct(
+              as.constructor(target),
+              args,
+              as.constructor(newTarget)
+            )
+          ),
         defineProperty: (target, key, attrs) =>
           reflect.defineProperty(target, key, attrs),
         deleteProperty: (target, key) => reflect.deleteProperty(target, key),

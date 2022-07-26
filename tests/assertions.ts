@@ -1,7 +1,7 @@
 import { AssertionError, ReadonlyMap, ReadonlySet, assert, fn, is } from "@";
-import type { unknowns } from "@";
+import type { types, unknowns } from "@";
 
-function createSubtest(assertion: Function, ...args: unknowns) {
+function createSubtest(assertion: types.fn.Callable, ...args: unknowns) {
   return (value: unknown) => (): void => {
     assertion(value, ...args);
   };
@@ -88,6 +88,17 @@ test.each([
   { expected: new AssertionError(), expectedToThrow: true }
 ])("callable", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(assert.callable);
+
+  expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
+});
+
+test.each([
+  { value: TestClass },
+  { value: fn.noop },
+  { expected: new AssertionError(), expectedToThrow: true, value: 1 },
+  { expected: new AssertionError(), expectedToThrow: true }
+])("constructor", ({ expected, expectedToThrow, value }) => {
+  const subtest = createSubtest(assert.constructor);
 
   expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
 });
@@ -238,6 +249,19 @@ test.each([
   { expected: new AssertionError(), expectedToThrow: true }
 ])("object", ({ expected, expectedToThrow, value }) => {
   const subtest = createSubtest(assert.object);
+
+  expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
+});
+
+test.each([
+  { value: 1 },
+  { value: "a" },
+  { value: Symbol("test-symbol") },
+  { expected: new AssertionError(), expectedToThrow: true, value: Number.NaN },
+  { expected: new AssertionError(), expectedToThrow: true, value: true },
+  { expected: new AssertionError(), expectedToThrow: true }
+])("propertyKey", ({ expected, expectedToThrow, value }) => {
+  const subtest = createSubtest(assert.propertyKey);
 
   expect(subtest(value)).executionResultToBe(expected, expectedToThrow);
 });

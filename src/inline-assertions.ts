@@ -122,6 +122,14 @@ export const objects = factory(is.objects);
 
 export const objectsU = factory(is.objectsU);
 
+export const propertyKey = factory(is.propertyKey);
+
+export const propertyKeyU = factory(is.propertyKeyU);
+
+export const propertyKeys = factory(is.propertyKeys);
+
+export const propertyKeysU = factory(is.propertyKeyU);
+
 export const set = defineFn(factory(is.set), {
   /**
    * Asserts that value type is Set\<T\>.
@@ -177,6 +185,7 @@ export const not = {
   numStr: notFactory<NumStr>(is.not.numStr),
   number: notFactory<number>(is.not.number),
   object: notFactory<object>(is.not.object),
+  propertyKey: notFactory<NumStr>(is.not.propertyKey),
   set: notFactory<ReadonlySet<unknown>>(is.not.set),
   string: notFactory<string>(is.not.string),
   stringU: notFactory<baseStringU>(is.not.stringU),
@@ -206,8 +215,22 @@ export function byGuard<T>(value: unknown, guard: is.Guard<T>): T {
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
-export function callable<T extends Function>(value: unknown): T {
+export function callable<T extends types.fn.Callable>(value: unknown): T {
   if (is.callable<T>(value)) return value;
+
+  throw new AssertionError();
+}
+
+/**
+ * Asserts that value type is T.
+ *
+ * @param value - Value.
+ * @returns Value if value type is T.
+ * @throws Error otherwise.
+ */
+// eslint-disable-next-line @typescript-eslint/no-shadow -- Wait for @skylib/config
+export function constructor<T extends types.fn.Constructor>(value: unknown): T {
+  if (is.constructor<T>(value)) return value;
 
   throw new AssertionError();
 }

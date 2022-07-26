@@ -43,7 +43,7 @@ export const matchers: {
     }
   },
   executionTimeToBe: async (got, expected, precision = 10) => {
-    assert.callable<types.fn.Async<unknown>>(got, "Expecting async function");
+    assert.callable<types.fn.Async<void>>(got, "Expecting async function");
 
     const t1 = Date.now();
 

@@ -5,7 +5,7 @@
 /* eslint-disable @skylib/custom/functions/no-reflect-set -- Ok */
 
 import * as testUtils from "@/test-utils";
-import type { Facade, Writable } from "@";
+import type { Facade, Writable, types } from "@";
 import {
   ProxyHandlerAction,
   createFacade,
@@ -47,7 +47,7 @@ class TestClass {
   public readonly value = 1;
 }
 
-test.each([1, 2, 3])("createFacade: Extension", value => {
+test.each([1, 2, 3])("createFacade: extension", value => {
   const extension: Writable<Extension> = { pow: pow2 };
 
   const facade = createFacade<object, Writable<Extension>>("facade", extension);
@@ -61,8 +61,8 @@ test.each([1, 2, 3])("createFacade: Extension", value => {
   }
 });
 
-test.each([1, 2, 3])("createFacade: Function", value => {
-  const facade = createFacade<Function>("facade", {});
+test.each([1, 2, 3])("createFacade: function", value => {
+  const facade = createFacade<types.fn.Callable>("facade", {});
 
   facade.setImplementation(pow2);
   expect(facade(value)).toBe(pow2(value));
@@ -95,7 +95,7 @@ test.each([
     subtest: (facade: Facade<object>): unknown =>
       reflect.set(facade, "value", 2)
   }
-])("createFacade: Object", ({ expected, subtest }) => {
+])("createFacade: object", ({ expected, subtest }) => {
   const facade = createFacade<object>("facade", {});
 
   class Implementation {
