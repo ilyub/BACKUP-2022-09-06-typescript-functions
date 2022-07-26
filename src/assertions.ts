@@ -332,7 +332,7 @@ export function object(
 export function propertyKey(
   value: unknown,
   error: ErrorArg
-): asserts value is NumStr {
+): asserts value is PropertyKey {
   byGuard(value, is.propertyKey, error);
 }
 

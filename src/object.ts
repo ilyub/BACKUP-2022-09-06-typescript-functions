@@ -387,14 +387,13 @@ export function sort<K extends string, V>(
   obj: Rec<K, V>,
   compareFn?: CompareFn<Rec<K, V>>
 ): Rec<K, V> {
-  const arr = a.clone(entries(obj));
-
-  arr.sort(
-    compareFn
-      ? (entry1, entry2): number =>
-          compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
-      : undefined
+  return fromEntries.exhaustive(
+    a.sort(
+      a.clone(entries(obj)),
+      compareFn
+        ? (entry1, entry2): number =>
+            compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
+        : undefined
+    )
   );
-
-  return fromEntries.exhaustive(arr);
 }

@@ -841,7 +841,7 @@ export function number(value: unknown): value is number {
  * @param value - Value.
  * @returns _True_ if value type is PropertyKey, _false_ otherwise.
  */
-export function propertyKey(value: unknown): value is NumStr {
+export function propertyKey(value: unknown): value is PropertyKey {
   switch (typeof value) {
     case "number":
       return !Number.isNaN(value);

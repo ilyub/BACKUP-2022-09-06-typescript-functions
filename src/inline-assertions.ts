@@ -185,7 +185,7 @@ export const not = {
   numStr: notFactory<NumStr>(is.not.numStr),
   number: notFactory<number>(is.not.number),
   object: notFactory<object>(is.not.object),
-  propertyKey: notFactory<NumStr>(is.not.propertyKey),
+  propertyKey: notFactory<PropertyKey>(is.not.propertyKey),
   set: notFactory<ReadonlySet<unknown>>(is.not.set),
   string: notFactory<string>(is.not.string),
   stringU: notFactory<baseStringU>(is.not.stringU),
