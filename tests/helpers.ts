@@ -5,7 +5,7 @@
 /* eslint-disable @skylib/custom/functions/no-reflect-set -- Ok */
 
 import * as testUtils from "@/test-utils";
-import type { Facade, Writable, types } from "@";
+import type { Facade, Writable } from "@";
 import {
   ProxyHandlerAction,
   createFacade,
@@ -62,7 +62,7 @@ test.each([1, 2, 3])("createFacade: extension", value => {
 });
 
 test.each([1, 2, 3])("createFacade: function", value => {
-  const facade = createFacade<types.fn.Callable>("facade", {});
+  const facade = createFacade<(x: number) => number>("facade", {});
 
   facade.setImplementation(pow2);
   expect(facade(value)).toBe(pow2(value));

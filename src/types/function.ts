@@ -31,7 +31,7 @@ export interface CallSignature<T extends Callable> {
   (this: ThisParameterType<T>, ...args: Parameters<T>): ReturnType<T>;
 }
 
-export interface Callable<T = any> {
+export interface Callable<T = unknown> {
   /**
    * Function.
    *
@@ -51,7 +51,7 @@ export interface ConstructSignature<T extends Constructor> {
   new (...args: ConstructorParameters<T>): InstanceType<T>;
 }
 
-export interface Constructor<T = any> {
+export interface Constructor<T = unknown> {
   /**
    * Constructor.
    *

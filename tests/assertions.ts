@@ -1,7 +1,7 @@
 import { AssertionError, ReadonlyMap, ReadonlySet, assert, fn, is } from "@";
 import type { types, unknowns } from "@";
 
-function createSubtest(assertion: types.fn.Callable, ...args: unknowns) {
+function createSubtest(assertion: types.fn.Callable<void>, ...args: unknowns) {
   return (value: unknown) => (): void => {
     assertion(value, ...args);
   };

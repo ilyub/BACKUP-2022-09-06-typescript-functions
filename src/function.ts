@@ -1,7 +1,7 @@
 import * as _ from "@skylib/lodash-commonjs-es";
 import type { types, unknowns } from "./types";
 
-export const noop: types.fn.Callable = _.noop.bind(_);
+export const noop: types.fn.Callable<void> = _.noop.bind(_);
 
 export interface PipeCallback<V = unknown, R = unknown> {
   /**
