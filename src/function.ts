@@ -1,4 +1,5 @@
 import * as _ from "@skylib/lodash-commonjs-es";
+import * as is from "./guards";
 import type { types, unknowns } from "./types";
 
 export const noop: types.fn.Callable<void> = _.noop.bind(_);
@@ -14,6 +15,13 @@ export interface PipeCallback<V = unknown, R = unknown> {
 }
 
 export type PipeCallbacks = readonly PipeCallback[];
+
+export interface ValueGenerator<T> {
+  /**
+   * Generates value.
+   */
+  (): T;
+}
 
 /**
  * Identity function.
@@ -72,11 +80,21 @@ export function pipe(value: unknown, ...callbacks: PipeCallbacks): unknown {
 }
 
 /**
- * Creates factory function from value.
+ * Gets value from generator.
  *
- * @param value - Value.
+ * @param mixed - Value or generator.
  * @returns Factory function.
  */
-export function valueToGenerator<T>(value: T): () => T {
+export function valueFromGenerator<T>(mixed: T | ValueGenerator<T>): T {
+  return is.callable(mixed) ? mixed() : mixed;
+}
+
+/**
+ * Creates generator from value.
+ *
+ * @param value - Value.
+ * @returns Generator.
+ */
+export function valueToGenerator<T>(value: T): ValueGenerator<T> {
   return () => value;
 }
