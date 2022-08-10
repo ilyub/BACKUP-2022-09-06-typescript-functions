@@ -194,6 +194,36 @@ export const not = {
   undefined: notFactory<undefined>(is.not.undefined)
 } as const;
 
+const _false = factory(is.false);
+
+const _null = factory(is.null);
+
+const _true = factory(is.true);
+
+const _undefined = factory(is.undefined);
+
+export interface ExclusionInlineAssertion<T> {
+  /**
+   * Asserts value type.
+   *
+   * @param value - Value.
+   * @returns Value if its type is not T.
+   * @throws Error otherwise.
+   */
+  <V>(value: V): Exclude<V, T>;
+}
+
+export interface InlineAssertion<T> {
+  /**
+   * Asserts value type.
+   *
+   * @param value - Value.
+   * @returns Value if its type is T.
+   * @throws Error otherwise.
+   */
+  (value: unknown): T;
+}
+
 /**
  * Asserts that value type is T.
  *
@@ -228,7 +258,6 @@ export function callable<T extends types.fn.Callable>(value: unknown): T {
  * @returns Value if value type is T.
  * @throws Error otherwise.
  */
-// eslint-disable-next-line @typescript-eslint/no-shadow -- Wait for @skylib/config
 export function constructor<T extends types.fn.Constructor>(value: unknown): T {
   if (is.constructor<T>(value)) return value;
 
@@ -286,21 +315,13 @@ export function instancesOf<T>(
   throw new AssertionError();
 }
 
-const _false = factory(is.false);
-
-const _null = factory(is.null);
-
-const _true = factory(is.true);
-
-const _undefined = factory(is.undefined);
-
 /**
  * Creates inline assertion.
  *
  * @param guard - Guard for type T.
  * @returns Inline assertion for type T.
  */
-function factory<T>(guard: is.Guard<T>) {
+function factory<T>(guard: is.Guard<T>): InlineAssertion<T> {
   /**
    * Asserts that value has expected type.
    *
@@ -321,7 +342,9 @@ function factory<T>(guard: is.Guard<T>) {
  * @param guard - Guard for type not T.
  * @returns Inline assertion for type not T.
  */
-function notFactory<T>(guard: is.ExclusionGuard<T>) {
+function notFactory<T>(
+  guard: is.ExclusionGuard<T>
+): ExclusionInlineAssertion<T> {
   /**
    * Asserts that value has expected type.
    *

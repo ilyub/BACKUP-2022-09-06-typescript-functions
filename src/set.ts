@@ -8,7 +8,7 @@ export { _delete as delete };
  * @returns Set with value added.
  */
 export function add<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T> {
-  // eslint-disable-next-line @skylib/custom/functions/prefer-ReadonlySet -- Ok
+  // eslint-disable-next-line @skylib/functions/prefer-ReadonlySet -- Ok
   const result = new Set(set);
 
   result.add(value);
@@ -24,7 +24,7 @@ export function add<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T> {
  * @returns Set with value removed.
  */
 function _delete<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T> {
-  // eslint-disable-next-line @skylib/custom/functions/prefer-ReadonlySet -- Ok
+  // eslint-disable-next-line @skylib/functions/prefer-ReadonlySet -- Ok
   const result = new Set(set);
 
   result.delete(value);

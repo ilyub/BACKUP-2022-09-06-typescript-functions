@@ -23,6 +23,7 @@ import { ReadonlySet, defineFn, indexed } from "./core";
  */
 export const assign: <T extends object>(
   target: Writable<T>,
+  // eslint-disable-next-line @skylib/typescript/prefer-array-type-alias -- Ok
   ...sources: ReadonlyArray<Readonly<Partial<T>>>
 ) => T = Object.assign;
 
@@ -46,6 +47,7 @@ export const entries: {
    * @param obj - Object.
    * @returns Object entries.
    */
+  // eslint-disable-next-line @skylib/typescript/prefer-array-type-alias -- Ok
   <K extends string, V>(obj: PartialRecord<K, V>): ReadonlyArray<Entry<K, V>>;
   /**
    * Typed version of Object.entries.
@@ -53,9 +55,10 @@ export const entries: {
    * @param obj - Object.
    * @returns Object entries.
    */
-  <T extends object>(obj: T): ReadonlyArray<
-    Entry<string & keyof T, T[NumStr & keyof T]>
-  >;
+  <T extends object>(
+    obj: T
+  ): // eslint-disable-next-line @skylib/typescript/prefer-array-type-alias -- Ok
+  ReadonlyArray<Entry<string & keyof T, T[NumStr & keyof T]>>;
 } = Object.entries;
 
 export const fromEntries = defineFn(
@@ -107,6 +110,7 @@ export const keys: {
    * @param obj - Object.
    * @returns Object keys.
    */
+  // eslint-disable-next-line @skylib/typescript/prefer-array-type-alias -- Ok
   <T extends object>(obj: T): ReadonlyArray<string & keyof T>;
 } = Object.keys;
 
@@ -124,6 +128,7 @@ export const values: {
    * @param obj - Object.
    * @returns Object values.
    */
+  // eslint-disable-next-line @skylib/typescript/prefer-array-type-alias -- Ok
   <T extends object>(obj: T): ReadonlyArray<T[NumStr & keyof T]>;
 } = Object.values;
 
@@ -184,7 +189,7 @@ export interface Predicate<T extends object> {
  * @returns New object.
  */
 export function clone<T extends object>(obj: T): Writable<T> {
-  // eslint-disable-next-line @skylib/custom/functions/prefer-o-clone -- Ok
+  // eslint-disable-next-line @skylib/functions/object/prefer-clone -- Ok
   return { ...obj };
 }
 
@@ -263,7 +268,7 @@ export function get(
  * @returns Object prototype if available, _undefined_ otherwise.
  */
 export function getPrototypeOf(obj: object): objectU {
-  // eslint-disable-next-line @skylib/custom/functions/prefer-o-getPrototypeOf -- Ok
+  // eslint-disable-next-line @skylib/functions/object/prefer-getPrototypeOf -- Ok
   const prototype = Object.getPrototypeOf(obj);
 
   return is.object(prototype) ? prototype : undefined;
@@ -277,7 +282,7 @@ export function getPrototypeOf(obj: object): objectU {
  * @returns _True_ if object has property, _false_ otherwise.
  */
 export function hasOwnProp(key: PropertyKey, obj: object): boolean {
-  // eslint-disable-next-line @skylib/custom/functions/prefer-o-hasOwnProp -- Ok
+  // eslint-disable-next-line @skylib/functions/object/prefer-hasOwnProp -- Ok
   return Object.prototype.hasOwnProperty.call(obj, key);
 }
 
@@ -389,7 +394,7 @@ export function sort<K extends string, V>(
 ): Rec<K, V> {
   return fromEntries.exhaustive(
     a.sort(
-      a.clone(entries(obj)),
+      entries(obj),
       compareFn
         ? (entry1, entry2): number =>
             compareFn(entry1[1], entry2[1], entry1[0], entry2[0])

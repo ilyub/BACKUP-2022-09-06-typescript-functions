@@ -15,7 +15,7 @@ export { _setTimeout as setTimeout };
  * @param id - ID.
  */
 function _clearInterval(id: numberU): void {
-  // eslint-disable-next-line @skylib/custom/functions/prefer-programFlow-clearInterval -- Ok
+  // eslint-disable-next-line @skylib/functions/program-flow/prefer-clearInterval -- Ok
   if (is.not.empty(id)) clearInterval(id);
 }
 
@@ -25,7 +25,7 @@ function _clearInterval(id: numberU): void {
  * @param id - ID.
  */
 function _clearTimeout(id: numberU): void {
-  // eslint-disable-next-line @skylib/custom/functions/prefer-programFlow-clearTimeout -- Ok
+  // eslint-disable-next-line @skylib/functions/program-flow/prefer-clearTimeout -- Ok
   if (is.not.empty(id)) clearTimeout(id);
 }
 

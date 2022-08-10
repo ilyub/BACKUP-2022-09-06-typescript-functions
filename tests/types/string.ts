@@ -1,4 +1,4 @@
-/* eslint-disable @skylib/custom/no-literal-union-type -- Ok */
+/* eslint-disable @skylib/typescript/prefer-enum -- Ok */
 
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
 import type { types } from "@";

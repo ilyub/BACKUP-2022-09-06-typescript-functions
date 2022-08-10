@@ -21,11 +21,7 @@ test.each([
 });
 
 test("filter", () => {
-  const obj = {
-    a: 1,
-    b: 2,
-    c: 3
-  } as const;
+  const obj = { a: 1, b: 2, c: 3 } as const;
 
   const expected = { a: 1, c: 3 } as const;
 
@@ -83,17 +79,9 @@ test.each([
 });
 
 test("map", () => {
-  const obj = {
-    a: "1",
-    b: "12",
-    c: "123"
-  } as const;
+  const obj = { a: "1", b: "12", c: "123" } as const;
 
-  const expected = {
-    a: 1,
-    b: 2,
-    c: 3
-  } as const;
+  const expected = { a: 1, b: 2, c: 3 } as const;
 
   expect(o.map(obj, callback)).toStrictEqual(expected);
 

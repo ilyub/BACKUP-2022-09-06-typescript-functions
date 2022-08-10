@@ -7,7 +7,6 @@ testUtils.installFakeTimer();
 
 test("clearInterval", async () => {
   expect.hasAssertions();
-
   await testUtils.run(async () => {
     const callback = jest.fn();
 
@@ -22,7 +21,6 @@ test("clearInterval", async () => {
 
 test("clearTimeout", async () => {
   expect.hasAssertions();
-
   await testUtils.run(async () => {
     const callback = jest.fn();
 
@@ -37,7 +35,6 @@ test("clearTimeout", async () => {
 
 test("setInterval", async () => {
   expect.hasAssertions();
-
   await testUtils.run(async () => {
     const callback = jest.fn();
 
@@ -57,7 +54,6 @@ test("setInterval", async () => {
 
 test("setTimeout", async () => {
   expect.hasAssertions();
-
   await testUtils.run(async () => {
     const callback = jest.fn();
 

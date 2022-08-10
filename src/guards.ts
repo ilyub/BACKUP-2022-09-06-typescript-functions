@@ -1,10 +1,7 @@
-/* eslint-disable @skylib/custom/functions/prefer-a-fromIterable -- Ok */
-
-/* eslint-disable @skylib/custom/functions/prefer-o-entries -- Ok */
-
-/* eslint-disable @skylib/custom/functions/prefer-o-hasOwnProp -- Ok */
-
-/* eslint-disable @skylib/custom/functions/prefer-o-values -- Ok */
+/* eslint-disable @skylib/functions/array/prefer-fromIterable -- Ok */
+/* eslint-disable @skylib/functions/object/prefer-entries -- Ok */
+/* eslint-disable @skylib/functions/object/prefer-hasOwnProp -- Ok */
+/* eslint-disable @skylib/functions/object/prefer-values -- Ok */
 
 import type {
   IndexedObject,
@@ -513,7 +510,7 @@ export const tuple = defineFn(
       value: unknown,
       guard1: Guard<A>,
       guard2: Guard<B>
-      // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
+      // eslint-disable-next-line @skylib/typescript/no-multi-type-tuples -- Ok
     ): value is readonly [A, B];
 
     /**
@@ -530,7 +527,7 @@ export const tuple = defineFn(
       guard1: Guard<A>,
       guard2: Guard<B>,
       guard3: Guard<C>
-      // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
+      // eslint-disable-next-line @skylib/typescript/no-multi-type-tuples -- Ok
     ): value is readonly [A, B, C];
 
     /**
@@ -549,7 +546,7 @@ export const tuple = defineFn(
       guard2: Guard<B>,
       guard3: Guard<C>,
       guard4: Guard<D>
-      // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
+      // eslint-disable-next-line @skylib/typescript/no-multi-type-tuples -- Ok
     ): value is readonly [A, B, C, D];
 
     function result(value: unknown, ...guards: Guards): value is unknown {
@@ -580,7 +577,7 @@ export const tuple = defineFn(
       function result<A, B>(
         guard1: Guard<A>,
         guard2: Guard<B>
-        // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
+        // eslint-disable-next-line @skylib/typescript/no-multi-type-tuples -- Ok
       ): Guard<readonly [A, B]>;
 
       /**
@@ -595,7 +592,7 @@ export const tuple = defineFn(
         guard1: Guard<A>,
         guard2: Guard<B>,
         guard3: Guard<C>
-        // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
+        // eslint-disable-next-line @skylib/typescript/no-multi-type-tuples -- Ok
       ): Guard<readonly [A, B, C]>;
 
       /**
@@ -612,7 +609,7 @@ export const tuple = defineFn(
         guard2: Guard<B>,
         guard3: Guard<C>,
         guard4: Guard<D>
-        // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
+        // eslint-disable-next-line @skylib/typescript/no-multi-type-tuples -- Ok
       ): Guard<readonly [A, B, C, D]>;
 
       function result(...guards: Guards): Guard {
@@ -723,7 +720,6 @@ export function callable<T extends types.fn.Callable>(
  * @param value - Value.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-// eslint-disable-next-line @typescript-eslint/no-shadow -- Wait for @skylib/config
 export function constructor<T extends types.fn.Constructor>(
   value: unknown
 ): value is T {
@@ -922,7 +918,7 @@ function _false(value: unknown): value is false {
  * @param guard - Guard for type T.
  * @returns Guard for type not T.
  */
-function _notFactory<T>(guard: Guard<T>) {
+function _notFactory<T>(guard: Guard<T>): ExclusionGuard<T> {
   return <V>(value: V): value is Exclude<V, T> => !guard(value);
 }
 

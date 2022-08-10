@@ -1,3 +1,3 @@
 module.exports = {
-  scopes: ["arrayMap", "locales", "moduleDefinition", "testUtils"]
+  scopes: ["arrayMap", "configs", "locales", "moduleDefinition", "testUtils"]
 };

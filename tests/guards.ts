@@ -1,5 +1,3 @@
-/* eslint-disable @skylib/custom/functions/is-indexedObject-arg-type -- Ok */
-
 import { ReadonlyMap, ReadonlySet, fn, is } from "@";
 
 class TestClass {}
@@ -75,14 +73,14 @@ test.each([
 
 test.each([
   { expected: true, value: 1 },
-  { expected: true, value: "a" },
+  { expected: true, value: "b" },
   { expected: false, value: "1" },
-  { expected: false, value: "b" },
+  { expected: false, value: "c" },
   { expected: false, value: undefined }
 ])("enumeration", ({ expected, value }) => {
   enum TestEnum {
     a = 1,
-    b = "a"
+    b = "b"
   }
 
   expect(is.enumeration(value, TestEnum)).toBe(expected);

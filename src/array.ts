@@ -1,12 +1,14 @@
-/* eslint-disable @skylib/custom/functions/prefer-a-fromIterable -- Ok */
-
-/* eslint-disable @skylib/custom/functions/prefer-o-hasOwnProp -- Ok */
+/* eslint-disable @skylib/functions/array/prefer-fromIterable -- Ok */
+/* eslint-disable @skylib/functions/object/prefer-hasOwnProp -- Ok */
 
 import * as _ from "@skylib/lodash-commonjs-es";
 import * as assert from "./assertions";
 import * as is from "./guards";
 import type { Writable, numbers, strings, unknowns } from "./types";
 import { indexed } from "./core";
+
+// eslint-disable-next-line @skylib/typescript/consistent-array-type-name -- Ok
+export type ChainResult<T> = ReadonlyArray<readonly [T, T]>;
 
 export type KeyOrReduce<T extends object> = PropertyKey | Reduce<T>;
 
@@ -26,8 +28,8 @@ export interface Reduce<T extends object> {
  * @param arr - Array.
  * @returns Array of pairs.
  */
-export function chain<T>(arr: readonly T[]): ReadonlyArray<readonly [T, T]> {
-  const result: Writable<Pairs> = [];
+export function chain<T>(arr: readonly T[]): ChainResult<T> {
+  const result: Writable<ChainResult<T>> = [];
 
   let prev = first(arr);
 
@@ -37,8 +39,6 @@ export function chain<T>(arr: readonly T[]): ReadonlyArray<readonly [T, T]> {
   }
 
   return result;
-
-  type Pairs = ReadonlyArray<readonly [T, T]>;
 }
 
 /**
@@ -47,7 +47,7 @@ export function chain<T>(arr: readonly T[]): ReadonlyArray<readonly [T, T]> {
  * @param arr - Array.
  * @returns New array.
  */
-// eslint-disable-next-line @skylib/custom/prefer-readonly-array -- Ok
+// eslint-disable-next-line @skylib/typescript/prefer-readonly-array -- Ok
 export function clone<A>(arr: readonly [A]): [A];
 
 /**
@@ -56,7 +56,7 @@ export function clone<A>(arr: readonly [A]): [A];
  * @param arr - Array.
  * @returns New array.
  */
-// eslint-disable-next-line @skylib/custom/prefer-readonly-array, @skylib/no-multi-type-tuples -- Ok
+// eslint-disable-next-line @skylib/typescript/no-multi-type-tuples, @skylib/typescript/prefer-readonly-array -- Ok
 export function clone<A, B>(arr: readonly [A, B]): [A, B];
 
 /**
@@ -65,7 +65,7 @@ export function clone<A, B>(arr: readonly [A, B]): [A, B];
  * @param arr - Array.
  * @returns New array.
  */
-// eslint-disable-next-line @skylib/custom/prefer-readonly-array, @skylib/no-multi-type-tuples -- Ok
+// eslint-disable-next-line @skylib/typescript/no-multi-type-tuples, @skylib/typescript/prefer-readonly-array -- Ok
 export function clone<A, B, C>(arr: readonly [A, B, C]): [A, B, C];
 
 /**
@@ -74,7 +74,7 @@ export function clone<A, B, C>(arr: readonly [A, B, C]): [A, B, C];
  * @param arr - Array.
  * @returns New array.
  */
-// eslint-disable-next-line @skylib/custom/prefer-readonly-array, @skylib/no-multi-type-tuples -- Ok
+// eslint-disable-next-line @skylib/typescript/no-multi-type-tuples, @skylib/typescript/prefer-readonly-array -- Ok
 export function clone<A, B, C, D>(arr: readonly [A, B, C, D]): [A, B, C, D];
 
 /**
@@ -83,10 +83,10 @@ export function clone<A, B, C, D>(arr: readonly [A, B, C, D]): [A, B, C, D];
  * @param arr - Array.
  * @returns New array.
  */
-// eslint-disable-next-line @skylib/custom/prefer-readonly-array -- Ok
+// eslint-disable-next-line @skylib/typescript/prefer-readonly-array -- Ok
 export function clone<T>(arr: readonly T[]): T[];
 
-// eslint-disable-next-line @skylib/custom/prefer-readonly-array -- Ok
+// eslint-disable-next-line @skylib/typescript/prefer-readonly-array -- Ok
 export function clone<T>(arr: readonly T[]): T[] {
   return [...arr];
 }
@@ -341,7 +341,7 @@ export function replaceBy<T extends object>(
 export function reverse<T>(arr: readonly T[]): readonly T[] {
   const result = clone(arr);
 
-  // eslint-disable-next-line @skylib/custom/functions/prefer-a-reverse -- Ok
+  // eslint-disable-next-line @skylib/functions/array/prefer-reverse -- Ok
   result.reverse();
 
   return result;
@@ -371,7 +371,7 @@ export function sort<T>(
 ): readonly T[] {
   const result = clone(arr);
 
-  // eslint-disable-next-line @skylib/custom/functions/prefer-a-sort -- Ok
+  // eslint-disable-next-line @skylib/functions/array/prefer-sort -- Ok
   result.sort(compareFn);
 
   return result;
@@ -412,7 +412,7 @@ export function toggleBy<T extends object>(
  * @param mutableArray - Array.
  */
 export function truncate(mutableArray: Writable<unknowns>): void {
-  // eslint-disable-next-line @skylib/custom/functions/prefer-a-truncate -- Ok
+  // eslint-disable-next-line @skylib/functions/array/prefer-truncate -- Ok
   mutableArray.length = 0;
 }
 
@@ -429,6 +429,7 @@ export function uniqueBy<T extends object>(
 ): readonly T[] {
   const reduce = mixedToReduce(keyOrReduce);
 
+  // eslint-disable-next-line @skylib/functions/prefer-ReadonlySet -- Ok
   const seen = new Set();
 
   return arr.filter(element => {

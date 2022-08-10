@@ -23,7 +23,7 @@ export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
    * @param key - Key.
    * @returns Map of arrays.
    */
-  public get(key1: K): ReadonlyMap<L, readonly T[]>;
+  public get(key: K): ReadonlyMap<L, readonly T[]>;
 
   /**
    * Returns array at given keys.
@@ -56,7 +56,7 @@ export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
       if (arr) arr.push(value);
       else map.set(key2, [value]);
     }
-    // eslint-disable-next-line @skylib/custom/functions/prefer-ReadonlyMap -- Ok
+    // eslint-disable-next-line @skylib/functions/prefer-ReadonlyMap -- Ok
     else this.map.set(key1, new Map([[key2, [value]]]));
   }
 
@@ -76,7 +76,7 @@ export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
       if (arr) arr.unshift(value);
       else map.set(key2, [value]);
     }
-    // eslint-disable-next-line @skylib/custom/functions/prefer-ReadonlyMap -- Ok
+    // eslint-disable-next-line @skylib/functions/prefer-ReadonlyMap -- Ok
     else this.map.set(key1, new Map([[key2, [value]]]));
   }
 
@@ -88,7 +88,7 @@ export class Accumulator2<K extends PropertyKey, L extends PropertyKey, T> {
       for (const arr of map.values()) yield arr;
   }
 
-  // eslint-disable-next-line @skylib/custom/prefer-readonly-array, @skylib/custom/prefer-readonly-map -- Ok
+  // eslint-disable-next-line @skylib/functions/prefer-ReadonlyMap, @skylib/typescript/prefer-ReadonlyMap, @skylib/typescript/prefer-readonly-array -- Ok
   protected readonly map = new Map<K, Map<L, T[]>>();
 }
 
@@ -97,7 +97,7 @@ export namespace Accumulator2 {
     K extends PropertyKey,
     L extends PropertyKey,
     T
-    // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
+    // eslint-disable-next-line @skylib/typescript/no-multi-type-tuples -- Ok
   > = readonly [K, L, readonly T[]];
 
   export type Locked<K extends PropertyKey, L extends PropertyKey, T> = Omit<

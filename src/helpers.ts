@@ -1,6 +1,5 @@
-/* eslint-disable @skylib/custom/functions/no-reflect-get -- Ok */
-
-/* eslint-disable @skylib/custom/functions/no-reflect-set -- Ok */
+/* eslint-disable @skylib/functions/reflect/no-get -- Ok */
+/* eslint-disable @skylib/functions/reflect/no-set -- Ok */
 
 import * as as from "./inline-assertions";
 import * as assert from "./assertions";

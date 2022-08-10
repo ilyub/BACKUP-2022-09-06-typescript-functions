@@ -1,4 +1,4 @@
-/* eslint-disable @skylib/custom/prefer-readonly-property -- Ok */
+/* eslint-disable @skylib/typescript/prefer-readonly-property -- Ok */
 
 import type { Equals } from "ts-toolbelt/out/Any/Equals";
 import type { types } from "@";

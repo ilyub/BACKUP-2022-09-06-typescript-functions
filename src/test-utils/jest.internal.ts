@@ -71,7 +71,6 @@ export const matchers: {
       true
     );
 
-    // eslint-disable-next-line @skylib/custom/functions/prefer-mockCallsToBe -- Ok
     got.mockClear();
 
     return result;

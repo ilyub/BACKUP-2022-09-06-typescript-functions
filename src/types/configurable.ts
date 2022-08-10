@@ -1,15 +1,12 @@
 /* eslint-disable @skylib/only-export-name -- Ok */
 
-import type {
-  // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
-  Pick
-} from "./object.keys";
+import type * as keys from "./object.keys";
 
 declare global {
   namespace configurable {
-    // eslint-disable-next-line @skylib/custom/no-empty-interface -- Ok
+    // eslint-disable-next-line @skylib/no-empty-interfaces -- Ok
     interface LocaleName {}
   }
 }
 
-export type LocaleName = Pick<configurable.LocaleName, true, "extends->">;
+export type LocaleName = keys.Pick<configurable.LocaleName, true, "extends->">;

@@ -3,11 +3,13 @@ import * as fakeTimers from "@sinonjs/fake-timers";
 import { a, assert, evaluate, onDemand } from "..";
 import type { types } from "..";
 
-export const clock = onDemand(() => {
+export const clock = onDemand((): fakeTimers.Clock => {
   assert.not.empty(_clock, "Fake timer is not installed");
 
   return _clock;
 });
+
+let _clock: fakeTimers.Clock | undefined;
 
 export interface Options {
   readonly shouldAdvanceTime?: boolean;
@@ -20,7 +22,6 @@ export interface Options {
  */
 export function installFakeTimer(options: Options = {}): void {
   assert.empty(_clock, "Fake timer is already installed");
-
   _clock = fakeTimers.install({
     advanceTimeDelta: 10,
     loopLimit: 1000,
@@ -62,5 +63,3 @@ export function setRandomSystemTime(): void {
     })
   );
 }
-
-let _clock: fakeTimers.Clock | undefined;

@@ -1,8 +1,74 @@
 import * as as from "./inline-assertions";
 import type { strings } from "./types";
 
-// eslint-disable-next-line @skylib/custom/no-literal-union-type -- Ok
-export type Eol = "\n" | "\r\n";
+export enum Eol {
+  // eslint-disable-next-line @skylib/consistent-enum-members -- Ok
+  Unix = "\n",
+  // eslint-disable-next-line @skylib/consistent-enum-members -- Ok
+  Win = "\r\n"
+}
+
+export namespace path {
+  /**
+   * Adds leading slash.
+   *
+   * @param path - Path.
+   * @returns New string with leading slash added.
+   */
+  export function addLeadingSlash(path: string): string {
+    return `/${removeLeadingSlash(path)}`;
+  }
+
+  /**
+   * Adds trailing slash.
+   *
+   * @param path - Path.
+   * @returns New string with trailing slash added.
+   */
+  export function addTrailingSlash(path: string): string {
+    return `${removeTrailingSlash(path)}/`;
+  }
+
+  /**
+   * Canonicalizes path.
+   *
+   * @param path - Path.
+   * @returns Canonical path.
+   */
+  export function canonicalize(path: string): string {
+    return path.replace(/[/\\]+/gu, "/");
+  }
+
+  /**
+   * Creates path from parts.
+   *
+   * @param parts - Parts.
+   * @returns Path.
+   */
+  export function join(...parts: strings): string {
+    return canonicalize(parts.join("/"));
+  }
+
+  /**
+   * Removes leading slash.
+   *
+   * @param path - Path.
+   * @returns New string with leading slash removed.
+   */
+  export function removeLeadingSlash(path: string): string {
+    return canonicalize(path).replace(/^\//u, "");
+  }
+
+  /**
+   * Removes trailing slash.
+   *
+   * @param path - Path.
+   * @returns New string with trailing slash removed.
+   */
+  export function removeTrailingSlash(path: string): string {
+    return canonicalize(path).replace(/\/$/u, "");
+  }
+}
 
 /**
  * Detects EOL sequence.
@@ -11,7 +77,7 @@ export type Eol = "\n" | "\r\n";
  * @returns EOL sequence.
  */
 export function detectEol(str: string): Eol {
-  return str.includes("\r\n") ? "\r\n" : "\n";
+  return str.includes("\r\n") ? Eol.Win : Eol.Unix;
 }
 
 /**
@@ -30,6 +96,7 @@ export function empty(str: string): boolean {
  * @param str - String.
  * @returns Escaped string.
  */
+// eslint-disable-next-line @skylib/max-identifier-blocks -- Ok
 export function escapeRegExpSpecialChars(str: string): string {
   return str.replace(/[$()*+.?[\\\]^{|}]/gu, "\\$&").replace(/-/gu, "\\x2d");
 }
@@ -180,66 +247,4 @@ export function unpadMultiline(str: string): string {
   return matches
     ? replaceAll(str.trim(), as.not.empty(matches[0]), detectEol(str))
     : str;
-}
-
-export namespace path {
-  /**
-   * Adds leading slash.
-   *
-   * @param path - Path.
-   * @returns New string with leading slash added.
-   */
-  export function addLeadingSlash(path: string): string {
-    return `/${removeLeadingSlash(path)}`;
-  }
-
-  /**
-   * Adds trailing slash.
-   *
-   * @param path - Path.
-   * @returns New string with trailing slash added.
-   */
-  export function addTrailingSlash(path: string): string {
-    return `${removeTrailingSlash(path)}/`;
-  }
-
-  /**
-   * Canonicalizes path.
-   *
-   * @param path - Path.
-   * @returns Canonical path.
-   */
-  export function canonicalize(path: string): string {
-    return path.replace(/[/\\]+/gu, "/");
-  }
-
-  /**
-   * Creates path from parts.
-   *
-   * @param parts - Parts.
-   * @returns Path.
-   */
-  export function join(...parts: strings): string {
-    return canonicalize(parts.join("/"));
-  }
-
-  /**
-   * Removes leading slash.
-   *
-   * @param path - Path.
-   * @returns New string with leading slash removed.
-   */
-  export function removeLeadingSlash(path: string): string {
-    return canonicalize(path).replace(/^\//u, "");
-  }
-
-  /**
-   * Removes trailing slash.
-   *
-   * @param path - Path.
-   * @returns New string with trailing slash removed.
-   */
-  export function removeTrailingSlash(path: string): string {
-    return canonicalize(path).replace(/\/$/u, "");
-  }
 }

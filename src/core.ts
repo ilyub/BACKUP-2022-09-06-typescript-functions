@@ -1,7 +1,7 @@
 import type { IndexedObject, Writable, types } from "./types";
 
 export const ReadonlyMap: {
-  // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
+  // eslint-disable-next-line @skylib/typescript/no-multi-type-tuples, @skylib/typescript/prefer-array-type-alias -- Ok
   new <K, V>(entries?: ReadonlyArray<readonly [K, V]>): ReadonlyMap<K, V>;
 } = Map;
 

@@ -218,7 +218,6 @@ export function callable<T extends types.fn.Callable>(
  * @param value - Value.
  * @param error - Error.
  */
-// eslint-disable-next-line @typescript-eslint/no-shadow -- Wait for @skylib/config
 export function constructor<T extends types.fn.Constructor>(
   value: unknown,
   error: ErrorArg

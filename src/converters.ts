@@ -1,6 +1,5 @@
-/* eslint-disable @skylib/custom/functions/prefer-cast-number -- Ok */
-
-/* eslint-disable @skylib/custom/functions/prefer-cast-string -- Ok */
+/* eslint-disable @skylib/functions/converters/prefer-number -- Ok */
+/* eslint-disable @skylib/functions/converters/prefer-string -- Ok */
 
 import * as is from "./guards";
 import type {

@@ -1,3 +1,6 @@
 module.exports = {
-  extends: require.resolve("@skylib/config/src/eslintrc.allow-type-assertions")
+  extends: [
+    "plugin:@skylib/functions",
+    "./node_modules/@skylib/config/src/eslintrc/options/allow-type-assertions"
+  ]
 };

@@ -1,6 +1,5 @@
 /* eslint-disable @skylib/consistent-optional-props -- Ok */
-
-/* eslint-disable @skylib/custom/prefer-readonly-property -- Ok */
+/* eslint-disable @skylib/typescript/prefer-readonly-property -- Ok */
 
 import type { numberU, types } from "@";
 import type { Equals } from "ts-toolbelt/out/Any/Equals";

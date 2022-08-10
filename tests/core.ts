@@ -1,10 +1,7 @@
 /* eslint jest/max-expects: [warn, { max: 3 }] -- Ok */
-
-/* eslint-disable @skylib/custom/functions/prefer-ReadonlyMap -- Ok */
-
-/* eslint-disable @skylib/custom/functions/prefer-ReadonlySet -- Ok */
-
-/* eslint-disable @skylib/custom/prefer-readonly-property -- Ok */
+/* eslint-disable @skylib/functions/prefer-ReadonlyMap -- Ok */
+/* eslint-disable @skylib/functions/prefer-ReadonlySet -- Ok */
+/* eslint-disable @skylib/typescript/prefer-readonly-property -- Ok */
 
 import { ReadonlyMap, ReadonlySet, evaluate, freeze, unfreeze } from "@";
 import type { Equals } from "ts-toolbelt/out/Any/Equals";

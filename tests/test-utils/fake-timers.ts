@@ -9,7 +9,6 @@ test("clock", () => {
 
 test("run", async () => {
   expect.hasAssertions();
-
   await testUtils.run(async () => {
     await expect(async () => {
       await wait(1000);

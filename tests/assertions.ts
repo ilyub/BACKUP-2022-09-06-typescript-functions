@@ -1,13 +1,25 @@
 import { AssertionError, ReadonlyMap, ReadonlySet, assert, fn, is } from "@";
 import type { types, unknowns } from "@";
 
-function createSubtest(assertion: types.fn.Callable<void>, ...args: unknowns) {
-  return (value: unknown) => (): void => {
-    assertion(value, ...args);
-  };
+class TestClass {}
+
+interface Subtest {
+  (value: unknown): () => void;
 }
 
-class TestClass {}
+interface SubtestResult {
+  (): void;
+}
+
+function createSubtest(
+  assertion: types.fn.Callable<void>,
+  ...args: unknowns
+): Subtest {
+  return (value: unknown): SubtestResult =>
+    (): void => {
+      assertion(value, ...args);
+    };
+}
 
 test.each([
   { value: [1] },
@@ -115,14 +127,14 @@ test.each([
 
 test.each([
   { value: 1 },
-  { value: "a" },
+  { value: "b" },
   { expected: new AssertionError(), expectedToThrow: true, value: "1" },
-  { expected: new AssertionError(), expectedToThrow: true, value: "b" },
+  { expected: new AssertionError(), expectedToThrow: true, value: "c" },
   { expected: new AssertionError(), expectedToThrow: true }
 ])("enumeration", ({ expected, expectedToThrow, value }) => {
   enum TestEnum {
     a = 1,
-    b = "a"
+    b = "b"
   }
 
   const subtest = createSubtest(assert.enumeration, TestEnum);

@@ -56,12 +56,12 @@ export class Accumulator<K extends PropertyKey, T> {
     for (const arr of this.map.values()) yield arr;
   }
 
-  // eslint-disable-next-line @skylib/custom/prefer-readonly-array -- Ok
+  // eslint-disable-next-line @skylib/functions/prefer-ReadonlyMap, @skylib/typescript/prefer-readonly-array -- Ok
   protected readonly map = new Map<K, T[]>();
 }
 
 export namespace Accumulator {
-  // eslint-disable-next-line @skylib/no-multi-type-tuples -- Ok
+  // eslint-disable-next-line @skylib/typescript/no-multi-type-tuples -- Ok
   export type Entry<K extends PropertyKey, T> = readonly [K, readonly T[]];
 
   export type Locked<K extends PropertyKey, T> = Omit<

@@ -1,4 +1,6 @@
 /* eslint jest/max-expects: [warn, { max: 2 }] -- Ok */
+/* eslint-disable @skylib/no-at-sign-internal-import -- Ok */
+/* eslint-disable @skylib/no-internal-modules -- Ok */
 
 import { matchers } from "@/test-utils/jest.internal";
 

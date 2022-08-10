@@ -1,4 +1,4 @@
-/* eslint-disable @skylib/custom/functions/no-ts-toolbelt -- Ok */
+/* eslint-disable @skylib/functions/types/no-ts-toolbelt -- Ok */
 
 import type { And } from "./core";
 import type { Extends } from "ts-toolbelt/out/Any/Extends";

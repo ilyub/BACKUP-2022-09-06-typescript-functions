@@ -1,5 +1,3 @@
-/* eslint-disable @skylib/custom/no-literal-union-type -- Ok */
-
 export type PickGroupsOption =
-  // prettier-break
+  // eslint-disable-next-line @skylib/typescript/prefer-enum -- Ok
   "defined" | "optional" | "readonly" | "required" | "undefined" | "writable";
