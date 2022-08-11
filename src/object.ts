@@ -21,7 +21,7 @@ import { ReadonlySet, defineFn, indexed } from "./core";
  * @param sources - Sources.
  * @returns Target.
  */
-export const assign: <T extends object>(
+export const assign: <T>(
   target: Writable<T>,
   // eslint-disable-next-line @skylib/typescript/prefer-array-type-alias -- Ok
   ...sources: ReadonlyArray<Readonly<Partial<T>>>
@@ -55,7 +55,7 @@ export const entries: {
    * @param obj - Object.
    * @returns Object entries.
    */
-  <T extends object>(
+  <T>(
     obj: T
   ): // eslint-disable-next-line @skylib/typescript/prefer-array-type-alias -- Ok
   ReadonlyArray<Entry<string & keyof T, T[NumStr & keyof T]>>;
@@ -111,7 +111,7 @@ export const keys: {
    * @returns Object keys.
    */
   // eslint-disable-next-line @skylib/typescript/prefer-array-type-alias -- Ok
-  <T extends object>(obj: T): ReadonlyArray<string & keyof T>;
+  <T>(obj: T): ReadonlyArray<string & keyof T>;
 } = Object.keys;
 
 export const values: {
@@ -129,10 +129,10 @@ export const values: {
    * @returns Object values.
    */
   // eslint-disable-next-line @skylib/typescript/prefer-array-type-alias -- Ok
-  <T extends object>(obj: T): ReadonlyArray<T[NumStr & keyof T]>;
+  <T>(obj: T): ReadonlyArray<T[NumStr & keyof T]>;
 } = Object.values;
 
-export interface CompareFn<T extends object> {
+export interface CompareFn<T> {
   /**
    * Compares two object entries.
    *
@@ -171,7 +171,7 @@ export interface Descriptor<T, K extends keyof T = keyof T>
   readonly writable?: boolean;
 }
 
-export interface Predicate<T extends object> {
+export interface Predicate<T> {
   /**
    * Checks object entry.
    *
@@ -182,13 +182,17 @@ export interface Predicate<T extends object> {
   (value: T[keyof T], key: keyof T): boolean;
 }
 
+export type PrefixKeys<T, P extends string> = {
+  [K in string & keyof T as `${P}${K}`]: T[K];
+};
+
 /**
  * Clones object.
  *
  * @param obj - Object.
  * @returns New object.
  */
-export function clone<T extends object>(obj: T): Writable<T> {
+export function clone<T>(obj: T): Writable<T> {
   // eslint-disable-next-line @skylib/functions/object/prefer-clone -- Ok
   return { ...obj };
 }
@@ -200,10 +204,7 @@ export function clone<T extends object>(obj: T): Writable<T> {
  * @param predicate - Predicate.
  * @returns _True_ if every object property satisfies condition, _false_ otherwise.
  */
-export function every<T extends object>(
-  obj: T,
-  predicate: Predicate<T>
-): boolean {
+export function every<T>(obj: T, predicate: Predicate<T>): boolean {
   return entries(obj).every(([key, value]) => predicate(value, key));
 }
 
@@ -214,14 +215,11 @@ export function every<T extends object>(
  * @param predicate - Predicate.
  * @returns New object.
  */
-export function filter<T extends object>(
-  obj: T,
-  predicate: Predicate<T>
-): Partial<T> {
+export function filter<T>(obj: T, predicate: Predicate<T>): Partial<T> {
   const result: Partial<T> = {};
 
   for (const [key, value] of entries(obj))
-    if (predicate(value, key)) result[key] = value;
+    if (predicate(value, key)) set(result, key, value);
 
   return result;
 }
@@ -309,7 +307,7 @@ export function map<K extends string, V, R>(
  * @param exclude - Keys to omit.
  * @returns New object.
  */
-export function omit<T extends object, K extends string & keyof T>(
+export function omit<T, K extends string & keyof T>(
   obj: T,
   ...exclude: readonly K[]
 ): types.object.Omit<T, K> {
@@ -318,6 +316,26 @@ export function omit<T extends object, K extends string & keyof T>(
   const result = filter(obj, (_value, key) => !excludeSet.has(key));
 
   return result as types.object.Omit<T, K>;
+}
+
+/**
+ * Adds prefix to object keys.
+ *
+ * @param obj - Object.
+ * @param prefix - Prefix.
+ * @returns Object with prefixed keys.
+ */
+export function prefixKeys<T, P extends string>(
+  obj: T,
+  prefix: P
+): PrefixKeys<T, P> {
+  const result = fromEntries(
+    entries(obj).map(([key, value]): Prefixed => [`${prefix}${key}`, value])
+  );
+
+  return result as unknown as PrefixKeys<T, P>;
+
+  type Prefixed = Entry<`${P}${string & keyof T}`, T[keyof T]>;
 }
 
 /**
@@ -360,10 +378,7 @@ export function size(obj: object): number {
  * @param predicate - Predicate.
  * @returns _True_ if some object property satisfies condition, _false_ otherwise.
  */
-export function some<T extends object>(
-  obj: T,
-  predicate: Predicate<T>
-): boolean {
+export function some<T>(obj: T, predicate: Predicate<T>): boolean {
   return entries(obj).some(([key, value]) => predicate(value, key));
 }
 
@@ -386,7 +401,7 @@ export function sort<K extends string, V>(
  * @param compareFn - Comparison function.
  * @returns New object.
  */
-export function sort<T extends object>(obj: T, compareFn?: CompareFn<T>): T;
+export function sort<T>(obj: T, compareFn?: CompareFn<T>): T;
 
 export function sort<K extends string, V>(
   obj: Rec<K, V>,

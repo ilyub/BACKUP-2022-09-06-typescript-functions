@@ -94,6 +94,10 @@ test("omit", () => {
   expect(o.omit({ a: 1, b: 2, c: 3 }, "b")).toStrictEqual({ a: 1, c: 3 });
 });
 
+test("prefixKeys", () => {
+  expect(o.prefixKeys({ a: 1, b: 2 }, "x")).toStrictEqual({ xa: 1, xb: 2 });
+});
+
 test("removeUndefinedKeys", () => {
   const obj = { a: 1, b: undefined } as const;
 
