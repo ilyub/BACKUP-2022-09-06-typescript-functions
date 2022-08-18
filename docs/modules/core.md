@@ -77,7 +77,7 @@ Executes callback.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `callback` | [`Sync`](../interfaces/types_function.Sync.md)<`T`, [`nevers`](types_core.md#nevers)\> | Callback. |
+| `callback` | [`Sync`](../interfaces/types_function.Sync.md)<`T`, readonly []\> | Callback. |
 
 #### Returns
 
@@ -99,7 +99,7 @@ Executes promise or async function.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `mixed` | [`AsyncPromise`](types_function.md#asyncpromise)<`T`, [`nevers`](types_core.md#nevers)\> | Promise or async function. |
+| `mixed` | [`AsyncPromise`](types_function.md#asyncpromise)<`T`, readonly []\> | Promise or async function. |
 
 #### Returns
 

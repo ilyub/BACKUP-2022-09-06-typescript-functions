@@ -40,36 +40,45 @@
 | `executionResultToBe` | [`ExpectFromMatcher`](../interfaces/test_utils_expect.ExpectFromMatcher.md)<``"executionResultToBe"``\> |
 | `executionTimeToBe` | [`ExpectFromMatcher`](../interfaces/test_utils_expect.ExpectFromMatcher.md)<``"executionTimeToBe"``\> |
 | `mockCallsToBe` | [`ExpectFromMatcher`](../interfaces/test_utils_expect.ExpectFromMatcher.md)<``"mockCallsToBe"``\> |
+| `promiseResultToBe` | [`ExpectFromMatcher`](../interfaces/test_utils_expect.ExpectFromMatcher.md)<``"promiseResultToBe"``\> |
 | `toBeSameAs` | [`ExpectFromMatcher`](../interfaces/test_utils_expect.ExpectFromMatcher.md)<``"toBeSameAs"``\> |
 
 ## Functions
 
 ### error
 
-▸ **error**(...`data`): `void`
+▸ **error**(...`args`): `void`
+
+Function.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `...data` | `any`[] |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `...args` | readonly `any`[] | Arguments. |
 
 #### Returns
 
 `void`
+
+Result.
 
 ___
 
 ### warn
 
-▸ **warn**(...`data`): `void`
+▸ **warn**(...`args`): `void`
+
+Function.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `...data` | `any`[] |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `...args` | readonly `any`[] | Arguments. |
 
 #### Returns
 
 `void`
+
+Result.

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.byGuard = exports.not = exports.unknownsU = exports.unknowns = exports.unknown = exports.symbolsU = exports.symbols = exports.symbolU = exports.symbol = exports.stringsU = exports.strings = exports.stringU = exports.string = exports.setsU = exports.sets = exports.setU = exports.set = exports.objectsU = exports.objects = exports.objectU = exports.object = exports.numbersU = exports.numbers = exports.numberU = exports.number = exports.numStrsU = exports.numStrs = exports.numStrU = exports.numStr = exports.never = exports.mapsU = exports.maps = exports.mapU = exports.map = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObject = exports.empty = exports.booleansU = exports.booleans = exports.booleanU = exports.boolean = exports.arraysU = exports.arrays = exports.arrayU = exports.array = exports.undefined = exports.true = exports.null = exports.false = void 0;
-exports.instancesOf = exports.instanceOf = exports.enumeration = exports.callable = void 0;
+exports.unknown = exports.symbolsU = exports.symbols = exports.symbolU = exports.symbol = exports.stringsU = exports.strings = exports.stringU = exports.string = exports.setsU = exports.sets = exports.setU = exports.set = exports.propertyKeysU = exports.propertyKeys = exports.propertyKeyU = exports.propertyKey = exports.objectsU = exports.objects = exports.objectU = exports.object = exports.numbersU = exports.numbers = exports.numberU = exports.number = exports.numStrsU = exports.numStrs = exports.numStrU = exports.numStr = exports.never = exports.mapsU = exports.maps = exports.mapU = exports.map = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObject = exports.empty = exports.booleansU = exports.booleans = exports.booleanU = exports.boolean = exports.arraysU = exports.arrays = exports.arrayU = exports.array = exports.undefined = exports.true = exports.null = exports.false = void 0;
+exports.instancesOf = exports.instanceOf = exports.enumeration = exports.constructor = exports.callable = exports.byGuard = exports.not = exports.unknownsU = exports.unknowns = void 0;
 const tslib_1 = require("tslib");
 const is = tslib_1.__importStar(require("./guards"));
 const errors_1 = require("./errors");
@@ -78,6 +78,10 @@ exports.object = factory(is.object);
 exports.objectU = factory(is.objectU);
 exports.objects = factory(is.objects);
 exports.objectsU = factory(is.objectsU);
+exports.propertyKey = factory(is.propertyKey);
+exports.propertyKeyU = factory(is.propertyKeyU);
+exports.propertyKeys = factory(is.propertyKeys);
+exports.propertyKeysU = factory(is.propertyKeyU);
 exports.set = (0, core_1.defineFn)(factory(is.set), {
     /**
      * Asserts that value type is Set\<T\>.
@@ -118,6 +122,7 @@ exports.not = {
     numStr: notFactory(is.not.numStr),
     number: notFactory(is.not.number),
     object: notFactory(is.not.object),
+    propertyKey: notFactory(is.not.propertyKey),
     set: notFactory(is.not.set),
     string: notFactory(is.not.string),
     stringU: notFactory(is.not.stringU),
@@ -125,6 +130,14 @@ exports.not = {
     true: notFactory(is.not.true),
     undefined: notFactory(is.not.undefined)
 };
+const _false = factory(is.false);
+exports.false = _false;
+const _null = factory(is.null);
+exports.null = _null;
+const _true = factory(is.true);
+exports.true = _true;
+const _undefined = factory(is.undefined);
+exports.undefined = _undefined;
 /**
  * Asserts that value type is T.
  *
@@ -152,6 +165,19 @@ function callable(value) {
     throw new errors_1.AssertionError();
 }
 exports.callable = callable;
+/**
+ * Asserts that value type is T.
+ *
+ * @param value - Value.
+ * @returns Value if value type is T.
+ * @throws Error otherwise.
+ */
+function constructor(value) {
+    if (is.constructor(value))
+        return value;
+    throw new errors_1.AssertionError();
+}
+exports.constructor = constructor;
 /**
  * Asserts that value type is T.
  *
@@ -194,14 +220,6 @@ function instancesOf(value, ctor) {
     throw new errors_1.AssertionError();
 }
 exports.instancesOf = instancesOf;
-const _false = factory(is.false);
-exports.false = _false;
-const _null = factory(is.null);
-exports.null = _null;
-const _true = factory(is.true);
-exports.true = _true;
-const _undefined = factory(is.undefined);
-exports.undefined = _undefined;
 /**
  * Creates inline assertion.
  *

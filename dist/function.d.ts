@@ -1,5 +1,6 @@
 import type { types, unknowns } from "./types";
-export declare const noop: types.fn.Callable;
+export declare const noop: types.fn.Callable<void>;
+export declare const never: types.fn.Callable;
 export interface PipeCallback<V = unknown, R = unknown> {
     /**
      * Pipe callback.
@@ -10,6 +11,12 @@ export interface PipeCallback<V = unknown, R = unknown> {
     (value: V): R;
 }
 export declare type PipeCallbacks = readonly PipeCallback[];
+export interface ValueGenerator<T> {
+    /**
+     * Generates value.
+     */
+    (): T;
+}
 /**
  * Identity function.
  *
@@ -44,10 +51,17 @@ export declare function pipe<V, A, R>(value: V, callback1: PipeCallback<V, A>, c
  */
 export declare function pipe<V, A, B, R>(value: V, callback1: PipeCallback<V, A>, callback2: PipeCallback<A, B>, callback3: PipeCallback<B, R>): R;
 /**
- * Creates factory function from value.
+ * Gets value from generator.
  *
- * @param value - Value.
+ * @param mixed - Value or generator.
  * @returns Factory function.
  */
-export declare function valueToGenerator<T>(value: T): () => T;
+export declare function valueFromGenerator<T>(mixed: T | ValueGenerator<T>): T;
+/**
+ * Creates generator from value.
+ *
+ * @param value - Value.
+ * @returns Generator.
+ */
+export declare function valueToGenerator<T>(value: T): ValueGenerator<T>;
 //# sourceMappingURL=function.d.ts.map

@@ -12,7 +12,7 @@ export declare class Accumulator2<K extends PropertyKey, L extends PropertyKey, 
      * @param key - Key.
      * @returns Map of arrays.
      */
-    get(key1: K): ReadonlyMap<L, readonly T[]>;
+    get(key: K): ReadonlyMap<L, readonly T[]>;
     /**
      * Returns array at given keys.
      *

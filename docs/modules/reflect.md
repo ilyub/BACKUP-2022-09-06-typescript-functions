@@ -52,7 +52,7 @@ Typed version of Reflect.apply.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `target` | `Function` | Target function. |
+| `target` | [`Callable`](../interfaces/types_function.Callable.md)<`unknown`\> | Target function. |
 | `thisArg` | `unknown` | This argument. |
 | `args` | `ArrayLike`<`unknown`\> | Arguments. |
 
@@ -74,9 +74,9 @@ Typed version of Reflect.construct.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `target` | `Function` | Target function. |
+| `target` | [`Constructor`](../interfaces/types_function.Constructor.md)<`unknown`\> | Target function. |
 | `args` | `ArrayLike`<`unknown`\> | Arguments. |
-| `newTarget?` | `Function` | New target function. |
+| `newTarget?` | [`Constructor`](../interfaces/types_function.Constructor.md)<`unknown`\> | New target function. |
 
 #### Returns
 

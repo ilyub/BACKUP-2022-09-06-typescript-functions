@@ -18,6 +18,7 @@
 - [boolean](assertions.md#boolean)
 - [byGuard](assertions.md#byguard)
 - [callable](assertions.md#callable)
+- [constructor](assertions.md#constructor)
 - [empty](assertions.md#empty)
 - [enumeration](assertions.md#enumeration)
 - [indexedObject](assertions.md#indexedobject)
@@ -27,6 +28,7 @@
 - [numStr](assertions.md#numstr)
 - [number](assertions.md#number)
 - [object](assertions.md#object)
+- [propertyKey](assertions.md#propertykey)
 - [set](assertions.md#set)
 - [string](assertions.md#string)
 - [stringU](assertions.md#stringu)
@@ -129,7 +131,32 @@ Asserts that value type is T.
 
 | Name | Type |
 | :------ | :------ |
-| `T` | extends `Function` |
+| `T` | extends [`Callable`](../interfaces/types_function.Callable.md)<`unknown`, `T`\> |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+| `error` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+
+#### Returns
+
+asserts value is T
+
+___
+
+### constructor
+
+▸ **constructor**<`T`\>(`value`, `error`): asserts value is T
+
+Asserts that value type is T.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends [`Constructor`](../interfaces/types_function.Constructor.md)<`unknown`, `T`\> |
 
 #### Parameters
 
@@ -333,6 +360,25 @@ Asserts that value is an object.
 #### Returns
 
 asserts value is object
+
+___
+
+### propertyKey
+
+▸ **propertyKey**(`value`, `error`): asserts value is PropertyKey
+
+Asserts that value type is PropertyKey.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+| `error` | [`ErrorArg`](assertions.md#errorarg) | Error. |
+
+#### Returns
+
+asserts value is PropertyKey
 
 ___
 

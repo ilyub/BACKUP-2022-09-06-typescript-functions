@@ -27,6 +27,7 @@
 - [booleans](guards.md#booleans)
 - [booleansU](guards.md#booleansu)
 - [callable](guards.md#callable)
+- [constructor](guards.md#constructor)
 - [empty](guards.md#empty)
 - [enumeration](guards.md#enumeration)
 - [factory](guards.md#factory)
@@ -57,6 +58,10 @@
 - [objects](guards.md#objects)
 - [objectsU](guards.md#objectsu)
 - [or](guards.md#or)
+- [propertyKey](guards.md#propertykey)
+- [propertyKeyU](guards.md#propertykeyu)
+- [propertyKeys](guards.md#propertykeys)
+- [propertyKeysU](guards.md#propertykeysu)
 - [set](guards.md#set)
 - [setU](guards.md#setu)
 - [sets](guards.md#sets)
@@ -352,7 +357,33 @@ Checks if value type is T.
 
 | Name | Type |
 | :------ | :------ |
-| `T` | extends `Function` |
+| `T` | extends [`Callable`](../interfaces/types_function.Callable.md)<`unknown`, `T`\> |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+
+#### Returns
+
+value is T
+
+_True_ if value type is T, _false_ otherwise.
+
+___
+
+### constructor
+
+▸ **constructor**<`T`\>(`value`): value is T
+
+Checks if value type is T.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends [`Constructor`](../interfaces/types_function.Constructor.md)<`unknown`, `T`\> |
 
 #### Parameters
 
@@ -1067,6 +1098,86 @@ Checks if value type is A | B | C | D.
 value is A \| B \| C \| D
 
 _True_ if value type is A | B | C | D, _false_ otherwise.
+
+___
+
+### propertyKey
+
+▸ **propertyKey**(`value`): value is PropertyKey
+
+Checks if value type is PropertyKey.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+
+#### Returns
+
+value is PropertyKey
+
+_True_ if value type is PropertyKey, _false_ otherwise.
+
+___
+
+### propertyKeyU
+
+▸ **propertyKeyU**(`value`): value is undefined \| PropertyKey
+
+Checks if value type is T.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+
+#### Returns
+
+value is undefined \| PropertyKey
+
+_True_ if value type is T, _false_ otherwise.
+
+___
+
+### propertyKeys
+
+▸ **propertyKeys**(`value`): value is readonly PropertyKey[]
+
+Checks if value type is T.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+
+#### Returns
+
+value is readonly PropertyKey[]
+
+_True_ if value type is T, _false_ otherwise.
+
+___
+
+### propertyKeysU
+
+▸ **propertyKeysU**(`value`): value is undefined \| readonly PropertyKey[]
+
+Checks if value type is T.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+
+#### Returns
+
+value is undefined \| readonly PropertyKey[]
+
+_True_ if value type is T, _false_ otherwise.
 
 ___
 

@@ -1,5 +1,5 @@
-/* eslint-disable @skylib/custom/functions/prefer-a-fromIterable -- Ok */
-/* eslint-disable @skylib/custom/functions/prefer-o-hasOwnProp -- Ok */
+/* eslint-disable @skylib/functions/array/prefer-fromIterable -- Ok */
+/* eslint-disable @skylib/functions/object/prefer-hasOwnProp -- Ok */
 import * as _ from "@skylib/lodash-commonjs-es";
 import * as assert from "./assertions";
 import * as is from "./guards";
@@ -19,7 +19,7 @@ export function chain(arr) {
     }
     return result;
 }
-// eslint-disable-next-line @skylib/custom/prefer-readonly-array -- Ok
+// eslint-disable-next-line @skylib/typescript/prefer-readonly-array -- Ok
 export function clone(arr) {
     return [...arr];
 }
@@ -211,6 +211,7 @@ export function replaceBy(arr, value, keyOrReduce) {
  */
 export function reverse(arr) {
     const result = clone(arr);
+    // eslint-disable-next-line @skylib/functions/array/prefer-reverse -- Ok
     result.reverse();
     return result;
 }
@@ -233,6 +234,7 @@ export function second(arr) {
  */
 export function sort(arr, compareFn) {
     const result = clone(arr);
+    // eslint-disable-next-line @skylib/functions/array/prefer-sort -- Ok
     result.sort(compareFn);
     return result;
 }
@@ -265,7 +267,7 @@ export function toggleBy(arr, value, keyOrReduce) {
  * @param mutableArray - Array.
  */
 export function truncate(mutableArray) {
-    // eslint-disable-next-line @skylib/custom/functions/prefer-a-truncate -- Ok
+    // eslint-disable-next-line @skylib/functions/array/prefer-truncate -- Ok
     mutableArray.length = 0;
 }
 /**
@@ -277,6 +279,7 @@ export function truncate(mutableArray) {
  */
 export function uniqueBy(arr, keyOrReduce) {
     const reduce = mixedToReduce(keyOrReduce);
+    // eslint-disable-next-line @skylib/functions/prefer-ReadonlySet -- Ok
     const seen = new Set();
     return arr.filter(element => {
         const reduced = reduce(element);
@@ -316,8 +319,8 @@ export function unshiftOrReplaceBy(arr, value, keyOrReduce) {
  * @returns Reduce function.
  */
 function mixedToReduce(keyOrReduce) {
-    if (is.callable(keyOrReduce))
-        return keyOrReduce;
-    return (obj) => indexed(obj)[keyOrReduce];
+    return is.propertyKey(keyOrReduce)
+        ? (obj) => indexed(obj)[keyOrReduce]
+        : keyOrReduce;
 }
 //# sourceMappingURL=array.js.map

@@ -7,7 +7,7 @@ export class Accumulator2 {
      * @param source - Source.
      */
     constructor(source = []) {
-        // eslint-disable-next-line @skylib/custom/prefer-readonly-array, @skylib/custom/prefer-readonly-map -- Ok
+        // eslint-disable-next-line @skylib/functions/prefer-ReadonlyMap, @skylib/typescript/prefer-ReadonlyMap, @skylib/typescript/prefer-readonly-array -- Ok
         Object.defineProperty(this, "map", {
             enumerable: true,
             configurable: true,
@@ -44,7 +44,7 @@ export class Accumulator2 {
             else
                 map.set(key2, [value]);
         }
-        // eslint-disable-next-line @skylib/custom/functions/prefer-ReadonlyMap -- Ok
+        // eslint-disable-next-line @skylib/functions/prefer-ReadonlyMap -- Ok
         else
             this.map.set(key1, new Map([[key2, [value]]]));
     }
@@ -64,7 +64,7 @@ export class Accumulator2 {
             else
                 map.set(key2, [value]);
         }
-        // eslint-disable-next-line @skylib/custom/functions/prefer-ReadonlyMap -- Ok
+        // eslint-disable-next-line @skylib/functions/prefer-ReadonlyMap -- Ok
         else
             this.map.set(key1, new Map([[key2, [value]]]));
     }

@@ -1,5 +1,5 @@
-import type { nevers, unknowns } from "./core";
-export interface Async<R, A extends unknowns = nevers> {
+import type { unknowns } from "./core";
+export interface Async<R, A extends unknowns = readonly []> {
     /**
      * Async function.
      *
@@ -8,8 +8,8 @@ export interface Async<R, A extends unknowns = nevers> {
      */
     (...args: A): Promise<R>;
 }
-export declare type AsyncPromise<R, A extends unknowns = nevers> = Async<R, A> | Promise<R>;
-export declare type AsyncPromiseSync<R, A extends unknowns = nevers> = Async<R, A> | Promise<R> | Sync<R, A>;
+export declare type AsyncPromise<R, A extends unknowns = readonly []> = Async<R, A> | Promise<R>;
+export declare type AsyncPromiseSync<R, A extends unknowns = readonly []> = Async<R, A> | Promise<R> | Sync<R, A>;
 export interface CallSignature<T extends Callable> {
     /**
      * Call signature.
@@ -20,7 +20,7 @@ export interface CallSignature<T extends Callable> {
      */
     (this: ThisParameterType<T>, ...args: Parameters<T>): ReturnType<T>;
 }
-export interface Callable<T = any> {
+export interface Callable<T = unknown> {
     /**
      * Function.
      *
@@ -38,7 +38,7 @@ export interface ConstructSignature<T extends Constructor> {
      */
     new (...args: ConstructorParameters<T>): InstanceType<T>;
 }
-export interface Constructor<T = any> {
+export interface Constructor<T = unknown> {
     /**
      * Constructor.
      *
@@ -47,7 +47,7 @@ export interface Constructor<T = any> {
      */
     new (...args: readonly any[]): T;
 }
-export interface Sync<R, A extends unknowns = nevers> {
+export interface Sync<R, A extends unknowns = readonly []> {
     /**
      * Function.
      *

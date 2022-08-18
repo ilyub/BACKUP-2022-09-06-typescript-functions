@@ -72,15 +72,15 @@ ___
 
 ### get
 
-▸ **get**(`key1`): `ReadonlyMap`<`L`, readonly `T`[]\>
+▸ **get**(`key`): `ReadonlyMap`<`L`, readonly `T`[]\>
 
 Returns map of arrays at given key.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `key1` | `K` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `key` | `K` | Key. |
 
 #### Returns
 

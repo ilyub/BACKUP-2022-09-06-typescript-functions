@@ -60,7 +60,7 @@ Executes promise or async function.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `mixed` | [`Async`](../interfaces/types_function.Async.md)<`T`, [`nevers`](types_core.md#nevers)\> | Promise or async function. |
+| `mixed` | [`Async`](../interfaces/types_function.Async.md)<`T`, readonly []\> | Promise or async function. |
 
 #### Returns
 

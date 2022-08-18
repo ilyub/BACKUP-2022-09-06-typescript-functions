@@ -84,6 +84,9 @@ export declare const object: ((value: unknown) => value is object) & Readonly<{
 export declare const objectU: Guard<object | undefined>;
 export declare const objects: Guard<readonly object[]>;
 export declare const objectsU: Guard<readonly object[] | undefined>;
+export declare const propertyKeyU: Guard<PropertyKey | undefined>;
+export declare const propertyKeys: Guard<readonly PropertyKey[]>;
+export declare const propertyKeysU: Guard<readonly PropertyKey[] | undefined>;
 export declare const set: ((value: unknown) => value is ReadonlySet<unknown>) & Readonly<{
     /**
      * Checks if value type is Set\<T\>.
@@ -118,23 +121,24 @@ export declare const tuple: {
 export declare const unknowns: Guard<readonly unknown[]>;
 export declare const unknownsU: Guard<readonly unknown[] | undefined>;
 export declare const not: (<T, V>(value: V, guard: Guard<T>) => value is Exclude<V, T>) & Readonly<{
-    array: <V_1>(value: V_1) => value is Exclude<V_1, baseUnknowns>;
-    boolean: <V_2>(value: V_2) => value is Exclude<V_2, boolean>;
-    empty: <V_3>(value: V_3) => value is Exclude<V_3, baseEmpty>;
+    array: ExclusionGuard<baseUnknowns>;
+    boolean: ExclusionGuard<boolean>;
+    empty: ExclusionGuard<baseEmpty>;
     factory: typeof _notFactory;
-    false: <V_4>(value: V_4) => value is Exclude<V_4, false>;
-    indexedObject: <V_5>(value: V_5) => value is Exclude<V_5, IndexedObject<unknown>>;
-    map: <V_6>(value: V_6) => value is Exclude<V_6, ReadonlyMap<unknown, unknown>>;
-    null: <V_7>(value: V_7) => value is Exclude<V_7, null>;
-    numStr: <V_8>(value: V_8) => value is Exclude<V_8, NumStr>;
-    number: <V_9>(value: V_9) => value is Exclude<V_9, number>;
-    object: <V_10>(value: V_10) => value is Exclude<V_10, object>;
-    set: <V_11>(value: V_11) => value is Exclude<V_11, ReadonlySet<unknown>>;
-    string: <V_12>(value: V_12) => value is Exclude<V_12, string>;
-    stringU: <V_13>(value: V_13) => value is Exclude<V_13, baseStringU>;
-    symbol: <V_14>(value: V_14) => value is Exclude<V_14, symbol>;
-    true: <V_15>(value: V_15) => value is Exclude<V_15, true>;
-    undefined: <V_16>(value: V_16) => value is Exclude<V_16, undefined>;
+    false: ExclusionGuard<false>;
+    indexedObject: ExclusionGuard<IndexedObject<unknown>>;
+    map: ExclusionGuard<ReadonlyMap<unknown, unknown>>;
+    null: ExclusionGuard<null>;
+    numStr: ExclusionGuard<NumStr>;
+    number: ExclusionGuard<number>;
+    object: ExclusionGuard<object>;
+    propertyKey: ExclusionGuard<PropertyKey>;
+    set: ExclusionGuard<ReadonlySet<unknown>>;
+    string: ExclusionGuard<string>;
+    stringU: ExclusionGuard<baseStringU>;
+    symbol: ExclusionGuard<symbol>;
+    true: ExclusionGuard<true>;
+    undefined: ExclusionGuard<undefined>;
 }>;
 export interface ExclusionGuard<T> {
     /**
@@ -181,7 +185,14 @@ export declare function boolean(value: unknown): value is boolean;
  * @param value - Value.
  * @returns _True_ if value type is T, _false_ otherwise.
  */
-export declare function callable<T extends Function>(value: unknown): value is T;
+export declare function callable<T extends types.fn.Callable>(value: unknown): value is T;
+/**
+ * Checks if value type is T.
+ *
+ * @param value - Value.
+ * @returns _True_ if value type is T, _false_ otherwise.
+ */
+export declare function constructor<T extends types.fn.Constructor>(value: unknown): value is T;
 /**
  * Checks if value type is empty.
  *
@@ -243,6 +254,13 @@ export declare function numStr(value: unknown): value is NumStr;
  */
 export declare function number(value: unknown): value is number;
 /**
+ * Checks if value type is PropertyKey.
+ *
+ * @param value - Value.
+ * @returns _True_ if value type is PropertyKey, _false_ otherwise.
+ */
+export declare function propertyKey(value: unknown): value is PropertyKey;
+/**
  * Checks if value is a string.
  *
  * @param value - Value.
@@ -283,7 +301,7 @@ declare function _false(value: unknown): value is false;
  * @param guard - Guard for type T.
  * @returns Guard for type not T.
  */
-declare function _notFactory<T>(guard: Guard<T>): <V>(value: V) => value is Exclude<V, T>;
+declare function _notFactory<T>(guard: Guard<T>): ExclusionGuard<T>;
 /**
  * Checks if value is _null_.
  *

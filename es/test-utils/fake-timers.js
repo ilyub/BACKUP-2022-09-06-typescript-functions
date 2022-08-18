@@ -5,6 +5,7 @@ export const clock = onDemand(() => {
     assert.not.empty(_clock, "Fake timer is not installed");
     return _clock;
 });
+let _clock;
 /**
  * Installs fake timer.
  *
@@ -39,5 +40,4 @@ export function setRandomSystemTime() {
         return date;
     }));
 }
-let _clock;
 //# sourceMappingURL=fake-timers.js.map

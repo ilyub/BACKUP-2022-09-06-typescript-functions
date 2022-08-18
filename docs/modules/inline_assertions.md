@@ -4,6 +4,11 @@
 
 ## Table of contents
 
+### Interfaces
+
+- [ExclusionInlineAssertion](../interfaces/inline_assertions.ExclusionInlineAssertion.md)
+- [InlineAssertion](../interfaces/inline_assertions.InlineAssertion.md)
+
 ### Variables
 
 - [not](inline_assertions.md#not)
@@ -20,6 +25,7 @@
 - [booleansU](inline_assertions.md#booleansu)
 - [byGuard](inline_assertions.md#byguard)
 - [callable](inline_assertions.md#callable)
+- [constructor](inline_assertions.md#constructor)
 - [empty](inline_assertions.md#empty)
 - [enumeration](inline_assertions.md#enumeration)
 - [false](inline_assertions.md#false)
@@ -46,6 +52,10 @@
 - [objectU](inline_assertions.md#objectu)
 - [objects](inline_assertions.md#objects)
 - [objectsU](inline_assertions.md#objectsu)
+- [propertyKey](inline_assertions.md#propertykey)
+- [propertyKeyU](inline_assertions.md#propertykeyu)
+- [propertyKeys](inline_assertions.md#propertykeys)
+- [propertyKeysU](inline_assertions.md#propertykeysu)
 - [set](inline_assertions.md#set)
 - [setU](inline_assertions.md#setu)
 - [sets](inline_assertions.md#sets)
@@ -74,22 +84,23 @@
 
 | Name | Type |
 | :------ | :------ |
-| `array` | <V\>(`value`: `V`) => `Exclude`<`V`, [`unknowns`](types_core.md#unknowns)\> |
-| `boolean` | <V\>(`value`: `V`) => `Exclude`<`V`, `boolean`\> |
-| `empty` | <V\>(`value`: `V`) => `Exclude`<`V`, [`empty`](types_core.md#empty)\> |
-| `false` | <V\>(`value`: `V`) => `Exclude`<`V`, ``false``\> |
-| `indexedObject` | <V\>(`value`: `V`) => `Exclude`<`V`, [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>\> |
-| `map` | <V\>(`value`: `V`) => `Exclude`<`V`, `ReadonlyMap`<`unknown`, `unknown`\>\> |
-| `null` | <V\>(`value`: `V`) => `Exclude`<`V`, ``null``\> |
-| `numStr` | <V\>(`value`: `V`) => `Exclude`<`V`, [`NumStr`](types_core.md#numstr)\> |
-| `number` | <V\>(`value`: `V`) => `Exclude`<`V`, `number`\> |
-| `object` | <V\>(`value`: `V`) => `Exclude`<`V`, `object`\> |
-| `set` | <V\>(`value`: `V`) => `Exclude`<`V`, `ReadonlySet`<`unknown`\>\> |
-| `string` | <V\>(`value`: `V`) => `Exclude`<`V`, `string`\> |
-| `stringU` | <V\>(`value`: `V`) => `Exclude`<`V`, [`stringU`](types_core.md#stringu)\> |
-| `symbol` | <V\>(`value`: `V`) => `Exclude`<`V`, `symbol`\> |
-| `true` | <V\>(`value`: `V`) => `Exclude`<`V`, ``true``\> |
-| `undefined` | <V\>(`value`: `V`) => `Exclude`<`V`, `undefined`\> |
+| `array` | [`ExclusionInlineAssertion`](../interfaces/inline_assertions.ExclusionInlineAssertion.md)<[`unknowns`](types_core.md#unknowns)\> |
+| `boolean` | [`ExclusionInlineAssertion`](../interfaces/inline_assertions.ExclusionInlineAssertion.md)<`boolean`\> |
+| `empty` | [`ExclusionInlineAssertion`](../interfaces/inline_assertions.ExclusionInlineAssertion.md)<[`empty`](types_core.md#empty)\> |
+| `false` | [`ExclusionInlineAssertion`](../interfaces/inline_assertions.ExclusionInlineAssertion.md)<``false``\> |
+| `indexedObject` | [`ExclusionInlineAssertion`](../interfaces/inline_assertions.ExclusionInlineAssertion.md)<[`IndexedObject`](types_core.md#indexedobject)<`unknown`\>\> |
+| `map` | [`ExclusionInlineAssertion`](../interfaces/inline_assertions.ExclusionInlineAssertion.md)<`ReadonlyMap`<`unknown`, `unknown`\>\> |
+| `null` | [`ExclusionInlineAssertion`](../interfaces/inline_assertions.ExclusionInlineAssertion.md)<``null``\> |
+| `numStr` | [`ExclusionInlineAssertion`](../interfaces/inline_assertions.ExclusionInlineAssertion.md)<[`NumStr`](types_core.md#numstr)\> |
+| `number` | [`ExclusionInlineAssertion`](../interfaces/inline_assertions.ExclusionInlineAssertion.md)<`number`\> |
+| `object` | [`ExclusionInlineAssertion`](../interfaces/inline_assertions.ExclusionInlineAssertion.md)<`object`\> |
+| `propertyKey` | [`ExclusionInlineAssertion`](../interfaces/inline_assertions.ExclusionInlineAssertion.md)<`PropertyKey`\> |
+| `set` | [`ExclusionInlineAssertion`](../interfaces/inline_assertions.ExclusionInlineAssertion.md)<`ReadonlySet`<`unknown`\>\> |
+| `string` | [`ExclusionInlineAssertion`](../interfaces/inline_assertions.ExclusionInlineAssertion.md)<`string`\> |
+| `stringU` | [`ExclusionInlineAssertion`](../interfaces/inline_assertions.ExclusionInlineAssertion.md)<[`stringU`](types_core.md#stringu)\> |
+| `symbol` | [`ExclusionInlineAssertion`](../interfaces/inline_assertions.ExclusionInlineAssertion.md)<`symbol`\> |
+| `true` | [`ExclusionInlineAssertion`](../interfaces/inline_assertions.ExclusionInlineAssertion.md)<``true``\> |
+| `undefined` | [`ExclusionInlineAssertion`](../interfaces/inline_assertions.ExclusionInlineAssertion.md)<`undefined`\> |
 
 ## Functions
 
@@ -97,15 +108,23 @@
 
 ▸ **array**(`value`): [`unknowns`](types_core.md#unknowns)
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 [`unknowns`](types_core.md#unknowns)
+
+Value if its type is T.
 
 ___
 
@@ -113,15 +132,23 @@ ___
 
 ▸ **arrayU**(`value`): `undefined` \| [`unknowns`](types_core.md#unknowns)
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| [`unknowns`](types_core.md#unknowns)
+
+Value if its type is T.
 
 ___
 
@@ -129,15 +156,23 @@ ___
 
 ▸ **arrays**(`value`): readonly [`unknowns`](types_core.md#unknowns)[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 readonly [`unknowns`](types_core.md#unknowns)[]
+
+Value if its type is T.
 
 ___
 
@@ -145,15 +180,23 @@ ___
 
 ▸ **arraysU**(`value`): `undefined` \| readonly [`unknowns`](types_core.md#unknowns)[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| readonly [`unknowns`](types_core.md#unknowns)[]
+
+Value if its type is T.
 
 ___
 
@@ -161,15 +204,23 @@ ___
 
 ▸ **boolean**(`value`): `boolean`
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `boolean`
+
+Value if its type is T.
 
 ___
 
@@ -177,15 +228,23 @@ ___
 
 ▸ **booleanU**(`value`): `undefined` \| `boolean`
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| `boolean`
+
+Value if its type is T.
 
 ___
 
@@ -193,15 +252,23 @@ ___
 
 ▸ **booleans**(`value`): readonly `boolean`[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 readonly `boolean`[]
+
+Value if its type is T.
 
 ___
 
@@ -209,15 +276,23 @@ ___
 
 ▸ **booleansU**(`value`): `undefined` \| readonly `boolean`[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| readonly `boolean`[]
+
+Value if its type is T.
 
 ___
 
@@ -266,7 +341,37 @@ Error otherwise.
 
 | Name | Type |
 | :------ | :------ |
-| `T` | extends `Function` |
+| `T` | extends [`Callable`](../interfaces/types_function.Callable.md)<`unknown`, `T`\> |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+
+#### Returns
+
+`T`
+
+Value if value type is T.
+
+___
+
+### constructor
+
+▸ **constructor**<`T`\>(`value`): `T`
+
+Asserts that value type is T.
+
+**`Throws`**
+
+Error otherwise.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends [`Constructor`](../interfaces/types_function.Constructor.md)<`unknown`, `T`\> |
 
 #### Parameters
 
@@ -286,15 +391,23 @@ ___
 
 ▸ **empty**(`value`): [`empty`](types_core.md#empty)
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 [`empty`](types_core.md#empty)
+
+Value if its type is T.
 
 ___
 
@@ -333,15 +446,23 @@ ___
 
 ▸ **false**(`value`): ``false``
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 ``false``
+
+Value if its type is T.
 
 ___
 
@@ -349,15 +470,23 @@ ___
 
 ▸ **indexedObject**(`value`): [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>
+
+Value if its type is T.
 
 ___
 
@@ -365,15 +494,23 @@ ___
 
 ▸ **indexedObjects**(`value`): readonly [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 readonly [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>[]
+
+Value if its type is T.
 
 ___
 
@@ -381,15 +518,23 @@ ___
 
 ▸ **indexedObjectsU**(`value`): `undefined` \| readonly [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| readonly [`IndexedObject`](types_core.md#indexedobject)<`unknown`\>[]
+
+Value if its type is T.
 
 ___
 
@@ -459,15 +604,23 @@ ___
 
 ▸ **map**(`value`): `ReadonlyMap`<`unknown`, `unknown`\>
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `ReadonlyMap`<`unknown`, `unknown`\>
+
+Value if its type is T.
 
 ___
 
@@ -475,15 +628,23 @@ ___
 
 ▸ **mapU**(`value`): `undefined` \| `ReadonlyMap`<`unknown`, `unknown`\>
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| `ReadonlyMap`<`unknown`, `unknown`\>
+
+Value if its type is T.
 
 ___
 
@@ -491,15 +652,23 @@ ___
 
 ▸ **maps**(`value`): readonly `ReadonlyMap`<`unknown`, `unknown`\>[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 readonly `ReadonlyMap`<`unknown`, `unknown`\>[]
+
+Value if its type is T.
 
 ___
 
@@ -507,15 +676,23 @@ ___
 
 ▸ **mapsU**(`value`): `undefined` \| readonly `ReadonlyMap`<`unknown`, `unknown`\>[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| readonly `ReadonlyMap`<`unknown`, `unknown`\>[]
+
+Value if its type is T.
 
 ___
 
@@ -523,15 +700,23 @@ ___
 
 ▸ **never**(`value`): `never`
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `never`
+
+Value if its type is T.
 
 ___
 
@@ -539,15 +724,23 @@ ___
 
 ▸ **null**(`value`): ``null``
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 ``null``
+
+Value if its type is T.
 
 ___
 
@@ -555,15 +748,23 @@ ___
 
 ▸ **numStr**(`value`): [`NumStr`](types_core.md#numstr)
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 [`NumStr`](types_core.md#numstr)
+
+Value if its type is T.
 
 ___
 
@@ -571,15 +772,23 @@ ___
 
 ▸ **numStrU**(`value`): `undefined` \| [`NumStr`](types_core.md#numstr)
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| [`NumStr`](types_core.md#numstr)
+
+Value if its type is T.
 
 ___
 
@@ -587,15 +796,23 @@ ___
 
 ▸ **numStrs**(`value`): readonly [`NumStr`](types_core.md#numstr)[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 readonly [`NumStr`](types_core.md#numstr)[]
+
+Value if its type is T.
 
 ___
 
@@ -603,15 +820,23 @@ ___
 
 ▸ **numStrsU**(`value`): `undefined` \| readonly [`NumStr`](types_core.md#numstr)[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| readonly [`NumStr`](types_core.md#numstr)[]
+
+Value if its type is T.
 
 ___
 
@@ -619,15 +844,23 @@ ___
 
 ▸ **number**(`value`): `number`
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `number`
+
+Value if its type is T.
 
 ___
 
@@ -635,15 +868,23 @@ ___
 
 ▸ **numberU**(`value`): `undefined` \| `number`
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| `number`
+
+Value if its type is T.
 
 ___
 
@@ -651,15 +892,23 @@ ___
 
 ▸ **numbers**(`value`): readonly `number`[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 readonly `number`[]
+
+Value if its type is T.
 
 ___
 
@@ -667,15 +916,23 @@ ___
 
 ▸ **numbersU**(`value`): `undefined` \| readonly `number`[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| readonly `number`[]
+
+Value if its type is T.
 
 ___
 
@@ -683,15 +940,23 @@ ___
 
 ▸ **object**(`value`): `object`
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `object`
+
+Value if its type is T.
 
 ___
 
@@ -699,15 +964,23 @@ ___
 
 ▸ **objectU**(`value`): `undefined` \| `object`
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| `object`
+
+Value if its type is T.
 
 ___
 
@@ -715,15 +988,23 @@ ___
 
 ▸ **objects**(`value`): readonly `object`[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 readonly `object`[]
+
+Value if its type is T.
 
 ___
 
@@ -731,15 +1012,119 @@ ___
 
 ▸ **objectsU**(`value`): `undefined` \| readonly `object`[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| readonly `object`[]
+
+Value if its type is T.
+
+___
+
+### propertyKey
+
+▸ **propertyKey**(`value`): `PropertyKey`
+
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+
+#### Returns
+
+`PropertyKey`
+
+Value if its type is T.
+
+___
+
+### propertyKeyU
+
+▸ **propertyKeyU**(`value`): `undefined` \| `PropertyKey`
+
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+
+#### Returns
+
+`undefined` \| `PropertyKey`
+
+Value if its type is T.
+
+___
+
+### propertyKeys
+
+▸ **propertyKeys**(`value`): readonly `PropertyKey`[]
+
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+
+#### Returns
+
+readonly `PropertyKey`[]
+
+Value if its type is T.
+
+___
+
+### propertyKeysU
+
+▸ **propertyKeysU**(`value`): `undefined` \| `PropertyKey`
+
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
+
+#### Returns
+
+`undefined` \| `PropertyKey`
+
+Value if its type is T.
 
 ___
 
@@ -747,15 +1132,23 @@ ___
 
 ▸ **set**(`value`): `ReadonlySet`<`unknown`\>
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `ReadonlySet`<`unknown`\>
+
+Value if its type is T.
 
 ___
 
@@ -763,15 +1156,23 @@ ___
 
 ▸ **setU**(`value`): `undefined` \| `ReadonlySet`<`unknown`\>
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| `ReadonlySet`<`unknown`\>
+
+Value if its type is T.
 
 ___
 
@@ -779,15 +1180,23 @@ ___
 
 ▸ **sets**(`value`): readonly `ReadonlySet`<`unknown`\>[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 readonly `ReadonlySet`<`unknown`\>[]
+
+Value if its type is T.
 
 ___
 
@@ -795,15 +1204,23 @@ ___
 
 ▸ **setsU**(`value`): `undefined` \| readonly `ReadonlySet`<`unknown`\>[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| readonly `ReadonlySet`<`unknown`\>[]
+
+Value if its type is T.
 
 ___
 
@@ -811,15 +1228,23 @@ ___
 
 ▸ **string**(`value`): `string`
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `string`
+
+Value if its type is T.
 
 ___
 
@@ -827,15 +1252,23 @@ ___
 
 ▸ **stringU**(`value`): [`stringU`](types_core.md#stringu)
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 [`stringU`](types_core.md#stringu)
+
+Value if its type is T.
 
 ___
 
@@ -843,15 +1276,23 @@ ___
 
 ▸ **strings**(`value`): readonly `string`[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 readonly `string`[]
+
+Value if its type is T.
 
 ___
 
@@ -859,15 +1300,23 @@ ___
 
 ▸ **stringsU**(`value`): `undefined` \| readonly `string`[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| readonly `string`[]
+
+Value if its type is T.
 
 ___
 
@@ -875,15 +1324,23 @@ ___
 
 ▸ **symbol**(`value`): `symbol`
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `symbol`
+
+Value if its type is T.
 
 ___
 
@@ -891,15 +1348,23 @@ ___
 
 ▸ **symbolU**(`value`): `undefined` \| `symbol`
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| `symbol`
+
+Value if its type is T.
 
 ___
 
@@ -907,15 +1372,23 @@ ___
 
 ▸ **symbols**(`value`): readonly `symbol`[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 readonly `symbol`[]
+
+Value if its type is T.
 
 ___
 
@@ -923,15 +1396,23 @@ ___
 
 ▸ **symbolsU**(`value`): `undefined` \| readonly `symbol`[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| readonly `symbol`[]
+
+Value if its type is T.
 
 ___
 
@@ -939,15 +1420,23 @@ ___
 
 ▸ **true**(`value`): ``true``
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 ``true``
+
+Value if its type is T.
 
 ___
 
@@ -955,15 +1444,23 @@ ___
 
 ▸ **undefined**(`value`): `undefined`
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined`
+
+Value if its type is T.
 
 ___
 
@@ -971,15 +1468,23 @@ ___
 
 ▸ **unknown**(`value`): `unknown`
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `unknown`
+
+Value if its type is T.
 
 ___
 
@@ -987,15 +1492,23 @@ ___
 
 ▸ **unknowns**(`value`): readonly `unknown`[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 readonly `unknown`[]
+
+Value if its type is T.
 
 ___
 
@@ -1003,12 +1516,20 @@ ___
 
 ▸ **unknownsU**(`value`): `undefined` \| readonly `unknown`[]
 
+Asserts value type.
+
+**`Throws`**
+
+Error otherwise.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | `unknown` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `unknown` | Value. |
 
 #### Returns
 
 `undefined` \| readonly `unknown`[]
+
+Value if its type is T.

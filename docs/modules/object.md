@@ -10,6 +10,10 @@
 - [Descriptor](../interfaces/object.Descriptor.md)
 - [Predicate](../interfaces/object.Predicate.md)
 
+### Type Aliases
+
+- [PrefixKeys](object.md#prefixkeys)
+
 ### Functions
 
 - [assign](object.md#assign)
@@ -25,12 +29,26 @@
 - [keys](object.md#keys)
 - [map](object.md#map)
 - [omit](object.md#omit)
+- [prefixKeys](object.md#prefixkeys-1)
 - [removeUndefinedKeys](object.md#removeundefinedkeys)
 - [set](object.md#set)
 - [size](object.md#size)
 - [some](object.md#some)
 - [sort](object.md#sort)
 - [values](object.md#values)
+
+## Type Aliases
+
+### PrefixKeys
+
+Ƭ **PrefixKeys**<`T`, `P`\>: { [K in string & keyof T as \`${P}${K}\`]: T[K] }
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | `T` |
+| `P` | extends `string` |
 
 ## Functions
 
@@ -42,9 +60,9 @@ Typed version of Object.assign.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters
 
@@ -69,9 +87,9 @@ Clones object.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters
 
@@ -145,9 +163,9 @@ Typed version of Object.entries.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters
 
@@ -171,9 +189,9 @@ Checks if every object property satisfies condition.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters
 
@@ -198,9 +216,9 @@ Filters object by predicate.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters
 
@@ -366,9 +384,9 @@ Typed version of Object.keys.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters
 
@@ -423,7 +441,7 @@ Removes keys from object.
 
 | Name | Type |
 | :------ | :------ |
-| `T` | extends `object` |
+| `T` | `T` |
 | `K` | extends `string` |
 
 #### Parameters
@@ -438,6 +456,34 @@ Removes keys from object.
 [`Omit`](types_object.md#omit)<`T`, `K`\>
 
 New object.
+
+___
+
+### prefixKeys
+
+▸ **prefixKeys**<`T`, `P`\>(`obj`, `prefix`): [`PrefixKeys`](object.md#prefixkeys)<`T`, `P`\>
+
+Adds prefix to object keys.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | `T` |
+| `P` | extends `string` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | `T` | Object. |
+| `prefix` | `P` | Prefix. |
+
+#### Returns
+
+[`PrefixKeys`](object.md#prefixkeys)<`T`, `P`\>
+
+Object with prefixed keys.
 
 ___
 
@@ -515,9 +561,9 @@ Checks if some object property satisfies condition.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters
 
@@ -566,9 +612,9 @@ Sorts object.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters
 
@@ -616,9 +662,9 @@ Typed version of Object.values.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters
 

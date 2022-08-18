@@ -74,6 +74,10 @@ export const object = factory(is.object);
 export const objectU = factory(is.objectU);
 export const objects = factory(is.objects);
 export const objectsU = factory(is.objectsU);
+export const propertyKey = factory(is.propertyKey);
+export const propertyKeyU = factory(is.propertyKeyU);
+export const propertyKeys = factory(is.propertyKeys);
+export const propertyKeysU = factory(is.propertyKeyU);
 export const set = defineFn(factory(is.set), {
     /**
      * Asserts that value type is Set\<T\>.
@@ -114,6 +118,7 @@ export const not = {
     numStr: notFactory(is.not.numStr),
     number: notFactory(is.not.number),
     object: notFactory(is.not.object),
+    propertyKey: notFactory(is.not.propertyKey),
     set: notFactory(is.not.set),
     string: notFactory(is.not.string),
     stringU: notFactory(is.not.stringU),
@@ -121,6 +126,10 @@ export const not = {
     true: notFactory(is.not.true),
     undefined: notFactory(is.not.undefined)
 };
+const _false = factory(is.false);
+const _null = factory(is.null);
+const _true = factory(is.true);
+const _undefined = factory(is.undefined);
 /**
  * Asserts that value type is T.
  *
@@ -143,6 +152,18 @@ export function byGuard(value, guard) {
  */
 export function callable(value) {
     if (is.callable(value))
+        return value;
+    throw new AssertionError();
+}
+/**
+ * Asserts that value type is T.
+ *
+ * @param value - Value.
+ * @returns Value if value type is T.
+ * @throws Error otherwise.
+ */
+export function constructor(value) {
+    if (is.constructor(value))
         return value;
     throw new AssertionError();
 }
@@ -185,10 +206,6 @@ export function instancesOf(value, ctor) {
         return value;
     throw new AssertionError();
 }
-const _false = factory(is.false);
-const _null = factory(is.null);
-const _true = factory(is.true);
-const _undefined = factory(is.undefined);
 /**
  * Creates inline assertion.
  *

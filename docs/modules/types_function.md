@@ -29,7 +29,7 @@
 | Name | Type |
 | :------ | :------ |
 | `R` | `R` |
-| `A` | extends [`unknowns`](types_core.md#unknowns) = [`nevers`](types_core.md#nevers) |
+| `A` | extends [`unknowns`](types_core.md#unknowns) = readonly [] |
 
 ___
 
@@ -42,4 +42,4 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `R` | `R` |
-| `A` | extends [`unknowns`](types_core.md#unknowns) = [`nevers`](types_core.md#nevers) |
+| `A` | extends [`unknowns`](types_core.md#unknowns) = readonly [] |

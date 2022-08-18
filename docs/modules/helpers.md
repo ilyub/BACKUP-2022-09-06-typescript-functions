@@ -14,12 +14,14 @@
 
 ### Type Aliases
 
+- [ClassToInterface](helpers.md#classtointerface)
 - [Facade](helpers.md#facade)
 - [SafeAccess](helpers.md#safeaccess)
 - [SafeAccessGuards](helpers.md#safeaccessguards)
 
 ### Functions
 
+- [classToInterface](helpers.md#classtointerface-1)
 - [createFacade](helpers.md#createfacade)
 - [onDemand](helpers.md#ondemand)
 - [safeAccess](helpers.md#safeaccess-1)
@@ -27,6 +29,18 @@
 - [wrapProxyHandler](helpers.md#wrapproxyhandler)
 
 ## Type Aliases
+
+### ClassToInterface
+
+Ƭ **ClassToInterface**<`T`\>: { [K in keyof T]: T[K] }
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+___
 
 ### Facade
 
@@ -67,6 +81,32 @@ ___
 | `W` | extends `string` & keyof `T` |
 
 ## Functions
+
+### classToInterface
+
+▸ **classToInterface**<`T`\>(`obj`): [`ClassToInterface`](helpers.md#classtointerface)<`T`\>
+
+Self-binds all methods.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `object` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | `T` | Object. |
+
+#### Returns
+
+[`ClassToInterface`](helpers.md#classtointerface)<`T`\>
+
+Proxy.
+
+___
 
 ### createFacade
 

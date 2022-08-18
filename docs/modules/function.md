@@ -7,6 +7,7 @@
 ### Interfaces
 
 - [PipeCallback](../interfaces/function.PipeCallback.md)
+- [ValueGenerator](../interfaces/function.ValueGenerator.md)
 
 ### Type Aliases
 
@@ -15,9 +16,11 @@
 ### Functions
 
 - [identity](function.md#identity)
+- [never](function.md#never)
 - [noop](function.md#noop)
 - [noopTrue](function.md#nooptrue)
 - [pipe](function.md#pipe)
+- [valueFromGenerator](function.md#valuefromgenerator)
 - [valueToGenerator](function.md#valuetogenerator)
 
 ## Type Aliases
@@ -54,9 +57,9 @@ Value.
 
 ___
 
-### noop
+### never
 
-▸ **noop**(...`args`): `any`
+▸ **never**(...`args`): `unknown`
 
 Function.
 
@@ -68,7 +71,27 @@ Function.
 
 #### Returns
 
-`any`
+`unknown`
+
+Result.
+
+___
+
+### noop
+
+▸ **noop**(...`args`): `void`
+
+Function.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `...args` | readonly `any`[] | Arguments. |
+
+#### Returns
+
+`void`
 
 Result.
 
@@ -152,11 +175,37 @@ The value returned by callback sequence.
 
 ___
 
+### valueFromGenerator
+
+▸ **valueFromGenerator**<`T`\>(`mixed`): `T`
+
+Gets value from generator.
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `mixed` | `T` \| [`ValueGenerator`](../interfaces/function.ValueGenerator.md)<`T`\> | Value or generator. |
+
+#### Returns
+
+`T`
+
+Factory function.
+
+___
+
 ### valueToGenerator
 
-▸ **valueToGenerator**<`T`\>(`value`): () => `T`
+▸ **valueToGenerator**<`T`\>(`value`): [`ValueGenerator`](../interfaces/function.ValueGenerator.md)<`T`\>
 
-Creates factory function from value.
+Creates generator from value.
 
 #### Type parameters
 
@@ -172,12 +221,6 @@ Creates factory function from value.
 
 #### Returns
 
-`fn`
+[`ValueGenerator`](../interfaces/function.ValueGenerator.md)<`T`\>
 
-Factory function.
-
-▸ (): `T`
-
-##### Returns
-
-`T`
+Generator.

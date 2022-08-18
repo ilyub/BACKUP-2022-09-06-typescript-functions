@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sort = exports.some = exports.size = exports.set = exports.removeUndefinedKeys = exports.omit = exports.map = exports.hasOwnProp = exports.getPrototypeOf = exports.get = exports.filter = exports.every = exports.clone = exports.values = exports.keys = exports.fromEntries = exports.entries = exports.defineProperty = exports.assign = void 0;
+exports.sort = exports.some = exports.size = exports.set = exports.removeUndefinedKeys = exports.prefixKeys = exports.omit = exports.map = exports.hasOwnProp = exports.getPrototypeOf = exports.get = exports.filter = exports.every = exports.clone = exports.values = exports.keys = exports.fromEntries = exports.entries = exports.defineProperty = exports.assign = void 0;
 const tslib_1 = require("tslib");
 const a = tslib_1.__importStar(require("./array"));
 const as = tslib_1.__importStar(require("./inline-assertions"));
@@ -58,7 +58,7 @@ exports.values = Object.values;
  * @returns New object.
  */
 function clone(obj) {
-    // eslint-disable-next-line @skylib/custom/functions/prefer-o-clone -- Ok
+    // eslint-disable-next-line @skylib/functions/object/prefer-clone -- Ok
     return Object.assign({}, obj);
 }
 exports.clone = clone;
@@ -84,7 +84,7 @@ function filter(obj, predicate) {
     const result = {};
     for (const [key, value] of (0, exports.entries)(obj))
         if (predicate(value, key))
-            result[key] = value;
+            set(result, key, value);
     return result;
 }
 exports.filter = filter;
@@ -100,7 +100,7 @@ exports.get = get;
  * @returns Object prototype if available, _undefined_ otherwise.
  */
 function getPrototypeOf(obj) {
-    // eslint-disable-next-line @skylib/custom/functions/prefer-o-getPrototypeOf -- Ok
+    // eslint-disable-next-line @skylib/functions/object/prefer-getPrototypeOf -- Ok
     const prototype = Object.getPrototypeOf(obj);
     return is.object(prototype) ? prototype : undefined;
 }
@@ -113,7 +113,7 @@ exports.getPrototypeOf = getPrototypeOf;
  * @returns _True_ if object has property, _false_ otherwise.
  */
 function hasOwnProp(key, obj) {
-    // eslint-disable-next-line @skylib/custom/functions/prefer-o-hasOwnProp -- Ok
+    // eslint-disable-next-line @skylib/functions/object/prefer-hasOwnProp -- Ok
     return Object.prototype.hasOwnProperty.call(obj, key);
 }
 exports.hasOwnProp = hasOwnProp;
@@ -141,6 +141,18 @@ function omit(obj, ...exclude) {
     return result;
 }
 exports.omit = omit;
+/**
+ * Adds prefix to object keys.
+ *
+ * @param obj - Object.
+ * @param prefix - Prefix.
+ * @returns Object with prefixed keys.
+ */
+function prefixKeys(obj, prefix) {
+    const result = (0, exports.fromEntries)((0, exports.entries)(obj).map(([key, value]) => [`${prefix}${key}`, value]));
+    return result;
+}
+exports.prefixKeys = prefixKeys;
 /**
  * Removes undefined keys.
  *
@@ -184,11 +196,9 @@ function some(obj, predicate) {
 }
 exports.some = some;
 function sort(obj, compareFn) {
-    const arr = a.clone((0, exports.entries)(obj));
-    arr.sort(compareFn
+    return exports.fromEntries.exhaustive(a.sort((0, exports.entries)(obj), compareFn
         ? (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
-        : undefined);
-    return exports.fromEntries.exhaustive(arr);
+        : undefined));
 }
 exports.sort = sort;
 //# sourceMappingURL=object.js.map

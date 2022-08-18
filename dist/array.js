@@ -1,9 +1,9 @@
 "use strict";
-/* eslint-disable @skylib/custom/functions/prefer-a-fromIterable -- Ok */
+/* eslint-disable @skylib/functions/array/prefer-fromIterable -- Ok */
+/* eslint-disable @skylib/functions/object/prefer-hasOwnProp -- Ok */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.unshiftOrReplaceBy = exports.unshift = exports.uniqueBy = exports.truncate = exports.toggleBy = exports.third = exports.sort = exports.second = exports.reverse = exports.replaceBy = exports.replace = exports.removeBy = exports.random = exports.pushOrReplaceBy = exports.push = exports.last = exports.includesBy = exports.get = exports.fromString = exports.fromRange = exports.fromMixed = exports.fromIterable = exports.first = exports.findBy = exports.drop = exports.clone = exports.chain = void 0;
 const tslib_1 = require("tslib");
-/* eslint-disable @skylib/custom/functions/prefer-o-hasOwnProp -- Ok */
 const _ = tslib_1.__importStar(require("@skylib/lodash-commonjs-es"));
 const assert = tslib_1.__importStar(require("./assertions"));
 const is = tslib_1.__importStar(require("./guards"));
@@ -24,7 +24,7 @@ function chain(arr) {
     return result;
 }
 exports.chain = chain;
-// eslint-disable-next-line @skylib/custom/prefer-readonly-array -- Ok
+// eslint-disable-next-line @skylib/typescript/prefer-readonly-array -- Ok
 function clone(arr) {
     return [...arr];
 }
@@ -233,6 +233,7 @@ exports.replaceBy = replaceBy;
  */
 function reverse(arr) {
     const result = clone(arr);
+    // eslint-disable-next-line @skylib/functions/array/prefer-reverse -- Ok
     result.reverse();
     return result;
 }
@@ -257,6 +258,7 @@ exports.second = second;
  */
 function sort(arr, compareFn) {
     const result = clone(arr);
+    // eslint-disable-next-line @skylib/functions/array/prefer-sort -- Ok
     result.sort(compareFn);
     return result;
 }
@@ -292,7 +294,7 @@ exports.toggleBy = toggleBy;
  * @param mutableArray - Array.
  */
 function truncate(mutableArray) {
-    // eslint-disable-next-line @skylib/custom/functions/prefer-a-truncate -- Ok
+    // eslint-disable-next-line @skylib/functions/array/prefer-truncate -- Ok
     mutableArray.length = 0;
 }
 exports.truncate = truncate;
@@ -305,6 +307,7 @@ exports.truncate = truncate;
  */
 function uniqueBy(arr, keyOrReduce) {
     const reduce = mixedToReduce(keyOrReduce);
+    // eslint-disable-next-line @skylib/functions/prefer-ReadonlySet -- Ok
     const seen = new Set();
     return arr.filter(element => {
         const reduced = reduce(element);
@@ -347,8 +350,8 @@ exports.unshiftOrReplaceBy = unshiftOrReplaceBy;
  * @returns Reduce function.
  */
 function mixedToReduce(keyOrReduce) {
-    if (is.callable(keyOrReduce))
-        return keyOrReduce;
-    return (obj) => (0, core_1.indexed)(obj)[keyOrReduce];
+    return is.propertyKey(keyOrReduce)
+        ? (obj) => (0, core_1.indexed)(obj)[keyOrReduce]
+        : keyOrReduce;
 }
 //# sourceMappingURL=array.js.map

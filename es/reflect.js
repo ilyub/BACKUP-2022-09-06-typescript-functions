@@ -1,4 +1,4 @@
-/* eslint-disable @skylib/custom/functions/prefer-reflect -- Ok */
+/* eslint-disable @skylib/functions/reflect/prefer-reflect -- Ok */
 import "reflect-metadata";
 import * as as from "./inline-assertions";
 import * as is from "./guards";

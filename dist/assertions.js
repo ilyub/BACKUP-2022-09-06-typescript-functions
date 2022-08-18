@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.wrapError = exports.toBeTrue = exports.toBeFalse = exports.symbol = exports.stringU = exports.string = exports.object = exports.number = exports.numStr = exports.instancesOf = exports.instanceOf = exports.enumeration = exports.empty = exports.callable = exports.byGuard = exports.boolean = exports.set = exports.map = exports.indexedObject = exports.array = exports.not = void 0;
+exports.wrapError = exports.toBeTrue = exports.toBeFalse = exports.symbol = exports.stringU = exports.string = exports.propertyKey = exports.object = exports.number = exports.numStr = exports.instancesOf = exports.instanceOf = exports.enumeration = exports.empty = exports.constructor = exports.callable = exports.byGuard = exports.boolean = exports.set = exports.map = exports.indexedObject = exports.array = exports.not = void 0;
 const tslib_1 = require("tslib");
 const is = tslib_1.__importStar(require("./guards"));
 const errors_1 = require("./errors");
@@ -74,6 +74,16 @@ function callable(value, error) {
 }
 exports.callable = callable;
 /**
+ * Asserts that value type is T.
+ *
+ * @param value - Value.
+ * @param error - Error.
+ */
+function constructor(value, error) {
+    byGuard(value, is.constructor, error);
+}
+exports.constructor = constructor;
+/**
  * Asserts that value type is empty.
  *
  * @param value - Value.
@@ -146,6 +156,16 @@ function object(value, error) {
     byGuard(value, is.object, error);
 }
 exports.object = object;
+/**
+ * Asserts that value type is PropertyKey.
+ *
+ * @param value - Value.
+ * @param error - Error.
+ */
+function propertyKey(value, error) {
+    byGuard(value, is.propertyKey, error);
+}
+exports.propertyKey = propertyKey;
 /**
  * Asserts that value is a string.
  *

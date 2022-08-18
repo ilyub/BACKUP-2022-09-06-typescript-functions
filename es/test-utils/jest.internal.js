@@ -11,11 +11,11 @@ export const matchers = {
         try {
             const result = got();
             assert.toBeFalse(expectedToThrow, "Expecting function not to throw");
-            return buildEqualsResult(equals(result, expected), "Unexpected function execution result", result, expected, true);
+            return buildEqualsResult(equals(result, expected), "Unexpected function execution result", result, expected);
         }
         catch (e) {
             assert.toBeTrue(expectedToThrow, "Expecting function to throw");
-            return buildEqualsResult(equals(e, expected), "Unexpected function execution result", e, expected, true);
+            return buildEqualsResult(equals(e, expected), "Unexpected function execution result", e, expected);
         }
     },
     executionTimeToBe: async (got, expected, precision = 10) => {
@@ -29,9 +29,20 @@ export const matchers = {
     mockCallsToBe: (got, ...expected) => {
         assert.byGuard(got, isMock, "Expecting mock function");
         const result = buildEqualsResult(equals(got.mock.calls, expected), "Unexpected mock calls", got.mock.calls, expected, true);
-        // eslint-disable-next-line @skylib/custom/functions/prefer-mockCallsToBe -- Ok
         got.mockClear();
         return result;
+    },
+    promiseResultToBe: async (got, expected, expectedToThrow = false) => {
+        assert.instanceOf(got, Promise, "Expecting promise");
+        try {
+            const result = await got;
+            assert.toBeFalse(expectedToThrow, "Expecting promise not to throw");
+            return buildEqualsResult(equals(result, expected), "Unexpected promise execution result", result, expected);
+        }
+        catch (e) {
+            assert.toBeTrue(expectedToThrow, "Expecting promise to throw");
+            return buildEqualsResult(equals(e, expected), "Unexpected promise execution result", e, expected);
+        }
     },
     toBeSameAs: (got, expected) => {
         assert.object(got, "Expecting object");

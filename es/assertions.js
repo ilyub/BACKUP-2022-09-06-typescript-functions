@@ -67,6 +67,15 @@ export function callable(value, error) {
     byGuard(value, is.callable, error);
 }
 /**
+ * Asserts that value type is T.
+ *
+ * @param value - Value.
+ * @param error - Error.
+ */
+export function constructor(value, error) {
+    byGuard(value, is.constructor, error);
+}
+/**
  * Asserts that value type is empty.
  *
  * @param value - Value.
@@ -131,6 +140,15 @@ export function number(value, error) {
  */
 export function object(value, error) {
     byGuard(value, is.object, error);
+}
+/**
+ * Asserts that value type is PropertyKey.
+ *
+ * @param value - Value.
+ * @param error - Error.
+ */
+export function propertyKey(value, error) {
+    byGuard(value, is.propertyKey, error);
 }
 /**
  * Asserts that value is a string.

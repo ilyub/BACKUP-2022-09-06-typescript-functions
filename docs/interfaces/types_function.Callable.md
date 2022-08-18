@@ -8,7 +8,7 @@
 
 | Name | Type |
 | :------ | :------ |
-| `T` | `any` |
+| `T` | `unknown` |
 
 ## Callable
 

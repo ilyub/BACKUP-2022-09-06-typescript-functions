@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import * as is from "./guards";
+import type { types } from "./types";
 /**
  * Typed version of Reflect.apply.
  *
@@ -8,7 +9,7 @@ import * as is from "./guards";
  * @param args - Arguments.
  * @returns Function execution result.
  */
-export declare const apply: (target: Function, thisArg: unknown, args: ArrayLike<unknown>) => unknown;
+export declare const apply: (target: types.fn.Callable, thisArg: unknown, args: ArrayLike<unknown>) => unknown;
 /**
  * Typed version of Reflect.construct.
  *
@@ -17,7 +18,7 @@ export declare const apply: (target: Function, thisArg: unknown, args: ArrayLike
  * @param newTarget - New target function.
  * @returns Constructed object.
  */
-export declare const construct: (target: Function, args: ArrayLike<unknown>, newTarget?: Function) => unknown;
+export declare const construct: (target: types.fn.Constructor, args: ArrayLike<unknown>, newTarget?: types.fn.Constructor) => unknown;
 export declare const defineProperty: typeof Reflect.defineProperty;
 export declare const deleteProperty: typeof Reflect.deleteProperty;
 export declare const getOwnPropertyDescriptor: typeof Reflect.getOwnPropertyDescriptor;

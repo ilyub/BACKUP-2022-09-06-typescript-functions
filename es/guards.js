@@ -1,4 +1,7 @@
-/* eslint-disable @skylib/custom/functions/prefer-a-fromIterable -- Ok */
+/* eslint-disable @skylib/functions/array/prefer-fromIterable -- Ok */
+/* eslint-disable @skylib/functions/object/prefer-entries -- Ok */
+/* eslint-disable @skylib/functions/object/prefer-hasOwnProp -- Ok */
+/* eslint-disable @skylib/functions/object/prefer-values -- Ok */
 import { defineFn, overload } from "./core";
 export { _false as false, _null as null, _true as true, _undefined as undefined };
 export const and = defineFn(overload(() => {
@@ -123,6 +126,9 @@ export const object = defineFn(
 export const objectU = or.factory(object, _undefined);
 export const objects = factory(array.of, object);
 export const objectsU = or.factory(objects, _undefined);
+export const propertyKeyU = or.factory(propertyKey, _undefined);
+export const propertyKeys = factory(array.of, propertyKey);
+export const propertyKeysU = or.factory(propertyKeys, _undefined);
 export const set = defineFn(
 /**
  * Checks if value type is Set.
@@ -183,6 +189,7 @@ export const not = defineFn(
     numStr: _notFactory(numStr),
     number: _notFactory(number),
     object: _notFactory(object),
+    propertyKey: _notFactory(propertyKey),
     set: _notFactory(set),
     string: _notFactory(string),
     stringU: _notFactory(stringU),
@@ -206,6 +213,15 @@ export function boolean(value) {
  * @returns _True_ if value type is T, _false_ otherwise.
  */
 export function callable(value) {
+    return typeof value === "function";
+}
+/**
+ * Checks if value type is T.
+ *
+ * @param value - Value.
+ * @returns _True_ if value type is T, _false_ otherwise.
+ */
+export function constructor(value) {
     return typeof value === "function";
 }
 /**
@@ -290,6 +306,24 @@ export function numStr(value) {
  */
 export function number(value) {
     return typeof value === "number" && !Number.isNaN(value);
+}
+/**
+ * Checks if value type is PropertyKey.
+ *
+ * @param value - Value.
+ * @returns _True_ if value type is PropertyKey, _false_ otherwise.
+ */
+export function propertyKey(value) {
+    switch (typeof value) {
+        case "number":
+            return !Number.isNaN(value);
+        case "string":
+            return true;
+        case "symbol":
+            return true;
+        default:
+            return false;
+    }
 }
 /**
  * Checks if value is a string.

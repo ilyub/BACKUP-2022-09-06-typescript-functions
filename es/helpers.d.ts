@@ -4,6 +4,9 @@ export declare enum ProxyHandlerAction {
     doDefault = "doDefault",
     throw = "throw"
 }
+export declare type ClassToInterface<T extends object> = {
+    [K in keyof T]: T[K];
+};
 export declare type Facade<I, E = unknown> = E & FacadeOwnMethods<I> & I;
 export interface FacadeOwnMethods<I> {
     /**
@@ -21,6 +24,13 @@ export declare type SafeAccess<T extends object, W extends string & keyof T, R e
 export declare type SafeAccessGuards<T, W extends string & keyof T> = {
     readonly [K in W]: is.Guard<T[K]>;
 };
+/**
+ * Self-binds all methods.
+ *
+ * @param obj - Object.
+ * @returns Proxy.
+ */
+export declare function classToInterface<T extends object>(obj: T): ClassToInterface<T>;
 /**
  * Creates facade.
  *

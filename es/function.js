@@ -1,5 +1,9 @@
 import * as _ from "@skylib/lodash-commonjs-es";
+import * as is from "./guards";
 export const noop = _.noop.bind(_);
+export const never = () => {
+    throw new Error("This function should not be called");
+};
 /**
  * Identity function.
  *
@@ -24,10 +28,19 @@ export function pipe(value, ...callbacks) {
     return value;
 }
 /**
- * Creates factory function from value.
+ * Gets value from generator.
+ *
+ * @param mixed - Value or generator.
+ * @returns Factory function.
+ */
+export function valueFromGenerator(mixed) {
+    return is.callable(mixed) ? mixed() : mixed;
+}
+/**
+ * Creates generator from value.
  *
  * @param value - Value.
- * @returns Factory function.
+ * @returns Generator.
  */
 export function valueToGenerator(value) {
     return () => value;

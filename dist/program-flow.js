@@ -9,7 +9,7 @@ const is = tslib_1.__importStar(require("./guards"));
  * @param id - ID.
  */
 function _clearInterval(id) {
-    // eslint-disable-next-line @skylib/custom/functions/prefer-programFlow-clearInterval -- Ok
+    // eslint-disable-next-line @skylib/functions/program-flow/prefer-clearInterval -- Ok
     if (is.not.empty(id))
         clearInterval(id);
 }
@@ -20,7 +20,7 @@ exports.clearInterval = _clearInterval;
  * @param id - ID.
  */
 function _clearTimeout(id) {
-    // eslint-disable-next-line @skylib/custom/functions/prefer-programFlow-clearTimeout -- Ok
+    // eslint-disable-next-line @skylib/functions/program-flow/prefer-clearTimeout -- Ok
     if (is.not.empty(id))
         clearTimeout(id);
 }

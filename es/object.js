@@ -54,7 +54,7 @@ export const values = Object.values;
  * @returns New object.
  */
 export function clone(obj) {
-    // eslint-disable-next-line @skylib/custom/functions/prefer-o-clone -- Ok
+    // eslint-disable-next-line @skylib/functions/object/prefer-clone -- Ok
     return Object.assign({}, obj);
 }
 /**
@@ -78,7 +78,7 @@ export function filter(obj, predicate) {
     const result = {};
     for (const [key, value] of entries(obj))
         if (predicate(value, key))
-            result[key] = value;
+            set(result, key, value);
     return result;
 }
 export function get(obj, key, guard = is.unknown, defVal) {
@@ -92,7 +92,7 @@ export function get(obj, key, guard = is.unknown, defVal) {
  * @returns Object prototype if available, _undefined_ otherwise.
  */
 export function getPrototypeOf(obj) {
-    // eslint-disable-next-line @skylib/custom/functions/prefer-o-getPrototypeOf -- Ok
+    // eslint-disable-next-line @skylib/functions/object/prefer-getPrototypeOf -- Ok
     const prototype = Object.getPrototypeOf(obj);
     return is.object(prototype) ? prototype : undefined;
 }
@@ -104,7 +104,7 @@ export function getPrototypeOf(obj) {
  * @returns _True_ if object has property, _false_ otherwise.
  */
 export function hasOwnProp(key, obj) {
-    // eslint-disable-next-line @skylib/custom/functions/prefer-o-hasOwnProp -- Ok
+    // eslint-disable-next-line @skylib/functions/object/prefer-hasOwnProp -- Ok
     return Object.prototype.hasOwnProperty.call(obj, key);
 }
 /**
@@ -127,6 +127,17 @@ export function map(obj, callback) {
 export function omit(obj, ...exclude) {
     const excludeSet = new ReadonlySet(exclude);
     const result = filter(obj, (_value, key) => !excludeSet.has(key));
+    return result;
+}
+/**
+ * Adds prefix to object keys.
+ *
+ * @param obj - Object.
+ * @param prefix - Prefix.
+ * @returns Object with prefixed keys.
+ */
+export function prefixKeys(obj, prefix) {
+    const result = fromEntries(entries(obj).map(([key, value]) => [`${prefix}${key}`, value]));
     return result;
 }
 /**
@@ -168,10 +179,8 @@ export function some(obj, predicate) {
     return entries(obj).some(([key, value]) => predicate(value, key));
 }
 export function sort(obj, compareFn) {
-    const arr = a.clone(entries(obj));
-    arr.sort(compareFn
+    return fromEntries.exhaustive(a.sort(entries(obj), compareFn
         ? (entry1, entry2) => compareFn(entry1[1], entry2[1], entry1[0], entry2[0])
-        : undefined);
-    return fromEntries.exhaustive(arr);
+        : undefined));
 }
 //# sourceMappingURL=object.js.map

@@ -8,15 +8,16 @@
 
 - [path](string.path.md)
 
-### Type Aliases
+### Enumerations
 
-- [Eol](string.md#eol)
+- [Eol](../enums/string.Eol.md)
 
 ### Functions
 
 - [detectEol](string.md#detecteol)
 - [empty](string.md#empty)
 - [escapeRegExpSpecialChars](string.md#escaperegexpspecialchars)
+- [firstLine](string.md#firstline)
 - [lcFirst](string.md#lcfirst)
 - [leadingSpaces](string.md#leadingspaces)
 - [lines](string.md#lines)
@@ -31,17 +32,11 @@
 - [ucFirst](string.md#ucfirst)
 - [unpadMultiline](string.md#unpadmultiline)
 
-## Type Aliases
-
-### Eol
-
-Ƭ **Eol**: ``"\n"`` \| ``"\r\n"``
-
 ## Functions
 
 ### detectEol
 
-▸ **detectEol**(`str`): [`Eol`](string.md#eol)
+▸ **detectEol**(`str`): [`Eol`](../enums/string.Eol.md)
 
 Detects EOL sequence.
 
@@ -53,7 +48,7 @@ Detects EOL sequence.
 
 #### Returns
 
-[`Eol`](string.md#eol)
+[`Eol`](../enums/string.Eol.md)
 
 EOL sequence.
 
@@ -96,6 +91,26 @@ Escapes regular expression special characters.
 `string`
 
 Escaped string.
+
+___
+
+### firstLine
+
+▸ **firstLine**(`str`): `string`
+
+Returns first line.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `str` | `string` | String. |
+
+#### Returns
+
+`string`
+
+First line.
 
 ___
 

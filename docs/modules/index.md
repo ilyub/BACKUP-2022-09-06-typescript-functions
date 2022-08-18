@@ -10,6 +10,7 @@
 - [Accumulator2](index.md#accumulator2)
 - [And](index.md#and)
 - [AssertionError](index.md#assertionerror)
+- [ClassToInterface](index.md#classtointerface)
 - [ConversionError](index.md#conversionerror)
 - [Entry](index.md#entry)
 - [Facade](index.md#facade)
@@ -54,6 +55,7 @@
 - [booleanU](index.md#booleanu)
 - [booleans](index.md#booleans)
 - [cast](index.md#cast)
+- [classToInterface](index.md#classtointerface-1)
 - [createFacade](index.md#createfacade)
 - [defineFn](index.md#definefn)
 - [empty](index.md#empty)
@@ -116,6 +118,12 @@ ___
 ### AssertionError
 
 Re-exports [AssertionError](../classes/errors_AssertionError.AssertionError.md)
+
+___
+
+### ClassToInterface
+
+Re-exports [ClassToInterface](helpers.md#classtointerface)
 
 ___
 
@@ -380,6 +388,12 @@ ___
 ### cast
 
 Renames and re-exports [converters](converters.md)
+
+___
+
+### classToInterface
+
+Re-exports [classToInterface](helpers.md#classtointerface-1)
 
 ___
 

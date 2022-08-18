@@ -10,6 +10,7 @@
 
 ### Type Aliases
 
+- [ChainResult](array.md#chainresult)
 - [KeyOrReduce](array.md#keyorreduce)
 
 ### Functions
@@ -44,6 +45,18 @@
 
 ## Type Aliases
 
+### ChainResult
+
+Ƭ **ChainResult**<`T`\>: `ReadonlyArray`<readonly [`T`, `T`]\>
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+___
+
 ### KeyOrReduce
 
 Ƭ **KeyOrReduce**<`T`\>: `PropertyKey` \| [`Reduce`](../interfaces/array.Reduce.md)<`T`\>
@@ -58,7 +71,7 @@
 
 ### chain
 
-▸ **chain**<`T`\>(`arr`): `ReadonlyArray`<readonly [`T`, `T`]\>
+▸ **chain**<`T`\>(`arr`): [`ChainResult`](array.md#chainresult)<`T`\>
 
 Creates array of pairs ([x, y, z] =\> [[x, y], [y, z]]).
 
@@ -76,7 +89,7 @@ Creates array of pairs ([x, y, z] =\> [[x, y], [y, z]]).
 
 #### Returns
 
-`ReadonlyArray`<readonly [`T`, `T`]\>
+[`ChainResult`](array.md#chainresult)<`T`\>
 
 Array of pairs.
 

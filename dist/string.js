@@ -1,8 +1,78 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.path = exports.unpadMultiline = exports.ucFirst = exports.trimTrailingEmptyLines = exports.trimStart = exports.trimLeadingEmptyLines = exports.trimEnd = exports.trailingSpaces = exports.singleLine = exports.replaceAll = exports.multiline = exports.lines = exports.leadingSpaces = exports.lcFirst = exports.escapeRegExpSpecialChars = exports.empty = exports.detectEol = void 0;
+exports.unpadMultiline = exports.ucFirst = exports.trimTrailingEmptyLines = exports.trimStart = exports.trimLeadingEmptyLines = exports.trimEnd = exports.trailingSpaces = exports.singleLine = exports.replaceAll = exports.multiline = exports.lines = exports.leadingSpaces = exports.lcFirst = exports.firstLine = exports.escapeRegExpSpecialChars = exports.empty = exports.detectEol = exports.path = exports.Eol = void 0;
 const tslib_1 = require("tslib");
 const as = tslib_1.__importStar(require("./inline-assertions"));
+var Eol;
+(function (Eol) {
+    // eslint-disable-next-line @skylib/consistent-enum-members -- Ok
+    Eol["Unix"] = "\n";
+    // eslint-disable-next-line @skylib/consistent-enum-members -- Ok
+    Eol["Win"] = "\r\n";
+})(Eol = exports.Eol || (exports.Eol = {}));
+var path;
+(function (path_1) {
+    /**
+     * Adds leading slash.
+     *
+     * @param path - Path.
+     * @returns New string with leading slash added.
+     */
+    function addLeadingSlash(path) {
+        return `/${removeLeadingSlash(path)}`;
+    }
+    path_1.addLeadingSlash = addLeadingSlash;
+    /**
+     * Adds trailing slash.
+     *
+     * @param path - Path.
+     * @returns New string with trailing slash added.
+     */
+    function addTrailingSlash(path) {
+        return `${removeTrailingSlash(path)}/`;
+    }
+    path_1.addTrailingSlash = addTrailingSlash;
+    /**
+     * Canonicalizes path.
+     *
+     * @param path - Path.
+     * @returns Canonical path.
+     */
+    function canonicalize(path) {
+        return path.replace(/[/\\]+/gu, "/");
+    }
+    path_1.canonicalize = canonicalize;
+    /**
+     * Creates path from parts.
+     *
+     * @param parts - Parts.
+     * @returns Path.
+     */
+    function join(...parts) {
+        return canonicalize(parts.join("/"));
+    }
+    path_1.join = join;
+    /**
+     * Removes leading slash.
+     *
+     * @param path - Path.
+     * @returns New string with leading slash removed.
+     */
+    function removeLeadingSlash(path) {
+        return canonicalize(path).replace(/^\//u, "");
+    }
+    path_1.removeLeadingSlash = removeLeadingSlash;
+    /**
+     * Removes trailing slash.
+     *
+     * @param path - Path.
+     * @returns New string with trailing slash removed.
+     */
+    function removeTrailingSlash(path) {
+        return canonicalize(path).replace(/\/$/u, "");
+    }
+    path_1.removeTrailingSlash = removeTrailingSlash;
+})(path = exports.path || (exports.path = {}));
 /**
  * Detects EOL sequence.
  *
@@ -10,7 +80,7 @@ const as = tslib_1.__importStar(require("./inline-assertions"));
  * @returns EOL sequence.
  */
 function detectEol(str) {
-    return str.includes("\r\n") ? "\r\n" : "\n";
+    return str.includes("\r\n") ? Eol.Win : Eol.Unix;
 }
 exports.detectEol = detectEol;
 /**
@@ -29,10 +99,21 @@ exports.empty = empty;
  * @param str - String.
  * @returns Escaped string.
  */
+// eslint-disable-next-line @skylib/max-identifier-blocks -- Ok
 function escapeRegExpSpecialChars(str) {
     return str.replace(/[$()*+.?[\\\]^{|}]/gu, "\\$&").replace(/-/gu, "\\x2d");
 }
 exports.escapeRegExpSpecialChars = escapeRegExpSpecialChars;
+/**
+ * Returns first line.
+ *
+ * @param str - String.
+ * @returns First line.
+ */
+function firstLine(str) {
+    return as.not.empty(lines(str)[0]);
+}
+exports.firstLine = firstLine;
 /**
  * Converts first letter to lower case.
  *
@@ -172,67 +253,4 @@ function unpadMultiline(str) {
         : str;
 }
 exports.unpadMultiline = unpadMultiline;
-var path;
-(function (path_1) {
-    /**
-     * Adds leading slash.
-     *
-     * @param path - Path.
-     * @returns New string with leading slash added.
-     */
-    function addLeadingSlash(path) {
-        return `/${removeLeadingSlash(path)}`;
-    }
-    path_1.addLeadingSlash = addLeadingSlash;
-    /**
-     * Adds trailing slash.
-     *
-     * @param path - Path.
-     * @returns New string with trailing slash added.
-     */
-    function addTrailingSlash(path) {
-        return `${removeTrailingSlash(path)}/`;
-    }
-    path_1.addTrailingSlash = addTrailingSlash;
-    /**
-     * Canonicalizes path.
-     *
-     * @param path - Path.
-     * @returns Canonical path.
-     */
-    function canonicalize(path) {
-        return path.replace(/[/\\]+/gu, "/");
-    }
-    path_1.canonicalize = canonicalize;
-    /**
-     * Creates path from parts.
-     *
-     * @param parts - Parts.
-     * @returns Path.
-     */
-    function join(...parts) {
-        return canonicalize(parts.join("/"));
-    }
-    path_1.join = join;
-    /**
-     * Removes leading slash.
-     *
-     * @param path - Path.
-     * @returns New string with leading slash removed.
-     */
-    function removeLeadingSlash(path) {
-        return canonicalize(path).replace(/^\//u, "");
-    }
-    path_1.removeLeadingSlash = removeLeadingSlash;
-    /**
-     * Removes trailing slash.
-     *
-     * @param path - Path.
-     * @returns New string with trailing slash removed.
-     */
-    function removeTrailingSlash(path) {
-        return canonicalize(path).replace(/\/$/u, "");
-    }
-    path_1.removeTrailingSlash = removeTrailingSlash;
-})(path = exports.path || (exports.path = {}));
 //# sourceMappingURL=string.js.map

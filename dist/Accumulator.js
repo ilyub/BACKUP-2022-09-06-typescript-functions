@@ -8,7 +8,7 @@ class Accumulator {
      * @param source - Source.
      */
     constructor(source = []) {
-        // eslint-disable-next-line @skylib/custom/prefer-readonly-array -- Ok
+        // eslint-disable-next-line @skylib/functions/prefer-ReadonlyMap, @skylib/typescript/prefer-readonly-array -- Ok
         Object.defineProperty(this, "map", {
             enumerable: true,
             configurable: true,

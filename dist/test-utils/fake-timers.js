@@ -9,6 +9,7 @@ exports.clock = (0, __1.onDemand)(() => {
     __1.assert.not.empty(_clock, "Fake timer is not installed");
     return _clock;
 });
+let _clock;
 /**
  * Installs fake timer.
  *
@@ -46,5 +47,4 @@ function setRandomSystemTime() {
     }));
 }
 exports.setRandomSystemTime = setRandomSystemTime;
-let _clock;
 //# sourceMappingURL=fake-timers.js.map

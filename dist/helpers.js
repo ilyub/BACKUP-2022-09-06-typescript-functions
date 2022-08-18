@@ -1,9 +1,9 @@
 "use strict";
-/* eslint-disable @skylib/custom/functions/no-reflect-get -- Ok */
+/* eslint-disable @skylib/functions/reflect/no-get -- Ok */
+/* eslint-disable @skylib/functions/reflect/no-set -- Ok */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.wrapProxyHandler = exports.wait = exports.safeAccess = exports.onDemand = exports.createFacade = exports.ProxyHandlerAction = void 0;
+exports.wrapProxyHandler = exports.wait = exports.safeAccess = exports.onDemand = exports.createFacade = exports.classToInterface = exports.ProxyHandlerAction = void 0;
 const tslib_1 = require("tslib");
-/* eslint-disable @skylib/custom/functions/no-reflect-set -- Ok */
 const as = tslib_1.__importStar(require("./inline-assertions"));
 const assert = tslib_1.__importStar(require("./assertions"));
 const cast = tslib_1.__importStar(require("./converters"));
@@ -19,6 +19,21 @@ var ProxyHandlerAction;
     ProxyHandlerAction["throw"] = "throw";
 })(ProxyHandlerAction = exports.ProxyHandlerAction || (exports.ProxyHandlerAction = {}));
 /**
+ * Self-binds all methods.
+ *
+ * @param obj - Object.
+ * @returns Proxy.
+ */
+function classToInterface(obj) {
+    return new Proxy(obj, wrapProxyHandler("classToInterface", ProxyHandlerAction.doDefault, {
+        get: (target, key) => {
+            const result = reflect.get(target, key);
+            return is.callable(result) ? result.bind(target) : result;
+        }
+    }));
+}
+exports.classToInterface = classToInterface;
+/**
  * Creates facade.
  *
  * @param name - Facade name.
@@ -31,7 +46,7 @@ function createFacade(name, extension) {
             _implementation = value;
         } }, extension);
     const proxy = new Proxy(fn.noop, wrapProxyHandler("createFacade", ProxyHandlerAction.throw, {
-        apply: (_target, thisArg, args) => reflect.apply(targetFn(), thisArg, args),
+        apply: (_target, thisArg, args) => reflect.apply(as.callable(target()), thisArg, args),
         get: (_target, key) => reflect.get(target(key), key),
         getOwnPropertyDescriptor: (_target, key) => reflect.getOwnPropertyDescriptor(target(key), key),
         has: (_target, key) => reflect.has(target(key), key),
@@ -44,10 +59,6 @@ function createFacade(name, extension) {
         if (is.not.empty(key) && key in facadeOwn)
             return facadeOwn;
         assert.not.empty(_implementation, `Missing facade implementation: ${name}`);
-        return _implementation;
-    }
-    function targetFn() {
-        assert.callable(_implementation, `Facade is not callable: ${name}`);
         return _implementation;
     }
 }
@@ -140,7 +151,7 @@ exports.wait = wait;
 function wrapProxyHandler(id, action, handler) {
     switch (action) {
         case ProxyHandlerAction.doDefault:
-            return (0, core_1.typedef)(Object.assign({ apply: (target, thisArg, args) => reflect.apply(as.callable(target), thisArg, args), construct: (target, args, newTarget) => as.object(reflect.construct(as.callable(target), args, newTarget)), defineProperty: (target, key, attrs) => reflect.defineProperty(target, key, attrs), deleteProperty: (target, key) => reflect.deleteProperty(target, key), get: (target, key) => reflect.get(target, key), getOwnPropertyDescriptor: (target, key) => reflect.getOwnPropertyDescriptor(target, key), getPrototypeOf: target => reflect.getPrototypeOf(target), has: (target, key) => reflect.has(target, key), isExtensible: target => reflect.isExtensible(target), ownKeys: target => reflect.ownKeys(target), preventExtensions: target => reflect.preventExtensions(target), set: (target, key, value) => reflect.set(target, key, value), setPrototypeOf: (target, proto) => reflect.setPrototypeOf(target, proto) }, handler));
+            return (0, core_1.typedef)(Object.assign({ apply: (target, thisArg, args) => reflect.apply(as.callable(target), thisArg, args), construct: (target, args, newTarget) => as.object(reflect.construct(as.constructor(target), args, as.constructor(newTarget))), defineProperty: (target, key, attrs) => reflect.defineProperty(target, key, attrs), deleteProperty: (target, key) => reflect.deleteProperty(target, key), get: (target, key) => reflect.get(target, key), getOwnPropertyDescriptor: (target, key) => reflect.getOwnPropertyDescriptor(target, key), getPrototypeOf: target => reflect.getPrototypeOf(target), has: (target, key) => reflect.has(target, key), isExtensible: target => reflect.isExtensible(target), ownKeys: target => reflect.ownKeys(target), preventExtensions: target => reflect.preventExtensions(target), set: (target, key, value) => reflect.set(target, key, value), setPrototypeOf: (target, proto) => reflect.setPrototypeOf(target, proto) }, handler));
         case ProxyHandlerAction.throw:
             return (0, core_1.typedef)(Object.assign({ apply: () => {
                     throw new Error(`Not implemented: ${id}.apply`);

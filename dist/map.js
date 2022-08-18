@@ -10,7 +10,7 @@ exports.set = exports.delete = void 0;
  * @returns Map with key set.
  */
 function set(map, key, value) {
-    // eslint-disable-next-line @skylib/custom/functions/prefer-ReadonlyMap -- Ok
+    // eslint-disable-next-line @skylib/functions/prefer-ReadonlyMap -- Ok
     const result = new Map(map);
     result.set(key, value);
     return result;
@@ -24,7 +24,7 @@ exports.set = set;
  * @returns Map with key removed.
  */
 function _delete(map, key) {
-    // eslint-disable-next-line @skylib/custom/functions/prefer-ReadonlyMap -- Ok
+    // eslint-disable-next-line @skylib/functions/prefer-ReadonlyMap -- Ok
     const result = new Map(map);
     result.delete(key);
     return result;

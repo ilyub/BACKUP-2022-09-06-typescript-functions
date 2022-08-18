@@ -6,9 +6,9 @@
 
 ## Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `object` |
+| Name |
+| :------ |
+| `T` |
 
 ## Callable
 

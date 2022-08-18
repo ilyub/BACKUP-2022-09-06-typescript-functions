@@ -7,7 +7,7 @@ import type { Entry, NumStr, PartialRecord, Rec, Writable, objectU, types } from
  * @param sources - Sources.
  * @returns Target.
  */
-export declare const assign: <T extends object>(target: Writable<T>, ...sources: ReadonlyArray<Readonly<Partial<T>>>) => T;
+export declare const assign: <T>(target: Writable<T>, ...sources: ReadonlyArray<Readonly<Partial<T>>>) => T;
 /**
  * Typed version of Object.defineProperty.
  *
@@ -30,7 +30,7 @@ export declare const entries: {
      * @param obj - Object.
      * @returns Object entries.
      */
-    <T extends object>(obj: T): ReadonlyArray<Entry<string & keyof T, T[NumStr & keyof T]>>;
+    <T>(obj: T): ReadonlyArray<Entry<string & keyof T, T[NumStr & keyof T]>>;
 };
 export declare const fromEntries: (<K extends PropertyKey, V>(entries: Iterable<Entry<K, V>>) => PartialRecord<K, V>) & Readonly<{
     /**
@@ -55,7 +55,7 @@ export declare const keys: {
      * @param obj - Object.
      * @returns Object keys.
      */
-    <T extends object>(obj: T): ReadonlyArray<string & keyof T>;
+    <T>(obj: T): ReadonlyArray<string & keyof T>;
 };
 export declare const values: {
     /**
@@ -71,9 +71,9 @@ export declare const values: {
      * @param obj - Object.
      * @returns Object values.
      */
-    <T extends object>(obj: T): ReadonlyArray<T[NumStr & keyof T]>;
+    <T>(obj: T): ReadonlyArray<T[NumStr & keyof T]>;
 };
-export interface CompareFn<T extends object> {
+export interface CompareFn<T> {
     /**
      * Compares two object entries.
      *
@@ -104,7 +104,7 @@ export interface Descriptor<T, K extends keyof T = keyof T> extends PropertyDesc
     readonly value?: T[K];
     readonly writable?: boolean;
 }
-export interface Predicate<T extends object> {
+export interface Predicate<T> {
     /**
      * Checks object entry.
      *
@@ -114,13 +114,16 @@ export interface Predicate<T extends object> {
      */
     (value: T[keyof T], key: keyof T): boolean;
 }
+export declare type PrefixKeys<T, P extends string> = {
+    [K in string & keyof T as `${P}${K}`]: T[K];
+};
 /**
  * Clones object.
  *
  * @param obj - Object.
  * @returns New object.
  */
-export declare function clone<T extends object>(obj: T): Writable<T>;
+export declare function clone<T>(obj: T): Writable<T>;
 /**
  * Checks if every object property satisfies condition.
  *
@@ -128,7 +131,7 @@ export declare function clone<T extends object>(obj: T): Writable<T>;
  * @param predicate - Predicate.
  * @returns _True_ if every object property satisfies condition, _false_ otherwise.
  */
-export declare function every<T extends object>(obj: T, predicate: Predicate<T>): boolean;
+export declare function every<T>(obj: T, predicate: Predicate<T>): boolean;
 /**
  * Filters object by predicate.
  *
@@ -136,7 +139,7 @@ export declare function every<T extends object>(obj: T, predicate: Predicate<T>)
  * @param predicate - Predicate.
  * @returns New object.
  */
-export declare function filter<T extends object>(obj: T, predicate: Predicate<T>): Partial<T>;
+export declare function filter<T>(obj: T, predicate: Predicate<T>): Partial<T>;
 /**
  * Returns object property.
  *
@@ -186,7 +189,15 @@ export declare function map<K extends string, V, R>(obj: Rec<K, V>, callback: (v
  * @param exclude - Keys to omit.
  * @returns New object.
  */
-export declare function omit<T extends object, K extends string & keyof T>(obj: T, ...exclude: readonly K[]): types.object.Omit<T, K>;
+export declare function omit<T, K extends string & keyof T>(obj: T, ...exclude: readonly K[]): types.object.Omit<T, K>;
+/**
+ * Adds prefix to object keys.
+ *
+ * @param obj - Object.
+ * @param prefix - Prefix.
+ * @returns Object with prefixed keys.
+ */
+export declare function prefixKeys<T, P extends string>(obj: T, prefix: P): PrefixKeys<T, P>;
 /**
  * Removes undefined keys.
  *
@@ -216,7 +227,7 @@ export declare function size(obj: object): number;
  * @param predicate - Predicate.
  * @returns _True_ if some object property satisfies condition, _false_ otherwise.
  */
-export declare function some<T extends object>(obj: T, predicate: Predicate<T>): boolean;
+export declare function some<T>(obj: T, predicate: Predicate<T>): boolean;
 /**
  * Sorts object.
  *
@@ -232,5 +243,5 @@ export declare function sort<K extends string, V>(obj: Rec<K, V>, compareFn?: Co
  * @param compareFn - Comparison function.
  * @returns New object.
  */
-export declare function sort<T extends object>(obj: T, compareFn?: CompareFn<T>): T;
+export declare function sort<T>(obj: T, compareFn?: CompareFn<T>): T;
 //# sourceMappingURL=object.d.ts.map

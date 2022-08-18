@@ -20,7 +20,7 @@
 
 | Name | Type |
 | :------ | :------ |
-| `T` | extends `object` |
+| `T` | `T` |
 | `K` | extends keyof `T` |
 
 ___

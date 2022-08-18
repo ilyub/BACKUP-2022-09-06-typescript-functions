@@ -1,8 +1,11 @@
 "use strict";
-/* eslint-disable @skylib/custom/functions/prefer-a-fromIterable -- Ok */
+/* eslint-disable @skylib/functions/array/prefer-fromIterable -- Ok */
+/* eslint-disable @skylib/functions/object/prefer-entries -- Ok */
+/* eslint-disable @skylib/functions/object/prefer-hasOwnProp -- Ok */
+/* eslint-disable @skylib/functions/object/prefer-values -- Ok */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.instanceOf = exports.factory = exports.enumeration = exports.empty = exports.callable = exports.boolean = exports.not = exports.unknownsU = exports.unknowns = exports.tuple = exports.symbolsU = exports.symbols = exports.symbolU = exports.stringsU = exports.strings = exports.setsU = exports.sets = exports.setU = exports.set = exports.objectsU = exports.objects = exports.objectU = exports.object = exports.numbersU = exports.numbers = exports.numberU = exports.numStrsU = exports.numStrs = exports.numStrU = exports.mapsU = exports.maps = exports.mapU = exports.map = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObjectU = exports.indexedObject = exports.booleansU = exports.booleans = exports.booleanU = exports.arraysU = exports.arrays = exports.arrayU = exports.array = exports.or = exports.and = exports.undefined = exports.true = exports.null = exports.false = void 0;
-exports.unknown = exports.symbol = exports.stringU = exports.string = exports.number = exports.numStr = exports.never = exports.instancesOf = void 0;
+exports.constructor = exports.callable = exports.boolean = exports.not = exports.unknownsU = exports.unknowns = exports.tuple = exports.symbolsU = exports.symbols = exports.symbolU = exports.stringsU = exports.strings = exports.setsU = exports.sets = exports.setU = exports.set = exports.propertyKeysU = exports.propertyKeys = exports.propertyKeyU = exports.objectsU = exports.objects = exports.objectU = exports.object = exports.numbersU = exports.numbers = exports.numberU = exports.numStrsU = exports.numStrs = exports.numStrU = exports.mapsU = exports.maps = exports.mapU = exports.map = exports.indexedObjectsU = exports.indexedObjects = exports.indexedObjectU = exports.indexedObject = exports.booleansU = exports.booleans = exports.booleanU = exports.arraysU = exports.arrays = exports.arrayU = exports.array = exports.or = exports.and = exports.undefined = exports.true = exports.null = exports.false = void 0;
+exports.unknown = exports.symbol = exports.stringU = exports.string = exports.propertyKey = exports.number = exports.numStr = exports.never = exports.instancesOf = exports.instanceOf = exports.factory = exports.enumeration = exports.empty = void 0;
 const core_1 = require("./core");
 exports.and = (0, core_1.defineFn)((0, core_1.overload)(() => {
     return result;
@@ -126,6 +129,9 @@ exports.object = (0, core_1.defineFn)(
 exports.objectU = exports.or.factory(exports.object, _undefined);
 exports.objects = factory(exports.array.of, exports.object);
 exports.objectsU = exports.or.factory(exports.objects, _undefined);
+exports.propertyKeyU = exports.or.factory(propertyKey, _undefined);
+exports.propertyKeys = factory(exports.array.of, propertyKey);
+exports.propertyKeysU = exports.or.factory(exports.propertyKeys, _undefined);
 exports.set = (0, core_1.defineFn)(
 /**
  * Checks if value type is Set.
@@ -186,6 +192,7 @@ exports.not = (0, core_1.defineFn)(
     numStr: _notFactory(numStr),
     number: _notFactory(number),
     object: _notFactory(exports.object),
+    propertyKey: _notFactory(propertyKey),
     set: _notFactory(exports.set),
     string: _notFactory(string),
     stringU: _notFactory(stringU),
@@ -213,6 +220,16 @@ function callable(value) {
     return typeof value === "function";
 }
 exports.callable = callable;
+/**
+ * Checks if value type is T.
+ *
+ * @param value - Value.
+ * @returns _True_ if value type is T, _false_ otherwise.
+ */
+function constructor(value) {
+    return typeof value === "function";
+}
+exports.constructor = constructor;
 /**
  * Checks if value type is empty.
  *
@@ -304,6 +321,25 @@ function number(value) {
     return typeof value === "number" && !Number.isNaN(value);
 }
 exports.number = number;
+/**
+ * Checks if value type is PropertyKey.
+ *
+ * @param value - Value.
+ * @returns _True_ if value type is PropertyKey, _false_ otherwise.
+ */
+function propertyKey(value) {
+    switch (typeof value) {
+        case "number":
+            return !Number.isNaN(value);
+        case "string":
+            return true;
+        case "symbol":
+            return true;
+        default:
+            return false;
+    }
+}
+exports.propertyKey = propertyKey;
 /**
  * Checks if value is a string.
  *

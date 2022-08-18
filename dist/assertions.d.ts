@@ -106,7 +106,14 @@ export declare function byGuard<T>(value: unknown, guard: is.Guard<T>, error: Er
  * @param value - Value.
  * @param error - Error.
  */
-export declare function callable<T extends Function>(value: unknown, error: ErrorArg): asserts value is T;
+export declare function callable<T extends types.fn.Callable>(value: unknown, error: ErrorArg): asserts value is T;
+/**
+ * Asserts that value type is T.
+ *
+ * @param value - Value.
+ * @param error - Error.
+ */
+export declare function constructor<T extends types.fn.Constructor>(value: unknown, error: ErrorArg): asserts value is T;
 /**
  * Asserts that value type is empty.
  *
@@ -159,6 +166,13 @@ export declare function number(value: unknown, error: ErrorArg): asserts value i
  * @param error - Error.
  */
 export declare function object(value: unknown, error: ErrorArg): asserts value is object;
+/**
+ * Asserts that value type is PropertyKey.
+ *
+ * @param value - Value.
+ * @param error - Error.
+ */
+export declare function propertyKey(value: unknown, error: ErrorArg): asserts value is PropertyKey;
 /**
  * Asserts that value is a string.
  *

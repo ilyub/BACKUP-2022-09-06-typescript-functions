@@ -1,4 +1,5 @@
 import type { Writable, numbers, strings, unknowns } from "./types";
+export declare type ChainResult<T> = ReadonlyArray<readonly [T, T]>;
 export declare type KeyOrReduce<T extends object> = PropertyKey | Reduce<T>;
 export interface Reduce<T extends object> {
     /**
@@ -15,7 +16,7 @@ export interface Reduce<T extends object> {
  * @param arr - Array.
  * @returns Array of pairs.
  */
-export declare function chain<T>(arr: readonly T[]): ReadonlyArray<readonly [T, T]>;
+export declare function chain<T>(arr: readonly T[]): ChainResult<T>;
 /**
  * Clones array.
  *

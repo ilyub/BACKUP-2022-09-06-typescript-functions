@@ -14,11 +14,11 @@ exports.matchers = {
         try {
             const result = got();
             __1.assert.toBeFalse(expectedToThrow, "Expecting function not to throw");
-            return (0, expect_1.buildEqualsResult)((0, expect_utils_1.equals)(result, expected), "Unexpected function execution result", result, expected, true);
+            return (0, expect_1.buildEqualsResult)((0, expect_utils_1.equals)(result, expected), "Unexpected function execution result", result, expected);
         }
         catch (e) {
             __1.assert.toBeTrue(expectedToThrow, "Expecting function to throw");
-            return (0, expect_1.buildEqualsResult)((0, expect_utils_1.equals)(e, expected), "Unexpected function execution result", e, expected, true);
+            return (0, expect_1.buildEqualsResult)((0, expect_utils_1.equals)(e, expected), "Unexpected function execution result", e, expected);
         }
     },
     executionTimeToBe: async (got, expected, precision = 10) => {
@@ -32,9 +32,20 @@ exports.matchers = {
     mockCallsToBe: (got, ...expected) => {
         __1.assert.byGuard(got, isMock, "Expecting mock function");
         const result = (0, expect_1.buildEqualsResult)((0, expect_utils_1.equals)(got.mock.calls, expected), "Unexpected mock calls", got.mock.calls, expected, true);
-        // eslint-disable-next-line @skylib/custom/functions/prefer-mockCallsToBe -- Ok
         got.mockClear();
         return result;
+    },
+    promiseResultToBe: async (got, expected, expectedToThrow = false) => {
+        __1.assert.instanceOf(got, Promise, "Expecting promise");
+        try {
+            const result = await got;
+            __1.assert.toBeFalse(expectedToThrow, "Expecting promise not to throw");
+            return (0, expect_1.buildEqualsResult)((0, expect_utils_1.equals)(result, expected), "Unexpected promise execution result", result, expected);
+        }
+        catch (e) {
+            __1.assert.toBeTrue(expectedToThrow, "Expecting promise to throw");
+            return (0, expect_1.buildEqualsResult)((0, expect_utils_1.equals)(e, expected), "Unexpected promise execution result", e, expected);
+        }
     },
     toBeSameAs: (got, expected) => {
         __1.assert.object(got, "Expecting object");

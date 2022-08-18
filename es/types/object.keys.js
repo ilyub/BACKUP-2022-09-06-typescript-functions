@@ -1,3 +1,3 @@
-/* eslint-disable @skylib/custom/functions/no-ts-toolbelt -- Ok */
+/* eslint-disable @skylib/functions/types/no-ts-toolbelt -- Ok */
 export {};
 //# sourceMappingURL=object.keys.js.map

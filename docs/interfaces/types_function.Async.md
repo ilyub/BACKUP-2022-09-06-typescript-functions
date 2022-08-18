@@ -9,7 +9,7 @@
 | Name | Type |
 | :------ | :------ |
 | `R` | `R` |
-| `A` | extends [`unknowns`](../modules/types_core.md#unknowns) = [`nevers`](../modules/types_core.md#nevers) |
+| `A` | extends [`unknowns`](../modules/types_core.md#unknowns) = readonly [] |
 
 ## Callable
 

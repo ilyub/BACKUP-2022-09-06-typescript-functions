@@ -1,4 +1,4 @@
-export declare type Omit1<T extends object, K extends keyof T> = Omit<T, K>;
+export declare type Omit1<T, K extends keyof T> = Omit<T, K>;
 export declare type Omit2<K extends PropertyKey> = {
     [L in K]?: never;
 };
