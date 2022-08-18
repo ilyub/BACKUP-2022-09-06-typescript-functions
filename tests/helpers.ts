@@ -1,19 +1,18 @@
 /* eslint jest/max-expects: [warn, { max: 2 }] -- Ok */
 /* eslint-disable @skylib/functions/reflect/no-get -- Ok */
 /* eslint-disable @skylib/functions/reflect/no-set -- Ok */
-/* eslint-disable @typescript-eslint/unbound-method -- Ok */
 
 import * as testUtils from "@/test-utils";
 import type { Facade, Writable } from "@";
 import {
   ProxyHandlerAction,
+  classToInterface,
   createFacade,
   fn,
   is,
   onDemand,
   reflect,
   safeAccess,
-  selfBind,
   wait,
   wrapProxyHandler
 } from "@";
@@ -50,6 +49,13 @@ function safeObj1(): object {
 function safeObj2(): object {
   return safeAccess({ a: 1, b: 2, c: 3 }, { a: is.number });
 }
+
+test.each([
+  classToInterface(new TestClass()).f(),
+  classToInterface(new TestClass()).value
+])("classToInterface", value => {
+  expect(value).toBe(1);
+});
 
 test.each([1, 2, 3])("createFacade: extension", value => {
   const extension: Writable<Extension> = { pow: pow2 };
@@ -228,19 +234,6 @@ test.each([
     expected,
     expectedToThrow
   );
-});
-
-test.each([
-  { expected: 1, method: selfBind(new TestClass()).f },
-  {
-    expected: new Error(
-      "Cannot read properties of undefined (reading 'value')"
-    ),
-    expectedToThrow: true,
-    method: new TestClass().f
-  }
-])("selfBind", ({ expected, expectedToThrow, method }) => {
-  expect(method).executionResultToBe(expected, expectedToThrow);
 });
 
 test("wait", async () => {

@@ -17,6 +17,8 @@ export enum ProxyHandlerAction {
   throw = "throw"
 }
 
+export type ClassToInterface<T extends object> = { [K in keyof T]: T[K] };
+
 export type Facade<I, E = unknown> = E & FacadeOwnMethods<I> & I;
 
 export interface FacadeOwnMethods<I> {
@@ -38,7 +40,26 @@ export declare type SafeAccessGuards<T, W extends string & keyof T> = {
   readonly [K in W]: is.Guard<T[K]>;
 };
 
-export type SelfBind<T extends object> = { [K in keyof T]: T[K] };
+/**
+ * Self-binds all methods.
+ *
+ * @param obj - Object.
+ * @returns Proxy.
+ */
+export function classToInterface<T extends object>(
+  obj: T
+): ClassToInterface<T> {
+  return new Proxy(
+    obj,
+    wrapProxyHandler("classToInterface", ProxyHandlerAction.doDefault, {
+      get: (target, key) => {
+        const result = reflect.get(target, key);
+
+        return is.callable(result) ? result.bind(target) : result;
+      }
+    })
+  ) as ClassToInterface<T>;
+}
 
 /**
  * Creates facade.
@@ -176,25 +197,6 @@ export function safeAccess<
       }
     })
   );
-}
-
-/**
- * Self-binds all methods.
- *
- * @param obj - Object.
- * @returns Proxy.
- */
-export function selfBind<T extends object>(obj: T): SelfBind<T> {
-  return new Proxy(
-    obj,
-    wrapProxyHandler("selfBind", ProxyHandlerAction.doDefault, {
-      get: (target, key) => {
-        const result = reflect.get(target, key);
-
-        return is.callable(result) ? result.bind(target) : result;
-      }
-    })
-  ) as SelfBind<T>;
 }
 
 /**
