@@ -102,6 +102,16 @@ export function escapeRegExpSpecialChars(str: string): string {
 }
 
 /**
+ * Returns first line.
+ *
+ * @param str - String.
+ * @returns First line.
+ */
+export function firstLine(str: string): string {
+  return as.not.empty(lines(str)[0]);
+}
+
+/**
  * Converts first letter to lower case.
  *
  * @param str - String.

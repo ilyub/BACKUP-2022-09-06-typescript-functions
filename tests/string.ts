@@ -23,6 +23,10 @@ test("escapeRegExpSpecialChars", () => {
   expect(s.escapeRegExpSpecialChars(str)).toBe(expected);
 });
 
+test("firstLine", () => {
+  expect(s.firstLine("abc\r\n123")).toBe("abc");
+});
+
 test.each([
   { expected: "aBC", str: "ABC" },
   { expected: "", str: "" }
