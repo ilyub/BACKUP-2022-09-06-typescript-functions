@@ -4,6 +4,10 @@ import type { types, unknowns } from "./types";
 
 export const noop: types.fn.Callable<void> = _.noop.bind(_);
 
+export const never: types.fn.Callable = () => {
+  throw new Error("This function should not be called");
+};
+
 export interface PipeCallback<V = unknown, R = unknown> {
   /**
    * Pipe callback.

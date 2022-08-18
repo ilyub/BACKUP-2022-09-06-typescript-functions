@@ -4,6 +4,10 @@ test.each([1, 2, 3])("identity", value => {
   expect(fn.identity(value)).toBe(value);
 });
 
+test("never", () => {
+  expect(fn.never).toThrow(new Error("This function should not be called"));
+});
+
 test("noopTrue", () => {
   expect(fn.noopTrue(1)).toBe(true);
 });
