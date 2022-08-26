@@ -1,3 +1,4 @@
+/* eslint-disable @skylib/functions/array/prefer-clone -- Ok */
 /* eslint-disable @skylib/functions/array/prefer-fromIterable -- Ok */
 /* eslint-disable @skylib/functions/object/prefer-entries -- Ok */
 /* eslint-disable @skylib/functions/object/prefer-hasOwnProp -- Ok */

@@ -1,5 +1,3 @@
-/* eslint-disable @skylib/export-all-name -- Ok */
-
 export * as a from "./array";
 
 export * as assert from "./assertions";

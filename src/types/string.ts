@@ -1,7 +1,7 @@
 export type AddPrefix<T extends string, P extends string> = `${P}${T}`;
 
+// eslint-disable-next-line @skylib/typescript/prefer-enum  -- Ok
 export type LowercaseLetter =
-  // eslint-disable-next-line @skylib/typescript/prefer-enum -- Ok
   | "a"
   | "b"
   | "c"
@@ -34,8 +34,8 @@ export type RemovePrefix<
   P extends string
 > = T extends `${P}${infer R}` ? R : never;
 
+// eslint-disable-next-line @skylib/typescript/prefer-enum  -- Ok
 export type UppercaseLetter =
-  // eslint-disable-next-line @skylib/typescript/prefer-enum -- Ok
   | "A"
   | "B"
   | "C"

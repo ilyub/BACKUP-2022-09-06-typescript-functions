@@ -9,8 +9,6 @@ export const clock = onDemand((): fakeTimers.Clock => {
   return _clock;
 });
 
-let _clock: fakeTimers.Clock | undefined;
-
 export interface Options {
   readonly shouldAdvanceTime?: boolean;
 }
@@ -63,3 +61,5 @@ export function setRandomSystemTime(): void {
     })
   );
 }
+
+let _clock: fakeTimers.Clock | undefined;

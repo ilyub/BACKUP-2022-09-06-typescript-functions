@@ -1,7 +1,7 @@
-/* eslint-disable @skylib/no-at-sign-internal-import -- Ok */
-/* eslint-disable @skylib/no-internal-modules -- Ok */
 /* eslint jest/max-expects: [warn, { max: 2 }] -- Ok */
 /* eslint-disable @skylib/consistent-import -- Ok */
+/* eslint-disable @skylib/no-at-sign-internal-import -- Ok */
+/* eslint-disable @skylib/no-internal-modules -- Ok */
 /* eslint-disable no-console -- Ok */
 
 import * as internal from "@/test-utils/jest.internal";

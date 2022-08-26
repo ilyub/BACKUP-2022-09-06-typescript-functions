@@ -1,8 +1,6 @@
 import { AssertionError, ReadonlyMap, ReadonlySet, assert, fn, is } from "@";
 import type { types, unknowns } from "@";
 
-class TestClass {}
-
 interface Subtest {
   (value: unknown): () => void;
 }
@@ -20,6 +18,8 @@ function createSubtest(
       assertion(value, ...args);
     };
 }
+
+class TestClass {}
 
 test.each([
   { value: [1] },

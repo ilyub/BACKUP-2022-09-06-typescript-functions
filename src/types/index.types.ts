@@ -1,5 +1,3 @@
-/* eslint-disable @skylib/export-all-name -- Ok */
-
 export * as fn from "./function";
 
 export * as object from "./index.types.object";

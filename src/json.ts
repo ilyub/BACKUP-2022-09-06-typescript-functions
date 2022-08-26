@@ -7,21 +7,6 @@ import * as is from "./guards";
 import { ReadonlyMap, ReadonlySet } from "./core";
 import type { stringE } from "./types";
 
-enum Type {
-  // eslint-disable-next-line @skylib/consistent-enum-members -- Ok
-  map = "map-5702-3c89-3feb-75d4",
-  // eslint-disable-next-line @skylib/consistent-enum-members -- Ok
-  set = "set-41ef-10c9-ae1f-15e8"
-}
-
-const isEntry = is.tuple.factory(is.unknown, is.unknown);
-
-const isEntries = is.factory(is.array.of, isEntry);
-
-const isType = is.factory(is.enumeration, Type);
-
-const isCustomData = is.object.factory({ type: isType, value: is.unknown }, {});
-
 /**
  * Decodes JSON string.
  *
@@ -68,6 +53,29 @@ export function eq(x: unknown, y: unknown): boolean {
  */
 export function neq(x: unknown, y: unknown): boolean {
   return encode(x) !== encode(y);
+}
+
+enum Type {
+  // eslint-disable-next-line @skylib/consistent-enum-members -- Ok
+  map = "map-5702-3c89-3feb-75d4",
+  // eslint-disable-next-line @skylib/consistent-enum-members -- Ok
+  set = "set-41ef-10c9-ae1f-15e8"
+}
+
+const isEntry = is.tuple.factory(is.unknown, is.unknown);
+
+const isEntries = is.factory(is.array.of, isEntry);
+
+const isType = is.factory(is.enumeration, Type);
+
+const isCustomData = is.object.factory<CustomData>(
+  { type: isType, value: is.unknown },
+  {}
+);
+
+interface CustomData {
+  readonly type: Type;
+  readonly value: unknown;
 }
 
 /**

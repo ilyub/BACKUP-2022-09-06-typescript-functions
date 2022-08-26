@@ -194,14 +194,6 @@ export const not = {
   undefined: notFactory<undefined>(is.not.undefined)
 } as const;
 
-const _false = factory(is.false);
-
-const _null = factory(is.null);
-
-const _true = factory(is.true);
-
-const _undefined = factory(is.undefined);
-
 export interface ExclusionInlineAssertion<T> {
   /**
    * Asserts value type.
@@ -314,6 +306,14 @@ export function instancesOf<T>(
 
   throw new AssertionError();
 }
+
+const _false = factory(is.false);
+
+const _null = factory(is.null);
+
+const _true = factory(is.true);
+
+const _undefined = factory(is.undefined);
 
 /**
  * Creates inline assertion.

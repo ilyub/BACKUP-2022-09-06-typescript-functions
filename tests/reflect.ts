@@ -18,7 +18,7 @@ test.each([
   { expected: 1, metadataKey: metadataKey1, metadataValue: 1 },
   { expected: undefined, metadataKey: metadataKey2, metadataValue: undefined }
 ])("defineMetadata", ({ expected, metadataKey, metadataValue }) => {
-  const target = {} as const;
+  const target = {};
 
   reflect.defineMetadata(metadataKey, metadataValue, target);
   expect(reflect.getOwnMetadata(metadataKey, target)).toStrictEqual(expected);

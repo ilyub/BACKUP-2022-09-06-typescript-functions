@@ -2,7 +2,7 @@ const { eslint } = require("@skylib/config/api");
 
 const consistentImport = eslint.rules["@skylib/consistent-import"];
 
-const noShadow = eslint.rules["@typescript-eslint/no-shadow"];
+const noShadow = eslint.rules["@skylib/typescript/no-shadow"];
 
 module.exports = {
   rules: {
@@ -203,7 +203,7 @@ module.exports = {
     {
       files: "./src/object.ts",
       rules: {
-        "@typescript-eslint/no-shadow": [
+        "@skylib/typescript/no-shadow": [
           "warn",
           { ...noShadow, allow: [...noShadow.allow, "entries"] }
         ]
@@ -212,7 +212,7 @@ module.exports = {
     {
       files: "./src/string.ts",
       rules: {
-        "@typescript-eslint/no-shadow": [
+        "@skylib/typescript/no-shadow": [
           "warn",
           { ...noShadow, allow: [...noShadow.allow, "path"] }
         ]

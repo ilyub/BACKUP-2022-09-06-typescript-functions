@@ -8,11 +8,11 @@ import type { Match } from "ts-toolbelt/out/Any/_Internal";
 import type { OptionalKeys as Optional } from "ts-toolbelt/out/Object/OptionalKeys";
 import type { PickGroupsOption } from "./keys.internal";
 import type {
-  // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
+  // eslint-disable-next-line @skylib/typescript/no-shadow -- Ok
   ReadonlyKeys as Readonly
 } from "ts-toolbelt/out/Object/ReadonlyKeys";
 import type {
-  // eslint-disable-next-line @typescript-eslint/no-shadow -- Ok
+  // eslint-disable-next-line @skylib/typescript/no-shadow -- Ok
   RequiredKeys as Required
 } from "ts-toolbelt/out/Object/RequiredKeys";
 import type { WritableKeys as Writable } from "ts-toolbelt/out/Object/WritableKeys";

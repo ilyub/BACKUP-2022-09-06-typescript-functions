@@ -17,6 +17,22 @@ import {
   wrapProxyHandler
 } from "@";
 
+function pow2(x: number): number {
+  return x * x;
+}
+
+function pow3(x: number): number {
+  return x * x * x;
+}
+
+function safeObj1(): object {
+  return safeAccess({ a: 1, b: 2, c: 3 }, { a: is.number }, ["b"]);
+}
+
+function safeObj2(): object {
+  return safeAccess({ a: 1, b: 2, c: 3 }, { a: is.number });
+}
+
 testUtils.installFakeTimer();
 
 const descriptor = {
@@ -32,22 +48,6 @@ class TestClass {
   public f(): number {
     return this.value;
   }
-}
-
-function pow2(x: number): number {
-  return x * x;
-}
-
-function pow3(x: number): number {
-  return x * x * x;
-}
-
-function safeObj1(): object {
-  return safeAccess({ a: 1, b: 2, c: 3 }, { a: is.number }, ["b"]);
-}
-
-function safeObj2(): object {
-  return safeAccess({ a: 1, b: 2, c: 3 }, { a: is.number });
 }
 
 test.each([
