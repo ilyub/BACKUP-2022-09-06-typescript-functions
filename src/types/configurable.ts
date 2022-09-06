@@ -2,11 +2,11 @@
 
 import type * as keys from "./object.keys";
 
-export type LocaleName = keys.Pick<configurable.LocaleName, true, "extends->">;
-
 declare global {
   namespace configurable {
     // eslint-disable-next-line @skylib/typescript/no-empty-interfaces -- Ok
     interface LocaleName {}
   }
 }
+
+export type LocaleName = keys.Pick<configurable.LocaleName, true, "extends->">;
