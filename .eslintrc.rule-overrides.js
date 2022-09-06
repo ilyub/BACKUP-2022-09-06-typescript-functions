@@ -10,7 +10,6 @@ module.exports = {
       "warn",
       {
         sources: [
-          ...consistentImport.sources,
           {
             _id: "array",
             autoImport: true,
@@ -158,21 +157,22 @@ module.exports = {
             _id: "types/string",
             source: "@skylib/functions/src/types/string",
             wildcard: true
-          }
+          },
+          ...consistentImport.sources
         ]
       }
     ],
     "@skylib/no-sibling-import": [
       "warn",
       {
-        folders: [
+        rules: [
           {
             filesToLint: ["./*"],
-            levels: [["./jest.config"], ["./jest.config.fast"]]
+            hierarchy: [["./jest.config"], ["./jest.config.fast"]]
           },
           {
             filesToLint: ["./src/*"],
-            levels: [
+            hierarchy: [
               ["./core"],
               ["./guards"],
               ["./assertions", "./inline-assertions"],
@@ -192,9 +192,9 @@ module.exports = {
           },
           {
             filesToLint: ["./src/test-utils/*"],
-            levels: [["./expect"], ["./jest.internal"]]
+            hierarchy: [["./expect"], ["./jest.internal"]]
           },
-          { allow: true, filesToLint: ["./src/types/*"] }
+          { filesToLint: ["./src/types/*"], hierarchy: [["./**"]] }
         ]
       }
     ]
